@@ -1,0 +1,1 @@
+@item @var{int} @ref{gnutls_certificate_get_openpgp_crt} (gnutls_certificate_credentials_t @var{res}, unsigned @var{index}, gnutls_openpgp_crt_t ** @var{crt_list}, unsigned * @var{crt_list_size})

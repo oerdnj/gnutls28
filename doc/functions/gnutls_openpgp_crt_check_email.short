@@ -1,0 +1,1 @@
+@item @var{int} @ref{gnutls_openpgp_crt_check_email} (gnutls_openpgp_crt_t @var{key}, const char * @var{email}, unsigned @var{flags})

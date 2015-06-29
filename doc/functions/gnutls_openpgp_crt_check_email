@@ -1,0 +1,16 @@
+
+
+
+
+@deftypefun {int} {gnutls_openpgp_crt_check_email} (gnutls_openpgp_crt_t @var{key}, const char * @var{email}, unsigned @var{flags})
+@var{key}: should contain a @code{gnutls_openpgp_crt_t}  type
+
+@var{email}: A null terminated string that contains an RFC822 address (email)
+
+@var{flags}: gnutls_certificate_verify_flags
+
+This function will check if the given key's owner matches the
+given email address. 
+
+@strong{Returns:} non-zero for a successful match, and zero on failure.
+@end deftypefun

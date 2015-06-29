@@ -1,0 +1,2744 @@
+This is gnutls.info, produced by makeinfo version 5.2 from gnutls.texi.
+
+This manual is last updated 4 March 2015 for version 3.4.2 of GnuTLS.
+
+Copyright (C) 2001-2015 Free Software Foundation, Inc.\\ Copyright (C)
+2001-2015 Nikos Mavrogiannopoulos
+
+     Permission is granted to copy, distribute and/or modify this
+     document under the terms of the GNU Free Documentation License,
+     Version 1.3 or any later version published by the Free Software
+     Foundation; with no Invariant Sections, no Front-Cover Texts, and
+     no Back-Cover Texts.  A copy of the license is included in the
+     section entitled "GNU Free Documentation License".
+INFO-DIR-SECTION Software libraries
+START-INFO-DIR-ENTRY
+* GnuTLS: (gnutls).		GNU Transport Layer Security Library.
+END-INFO-DIR-ENTRY
+
+INFO-DIR-SECTION System Administration
+START-INFO-DIR-ENTRY
+* certtool: (gnutls)Invoking certtool.	Manipulate certificates and keys.
+* gnutls-serv: (gnutls)Invoking gnutls-serv.	GnuTLS test server.
+* gnutls-cli: (gnutls)Invoking gnutls-cli.	GnuTLS test client.
+* gnutls-cli-debug: (gnutls)Invoking gnutls-cli-debug.	GnuTLS debug client.
+* psktool: (gnutls)Invoking psktool.	Simple TLS-Pre-Shared-Keys manager.
+* srptool: (gnutls)Invoking srptool.	Simple SRP password tool.
+END-INFO-DIR-ENTRY
+
+
+File: gnutls.info,  Node: PKCS 7 API,  Next: OCSP API,  Prev: X509 certificate API,  Up: API reference
+
+E.4 PKCS 7 API
+==============
+
+The following functions are to be used for PKCS 7 structures handling.
+Their prototypes lie in 'gnutls/pkcs7.h'.
+
+gnutls_pkcs7_add_attr
+---------------------
+
+ -- Function: int gnutls_pkcs7_add_attr (gnutls_pkcs7_attrs_t * LIST,
+          const char * OID, gnutls_datum_t * DATA, unsigned FLAGS)
+     LIST: A list of existing attributes or pointer to 'NULL' for the
+     first one
+
+     OID: the OID of the attribute to be set
+
+     DATA: the raw (DER-encoded) data of the attribute to be set
+
+     FLAGS: zero or 'GNUTLS_PKCS7_ATTR_ENCODE_OCTET_STRING'
+
+     This function will set a PKCS '7' attribute in the provided list.
+     If this function fails, the previous list would be deallocated.
+
+     Note that any attributes set with this function must either be DER
+     or BER encoded, unless a special flag is present.
+
+     *Returns:* On success, the new list head, otherwise 'NULL' .
+
+     *Since:* 3.4.2
+
+gnutls_pkcs7_attrs_deinit
+-------------------------
+
+ -- Function: void gnutls_pkcs7_attrs_deinit (gnutls_pkcs7_attrs_t LIST)
+     LIST: A list of existing attributes
+
+     This function will clear a PKCS '7' attribute list.
+
+     *Since:* 3.4.2
+
+gnutls_pkcs7_deinit
+-------------------
+
+ -- Function: void gnutls_pkcs7_deinit (gnutls_pkcs7_t PKCS7)
+     PKCS7: the type to be deinitialized
+
+     This function will deinitialize a PKCS7 type.
+
+gnutls_pkcs7_delete_crl
+-----------------------
+
+ -- Function: int gnutls_pkcs7_delete_crl (gnutls_pkcs7_t PKCS7, int
+          INDX)
+     PKCS7: The pkcs7 type
+
+     INDX: the index of the crl to delete
+
+     This function will delete a crl from a PKCS7 or RFC2630 crl set.
+     Index starts from 0.  Returns 0 on success.
+
+     *Returns:* On success, 'GNUTLS_E_SUCCESS' (0) is returned,
+     otherwise a negative error value.
+
+gnutls_pkcs7_delete_crt
+-----------------------
+
+ -- Function: int gnutls_pkcs7_delete_crt (gnutls_pkcs7_t PKCS7, int
+          INDX)
+     PKCS7: The pkcs7 type
+
+     INDX: the index of the certificate to delete
+
+     This function will delete a certificate from a PKCS7 or RFC2630
+     certificate set.  Index starts from 0.  Returns 0 on success.
+
+     *Returns:* On success, 'GNUTLS_E_SUCCESS' (0) is returned,
+     otherwise a negative error value.
+
+gnutls_pkcs7_export
+-------------------
+
+ -- Function: int gnutls_pkcs7_export (gnutls_pkcs7_t PKCS7,
+          gnutls_x509_crt_fmt_t FORMAT, void * OUTPUT_DATA, size_t *
+          OUTPUT_DATA_SIZE)
+     PKCS7: The pkcs7 type
+
+     FORMAT: the format of output params.  One of PEM or DER.
+
+     OUTPUT_DATA: will contain a structure PEM or DER encoded
+
+     OUTPUT_DATA_SIZE: holds the size of output_data (and will be
+     replaced by the actual size of parameters)
+
+     This function will export the pkcs7 structure to DER or PEM format.
+
+     If the buffer provided is not long enough to hold the output, then
+     * 'output_data_size' is updated and 'GNUTLS_E_SHORT_MEMORY_BUFFER'
+     will be returned.
+
+     If the structure is PEM encoded, it will have a header of "BEGIN
+     PKCS7".
+
+     *Returns:* On success, 'GNUTLS_E_SUCCESS' (0) is returned,
+     otherwise a negative error value.
+
+gnutls_pkcs7_export2
+--------------------
+
+ -- Function: int gnutls_pkcs7_export2 (gnutls_pkcs7_t PKCS7,
+          gnutls_x509_crt_fmt_t FORMAT, gnutls_datum_t * OUT)
+     PKCS7: The pkcs7 type
+
+     FORMAT: the format of output params.  One of PEM or DER.
+
+     OUT: will contain a structure PEM or DER encoded
+
+     This function will export the pkcs7 structure to DER or PEM format.
+
+     The output buffer is allocated using 'gnutls_malloc()' .
+
+     If the structure is PEM encoded, it will have a header of "BEGIN
+     PKCS7".
+
+     *Returns:* On success, 'GNUTLS_E_SUCCESS' (0) is returned,
+     otherwise a negative error value.
+
+     *Since:* 3.1.3
+
+gnutls_pkcs7_get_attr
+---------------------
+
+ -- Function: int gnutls_pkcs7_get_attr (gnutls_pkcs7_attrs_t LIST,
+          unsigned IDX, char ** OID, gnutls_datum_t * DATA, unsigned
+          FLAGS)
+     LIST: A list of existing attributes or 'NULL' for the first one
+
+     IDX: the index of the attribute to get
+
+     OID: the OID of the attribute (read-only)
+
+     DATA: the raw data of the attribute
+
+     FLAGS: zero or 'GNUTLS_PKCS7_ATTR_ENCODE_OCTET_STRING'
+
+     This function will get a PKCS '7' attribute from the provided list.
+     The OID is a constant string, but data will be allocated and must
+     be deinitialized by the caller.
+
+     *Returns:* On success, 'GNUTLS_E_SUCCESS' (0) is returned,
+     otherwise a negative error value.
+     'GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE' is returned if there are no
+     data in the current index.
+
+     *Since:* 3.4.2
+
+gnutls_pkcs7_get_crl_count
+--------------------------
+
+ -- Function: int gnutls_pkcs7_get_crl_count (gnutls_pkcs7_t PKCS7)
+     PKCS7: The pkcs7 type
+
+     This function will return the number of certifcates in the PKCS7 or
+     RFC2630 crl set.
+
+     *Returns:* On success, 'GNUTLS_E_SUCCESS' (0) is returned,
+     otherwise a negative error value.
+
+gnutls_pkcs7_get_crl_raw
+------------------------
+
+ -- Function: int gnutls_pkcs7_get_crl_raw (gnutls_pkcs7_t PKCS7, int
+          INDX, void * CRL, size_t * CRL_SIZE)
+     PKCS7: The pkcs7 type
+
+     INDX: contains the index of the crl to extract
+
+     CRL: the contents of the crl will be copied there (may be null)
+
+     CRL_SIZE: should hold the size of the crl
+
+     This function will return a crl of the PKCS7 or RFC2630 crl set.
+
+     *Returns:* On success, 'GNUTLS_E_SUCCESS' (0) is returned,
+     otherwise a negative error value.  If the provided buffer is not
+     long enough, then 'crl_size' is updated and
+     'GNUTLS_E_SHORT_MEMORY_BUFFER' is returned.  After the last crl has
+     been read 'GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE' will be returned.
+
+gnutls_pkcs7_get_crl_raw2
+-------------------------
+
+ -- Function: int gnutls_pkcs7_get_crl_raw2 (gnutls_pkcs7_t PKCS7, int
+          INDX, gnutls_datum_t * CRL)
+     PKCS7: The pkcs7 type
+
+     INDX: contains the index of the crl to extract
+
+     CRL: will contain the contents of the CRL in an allocated buffer
+
+     This function will return a DER encoded CRL of the PKCS7 or RFC2630
+     crl set.
+
+     *Returns:* On success, 'GNUTLS_E_SUCCESS' (0) is returned,
+     otherwise a negative error value.  After the last crl has been read
+     'GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE' will be returned.
+
+     *Since:* 3.4.2
+
+gnutls_pkcs7_get_crt_count
+--------------------------
+
+ -- Function: int gnutls_pkcs7_get_crt_count (gnutls_pkcs7_t PKCS7)
+     PKCS7: should contain a 'gnutls_pkcs7_t' type
+
+     This function will return the number of certifcates in the PKCS7 or
+     RFC2630 certificate set.
+
+     *Returns:* On success, 'GNUTLS_E_SUCCESS' (0) is returned,
+     otherwise a negative error value.
+
+gnutls_pkcs7_get_crt_raw
+------------------------
+
+ -- Function: int gnutls_pkcs7_get_crt_raw (gnutls_pkcs7_t PKCS7, int
+          INDX, void * CERTIFICATE, size_t * CERTIFICATE_SIZE)
+     PKCS7: should contain a gnutls_pkcs7_t type
+
+     INDX: contains the index of the certificate to extract
+
+     CERTIFICATE: the contents of the certificate will be copied there
+     (may be null)
+
+     CERTIFICATE_SIZE: should hold the size of the certificate
+
+     This function will return a certificate of the PKCS7 or RFC2630
+     certificate set.
+
+     After the last certificate has been read
+     'GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE' will be returned.
+
+     *Returns:* On success, 'GNUTLS_E_SUCCESS' (0) is returned,
+     otherwise a negative error value.  If the provided buffer is not
+     long enough, then 'certificate_size' is updated and
+     'GNUTLS_E_SHORT_MEMORY_BUFFER' is returned.
+
+gnutls_pkcs7_get_crt_raw2
+-------------------------
+
+ -- Function: int gnutls_pkcs7_get_crt_raw2 (gnutls_pkcs7_t PKCS7, int
+          INDX, gnutls_datum_t * CERT)
+     PKCS7: should contain a gnutls_pkcs7_t type
+
+     INDX: contains the index of the certificate to extract
+
+     CERT: - undescribed -
+
+     This function will return a certificate of the PKCS7 or RFC2630
+     certificate set.
+
+     After the last certificate has been read
+     'GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE' will be returned.
+
+     *Returns:* On success, 'GNUTLS_E_SUCCESS' (0) is returned,
+     otherwise a negative error value.  If the provided buffer is not
+     long enough, then 'certificate_size' is updated and
+     'GNUTLS_E_SHORT_MEMORY_BUFFER' is returned.
+
+     *Since:* 3.4.2
+
+gnutls_pkcs7_get_signature_info
+-------------------------------
+
+ -- Function: int gnutls_pkcs7_get_signature_info (gnutls_pkcs7_t PKCS7,
+          unsigned IDX, gnutls_pkcs7_signature_info_st * INFO)
+     PKCS7: should contain a 'gnutls_pkcs7_t' type
+
+     IDX: the index of the signature info to check
+
+     INFO: will contain the output signature
+
+     This function will return information about the signature
+     identified by idx in the provided PKCS '7' structure.  The
+     information should be deinitialized using
+     'gnutls_pkcs7_signature_info_deinit()' .
+
+     *Returns:* On success, 'GNUTLS_E_SUCCESS' (0) is returned,
+     otherwise a negative error value.
+
+     *Since:* 3.4.2
+
+gnutls_pkcs7_import
+-------------------
+
+ -- Function: int gnutls_pkcs7_import (gnutls_pkcs7_t PKCS7, const
+          gnutls_datum_t * DATA, gnutls_x509_crt_fmt_t FORMAT)
+     PKCS7: The data to store the parsed PKCS7.
+
+     DATA: The DER or PEM encoded PKCS7.
+
+     FORMAT: One of DER or PEM
+
+     This function will convert the given DER or PEM encoded PKCS7 to
+     the native 'gnutls_pkcs7_t' format.  The output will be stored in
+     'pkcs7' .
+
+     If the PKCS7 is PEM encoded it should have a header of "PKCS7".
+
+     *Returns:* On success, 'GNUTLS_E_SUCCESS' (0) is returned,
+     otherwise a negative error value.
+
+gnutls_pkcs7_init
+-----------------
+
+ -- Function: int gnutls_pkcs7_init (gnutls_pkcs7_t * PKCS7)
+     PKCS7: A pointer to the type to be initialized
+
+     This function will initialize a PKCS7 structure.  PKCS7 structures
+     usually contain lists of X.509 Certificates and X.509 Certificate
+     revocation lists.
+
+     *Returns:* On success, 'GNUTLS_E_SUCCESS' (0) is returned,
+     otherwise a negative error value.
+
+gnutls_pkcs7_print
+------------------
+
+ -- Function: int gnutls_pkcs7_print (gnutls_pkcs7_t PKCS7,
+          gnutls_certificate_print_formats_t FORMAT, gnutls_datum_t *
+          OUT)
+     PKCS7: The PKCS7 struct to be printed
+
+     FORMAT: Indicate the format to use
+
+     OUT: Newly allocated datum with null terminated string.
+
+     This function will pretty print a signed PKCS '7' structure,
+     suitable for display to a human.
+
+     Currently the supported formats are 'GNUTLS_CRT_PRINT_FULL' and
+     'GNUTLS_CRT_PRINT_COMPACT' .
+
+     The output 'out' needs to be deallocated using 'gnutls_free()' .
+
+     *Returns:* On success, 'GNUTLS_E_SUCCESS' (0) is returned,
+     otherwise a negative error value.
+
+gnutls_pkcs7_set_crl
+--------------------
+
+ -- Function: int gnutls_pkcs7_set_crl (gnutls_pkcs7_t PKCS7,
+          gnutls_x509_crl_t CRL)
+     PKCS7: The pkcs7 type
+
+     CRL: the DER encoded crl to be added
+
+     This function will add a parsed CRL to the PKCS7 or RFC2630 crl
+     set.
+
+     *Returns:* On success, 'GNUTLS_E_SUCCESS' (0) is returned,
+     otherwise a negative error value.
+
+gnutls_pkcs7_set_crl_raw
+------------------------
+
+ -- Function: int gnutls_pkcs7_set_crl_raw (gnutls_pkcs7_t PKCS7, const
+          gnutls_datum_t * CRL)
+     PKCS7: The pkcs7 type
+
+     CRL: the DER encoded crl to be added
+
+     This function will add a crl to the PKCS7 or RFC2630 crl set.
+
+     *Returns:* On success, 'GNUTLS_E_SUCCESS' (0) is returned,
+     otherwise a negative error value.
+
+gnutls_pkcs7_set_crt
+--------------------
+
+ -- Function: int gnutls_pkcs7_set_crt (gnutls_pkcs7_t PKCS7,
+          gnutls_x509_crt_t CRT)
+     PKCS7: The pkcs7 type
+
+     CRT: the certificate to be copied.
+
+     This function will add a parsed certificate to the PKCS7 or RFC2630
+     certificate set.  This is a wrapper function over
+     'gnutls_pkcs7_set_crt_raw()' .
+
+     *Returns:* On success, 'GNUTLS_E_SUCCESS' (0) is returned,
+     otherwise a negative error value.
+
+gnutls_pkcs7_set_crt_raw
+------------------------
+
+ -- Function: int gnutls_pkcs7_set_crt_raw (gnutls_pkcs7_t PKCS7, const
+          gnutls_datum_t * CRT)
+     PKCS7: The pkcs7 type
+
+     CRT: the DER encoded certificate to be added
+
+     This function will add a certificate to the PKCS7 or RFC2630
+     certificate set.
+
+     *Returns:* On success, 'GNUTLS_E_SUCCESS' (0) is returned,
+     otherwise a negative error value.
+
+gnutls_pkcs7_sign
+-----------------
+
+ -- Function: int gnutls_pkcs7_sign (gnutls_pkcs7_t PKCS7,
+          gnutls_x509_crt_t SIGNER, gnutls_privkey_t SIGNER_KEY, const
+          gnutls_datum_t * DATA, gnutls_pkcs7_attrs_t SIGNED_ATTRS,
+          gnutls_pkcs7_attrs_t UNSIGNED_ATTRS, gnutls_digest_algorithm_t
+          DIG, unsigned FLAGS)
+     PKCS7: should contain a 'gnutls_pkcs7_t' type
+
+     SIGNER: the certificate believe to have signed the structure
+
+     SIGNER_KEY: - undescribed -
+
+     DATA: The data to be signed or 'NULL' if the data are already
+     embedded
+
+     SIGNED_ATTRS: Any additional attributes to be included in the
+     signed ones (or 'NULL' )
+
+     UNSIGNED_ATTRS: Any additional attributes to be included in the
+     unsigned ones (or 'NULL' )
+
+     DIG: The digest algorithm to use for signing
+
+     FLAGS: Should be zero or one of 'GNUTLS_PKCS7' flags
+
+     This function will add a signature in the provided PKCS '7'
+     structure for the provided data.  Multiple signatures can be made
+     with different signers.
+
+     The available flags are: - 'GNUTLS_PKCS7_EMBED_DATA' : the data
+     will be embedded in the structure - 'GNUTLS_PKCS7_INCLUDE_TIME' :
+     the signing time will be included - 'GNUTLS_PKCS7_INCLUDE_CERT' :
+     the signer's certificate will be included in the cert list -
+     'GNUTLS_PKCS7_WRITE_SPKI' : store the issuer's ID instead of name
+
+     *Returns:* On success, 'GNUTLS_E_SUCCESS' (0) is returned,
+     otherwise a negative error value.
+
+     *Since:* 3.4.2
+
+gnutls_pkcs7_signature_info_deinit
+----------------------------------
+
+ -- Function: void gnutls_pkcs7_signature_info_deinit
+          (gnutls_pkcs7_signature_info_st * INFO)
+     INFO: should point to a 'gnutls_pkcs7_signature_info_st' structure
+
+     This function will deinitialize any allocated value in the provided
+     'gnutls_pkcs7_signature_info_st' .
+
+     *Since:* 3.4.2
+
+gnutls_pkcs7_verify
+-------------------
+
+ -- Function: int gnutls_pkcs7_verify (gnutls_pkcs7_t PKCS7,
+          gnutls_x509_trust_list_t TL, gnutls_typed_vdata_st * VDATA,
+          unsigned int VDATA_SIZE, unsigned IDX, const gnutls_datum_t *
+          DATA, unsigned FLAGS)
+     PKCS7: should contain a 'gnutls_pkcs7_t' type
+
+     TL: A list of trusted certificates
+
+     VDATA: an array of typed data
+
+     VDATA_SIZE: the number of data elements
+
+     IDX: the index of the signature info to check
+
+     DATA: The data to be verified or 'NULL'
+
+     FLAGS: Zero or an OR list of 'gnutls_certificate_verify_flags'
+
+     This function will verify the provided data against the signature
+     present in the SignedData of the PKCS '7' structure.  If the data
+     provided are NULL then the data in the encapsulatedContent field
+     will be used instead.
+
+     *Returns:* On success, 'GNUTLS_E_SUCCESS' (0) is returned,
+     otherwise a negative error value.  A verification error results to
+     a 'GNUTLS_E_PK_SIG_VERIFY_FAILED' and the lack of encapsulated data
+     to verify to a 'GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE' .
+
+     *Since:* 3.4.2
+
+gnutls_pkcs7_verify_direct
+--------------------------
+
+ -- Function: int gnutls_pkcs7_verify_direct (gnutls_pkcs7_t PKCS7,
+          gnutls_x509_crt_t SIGNER, unsigned IDX, const gnutls_datum_t *
+          DATA, unsigned FLAGS)
+     PKCS7: should contain a 'gnutls_pkcs7_t' type
+
+     SIGNER: the certificate believe to have signed the structure
+
+     IDX: the index of the signature info to check
+
+     DATA: The data to be verified or 'NULL'
+
+     FLAGS: Zero or an OR list of 'gnutls_certificate_verify_flags'
+
+     This function will verify the provided data against the signature
+     present in the SignedData of the PKCS '7' structure.  If the data
+     provided are NULL then the data in the encapsulatedContent field
+     will be used instead.
+
+     *Returns:* On success, 'GNUTLS_E_SUCCESS' (0) is returned,
+     otherwise a negative error value.  A verification error results to
+     a 'GNUTLS_E_PK_SIG_VERIFY_FAILED' and the lack of encapsulated data
+     to verify to a 'GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE' .
+
+     *Since:* 3.4.2
+
+
+File: gnutls.info,  Node: OCSP API,  Next: OpenPGP API,  Prev: PKCS 7 API,  Up: API reference
+
+E.5 OCSP API
+============
+
+The following functions are for OCSP certificate status checking.  Their
+prototypes lie in 'gnutls/ocsp.h'.
+
+gnutls_ocsp_req_add_cert
+------------------------
+
+ -- Function: int gnutls_ocsp_req_add_cert (gnutls_ocsp_req_t REQ,
+          gnutls_digest_algorithm_t DIGEST, gnutls_x509_crt_t ISSUER,
+          gnutls_x509_crt_t CERT)
+     REQ: should contain a 'gnutls_ocsp_req_t' type
+
+     DIGEST: hash algorithm, a 'gnutls_digest_algorithm_t' value
+
+     ISSUER: issuer of 'subject' certificate
+
+     CERT: certificate to request status for
+
+     This function will add another request to the OCSP request for a
+     particular certificate.  The issuer name hash, issuer key hash, and
+     serial number fields is populated as follows.  The issuer name and
+     the serial number is taken from 'cert' .  The issuer key is taken
+     from 'issuer' .  The hashed values will be hashed using the
+     'digest' algorithm, normally 'GNUTLS_DIG_SHA1' .
+
+     *Returns:* On success, 'GNUTLS_E_SUCCESS' (0) is returned,
+     otherwise a negative error code is returned.
+
+gnutls_ocsp_req_add_cert_id
+---------------------------
+
+ -- Function: int gnutls_ocsp_req_add_cert_id (gnutls_ocsp_req_t REQ,
+          gnutls_digest_algorithm_t DIGEST, const gnutls_datum_t *
+          ISSUER_NAME_HASH, const gnutls_datum_t * ISSUER_KEY_HASH,
+          const gnutls_datum_t * SERIAL_NUMBER)
+     REQ: should contain a 'gnutls_ocsp_req_t' type
+
+     DIGEST: hash algorithm, a 'gnutls_digest_algorithm_t' value
+
+     ISSUER_NAME_HASH: hash of issuer's DN
+
+     ISSUER_KEY_HASH: hash of issuer's public key
+
+     SERIAL_NUMBER: serial number of certificate to check
+
+     This function will add another request to the OCSP request for a
+     particular certificate having the issuer name hash of
+     'issuer_name_hash' and issuer key hash of 'issuer_key_hash' (both
+     hashed using 'digest' ) and serial number 'serial_number' .
+
+     The information needed corresponds to the CertID structure:
+
+     <informalexample><programlisting> CertID ::= SEQUENCE {
+     hashAlgorithm AlgorithmIdentifier, issuerNameHash OCTET STRING, -
+     Hash of Issuer's DN issuerKeyHash OCTET STRING, - Hash of Issuers
+     public key serialNumber CertificateSerialNumber }
+     </programlisting></informalexample>
+
+     *Returns:* On success, 'GNUTLS_E_SUCCESS' (0) is returned,
+     otherwise a negative error code is returned.
+
+gnutls_ocsp_req_deinit
+----------------------
+
+ -- Function: void gnutls_ocsp_req_deinit (gnutls_ocsp_req_t REQ)
+     REQ: The data to be deinitialized
+
+     This function will deinitialize a OCSP request structure.
+
+gnutls_ocsp_req_export
+----------------------
+
+ -- Function: int gnutls_ocsp_req_export (gnutls_ocsp_req_t REQ,
+          gnutls_datum_t * DATA)
+     REQ: Holds the OCSP request
+
+     DATA: newly allocate buffer holding DER encoded OCSP request
+
+     This function will export the OCSP request to DER format.
+
+     *Returns:* In case of failure a negative error code will be
+     returned, and 0 on success.
+
+gnutls_ocsp_req_get_cert_id
+---------------------------
+
+ -- Function: int gnutls_ocsp_req_get_cert_id (gnutls_ocsp_req_t REQ,
+          unsigned INDX, gnutls_digest_algorithm_t * DIGEST,
+          gnutls_datum_t * ISSUER_NAME_HASH, gnutls_datum_t *
+          ISSUER_KEY_HASH, gnutls_datum_t * SERIAL_NUMBER)
+     REQ: should contain a 'gnutls_ocsp_req_t' type
+
+     INDX: Specifies which extension OID to get.  Use (0) to get the
+     first one.
+
+     DIGEST: output variable with 'gnutls_digest_algorithm_t' hash
+     algorithm
+
+     ISSUER_NAME_HASH: output buffer with hash of issuer's DN
+
+     ISSUER_KEY_HASH: output buffer with hash of issuer's public key
+
+     SERIAL_NUMBER: output buffer with serial number of certificate to
+     check
+
+     This function will return the certificate information of the 'indx'
+     'ed request in the OCSP request.  The information returned
+     corresponds to the CertID structure:
+
+     <informalexample><programlisting> CertID ::= SEQUENCE {
+     hashAlgorithm AlgorithmIdentifier, issuerNameHash OCTET STRING, -
+     Hash of Issuer's DN issuerKeyHash OCTET STRING, - Hash of Issuers
+     public key serialNumber CertificateSerialNumber }
+     </programlisting></informalexample>
+
+     Each of the pointers to output variables may be NULL to indicate
+     that the caller is not interested in that value.
+
+     *Returns:* On success, 'GNUTLS_E_SUCCESS' (0) is returned,
+     otherwise a negative error code is returned.  If you have reached
+     the last CertID available 'GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE'
+     will be returned.
+
+gnutls_ocsp_req_get_extension
+-----------------------------
+
+ -- Function: int gnutls_ocsp_req_get_extension (gnutls_ocsp_req_t REQ,
+          unsigned INDX, gnutls_datum_t * OID, unsigned int * CRITICAL,
+          gnutls_datum_t * DATA)
+     REQ: should contain a 'gnutls_ocsp_req_t' type
+
+     INDX: Specifies which extension OID to get.  Use (0) to get the
+     first one.
+
+     OID: will hold newly allocated buffer with OID of extension, may be
+     NULL
+
+     CRITICAL: output variable with critical flag, may be NULL.
+
+     DATA: will hold newly allocated buffer with extension data, may be
+     NULL
+
+     This function will return all information about the requested
+     extension in the OCSP request.  The information returned is the
+     OID, the critical flag, and the data itself.  The extension OID
+     will be stored as a string.  Any of 'oid' , 'critical' , and 'data'
+     may be NULL which means that the caller is not interested in
+     getting that information back.
+
+     The caller needs to deallocate memory by calling 'gnutls_free()' on
+     'oid' ->data and 'data' ->data.
+
+     *Returns:* On success, 'GNUTLS_E_SUCCESS' (0) is returned,
+     otherwise a negative error code is returned.  If you have reached
+     the last extension available
+     'GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE' will be returned.
+
+gnutls_ocsp_req_get_nonce
+-------------------------
+
+ -- Function: int gnutls_ocsp_req_get_nonce (gnutls_ocsp_req_t REQ,
+          unsigned int * CRITICAL, gnutls_datum_t * NONCE)
+     REQ: should contain a 'gnutls_ocsp_req_t' type
+
+     CRITICAL: whether nonce extension is marked critical, or NULL
+
+     NONCE: will hold newly allocated buffer with nonce data
+
+     This function will return the OCSP request nonce extension data.
+
+     The caller needs to deallocate memory by calling 'gnutls_free()' on
+     'nonce' ->data.
+
+     *Returns:* On success, 'GNUTLS_E_SUCCESS' (0) is returned,
+     otherwise a negative error code is returned.
+
+gnutls_ocsp_req_get_version
+---------------------------
+
+ -- Function: int gnutls_ocsp_req_get_version (gnutls_ocsp_req_t REQ)
+     REQ: should contain a 'gnutls_ocsp_req_t' type
+
+     This function will return the version of the OCSP request.
+     Typically this is always 1 indicating version 1.
+
+     *Returns:* version of OCSP request, or a negative error code on
+     error.
+
+gnutls_ocsp_req_import
+----------------------
+
+ -- Function: int gnutls_ocsp_req_import (gnutls_ocsp_req_t REQ, const
+          gnutls_datum_t * DATA)
+     REQ: The data to store the parsed request.
+
+     DATA: DER encoded OCSP request.
+
+     This function will convert the given DER encoded OCSP request to
+     the native 'gnutls_ocsp_req_t' format.  The output will be stored
+     in 'req' .
+
+     *Returns:* On success, 'GNUTLS_E_SUCCESS' (0) is returned,
+     otherwise a negative error value.
+
+gnutls_ocsp_req_init
+--------------------
+
+ -- Function: int gnutls_ocsp_req_init (gnutls_ocsp_req_t * REQ)
+     REQ: A pointer to the type to be initialized
+
+     This function will initialize an OCSP request structure.
+
+     *Returns:* On success, 'GNUTLS_E_SUCCESS' (0) is returned,
+     otherwise a negative error value.
+
+gnutls_ocsp_req_print
+---------------------
+
+ -- Function: int gnutls_ocsp_req_print (gnutls_ocsp_req_t REQ,
+          gnutls_ocsp_print_formats_t FORMAT, gnutls_datum_t * OUT)
+     REQ: The data to be printed
+
+     FORMAT: Indicate the format to use
+
+     OUT: Newly allocated datum with (0) terminated string.
+
+     This function will pretty print a OCSP request, suitable for
+     display to a human.
+
+     If the format is 'GNUTLS_OCSP_PRINT_FULL' then all fields of the
+     request will be output, on multiple lines.
+
+     The output 'out' ->data needs to be deallocate using
+     'gnutls_free()' .
+
+     *Returns:* On success, 'GNUTLS_E_SUCCESS' (0) is returned,
+     otherwise a negative error value.
+
+gnutls_ocsp_req_randomize_nonce
+-------------------------------
+
+ -- Function: int gnutls_ocsp_req_randomize_nonce (gnutls_ocsp_req_t
+          REQ)
+     REQ: should contain a 'gnutls_ocsp_req_t' type
+
+     This function will add or update an nonce extension to the OCSP
+     request with a newly generated random value.
+
+     *Returns:* On success, 'GNUTLS_E_SUCCESS' (0) is returned,
+     otherwise a negative error code is returned.
+
+gnutls_ocsp_req_set_extension
+-----------------------------
+
+ -- Function: int gnutls_ocsp_req_set_extension (gnutls_ocsp_req_t REQ,
+          const char * OID, unsigned int CRITICAL, const gnutls_datum_t
+          * DATA)
+     REQ: should contain a 'gnutls_ocsp_req_t' type
+
+     OID: buffer with OID of extension as a string.
+
+     CRITICAL: critical flag, normally false.
+
+     DATA: the extension data
+
+     This function will add an extension to the OCSP request.  Calling
+     this function multiple times for the same OID will overwrite values
+     from earlier calls.
+
+     *Returns:* On success, 'GNUTLS_E_SUCCESS' (0) is returned,
+     otherwise a negative error code is returned.
+
+gnutls_ocsp_req_set_nonce
+-------------------------
+
+ -- Function: int gnutls_ocsp_req_set_nonce (gnutls_ocsp_req_t REQ,
+          unsigned int CRITICAL, const gnutls_datum_t * NONCE)
+     REQ: should contain a 'gnutls_ocsp_req_t' type
+
+     CRITICAL: critical flag, normally false.
+
+     NONCE: the nonce data
+
+     This function will add an nonce extension to the OCSP request.
+     Calling this function multiple times will overwrite values from
+     earlier calls.
+
+     *Returns:* On success, 'GNUTLS_E_SUCCESS' (0) is returned,
+     otherwise a negative error code is returned.
+
+gnutls_ocsp_resp_check_crt
+--------------------------
+
+ -- Function: int gnutls_ocsp_resp_check_crt (gnutls_ocsp_resp_t RESP,
+          unsigned int INDX, gnutls_x509_crt_t CRT)
+     RESP: should contain a 'gnutls_ocsp_resp_t' type
+
+     INDX: Specifies response number to get.  Use (0) to get the first
+     one.
+
+     CRT: The certificate to check
+
+     This function will check whether the OCSP response is about the
+     provided certificate.
+
+     *Returns:* On success, 'GNUTLS_E_SUCCESS' (0) is returned,
+     otherwise a negative error code is returned.
+
+     *Since:* 3.1.3
+
+gnutls_ocsp_resp_deinit
+-----------------------
+
+ -- Function: void gnutls_ocsp_resp_deinit (gnutls_ocsp_resp_t RESP)
+     RESP: The data to be deinitialized
+
+     This function will deinitialize a OCSP response structure.
+
+gnutls_ocsp_resp_export
+-----------------------
+
+ -- Function: int gnutls_ocsp_resp_export (gnutls_ocsp_resp_t RESP,
+          gnutls_datum_t * DATA)
+     RESP: Holds the OCSP response
+
+     DATA: newly allocate buffer holding DER encoded OCSP response
+
+     This function will export the OCSP response to DER format.
+
+     *Returns:* In case of failure a negative error code will be
+     returned, and 0 on success.
+
+gnutls_ocsp_resp_get_certs
+--------------------------
+
+ -- Function: int gnutls_ocsp_resp_get_certs (gnutls_ocsp_resp_t RESP,
+          gnutls_x509_crt_t ** CERTS, size_t * NCERTS)
+     RESP: should contain a 'gnutls_ocsp_resp_t' type
+
+     CERTS: newly allocated array with 'gnutls_x509_crt_t' certificates
+
+     NCERTS: output variable with number of allocated certs.
+
+     This function will extract the X.509 certificates found in the
+     Basic OCSP Response.  The 'certs' output variable will hold a newly
+     allocated zero-terminated array with X.509 certificates.
+
+     Every certificate in the array needs to be de-allocated with
+     'gnutls_x509_crt_deinit()' and the array itself must be freed using
+     'gnutls_free()' .
+
+     Both the 'certs' and 'ncerts' variables may be NULL. Then the
+     function will work as normal but will not return the NULL:d
+     information.  This can be used to get the number of certificates
+     only, or to just get the certificate array without its size.
+
+     *Returns:* On success, 'GNUTLS_E_SUCCESS' (0) is returned,
+     otherwise a negative error value.
+
+gnutls_ocsp_resp_get_extension
+------------------------------
+
+ -- Function: int gnutls_ocsp_resp_get_extension (gnutls_ocsp_resp_t
+          RESP, unsigned INDX, gnutls_datum_t * OID, unsigned int *
+          CRITICAL, gnutls_datum_t * DATA)
+     RESP: should contain a 'gnutls_ocsp_resp_t' type
+
+     INDX: Specifies which extension OID to get.  Use (0) to get the
+     first one.
+
+     OID: will hold newly allocated buffer with OID of extension, may be
+     NULL
+
+     CRITICAL: output variable with critical flag, may be NULL.
+
+     DATA: will hold newly allocated buffer with extension data, may be
+     NULL
+
+     This function will return all information about the requested
+     extension in the OCSP response.  The information returned is the
+     OID, the critical flag, and the data itself.  The extension OID
+     will be stored as a string.  Any of 'oid' , 'critical' , and 'data'
+     may be NULL which means that the caller is not interested in
+     getting that information back.
+
+     The caller needs to deallocate memory by calling 'gnutls_free()' on
+     'oid' ->data and 'data' ->data.
+
+     *Returns:* On success, 'GNUTLS_E_SUCCESS' (0) is returned,
+     otherwise a negative error code is returned.  If you have reached
+     the last extension available
+     'GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE' will be returned.
+
+gnutls_ocsp_resp_get_nonce
+--------------------------
+
+ -- Function: int gnutls_ocsp_resp_get_nonce (gnutls_ocsp_resp_t RESP,
+          unsigned int * CRITICAL, gnutls_datum_t * NONCE)
+     RESP: should contain a 'gnutls_ocsp_resp_t' type
+
+     CRITICAL: whether nonce extension is marked critical
+
+     NONCE: will hold newly allocated buffer with nonce data
+
+     This function will return the Basic OCSP Response nonce extension
+     data.
+
+     The caller needs to deallocate memory by calling 'gnutls_free()' on
+     'nonce' ->data.
+
+     *Returns:* On success, 'GNUTLS_E_SUCCESS' (0) is returned,
+     otherwise a negative error code is returned.
+
+gnutls_ocsp_resp_get_produced
+-----------------------------
+
+ -- Function: time_t gnutls_ocsp_resp_get_produced (gnutls_ocsp_resp_t
+          RESP)
+     RESP: should contain a 'gnutls_ocsp_resp_t' type
+
+     This function will return the time when the OCSP response was
+     signed.
+
+     *Returns:* signing time, or (time_t)-1 on error.
+
+gnutls_ocsp_resp_get_responder
+------------------------------
+
+ -- Function: int gnutls_ocsp_resp_get_responder (gnutls_ocsp_resp_t
+          RESP, gnutls_datum_t * DN)
+     RESP: should contain a 'gnutls_ocsp_resp_t' type
+
+     DN: newly allocated buffer with name
+
+     This function will extract the name of the Basic OCSP Response in
+     the provided buffer.  The name will be in the form
+     "C=xxxx,O=yyyy,CN=zzzz" as described in RFC2253.  The output string
+     will be ASCII or UTF-8 encoded, depending on the certificate data.
+
+     If the responder ID is not a name but a hash, this function will
+     return zero and the 'dn' elements will be set to 'NULL' .
+
+     The caller needs to deallocate memory by calling 'gnutls_free()' on
+     'dn' ->data.
+
+     *Returns:* On success, 'GNUTLS_E_SUCCESS' (0) is returned,
+     otherwise a negative error code is returned.
+
+gnutls_ocsp_resp_get_responder_raw_id
+-------------------------------------
+
+ -- Function: int gnutls_ocsp_resp_get_responder_raw_id
+          (gnutls_ocsp_resp_t RESP, unsigned TYPE, gnutls_datum_t * RAW)
+     RESP: should contain a 'gnutls_ocsp_resp_t' type
+
+     TYPE: should be 'GNUTLS_OCSP_RESP_ID_KEY' or
+     'GNUTLS_OCSP_RESP_ID_DN'
+
+     RAW: newly allocated buffer with the raw ID
+
+     This function will extract the raw key (or DN) ID of the Basic OCSP
+     Response in the provided buffer.  If the responder ID is not a key
+     ID then this function will return
+     'GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE' .
+
+     The caller needs to deallocate memory by calling 'gnutls_free()' on
+     'dn' ->data.
+
+     *Returns:* On success, 'GNUTLS_E_SUCCESS' (0) is returned,
+     otherwise a negative error code is returned.
+
+gnutls_ocsp_resp_get_response
+-----------------------------
+
+ -- Function: int gnutls_ocsp_resp_get_response (gnutls_ocsp_resp_t
+          RESP, gnutls_datum_t * RESPONSE_TYPE_OID, gnutls_datum_t *
+          RESPONSE)
+     RESP: should contain a 'gnutls_ocsp_resp_t' type
+
+     RESPONSE_TYPE_OID: newly allocated output buffer with response type
+     OID
+
+     RESPONSE: newly allocated output buffer with DER encoded response
+
+     This function will extract the response type OID in and the
+     response data from an OCSP response.  Normally the
+     'response_type_oid' is always "1.3.6.1.5.5.7.48.1.1" which means
+     the 'response' should be decoded as a Basic OCSP Response, but
+     technically other response types could be used.
+
+     This function is typically only useful when you want to extract the
+     response type OID of an response for diagnostic purposes.
+     Otherwise 'gnutls_ocsp_resp_import()' will decode the basic OCSP
+     response part and the caller need not worry about that aspect.
+
+     *Returns:* On success, 'GNUTLS_E_SUCCESS' (0) is returned,
+     otherwise a negative error value.
+
+gnutls_ocsp_resp_get_signature
+------------------------------
+
+ -- Function: int gnutls_ocsp_resp_get_signature (gnutls_ocsp_resp_t
+          RESP, gnutls_datum_t * SIG)
+     RESP: should contain a 'gnutls_ocsp_resp_t' type
+
+     SIG: newly allocated output buffer with signature data
+
+     This function will extract the signature field of a OCSP response.
+
+     *Returns:* On success, 'GNUTLS_E_SUCCESS' (0) is returned,
+     otherwise a negative error value.
+
+gnutls_ocsp_resp_get_signature_algorithm
+----------------------------------------
+
+ -- Function: int gnutls_ocsp_resp_get_signature_algorithm
+          (gnutls_ocsp_resp_t RESP)
+     RESP: should contain a 'gnutls_ocsp_resp_t' type
+
+     This function will return a value of the 'gnutls_sign_algorithm_t'
+     enumeration that is the signature algorithm that has been used to
+     sign the OCSP response.
+
+     *Returns:* a 'gnutls_sign_algorithm_t' value, or a negative error
+     code on error.
+
+gnutls_ocsp_resp_get_single
+---------------------------
+
+ -- Function: int gnutls_ocsp_resp_get_single (gnutls_ocsp_resp_t RESP,
+          unsigned INDX, gnutls_digest_algorithm_t * DIGEST,
+          gnutls_datum_t * ISSUER_NAME_HASH, gnutls_datum_t *
+          ISSUER_KEY_HASH, gnutls_datum_t * SERIAL_NUMBER, unsigned int
+          * CERT_STATUS, time_t * THIS_UPDATE, time_t * NEXT_UPDATE,
+          time_t * REVOCATION_TIME, unsigned int * REVOCATION_REASON)
+     RESP: should contain a 'gnutls_ocsp_resp_t' type
+
+     INDX: Specifies response number to get.  Use (0) to get the first
+     one.
+
+     DIGEST: output variable with 'gnutls_digest_algorithm_t' hash
+     algorithm
+
+     ISSUER_NAME_HASH: output buffer with hash of issuer's DN
+
+     ISSUER_KEY_HASH: output buffer with hash of issuer's public key
+
+     SERIAL_NUMBER: output buffer with serial number of certificate to
+     check
+
+     CERT_STATUS: a certificate status, a 'gnutls_ocsp_cert_status_t'
+     enum.
+
+     THIS_UPDATE: time at which the status is known to be correct.
+
+     NEXT_UPDATE: when newer information will be available, or
+     (time_t)-1 if unspecified
+
+     REVOCATION_TIME: when 'cert_status' is 'GNUTLS_OCSP_CERT_REVOKED' ,
+     holds time of revocation.
+
+     REVOCATION_REASON: revocation reason, a 'gnutls_x509_crl_reason_t'
+     enum.
+
+     This function will return the certificate information of the 'indx'
+     'ed response in the Basic OCSP Response 'resp' .  The information
+     returned corresponds to the OCSP SingleResponse structure except
+     the final singleExtensions.
+
+     Each of the pointers to output variables may be NULL to indicate
+     that the caller is not interested in that value.
+
+     *Returns:* On success, 'GNUTLS_E_SUCCESS' (0) is returned,
+     otherwise a negative error code is returned.  If you have reached
+     the last CertID available 'GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE'
+     will be returned.
+
+gnutls_ocsp_resp_get_status
+---------------------------
+
+ -- Function: int gnutls_ocsp_resp_get_status (gnutls_ocsp_resp_t RESP)
+     RESP: should contain a 'gnutls_ocsp_resp_t' type
+
+     This function will return the status of a OCSP response, an
+     'gnutls_ocsp_resp_status_t' enumeration.
+
+     *Returns:* status of OCSP request as a 'gnutls_ocsp_resp_status_t'
+     , or a negative error code on error.
+
+gnutls_ocsp_resp_get_version
+----------------------------
+
+ -- Function: int gnutls_ocsp_resp_get_version (gnutls_ocsp_resp_t RESP)
+     RESP: should contain a 'gnutls_ocsp_resp_t' type
+
+     This function will return the version of the Basic OCSP Response.
+     Typically this is always 1 indicating version 1.
+
+     *Returns:* version of Basic OCSP response, or a negative error code
+     on error.
+
+gnutls_ocsp_resp_import
+-----------------------
+
+ -- Function: int gnutls_ocsp_resp_import (gnutls_ocsp_resp_t RESP,
+          const gnutls_datum_t * DATA)
+     RESP: The data to store the parsed response.
+
+     DATA: DER encoded OCSP response.
+
+     This function will convert the given DER encoded OCSP response to
+     the native 'gnutls_ocsp_resp_t' format.  It also decodes the Basic
+     OCSP Response part, if any.  The output will be stored in 'resp' .
+
+     *Returns:* On success, 'GNUTLS_E_SUCCESS' (0) is returned,
+     otherwise a negative error value.
+
+gnutls_ocsp_resp_init
+---------------------
+
+ -- Function: int gnutls_ocsp_resp_init (gnutls_ocsp_resp_t * RESP)
+     RESP: A pointer to the type to be initialized
+
+     This function will initialize an OCSP response structure.
+
+     *Returns:* On success, 'GNUTLS_E_SUCCESS' (0) is returned,
+     otherwise a negative error value.
+
+gnutls_ocsp_resp_print
+----------------------
+
+ -- Function: int gnutls_ocsp_resp_print (gnutls_ocsp_resp_t RESP,
+          gnutls_ocsp_print_formats_t FORMAT, gnutls_datum_t * OUT)
+     RESP: The data to be printed
+
+     FORMAT: Indicate the format to use
+
+     OUT: Newly allocated datum with (0) terminated string.
+
+     This function will pretty print a OCSP response, suitable for
+     display to a human.
+
+     If the format is 'GNUTLS_OCSP_PRINT_FULL' then all fields of the
+     response will be output, on multiple lines.
+
+     The output 'out' ->data needs to be deallocate using
+     'gnutls_free()' .
+
+     *Returns:* On success, 'GNUTLS_E_SUCCESS' (0) is returned,
+     otherwise a negative error value.
+
+gnutls_ocsp_resp_verify
+-----------------------
+
+ -- Function: int gnutls_ocsp_resp_verify (gnutls_ocsp_resp_t RESP,
+          gnutls_x509_trust_list_t TRUSTLIST, unsigned int * VERIFY,
+          unsigned int FLAGS)
+     RESP: should contain a 'gnutls_ocsp_resp_t' type
+
+     TRUSTLIST: trust anchors as a 'gnutls_x509_trust_list_t' type
+
+     VERIFY: output variable with verification status, an
+     'gnutls_ocsp_verify_reason_t'
+
+     FLAGS: verification flags, 0 for now.
+
+     Verify signature of the Basic OCSP Response against the public key
+     in the certificate of a trusted signer.  The 'trustlist' should be
+     populated with trust anchors.  The function will extract the signer
+     certificate from the Basic OCSP Response and will verify it against
+     the 'trustlist' .  A trusted signer is a certificate that is either
+     in 'trustlist' , or it is signed directly by a certificate in
+     'trustlist' and has the id-ad-ocspSigning Extended Key Usage bit
+     set.
+
+     The output 'verify' variable will hold verification status codes
+     (e.g., 'GNUTLS_OCSP_VERIFY_SIGNER_NOT_FOUND' ,
+     'GNUTLS_OCSP_VERIFY_INSECURE_ALGORITHM' ) which are only valid if
+     the function returned 'GNUTLS_E_SUCCESS' .
+
+     Note that the function returns 'GNUTLS_E_SUCCESS' even when
+     verification failed.  The caller must always inspect the 'verify'
+     variable to find out the verification status.
+
+     The 'flags' variable should be 0 for now.
+
+     *Returns:* On success, 'GNUTLS_E_SUCCESS' (0) is returned,
+     otherwise a negative error value.
+
+gnutls_ocsp_resp_verify_direct
+------------------------------
+
+ -- Function: int gnutls_ocsp_resp_verify_direct (gnutls_ocsp_resp_t
+          RESP, gnutls_x509_crt_t ISSUER, unsigned int * VERIFY,
+          unsigned int FLAGS)
+     RESP: should contain a 'gnutls_ocsp_resp_t' type
+
+     ISSUER: certificate believed to have signed the response
+
+     VERIFY: output variable with verification status, an
+     'gnutls_ocsp_verify_reason_t'
+
+     FLAGS: verification flags, 0 for now.
+
+     Verify signature of the Basic OCSP Response against the public key
+     in the 'issuer' certificate.
+
+     The output 'verify' variable will hold verification status codes
+     (e.g., 'GNUTLS_OCSP_VERIFY_SIGNER_NOT_FOUND' ,
+     'GNUTLS_OCSP_VERIFY_INSECURE_ALGORITHM' ) which are only valid if
+     the function returned 'GNUTLS_E_SUCCESS' .
+
+     Note that the function returns 'GNUTLS_E_SUCCESS' even when
+     verification failed.  The caller must always inspect the 'verify'
+     variable to find out the verification status.
+
+     The 'flags' variable should be 0 for now.
+
+     *Returns:* On success, 'GNUTLS_E_SUCCESS' (0) is returned,
+     otherwise a negative error value.
+
+
+File: gnutls.info,  Node: OpenPGP API,  Next: PKCS 12 API,  Prev: OCSP API,  Up: API reference
+
+E.6 OpenPGP API
+===============
+
+The following functions are to be used for OpenPGP certificate handling.
+Their prototypes lie in 'gnutls/openpgp.h'.
+
+gnutls_certificate_get_openpgp_crt
+----------------------------------
+
+ -- Function: int gnutls_certificate_get_openpgp_crt
+          (gnutls_certificate_credentials_t RES, unsigned INDEX,
+          gnutls_openpgp_crt_t ** CRT_LIST, unsigned * CRT_LIST_SIZE)
+     RES: is a 'gnutls_certificate_credentials_t' type.
+
+     INDEX: The index of the certificate list to obtain.
+
+     CRT_LIST: Where to store the certificate list.
+
+     CRT_LIST_SIZE: - undescribed -
+
+     Obtains a X.509 certificate list that has been stored in 'res' with
+     one of 'gnutls_certificate_set_openpgp_key()' ,
+     'gnutls_certificate_set_openpgp_key_file()' ,
+     'gnutls_certificate_set_openpgp_key_file2()' ,
+     'gnutls_certificate_set_openpgp_key_mem()' , or
+     'gnutls_certificate_set_openpgp_key_mem2()' .  Each certificate in
+     the returned certificate list must be deallocated with
+     'gnutls_openpgp_crt_deinit()' , and the list itself must be freed
+     with 'gnutls_free()' .
+
+     If there is no certificate with the given index,
+     'GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE' is returned.  If the
+     certificate with the given index is not a X.509 certificate,
+     'GNUTLS_E_INVALID_REQUEST' is returned.
+
+     *Returns:* 'GNUTLS_E_SUCCESS' (0) on success, or a negative error
+     code.
+
+     *Since:* 3.4.0
+
+gnutls_certificate_get_openpgp_key
+----------------------------------
+
+ -- Function: int gnutls_certificate_get_openpgp_key
+          (gnutls_certificate_credentials_t RES, unsigned INDEX,
+          gnutls_openpgp_privkey_t * KEY)
+     RES: is a 'gnutls_certificate_credentials_t' type.
+
+     INDEX: The index of the key to obtain.
+
+     KEY: Location to store the key.
+
+     Obtains a OpenPGP private key that has been stored in 'res' with
+     one of 'gnutls_certificate_set_openpgp_key()' ,
+     'gnutls_certificate_set_openpgp_key_file()' ,
+     'gnutls_certificate_set_openpgp_key_file2()' ,
+     'gnutls_certificate_set_openpgp_key_mem()' , or
+     'gnutls_certificate_set_openpgp_key_mem2()' .  The returned key
+     must be deallocated with 'gnutls_openpgp_privkey_deinit()' when no
+     longer needed.
+
+     If there is no key with the given index,
+     'GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE' is returned.  If the key
+     with the given index is not a X.509 key, 'GNUTLS_E_INVALID_REQUEST'
+     is returned.
+
+     *Returns:* 'GNUTLS_E_SUCCESS' (0) on success, or a negative error
+     code.
+
+     *Since:* 3.4.0
+
+gnutls_certificate_set_openpgp_key
+----------------------------------
+
+ -- Function: int gnutls_certificate_set_openpgp_key
+          (gnutls_certificate_credentials_t RES, gnutls_openpgp_crt_t
+          CRT, gnutls_openpgp_privkey_t PKEY)
+     RES: is a 'gnutls_certificate_credentials_t' type.
+
+     CRT: contains an openpgp public key
+
+     PKEY: is an openpgp private key
+
+     This function sets a certificate/private key pair in the
+     gnutls_certificate_credentials_t type.  This function may be called
+     more than once (in case multiple keys/certificates exist for the
+     server).
+
+     Note that this function requires that the preferred key ids have
+     been set and be used.  See
+     'gnutls_openpgp_crt_set_preferred_key_id()' .  Otherwise the master
+     key will be used.
+
+     *Returns:* On success, 'GNUTLS_E_SUCCESS' (0) is returned,
+     otherwise a negative error code is returned.
+
+gnutls_certificate_set_openpgp_key_file
+---------------------------------------
+
+ -- Function: int gnutls_certificate_set_openpgp_key_file
+          (gnutls_certificate_credentials_t RES, const char * CERTFILE,
+          const char * KEYFILE, gnutls_openpgp_crt_fmt_t FORMAT)
+     RES: the destination context to save the data.
+
+     CERTFILE: the file that contains the public key.
+
+     KEYFILE: the file that contains the secret key.
+
+     FORMAT: the format of the keys
+
+     This funtion is used to load OpenPGP keys into the GnuTLS
+     credentials structure.  The file should contain at least one valid
+     non encrypted subkey.
+
+     *Returns:* On success, 'GNUTLS_E_SUCCESS' (0) is returned,
+     otherwise a negative error value.
+
+gnutls_certificate_set_openpgp_key_file2
+----------------------------------------
+
+ -- Function: int gnutls_certificate_set_openpgp_key_file2
+          (gnutls_certificate_credentials_t RES, const char * CERTFILE,
+          const char * KEYFILE, const char * SUBKEY_ID,
+          gnutls_openpgp_crt_fmt_t FORMAT)
+     RES: the destination context to save the data.
+
+     CERTFILE: the file that contains the public key.
+
+     KEYFILE: the file that contains the secret key.
+
+     SUBKEY_ID: a hex encoded subkey id
+
+     FORMAT: the format of the keys
+
+     This funtion is used to load OpenPGP keys into the GnuTLS
+     credential structure.  The file should contain at least one valid
+     non encrypted subkey.
+
+     The special keyword "auto" is also accepted as 'subkey_id' .  In
+     that case the 'gnutls_openpgp_crt_get_auth_subkey()' will be used
+     to retrieve the subkey.
+
+     *Returns:* On success, 'GNUTLS_E_SUCCESS' (0) is returned,
+     otherwise a negative error value.
+
+     *Since:* 2.4.0
+
+gnutls_certificate_set_openpgp_key_mem
+--------------------------------------
+
+ -- Function: int gnutls_certificate_set_openpgp_key_mem
+          (gnutls_certificate_credentials_t RES, const gnutls_datum_t *
+          CERT, const gnutls_datum_t * KEY, gnutls_openpgp_crt_fmt_t
+          FORMAT)
+     RES: the destination context to save the data.
+
+     CERT: the datum that contains the public key.
+
+     KEY: the datum that contains the secret key.
+
+     FORMAT: the format of the keys
+
+     This funtion is used to load OpenPGP keys into the GnuTLS
+     credential structure.  The datum should contain at least one valid
+     non encrypted subkey.
+
+     *Returns:* On success, 'GNUTLS_E_SUCCESS' (0) is returned,
+     otherwise a negative error value.
+
+gnutls_certificate_set_openpgp_key_mem2
+---------------------------------------
+
+ -- Function: int gnutls_certificate_set_openpgp_key_mem2
+          (gnutls_certificate_credentials_t RES, const gnutls_datum_t *
+          CERT, const gnutls_datum_t * KEY, const char * SUBKEY_ID,
+          gnutls_openpgp_crt_fmt_t FORMAT)
+     RES: the destination context to save the data.
+
+     CERT: the datum that contains the public key.
+
+     KEY: the datum that contains the secret key.
+
+     SUBKEY_ID: a hex encoded subkey id
+
+     FORMAT: the format of the keys
+
+     This funtion is used to load OpenPGP keys into the GnuTLS
+     credentials structure.  The datum should contain at least one valid
+     non encrypted subkey.
+
+     The special keyword "auto" is also accepted as 'subkey_id' .  In
+     that case the 'gnutls_openpgp_crt_get_auth_subkey()' will be used
+     to retrieve the subkey.
+
+     *Returns:* On success, 'GNUTLS_E_SUCCESS' (0) is returned,
+     otherwise a negative error value.
+
+     *Since:* 2.4.0
+
+gnutls_certificate_set_openpgp_keyring_file
+-------------------------------------------
+
+ -- Function: int gnutls_certificate_set_openpgp_keyring_file
+          (gnutls_certificate_credentials_t C, const char * FILE,
+          gnutls_openpgp_crt_fmt_t FORMAT)
+     C: A certificate credentials structure
+
+     FILE: filename of the keyring.
+
+     FORMAT: format of keyring.
+
+     The function is used to set keyrings that will be used internally
+     by various OpenPGP functions.  For example to find a key when it is
+     needed for an operations.  The keyring will also be used at the
+     verification functions.
+
+     *Returns:* On success, 'GNUTLS_E_SUCCESS' (0) is returned,
+     otherwise a negative error value.
+
+gnutls_certificate_set_openpgp_keyring_mem
+------------------------------------------
+
+ -- Function: int gnutls_certificate_set_openpgp_keyring_mem
+          (gnutls_certificate_credentials_t C, const uint8_t * DATA,
+          size_t DLEN, gnutls_openpgp_crt_fmt_t FORMAT)
+     C: A certificate credentials structure
+
+     DATA: buffer with keyring data.
+
+     DLEN: length of data buffer.
+
+     FORMAT: the format of the keyring
+
+     The function is used to set keyrings that will be used internally
+     by various OpenPGP functions.  For example to find a key when it is
+     needed for an operations.  The keyring will also be used at the
+     verification functions.
+
+     *Returns:* On success, 'GNUTLS_E_SUCCESS' (0) is returned,
+     otherwise a negative error value.
+
+gnutls_openpgp_crt_check_email
+------------------------------
+
+ -- Function: int gnutls_openpgp_crt_check_email (gnutls_openpgp_crt_t
+          KEY, const char * EMAIL, unsigned FLAGS)
+     KEY: should contain a 'gnutls_openpgp_crt_t' type
+
+     EMAIL: A null terminated string that contains an RFC822 address
+     (email)
+
+     FLAGS: gnutls_certificate_verify_flags
+
+     This function will check if the given key's owner matches the given
+     email address.
+
+     *Returns:* non-zero for a successful match, and zero on failure.
+
+gnutls_openpgp_crt_check_hostname
+---------------------------------
+
+ -- Function: int gnutls_openpgp_crt_check_hostname
+          (gnutls_openpgp_crt_t KEY, const char * HOSTNAME)
+     KEY: should contain a 'gnutls_openpgp_crt_t' type
+
+     HOSTNAME: A null terminated string that contains a DNS name
+
+     This function will check if the given key's owner matches the given
+     hostname.  This is a basic implementation of the matching described
+     in RFC2818 (HTTPS), which takes into account wildcards.
+
+     *Returns:* non-zero for a successful match, and zero on failure.
+
+gnutls_openpgp_crt_check_hostname2
+----------------------------------
+
+ -- Function: int gnutls_openpgp_crt_check_hostname2
+          (gnutls_openpgp_crt_t KEY, const char * HOSTNAME, unsigned
+          FLAGS)
+     KEY: should contain a 'gnutls_openpgp_crt_t' type
+
+     HOSTNAME: A null terminated string that contains a DNS name
+
+     FLAGS: gnutls_certificate_verify_flags
+
+     This function will check if the given key's owner matches the given
+     hostname.
+
+     Unless, the flag 'GNUTLS_VERIFY_DO_NOT_ALLOW_WILDCARDS' is
+     specified, wildcards are only considered if the domain name
+     consists of three components or more, and the wildcard starts at
+     the leftmost position.
+
+     *Returns:* non-zero for a successful match, and zero on failure.
+
+gnutls_openpgp_crt_deinit
+-------------------------
+
+ -- Function: void gnutls_openpgp_crt_deinit (gnutls_openpgp_crt_t KEY)
+     KEY: A pointer to the type to be initialized
+
+     This function will deinitialize a key structure.
+
+gnutls_openpgp_crt_export
+-------------------------
+
+ -- Function: int gnutls_openpgp_crt_export (gnutls_openpgp_crt_t KEY,
+          gnutls_openpgp_crt_fmt_t FORMAT, void * OUTPUT_DATA, size_t *
+          OUTPUT_DATA_SIZE)
+     KEY: Holds the key.
+
+     FORMAT: One of gnutls_openpgp_crt_fmt_t elements.
+
+     OUTPUT_DATA: will contain the raw or base64 encoded key
+
+     OUTPUT_DATA_SIZE: holds the size of output_data (and will be
+     replaced by the actual size of parameters)
+
+     This function will convert the given key to RAW or Base64 format.
+     If the buffer provided is not long enough to hold the output, then
+     'GNUTLS_E_SHORT_MEMORY_BUFFER' will be returned.
+
+     *Returns:* 'GNUTLS_E_SUCCESS' on success, or an error code.
+
+gnutls_openpgp_crt_export2
+--------------------------
+
+ -- Function: int gnutls_openpgp_crt_export2 (gnutls_openpgp_crt_t KEY,
+          gnutls_openpgp_crt_fmt_t FORMAT, gnutls_datum_t * OUT)
+     KEY: Holds the key.
+
+     FORMAT: One of gnutls_openpgp_crt_fmt_t elements.
+
+     OUT: will contain the raw or base64 encoded key
+
+     This function will convert the given key to RAW or Base64 format.
+     The output buffer is allocated using 'gnutls_malloc()' .
+
+     *Returns:* 'GNUTLS_E_SUCCESS' on success, or an error code.
+
+     *Since:* 3.1.3
+
+gnutls_openpgp_crt_get_auth_subkey
+----------------------------------
+
+ -- Function: int gnutls_openpgp_crt_get_auth_subkey
+          (gnutls_openpgp_crt_t CRT, gnutls_openpgp_keyid_t KEYID,
+          unsigned int FLAG)
+     CRT: the structure that contains the OpenPGP public key.
+
+     KEYID: the struct to save the keyid.
+
+     FLAG: Non-zero indicates that a valid subkey is always returned.
+
+     Returns the 64-bit keyID of the first valid OpenPGP subkey marked
+     for authentication.  If flag is non-zero and no authentication
+     subkey exists, then a valid subkey will be returned even if it is
+     not marked for authentication.
+
+     *Returns:* 'GNUTLS_E_SUCCESS' on success, or an error code.
+
+gnutls_openpgp_crt_get_creation_time
+------------------------------------
+
+ -- Function: time_t gnutls_openpgp_crt_get_creation_time
+          (gnutls_openpgp_crt_t KEY)
+     KEY: the structure that contains the OpenPGP public key.
+
+     Get key creation time.
+
+     *Returns:* the timestamp when the OpenPGP key was created.
+
+gnutls_openpgp_crt_get_expiration_time
+--------------------------------------
+
+ -- Function: time_t gnutls_openpgp_crt_get_expiration_time
+          (gnutls_openpgp_crt_t KEY)
+     KEY: the structure that contains the OpenPGP public key.
+
+     Get key expiration time.  A value of '0' means that the key doesn't
+     expire at all.
+
+     *Returns:* the time when the OpenPGP key expires.
+
+gnutls_openpgp_crt_get_fingerprint
+----------------------------------
+
+ -- Function: int gnutls_openpgp_crt_get_fingerprint
+          (gnutls_openpgp_crt_t KEY, void * FPR, size_t * FPRLEN)
+     KEY: the raw data that contains the OpenPGP public key.
+
+     FPR: the buffer to save the fingerprint, must hold at least 20
+     bytes.
+
+     FPRLEN: the integer to save the length of the fingerprint.
+
+     Get key fingerprint.  Depending on the algorithm, the fingerprint
+     can be 16 or 20 bytes.
+
+     *Returns:* On success, 0 is returned.  Otherwise, an error code.
+
+gnutls_openpgp_crt_get_key_id
+-----------------------------
+
+ -- Function: int gnutls_openpgp_crt_get_key_id (gnutls_openpgp_crt_t
+          KEY, gnutls_openpgp_keyid_t KEYID)
+     KEY: the structure that contains the OpenPGP public key.
+
+     KEYID: the buffer to save the keyid.
+
+     Get key id string.
+
+     *Returns:* the 64-bit keyID of the OpenPGP key.
+
+     *Since:* 2.4.0
+
+gnutls_openpgp_crt_get_key_usage
+--------------------------------
+
+ -- Function: int gnutls_openpgp_crt_get_key_usage (gnutls_openpgp_crt_t
+          KEY, unsigned int * KEY_USAGE)
+     KEY: should contain a gnutls_openpgp_crt_t type
+
+     KEY_USAGE: where the key usage bits will be stored
+
+     This function will return certificate's key usage, by checking the
+     key algorithm.  The key usage value will ORed values of the:
+     'GNUTLS_KEY_DIGITAL_SIGNATURE' , 'GNUTLS_KEY_KEY_ENCIPHERMENT' .
+
+     *Returns:* 'GNUTLS_E_SUCCESS' on success, or an error code.
+
+gnutls_openpgp_crt_get_name
+---------------------------
+
+ -- Function: int gnutls_openpgp_crt_get_name (gnutls_openpgp_crt_t KEY,
+          int IDX, char * BUF, size_t * SIZEOF_BUF)
+     KEY: the structure that contains the OpenPGP public key.
+
+     IDX: the index of the ID to extract
+
+     BUF: a pointer to a structure to hold the name, may be 'NULL' to
+     only get the 'sizeof_buf' .
+
+     SIZEOF_BUF: holds the maximum size of 'buf' , on return hold the
+     actual/required size of 'buf' .
+
+     Extracts the userID from the parsed OpenPGP key.
+
+     *Returns:* 'GNUTLS_E_SUCCESS' on success, and if the index of the
+     ID does not exist 'GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE' , or an
+     error code.
+
+gnutls_openpgp_crt_get_pk_algorithm
+-----------------------------------
+
+ -- Function: gnutls_pk_algorithm_t gnutls_openpgp_crt_get_pk_algorithm
+          (gnutls_openpgp_crt_t KEY, unsigned int * BITS)
+     KEY: is an OpenPGP key
+
+     BITS: if bits is non null it will hold the size of the parameters'
+     in bits
+
+     This function will return the public key algorithm of an OpenPGP
+     certificate.
+
+     If bits is non null, it should have enough size to hold the
+     parameters size in bits.  For RSA the bits returned is the modulus.
+     For DSA the bits returned are of the public exponent.
+
+     *Returns:* a member of the 'gnutls_pk_algorithm_t' enumeration on
+     success, or GNUTLS_PK_UNKNOWN on error.
+
+gnutls_openpgp_crt_get_pk_dsa_raw
+---------------------------------
+
+ -- Function: int gnutls_openpgp_crt_get_pk_dsa_raw
+          (gnutls_openpgp_crt_t CRT, gnutls_datum_t * P, gnutls_datum_t
+          * Q, gnutls_datum_t * G, gnutls_datum_t * Y)
+     CRT: Holds the certificate
+
+     P: will hold the p
+
+     Q: will hold the q
+
+     G: will hold the g
+
+     Y: will hold the y
+
+     This function will export the DSA public key's parameters found in
+     the given certificate.  The new parameters will be allocated using
+     'gnutls_malloc()' and will be stored in the appropriate datum.
+
+     *Returns:* 'GNUTLS_E_SUCCESS' on success, otherwise a negative
+     error code.
+
+     *Since:* 2.4.0
+
+gnutls_openpgp_crt_get_pk_rsa_raw
+---------------------------------
+
+ -- Function: int gnutls_openpgp_crt_get_pk_rsa_raw
+          (gnutls_openpgp_crt_t CRT, gnutls_datum_t * M, gnutls_datum_t
+          * E)
+     CRT: Holds the certificate
+
+     M: will hold the modulus
+
+     E: will hold the public exponent
+
+     This function will export the RSA public key's parameters found in
+     the given structure.  The new parameters will be allocated using
+     'gnutls_malloc()' and will be stored in the appropriate datum.
+
+     *Returns:* 'GNUTLS_E_SUCCESS' on success, otherwise a negative
+     error code.
+
+     *Since:* 2.4.0
+
+gnutls_openpgp_crt_get_preferred_key_id
+---------------------------------------
+
+ -- Function: int gnutls_openpgp_crt_get_preferred_key_id
+          (gnutls_openpgp_crt_t KEY, gnutls_openpgp_keyid_t KEYID)
+     KEY: the structure that contains the OpenPGP public key.
+
+     KEYID: the struct to save the keyid.
+
+     Get preferred key id.  If it hasn't been set it returns
+     'GNUTLS_E_INVALID_REQUEST' .
+
+     *Returns:* the 64-bit preferred keyID of the OpenPGP key.
+
+gnutls_openpgp_crt_get_revoked_status
+-------------------------------------
+
+ -- Function: int gnutls_openpgp_crt_get_revoked_status
+          (gnutls_openpgp_crt_t KEY)
+     KEY: the structure that contains the OpenPGP public key.
+
+     Get revocation status of key.
+
+     *Returns:* true (1) if the key has been revoked, or false (0) if it
+     has not.
+
+     *Since:* 2.4.0
+
+gnutls_openpgp_crt_get_subkey_count
+-----------------------------------
+
+ -- Function: int gnutls_openpgp_crt_get_subkey_count
+          (gnutls_openpgp_crt_t KEY)
+     KEY: is an OpenPGP key
+
+     This function will return the number of subkeys present in the
+     given OpenPGP certificate.
+
+     *Returns:* the number of subkeys, or a negative error code on
+     error.
+
+     *Since:* 2.4.0
+
+gnutls_openpgp_crt_get_subkey_creation_time
+-------------------------------------------
+
+ -- Function: time_t gnutls_openpgp_crt_get_subkey_creation_time
+          (gnutls_openpgp_crt_t KEY, unsigned int IDX)
+     KEY: the structure that contains the OpenPGP public key.
+
+     IDX: the subkey index
+
+     Get subkey creation time.
+
+     *Returns:* the timestamp when the OpenPGP sub-key was created.
+
+     *Since:* 2.4.0
+
+gnutls_openpgp_crt_get_subkey_expiration_time
+---------------------------------------------
+
+ -- Function: time_t gnutls_openpgp_crt_get_subkey_expiration_time
+          (gnutls_openpgp_crt_t KEY, unsigned int IDX)
+     KEY: the structure that contains the OpenPGP public key.
+
+     IDX: the subkey index
+
+     Get subkey expiration time.  A value of '0' means that the key
+     doesn't expire at all.
+
+     *Returns:* the time when the OpenPGP key expires.
+
+     *Since:* 2.4.0
+
+gnutls_openpgp_crt_get_subkey_fingerprint
+-----------------------------------------
+
+ -- Function: int gnutls_openpgp_crt_get_subkey_fingerprint
+          (gnutls_openpgp_crt_t KEY, unsigned int IDX, void * FPR,
+          size_t * FPRLEN)
+     KEY: the raw data that contains the OpenPGP public key.
+
+     IDX: the subkey index
+
+     FPR: the buffer to save the fingerprint, must hold at least 20
+     bytes.
+
+     FPRLEN: the integer to save the length of the fingerprint.
+
+     Get key fingerprint of a subkey.  Depending on the algorithm, the
+     fingerprint can be 16 or 20 bytes.
+
+     *Returns:* On success, 0 is returned.  Otherwise, an error code.
+
+     *Since:* 2.4.0
+
+gnutls_openpgp_crt_get_subkey_id
+--------------------------------
+
+ -- Function: int gnutls_openpgp_crt_get_subkey_id (gnutls_openpgp_crt_t
+          KEY, unsigned int IDX, gnutls_openpgp_keyid_t KEYID)
+     KEY: the structure that contains the OpenPGP public key.
+
+     IDX: the subkey index
+
+     KEYID: the buffer to save the keyid.
+
+     Get the subkey's key-id.
+
+     *Returns:* the 64-bit keyID of the OpenPGP key.
+
+gnutls_openpgp_crt_get_subkey_idx
+---------------------------------
+
+ -- Function: int gnutls_openpgp_crt_get_subkey_idx
+          (gnutls_openpgp_crt_t KEY, const gnutls_openpgp_keyid_t KEYID)
+     KEY: the structure that contains the OpenPGP public key.
+
+     KEYID: the keyid.
+
+     Get subkey's index.
+
+     *Returns:* the index of the subkey or a negative error value.
+
+     *Since:* 2.4.0
+
+gnutls_openpgp_crt_get_subkey_pk_algorithm
+------------------------------------------
+
+ -- Function: gnutls_pk_algorithm_t
+          gnutls_openpgp_crt_get_subkey_pk_algorithm
+          (gnutls_openpgp_crt_t KEY, unsigned int IDX, unsigned int *
+          BITS)
+     KEY: is an OpenPGP key
+
+     IDX: is the subkey index
+
+     BITS: if bits is non null it will hold the size of the parameters'
+     in bits
+
+     This function will return the public key algorithm of a subkey of
+     an OpenPGP certificate.
+
+     If bits is non null, it should have enough size to hold the
+     parameters size in bits.  For RSA the bits returned is the modulus.
+     For DSA the bits returned are of the public exponent.
+
+     *Returns:* a member of the 'gnutls_pk_algorithm_t' enumeration on
+     success, or GNUTLS_PK_UNKNOWN on error.
+
+     *Since:* 2.4.0
+
+gnutls_openpgp_crt_get_subkey_pk_dsa_raw
+----------------------------------------
+
+ -- Function: int gnutls_openpgp_crt_get_subkey_pk_dsa_raw
+          (gnutls_openpgp_crt_t CRT, unsigned int IDX, gnutls_datum_t *
+          P, gnutls_datum_t * Q, gnutls_datum_t * G, gnutls_datum_t * Y)
+     CRT: Holds the certificate
+
+     IDX: Is the subkey index
+
+     P: will hold the p
+
+     Q: will hold the q
+
+     G: will hold the g
+
+     Y: will hold the y
+
+     This function will export the DSA public key's parameters found in
+     the given certificate.  The new parameters will be allocated using
+     'gnutls_malloc()' and will be stored in the appropriate datum.
+
+     *Returns:* 'GNUTLS_E_SUCCESS' on success, otherwise a negative
+     error code.
+
+     *Since:* 2.4.0
+
+gnutls_openpgp_crt_get_subkey_pk_rsa_raw
+----------------------------------------
+
+ -- Function: int gnutls_openpgp_crt_get_subkey_pk_rsa_raw
+          (gnutls_openpgp_crt_t CRT, unsigned int IDX, gnutls_datum_t *
+          M, gnutls_datum_t * E)
+     CRT: Holds the certificate
+
+     IDX: Is the subkey index
+
+     M: will hold the modulus
+
+     E: will hold the public exponent
+
+     This function will export the RSA public key's parameters found in
+     the given structure.  The new parameters will be allocated using
+     'gnutls_malloc()' and will be stored in the appropriate datum.
+
+     *Returns:* 'GNUTLS_E_SUCCESS' on success, otherwise a negative
+     error code.
+
+     *Since:* 2.4.0
+
+gnutls_openpgp_crt_get_subkey_revoked_status
+--------------------------------------------
+
+ -- Function: int gnutls_openpgp_crt_get_subkey_revoked_status
+          (gnutls_openpgp_crt_t KEY, unsigned int IDX)
+     KEY: the structure that contains the OpenPGP public key.
+
+     IDX: is the subkey index
+
+     Get subkey revocation status.  A negative error code indicates an
+     error.
+
+     *Returns:* true (1) if the key has been revoked, or false (0) if it
+     has not.
+
+     *Since:* 2.4.0
+
+gnutls_openpgp_crt_get_subkey_usage
+-----------------------------------
+
+ -- Function: int gnutls_openpgp_crt_get_subkey_usage
+          (gnutls_openpgp_crt_t KEY, unsigned int IDX, unsigned int *
+          KEY_USAGE)
+     KEY: should contain a gnutls_openpgp_crt_t type
+
+     IDX: the subkey index
+
+     KEY_USAGE: where the key usage bits will be stored
+
+     This function will return certificate's key usage, by checking the
+     key algorithm.  The key usage value will ORed values of
+     'GNUTLS_KEY_DIGITAL_SIGNATURE' or 'GNUTLS_KEY_KEY_ENCIPHERMENT' .
+
+     A negative error code may be returned in case of parsing error.
+
+     *Returns:* key usage value.
+
+     *Since:* 2.4.0
+
+gnutls_openpgp_crt_get_version
+------------------------------
+
+ -- Function: int gnutls_openpgp_crt_get_version (gnutls_openpgp_crt_t
+          KEY)
+     KEY: the structure that contains the OpenPGP public key.
+
+     Extract the version of the OpenPGP key.
+
+     *Returns:* the version number is returned, or a negative error code
+     on errors.
+
+gnutls_openpgp_crt_import
+-------------------------
+
+ -- Function: int gnutls_openpgp_crt_import (gnutls_openpgp_crt_t KEY,
+          const gnutls_datum_t * DATA, gnutls_openpgp_crt_fmt_t FORMAT)
+     KEY: The structure to store the parsed key.
+
+     DATA: The RAW or BASE64 encoded key.
+
+     FORMAT: One of gnutls_openpgp_crt_fmt_t elements.
+
+     This function will convert the given RAW or Base64 encoded key to
+     the native 'gnutls_openpgp_crt_t' format.  The output will be
+     stored in 'key'.
+
+     *Returns:* 'GNUTLS_E_SUCCESS' on success, or an error code.
+
+gnutls_openpgp_crt_init
+-----------------------
+
+ -- Function: int gnutls_openpgp_crt_init (gnutls_openpgp_crt_t * KEY)
+     KEY: A pointer to the type to be initialized
+
+     This function will initialize an OpenPGP key structure.
+
+     *Returns:* 'GNUTLS_E_SUCCESS' on success, or an error code.
+
+gnutls_openpgp_crt_print
+------------------------
+
+ -- Function: int gnutls_openpgp_crt_print (gnutls_openpgp_crt_t CERT,
+          gnutls_certificate_print_formats_t FORMAT, gnutls_datum_t *
+          OUT)
+     CERT: The structure to be printed
+
+     FORMAT: Indicate the format to use
+
+     OUT: Newly allocated datum with (0) terminated string.
+
+     This function will pretty print an OpenPGP certificate, suitable
+     for display to a human.
+
+     The format should be (0) for future compatibility.
+
+     The output 'out' needs to be deallocate using 'gnutls_free()' .
+
+     *Returns:* 'GNUTLS_E_SUCCESS' on success, or an error code.
+
+gnutls_openpgp_crt_set_preferred_key_id
+---------------------------------------
+
+ -- Function: int gnutls_openpgp_crt_set_preferred_key_id
+          (gnutls_openpgp_crt_t KEY, const gnutls_openpgp_keyid_t KEYID)
+     KEY: the structure that contains the OpenPGP public key.
+
+     KEYID: the selected keyid
+
+     This allows setting a preferred key id for the given certificate.
+     This key will be used by functions that involve key handling.
+
+     If the provided 'keyid' is 'NULL' then the master key is set as
+     preferred.
+
+     *Returns:* On success, 'GNUTLS_E_SUCCESS' (0) is returned,
+     otherwise a negative error code is returned.
+
+gnutls_openpgp_crt_verify_ring
+------------------------------
+
+ -- Function: int gnutls_openpgp_crt_verify_ring (gnutls_openpgp_crt_t
+          KEY, gnutls_openpgp_keyring_t KEYRING, unsigned int FLAGS,
+          unsigned int * VERIFY)
+     KEY: the structure that holds the key.
+
+     KEYRING: holds the keyring to check against
+
+     FLAGS: unused (should be 0)
+
+     VERIFY: will hold the certificate verification output.
+
+     Verify all signatures in the key, using the given set of keys
+     (keyring).
+
+     The key verification output will be put in 'verify' and will be one
+     or more of the 'gnutls_certificate_status_t' enumerated elements
+     bitwise or'd.
+
+     Note that this function does not verify using any "web of trust".
+     You may use GnuPG for that purpose, or any other external PGP
+     application.
+
+     *Returns:* 'GNUTLS_E_SUCCESS' on success, or an error code.
+
+gnutls_openpgp_crt_verify_self
+------------------------------
+
+ -- Function: int gnutls_openpgp_crt_verify_self (gnutls_openpgp_crt_t
+          KEY, unsigned int FLAGS, unsigned int * VERIFY)
+     KEY: the structure that holds the key.
+
+     FLAGS: unused (should be 0)
+
+     VERIFY: will hold the key verification output.
+
+     Verifies the self signature in the key.  The key verification
+     output will be put in 'verify' and will be one or more of the
+     gnutls_certificate_status_t enumerated elements bitwise or'd.
+
+     *Returns:* 'GNUTLS_E_SUCCESS' on success, or an error code.
+
+gnutls_openpgp_keyring_check_id
+-------------------------------
+
+ -- Function: int gnutls_openpgp_keyring_check_id
+          (gnutls_openpgp_keyring_t RING, const gnutls_openpgp_keyid_t
+          KEYID, unsigned int FLAGS)
+     RING: holds the keyring to check against
+
+     KEYID: will hold the keyid to check for.
+
+     FLAGS: unused (should be 0)
+
+     Check if a given key ID exists in the keyring.
+
+     *Returns:* 'GNUTLS_E_SUCCESS' on success (if keyid exists) and a
+     negative error code on failure.
+
+gnutls_openpgp_keyring_deinit
+-----------------------------
+
+ -- Function: void gnutls_openpgp_keyring_deinit
+          (gnutls_openpgp_keyring_t KEYRING)
+     KEYRING: A pointer to the type to be initialized
+
+     This function will deinitialize a keyring structure.
+
+gnutls_openpgp_keyring_get_crt
+------------------------------
+
+ -- Function: int gnutls_openpgp_keyring_get_crt
+          (gnutls_openpgp_keyring_t RING, unsigned int IDX,
+          gnutls_openpgp_crt_t * CERT)
+     RING: Holds the keyring.
+
+     IDX: the index of the certificate to export
+
+     CERT: An uninitialized 'gnutls_openpgp_crt_t' type
+
+     This function will extract an OpenPGP certificate from the given
+     keyring.  If the index given is out of range
+     'GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE' will be returned.  The
+     returned structure needs to be deinited.
+
+     *Returns:* 'GNUTLS_E_SUCCESS' on success, or an error code.
+
+gnutls_openpgp_keyring_get_crt_count
+------------------------------------
+
+ -- Function: int gnutls_openpgp_keyring_get_crt_count
+          (gnutls_openpgp_keyring_t RING)
+     RING: is an OpenPGP key ring
+
+     This function will return the number of OpenPGP certificates
+     present in the given keyring.
+
+     *Returns:* the number of subkeys, or a negative error code on
+     error.
+
+gnutls_openpgp_keyring_import
+-----------------------------
+
+ -- Function: int gnutls_openpgp_keyring_import
+          (gnutls_openpgp_keyring_t KEYRING, const gnutls_datum_t *
+          DATA, gnutls_openpgp_crt_fmt_t FORMAT)
+     KEYRING: The structure to store the parsed key.
+
+     DATA: The RAW or BASE64 encoded keyring.
+
+     FORMAT: One of 'gnutls_openpgp_keyring_fmt' elements.
+
+     This function will convert the given RAW or Base64 encoded keyring
+     to the native 'gnutls_openpgp_keyring_t' format.  The output will
+     be stored in 'keyring'.
+
+     *Returns:* 'GNUTLS_E_SUCCESS' on success, or an error code.
+
+gnutls_openpgp_keyring_init
+---------------------------
+
+ -- Function: int gnutls_openpgp_keyring_init (gnutls_openpgp_keyring_t
+          * KEYRING)
+     KEYRING: A pointer to the type to be initialized
+
+     This function will initialize an keyring structure.
+
+     *Returns:* 'GNUTLS_E_SUCCESS' on success, or an error code.
+
+gnutls_openpgp_privkey_deinit
+-----------------------------
+
+ -- Function: void gnutls_openpgp_privkey_deinit
+          (gnutls_openpgp_privkey_t KEY)
+     KEY: A pointer to the type to be initialized
+
+     This function will deinitialize a key structure.
+
+gnutls_openpgp_privkey_export
+-----------------------------
+
+ -- Function: int gnutls_openpgp_privkey_export
+          (gnutls_openpgp_privkey_t KEY, gnutls_openpgp_crt_fmt_t
+          FORMAT, const char * PASSWORD, unsigned int FLAGS, void *
+          OUTPUT_DATA, size_t * OUTPUT_DATA_SIZE)
+     KEY: Holds the key.
+
+     FORMAT: One of gnutls_openpgp_crt_fmt_t elements.
+
+     PASSWORD: the password that will be used to encrypt the key.
+     (unused for now)
+
+     FLAGS: (0) for future compatibility
+
+     OUTPUT_DATA: will contain the key base64 encoded or raw
+
+     OUTPUT_DATA_SIZE: holds the size of output_data (and will be
+     replaced by the actual size of parameters)
+
+     This function will convert the given key to RAW or Base64 format.
+     If the buffer provided is not long enough to hold the output, then
+     GNUTLS_E_SHORT_MEMORY_BUFFER will be returned.
+
+     *Returns:* 'GNUTLS_E_SUCCESS' on success, or an error code.
+
+     *Since:* 2.4.0
+
+gnutls_openpgp_privkey_export2
+------------------------------
+
+ -- Function: int gnutls_openpgp_privkey_export2
+          (gnutls_openpgp_privkey_t KEY, gnutls_openpgp_crt_fmt_t
+          FORMAT, const char * PASSWORD, unsigned int FLAGS,
+          gnutls_datum_t * OUT)
+     KEY: Holds the key.
+
+     FORMAT: One of gnutls_openpgp_crt_fmt_t elements.
+
+     PASSWORD: the password that will be used to encrypt the key.
+     (unused for now)
+
+     FLAGS: (0) for future compatibility
+
+     OUT: will contain the raw or based64 encoded key
+
+     This function will convert the given key to RAW or Base64 format.
+     The output buffer is allocated using 'gnutls_malloc()' .
+
+     *Returns:* 'GNUTLS_E_SUCCESS' on success, or an error code.
+
+     *Since:* 3.1.3
+
+gnutls_openpgp_privkey_export_dsa_raw
+-------------------------------------
+
+ -- Function: int gnutls_openpgp_privkey_export_dsa_raw
+          (gnutls_openpgp_privkey_t PKEY, gnutls_datum_t * P,
+          gnutls_datum_t * Q, gnutls_datum_t * G, gnutls_datum_t * Y,
+          gnutls_datum_t * X)
+     PKEY: Holds the certificate
+
+     P: will hold the p
+
+     Q: will hold the q
+
+     G: will hold the g
+
+     Y: will hold the y
+
+     X: will hold the x
+
+     This function will export the DSA private key's parameters found in
+     the given certificate.  The new parameters will be allocated using
+     'gnutls_malloc()' and will be stored in the appropriate datum.
+
+     *Returns:* 'GNUTLS_E_SUCCESS' on success, otherwise a negative
+     error code.
+
+     *Since:* 2.4.0
+
+gnutls_openpgp_privkey_export_rsa_raw
+-------------------------------------
+
+ -- Function: int gnutls_openpgp_privkey_export_rsa_raw
+          (gnutls_openpgp_privkey_t PKEY, gnutls_datum_t * M,
+          gnutls_datum_t * E, gnutls_datum_t * D, gnutls_datum_t * P,
+          gnutls_datum_t * Q, gnutls_datum_t * U)
+     PKEY: Holds the certificate
+
+     M: will hold the modulus
+
+     E: will hold the public exponent
+
+     D: will hold the private exponent
+
+     P: will hold the first prime (p)
+
+     Q: will hold the second prime (q)
+
+     U: will hold the coefficient
+
+     This function will export the RSA private key's parameters found in
+     the given structure.  The new parameters will be allocated using
+     'gnutls_malloc()' and will be stored in the appropriate datum.
+
+     *Returns:* 'GNUTLS_E_SUCCESS' on success, otherwise a negative
+     error code.
+
+     *Since:* 2.4.0
+
+gnutls_openpgp_privkey_export_subkey_dsa_raw
+--------------------------------------------
+
+ -- Function: int gnutls_openpgp_privkey_export_subkey_dsa_raw
+          (gnutls_openpgp_privkey_t PKEY, unsigned int IDX,
+          gnutls_datum_t * P, gnutls_datum_t * Q, gnutls_datum_t * G,
+          gnutls_datum_t * Y, gnutls_datum_t * X)
+     PKEY: Holds the certificate
+
+     IDX: Is the subkey index
+
+     P: will hold the p
+
+     Q: will hold the q
+
+     G: will hold the g
+
+     Y: will hold the y
+
+     X: will hold the x
+
+     This function will export the DSA private key's parameters found in
+     the given certificate.  The new parameters will be allocated using
+     'gnutls_malloc()' and will be stored in the appropriate datum.
+
+     *Returns:* 'GNUTLS_E_SUCCESS' on success, otherwise a negative
+     error code.
+
+     *Since:* 2.4.0
+
+gnutls_openpgp_privkey_export_subkey_rsa_raw
+--------------------------------------------
+
+ -- Function: int gnutls_openpgp_privkey_export_subkey_rsa_raw
+          (gnutls_openpgp_privkey_t PKEY, unsigned int IDX,
+          gnutls_datum_t * M, gnutls_datum_t * E, gnutls_datum_t * D,
+          gnutls_datum_t * P, gnutls_datum_t * Q, gnutls_datum_t * U)
+     PKEY: Holds the certificate
+
+     IDX: Is the subkey index
+
+     M: will hold the modulus
+
+     E: will hold the public exponent
+
+     D: will hold the private exponent
+
+     P: will hold the first prime (p)
+
+     Q: will hold the second prime (q)
+
+     U: will hold the coefficient
+
+     This function will export the RSA private key's parameters found in
+     the given structure.  The new parameters will be allocated using
+     'gnutls_malloc()' and will be stored in the appropriate datum.
+
+     *Returns:* 'GNUTLS_E_SUCCESS' on success, otherwise a negative
+     error code.
+
+     *Since:* 2.4.0
+
+gnutls_openpgp_privkey_get_fingerprint
+--------------------------------------
+
+ -- Function: int gnutls_openpgp_privkey_get_fingerprint
+          (gnutls_openpgp_privkey_t KEY, void * FPR, size_t * FPRLEN)
+     KEY: the raw data that contains the OpenPGP secret key.
+
+     FPR: the buffer to save the fingerprint, must hold at least 20
+     bytes.
+
+     FPRLEN: the integer to save the length of the fingerprint.
+
+     Get the fingerprint of the OpenPGP key.  Depends on the algorithm,
+     the fingerprint can be 16 or 20 bytes.
+
+     *Returns:* On success, 0 is returned, or an error code.
+
+     *Since:* 2.4.0
+
+gnutls_openpgp_privkey_get_key_id
+---------------------------------
+
+ -- Function: int gnutls_openpgp_privkey_get_key_id
+          (gnutls_openpgp_privkey_t KEY, gnutls_openpgp_keyid_t KEYID)
+     KEY: the structure that contains the OpenPGP secret key.
+
+     KEYID: the buffer to save the keyid.
+
+     Get key-id.
+
+     *Returns:* the 64-bit keyID of the OpenPGP key.
+
+     *Since:* 2.4.0
+
+gnutls_openpgp_privkey_get_pk_algorithm
+---------------------------------------
+
+ -- Function: gnutls_pk_algorithm_t
+          gnutls_openpgp_privkey_get_pk_algorithm
+          (gnutls_openpgp_privkey_t KEY, unsigned int * BITS)
+     KEY: is an OpenPGP key
+
+     BITS: if bits is non null it will hold the size of the parameters'
+     in bits
+
+     This function will return the public key algorithm of an OpenPGP
+     certificate.
+
+     If bits is non null, it should have enough size to hold the
+     parameters size in bits.  For RSA the bits returned is the modulus.
+     For DSA the bits returned are of the public exponent.
+
+     *Returns:* a member of the 'gnutls_pk_algorithm_t' enumeration on
+     success, or a negative error code on error.
+
+     *Since:* 2.4.0
+
+gnutls_openpgp_privkey_get_preferred_key_id
+-------------------------------------------
+
+ -- Function: int gnutls_openpgp_privkey_get_preferred_key_id
+          (gnutls_openpgp_privkey_t KEY, gnutls_openpgp_keyid_t KEYID)
+     KEY: the structure that contains the OpenPGP public key.
+
+     KEYID: the struct to save the keyid.
+
+     Get the preferred key-id for the key.
+
+     *Returns:* the 64-bit preferred keyID of the OpenPGP key, or if it
+     hasn't been set it returns 'GNUTLS_E_INVALID_REQUEST' .
+
+gnutls_openpgp_privkey_get_revoked_status
+-----------------------------------------
+
+ -- Function: int gnutls_openpgp_privkey_get_revoked_status
+          (gnutls_openpgp_privkey_t KEY)
+     KEY: the structure that contains the OpenPGP private key.
+
+     Get revocation status of key.
+
+     *Returns:* true (1) if the key has been revoked, or false (0) if it
+     has not, or a negative error code indicates an error.
+
+     *Since:* 2.4.0
+
+gnutls_openpgp_privkey_get_subkey_count
+---------------------------------------
+
+ -- Function: int gnutls_openpgp_privkey_get_subkey_count
+          (gnutls_openpgp_privkey_t KEY)
+     KEY: is an OpenPGP key
+
+     This function will return the number of subkeys present in the
+     given OpenPGP certificate.
+
+     *Returns:* the number of subkeys, or a negative error code on
+     error.
+
+     *Since:* 2.4.0
+
+gnutls_openpgp_privkey_get_subkey_creation_time
+-----------------------------------------------
+
+ -- Function: time_t gnutls_openpgp_privkey_get_subkey_creation_time
+          (gnutls_openpgp_privkey_t KEY, unsigned int IDX)
+     KEY: the structure that contains the OpenPGP private key.
+
+     IDX: the subkey index
+
+     Get subkey creation time.
+
+     *Returns:* the timestamp when the OpenPGP key was created.
+
+     *Since:* 2.4.0
+
+gnutls_openpgp_privkey_get_subkey_expiration_time
+-------------------------------------------------
+
+ -- Function: time_t gnutls_openpgp_privkey_get_subkey_expiration_time
+          (gnutls_openpgp_privkey_t KEY, unsigned int IDX)
+     KEY: the structure that contains the OpenPGP private key.
+
+     IDX: the subkey index
+
+     Get subkey expiration time.  A value of '0' means that the key
+     doesn't expire at all.
+
+     *Returns:* the time when the OpenPGP key expires.
+
+     *Since:* 2.4.0
+
+gnutls_openpgp_privkey_get_subkey_fingerprint
+---------------------------------------------
+
+ -- Function: int gnutls_openpgp_privkey_get_subkey_fingerprint
+          (gnutls_openpgp_privkey_t KEY, unsigned int IDX, void * FPR,
+          size_t * FPRLEN)
+     KEY: the raw data that contains the OpenPGP secret key.
+
+     IDX: the subkey index
+
+     FPR: the buffer to save the fingerprint, must hold at least 20
+     bytes.
+
+     FPRLEN: the integer to save the length of the fingerprint.
+
+     Get the fingerprint of an OpenPGP subkey.  Depends on the
+     algorithm, the fingerprint can be 16 or 20 bytes.
+
+     *Returns:* On success, 0 is returned, or an error code.
+
+     *Since:* 2.4.0
+
+gnutls_openpgp_privkey_get_subkey_id
+------------------------------------
+
+ -- Function: int gnutls_openpgp_privkey_get_subkey_id
+          (gnutls_openpgp_privkey_t KEY, unsigned int IDX,
+          gnutls_openpgp_keyid_t KEYID)
+     KEY: the structure that contains the OpenPGP secret key.
+
+     IDX: the subkey index
+
+     KEYID: the buffer to save the keyid.
+
+     Get the key-id for the subkey.
+
+     *Returns:* the 64-bit keyID of the OpenPGP key.
+
+     *Since:* 2.4.0
+
+gnutls_openpgp_privkey_get_subkey_idx
+-------------------------------------
+
+ -- Function: int gnutls_openpgp_privkey_get_subkey_idx
+          (gnutls_openpgp_privkey_t KEY, const gnutls_openpgp_keyid_t
+          KEYID)
+     KEY: the structure that contains the OpenPGP private key.
+
+     KEYID: the keyid.
+
+     Get index of subkey.
+
+     *Returns:* the index of the subkey or a negative error value.
+
+     *Since:* 2.4.0
+
+gnutls_openpgp_privkey_get_subkey_pk_algorithm
+----------------------------------------------
+
+ -- Function: gnutls_pk_algorithm_t
+          gnutls_openpgp_privkey_get_subkey_pk_algorithm
+          (gnutls_openpgp_privkey_t KEY, unsigned int IDX, unsigned int
+          * BITS)
+     KEY: is an OpenPGP key
+
+     IDX: is the subkey index
+
+     BITS: if bits is non null it will hold the size of the parameters'
+     in bits
+
+     This function will return the public key algorithm of a subkey of
+     an OpenPGP certificate.
+
+     If bits is non null, it should have enough size to hold the
+     parameters size in bits.  For RSA the bits returned is the modulus.
+     For DSA the bits returned are of the public exponent.
+
+     *Returns:* a member of the 'gnutls_pk_algorithm_t' enumeration on
+     success, or a negative error code on error.
+
+     *Since:* 2.4.0
+
+gnutls_openpgp_privkey_get_subkey_revoked_status
+------------------------------------------------
+
+ -- Function: int gnutls_openpgp_privkey_get_subkey_revoked_status
+          (gnutls_openpgp_privkey_t KEY, unsigned int IDX)
+     KEY: the structure that contains the OpenPGP private key.
+
+     IDX: is the subkey index
+
+     Get revocation status of key.
+
+     *Returns:* true (1) if the key has been revoked, or false (0) if it
+     has not, or a negative error code indicates an error.
+
+     *Since:* 2.4.0
+
+gnutls_openpgp_privkey_import
+-----------------------------
+
+ -- Function: int gnutls_openpgp_privkey_import
+          (gnutls_openpgp_privkey_t KEY, const gnutls_datum_t * DATA,
+          gnutls_openpgp_crt_fmt_t FORMAT, const char * PASSWORD,
+          unsigned int FLAGS)
+     KEY: The structure to store the parsed key.
+
+     DATA: The RAW or BASE64 encoded key.
+
+     FORMAT: One of 'gnutls_openpgp_crt_fmt_t' elements.
+
+     PASSWORD: not used for now
+
+     FLAGS: should be (0)
+
+     This function will convert the given RAW or Base64 encoded key to
+     the native gnutls_openpgp_privkey_t format.  The output will be
+     stored in 'key'.
+
+     *Returns:* 'GNUTLS_E_SUCCESS' on success, or an error code.
+
+gnutls_openpgp_privkey_init
+---------------------------
+
+ -- Function: int gnutls_openpgp_privkey_init (gnutls_openpgp_privkey_t
+          * KEY)
+     KEY: A pointer to the type to be initialized
+
+     This function will initialize an OpenPGP key structure.
+
+     *Returns:* 'GNUTLS_E_SUCCESS' on success, or an error code.
+
+gnutls_openpgp_privkey_sec_param
+--------------------------------
+
+ -- Function: gnutls_sec_param_t gnutls_openpgp_privkey_sec_param
+          (gnutls_openpgp_privkey_t KEY)
+     KEY: a key structure
+
+     This function will return the security parameter appropriate with
+     this private key.
+
+     *Returns:* On success, a valid security parameter is returned
+     otherwise 'GNUTLS_SEC_PARAM_UNKNOWN' is returned.
+
+     *Since:* 2.12.0
+
+gnutls_openpgp_privkey_set_preferred_key_id
+-------------------------------------------
+
+ -- Function: int gnutls_openpgp_privkey_set_preferred_key_id
+          (gnutls_openpgp_privkey_t KEY, const gnutls_openpgp_keyid_t
+          KEYID)
+     KEY: the structure that contains the OpenPGP public key.
+
+     KEYID: the selected keyid
+
+     This allows setting a preferred key id for the given certificate.
+     This key will be used by functions that involve key handling.
+
+     If the provided 'keyid' is 'NULL' then the master key is set as
+     preferred.
+
+     *Returns:* On success, 'GNUTLS_E_SUCCESS' (0) is returned,
+     otherwise a negative error code is returned.
+
+gnutls_openpgp_set_recv_key_function
+------------------------------------
+
+ -- Function: void gnutls_openpgp_set_recv_key_function
+          (gnutls_session_t SESSION, gnutls_openpgp_recv_key_func FUNC)
+     SESSION: a TLS session
+
+     FUNC: the callback
+
+     This funtion will set a key retrieval function for OpenPGP keys.
+     This callback is only useful in server side, and will be used if
+     the peer sent a key fingerprint instead of a full key.
+
+     The retrieved key must be allocated using 'gnutls_malloc()' .
+
