@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnutls 2.8.1\n"
 "Report-Msgid-Bugs-To: bug-gnutls@gnu.org\n"
-"POT-Creation-Date: 2015-06-16 21:33+0200\n"
+"POT-Creation-Date: 2015-09-12 11:48+0200\n"
 "PO-Revision-Date: 2009-11-09 19:16+0800\n"
 "Last-Translator: Aron Xu <happyaron.xu@gmail.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
@@ -17,778 +17,790 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: lib/gnutls_alert.c:43
+#: lib/gnutls_alert.c:39
 msgid "Close notify"
 msgstr ""
 
-#: lib/gnutls_alert.c:44
+#: lib/gnutls_alert.c:40
 msgid "Unexpected message"
 msgstr "未预料的消息"
 
-#: lib/gnutls_alert.c:45
+#: lib/gnutls_alert.c:41
 msgid "Bad record MAC"
 msgstr ""
 
-#: lib/gnutls_alert.c:46
+#: lib/gnutls_alert.c:42
 msgid "Decryption failed"
 msgstr "解密失败"
 
-#: lib/gnutls_alert.c:47
+#: lib/gnutls_alert.c:43
 msgid "Record overflow"
 msgstr "记录溢出"
 
-#: lib/gnutls_alert.c:49
+#: lib/gnutls_alert.c:45
 msgid "Decompression failed"
 msgstr "解压缩失败"
 
-#: lib/gnutls_alert.c:50
+#: lib/gnutls_alert.c:46
 msgid "Handshake failed"
 msgstr "握手失败"
 
-#: lib/gnutls_alert.c:51
+#: lib/gnutls_alert.c:47
 msgid "Certificate is bad"
 msgstr "证书无效"
 
-#: lib/gnutls_alert.c:53
+#: lib/gnutls_alert.c:49
 msgid "Certificate is not supported"
 msgstr "证书不被支持"
 
-#: lib/gnutls_alert.c:55
+#: lib/gnutls_alert.c:51
 msgid "Certificate was revoked"
 msgstr "证书已吊销"
 
-#: lib/gnutls_alert.c:57
+#: lib/gnutls_alert.c:53
 msgid "Certificate is expired"
 msgstr "证书过期"
 
-#: lib/gnutls_alert.c:59
+#: lib/gnutls_alert.c:55
 msgid "Unknown certificate"
 msgstr "未知证书"
 
-#: lib/gnutls_alert.c:60
+#: lib/gnutls_alert.c:56
 msgid "Illegal parameter"
 msgstr "非法参数"
 
-#: lib/gnutls_alert.c:61
+#: lib/gnutls_alert.c:57
 msgid "CA is unknown"
 msgstr "未知 CA"
 
-#: lib/gnutls_alert.c:62
+#: lib/gnutls_alert.c:58
 msgid "Access was denied"
 msgstr "访问被拒绝"
 
-#: lib/gnutls_alert.c:63
+#: lib/gnutls_alert.c:59
 msgid "Decode error"
 msgstr "解码错误"
 
-#: lib/gnutls_alert.c:64
+#: lib/gnutls_alert.c:60
 msgid "Decrypt error"
 msgstr "解密出错"
 
-#: lib/gnutls_alert.c:65
+#: lib/gnutls_alert.c:61
 msgid "Export restriction"
 msgstr "导出受限"
 
-#: lib/gnutls_alert.c:67
+#: lib/gnutls_alert.c:63
 msgid "Error in protocol version"
 msgstr "协议版本出错"
 
-#: lib/gnutls_alert.c:69
+#: lib/gnutls_alert.c:65
 msgid "Insufficient security"
 msgstr "不够安全"
 
-#: lib/gnutls_alert.c:70
+#: lib/gnutls_alert.c:66
 msgid "User canceled"
 msgstr "用户已取消"
 
-#: lib/gnutls_alert.c:72
+#: lib/gnutls_alert.c:68
 #, fuzzy
 msgid "No certificate (SSL 3.0)"
 msgstr "\t撤销的证书（%d）：\n"
 
-#: lib/gnutls_alert.c:73
+#: lib/gnutls_alert.c:69
 msgid "Internal error"
 msgstr "内部错误"
 
-#: lib/gnutls_alert.c:75
+#: lib/gnutls_alert.c:71
+msgid "Inappropriate fallback"
+msgstr ""
+
+#: lib/gnutls_alert.c:73
 msgid "No renegotiation is allowed"
 msgstr ""
 
-#: lib/gnutls_alert.c:77
+#: lib/gnutls_alert.c:75
 msgid "Could not retrieve the specified certificate"
 msgstr ""
 
-#: lib/gnutls_alert.c:79
+#: lib/gnutls_alert.c:77
 msgid "An unsupported extension was sent"
 msgstr "发送了一个不支持的扩展"
 
-#: lib/gnutls_alert.c:81
+#: lib/gnutls_alert.c:79
 msgid "The server name sent was not recognized"
 msgstr "发送的服务器名未被识别"
 
-#: lib/gnutls_alert.c:83
+#: lib/gnutls_alert.c:81
 msgid "The SRP/PSK username is missing or not known"
 msgstr "SRP/PSK 用户名丢失或未知"
 
-#: lib/gnutls_alert.c:86
+#: lib/gnutls_alert.c:84
 msgid "No supported application protocol could be negotiated"
 msgstr ""
 
-#: lib/gnutls_errors.c:48
+#: lib/gnutls_errors.c:44
 msgid "Could not negotiate a supported cipher suite."
 msgstr "无法协商受支持的密码算法。"
 
-#: lib/gnutls_errors.c:50
+#: lib/gnutls_errors.c:46
 msgid "No or insufficient priorities were set."
 msgstr ""
 
-#: lib/gnutls_errors.c:52
+#: lib/gnutls_errors.c:48
 msgid "The cipher type is unsupported."
 msgstr "密码类型不支持。"
 
-#: lib/gnutls_errors.c:54
+#: lib/gnutls_errors.c:50
 msgid "The certificate and the given key do not match."
 msgstr "证书与密钥不匹配。"
 
-#: lib/gnutls_errors.c:57
+#: lib/gnutls_errors.c:53
 msgid "Could not negotiate a supported compression method."
 msgstr "无法协商支持的压缩方法。"
 
-#: lib/gnutls_errors.c:59
+#: lib/gnutls_errors.c:55
 msgid "An unknown public key algorithm was encountered."
 msgstr "遇到未知的公钥算法。"
 
-#: lib/gnutls_errors.c:62
+#: lib/gnutls_errors.c:58
 msgid "An algorithm that is not enabled was negotiated."
 msgstr "协商的算法未启用。"
 
-#: lib/gnutls_errors.c:65
+#: lib/gnutls_errors.c:61
 #, fuzzy
 msgid "A packet with illegal or unsupported version was received."
 msgstr "收到的记录包版本非法。"
 
-#: lib/gnutls_errors.c:68
+#: lib/gnutls_errors.c:64
 msgid ""
 "The Diffie-Hellman prime sent by the server is not acceptable (not long "
 "enough)."
 msgstr ""
 
-#: lib/gnutls_errors.c:71
+#: lib/gnutls_errors.c:67
 msgid "A TLS packet with unexpected length was received."
 msgstr "收到了意外长度的 TLS 数据包。"
 
-#: lib/gnutls_errors.c:73
+#: lib/gnutls_errors.c:69
 msgid "The TLS connection was non-properly terminated."
 msgstr ""
 
-#: lib/gnutls_errors.c:76
+#: lib/gnutls_errors.c:72
 msgid "The specified session has been invalidated for some reason."
 msgstr "指定的会话已因故失效。"
 
-#: lib/gnutls_errors.c:79
+#: lib/gnutls_errors.c:75
 msgid "GnuTLS internal error."
 msgstr "GnuTLS 内部错误。"
 
-#: lib/gnutls_errors.c:80
+#: lib/gnutls_errors.c:77
+msgid "A connection with inappropriate fallback was attempted."
+msgstr ""
+
+#: lib/gnutls_errors.c:79
 msgid "An illegal TLS extension was received."
 msgstr "收到一个非法的 TLS 扩展包。"
 
-#: lib/gnutls_errors.c:82
+#: lib/gnutls_errors.c:81
 msgid "A TLS fatal alert has been received."
 msgstr "收到一个 TLS 致命错误警告。"
 
-#: lib/gnutls_errors.c:84
+#: lib/gnutls_errors.c:83
 msgid "An unexpected TLS packet was received."
 msgstr "收到一个意外的 TLS 数据包。"
 
-#: lib/gnutls_errors.c:86
+#: lib/gnutls_errors.c:85
 msgid "Failed to import the key into store."
 msgstr ""
 
-#: lib/gnutls_errors.c:89
+#: lib/gnutls_errors.c:88
 msgid "An error was encountered at the TLS Finished packet calculation."
 msgstr "在完成 TLS 数据包计算时出错。"
 
-#: lib/gnutls_errors.c:91
+#: lib/gnutls_errors.c:90
 #, fuzzy
 msgid "No certificate was found."
 msgstr "证书已吊销"
 
-#: lib/gnutls_errors.c:94
+#: lib/gnutls_errors.c:93
 msgid "The given DSA key is incompatible with the selected TLS protocol."
 msgstr ""
 
-#: lib/gnutls_errors.c:97
+#: lib/gnutls_errors.c:96
 msgid "There is already a crypto algorithm with lower priority."
 msgstr "已经有一个低优先级的加密算法。"
 
-#: lib/gnutls_errors.c:100
+#: lib/gnutls_errors.c:99
 msgid "No temporary RSA parameters were found."
 msgstr "未发现 RSA 临时参数。"
 
-#: lib/gnutls_errors.c:102
+#: lib/gnutls_errors.c:101
 msgid "No temporary DH parameters were found."
 msgstr "未发现临时 DH 参数。"
 
-#: lib/gnutls_errors.c:104
+#: lib/gnutls_errors.c:103
 msgid "An unexpected TLS handshake packet was received."
 msgstr "收到意外的 TLS 握手数据包。"
 
-#: lib/gnutls_errors.c:106
+#: lib/gnutls_errors.c:105
 msgid "The scanning of a large integer has failed."
 msgstr "大整数扫描失败。"
 
-#: lib/gnutls_errors.c:108
+#: lib/gnutls_errors.c:107
 msgid "Could not export a large integer."
 msgstr "无法输出大整数。"
 
-#: lib/gnutls_errors.c:110
+#: lib/gnutls_errors.c:109
 msgid "Decryption has failed."
 msgstr "解密失败。"
 
-#: lib/gnutls_errors.c:112
+#: lib/gnutls_errors.c:111
 msgid "Encryption has failed."
 msgstr "加密失败。"
 
-#: lib/gnutls_errors.c:114
+#: lib/gnutls_errors.c:113
 msgid "Public key decryption has failed."
 msgstr "公钥解密失败。"
 
-#: lib/gnutls_errors.c:116
+#: lib/gnutls_errors.c:115
 msgid "Public key encryption has failed."
 msgstr "公钥加密失败。"
 
-#: lib/gnutls_errors.c:118
+#: lib/gnutls_errors.c:117
 msgid "Public key signing has failed."
 msgstr "公钥签名失败。"
 
-#: lib/gnutls_errors.c:120
+#: lib/gnutls_errors.c:119
 msgid "Public key signature verification has failed."
 msgstr "公钥签名验证失败。"
 
-#: lib/gnutls_errors.c:123
+#: lib/gnutls_errors.c:122
 msgid "Decompression of the TLS record packet has failed."
 msgstr "TLS 记录数据包解压缩失败。"
 
-#: lib/gnutls_errors.c:125
+#: lib/gnutls_errors.c:124
 msgid "Compression of the TLS record packet has failed."
 msgstr "TLS 记录数据包压缩失败。"
 
-#: lib/gnutls_errors.c:128
+#: lib/gnutls_errors.c:127
 msgid "Internal error in memory allocation."
 msgstr "在分配内存时发生内部错误。"
 
-#: lib/gnutls_errors.c:131
+#: lib/gnutls_errors.c:130
 msgid "An unimplemented or disabled feature has been requested."
 msgstr "所请求的特性尚未实现或已被禁用。"
 
-#: lib/gnutls_errors.c:133
+#: lib/gnutls_errors.c:132
 msgid "Insufficient credentials for that request."
 msgstr "此请求的信任凭证不足。"
 
-#: lib/gnutls_errors.c:135
+#: lib/gnutls_errors.c:134
 msgid "Error in password file."
 msgstr "密码文件错误。"
 
-#: lib/gnutls_errors.c:136
+#: lib/gnutls_errors.c:135
 msgid "Wrong padding in PKCS1 packet."
 msgstr "PKC51 数据包填充错误。"
 
-#: lib/gnutls_errors.c:138
+#: lib/gnutls_errors.c:137
 msgid "The requested session has expired."
 msgstr "请求的会话已过期。"
 
-#: lib/gnutls_errors.c:140
+#: lib/gnutls_errors.c:139
 msgid "Hashing has failed."
 msgstr "散列运算失败。"
 
-#: lib/gnutls_errors.c:141
+#: lib/gnutls_errors.c:140
 msgid "Base64 decoding error."
 msgstr "Base64 解码出错。"
 
-#: lib/gnutls_errors.c:143
+#: lib/gnutls_errors.c:142
 msgid "Base64 unexpected header error."
 msgstr ""
 
-#: lib/gnutls_errors.c:145
+#: lib/gnutls_errors.c:144
 msgid "Base64 encoding error."
 msgstr "Base64 编码出错。"
 
-#: lib/gnutls_errors.c:147
+#: lib/gnutls_errors.c:146
 msgid "Parsing error in password file."
 msgstr "密码文件解析出错。"
 
-#: lib/gnutls_errors.c:149
+#: lib/gnutls_errors.c:148
 msgid "The requested data were not available."
 msgstr "请求的数据不可用。"
 
-#: lib/gnutls_errors.c:151
+#: lib/gnutls_errors.c:150
 msgid "Error in the pull function."
 msgstr "在 pull 函数中出错。"
 
-#: lib/gnutls_errors.c:152
+#: lib/gnutls_errors.c:151
 msgid "Error in the push function."
 msgstr "在 push 函数中出错。"
 
-#: lib/gnutls_errors.c:154
+#: lib/gnutls_errors.c:153
 msgid ""
 "The upper limit of record packet sequence numbers has been reached. Wow!"
 msgstr "哦！记录数据包序列的上限值已到。"
 
-#: lib/gnutls_errors.c:156
+#: lib/gnutls_errors.c:155
 msgid "Error in the certificate."
 msgstr "证书出错。"
 
-#: lib/gnutls_errors.c:158
+#: lib/gnutls_errors.c:157
 #, fuzzy
 msgid "Could not authenticate peer."
 msgstr "无法获得 OpenPGP 密钥。"
 
-#: lib/gnutls_errors.c:161
+#: lib/gnutls_errors.c:160
 msgid "Unknown Subject Alternative name in X.509 certificate."
 msgstr "X.509 证书中含有未知的主体代用名。"
 
-#: lib/gnutls_errors.c:165
+#: lib/gnutls_errors.c:164
 msgid "Unsupported critical extension in X.509 certificate."
 msgstr "X.509 证书中含有不支持的关键性扩展。"
 
-#: lib/gnutls_errors.c:167
+#: lib/gnutls_errors.c:166
 #, fuzzy
 msgid "Unsupported extension in X.509 certificate."
 msgstr "X.509 证书中含有不支持的关键性扩展。"
 
-#: lib/gnutls_errors.c:170
+#: lib/gnutls_errors.c:169
 msgid "Key usage violation in certificate has been detected."
 msgstr "在证书中检测到违规的密钥用法。"
 
-#: lib/gnutls_errors.c:172 lib/gnutls_errors.c:387
+#: lib/gnutls_errors.c:171 lib/gnutls_errors.c:388
 msgid "Function was interrupted."
 msgstr "函数被中断。"
 
-#: lib/gnutls_errors.c:174
+#: lib/gnutls_errors.c:173
 msgid "TLS Application data were received, while expecting handshake data."
 msgstr "在期望接收 TLS 握手数据时接收到应用数据。"
 
-#: lib/gnutls_errors.c:176
+#: lib/gnutls_errors.c:175
 msgid "Error in Database backend."
 msgstr "数据库后端出错。"
 
-#: lib/gnutls_errors.c:177
+#: lib/gnutls_errors.c:176
 msgid "The certificate type is not supported."
 msgstr "不支持的证书类型。"
 
-#: lib/gnutls_errors.c:180
+#: lib/gnutls_errors.c:179
 msgid "The given memory buffer is too short to hold parameters."
 msgstr "给待处理参数预留的内存缓冲区过短。"
 
-#: lib/gnutls_errors.c:182
+#: lib/gnutls_errors.c:181
 msgid "The request is invalid."
 msgstr "请求无效。"
 
-#: lib/gnutls_errors.c:184
+#: lib/gnutls_errors.c:183
 msgid "The cookie was bad."
 msgstr ""
 
-#: lib/gnutls_errors.c:185
+#: lib/gnutls_errors.c:184
 msgid "An illegal parameter has been received."
 msgstr "收到一个非法参数。"
 
-#: lib/gnutls_errors.c:187
+#: lib/gnutls_errors.c:186
 #, fuzzy
 msgid "An illegal parameter was found."
 msgstr "收到一个非法参数。"
 
-#: lib/gnutls_errors.c:189
+#: lib/gnutls_errors.c:188
 msgid "Error while reading file."
 msgstr "读取文件时出错。"
 
-#: lib/gnutls_errors.c:191
+#: lib/gnutls_errors.c:190
 msgid "ASN1 parser: Element was not found."
 msgstr "ASN1 解析器：找不到元素。"
 
-#: lib/gnutls_errors.c:193
+#: lib/gnutls_errors.c:192
 msgid "ASN1 parser: Identifier was not found"
 msgstr "ASN1 解析器：找不到标识。"
 
-#: lib/gnutls_errors.c:195
+#: lib/gnutls_errors.c:194
 msgid "ASN1 parser: Error in DER parsing."
 msgstr "ASN1 解析器：DER 解析时出错。"
 
-#: lib/gnutls_errors.c:197
+#: lib/gnutls_errors.c:196
 msgid "ASN1 parser: Value was not found."
 msgstr "ASN1 解析器：找不到值。"
 
-#: lib/gnutls_errors.c:199
+#: lib/gnutls_errors.c:198
 msgid "ASN1 parser: Generic parsing error."
 msgstr "ASN1 解析器：常规解析中出错。"
 
-#: lib/gnutls_errors.c:201
+#: lib/gnutls_errors.c:200
 msgid "ASN1 parser: Value is not valid."
 msgstr "ASN1 解析器：无效的值。"
 
-#: lib/gnutls_errors.c:203
+#: lib/gnutls_errors.c:202
 msgid "ASN1 parser: Error in TAG."
 msgstr "ASN1 解析器：标签中出错。"
 
-#: lib/gnutls_errors.c:205
+#: lib/gnutls_errors.c:204
 msgid "ASN1 parser: error in implicit tag"
 msgstr "ASN1 解析器：隐式标签中出错。"
 
-#: lib/gnutls_errors.c:207
+#: lib/gnutls_errors.c:206
 msgid "ASN1 parser: Error in type 'ANY'."
 msgstr "ASN1 解析器：‘ANY’类型中出错。"
 
-#: lib/gnutls_errors.c:209
+#: lib/gnutls_errors.c:208
 msgid "ASN1 parser: Syntax error."
 msgstr "ASN1 解析器：语法出错。"
 
-#: lib/gnutls_errors.c:211
+#: lib/gnutls_errors.c:210
 msgid "ASN1 parser: Overflow in DER parsing."
 msgstr "ASN1 解析器：DER 解析中出现溢出。"
 
-#: lib/gnutls_errors.c:215
+#: lib/gnutls_errors.c:214
 msgid "Too many empty record packets have been received."
 msgstr "收到了过多的空记录包。"
 
-#: lib/gnutls_errors.c:217
+#: lib/gnutls_errors.c:216
 #, fuzzy
 msgid "Too many handshake packets have been received."
 msgstr "收到了过多的空记录包。"
 
-#: lib/gnutls_errors.c:219
+#: lib/gnutls_errors.c:218
 #, fuzzy
 msgid "The crypto library version is too old."
 msgstr "gcrypt 库的版本过旧。"
 
-#: lib/gnutls_errors.c:222
+#: lib/gnutls_errors.c:221
 msgid "The tasn1 library version is too old."
 msgstr "tasn1 库的版本过旧。"
 
-#: lib/gnutls_errors.c:224
+#: lib/gnutls_errors.c:223
 msgid "The OpenPGP User ID is revoked."
 msgstr "OpenPGP 用户 ID 已吊销。"
 
-#: lib/gnutls_errors.c:226
+#: lib/gnutls_errors.c:225
 msgid "The OpenPGP key has not a preferred key set."
 msgstr ""
 
-#: lib/gnutls_errors.c:228
+#: lib/gnutls_errors.c:227
 msgid "Error loading the keyring."
 msgstr "载入密钥环时出错。"
 
-#: lib/gnutls_errors.c:230
+#: lib/gnutls_errors.c:229
 #, fuzzy
 msgid "The initialization of crypto backend has failed."
 msgstr "LZO 算法初始化失败。"
 
-#: lib/gnutls_errors.c:233
+#: lib/gnutls_errors.c:232
 msgid "No supported compression algorithms have been found."
 msgstr "找不到支持的压缩算法。"
 
-#: lib/gnutls_errors.c:235
+#: lib/gnutls_errors.c:234
 msgid "No supported cipher suites have been found."
 msgstr "找不到支持的密码机制。"
 
-#: lib/gnutls_errors.c:237
+#: lib/gnutls_errors.c:236
 msgid "Could not get OpenPGP key."
 msgstr "无法获得 OpenPGP 密钥。"
 
-#: lib/gnutls_errors.c:239
+#: lib/gnutls_errors.c:238
 msgid "Could not find OpenPGP subkey."
 msgstr ""
 
-#: lib/gnutls_errors.c:241
+#: lib/gnutls_errors.c:240
 #, fuzzy
 msgid "Safe renegotiation failed."
 msgstr "解密失败"
 
-#: lib/gnutls_errors.c:243
+#: lib/gnutls_errors.c:242
 msgid "Unsafe renegotiation denied."
 msgstr ""
 
-#: lib/gnutls_errors.c:246
+#: lib/gnutls_errors.c:245
 msgid "The SRP username supplied is illegal."
 msgstr "提供的 SRP 用户名非法。"
 
-#: lib/gnutls_errors.c:248
+#: lib/gnutls_errors.c:247
 #, fuzzy
 msgid "The SRP username supplied is unknown."
 msgstr "提供的 SRP 用户名非法。"
 
-#: lib/gnutls_errors.c:251
+#: lib/gnutls_errors.c:250
 msgid "The OpenPGP fingerprint is not supported."
 msgstr "不支持 OpenPGP 指纹。"
 
-#: lib/gnutls_errors.c:253
+#: lib/gnutls_errors.c:252
 #, fuzzy
 msgid "The signature algorithm is not supported."
 msgstr "不支持的证书类型。"
 
-#: lib/gnutls_errors.c:255
+#: lib/gnutls_errors.c:254
 msgid "The certificate has unsupported attributes."
 msgstr "证书中含有不支持的属性。"
 
-#: lib/gnutls_errors.c:257
+#: lib/gnutls_errors.c:256
 msgid "The OID is not supported."
 msgstr "不支持 OID。"
 
-#: lib/gnutls_errors.c:259
+#: lib/gnutls_errors.c:258
 msgid "The hash algorithm is unknown."
 msgstr "未知的散列算法。"
 
-#: lib/gnutls_errors.c:261
+#: lib/gnutls_errors.c:260
 msgid "The PKCS structure's content type is unknown."
 msgstr "未知的 PKCS 内容类型结构。"
 
-#: lib/gnutls_errors.c:263
+#: lib/gnutls_errors.c:262
 msgid "The PKCS structure's bag type is unknown."
 msgstr "未知的 PKCS 包类型结构。"
 
-#: lib/gnutls_errors.c:265
+#: lib/gnutls_errors.c:264
 msgid "The given password contains invalid characters."
 msgstr "给出的密码中包含无效字符。"
 
-#: lib/gnutls_errors.c:268
+#: lib/gnutls_errors.c:267
 msgid "The Message Authentication Code verification failed."
 msgstr "消息认证代码确认失败。"
 
-#: lib/gnutls_errors.c:270
+#: lib/gnutls_errors.c:269
 msgid "Some constraint limits were reached."
 msgstr "已达到某些约束限定。"
 
-#: lib/gnutls_errors.c:272
+#: lib/gnutls_errors.c:271
 msgid "Failed to acquire random data."
 msgstr "获取随机数据失败。"
 
-#: lib/gnutls_errors.c:274
+#: lib/gnutls_errors.c:273
 msgid "Verifying TLS/IA phase checksum failed"
 msgstr "校验 TLS/IA 相位和失败。"
 
-#: lib/gnutls_errors.c:277
+#: lib/gnutls_errors.c:276
 msgid "The specified algorithm or protocol is unknown."
 msgstr "指定的算法或协议未知。"
 
-#: lib/gnutls_errors.c:280
+#: lib/gnutls_errors.c:279
 msgid "The handshake data size is too large."
 msgstr ""
 
-#: lib/gnutls_errors.c:283
+#: lib/gnutls_errors.c:282
 msgid "Error opening /dev/crypto"
 msgstr ""
 
-#: lib/gnutls_errors.c:286
+#: lib/gnutls_errors.c:285
 msgid "Error interfacing with /dev/crypto"
 msgstr ""
 
-#: lib/gnutls_errors.c:288
+#: lib/gnutls_errors.c:287
 msgid "Peer has terminated the connection"
 msgstr ""
 
-#: lib/gnutls_errors.c:290
+#: lib/gnutls_errors.c:289
 #, fuzzy
 msgid "Channel binding data not available"
 msgstr "请求的数据不可用。"
 
-#: lib/gnutls_errors.c:293
+#: lib/gnutls_errors.c:292
 msgid "TPM error."
 msgstr ""
 
-#: lib/gnutls_errors.c:295
+#: lib/gnutls_errors.c:294
+msgid "The TPM library (trousers) cannot be found."
+msgstr ""
+
+#: lib/gnutls_errors.c:296
 msgid "TPM is not initialized."
 msgstr ""
 
-#: lib/gnutls_errors.c:297
+#: lib/gnutls_errors.c:298
 msgid "TPM key was not found in persistent storage."
 msgstr ""
 
-#: lib/gnutls_errors.c:299
+#: lib/gnutls_errors.c:300
 msgid "Cannot initialize a session with the TPM."
 msgstr ""
 
-#: lib/gnutls_errors.c:301
+#: lib/gnutls_errors.c:302
 msgid "PKCS #11 error."
 msgstr ""
 
-#: lib/gnutls_errors.c:303
+#: lib/gnutls_errors.c:304
 msgid "PKCS #11 initialization error."
 msgstr ""
 
-#: lib/gnutls_errors.c:305
+#: lib/gnutls_errors.c:306
 #, fuzzy
 msgid "Error in parsing."
 msgstr "密码文件错误。"
 
-#: lib/gnutls_errors.c:307
+#: lib/gnutls_errors.c:308
 #, fuzzy
 msgid "Error in provided PIN."
 msgstr "密码文件错误。"
 
-#: lib/gnutls_errors.c:309
+#: lib/gnutls_errors.c:310
 #, fuzzy
 msgid "Error in provided SRK password for TPM."
 msgstr "密码文件错误。"
 
-#: lib/gnutls_errors.c:312
+#: lib/gnutls_errors.c:313
 msgid "Error in provided password for key to be loaded in TPM."
 msgstr ""
 
-#: lib/gnutls_errors.c:314
+#: lib/gnutls_errors.c:315
 msgid "PKCS #11 error in slot"
 msgstr ""
 
-#: lib/gnutls_errors.c:316
+#: lib/gnutls_errors.c:317
 msgid "Thread locking error"
 msgstr ""
 
-#: lib/gnutls_errors.c:318
+#: lib/gnutls_errors.c:319
 msgid "PKCS #11 error in attribute"
 msgstr ""
 
-#: lib/gnutls_errors.c:320
+#: lib/gnutls_errors.c:321
 msgid "PKCS #11 error in device"
 msgstr ""
 
-#: lib/gnutls_errors.c:322
+#: lib/gnutls_errors.c:323
 msgid "PKCS #11 error in data"
 msgstr ""
 
-#: lib/gnutls_errors.c:324
+#: lib/gnutls_errors.c:325
 msgid "PKCS #11 unsupported feature"
 msgstr ""
 
-#: lib/gnutls_errors.c:326
+#: lib/gnutls_errors.c:327
 msgid "PKCS #11 error in key"
 msgstr ""
 
-#: lib/gnutls_errors.c:328
+#: lib/gnutls_errors.c:329
 msgid "PKCS #11 PIN expired"
 msgstr ""
 
-#: lib/gnutls_errors.c:330
+#: lib/gnutls_errors.c:331
 msgid "PKCS #11 PIN locked"
 msgstr ""
 
-#: lib/gnutls_errors.c:332
+#: lib/gnutls_errors.c:333
 msgid "PKCS #11 error in session"
 msgstr ""
 
-#: lib/gnutls_errors.c:334
+#: lib/gnutls_errors.c:335
 msgid "PKCS #11 error in signature"
 msgstr ""
 
-#: lib/gnutls_errors.c:336
+#: lib/gnutls_errors.c:337
 msgid "PKCS #11 error in token"
 msgstr ""
 
-#: lib/gnutls_errors.c:338
+#: lib/gnutls_errors.c:339
 msgid "PKCS #11 user error"
 msgstr ""
 
-#: lib/gnutls_errors.c:340
+#: lib/gnutls_errors.c:341
 msgid "The operation timed out"
 msgstr ""
 
-#: lib/gnutls_errors.c:342
+#: lib/gnutls_errors.c:343
 msgid "The operation was cancelled due to user error"
 msgstr ""
 
-#: lib/gnutls_errors.c:344
+#: lib/gnutls_errors.c:345
 #, fuzzy
 msgid "No supported ECC curves were found"
 msgstr "找不到支持的密码机制。"
 
-#: lib/gnutls_errors.c:346
+#: lib/gnutls_errors.c:347
 #, fuzzy
 msgid "The curve is unsupported"
 msgstr "密码类型不支持。"
 
-#: lib/gnutls_errors.c:348
+#: lib/gnutls_errors.c:349
 #, fuzzy
 msgid "The requested PKCS #11 object is not available"
 msgstr "请求的数据不可用。"
 
-#: lib/gnutls_errors.c:351
+#: lib/gnutls_errors.c:352
 msgid ""
 "The provided X.509 certificate list is not sorted (in subject to issuer "
 "order)"
 msgstr ""
 
-#: lib/gnutls_errors.c:353
+#: lib/gnutls_errors.c:354
 #, fuzzy
 msgid "The OCSP response is invalid"
 msgstr "请求无效。"
 
-#: lib/gnutls_errors.c:355
+#: lib/gnutls_errors.c:356
 msgid "There is no certificate status (OCSP)."
 msgstr ""
 
-#: lib/gnutls_errors.c:357
+#: lib/gnutls_errors.c:358
 msgid "Error in the system's randomness device."
 msgstr ""
 
-#: lib/gnutls_errors.c:360
+#: lib/gnutls_errors.c:361
 msgid "No common application protocol could be negotiated."
 msgstr ""
 
-#: lib/gnutls_errors.c:362
+#: lib/gnutls_errors.c:363
 #, fuzzy
 msgid "Error while performing self checks."
 msgstr "读取文件时出错。"
 
-#: lib/gnutls_errors.c:364
+#: lib/gnutls_errors.c:365
 msgid "There is no self test for this algorithm."
 msgstr ""
 
-#: lib/gnutls_errors.c:366
+#: lib/gnutls_errors.c:367
 msgid ""
 "An error has been detected in the library and cannot continue operations."
 msgstr ""
 
-#: lib/gnutls_errors.c:368
+#: lib/gnutls_errors.c:369
 #, fuzzy
 msgid "Error in sockets initialization."
 msgstr "在 push 函数中出错。"
 
-#: lib/gnutls_errors.c:370
+#: lib/gnutls_errors.c:371
 #, fuzzy
 msgid "Error in public key generation."
 msgstr "在 pull 函数中出错。"
 
-#: lib/gnutls_errors.c:376
+#: lib/gnutls_errors.c:377
 msgid "Success."
 msgstr "成功。"
 
-#: lib/gnutls_errors.c:377
+#: lib/gnutls_errors.c:378
 msgid "A TLS warning alert has been received."
 msgstr "收到一个 TLS 警告信息。"
 
-#: lib/gnutls_errors.c:379
+#: lib/gnutls_errors.c:380
 #, fuzzy
 msgid "A heartbeat pong message was received."
 msgstr "收到大 TLS 记录数据包。"
 
-#: lib/gnutls_errors.c:381
+#: lib/gnutls_errors.c:382
 #, fuzzy
 msgid "A heartbeat ping message was received."
 msgstr "收到大 TLS 记录数据包。"
 
-#: lib/gnutls_errors.c:383
+#: lib/gnutls_errors.c:384
 msgid "Resource temporarily unavailable, try again."
 msgstr "资源临时不可用，请重试。"
 
-#: lib/gnutls_errors.c:385
+#: lib/gnutls_errors.c:386
 msgid "The transmitted packet is too large (EMSGSIZE)."
 msgstr ""
 
-#: lib/gnutls_errors.c:388
+#: lib/gnutls_errors.c:389
 msgid "Rehandshake was requested by the peer."
 msgstr "按对方请求重新握手。"
 
-#: lib/gnutls_errors.c:390
+#: lib/gnutls_errors.c:391
 msgid "One of the involved algorithms has insufficient security level."
 msgstr ""
 
-#: lib/gnutls_errors.c:481
+#: lib/gnutls_errors.c:482
 msgid "(unknown error code)"
 msgstr "(未知错误代码)"
 
@@ -859,7 +871,7 @@ msgstr "\t\t过期：永不过期\n"
 msgid "\t\tExpiration: %s\n"
 msgstr "\t\t过期：%s\n"
 
-#: lib/openpgp/output.c:230 lib/x509/ocsp_output.c:533 lib/x509/output.c:1019
+#: lib/openpgp/output.c:230 lib/x509/ocsp_output.c:530 lib/x509/output.c:1019
 #: lib/x509/output.c:1379 lib/x509/output.c:1581 lib/x509/output.c:2012
 #: lib/x509/output.c:2168
 msgid "unknown"
@@ -905,8 +917,8 @@ msgstr "\t\tQ:\n"
 msgid "\t\tG:\n"
 msgstr "\t\tG:\n"
 
-#: lib/openpgp/output.c:341 lib/x509/ocsp_output.c:53
-#: lib/x509/ocsp_output.c:279 lib/x509/output.c:1224 lib/x509/output.c:1746
+#: lib/openpgp/output.c:341 lib/x509/ocsp_output.c:50
+#: lib/x509/ocsp_output.c:276 lib/x509/output.c:1224 lib/x509/output.c:1746
 #: lib/x509/output.c:2114
 #, c-format
 msgid "\tVersion: %d\n"
@@ -971,66 +983,66 @@ msgstr ""
 msgid "OpenPGP Certificate Information:\n"
 msgstr "OpenPGP 证书信息：\n"
 
-#: lib/x509/ocsp_output.c:139 lib/x509/ocsp_output.c:506
+#: lib/x509/ocsp_output.c:136 lib/x509/ocsp_output.c:503
 #: lib/x509/output.c:1929 lib/x509/output.c:2298
 msgid "\t\t\tASCII: "
 msgstr "\t\t\tASCII: "
 
-#: lib/x509/ocsp_output.c:144 lib/x509/ocsp_output.c:511
+#: lib/x509/ocsp_output.c:141 lib/x509/ocsp_output.c:508
 #: lib/x509/output.c:1933 lib/x509/output.c:2303
 msgid "\t\t\tHexdump: "
 msgstr "\t\t\t十六进制转储： "
 
-#: lib/x509/ocsp_output.c:189
+#: lib/x509/ocsp_output.c:186
 #, fuzzy
 msgid "OCSP Request Information:\n"
 msgstr "其它信息：\n"
 
-#: lib/x509/ocsp_output.c:292
+#: lib/x509/ocsp_output.c:289
 msgid "\tResponder Key ID: "
 msgstr ""
 
-#: lib/x509/ocsp_output.c:303
+#: lib/x509/ocsp_output.c:300
 #, c-format
 msgid "\tResponder ID: %.*s\n"
 msgstr ""
 
-#: lib/x509/ocsp_output.c:326
+#: lib/x509/ocsp_output.c:323
 #, fuzzy, c-format
 msgid "\tProduced At: %s\n"
 msgstr "\t\t撤销于：%s\n"
 
-#: lib/x509/ocsp_output.c:420
+#: lib/x509/ocsp_output.c:417
 #, fuzzy, c-format
 msgid "\t\tRevocation time: %s\n"
 msgstr "\t\t创建于：%s\n"
 
-#: lib/x509/ocsp_output.c:440
+#: lib/x509/ocsp_output.c:437
 #, fuzzy, c-format
 msgid "\t\tThis Update: %s\n"
 msgstr "\t\t下一个位于：%s\n"
 
-#: lib/x509/ocsp_output.c:459
+#: lib/x509/ocsp_output.c:456
 #, fuzzy, c-format
 msgid "\t\tNext Update: %s\n"
 msgstr "\t\t下一个位于：%s\n"
 
-#: lib/x509/ocsp_output.c:534 lib/x509/output.c:1380 lib/x509/output.c:2013
+#: lib/x509/ocsp_output.c:531 lib/x509/output.c:1380 lib/x509/output.c:2013
 #: lib/x509/output.c:2169
 #, c-format
 msgid "\tSignature Algorithm: %s\n"
 msgstr "\t签名算法：%s\n"
 
-#: lib/x509/ocsp_output.c:538 lib/x509/output.c:1384 lib/x509/output.c:2017
+#: lib/x509/ocsp_output.c:535 lib/x509/output.c:1384 lib/x509/output.c:2017
 msgid ""
 "warning: signed using a broken signature algorithm that can be forged.\n"
 msgstr "警告：使用可伪造的签名算法进行了签名。\n"
 
-#: lib/x509/ocsp_output.c:547 lib/x509/output.c:1410 lib/x509/output.c:2043
+#: lib/x509/ocsp_output.c:544 lib/x509/output.c:1410 lib/x509/output.c:2043
 msgid "\tSignature:\n"
 msgstr "\t签名：\n"
 
-#: lib/x509/ocsp_output.c:655
+#: lib/x509/ocsp_output.c:652
 #, fuzzy
 msgid "OCSP Response Information:\n"
 msgstr "其它信息：\n"
@@ -1576,6 +1588,19 @@ msgstr ""
 msgid "Public Key Information:\n"
 msgstr "其它信息：\n"
 
+#~ msgid "Received a TLS/IA Intermediate Phase Finished message"
+#~ msgstr "收到 TLS/IA 中间相位完成信息。"
+
+#~ msgid "Received a TLS/IA Final Phase Finished message"
+#~ msgstr "收到 TLS/IA 末尾相位完成信息。"
+
+#~ msgid ""
+#~ "\tSHA-1 fingerprint:\n"
+#~ "\t\t"
+#~ msgstr ""
+#~ "\tSHA-1 指纹：\n"
+#~ "\t\t"
+
 #~ msgid "The peer did not send any certificate."
 #~ msgstr "对方未发送任何证书。"
 
@@ -1587,21 +1612,8 @@ msgstr "其它信息：\n"
 #~ "version."
 #~ msgstr "GnuTLS 和 GnuTLS-extra 的库版本不相吻合。"
 
-#~ msgid "Received a TLS/IA Intermediate Phase Finished message"
-#~ msgstr "收到 TLS/IA 中间相位完成信息。"
-
-#~ msgid "Received a TLS/IA Final Phase Finished message"
-#~ msgstr "收到 TLS/IA 末尾相位完成信息。"
-
 #~ msgid "Inner application verification failed"
 #~ msgstr "内部应用程序验证失败"
 
 #~ msgid "\tSubject Public Key Algorithm: %s\n"
 #~ msgstr "\t主公钥算法： %s\n"
-
-#~ msgid ""
-#~ "\tSHA-1 fingerprint:\n"
-#~ "\t\t"
-#~ msgstr ""
-#~ "\tSHA-1 指纹：\n"
-#~ "\t\t"

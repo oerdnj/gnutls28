@@ -1,3 +1,44 @@
+gnutls28 (3.4.5-1) experimental; urgency=medium
+
+  [ Helmut Grohne ]
+  * Turn Build-Depends: datefudge optional via <!nocheck> profile.
+    Closes: #797544
+
+  [ Andreas Metzler ]
+  * New upstream version.
+
+ -- Andreas Metzler <ametzler@debian.org>  Sat, 26 Sep 2015 13:48:12 +0200
+
+gnutls28 (3.4.4.1-1) experimental; urgency=medium
+
+  * New upstream version.
+    + GNUTLS_PKCS11_OBJ_FLAG_NO_STORE_PUBKEY added to gnutls_pkcs11_obj_flags,
+      bump dependency info for functions taking it as argument or returning it.
+    + Bump dependency info on private symbols.
+    + Update debian/copyright.
+    + Fixes double free in DN decoding [GNUTLS-SA-2015-3]. Closes: #795068
+      CVE-2015-6251
+
+ -- Andreas Metzler <ametzler@debian.org>  Tue, 11 Aug 2015 20:12:46 +0200
+
+gnutls28 (3.4.3-1) experimental; urgency=medium
+
+  * Re-enable libidn-support, use versioned b-d on libidn11-dev >= 1.31.
+  * New upstream version.
+    + Bump dependency info on gnutls_pkcs11_token_get_info due to changed enum
+      gnutls_pkcs11_token_info_t.
+    + Add dependency info for new symbols, bump private symbol dependency.
+
+ -- Andreas Metzler <ametzler@debian.org>  Sun, 12 Jul 2015 20:01:09 +0200
+
+gnutls28 (3.4.2-2) experimental; urgency=medium
+
+  * Disable libidn support because CVE-2015-2059 is still not fixed. See
+    <https://gitlab.com/gnutls/gnutls/issues/10>. This also disables building
+    of crywrap.
+
+ -- Andreas Metzler <ametzler@debian.org>  Sun, 05 Jul 2015 14:18:06 +0200
+
 gnutls28 (3.4.2-1) experimental; urgency=medium
 
   * New upstream version.

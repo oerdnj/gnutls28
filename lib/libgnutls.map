@@ -1039,6 +1039,19 @@ GNUTLS_3_4
 	gnutls_pkcs7_get_attr;
 	gnutls_pkcs7_print;
 	gnutls_x509_crt_verify_data2;
+	gnutls_pkcs7_get_signature_count;
+	gnutls_ecc_curve_get_oid;
+	gnutls_digest_get_oid;
+	gnutls_pk_get_oid;
+	gnutls_sign_get_oid;
+	gnutls_ecc_curve_get_id;
+	gnutls_oid_to_digest;
+	gnutls_oid_to_pk;
+	gnutls_oid_to_sign;
+	gnutls_oid_to_ecc_curve;
+	gnutls_prf_rfc5705;
+	gnutls_hex_decode2;
+	gnutls_hex_encode2;
  local:
 	*;
 };
@@ -1066,21 +1079,9 @@ GNUTLS_FIPS140_3_4 {
 	_gnutls_ecdh_compute_key;
 };
 
-GNUTLS_PRIVATE {
+GNUTLS_PRIVATE_3_4 {
   global:
-	# Internal symbols needed by libgnutls-openssl:
-	_gnutls_pkix1_asn;
-	_gnutls_x509_parse_dn_oid;
-	_gnutls_asn2err;
-	_gnutls_ext_get_session_data;
-	_gnutls_ext_set_session_data;
-	_gnutls_ext_register;
-	_gnutls_buffer_append_prefix;
-	_gnutls_buffer_append_data;
-	_gnutls_buffer_clear;
-	_gnutls_buffer_append_data_prefix;
-	_gnutls_buffer_pop_data;
-	_gnutls_buffer_pop_prefix;
+	# Internal symbols needed by libgnutls-dane:
 	_gnutls_buffer_init;
 	_gnutls_buffer_append_str;
 	_gnutls_buffer_to_datum;
@@ -1103,6 +1104,6 @@ GNUTLS_PRIVATE {
 	_gnutls_mpi_release;
 	# Internal symbols needed by tests/pkcs12_s2k:
 	_gnutls_pkcs12_string_to_key;
-	_gnutls_mac_to_entry;
 	_gnutls_bin2hex;
+	_gnutls_mac_to_entry;
 };

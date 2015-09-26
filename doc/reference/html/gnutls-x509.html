@@ -2,13 +2,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>GnuTLS API Reference Manual: x509</title>
+<title>x509: GnuTLS API Reference Manual</title>
 <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
 <link rel="home" href="index.html" title="GnuTLS API Reference Manual">
 <link rel="up" href="intro.html" title="GnuTLS API Reference Manual">
 <link rel="prev" href="gnutls-abstract.html" title="abstract">
 <link rel="next" href="gnutls-openpgp.html" title="openpgp">
-<meta name="generator" content="GTK-Doc V1.21 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.24 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -2142,7 +2142,6 @@ Index starts from 0. Returns 0 on success.</p>
 <a name="id-1.2.6.6.3.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -2179,7 +2178,6 @@ certificate set.  Index starts from 0. Returns 0 on success.</p>
 <a name="id-1.2.6.6.4.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -2234,7 +2232,6 @@ replaced by the actual size of parameters)</p></td>
 <a name="id-1.2.6.6.5.8"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -2279,9 +2276,8 @@ of "BEGIN PKCS7".</p>
 <a name="id-1.2.6.6.6.8"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
-<p class="since">Since 3.1.3</p>
+<p class="since">Since: 3.1.3</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -2309,7 +2305,6 @@ or RFC2630 crl set.</p>
 <a name="id-1.2.6.6.7.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -2361,7 +2356,6 @@ then <em class="parameter"><code>crl_size</code></em>
 is updated and <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SHORT-MEMORY-BUFFER:CAPS" title="GNUTLS_E_SHORT_MEMORY_BUFFER"><code class="literal">GNUTLS_E_SHORT_MEMORY_BUFFER</code></a> is
 returned.  After the last crl has been read
 <a class="link" href="gnutls-gnutls.html#GNUTLS-E-REQUESTED-DATA-NOT-AVAILABLE:CAPS" title="GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE"><code class="literal">GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE</code></a> will be returned.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -2388,9 +2382,8 @@ or RFC2630 certificate set.</p>
 </div>
 <div class="refsect3">
 <a name="id-1.2.6.6.9.6"></a><h4>Returns</h4>
-<p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
+<p> On success, a positive number is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -2445,7 +2438,6 @@ negative error value.  If the provided buffer is not long enough,
 then <em class="parameter"><code>certificate_size</code></em>
 is updated and
 <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SHORT-MEMORY-BUFFER:CAPS" title="GNUTLS_E_SHORT_MEMORY_BUFFER"><code class="literal">GNUTLS_E_SHORT_MEMORY_BUFFER</code></a> is returned.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -2491,7 +2483,6 @@ the native <a class="link" href="gnutls-x509.html#gnutls-pkcs7-t" title="gnutls_
 <a name="id-1.2.6.6.11.7"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -2521,7 +2512,6 @@ revocation lists.</p>
 <a name="id-1.2.6.6.12.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -2558,7 +2548,6 @@ set.</p>
 <a name="id-1.2.6.6.13.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -2594,7 +2583,6 @@ gnutls_pkcs7_set_crl_raw (<em class="parameter"><code><a class="link" href="gnut
 <a name="id-1.2.6.6.14.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -2632,7 +2620,6 @@ RFC2630 certificate set.  This is a wrapper function over
 <a name="id-1.2.6.6.15.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -2669,7 +2656,6 @@ certificate set.</p>
 <a name="id-1.2.6.6.16.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -2706,7 +2692,6 @@ issuer certificate.</p>
 <a name="id-1.2.6.6.17.6"></a><h4>Returns</h4>
 <p> true (1) if the given CRL was issued by the given issuer,
 and false (0) if not.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -2781,7 +2766,6 @@ be replaced by the actual size of parameters)</p></td>
 <a name="id-1.2.6.6.19.8"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -2827,7 +2811,6 @@ of "BEGIN X509 CRL".</p>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
 <p>Since 3.1.3</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -2905,9 +2888,8 @@ and serial number.</p>
 <div class="refsect3">
 <a name="id-1.2.6.6.21.7"></a><h4>Returns</h4>
 <p> Returns 0 on success, or an error code.</p>
-<p></p>
 </div>
-<p class="since">Since 3.0</p>
+<p class="since">Since: 3.0</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -2961,9 +2943,8 @@ the name and serial number of the certificate. In that case
 <a name="id-1.2.6.6.22.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error code in case of an error.</p>
-<p></p>
 </div>
-<p class="since">Since 2.8.0</p>
+<p class="since">Since: 2.8.0</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -2990,7 +2971,6 @@ given CRL.</p>
 <div class="refsect3">
 <a name="id-1.2.6.6.23.6"></a><h4>Returns</h4>
 <p> number of certificates, a negative error code on failure.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -3047,7 +3027,6 @@ of revoked certificates. In that case use <code class="function">gnutls_x509_crl
 <a name="id-1.2.6.6.24.7"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -3098,7 +3077,6 @@ issuer, specified by the given index.</p>
 <p> <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SHORT-MEMORY-BUFFER:CAPS" title="GNUTLS_E_SHORT_MEMORY_BUFFER"><code class="literal">GNUTLS_E_SHORT_MEMORY_BUFFER</code></a> if the provided buffer is
 not long enough, and in that case the sizeof_oid will be updated
 with the required size.  On success 0 is returned.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -3155,9 +3133,8 @@ sequence.</p>
 negative error code in case of an error.  If your have reached the
 last extension available <a class="link" href="gnutls-gnutls.html#GNUTLS-E-REQUESTED-DATA-NOT-AVAILABLE:CAPS" title="GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE"><code class="literal">GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE</code></a>
 will be returned.</p>
-<p></p>
 </div>
-<p class="since">Since 2.8.0</p>
+<p class="since">Since: 2.8.0</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -3222,9 +3199,8 @@ holds actual size of <em class="parameter"><code>oid</code></em>
 negative error code in case of an error.  If your have reached the
 last extension available <a class="link" href="gnutls-gnutls.html#GNUTLS-E-REQUESTED-DATA-NOT-AVAILABLE:CAPS" title="GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE"><code class="literal">GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE</code></a>
 will be returned.</p>
-<p></p>
 </div>
-<p class="since">Since 2.8.0</p>
+<p class="since">Since: 2.8.0</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -3276,9 +3252,8 @@ buffer.</p>
 negative error code in case of an error.  If your have reached the
 last extension available <a class="link" href="gnutls-gnutls.html#GNUTLS-E-REQUESTED-DATA-NOT-AVAILABLE:CAPS" title="GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE"><code class="literal">GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE</code></a>
 will be returned.</p>
-<p></p>
 </div>
-<p class="since">Since 2.8.0</p>
+<p class="since">Since: 2.8.0</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -3325,7 +3300,6 @@ encoded, depending on the certificate data.</p>
 <p> <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SHORT-MEMORY-BUFFER:CAPS" title="GNUTLS_E_SHORT_MEMORY_BUFFER"><code class="literal">GNUTLS_E_SHORT_MEMORY_BUFFER</code></a> if the provided buffer is
 not long enough, and in that case the sizeof_buf will be updated
 with the required size, and 0 on success.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -3396,7 +3370,6 @@ using <a class="link" href="gnutls-x509.html#gnutls-x509-dn-oid-known" title="gn
 <p> <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SHORT-MEMORY-BUFFER:CAPS" title="GNUTLS_E_SHORT_MEMORY_BUFFER"><code class="literal">GNUTLS_E_SHORT_MEMORY_BUFFER</code></a> if the provided buffer is
 not long enough, and in that case the sizeof_buf will be updated
 with the required size, and 0 on success.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -3425,7 +3398,6 @@ error instead.</p>
 <div class="refsect3">
 <a name="id-1.2.6.6.31.6"></a><h4>Returns</h4>
 <p> when the next CRL will be issued, or (time_t)-1 on error.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -3475,9 +3447,8 @@ obtained by the CRL Number extension field (2.5.29.20).</p>
 <a name="id-1.2.6.6.32.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error code in case of an error.</p>
-<p></p>
 </div>
-<p class="since">Since 2.8.0</p>
+<p class="since">Since: 2.8.0</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -3512,9 +3483,8 @@ and the length.</p>
 <div class="refsect3">
 <a name="id-1.2.6.6.33.6"></a><h4>Returns</h4>
 <p> a negative error code on error, and (0) on success.</p>
-<p></p>
 </div>
-<p class="since">Since 2.12.0</p>
+<p class="since">Since: 2.12.0</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -3556,7 +3526,6 @@ gnutls_x509_crl_get_signature (<em class="parameter"><code><a class="link" href=
 <a name="id-1.2.6.6.34.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value. </p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -3586,7 +3555,6 @@ enumeration that is the signature algorithm.</p>
 <a name="id-1.2.6.6.35.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -3613,7 +3581,6 @@ gnutls_x509_crl_get_this_update (<em class="parameter"><code><a class="link" hre
 <div class="refsect3">
 <a name="id-1.2.6.6.36.6"></a><h4>Returns</h4>
 <p> when the CRL was issued, or (time_t)-1 on error.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -3640,7 +3607,6 @@ gnutls_x509_crl_get_version (<em class="parameter"><code><a class="link" href="g
 <div class="refsect3">
 <a name="id-1.2.6.6.37.6"></a><h4>Returns</h4>
 <p> The version number, or a negative error code on error.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -3684,7 +3650,6 @@ to the native <a class="link" href="gnutls-gnutls.html#gnutls-x509-crl-t" title=
 <a name="id-1.2.6.6.38.7"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -3716,7 +3681,6 @@ authority's private key.</p>
 <a name="id-1.2.6.6.39.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -3773,9 +3737,8 @@ in <em class="parameter"><code>crls</code></em>
 <div class="refsect3">
 <a name="id-1.2.6.6.40.7"></a><h4>Returns</h4>
 <p> the number of certificates read or a negative error value.</p>
-<p></p>
 </div>
-<p class="since">Since 3.0</p>
+<p class="since">Since: 3.0</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -3832,9 +3795,8 @@ CRL".</p>
 <div class="refsect3">
 <a name="id-1.2.6.6.41.7"></a><h4>Returns</h4>
 <p> the number of certificates read or a negative error value.</p>
-<p></p>
 </div>
-<p class="since">Since 3.0</p>
+<p class="since">Since: 3.0</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -3878,7 +3840,6 @@ list, suitable for display to a human.</p>
 <a name="id-1.2.6.6.42.7"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -3923,9 +3884,8 @@ the used key.</p>
 <a name="id-1.2.6.6.43.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
-<p class="since">Since 2.8.0</p>
+<p class="since">Since: 2.8.0</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -3966,7 +3926,6 @@ gnutls_x509_crl_set_crt (<em class="parameter"><code><a class="link" href="gnutl
 <a name="id-1.2.6.6.44.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -4014,7 +3973,6 @@ gnutls_x509_crl_set_crt_serial (<em class="parameter"><code><a class="link" href
 <a name="id-1.2.6.6.45.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -4050,7 +4008,6 @@ gnutls_x509_crl_set_next_update (<em class="parameter"><code><a class="link" hre
 <a name="id-1.2.6.6.46.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -4094,9 +4051,8 @@ the CRL by the authority.</p>
 <a name="id-1.2.6.6.47.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
-<p class="since">Since 2.8.0</p>
+<p class="since">Since: 2.8.0</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -4131,7 +4087,6 @@ gnutls_x509_crl_set_this_update (<em class="parameter"><code><a class="link" hre
 <a name="id-1.2.6.6.48.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -4169,7 +4124,6 @@ by gnutls should have a version number of 2.</p>
 <a name="id-1.2.6.6.49.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -4226,7 +4180,6 @@ the previously set parameters are now signed.</p>
 <a name="id-1.2.6.6.50.7"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -4277,7 +4230,6 @@ a negative return value).</p>
 <a name="id-1.2.6.6.51.7"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -4356,7 +4308,6 @@ replaced by the actual size of parameters)</p></td>
 <a name="id-1.2.6.6.53.8"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -4403,7 +4354,6 @@ NEW CERTIFICATE REQUEST".</p>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
 <p>Since 3.1.3</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -4457,7 +4407,6 @@ specifies which to get, use (0) to get the first one</p></td>
 <a name="id-1.2.6.6.55.7"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -4514,9 +4463,8 @@ sequence.</p>
 negative error code in case of an error.  If your have reached the
 last extension available <a class="link" href="gnutls-gnutls.html#GNUTLS-E-REQUESTED-DATA-NOT-AVAILABLE:CAPS" title="GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE"><code class="literal">GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE</code></a>
 will be returned.</p>
-<p></p>
 </div>
-<p class="since">Since 2.8.0</p>
+<p class="since">Since: 2.8.0</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -4575,9 +4523,8 @@ holds actual size of <em class="parameter"><code>oid</code></em>
 negative error code in case of an error.  If your have reached the
 last extension available <a class="link" href="gnutls-gnutls.html#GNUTLS-E-REQUESTED-DATA-NOT-AVAILABLE:CAPS" title="GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE"><code class="literal">GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE</code></a>
 will be returned.</p>
-<p></p>
 </div>
-<p class="since">Since 2.8.0</p>
+<p class="since">Since: 2.8.0</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -4632,9 +4579,8 @@ returned, or (0) if the certificate does not have CA flag set.
 A negative error code may be returned in case of errors.  If the
 certificate does not contain the basicConstraints extension
 <a class="link" href="gnutls-gnutls.html#GNUTLS-E-REQUESTED-DATA-NOT-AVAILABLE:CAPS" title="GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE"><code class="literal">GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE</code></a> will be returned.</p>
-<p></p>
 </div>
-<p class="since">Since 2.8.0</p>
+<p class="since">Since: 2.8.0</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -4673,7 +4619,6 @@ revocation of the certificate.</p>
 <a name="id-1.2.6.6.59.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -4717,7 +4662,6 @@ data.</p>
 long enough, and in that case the *<em class="parameter"><code>buf_size</code></em>
 will be updated with
 the required size.  On success 0 is returned.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -4783,7 +4727,6 @@ which to get. Use (0) to get the first one.</p></td>
 not long enough, and in that case the *<em class="parameter"><code>buf_size</code></em>
 will be
 updated with the required size.  On success 0 is returned.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -4835,7 +4778,6 @@ certificate request subject, specified by the given index.</p>
 not long enough, and in that case the *<em class="parameter"><code>sizeof_oid</code></em>
 will be
 updated with the required size.  On success 0 is returned.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -4895,9 +4837,8 @@ specifies which to get. Use (0) to get the first one.</p></td>
 negative error code in case of an error.  If the certificate does not
 contain the specified extension
 <a class="link" href="gnutls-gnutls.html#GNUTLS-E-REQUESTED-DATA-NOT-AVAILABLE:CAPS" title="GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE"><code class="literal">GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE</code></a> will be returned.</p>
-<p></p>
 </div>
-<p class="since">Since 2.8.0</p>
+<p class="since">Since: 2.8.0</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -4953,9 +4894,8 @@ sequence.</p>
 negative error code in case of an error.  If your have reached the
 last extension available <a class="link" href="gnutls-gnutls.html#GNUTLS-E-REQUESTED-DATA-NOT-AVAILABLE:CAPS" title="GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE"><code class="literal">GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE</code></a>
 will be returned.</p>
-<p></p>
 </div>
-<p class="since">Since 2.8.0</p>
+<p class="since">Since: 2.8.0</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -5020,9 +4960,8 @@ holds actual size of <em class="parameter"><code>oid</code></em>
 negative error code in case of an error.  If your have reached the
 last extension available <a class="link" href="gnutls-gnutls.html#GNUTLS-E-REQUESTED-DATA-NOT-AVAILABLE:CAPS" title="GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE"><code class="literal">GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE</code></a>
 will be returned.</p>
-<p></p>
 </div>
-<p class="since">Since 2.8.0</p>
+<p class="since">Since: 2.8.0</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -5077,9 +5016,8 @@ replaced by the actual size of parameters)</p></td>
 <a name="id-1.2.6.6.66.7"></a><h4>Returns</h4>
 <p> In case of failure a negative error code will be
 returned, and 0 on success.</p>
-<p></p>
 </div>
-<p class="since">Since 2.8.0</p>
+<p class="since">Since: 2.8.0</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -5138,9 +5076,8 @@ human readable names.</p>
 not long enough, and in that case the *<em class="parameter"><code>sizeof_oid</code></em>
 will be
 updated with the required size.  On success 0 is returned.</p>
-<p></p>
 </div>
-<p class="since">Since 2.8.0</p>
+<p class="since">Since: 2.8.0</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -5183,9 +5120,8 @@ the given structure.  The new parameters will be allocated using
 <a name="id-1.2.6.6.68.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
-<p class="since">Since 2.8.0</p>
+<p class="since">Since: 2.8.0</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -5234,9 +5170,8 @@ ORed values of the: <a class="link" href="gnutls-gnutls.html#GNUTLS-KEY-DIGITAL-
 parsing error.  If the certificate does not contain the keyUsage
 extension <a class="link" href="gnutls-gnutls.html#GNUTLS-E-REQUESTED-DATA-NOT-AVAILABLE:CAPS" title="GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE"><code class="literal">GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE</code></a> will be
 returned.</p>
-<p></p>
 </div>
-<p class="since">Since 2.8.0</p>
+<p class="since">Since: 2.8.0</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -5275,7 +5210,6 @@ For DSA the bits returned are of the public exponent.</p>
 <a name="id-1.2.6.6.70.7"></a><h4>Returns</h4>
 <p> a member of the <a class="link" href="gnutls-gnutls.html#gnutls-pk-algorithm-t" title="enum gnutls_pk_algorithm_t"><span class="type">gnutls_pk_algorithm_t</span></a> enumeration on
 success, or a negative error code on error.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -5320,7 +5254,6 @@ times of the private key of the certificate.</p>
 <a name="id-1.2.6.6.71.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-REQUESTED-DATA-NOT-AVAILABLE:CAPS" title="GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE"><code class="literal">GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE</code></a>
 if the extension is not present, otherwise a negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -5395,9 +5328,8 @@ will be updated with the
 required size.  If the certificate request does not have an
 Alternative name with the specified sequence number then
 <a class="link" href="gnutls-gnutls.html#GNUTLS-E-REQUESTED-DATA-NOT-AVAILABLE:CAPS" title="GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE"><code class="literal">GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE</code></a> is returned.</p>
-<p></p>
 </div>
-<p class="since">Since 2.8.0</p>
+<p class="since">Since: 2.8.0</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -5460,9 +5392,8 @@ will be updated with the required size.  If the
 certificate does not have an Alternative name with the specified
 sequence number and with the otherName type then
 <a class="link" href="gnutls-gnutls.html#GNUTLS-E-REQUESTED-DATA-NOT-AVAILABLE:CAPS" title="GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE"><code class="literal">GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE</code></a> is returned.</p>
-<p></p>
 </div>
-<p class="since">Since 2.8.0</p>
+<p class="since">Since: 2.8.0</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -5490,7 +5421,6 @@ request.</p>
 <a name="id-1.2.6.6.74.6"></a><h4>Returns</h4>
 <p> version of certificate request, or a negative error code on
 error.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -5537,7 +5467,6 @@ CERTIFICATE REQUEST".</p>
 <a name="id-1.2.6.6.75.7"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -5566,7 +5495,6 @@ structure.</p>
 <a name="id-1.2.6.6.76.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -5611,9 +5539,8 @@ display to a human.</p>
 <a name="id-1.2.6.6.77.7"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
-<p class="since">Since 2.8.0</p>
+<p class="since">Since: 2.8.0</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -5659,7 +5586,6 @@ appended to the request. Their interpretation depends on the CA policy.</p>
 <a name="id-1.2.6.6.78.7"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -5703,9 +5629,8 @@ not be present.</p></td>
 <a name="id-1.2.6.6.79.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
-<p class="since">Since 2.8.0</p>
+<p class="since">Since: 2.8.0</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -5742,7 +5667,6 @@ revoking the request.</p>
 <a name="id-1.2.6.6.80.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -5804,7 +5728,6 @@ call this function with raw_flag set.</p>
 <a name="id-1.2.6.6.81.7"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -5841,7 +5764,6 @@ key to the request.</p>
 <a name="id-1.2.6.6.82.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -5886,9 +5808,8 @@ See the GNUTLS_KP_* definitions for human readable names.</p>
 <a name="id-1.2.6.6.83.7"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
-<p class="since">Since 2.8.0</p>
+<p class="since">Since: 2.8.0</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -5930,9 +5851,8 @@ key to the request. Only RSA keys are currently supported.</p>
 <a name="id-1.2.6.6.84.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
-<p class="since">Since 2.6.0</p>
+<p class="since">Since: 2.6.0</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -5967,9 +5887,8 @@ gnutls_x509_crq_set_key_usage (<em class="parameter"><code><a class="link" href=
 <a name="id-1.2.6.6.85.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
-<p class="since">Since 2.8.0</p>
+<p class="since">Since: 2.8.0</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -6011,7 +5930,6 @@ gnutls_x509_crq_set_private_key_usage_period
 <a name="id-1.2.6.6.86.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -6072,9 +5990,8 @@ extension.  It can set the following types:</p>
 <a name="id-1.2.6.6.87.11"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
-<p class="since">Since 2.8.0</p>
+<p class="since">Since: 2.8.0</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -6110,7 +6027,6 @@ version 1 requests this must be one.</p>
 <a name="id-1.2.6.6.88.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -6165,7 +6081,6 @@ since all the previously set parameters are now signed.</p>
 <a class="link" href="gnutls-gnutls.html#GNUTLS-E-ASN1-VALUE-NOT-FOUND:CAPS" title="GNUTLS_E_ASN1_VALUE_NOT_FOUND"><code class="literal">GNUTLS_E_ASN1_VALUE_NOT_FOUND</code></a> is returned if you didn't set all
 information in the certificate request (e.g., the version using
 <a class="link" href="gnutls-x509.html#gnutls-x509-crq-set-version" title="gnutls_x509_crq_set_version ()"><code class="function">gnutls_x509_crq_set_version()</code></a>).</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -6203,7 +6118,6 @@ request and return its status.</p>
 <p> In case of a verification failure <a class="link" href="gnutls-gnutls.html#GNUTLS-E-PK-SIG-VERIFY-FAILED:CAPS" title="GNUTLS_E_PK_SIG_VERIFY_FAILED"><code class="literal">GNUTLS_E_PK_SIG_VERIFY_FAILED</code></a>
 is returned, and zero or positive code on success.</p>
 <p>Since 2.12.0</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -6251,7 +6165,6 @@ starts at the leftmost position.</p>
 <div class="refsect3">
 <a name="id-1.2.6.6.91.8"></a><h4>Returns</h4>
 <p> non-zero for a successful match, and zero on failure.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -6293,7 +6206,6 @@ it will check whether the certificate is self-signed.</p>
 <a name="id-1.2.6.6.92.7"></a><h4>Returns</h4>
 <p> It will return true (1) if the given certificate is issued
 by the given issuer, and false (0) if not.  </p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -6336,7 +6248,6 @@ revoked.  It is assumed that the CRLs have been verified before.</p>
 <a name="id-1.2.6.6.93.6"></a><h4>Returns</h4>
 <p> 0 if the certificate is NOT revoked, and 1 if it is.  A
 negative error code is returned on error.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -6374,7 +6285,6 @@ This may be useful to copy from a CA certificate to issued ones.</p>
 <a name="id-1.2.6.6.94.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -6450,7 +6360,6 @@ replaced by the actual size of parameters)</p></td>
 <a name="id-1.2.6.6.96.8"></a><h4>Returns</h4>
 <p> In case of failure a negative error code will be
 returned, and 0 on success.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -6495,9 +6404,8 @@ of "BEGIN CERTIFICATE".</p>
 <a name="id-1.2.6.6.97.7"></a><h4>Returns</h4>
 <p> In case of failure a negative error code will be
 returned, and 0 on success.</p>
-<p></p>
 </div>
-<p class="since">Since 3.1.3</p>
+<p class="since">Since: 3.1.3</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -6524,7 +6432,6 @@ activated.</p>
 <div class="refsect3">
 <a name="id-1.2.6.6.98.6"></a><h4>Returns</h4>
 <p> activation time, or (time_t)-1 on error.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -6644,9 +6551,8 @@ to
 override), <a class="link" href="gnutls-gnutls.html#GNUTLS-E-UNKNOWN-ALGORITHM:CAPS" title="GNUTLS_E_UNKNOWN_ALGORITHM"><code class="literal">GNUTLS_E_UNKNOWN_ALGORITHM</code></a> if the requested OID does
 not match (e.g., when using <a class="link" href="gnutls-x509.html#GNUTLS-IA-OCSP-URI:CAPS"><code class="literal">GNUTLS_IA_OCSP_URI</code></a>), otherwise a
 negative error code.</p>
-<p></p>
 </div>
-<p class="since">Since 3.0</p>
+<p class="since">Since: 3.0</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -6724,9 +6630,8 @@ and serial number.</p>
 <a name="id-1.2.6.6.100.7"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-REQUESTED-DATA-NOT-AVAILABLE:CAPS" title="GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE"><code class="literal">GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE</code></a>
 if the extension is not present, otherwise a negative error value.</p>
-<p></p>
 </div>
-<p class="since">Since 3.0</p>
+<p class="since">Since: 3.0</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -6779,7 +6684,6 @@ the name and serial number of the certificate. In that case
 <a name="id-1.2.6.6.101.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-REQUESTED-DATA-NOT-AVAILABLE:CAPS" title="GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE"><code class="literal">GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE</code></a>
 if the extension is not present, otherwise a negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -6835,7 +6739,6 @@ returned, or (0) if the certificate does not have CA flag set.  A
 negative error code may be returned in case of errors.  If the
 certificate does not contain the basicConstraints extension
 GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE will be returned.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -6879,7 +6782,6 @@ returned, or (0) if the certificate does not have CA flag set.  A
 negative error code may be returned in case of errors.  If the
 certificate does not contain the basicConstraints extension
 GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE will be returned.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -6938,7 +6840,6 @@ one of the enumerated <a class="link" href="gnutls-gnutls.html#gnutls-x509-subje
 certificate does not have an Alternative name with the specified
 sequence number then <a class="link" href="gnutls-gnutls.html#GNUTLS-E-REQUESTED-DATA-NOT-AVAILABLE:CAPS" title="GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE"><code class="literal">GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE</code></a> is
 returned.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -6988,7 +6889,6 @@ encoded, depending on the certificate data.</p>
 long enough, and in that case the <em class="parameter"><code>buf_size</code></em>
 will be updated
 with the required size.  On success 0 is returned.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -7066,7 +6966,6 @@ long enough, and in that case the <em class="parameter"><code>buf_size</code></e
 will be updated with
 the required size. <a class="link" href="gnutls-gnutls.html#GNUTLS-E-REQUESTED-DATA-NOT-AVAILABLE:CAPS" title="GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE"><code class="literal">GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE</code></a> if there
 are no data in the current index. On success 0 is returned.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -7125,7 +7024,6 @@ long enough, and in that case the <em class="parameter"><code>buf_size</code></e
 will be updated with
 the required size. <a class="link" href="gnutls-gnutls.html#GNUTLS-E-REQUESTED-DATA-NOT-AVAILABLE:CAPS" title="GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE"><code class="literal">GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE</code></a> if there
 are no data in the current index. On success 0 is returned.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -7155,7 +7053,6 @@ expired.</p>
 <div class="refsect3">
 <a name="id-1.2.6.6.108.7"></a><h4>Returns</h4>
 <p> expiration time, or (time_t)-1 on error.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -7220,7 +7117,6 @@ encoded, in the provided buffer.</p>
 otherwise a negative error code is returned. If the certificate does not
 contain the specified extension
 GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE will be returned.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -7277,7 +7173,6 @@ sequence.</p>
 otherwise a negative error code is returned.  If you have reached the
 last extension available <a class="link" href="gnutls-gnutls.html#GNUTLS-E-REQUESTED-DATA-NOT-AVAILABLE:CAPS" title="GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE"><code class="literal">GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE</code></a>
 will be returned.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -7346,7 +7241,6 @@ holds actual size of <em class="parameter"><code>oid</code></em>
 otherwise a negative error code is returned.  If you have reached the
 last extension available <a class="link" href="gnutls-gnutls.html#GNUTLS-E-REQUESTED-DATA-NOT-AVAILABLE:CAPS" title="GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE"><code class="literal">GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE</code></a>
 will be returned.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -7402,7 +7296,6 @@ account for the trailing null.</p>
 otherwise a negative error code is returned.  If you have reached the
 last extension available <a class="link" href="gnutls-gnutls.html#GNUTLS-E-REQUESTED-DATA-NOT-AVAILABLE:CAPS" title="GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE"><code class="literal">GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE</code></a>
 will be returned.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -7455,7 +7348,6 @@ data of the certificate.</p>
 <p> <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SHORT-MEMORY-BUFFER:CAPS" title="GNUTLS_E_SHORT_MEMORY_BUFFER"><code class="literal">GNUTLS_E_SHORT_MEMORY_BUFFER</code></a> if the provided buffer is
 not long enough, and in that case the *buf_size will be updated
 with the required size.  On success 0 is returned.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -7498,7 +7390,6 @@ deallocated.</p>
 <div class="refsect3">
 <a name="id-1.2.6.6.114.7"></a><h4>Returns</h4>
 <p> Returns 0 on success, or an error code.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -7570,9 +7461,8 @@ will be updated with
 the required size.  If the certificate does not have an
 Alternative name with the specified sequence number then
 <a class="link" href="gnutls-gnutls.html#GNUTLS-E-REQUESTED-DATA-NOT-AVAILABLE:CAPS" title="GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE"><code class="literal">GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE</code></a> is returned.</p>
-<p></p>
 </div>
-<p class="since">Since 2.10.0</p>
+<p class="since">Since: 2.10.0</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -7644,9 +7534,8 @@ will be updated with
 the required size.  If the certificate does not have an
 Alternative name with the specified sequence number then
 <a class="link" href="gnutls-gnutls.html#GNUTLS-E-REQUESTED-DATA-NOT-AVAILABLE:CAPS" title="GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE"><code class="literal">GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE</code></a> is returned.</p>
-<p></p>
 </div>
-<p class="since">Since 2.10.0</p>
+<p class="since">Since: 2.10.0</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -7715,9 +7604,8 @@ will be updated with the required size.  If the
 certificate does not have an Alternative name with the specified
 sequence number and with the otherName type then
 <a class="link" href="gnutls-gnutls.html#GNUTLS-E-REQUESTED-DATA-NOT-AVAILABLE:CAPS" title="GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE"><code class="literal">GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE</code></a> is returned.</p>
-<p></p>
 </div>
-<p class="since">Since 2.10.0</p>
+<p class="since">Since: 2.10.0</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -7766,7 +7654,6 @@ will be ASCII or UTF-8 encoded, depending on the certificate data.</p>
 long enough, and in that case the <em class="parameter"><code>buf_size</code></em>
 will be updated with
 the required size.  On success 0 is returned.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -7844,7 +7731,6 @@ long enough, and in that case the <em class="parameter"><code>buf_size</code></e
 will be updated with
 the required size. <a class="link" href="gnutls-gnutls.html#GNUTLS-E-REQUESTED-DATA-NOT-AVAILABLE:CAPS" title="GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE"><code class="literal">GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE</code></a> if there
 are no data in the current index. On success 0 is returned.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -7903,7 +7789,6 @@ long enough, and in that case the <em class="parameter"><code>buf_size</code></e
 will be updated with
 the required size. <a class="link" href="gnutls-gnutls.html#GNUTLS-E-REQUESTED-DATA-NOT-AVAILABLE:CAPS" title="GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE"><code class="literal">GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE</code></a> if there
 are no data in the current index. On success 0 is returned.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -7949,9 +7834,8 @@ actual size of the unique ID on return.</p></td>
 <div class="refsect3">
 <a name="id-1.2.6.6.121.7"></a><h4>Returns</h4>
 <p> <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> on success, otherwise a negative error code.</p>
-<p></p>
 </div>
-<p class="since">Since 2.12.0</p>
+<p class="since">Since: 2.12.0</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -8005,7 +7889,6 @@ replaced by the actual size of parameters)</p></td>
 <a name="id-1.2.6.6.122.7"></a><h4>Returns</h4>
 <p> In case of failure a negative error code will be
 returned, and 0 on success.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -8070,7 +7953,6 @@ account for the trailing null.</p>
 <p> <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SHORT-MEMORY-BUFFER:CAPS" title="GNUTLS_E_SHORT_MEMORY_BUFFER"><code class="literal">GNUTLS_E_SHORT_MEMORY_BUFFER</code></a> if the provided buffer is
 not long enough, and in that case the *oid_size will be updated
 with the required size.  On success 0 is returned.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -8120,7 +8002,6 @@ values of the: <a class="link" href="gnutls-gnutls.html#GNUTLS-KEY-DIGITAL-SIGNA
 parsing error.  If the certificate does not contain the keyUsage
 extension <a class="link" href="gnutls-gnutls.html#GNUTLS-E-REQUESTED-DATA-NOT-AVAILABLE:CAPS" title="GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE"><code class="literal">GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE</code></a> will be
 returned.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -8161,7 +8042,6 @@ exponent.</p>
 <a name="id-1.2.6.6.125.7"></a><h4>Returns</h4>
 <p> a member of the <a class="link" href="gnutls-gnutls.html#gnutls-pk-algorithm-t" title="enum gnutls_pk_algorithm_t"><span class="type">gnutls_pk_algorithm_t</span></a> enumeration on
 success, or a negative error code on error.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -8216,7 +8096,6 @@ the given certificate.  The new parameters will be allocated using
 <div class="refsect3">
 <a name="id-1.2.6.6.126.6"></a><h4>Returns</h4>
 <p> <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> on success, otherwise a negative error code.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -8259,7 +8138,6 @@ the given structure.  The new parameters will be allocated using
 <div class="refsect3">
 <a name="id-1.2.6.6.127.6"></a><h4>Returns</h4>
 <p> <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> on success, otherwise a negative error code.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -8310,9 +8188,8 @@ specified by the given index. </p>
 <a name="id-1.2.6.6.128.7"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-REQUESTED-DATA-NOT-AVAILABLE:CAPS" title="GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE"><code class="literal">GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE</code></a>
 if the extension is not present, otherwise a negative error value.</p>
-<p></p>
 </div>
-<p class="since">Since 3.1.5</p>
+<p class="since">Since: 3.1.5</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -8362,7 +8239,6 @@ the PKIX extension 2.5.29.16 being present.</p>
 <a name="id-1.2.6.6.129.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-REQUESTED-DATA-NOT-AVAILABLE:CAPS" title="GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE"><code class="literal">GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE</code></a>
 if the extension is not present, otherwise a negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -8425,7 +8301,6 @@ field and the actual value, -1 indicate that the field is absent.</p></td>
 <a name="id-1.2.6.6.130.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned,
 otherwise a negative error code is returned.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -8455,7 +8330,6 @@ the length. This points to allocated data that must be free'd using <code class=
 <a name="id-1.2.6.6.131.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value. or a negative error code on error.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -8485,7 +8359,6 @@ and the length. This points to allocated data that must be free'd using <code cl
 <a name="id-1.2.6.6.132.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.or a negative error code on error.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -8530,7 +8403,6 @@ numbers, thus it may be wise to handle it as something uint8_t.</p>
 <a name="id-1.2.6.6.133.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -8566,8 +8438,7 @@ gnutls_x509_crt_get_signature (<em class="parameter"><code><a class="link" href=
 <div class="refsect3">
 <a name="id-1.2.6.6.134.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
-negative error value. and a negative error code on error.</p>
-<p></p>
+negative error value.</p>
 </div>
 </div>
 <hr>
@@ -8598,7 +8469,6 @@ sign this certificate.</p>
 <a name="id-1.2.6.6.135.6"></a><h4>Returns</h4>
 <p> a <a class="link" href="gnutls-gnutls.html#gnutls-sign-algorithm-t" title="enum gnutls_sign_algorithm_t"><span class="type">gnutls_sign_algorithm_t</span></a> value, or a negative error code on
 error.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -8641,7 +8511,6 @@ deallocated.</p>
 <div class="refsect3">
 <a name="id-1.2.6.6.136.7"></a><h4>Returns</h4>
 <p> Returns 0 on success, or an error code.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -8712,7 +8581,6 @@ will be updated with the
 required size.  If the certificate does not have an Alternative
 name with the specified sequence number then
 <a class="link" href="gnutls-gnutls.html#GNUTLS-E-REQUESTED-DATA-NOT-AVAILABLE:CAPS" title="GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE"><code class="literal">GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE</code></a> is returned.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -8785,7 +8653,6 @@ will be updated with
 the required size.  If the certificate does not have an
 Alternative name with the specified sequence number then
 <a class="link" href="gnutls-gnutls.html#GNUTLS-E-REQUESTED-DATA-NOT-AVAILABLE:CAPS" title="GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE"><code class="literal">GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE</code></a> is returned.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -8855,7 +8722,6 @@ will be updated with the required size.  If the
 certificate does not have an Alternative name with the specified
 sequence number and with the otherName type then
 <a class="link" href="gnutls-gnutls.html#GNUTLS-E-REQUESTED-DATA-NOT-AVAILABLE:CAPS" title="GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE"><code class="literal">GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE</code></a> is returned.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -8905,7 +8771,6 @@ extension field (2.5.29.14).</p>
 <a name="id-1.2.6.6.140.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-REQUESTED-DATA-NOT-AVAILABLE:CAPS" title="GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE"><code class="literal">GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE</code></a>
 if the extension is not present, otherwise a negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -8951,7 +8816,6 @@ actual size of the unique ID on return.</p></td>
 <div class="refsect3">
 <a name="id-1.2.6.6.141.7"></a><h4>Returns</h4>
 <p> <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> on success, otherwise a negative error code.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -8978,7 +8842,6 @@ gnutls_x509_crt_get_version (<em class="parameter"><code><a class="link" href="g
 <div class="refsect3">
 <a name="id-1.2.6.6.142.6"></a><h4>Returns</h4>
 <p> version of certificate, or a negative error code on error.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -9025,7 +8888,6 @@ CERTIFICATE", or "CERTIFICATE".</p>
 <a name="id-1.2.6.6.143.7"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -9053,7 +8915,6 @@ gnutls_x509_crt_init (<em class="parameter"><code><a class="link" href="gnutls-g
 <a name="id-1.2.6.6.144.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -9116,7 +8977,6 @@ CERTIFICATE", or "CERTIFICATE".</p>
 <div class="refsect3">
 <a name="id-1.2.6.6.145.8"></a><h4>Returns</h4>
 <p> the number of certificates read or a negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -9177,9 +9037,8 @@ independently, and use <code class="function">gnutls_free()</code> at</p>
 <div class="refsect3">
 <a name="id-1.2.6.6.146.8"></a><h4>Returns</h4>
 <p> the number of certificates read or a negative error value.</p>
-<p></p>
 </div>
-<p class="since">Since 3.0</p>
+<p class="since">Since: 3.0</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -9259,7 +9118,6 @@ elements bitwise or'd.  For a more detailed verification status use
 <a name="id-1.2.6.6.147.8"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -9308,7 +9166,6 @@ selected fields, which is useful for logging purposes.</p>
 <a name="id-1.2.6.6.148.8"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -9345,7 +9202,6 @@ activated.</p>
 <a name="id-1.2.6.6.149.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -9400,9 +9256,8 @@ URI.</p>
 <a name="id-1.2.6.6.150.8"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
-<p class="since">Since 3.0</p>
+<p class="since">Since: 3.0</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -9444,7 +9299,6 @@ Only the keyIdentifier field can be set with this function.</p>
 <a name="id-1.2.6.6.151.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -9488,7 +9342,6 @@ not be present.</p></td>
 <a name="id-1.2.6.6.152.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -9526,7 +9379,6 @@ the pathLenConstraint field too.</p>
 <a name="id-1.2.6.6.153.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -9574,7 +9426,6 @@ gnutls_x509_crt_set_crl_dist_points (<em class="parameter"><code><a class="link"
 <a name="id-1.2.6.6.154.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -9628,9 +9479,8 @@ gnutls_x509_crt_set_crl_dist_points2 (<em class="parameter"><code><a class="link
 <a name="id-1.2.6.6.155.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
-<p class="since">Since 2.6.0</p>
+<p class="since">Since: 2.6.0</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -9670,7 +9520,6 @@ signed and the signature is correct. See <a class="link" href="gnutls-x509.html#
 <a name="id-1.2.6.6.156.7"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -9707,9 +9556,8 @@ certificate.</p>
 <a name="id-1.2.6.6.157.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
-<p class="since">Since 2.8.0</p>
+<p class="since">Since: 2.8.0</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -9771,7 +9619,6 @@ and call this function with <em class="parameter"><code>raw_flag</code></em>
 <a name="id-1.2.6.6.158.7"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -9809,7 +9656,6 @@ will set to the no well-defined expiration date value.</p>
 <a name="id-1.2.6.6.159.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -9866,7 +9712,6 @@ encoded.</p>
 <a name="id-1.2.6.6.160.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -9932,7 +9777,6 @@ certificate.</p>
 <a name="id-1.2.6.6.161.8"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -9970,7 +9814,6 @@ supported.</p>
 <a name="id-1.2.6.6.162.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -10015,7 +9858,6 @@ See the GNUTLS_KP_* definitions for human readable names.</p>
 <a name="id-1.2.6.6.163.7"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned,
 otherwise a negative error code is returned.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -10051,7 +9893,6 @@ gnutls_x509_crt_set_key_usage (<em class="parameter"><code><a class="link" href=
 <a name="id-1.2.6.6.164.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -10093,7 +9934,7 @@ of a PKCS <span class="type">11</span> certificate with <code class="function">g
 </tbody>
 </table></div>
 </div>
-<p class="since">Since 3.1.0</p>
+<p class="since">Since: 3.1.0</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -10138,9 +9979,8 @@ if this is exceeded.</p>
 <a name="id-1.2.6.6.166.7"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
-<p class="since">Since 3.1.5</p>
+<p class="since">Since: 3.1.5</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -10182,7 +10022,6 @@ gnutls_x509_crt_set_private_key_usage_period
 <a name="id-1.2.6.6.167.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -10240,7 +10079,6 @@ not be present.</p></td>
 <a name="id-1.2.6.6.168.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -10304,7 +10142,6 @@ set it later by using <a class="link" href="gnutls-x509.html#gnutls-x509-crt-set
 <a name="id-1.2.6.6.169.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -10352,7 +10189,6 @@ a big-endian positive number (i.e. it's leftmost bit should be zero).</p>
 <a name="id-1.2.6.6.170.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -10412,9 +10248,8 @@ extension. It can set the following types:</p>
 <a name="id-1.2.6.6.171.11"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
-<p class="since">Since 2.6.0</p>
+<p class="since">Since: 2.6.0</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -10460,7 +10295,6 @@ terminated string.</p>
 <a name="id-1.2.6.6.172.7"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -10503,7 +10337,6 @@ extension.</p>
 <a name="id-1.2.6.6.173.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -10545,7 +10378,6 @@ or <a class="link" href="gnutls-x509.html#gnutls-x509-crt-set-key-usage" title="
 <a name="id-1.2.6.6.174.7"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -10588,7 +10420,6 @@ and SHA1 as the hash algorithm.</p>
 <a name="id-1.2.6.6.175.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -10645,7 +10476,6 @@ the previously set parameters are now signed.</p>
 <a name="id-1.2.6.6.176.7"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -10704,7 +10534,6 @@ as in <code class="function">gnutls_x509_trust_list_verify_crt2()</code>.</p>
 <a name="id-1.2.6.6.177.7"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -10729,7 +10558,7 @@ gnutls_x509_dn_deinit (<em class="parameter"><code><a class="link" href="gnutls-
 </tr></tbody>
 </table></div>
 </div>
-<p class="since">Since 2.4.0</p>
+<p class="since">Since: 2.4.0</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -10783,7 +10612,6 @@ replaced by the actual size of parameters)</p></td>
 <a name="id-1.2.6.6.179.8"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -10828,9 +10656,8 @@ of "BEGIN NAME".</p>
 <a name="id-1.2.6.6.180.8"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
-<p class="since">Since 3.1.3</p>
+<p class="since">Since: 3.1.3</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -10894,7 +10721,6 @@ value conversions when necessary (e.g. from UCS-2).</p>
 <div class="refsect3">
 <a name="id-1.2.6.6.181.10"></a><h4>Returns</h4>
 <p> Returns 0 on success, or an error code.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -10933,9 +10759,8 @@ decode the DN.</p>
 <a name="id-1.2.6.6.182.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
-<p class="since">Since 2.4.0</p>
+<p class="since">Since: 2.4.0</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -10964,9 +10789,8 @@ gnutls_x509_dn_init (<em class="parameter"><code><a class="link" href="gnutls-x5
 <a name="id-1.2.6.6.183.7"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
-<p class="since">Since 2.4.0</p>
+<p class="since">Since: 2.4.0</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -10998,7 +10822,6 @@ data.</p>
 <div class="refsect3">
 <a name="id-1.2.6.6.184.6"></a><h4>Returns</h4>
 <p> 1 on known OIDs and 0 otherwise.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -11036,9 +10859,8 @@ found.</p>
 <div class="refsect3">
 <a name="id-1.2.6.6.185.6"></a><h4>Returns</h4>
 <p> A null terminated string or NULL otherwise.</p>
-<p></p>
 </div>
-<p class="since">Since 3.0</p>
+<p class="since">Since: 3.0</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -11063,7 +10885,7 @@ gnutls_x509_policy_release (<em class="parameter"><code><span class="type">struc
 </tr></tbody>
 </table></div>
 </div>
-<p class="since">Since 3.1.5</p>
+<p class="since">Since: 3.1.5</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -11099,7 +10921,6 @@ key. Destination has to be initialized.</p>
 <a name="id-1.2.6.6.187.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -11178,7 +10999,6 @@ replaced by the actual size of parameters)</p></td>
 <a name="id-1.2.6.6.189.8"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -11226,7 +11046,6 @@ of "BEGIN RSA PRIVATE KEY".</p>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
 <p>Since 3.1.3</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -11291,7 +11110,6 @@ encryption is not used.</p>
 <p> In case of failure a negative error code will be
 returned, and 0 on success.</p>
 <p>Since 3.1.3</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -11353,7 +11171,6 @@ in the given structure. The new parameters will be allocated using
 <a name="id-1.2.6.6.192.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -11409,9 +11226,8 @@ in the given structure. The new parameters will be allocated using
 <a name="id-1.2.6.6.193.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
-<p class="since">Since 3.0</p>
+<p class="since">Since: 3.0</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -11483,7 +11299,6 @@ replaced by the actual size of parameters)</p></td>
 <a name="id-1.2.6.6.194.9"></a><h4>Returns</h4>
 <p> In case of failure a negative error code will be
 returned, and 0 on success.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -11551,7 +11366,6 @@ in the given structure. The new parameters will be allocated using
 <a name="id-1.2.6.6.195.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -11631,9 +11445,8 @@ in the given structure. The new parameters will be allocated using
 <a name="id-1.2.6.6.196.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
-<p class="since">Since 2.12.0</p>
+<p class="since">Since: 2.12.0</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -11661,7 +11474,6 @@ In RSA keys, this can be the coefficient and exponent1,2.</p>
 <a name="id-1.2.6.6.197.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -11716,7 +11528,6 @@ the <code class="function">GNUTLS_SUBGROUP_TO_BITS()</code> macro.</p>
 <a name="id-1.2.6.6.198.9"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -11772,7 +11583,6 @@ replaced by the actual size of parameters)</p></td>
 <a name="id-1.2.6.6.199.7"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -11801,7 +11611,6 @@ key.</p>
 <a name="id-1.2.6.6.200.6"></a><h4>Returns</h4>
 <p> a member of the <a class="link" href="gnutls-gnutls.html#gnutls-pk-algorithm-t" title="enum gnutls_pk_algorithm_t"><span class="type">gnutls_pk_algorithm_t</span></a> enumeration on
 success, or a negative error code on error.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -11838,7 +11647,6 @@ key.</p>
 <a name="id-1.2.6.6.201.6"></a><h4>Returns</h4>
 <p> a member of the <a class="link" href="gnutls-gnutls.html#gnutls-pk-algorithm-t" title="enum gnutls_pk_algorithm_t"><span class="type">gnutls_pk_algorithm_t</span></a> enumeration on
 success, or a negative error code on error.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -11886,7 +11694,6 @@ password, if the default format fails to import.</p>
 <a name="id-1.2.6.6.202.7"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -11947,7 +11754,6 @@ function will utilize the PIN callbacks if any.</p>
 <a name="id-1.2.6.6.203.8"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -12010,7 +11816,6 @@ in <em class="parameter"><code>key</code></em>
 <a name="id-1.2.6.6.204.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -12067,9 +11872,8 @@ in <em class="parameter"><code>key</code></em>
 <a name="id-1.2.6.6.205.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
-<p class="since">Since 3.0</p>
+<p class="since">Since: 3.0</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -12118,7 +11922,6 @@ or wrong then <a class="link" href="gnutls-gnutls.html#GNUTLS-E-DECRYPTION-FAILE
 <a name="id-1.2.6.6.206.8"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -12186,7 +11989,6 @@ are encrypted then <a class="link" href="gnutls-gnutls.html#GNUTLS-E-DECRYPTION-
 <a name="id-1.2.6.6.207.9"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -12255,7 +12057,6 @@ native <a class="link" href="gnutls-gnutls.html#gnutls-x509-privkey-t" title="gn
 <a name="id-1.2.6.6.208.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -12336,7 +12137,6 @@ native <a class="link" href="gnutls-gnutls.html#gnutls-x509-privkey-t" title="gn
 <a name="id-1.2.6.6.209.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -12364,7 +12164,6 @@ gnutls_x509_privkey_init (<em class="parameter"><code><a class="link" href="gnut
 <a name="id-1.2.6.6.210.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -12393,9 +12192,8 @@ this private key.</p>
 <a name="id-1.2.6.6.211.6"></a><h4>Returns</h4>
 <p> On success, a valid security parameter is returned otherwise
 <a class="link" href="gnutls-gnutls.html#GNUTLS-SEC-PARAM-UNKNOWN:CAPS"><code class="literal">GNUTLS_SEC_PARAM_UNKNOWN</code></a> is returned.</p>
-<p></p>
 </div>
-<p class="since">Since 2.12.0</p>
+<p class="since">Since: 2.12.0</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -12422,7 +12220,6 @@ gnutls_x509_privkey_verify_params (<em class="parameter"><code><a class="link" h
 <a name="id-1.2.6.6.212.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -12464,7 +12261,6 @@ RFC4514.</p>
 is
 updated if the provided buffer is not long enough, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -12525,7 +12321,6 @@ to send. Use 0 for the first one.</p></td>
 is
 updated if the provided buffer is not long enough, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -12572,9 +12367,8 @@ RDN sequence.</p>
 is
 updated if the provided buffer is not long enough, otherwise a
 negative error value.</p>
-<p></p>
 </div>
-<p class="since">Since 2.4.0</p>
+<p class="since">Since: 2.4.0</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -12626,9 +12420,8 @@ added to the list and will be deinitialized.</p>
 <div class="refsect3">
 <a name="id-1.2.6.6.216.7"></a><h4>Returns</h4>
 <p> The number of added elements is returned.</p>
-<p></p>
 </div>
-<p class="since">Since 3.0.0</p>
+<p class="since">Since: 3.0.0</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -12684,9 +12477,8 @@ to allow verifying the CRLs for validity.</p>
 <div class="refsect3">
 <a name="id-1.2.6.6.217.7"></a><h4>Returns</h4>
 <p> The number of added elements is returned.</p>
-<p></p>
 </div>
-<p class="since">Since 3.0</p>
+<p class="since">Since: 3.0</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -12749,9 +12541,8 @@ of the trusted list.</p>
 <a name="id-1.2.6.6.218.8"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
-<p class="since">Since 3.0.0</p>
+<p class="since">Since: 3.0.0</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -12795,9 +12586,8 @@ this function returns <a class="link" href="gnutls-gnutls.html#GNUTLS-E-UNIMPLEM
 <div class="refsect3">
 <a name="id-1.2.6.6.219.7"></a><h4>Returns</h4>
 <p> The number of added elements or a negative error code on error.</p>
-<p></p>
 </div>
-<p class="since">Since 3.1</p>
+<p class="since">Since: 3.1</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -12860,9 +12650,8 @@ trust databases can be set; they cannot be stacked with multiple calls.</p>
 <div class="refsect3">
 <a name="id-1.2.6.6.220.6"></a><h4>Returns</h4>
 <p> The number of added elements is returned.</p>
-<p></p>
 </div>
-<p class="since">Since 3.1</p>
+<p class="since">Since: 3.1</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -12921,9 +12710,8 @@ to the trusted list.</p>
 <div class="refsect3">
 <a name="id-1.2.6.6.221.6"></a><h4>Returns</h4>
 <p> The number of added elements is returned.</p>
-<p></p>
 </div>
-<p class="since">Since 3.1</p>
+<p class="since">Since: 3.1</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -12958,7 +12746,7 @@ want to prevent them from being deinitialized by this function.</p>
 </tbody>
 </table></div>
 </div>
-<p class="since">Since 3.0.0</p>
+<p class="since">Since: 3.0.0</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -13009,9 +12797,8 @@ to work with PKCS <span class="type">11</span> trust lists in a thread-safe way.
 <a name="id-1.2.6.6.223.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
-<p class="since">Since 3.0</p>
+<p class="since">Since: 3.0</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -13046,9 +12833,8 @@ gnutls_x509_trust_list_init (<em class="parameter"><code><a class="link" href="g
 <a name="id-1.2.6.6.224.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
-<p class="since">Since 3.0.0</p>
+<p class="since">Since: 3.0.0</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -13106,9 +12892,8 @@ its status. The <em class="parameter"><code>voutput</code></em>
 <a name="id-1.2.6.6.225.7"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
-<p class="since">Since 3.0</p>
+<p class="since">Since: 3.0</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -13178,9 +12963,8 @@ flags.</p>
 <a name="id-1.2.6.6.226.7"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
-<p class="since">Since 3.0.0</p>
+<p class="since">Since: 3.0.0</p>
 </div>
 </div>
 <div class="refsect1">
@@ -13704,6 +13488,14 @@ and <code class="literal">gnutls_certificate_verification_profiles_t</code>.</p>
 </td>
 <td class="enum_member_annotations"> </td>
 </tr>
+<tr>
+<td class="enum_member_name"><p><a name="GNUTLS-VERIFY-USE-TLS1-RSA:CAPS"></a>GNUTLS_VERIFY_USE_TLS1_RSA</p></td>
+<td class="enum_member_description">
+<p>This indicates that a (raw) RSA signature is provided
+  as in the TLS 1.0 protocol. Not all functions accept this flag.</p>
+</td>
+<td class="enum_member_annotations"> </td>
+</tr>
 </tbody>
 </table></div>
 </div>
@@ -13772,6 +13564,7 @@ and <code class="literal">gnutls_certificate_verification_profiles_t</code>.</p>
 <a name="gnutls-pkcs7-int"></a><h3>gnutls_pkcs7_int</h3>
 <pre class="programlisting">typedef struct {
 	ASN1_TYPE pkcs7;
+	ASN1_TYPE signed_data;
 	unsigned expanded;
 } gnutls_pkcs7_int;
 </pre>
@@ -13977,7 +13770,7 @@ and <code class="literal">gnutls_certificate_verification_profiles_t</code>.</p>
 <hr>
 <div class="refsect2">
 <a name="gnutls-x509-dn-t"></a><h3>gnutls_x509_dn_t</h3>
-<pre class="programlisting">typedef void *gnutls_x509_dn_t;
+<pre class="programlisting">typedef struct gnutls_x509_dn_st *gnutls_x509_dn_t;
 </pre>
 <p>
 </p>
@@ -14029,7 +13822,6 @@ and <code class="literal">gnutls_certificate_verification_profiles_t</code>.</p>
 </div>
 </div>
 <div class="footer">
-<hr>
-          Generated by GTK-Doc V1.21</div>
+<hr>Generated by GTK-Doc V1.24</div>
 </body>
 </html>

@@ -241,6 +241,8 @@ static void cmd_parser(int argc, char **argv)
 	 */
 	if (HAVE_OPT(LIST_TOKENS)) {
 		pkcs11_token_list(outfile, detailed_url, &cinfo, 0);
+	} else if (HAVE_OPT(LIST_TOKEN_URLS)) {
+		pkcs11_token_list(outfile, detailed_url, &cinfo, 1);
 	} else if (HAVE_OPT(LIST_MECHANISMS)) {
 		pkcs11_mechanism_list(outfile, url, flags, &cinfo);
 	} else if (HAVE_OPT(GENERATE_RANDOM)) {

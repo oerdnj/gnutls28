@@ -318,11 +318,11 @@
 /* Define to 1 if you have the `canonicalize_file_name' function. */
 #undef HAVE_CANONICALIZE_FILE_NAME
 
-/* Define to 1 if you have the Mac OS X function CFLocaleCopyCurrent in the
+/* Define to 1 if you have the MacOS X function CFLocaleCopyCurrent in the
    CoreFoundation framework. */
 #undef HAVE_CFLOCALECOPYCURRENT
 
-/* Define to 1 if you have the Mac OS X function CFPreferencesCopyAppValue in
+/* Define to 1 if you have the MacOS X function CFPreferencesCopyAppValue in
    the CoreFoundation framework. */
 #undef HAVE_CFPREFERENCESCOPYAPPVALUE
 
@@ -665,7 +665,7 @@
 /* Define to 1 if you have the `localtime_r' function. */
 #undef HAVE_LOCALTIME_R
 
-/* Define to 1 if the system has the type 'long long int'. */
+/* Define to 1 if the system has the type `long long int'. */
 #undef HAVE_LONG_LONG_INT
 
 /* Define if the 'malloc' function is POSIX compliant. */
@@ -732,9 +732,6 @@
 
 /* Define to 1 if the system has the type `pid_t'. */
 #undef HAVE_PID_T
-
-/* Define to 1 if you have the `pthread_atfork' function. */
-#undef HAVE_PTHREAD_ATFORK
 
 /* Define to 1 if you have the `pthread_mutex_lock' function. */
 #undef HAVE_PTHREAD_MUTEX_LOCK
@@ -1620,7 +1617,7 @@
 /* Define to 1 if you have the `unsetenv' function. */
 #undef HAVE_UNSETENV
 
-/* Define to 1 if the system has the type 'unsigned long long int'. */
+/* Define to 1 if the system has the type `unsigned long long int'. */
 #undef HAVE_UNSIGNED_LONG_LONG_INT
 
 /* Define to 1 if you have the <utime.h> header file. */
@@ -1851,6 +1848,9 @@
 /* Define to 1 if your <sys/time.h> declares `struct tm'. */
 #undef TM_IN_SYS_TIME
 
+/* the location of the trousers library */
+#undef TROUSERS_LIB
+
 /* The DNSSEC root key file */
 #undef UNBOUND_ROOT_KEY_FILE
 
@@ -2038,12 +2038,13 @@
 # define _GL_EXTERN_INLINE static _GL_UNUSED
 #endif
 
-/* In GCC, suppress bogus "no previous prototype for 'FOO'"
+/* In GCC 4.6 (inclusive) to 5.1 (exclusive),
+   suppress bogus "no previous prototype for 'FOO'"
    and "no previous declaration for 'FOO'" diagnostics,
    when FOO is an inline function in the header; see
    <https://gcc.gnu.org/bugzilla/show_bug.cgi?id=54113> and
    <https://gcc.gnu.org/bugzilla/show_bug.cgi?id=63877>.  */
-#if 4 < __GNUC__ + (6 <= __GNUC_MINOR__)
+#if __GNUC__ == 4 && 6 <= __GNUC_MINOR__
 # if defined __GNUC_STDC_INLINE__ && __GNUC_STDC_INLINE__
 #  define _GL_INLINE_HEADER_CONST_PRAGMA
 # else

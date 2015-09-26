@@ -405,7 +405,7 @@ gnutls_pkcs7_get_crt_raw(gnutls_pkcs7_t pkcs7,
  * This function will return the number of certifcates in the PKCS7
  * or RFC2630 certificate set.
  *
- * Returns: On success, %GNUTLS_E_SUCCESS (0) is returned, otherwise a
+ * Returns: On success, a positive number is returned, otherwise a
  *   negative error value.
  **/
 int gnutls_pkcs7_get_crt_count(gnutls_pkcs7_t pkcs7)
@@ -483,6 +483,34 @@ static time_t parse_time(gnutls_pkcs7_t pkcs7, const char *root)
 }
 
 /**
+ * gnutls_pkcs7_get_signature_count:
+ * @pkcs7: should contain a #gnutls_pkcs7_t type
+ *
+ * This function will return the number of signatures in the PKCS7
+ * structure.
+ *
+ * Returns: On success, a positive number is returned, otherwise a
+ *   negative error value.
+ *
+ * Since: 3.4.3
+ **/
+int gnutls_pkcs7_get_signature_count(gnutls_pkcs7_t pkcs7)
+{
+	int ret, count;
+
+	if (pkcs7 == NULL)
+		return GNUTLS_E_INVALID_REQUEST;
+
+	ret = asn1_number_of_elements(pkcs7->signed_data, "signerInfos", &count);
+	if (ret != ASN1_SUCCESS) {
+		gnutls_assert();
+		return 0;
+	}
+
+	return count;
+}
+
+/**
  * gnutls_pkcs7_get_signature_info:
  * @pkcs7: should contain a #gnutls_pkcs7_t type
  * @idx: the index of the signature info to check
@@ -527,10 +555,10 @@ int gnutls_pkcs7_get_signature_info(gnutls_pkcs7_t pkcs7, unsigned idx, gnutls_p
 		goto unsupp_algo;
 	}
 
-	sig = _gnutls_x509_oid2sign_algorithm(oid);
+	sig = gnutls_oid_to_sign(oid);
 	if (sig == GNUTLS_SIGN_UNKNOWN) {
 		/* great PKCS #7 allows to only specify a public key algo */
-		pk = _gnutls_x509_oid2pk_algorithm(oid);
+		pk = gnutls_oid_to_pk(oid);
 		if (pk == GNUTLS_PK_UNKNOWN) {
 			gnutls_assert();
 			goto unsupp_algo;
@@ -546,7 +574,7 @@ int gnutls_pkcs7_get_signature_info(gnutls_pkcs7_t pkcs7, unsigned idx, gnutls_p
 			goto unsupp_algo;
 		}
 
-		ret = _gnutls_x509_oid_to_digest(oid);
+		ret = gnutls_oid_to_digest(oid);
 		if (ret == GNUTLS_DIG_UNKNOWN) {
 			gnutls_assert();
 			goto unsupp_algo;
@@ -1680,7 +1708,7 @@ static int write_signer_id(ASN1_TYPE c2, const char *root, gnutls_x509_crt_t sig
 		}
 
 		serial_size = sizeof(serial);
-		result = gnutls_x509_crt_get_authority_key_id(signer, serial, &serial_size, NULL);
+		result = gnutls_x509_crt_get_subject_key_id(signer, serial, &serial_size, NULL);
 		if (result < 0)
 			return gnutls_assert_val(result);
 

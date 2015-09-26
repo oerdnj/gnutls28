@@ -7,8 +7,9 @@ Uploaders: Andreas Metzler <ametzler@debian.org>,
  James Westby <jw+debian@jameswestby.net>,
  Simon Josefsson <simon@josefsson.org>
 Build-Depends: debhelper (>= 9), nettle-dev (>= 3.1), zlib1g-dev,
- libtasn1-6-dev (>= 4.3), autotools-dev, guile-2.0-dev [!ia64 !m68k], datefudge,
- libp11-kit-dev (>= 0.23.1), pkg-config, chrpath, libidn11-dev,
+ libtasn1-6-dev (>= 4.3), autotools-dev, guile-2.0-dev [!ia64 !m68k],
+ datefudge <!nocheck>,
+ libp11-kit-dev (>= 0.23.1), pkg-config, chrpath, libidn11-dev (>= 1.31),
  autogen (>= 1:5.16-0), bison, dh-autoreconf, libgmp-dev (>= 2:6),
  libopts25-dev
 # The b-d on libgmp-dev is not technically necessary, since nettle brings
@@ -30,7 +31,7 @@ Depends: libgnutls30 (= ${binary:Version}),
  libgnutls-openssl27 (= ${binary:Version}),
  libgnutlsxx28 (= ${binary:Version}), 
  nettle-dev, libc6-dev | libc-dev, zlib1g-dev,
- libtasn1-6-dev, libp11-kit-dev, libidn11-dev, ${misc:Depends}
+ libtasn1-6-dev, libp11-kit-dev, libidn11-dev (>= 1.31), ${misc:Depends}
 Suggests: gnutls-doc, gnutls-bin, guile-gnutls
 Conflicts: gnutls-dev
 Replaces: gnutls-dev

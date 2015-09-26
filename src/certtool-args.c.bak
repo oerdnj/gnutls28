@@ -64,7 +64,7 @@ extern FILE * option_usage_fp;
  *  static const strings for certtool options
  */
 static char const certtool_opt_strs[6283] =
-/*     0 */ "certtool 3.4.2\n"
+/*     0 */ "certtool 3.4.5\n"
             "Copyright (C) 2000-2015 Free Software Foundation, and others, all rights reserved.\n"
             "This is free software. It is licensed for use, modification and\n"
             "redistribution under the terms of the GNU General Public License,\n"
@@ -325,7 +325,7 @@ static char const certtool_opt_strs[6283] =
             "The tool accepts files or URLs supported by GnuTLS.  In case PIN is\n"
             "required for the URL access you can provide it using the environment\n"
             "variables GNUTLS_PIN and GNUTLS_SO_PIN.\n\0"
-/*  6208 */ "certtool 3.4.2\0"
+/*  6208 */ "certtool 3.4.5\0"
 /*  6223 */ "certtool [options]\n"
             "certtool --help for usage instructions.\n";
 
@@ -2663,7 +2663,7 @@ static void bogus_function(void) {
      translate option names.
    */
   /* referenced via certtoolOptions.pzCopyright */
-  puts(_("certtool 3.4.2\n\
+  puts(_("certtool 3.4.5\n\
 Copyright (C) 2000-2015 Free Software Foundation, and others, all rights reserved.\n\
 This is free software. It is licensed for use, modification and\n\
 redistribution under the terms of the GNU General Public License,\n\
@@ -2937,7 +2937,7 @@ required for the URL access you can provide it using the environment\n\
 variables GNUTLS_PIN and GNUTLS_SO_PIN.\n"));
 
   /* referenced via certtoolOptions.pzFullVersion */
-  puts(_("certtool 3.4.2"));
+  puts(_("certtool 3.4.5"));
 
   /* referenced via certtoolOptions.pzFullUsage */
   puts(_("<<<NOT-FOUND>>>"));

@@ -196,7 +196,7 @@ negative error value.  After the last crl has been read
 This function will return the number of certifcates in the PKCS7
 or RFC2630 certificate set.
 
-@strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (0) is returned, otherwise a
+@strong{Returns:} On success, a positive number is returned, otherwise a
 negative error value.
 @end deftypefun
 
@@ -231,7 +231,7 @@ then  @code{certificate_size} is updated and
 
 @var{indx}: contains the index of the certificate to extract
 
-@var{cert}: -- undescribed --
+@var{cert}: will hold the contents of the certificate; must be deallocated with @code{gnutls_free()} 
 
 This function will return a certificate of the PKCS7 or RFC2630
 certificate set.
@@ -245,6 +245,20 @@ then  @code{certificate_size} is updated and
 @code{GNUTLS_E_SHORT_MEMORY_BUFFER}  is returned.
 
 @strong{Since:} 3.4.2
+@end deftypefun
+
+@subheading gnutls_pkcs7_get_signature_count
+@anchor{gnutls_pkcs7_get_signature_count}
+@deftypefun {int} {gnutls_pkcs7_get_signature_count} (gnutls_pkcs7_t @var{pkcs7})
+@var{pkcs7}: should contain a @code{gnutls_pkcs7_t}  type
+
+This function will return the number of signatures in the PKCS7
+structure.
+
+@strong{Returns:} On success, a positive number is returned, otherwise a
+negative error value.
+
+@strong{Since:} 3.4.3
 @end deftypefun
 
 @subheading gnutls_pkcs7_get_signature_info
@@ -380,9 +394,9 @@ negative error value.
 @deftypefun {int} {gnutls_pkcs7_sign} (gnutls_pkcs7_t @var{pkcs7}, gnutls_x509_crt_t @var{signer}, gnutls_privkey_t @var{signer_key}, const gnutls_datum_t * @var{data}, gnutls_pkcs7_attrs_t @var{signed_attrs}, gnutls_pkcs7_attrs_t @var{unsigned_attrs}, gnutls_digest_algorithm_t @var{dig}, unsigned @var{flags})
 @var{pkcs7}: should contain a @code{gnutls_pkcs7_t}  type
 
-@var{signer}: the certificate believe to have signed the structure
+@var{signer}: the certificate to sign the structure
 
-@var{signer_key}: -- undescribed --
+@var{signer_key}: the key to sign the structure
 
 @var{data}: The data to be signed or @code{NULL}  if the data are already embedded
 
@@ -456,7 +470,7 @@ to verify to a @code{GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE} .
 @deftypefun {int} {gnutls_pkcs7_verify_direct} (gnutls_pkcs7_t @var{pkcs7}, gnutls_x509_crt_t @var{signer}, unsigned @var{idx}, const gnutls_datum_t * @var{data}, unsigned @var{flags})
 @var{pkcs7}: should contain a @code{gnutls_pkcs7_t}  type
 
-@var{signer}: the certificate believe to have signed the structure
+@var{signer}: the certificate believed to have signed the structure
 
 @var{idx}: the index of the signature info to check
 

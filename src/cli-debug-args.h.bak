@@ -77,9 +77,9 @@ typedef enum {
 /** count of all options for gnutls-cli-debug */
 #define OPTION_CT    7
 /** gnutls-cli-debug version */
-#define GNUTLS_CLI_DEBUG_VERSION       "3.4.2"
+#define GNUTLS_CLI_DEBUG_VERSION       "3.4.5"
 /** Full gnutls-cli-debug version text */
-#define GNUTLS_CLI_DEBUG_FULL_VERSION  "gnutls-cli-debug 3.4.2"
+#define GNUTLS_CLI_DEBUG_FULL_VERSION  "gnutls-cli-debug 3.4.5"
 
 /**
  *  Interface defines for all options.  Replace "n" with the UPPER_CASED

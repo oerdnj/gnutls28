@@ -2,13 +2,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>GnuTLS API Reference Manual: ocsp</title>
+<title>ocsp: GnuTLS API Reference Manual</title>
 <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
 <link rel="home" href="index.html" title="GnuTLS API Reference Manual">
 <link rel="up" href="intro.html" title="GnuTLS API Reference Manual">
 <link rel="prev" href="gnutls-pkcs12.html" title="pkcs12">
 <link rel="next" href="gnutls-dtls.html" title="dtls">
-<meta name="generator" content="GTK-Doc V1.21 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.24 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -417,7 +417,6 @@ certificate</p></td>
 <a name="id-1.2.11.6.2.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error code is returned.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -498,7 +497,6 @@ hashed using <em class="parameter"><code>digest</code></em>
 <a name="id-1.2.11.6.3.8"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error code is returned.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -556,7 +554,6 @@ gnutls_ocsp_req_export (<em class="parameter"><code><a class="link" href="gnutls
 <a name="id-1.2.11.6.5.6"></a><h4>Returns</h4>
 <p> In case of failure a negative error code will be
 returned, and 0 on success.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -642,7 +639,6 @@ that the caller is not interested in that value.</p>
 negative error code is returned.  If you have reached the last
 CertID available <a class="link" href="gnutls-gnutls.html#GNUTLS-E-REQUESTED-DATA-NOT-AVAILABLE:CAPS" title="GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE"><code class="literal">GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE</code></a> will be
 returned.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -710,7 +706,6 @@ that information back.</p>
 negative error code is returned.  If you have reached the last
 extension available <a class="link" href="gnutls-gnutls.html#GNUTLS-E-REQUESTED-DATA-NOT-AVAILABLE:CAPS" title="GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE"><code class="literal">GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE</code></a> will
 be returned.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -755,7 +750,6 @@ gnutls_ocsp_req_get_nonce (<em class="parameter"><code><a class="link" href="gnu
 <a name="id-1.2.11.6.8.7"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error code is returned.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -783,7 +777,6 @@ Typically this is always 1 indicating version 1.</p>
 <div class="refsect3">
 <a name="id-1.2.11.6.9.6"></a><h4>Returns</h4>
 <p> version of OCSP request, or a negative error code on error.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -822,7 +815,6 @@ the native <a class="link" href="gnutls-ocsp.html#gnutls-ocsp-req-t" title="gnut
 <a name="id-1.2.11.6.10.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -850,7 +842,6 @@ gnutls_ocsp_req_init (<em class="parameter"><code><a class="link" href="gnutls-o
 <a name="id-1.2.11.6.11.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -897,7 +888,6 @@ request will be output, on multiple lines.</p>
 <a name="id-1.2.11.6.12.8"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -926,7 +916,6 @@ request with a newly generated random value.</p>
 <a name="id-1.2.11.6.13.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error code is returned.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -976,7 +965,6 @@ from earlier calls.</p>
 <a name="id-1.2.11.6.14.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error code is returned.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -1020,7 +1008,6 @@ earlier calls.</p>
 <a name="id-1.2.11.6.15.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error code is returned.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -1063,9 +1050,8 @@ is about the provided certificate.</p>
 <a name="id-1.2.11.6.16.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error code is returned.  </p>
-<p></p>
 </div>
-<p class="since">Since 3.1.3</p>
+<p class="since">Since: 3.1.3</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -1122,7 +1108,6 @@ gnutls_ocsp_resp_export (<em class="parameter"><code><a class="link" href="gnutl
 <a name="id-1.2.11.6.18.6"></a><h4>Returns</h4>
 <p> In case of failure a negative error code will be
 returned, and 0 on success.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -1176,7 +1161,6 @@ only, or to just get the certificate array without its size.</p>
 <a name="id-1.2.11.6.19.8"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -1244,7 +1228,6 @@ that information back.</p>
 negative error code is returned.  If you have reached the last
 extension available <a class="link" href="gnutls-gnutls.html#GNUTLS-E-REQUESTED-DATA-NOT-AVAILABLE:CAPS" title="GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE"><code class="literal">GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE</code></a> will
 be returned.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -1290,7 +1273,6 @@ data.</p>
 <a name="id-1.2.11.6.21.7"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error code is returned.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -1318,7 +1300,6 @@ signed.</p>
 <div class="refsect3">
 <a name="id-1.2.11.6.22.6"></a><h4>Returns</h4>
 <p> signing time, or (time_t)-1 on error.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -1363,7 +1344,6 @@ will return zero and the <em class="parameter"><code>dn</code></em>
 <a name="id-1.2.11.6.23.8"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error code is returned.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -1415,7 +1395,6 @@ response part and the caller need not worry about that aspect.</p>
 <a name="id-1.2.11.6.24.7"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -1451,7 +1430,6 @@ gnutls_ocsp_resp_get_signature (<em class="parameter"><code><a class="link" href
 <a name="id-1.2.11.6.25.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -1482,7 +1460,6 @@ sign the OCSP response.</p>
 <a name="id-1.2.11.6.26.6"></a><h4>Returns</h4>
 <p> a <a class="link" href="gnutls-gnutls.html#gnutls-sign-algorithm-t" title="enum gnutls_sign_algorithm_t"><span class="type">gnutls_sign_algorithm_t</span></a> value, or a negative error code
 on error.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -1582,7 +1559,6 @@ is <a class="link" href="gnutls-ocsp.html#GNUTLS-OCSP-CERT-REVOKED:CAPS"><code c
 negative error code is returned.  If you have reached the last
 CertID available <a class="link" href="gnutls-gnutls.html#GNUTLS-E-REQUESTED-DATA-NOT-AVAILABLE:CAPS" title="GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE"><code class="literal">GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE</code></a> will be
 returned.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -1611,7 +1587,6 @@ gnutls_ocsp_resp_get_status (<em class="parameter"><code><a class="link" href="g
 <a name="id-1.2.11.6.28.6"></a><h4>Returns</h4>
 <p> status of OCSP request as a <a class="link" href="gnutls-ocsp.html#gnutls-ocsp-resp-status-t" title="enum gnutls_ocsp_resp_status_t"><span class="type">gnutls_ocsp_resp_status_t</span></a>, or
 a negative error code on error.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -1640,7 +1615,6 @@ Typically this is always 1 indicating version 1.</p>
 <a name="id-1.2.11.6.29.6"></a><h4>Returns</h4>
 <p> version of Basic OCSP response, or a negative error code
 on error.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -1679,7 +1653,6 @@ OCSP Response part, if any.  The output will be stored in <em class="parameter">
 <a name="id-1.2.11.6.30.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -1707,7 +1680,6 @@ gnutls_ocsp_resp_init (<em class="parameter"><code><a class="link" href="gnutls-
 <a name="id-1.2.11.6.31.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -1754,7 +1726,6 @@ response will be output, on multiple lines.</p>
 <a name="id-1.2.11.6.32.8"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -1824,7 +1795,6 @@ variable to find out the verification status.</p>
 <a name="id-1.2.11.6.33.9"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -1885,7 +1855,6 @@ variable to find out the verification status.</p>
 <a name="id-1.2.11.6.34.9"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
-<p></p>
 </div>
 </div>
 </div>
@@ -2216,7 +2185,6 @@ ReasonFlags ASN.1 bit string.</p>
 </div>
 </div>
 <div class="footer">
-<hr>
-          Generated by GTK-Doc V1.21</div>
+<hr>Generated by GTK-Doc V1.24</div>
 </body>
 </html>

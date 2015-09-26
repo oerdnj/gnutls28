@@ -8,6 +8,6 @@
 This function will return the number of certifcates in the PKCS7
 or RFC2630 certificate set.
 
-@strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (0) is returned, otherwise a
+@strong{Returns:} On success, a positive number is returned, otherwise a
 negative error value.
 @end deftypefun
