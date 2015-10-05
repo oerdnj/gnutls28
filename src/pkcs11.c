@@ -45,7 +45,7 @@ char *get_single_token_url(common_info_st * info);
 	if (url == NULL) { \
 		url = get_single_token_url(info); \
 		if (url == NULL) { \
-			fprintf(stderr, "warning: no token URL was provided for this operation; the available tokens are:\n"); \
+			fprintf(stderr, "warning: no token URL was provided for this operation; the available tokens are:\n\n"); \
 			pkcs11_token_list(out, det, info, 1); \
 			exit(1); \
 		} \
@@ -312,6 +312,8 @@ pkcs11_test_sign(FILE * outfile, const char *url, unsigned int flags,
 	if (ret < 0) {
 		fprintf(stderr, "Cannot find a corresponding public key object in token: %s\n",
 			gnutls_strerror(ret));
+		if (ret == GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE)
+			exit(0);
 		exit(1);
 	}
 
@@ -545,7 +547,7 @@ pkcs11_token_list(FILE * outfile, unsigned int detailed,
 		}
 
 		if (brief != 0) {
-			fprintf(outfile, "Token %d: %s\n", i, url);
+			fprintf(outfile, "%s\n", url);
 			goto cont;
 		} else {
 			fprintf(outfile, "Token %d:\n\tURL: %s\n", i, url);
@@ -610,6 +612,15 @@ pkcs11_token_list(FILE * outfile, unsigned int detailed,
 		}
 
 		fprintf(outfile, "\tSerial: %s\n", buf);
+
+		size = sizeof(buf);
+		ret =
+		    gnutls_pkcs11_token_get_info(url,
+						 GNUTLS_PKCS11_TOKEN_MODNAME,
+						 buf, &size);
+		if (ret >= 0) {
+			fprintf(outfile, "\tModule: %s\n", buf);
+		}
 		fprintf(outfile, "\n\n");
  cont:
 		gnutls_free(url);

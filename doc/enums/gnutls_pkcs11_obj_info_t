@@ -17,9 +17,9 @@ The token's model.
 @item GNUTLS_@-PKCS11_@-OBJ_@-ID
 The object ID.
 @item GNUTLS_@-PKCS11_@-OBJ_@-LIBRARY_@-VERSION
-The library's used to access the object version.
+The library's version.
 @item GNUTLS_@-PKCS11_@-OBJ_@-LIBRARY_@-DESCRIPTION
-The library's used to access the object description (name).
+The library's description.
 @item GNUTLS_@-PKCS11_@-OBJ_@-LIBRARY_@-MANUFACTURER
-The library's used to access the object manufacturer name.
+The library's manufacturer name.
 @end table

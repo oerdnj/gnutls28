@@ -1412,6 +1412,7 @@ gnutls
 @GNUTLS_A_PROTOCOL_VERSION: 
 @GNUTLS_A_INSUFFICIENT_SECURITY: 
 @GNUTLS_A_INTERNAL_ERROR: 
+@GNUTLS_A_INAPPROPRIATE_FALLBACK: 
 @GNUTLS_A_USER_CANCELED: 
 @GNUTLS_A_NO_RENEGOTIATION: 
 @GNUTLS_A_UNSUPPORTED_EXTENSION: 
@@ -3503,6 +3504,7 @@ gnutls
 @additional_verify_flags: 
 @level: 
 @dh_prime_bits: 
+@fallback: 
 
 <!-- ##### TYPEDEF gnutls_priority_t ##### -->
 <para>
@@ -4837,6 +4839,8 @@ gnutls
 @raw_spki: 
 @der: 
 @pin: 
+@dn: 
+@idn: 
 
 <!-- ##### TYPEDEF gnutls_x509_crt_t ##### -->
 <para>

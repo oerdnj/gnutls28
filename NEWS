@@ -1,7 +1,91 @@
 GnuTLS NEWS -- History of user-visible changes.                -*- outline -*-
 Copyright (C) 2000-2015 Free Software Foundation, Inc.
-Copyright (C) 2013, 2014 Nikos Mavrogiannopoulos
+Copyright (C) 2013-2015 Nikos Mavrogiannopoulos
 See the end for copying conditions.
+
+* Version 3.4.5 (released 2015-09-12)
+
+** libgnutls: When re-importing CRLs to a trust list ensure that there
+   no duplicate entries.
+
+** certtool: Removed any arbitrary limits imposed on input file sizes
+   and maximum number of certificates imported.
+
+** certtool: Allow specifying fixed dates on CRL generation.
+
+** gnutls-cli-debug: Added check for inappropriate fallback support
+   (RFC7507).
+
+** API and ABI modifications:
+No changes since last version.
+
+
+* Version 3.4.4 (released 2015-08-10)
+
+** libgnutls: added high level API (gnutls_prf_rfc5705) to access
+   the PRF as specified by RFC5705. Suggestion and original patch
+   by Rick van Rein.
+
+** libgnutls: Link to trousers (TPM library) dynamically when this
+   functionality is requested.
+
+** libgnutls: Fix issue with server side sending the status request
+   extension even when not requested. Reported by Jeremy Harris.
+
+** libgnutls: Added support for RFC7507 by introducing the %FALLBACK_SCSV
+   priority string option. Patch by Alessandro Ghedini.
+
+** libgnutls: gnutls_pkcs11_privkey_generate2() will store the generated
+   public key, unless the GNUTLS_PKCS11_OBJ_FLAG_NO_STORE_PUBKEY flag is
+   specified.
+
+** libgnutls: Corrected regression from 3.4.3 in loading PKCS #8 keys as
+   fallback. Reported by Daniel Berrange.
+
+** libgnutls: Allow the parsing of very long DNs. Also fixes double free
+   in DN decoding [GNUTLS-SA-2015-3].
+
+** API and ABI modifications:
+gnutls_prf_rfc5705: Added
+gnutls_hex_encode2: Added
+gnutls_hex_decode2: Added
+
+
+* Version 3.4.3 (released 2015-07-12)
+
+** libgnutls: Follow closely RFC5280 recommendations and use UTCTime for
+   dates prior to 2050.
+
+** libgnutls: Force 16-byte alignment to all input to ciphers (previously it
+   was done only when cryptodev was enabled).
+
+** libgnutls: Removed support for pthread_atfork() as it has undefined
+   semantics when used with dlopen(), and may lead to a crash.
+
+** libgnutls: corrected failure when importing plain files 
+   with gnutls_x509_privkey_import2(), and a password was provided.
+
+** libgnutls: Don't reject certificates if a CA has the URI or IP address
+   name constraints, and the end certificate doesn't have an IP address 
+   name or a URI set.
+
+** libgnutls: set and read the hint in DHE-PSK and ECDHE-PSK ciphersuites.
+
+** p11tool: Added --list-token-urls option, and print the token module name
+   in list-tokens.
+
+** API and ABI modifications:
+gnutls_ecc_curve_get_oid: Added
+gnutls_digest_get_oid: Added
+gnutls_pk_get_oid: Added
+gnutls_sign_get_oid: Added
+gnutls_ecc_curve_get_id: Added
+gnutls_oid_to_digest: Added
+gnutls_oid_to_pk: Added
+gnutls_oid_to_sign: Added
+gnutls_oid_to_ecc_curve: Added
+gnutls_pkcs7_get_signature_count: Added
+
 
 * Version 3.4.2 (released 2015-06-16)
 

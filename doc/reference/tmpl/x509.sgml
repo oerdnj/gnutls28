@@ -361,6 +361,7 @@ x509
 @GNUTLS_VERIFY_ALLOW_UNSORTED_CHAIN: 
 @GNUTLS_VERIFY_DO_NOT_ALLOW_UNSORTED_CHAIN: 
 @GNUTLS_VERIFY_DO_NOT_ALLOW_WILDCARDS: 
+@GNUTLS_VERIFY_USE_TLS1_RSA: 
 
 <!-- ##### ENUM gnutls_info_access_what_t ##### -->
 <para>
@@ -493,6 +494,7 @@ x509
 </para>
 
 @pkcs7: 
+@signed_data: 
 
 <!-- ##### FUNCTION gnutls_pkcs7_set_crl ##### -->
 <para>

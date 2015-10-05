@@ -7,7 +7,7 @@
 
 @var{indx}: contains the index of the certificate to extract
 
-@var{cert}: -- undescribed --
+@var{cert}: will hold the contents of the certificate; must be deallocated with @code{gnutls_free()} 
 
 This function will return a certificate of the PKCS7 or RFC2630
 certificate set.

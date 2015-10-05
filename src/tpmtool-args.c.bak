@@ -63,8 +63,8 @@ extern FILE * option_usage_fp;
 /**
  *  static const strings for tpmtool options
  */
-static char const tpmtool_opt_strs[2103] =
-/*     0 */ "tpmtool 3.4.2\n"
+static char const tpmtool_opt_strs[2176] =
+/*     0 */ "tpmtool 3.4.5\n"
             "Copyright (C) 2000-2015 Free Software Foundation, and others, all rights reserved.\n"
             "This is free software. It is licensed for use, modification and\n"
             "redistribution under the terms of the GNU General Public License,\n"
@@ -115,33 +115,36 @@ static char const tpmtool_opt_strs[2103] =
 /*  1408 */ "Delete the key identified by the given URL (UUID).\0"
 /*  1459 */ "DELETE\0"
 /*  1466 */ "delete\0"
-/*  1473 */ "Specify the security level [low, legacy, medium, high, ultra].\0"
-/*  1536 */ "SEC_PARAM\0"
-/*  1546 */ "sec-param\0"
-/*  1556 */ "Specify the number of bits for key generate\0"
-/*  1600 */ "BITS\0"
-/*  1605 */ "bits\0"
-/*  1610 */ "Use the DER format for keys.\0"
-/*  1639 */ "INDER\0"
-/*  1645 */ "no-inder\0"
-/*  1654 */ "no\0"
-/*  1657 */ "Use DER format for output keys\0"
-/*  1688 */ "OUTDER\0"
-/*  1695 */ "no-outder\0"
-/*  1705 */ "display extended usage information and exit\0"
-/*  1749 */ "help\0"
-/*  1754 */ "extended usage information passed thru pager\0"
-/*  1799 */ "more-help\0"
-/*  1809 */ "output version information and exit\0"
-/*  1845 */ "version\0"
-/*  1853 */ "TPMTOOL\0"
-/*  1861 */ "tpmtool - GnuTLS TPM tool\n"
+/*  1473 */ "Tests the signature operation of the provided object\0"
+/*  1526 */ "TEST_SIGN\0"
+/*  1536 */ "test-sign\0"
+/*  1546 */ "Specify the security level [low, legacy, medium, high, ultra].\0"
+/*  1609 */ "SEC_PARAM\0"
+/*  1619 */ "sec-param\0"
+/*  1629 */ "Specify the number of bits for key generate\0"
+/*  1673 */ "BITS\0"
+/*  1678 */ "bits\0"
+/*  1683 */ "Use the DER format for keys.\0"
+/*  1712 */ "INDER\0"
+/*  1718 */ "no-inder\0"
+/*  1727 */ "no\0"
+/*  1730 */ "Use DER format for output keys\0"
+/*  1761 */ "OUTDER\0"
+/*  1768 */ "no-outder\0"
+/*  1778 */ "display extended usage information and exit\0"
+/*  1822 */ "help\0"
+/*  1827 */ "extended usage information passed thru pager\0"
+/*  1872 */ "more-help\0"
+/*  1882 */ "output version information and exit\0"
+/*  1918 */ "version\0"
+/*  1926 */ "TPMTOOL\0"
+/*  1934 */ "tpmtool - GnuTLS TPM tool\n"
             "Usage:  %s [ -<flag> [<val>] | --<name>[{=| }<val>] ]...\n\0"
-/*  1945 */ "bugs@gnutls.org\0"
-/*  1961 */ "\n\0"
-/*  1963 */ "Program that allows handling cryptographic data from the TPM chip.\n\0"
-/*  2031 */ "tpmtool 3.4.2\0"
-/*  2045 */ "tpmtool [options]\n"
+/*  2018 */ "bugs@gnutls.org\0"
+/*  2034 */ "\n\0"
+/*  2036 */ "Program that allows handling cryptographic data from the TPM chip.\n\0"
+/*  2104 */ "tpmtool 3.4.5\0"
+/*  2118 */ "tpmtool [options]\n"
             "tpmtool --help for usage instructions.\n";
 
 /**
@@ -326,14 +329,27 @@ static int const aSystemCantList[] = {
         | OPTST_SET_ARGTYPE(OPARG_TYPE_STRING))
 
 /**
+ *  test-sign option description:
+ */
+/** Descriptive text for the test-sign option */
+#define TEST_SIGN_DESC      (tpmtool_opt_strs+1473)
+/** Upper-cased name for the test-sign option */
+#define TEST_SIGN_NAME      (tpmtool_opt_strs+1526)
+/** Name string for the test-sign option */
+#define TEST_SIGN_name      (tpmtool_opt_strs+1536)
+/** Compiled in flag settings for the test-sign option */
+#define TEST_SIGN_FLAGS     (OPTST_DISABLED \
+        | OPTST_SET_ARGTYPE(OPARG_TYPE_STRING))
+
+/**
  *  sec-param option description:
  */
 /** Descriptive text for the sec-param option */
-#define SEC_PARAM_DESC      (tpmtool_opt_strs+1473)
+#define SEC_PARAM_DESC      (tpmtool_opt_strs+1546)
 /** Upper-cased name for the sec-param option */
-#define SEC_PARAM_NAME      (tpmtool_opt_strs+1536)
+#define SEC_PARAM_NAME      (tpmtool_opt_strs+1609)
 /** Name string for the sec-param option */
-#define SEC_PARAM_name      (tpmtool_opt_strs+1546)
+#define SEC_PARAM_name      (tpmtool_opt_strs+1619)
 /** Compiled in flag settings for the sec-param option */
 #define SEC_PARAM_FLAGS     (OPTST_DISABLED \
         | OPTST_SET_ARGTYPE(OPARG_TYPE_STRING))
@@ -342,11 +358,11 @@ static int const aSystemCantList[] = {
  *  bits option description:
  */
 /** Descriptive text for the bits option */
-#define BITS_DESC      (tpmtool_opt_strs+1556)
+#define BITS_DESC      (tpmtool_opt_strs+1629)
 /** Upper-cased name for the bits option */
-#define BITS_NAME      (tpmtool_opt_strs+1600)
+#define BITS_NAME      (tpmtool_opt_strs+1673)
 /** Name string for the bits option */
-#define BITS_name      (tpmtool_opt_strs+1605)
+#define BITS_name      (tpmtool_opt_strs+1678)
 /** Compiled in flag settings for the bits option */
 #define BITS_FLAGS     (OPTST_DISABLED \
         | OPTST_SET_ARGTYPE(OPARG_TYPE_NUMERIC))
@@ -355,13 +371,13 @@ static int const aSystemCantList[] = {
  *  inder option description:
  */
 /** Descriptive text for the inder option */
-#define INDER_DESC      (tpmtool_opt_strs+1610)
+#define INDER_DESC      (tpmtool_opt_strs+1683)
 /** Upper-cased name for the inder option */
-#define INDER_NAME      (tpmtool_opt_strs+1639)
+#define INDER_NAME      (tpmtool_opt_strs+1712)
 /** disablement name for the inder option */
-#define NOT_INDER_name  (tpmtool_opt_strs+1645)
+#define NOT_INDER_name  (tpmtool_opt_strs+1718)
 /** disablement prefix for the inder option */
-#define NOT_INDER_PFX   (tpmtool_opt_strs+1654)
+#define NOT_INDER_PFX   (tpmtool_opt_strs+1727)
 /** Name string for the inder option */
 #define INDER_name      (NOT_INDER_name + 3)
 /** Compiled in flag settings for the inder option */
@@ -371,13 +387,13 @@ static int const aSystemCantList[] = {
  *  outder option description:
  */
 /** Descriptive text for the outder option */
-#define OUTDER_DESC      (tpmtool_opt_strs+1657)
+#define OUTDER_DESC      (tpmtool_opt_strs+1730)
 /** Upper-cased name for the outder option */
-#define OUTDER_NAME      (tpmtool_opt_strs+1688)
+#define OUTDER_NAME      (tpmtool_opt_strs+1761)
 /** disablement name for the outder option */
-#define NOT_OUTDER_name  (tpmtool_opt_strs+1695)
+#define NOT_OUTDER_name  (tpmtool_opt_strs+1768)
 /** disablement prefix for the outder option */
-#define NOT_OUTDER_PFX   (tpmtool_opt_strs+1654)
+#define NOT_OUTDER_PFX   (tpmtool_opt_strs+1727)
 /** Name string for the outder option */
 #define OUTDER_name      (NOT_OUTDER_name + 3)
 /** Compiled in flag settings for the outder option */
@@ -386,11 +402,11 @@ static int const aSystemCantList[] = {
 /*
  *  Help/More_Help/Version option descriptions:
  */
-#define HELP_DESC       (tpmtool_opt_strs+1705)
-#define HELP_name       (tpmtool_opt_strs+1749)
+#define HELP_DESC       (tpmtool_opt_strs+1778)
+#define HELP_name       (tpmtool_opt_strs+1822)
 #ifdef HAVE_WORKING_FORK
-#define MORE_HELP_DESC  (tpmtool_opt_strs+1754)
-#define MORE_HELP_name  (tpmtool_opt_strs+1799)
+#define MORE_HELP_DESC  (tpmtool_opt_strs+1827)
+#define MORE_HELP_name  (tpmtool_opt_strs+1872)
 #define MORE_HELP_FLAGS (OPTST_IMM | OPTST_NO_INIT)
 #else
 #define MORE_HELP_DESC  HELP_DESC
@@ -403,8 +419,8 @@ static int const aSystemCantList[] = {
 #  define VER_FLAGS     (OPTST_SET_ARGTYPE(OPARG_TYPE_STRING) | \
                          OPTST_ARG_OPTIONAL | OPTST_IMM | OPTST_NO_INIT)
 #endif
-#define VER_DESC        (tpmtool_opt_strs+1809)
-#define VER_name        (tpmtool_opt_strs+1845)
+#define VER_DESC        (tpmtool_opt_strs+1882)
+#define VER_name        (tpmtool_opt_strs+1918)
 /**
  *  Declare option callback procedures
  */
@@ -568,8 +584,20 @@ static tOptDesc optDesc[OPTION_CT] = {
      /* desc, NAME, name */ DELETE_DESC, DELETE_NAME, DELETE_name,
      /* disablement strs */ NULL, NULL },
 
-  {  /* entry idx, value */ 12, VALUE_OPT_SEC_PARAM,
-     /* equiv idx, value */ 12, VALUE_OPT_SEC_PARAM,
+  {  /* entry idx, value */ 12, VALUE_OPT_TEST_SIGN,
+     /* equiv idx, value */ 12, VALUE_OPT_TEST_SIGN,
+     /* equivalenced to  */ NO_EQUIVALENT,
+     /* min, max, act ct */ 0, 1, 0,
+     /* opt state flags  */ TEST_SIGN_FLAGS, 0,
+     /* last opt argumnt */ { NULL }, /* --test-sign */
+     /* arg list/cookie  */ NULL,
+     /* must/cannot opts */ NULL, NULL,
+     /* option proc      */ NULL,
+     /* desc, NAME, name */ TEST_SIGN_DESC, TEST_SIGN_NAME, TEST_SIGN_name,
+     /* disablement strs */ NULL, NULL },
+
+  {  /* entry idx, value */ 13, VALUE_OPT_SEC_PARAM,
+     /* equiv idx, value */ 13, VALUE_OPT_SEC_PARAM,
      /* equivalenced to  */ NO_EQUIVALENT,
      /* min, max, act ct */ 0, 1, 0,
      /* opt state flags  */ SEC_PARAM_FLAGS, 0,
@@ -580,8 +608,8 @@ static tOptDesc optDesc[OPTION_CT] = {
      /* desc, NAME, name */ SEC_PARAM_DESC, SEC_PARAM_NAME, SEC_PARAM_name,
      /* disablement strs */ NULL, NULL },
 
-  {  /* entry idx, value */ 13, VALUE_OPT_BITS,
-     /* equiv idx, value */ 13, VALUE_OPT_BITS,
+  {  /* entry idx, value */ 14, VALUE_OPT_BITS,
+     /* equiv idx, value */ 14, VALUE_OPT_BITS,
      /* equivalenced to  */ NO_EQUIVALENT,
      /* min, max, act ct */ 0, 1, 0,
      /* opt state flags  */ BITS_FLAGS, 0,
@@ -592,8 +620,8 @@ static tOptDesc optDesc[OPTION_CT] = {
      /* desc, NAME, name */ BITS_DESC, BITS_NAME, BITS_name,
      /* disablement strs */ NULL, NULL },
 
-  {  /* entry idx, value */ 14, VALUE_OPT_INDER,
-     /* equiv idx, value */ 14, VALUE_OPT_INDER,
+  {  /* entry idx, value */ 15, VALUE_OPT_INDER,
+     /* equiv idx, value */ 15, VALUE_OPT_INDER,
      /* equivalenced to  */ NO_EQUIVALENT,
      /* min, max, act ct */ 0, 1, 0,
      /* opt state flags  */ INDER_FLAGS, 0,
@@ -604,8 +632,8 @@ static tOptDesc optDesc[OPTION_CT] = {
      /* desc, NAME, name */ INDER_DESC, INDER_NAME, INDER_name,
      /* disablement strs */ NOT_INDER_name, NOT_INDER_PFX },
 
-  {  /* entry idx, value */ 15, VALUE_OPT_OUTDER,
-     /* equiv idx, value */ 15, VALUE_OPT_OUTDER,
+  {  /* entry idx, value */ 16, VALUE_OPT_OUTDER,
+     /* equiv idx, value */ 16, VALUE_OPT_OUTDER,
      /* equivalenced to  */ NO_EQUIVALENT,
      /* min, max, act ct */ 0, 1, 0,
      /* opt state flags  */ OUTDER_FLAGS, 0,
@@ -658,21 +686,21 @@ static tOptDesc optDesc[OPTION_CT] = {
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 /** Reference to the upper cased version of tpmtool. */
-#define zPROGNAME       (tpmtool_opt_strs+1853)
+#define zPROGNAME       (tpmtool_opt_strs+1926)
 /** Reference to the title line for tpmtool usage. */
-#define zUsageTitle     (tpmtool_opt_strs+1861)
+#define zUsageTitle     (tpmtool_opt_strs+1934)
 /** There is no tpmtool configuration file. */
 #define zRcName         NULL
 /** There are no directories to search for tpmtool config files. */
 #define apzHomeList     NULL
 /** The tpmtool program bug email address. */
-#define zBugsAddr       (tpmtool_opt_strs+1945)
+#define zBugsAddr       (tpmtool_opt_strs+2018)
 /** Clarification/explanation of what tpmtool does. */
-#define zExplain        (tpmtool_opt_strs+1961)
+#define zExplain        (tpmtool_opt_strs+2034)
 /** Extra detail explaining what tpmtool does. */
-#define zDetail         (tpmtool_opt_strs+1963)
+#define zDetail         (tpmtool_opt_strs+2036)
 /** The full version string for tpmtool. */
-#define zFullVersion    (tpmtool_opt_strs+2031)
+#define zFullVersion    (tpmtool_opt_strs+2104)
 /* extracted from optcode.tlib near line 364 */
 
 #if defined(ENABLE_NLS)
@@ -684,7 +712,7 @@ static tOptDesc optDesc[OPTION_CT] = {
 #endif /* ENABLE_NLS */
 
 #define tpmtool_full_usage (NULL)
-#define tpmtool_short_usage (tpmtool_opt_strs+2045)
+#define tpmtool_short_usage (tpmtool_opt_strs+2118)
 
 #endif /* not defined __doxygen__ */
 
@@ -833,7 +861,7 @@ tOptions tpmtoolOptions = {
       NO_EQUIVALENT, /* '-#' option index */
       NO_EQUIVALENT /* index of default opt */
     },
-    19 /* full option count */, 16 /* user option count */,
+    20 /* full option count */, 17 /* user option count */,
     tpmtool_full_usage, tpmtool_short_usage,
     NULL, NULL,
     PKGDATADIR, tpmtool_packager_info
@@ -968,7 +996,7 @@ static void bogus_function(void) {
      translate option names.
    */
   /* referenced via tpmtoolOptions.pzCopyright */
-  puts(_("tpmtool 3.4.2\n\
+  puts(_("tpmtool 3.4.5\n\
 Copyright (C) 2000-2015 Free Software Foundation, and others, all rights reserved.\n\
 This is free software. It is licensed for use, modification and\n\
 redistribution under the terms of the GNU General Public License,\n\
@@ -1023,6 +1051,9 @@ with this program.  If not, see <http://www.gnu.org/licenses/>.\n"));
   puts(_("Delete the key identified by the given URL (UUID)."));
 
   /* referenced via tpmtoolOptions.pOptDesc->pzText */
+  puts(_("Tests the signature operation of the provided object"));
+
+  /* referenced via tpmtoolOptions.pOptDesc->pzText */
   puts(_("Specify the security level [low, legacy, medium, high, ultra]."));
 
   /* referenced via tpmtoolOptions.pOptDesc->pzText */
@@ -1054,7 +1085,7 @@ Usage:  %s [ -<flag> [<val>] | --<name>[{=| }<val>] ]...\n"));
   puts(_("Program that allows handling cryptographic data from the TPM chip.\n"));
 
   /* referenced via tpmtoolOptions.pzFullVersion */
-  puts(_("tpmtool 3.4.2"));
+  puts(_("tpmtool 3.4.5"));
 
   /* referenced via tpmtoolOptions.pzFullUsage */
   puts(_("<<<NOT-FOUND>>>"));

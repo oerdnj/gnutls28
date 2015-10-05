@@ -31,56 +31,18 @@
 #include <sys/types.h>
 #include <atfork.h>
 
+unsigned int _gnutls_forkid = 0;
+
 #ifndef _WIN32
-
-# if defined(HAVE___REGISTER_ATFORK) || defined(HAVE_PTHREAD_ATFORK)
-#  define HAVE_ATFORK
-# endif
-
-/* The maximum number of users of the API */
-# define MAX_VALS 6
-
-static unsigned int * fvals[MAX_VALS];
-static unsigned int fvals_size = 0;
 
 # ifdef HAVE_ATFORK
 static void fork_handler(void)
 {
-	unsigned i;
-	for (i=0;i<fvals_size;i++)
-		*fvals[i] = 1;
+	_gnutls_forkid++;
 }
 # endif
 
-static void set_val_on_fork(unsigned int *val, unsigned int def)
-{
-	if (fvals_size >= MAX_VALS)
-		abort(); /* internal error */
-	*val = def;
-	fvals[fvals_size++] = val;
-}
-
-void _gnutls_fork_set_val(unsigned int *val)
-{
-# ifdef HAVE_ATFORK
-	set_val_on_fork(val, 0);
-# else
-	set_val_on_fork(val, getpid());
-# endif
-}
-
-# if defined(HAVE_PTHREAD_ATFORK)
-
-#  include <pthread.h>
-
-int _gnutls_register_fork_handler(void)
-{
-	if (pthread_atfork(NULL, NULL, fork_handler) != 0)
-		return gnutls_assert_val(GNUTLS_E_INTERNAL_ERROR);
-	return 0;
-}
-
-# elif defined(HAVE___REGISTER_ATFORK)
+# if defined(HAVE___REGISTER_ATFORK)
 extern int __register_atfork(void (*)(void), void(*)(void), void (*)(void), void *);
 extern void *__dso_handle;
 
@@ -93,9 +55,22 @@ int _gnutls_register_fork_handler(void)
 
 # else
 
+unsigned int _gnutls_get_forkid(void)
+{
+	return getpid();
+}
+
+int _gnutls_detect_fork(unsigned int forkid)
+{
+	if (getpid() == forkid)
+		return 0;
+	return 1;
+}
+
 /* we have to detect fork manually */
 int _gnutls_register_fork_handler(void)
 {
+	_gnutls_forkid = getpid();
 	return 0;
 }
 

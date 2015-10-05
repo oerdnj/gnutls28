@@ -21,7 +21,7 @@ dnl Process this file with autoconf to produce a configure script.
 # USA
 
 AC_PREREQ(2.61)
-AC_INIT([GnuTLS], [3.4.2], [bugs@gnutls.org])
+AC_INIT([GnuTLS], [3.4.5], [bugs@gnutls.org])
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_MACRO_DIR([m4])
 AC_CANONICAL_HOST
@@ -89,7 +89,7 @@ if test "$use_cxx" != "no"; then
   AC_LANG_POP(C++)
 fi
 AM_CONDITIONAL(ENABLE_CXX, test "$use_cxx" != "no")
-AM_CONDITIONAL(WANT_TEST_SUITE, [test -f tests/suite/mini-eagain2.c])
+AM_CONDITIONAL(WANT_TEST_SUITE, [test -f "${srcdir}/tests/suite/mini-eagain2.c"])
 
 dnl Detect windows build
 use_accel=yes
@@ -197,7 +197,7 @@ AM_CONDITIONAL(ENABLE_TESTS, test "$enable_tests" != "no")
 
 GTK_DOC_CHECK(1.1)
 AM_GNU_GETTEXT([external])
-AM_GNU_GETTEXT_VERSION([0.18])
+AM_GNU_GETTEXT_VERSION([0.19])
 
 AC_C_BIGENDIAN
 
@@ -229,7 +229,7 @@ fi
 
 AM_CONDITIONAL(HAVE_FORK, test "$ac_cv_func_fork" != "no")
 
-AC_CHECK_FUNCS([pthread_atfork __register_atfork],,)
+AC_CHECK_FUNCS([__register_atfork],,)
 
 AC_LIB_HAVE_LINKFLAGS(rt,, [#include <time.h>
 #include <signal.h>
@@ -376,6 +376,10 @@ AC_ARG_WITH(idn, AS_HELP_STRING([--without-idn],
 if test "$try_libidn" = yes;then
 PKG_CHECK_MODULES(LIBIDN, libidn >= 0.5.6, [with_libidn=yes], [with_libidn=no])
 if test "$with_libidn" != "no";then
+        if ! $PKG_CONFIG --atleast-version=1.31 libidn; then
+	    with_buggy_libidn=yes
+        fi
+
 	AC_DEFINE([HAVE_LIBIDN], 1, [Build IDNA support])
 	if test "x$GNUTLS_REQUIRES_PRIVATE" = "x"; then
 		GNUTLS_REQUIRES_PRIVATE="Requires.private: libidn"
@@ -394,6 +398,7 @@ else
 fi
 
 AM_CONDITIONAL(HAVE_LIBIDN, test "$with_libidn" != "no")
+AM_CONDITIONAL(HAVE_BUGGY_LIBIDN, test "$with_buggy_libidn" = "yes")
 
 AC_ARG_ENABLE(non-suiteb-curves,
   AS_HELP_STRING([--disable-non-suiteb-curves], [disable curves not in SuiteB]),
@@ -523,6 +528,19 @@ if test "$with_tpm" != "no"; then
 fi
 
 AM_CONDITIONAL(ENABLE_TROUSERS, test "$with_tpm" != "no")
+
+if test -f "/usr/lib64/libtspi.so.1";then
+default_trousers_lib="/usr/lib64/libtspi.so.1"
+else
+default_trousers_lib="/usr/lib/libtspi.so.1"
+fi
+
+AC_ARG_WITH(trousers-lib, AS_HELP_STRING([--with-trousers-lib=LIB],
+                                 [set the location of the trousers library]),
+            ac_trousers_lib=$withval, ac_trousers_lib=$default_trousers_lib)
+
+AC_DEFINE_UNQUOTED(TROUSERS_LIB, ["$ac_trousers_lib"], [the location of the trousers library])
+AC_SUBST(TROUSERS_LIB)
 
 included_libopts=no
 if test "$enable_tools" != "no" || test "$enable_doc" != "no"; then
@@ -913,6 +931,11 @@ AC_MSG_NOTICE([External hardware support:
   PKCS#11 support:      $with_p11_kit
   TPM support:          $with_tpm
 ])
+if test -n "$ac_trousers_lib";then
+AC_MSG_NOTICE([
+  TPM library:          $ac_trousers_lib
+])
+fi
 
 AC_MSG_NOTICE([Optional features:
 (note that included applications might not compile properly

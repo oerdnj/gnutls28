@@ -1,0 +1,15 @@
+
+
+
+
+@deftypefun {int} {gnutls_hex_decode2} (const gnutls_datum_t * @var{hex_data}, gnutls_datum_t * @var{result})
+@var{hex_data}: contain the encoded data
+
+@var{result}: the result in an allocated string
+
+This function will decode the given encoded data, using the hex
+encoding used by PSK password files.
+
+@strong{Returns:} @code{GNUTLS_E_SHORT_MEMORY_BUFFER}  if the buffer given is not
+long enough, or 0 on success.
+@end deftypefun

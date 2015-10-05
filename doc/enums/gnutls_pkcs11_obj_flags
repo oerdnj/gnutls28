@@ -60,9 +60,11 @@ If set, the object was never marked as extractable (store).
 @item GNUTLS_@-PKCS11_@-OBJ_@-FLAG_@-CRT
 When searching, restrict to certificates only (seek).
 @item GNUTLS_@-PKCS11_@-OBJ_@-FLAG_@-WITH_@-PRIVKEY
-When searching, restrict to objects which have a corresponding private key (seek).
+-- undescribed --
 @item GNUTLS_@-PKCS11_@-OBJ_@-FLAG_@-PUBKEY
 When searching, restrict to public key objects only (seek).
+@item GNUTLS_@-PKCS11_@-OBJ_@-FLAG_@-NO_@-STORE_@-PUBKEY
+When generating a keypair don't store the public key (store).
 @item GNUTLS_@-PKCS11_@-OBJ_@-FLAG_@-PRIVKEY
 When searching, restrict to private key objects only (seek).
 @end table

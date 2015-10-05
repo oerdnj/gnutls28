@@ -909,27 +909,31 @@ _gnutls_server_select_suite(gnutls_session_t session, uint8_t * data,
 							 * supported by the peer.
 							 */
 
-	/* First, check for safe renegotiation SCSV.
-	 */
-	if (session->internals.priorities.sr != SR_DISABLED) {
-		unsigned int offset;
-
-		for (offset = 0; offset < datalen; offset += 2) {
-			/* TLS_RENEGO_PROTECTION_REQUEST = { 0x00, 0xff } */
-			if (data[offset] ==
-			    GNUTLS_RENEGO_PROTECTION_REQUEST_MAJOR
-			    && data[offset + 1] ==
-			    GNUTLS_RENEGO_PROTECTION_REQUEST_MINOR) {
-				_gnutls_handshake_log
-				    ("HSK[%p]: Received safe renegotiation CS\n",
-				     session);
-				retval = _gnutls_ext_sr_recv_cs(session);
-				if (retval < 0) {
-					gnutls_assert();
-					return retval;
-				}
-				break;
+	for (i = 0; i < datalen; i += 2) {
+		/* TLS_RENEGO_PROTECTION_REQUEST = { 0x00, 0xff } */
+		if (session->internals.priorities.sr != SR_DISABLED &&
+		    data[i] == GNUTLS_RENEGO_PROTECTION_REQUEST_MAJOR &&
+		    data[i + 1] == GNUTLS_RENEGO_PROTECTION_REQUEST_MINOR) {
+			_gnutls_handshake_log
+			    ("HSK[%p]: Received safe renegotiation CS\n",
+			     session);
+			retval = _gnutls_ext_sr_recv_cs(session);
+			if (retval < 0) {
+				gnutls_assert();
+				return retval;
 			}
+		}
+
+		/* TLS_FALLBACK_SCSV */
+		if (data[i] == GNUTLS_FALLBACK_SCSV_MAJOR &&
+		    data[i + 1] == GNUTLS_FALLBACK_SCSV_MINOR) {
+			unsigned max = _gnutls_version_max(session);
+			_gnutls_handshake_log
+			    ("HSK[%p]: Received fallback CS\n",
+			     session);
+
+			if (gnutls_protocol_get_version(session) != max)
+				return gnutls_assert_val(GNUTLS_E_INAPPROPRIATE_FALLBACK);
 		}
 	}
 
@@ -1837,7 +1841,7 @@ read_server_hello(gnutls_session_t session,
 	return ret;
 }
 
-
+#define RESERVED_CIPHERSUITES 4
 /* This function copies the appropriate ciphersuites to a locally allocated buffer
  * Needed in client hello messages. Returns the new data length. If add_scsv is
  * true, add the special safe renegotiation CS.
@@ -1847,13 +1851,13 @@ copy_ciphersuites(gnutls_session_t session,
 		  gnutls_buffer_st * cdata, int add_scsv)
 {
 	int ret;
-	uint8_t cipher_suites[MAX_CIPHERSUITE_SIZE + 2]; /* allow space for SCSV */
+	uint8_t cipher_suites[MAX_CIPHERSUITE_SIZE + RESERVED_CIPHERSUITES]; /* allow space for SCSV */
 	int cipher_suites_size;
 	size_t init_length = cdata->length;
 
 	ret =
 	    _gnutls_supported_ciphersuites(session, cipher_suites,
-					   sizeof(cipher_suites) - 2);
+					   sizeof(cipher_suites) - RESERVED_CIPHERSUITES);
 	if (ret < 0)
 		return gnutls_assert_val(ret);
 
@@ -1882,6 +1886,14 @@ copy_ciphersuites(gnutls_session_t session,
 		ret = _gnutls_ext_sr_send_cs(session);
 		if (ret < 0)
 			return gnutls_assert_val(ret);
+	}
+
+	if (session->internals.priorities.fallback) {
+		cipher_suites[cipher_suites_size] =
+			GNUTLS_FALLBACK_SCSV_MAJOR;
+		cipher_suites[cipher_suites_size + 1] =
+			GNUTLS_FALLBACK_SCSV_MINOR;
+		cipher_suites_size += 2;
 	}
 
 	ret =
@@ -2072,7 +2084,8 @@ static int send_client_hello(gnutls_session_t session, int again)
 			ret =
 			    copy_ciphersuites(session, &extdata,
 					      TRUE);
-			_gnutls_extension_list_add(session,
+			if (session->security_parameters.entity == GNUTLS_CLIENT)
+				_gnutls_extension_list_add(session,
 						   GNUTLS_EXTENSION_SAFE_RENEGOTIATION);
 		} else
 			ret =

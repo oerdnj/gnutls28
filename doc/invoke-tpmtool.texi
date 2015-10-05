@@ -86,6 +86,13 @@ user.
 @end itemize
 
 The generated key will be stored in system persistent storage.
+@anchor{tpmtool test-sign}
+@subsection test-sign option
+
+This is the ``tests the signature operation of the provided object'' option.
+This option takes a string argument @file{url}.
+It can be used to test the correct operation of the signature operation.
+This operation will sign and verify the signed data.
 @anchor{tpmtool sec-param}
 @subsection sec-param option
 

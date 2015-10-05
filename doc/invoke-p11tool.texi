@@ -45,168 +45,95 @@ with a status code of 0.
 
 @exampleindent 0
 @example
-p11tool - GnuTLS PKCS #11 tool
-Usage:  p11tool [ -<flag> [<val>] | --<name>[@{=| @}<val>] ]... [url]
-
-   -d, --debug=num            Enable debugging
-                                - it must be in the range:
-                                  0 to 9999
-       --outfile=str          Output file
-       --list-tokens          List all available tokens
-       --export               Export the object specified by the URL
-       --export-chain         Export the certificate specified by the URL and its chain of trust
-       --list-mechanisms      List all available mechanisms in a token
-       --info                 List information on an available object in a token
-       --list-all             List all available objects in a token
-       --list-all-certs       List all available certificates in a token
-       --list-certs           List all certificates that have an associated private key
-       --list-all-privkeys    List all available private keys in a token
-       --list-privkeys        an alias for the 'list-all-privkeys' option
-       --list-keys            an alias for the 'list-all-privkeys' option
-       --list-all-trusted     List all available certificates marked as trusted
-       --write                Writes the loaded objects to a PKCS #11 token
-       --delete               Deletes the objects matching the PKCS #11 URL
-       --generate-random=num  Generate random data
-       --generate-rsa         Generate an RSA private-public key pair
-       --generate-dsa         Generate an RSA private-public key pair
-       --generate-ecc         Generate an RSA private-public key pair
-       --export-pubkey        Export the public key for a private key
-       --label=str            Sets a label for the write operation
-       --mark-wrap            Marks the generated key to be a wrapping key
-                                - disabled as '--no-mark-wrap'
-       --mark-trusted         Marks the object to be written as trusted
-                                - disabled as '--no-mark-trusted'
-       --mark-ca              Marks the object to be written as a CA
-                                - disabled as '--no-mark-ca'
-       --mark-private         Marks the object to be written as private
-                                - disabled as '--no-mark-private'
-                                - enabled by default
-       --trusted              an alias for the 'mark-trusted' option
-       --ca                   an alias for the 'mark-ca' option
-       --private              an alias for the 'mark-private' option
-                                - enabled by default
-       --login                Force (user) login to token
-                                - disabled as '--no-login'
-       --so-login             Force security officer login to token
-                                - disabled as '--no-so-login'
-       --admin-login          an alias for the 'so-login' option
-       --detailed-url         Print detailed URLs
-                                - disabled as '--no-detailed-url'
-   -!, --secret-key=str       Provide a hex encoded secret key
-   -", --load-privkey=file    Private key file to use
-                                - file must pre-exist
-   -#, --load-pubkey=file     Public key file to use
-                                - file must pre-exist
-   -$, --load-certificate=file Certificate file to use
-                                - file must pre-exist
-   -8, --pkcs8                Use PKCS #8 format for private keys
-   -%, --bits=num             Specify the number of bits for key generate
-   -&, --curve=str            Specify the curve used for EC key generation
-   -', --sec-param=str        Specify the security level
-   -(, --inder                Use DER/RAW format for input
-                                - disabled as '--no-inder'
-   -), --inraw                an alias for the 'inder' option
-   -*, --outder               Use DER format for output certificates, private keys, and DH parameters
-                                - disabled as '--no-outder'
-   -+, --outraw               an alias for the 'outder' option
-   -,, --initialize           Initializes a PKCS #11 token
-   --, --set-pin=str          Specify the PIN to use on token initialization
-   -., --set-so-pin=str       Specify the Security Officer's PIN to use on token initialization
-   -/, --provider=file        Specify the PKCS #11 provider library
-                                - file must pre-exist
-   -0, --batch                Disable all interaction with the tool.  All parameters need to be
-specified on command line.
-   -v, --version[=arg]        output version information and exit
-   -h, --help                 display extended usage information and exit
-   -!, --more-help            extended usage information passed thru pager
-
-Options are specified by doubled hyphens and their name or by a single
-hyphen and the flag character.
-Operands and options may be intermixed.  They will be reordered.
-
-Program that allows operations on PKCS #11 smart cards and security
-modules.
-
-To use PKCS #11 tokens with GnuTLS the p11-kit configuration files need to
-be setup.  That is create a .module file in /etc/pkcs11/modules with the
-contents 'module: /path/to/pkcs11.so'.  Alternatively the configuration
-file /etc/gnutls/pkcs11.conf has to exist and contain a number of lines of
-the form 'load=/usr/lib/opensc-pkcs11.so'.
-
-You can provide the PIN to be used for the PKCS #11 operations with the
-environment variables GNUTLS_PIN and GNUTLS_SO_PIN.
-
+p11tool is unavailable - no --help
 @end example
 @exampleindent 4
 
-@anchor{p11tool debug}
-@subsection debug option (-d)
+@anchor{p11tool token-related-options}
+@subsection token-related-options options
+Tokens.
+@subsubheading list-token-urls option.
+@anchor{p11tool list-token-urls}
 
-This is the ``enable debugging'' option.
-This option takes a number argument.
-Specifies the debug level.
-@anchor{p11tool export-chain}
-@subsection export-chain option
+This is the ``list the urls available tokens'' option.
+This is a more compact version of --list-tokens.
+@subsubheading set-pin option.
+@anchor{p11tool set-pin}
 
-This is the ``export the certificate specified by the url and its chain of trust'' option.
-Exports the certificate specified by the URL and generates its chain of trust based on the stored certificates in the module.
+This is the ``specify the pin to use on token initialization'' option.
+This option takes a string argument.
+Alternatively the GNUTLS_PIN environment variable may be used.
+@subsubheading set-so-pin option.
+@anchor{p11tool set-so-pin}
+
+This is the ``specify the security officer's pin to use on token initialization'' option.
+This option takes a string argument.
+Alternatively the GNUTLS_SO_PIN environment variable may be used.
+@anchor{p11tool object-list-related-options}
+@subsection object-list-related-options options
+Object listing.
+@subsubheading list-all-privkeys option.
 @anchor{p11tool list-all-privkeys}
-@subsection list-all-privkeys option
 
 This is the ``list all available private keys in a token'' option.
 Lists all the private keys in a token that match the specified URL.
+@subsubheading list-privkeys option.
 @anchor{p11tool list-privkeys}
-@subsection list-privkeys option
 
 This is an alias for the @code{list-all-privkeys} option,
 @pxref{p11tool list-all-privkeys, the list-all-privkeys option documentation}.
 
+@subsubheading list-keys option.
 @anchor{p11tool list-keys}
-@subsection list-keys option
 
 This is an alias for the @code{list-all-privkeys} option,
 @pxref{p11tool list-all-privkeys, the list-all-privkeys option documentation}.
 
-@anchor{p11tool test-sign}
-@subsection test-sign option
+@subsubheading export-chain option.
+@anchor{p11tool export-chain}
 
-This is the ``tests the signature operation of the provided object'' option.
-It can be used to test the correct operation of the signature operation.
-If both a private and a public key are available this operation will sign and verify
-the signed data.
-@anchor{p11tool write}
-@subsection write option
-
-This is the ``writes the loaded objects to a pkcs #11 token'' option.
-It can be used to write private keys, certificates or secret keys to a token.
-@anchor{p11tool generate-random}
-@subsection generate-random option
-
-This is the ``generate random data'' option.
-This option takes a number argument.
-Asks the token to generate a number of bytes of random bytes.
-@anchor{p11tool generate-rsa}
-@subsection generate-rsa option
-
-This is the ``generate an rsa private-public key pair'' option.
-Generates an RSA private-public key pair on the specified token.
-@anchor{p11tool generate-dsa}
-@subsection generate-dsa option
-
-This is the ``generate an rsa private-public key pair'' option.
-Generates an RSA private-public key pair on the specified token.
-@anchor{p11tool generate-ecc}
-@subsection generate-ecc option
-
-This is the ``generate an rsa private-public key pair'' option.
-Generates an RSA private-public key pair on the specified token.
+This is the ``export the certificate specified by the url and its chain of trust'' option.
+Exports the certificate specified by the URL and generates its chain of trust based on the stored certificates in the module.
+@subsubheading export-pubkey option.
 @anchor{p11tool export-pubkey}
-@subsection export-pubkey option
 
 This is the ``export the public key for a private key'' option.
 Exports the public key for the specified private key
+@anchor{p11tool keygen-related-options}
+@subsection keygen-related-options options
+Key generation.
+@subsubheading generate-rsa option.
+@anchor{p11tool generate-rsa}
+
+This is the ``generate an rsa private-public key pair'' option.
+Generates an RSA private-public key pair on the specified token.
+@subsubheading generate-dsa option.
+@anchor{p11tool generate-dsa}
+
+This is the ``generate a dsa private-public key pair'' option.
+Generates a DSA private-public key pair on the specified token.
+@subsubheading generate-ecc option.
+@anchor{p11tool generate-ecc}
+
+This is the ``generate an ecdsa private-public key pair'' option.
+Generates an ECDSA private-public key pair on the specified token.
+@subsubheading curve option.
+@anchor{p11tool curve}
+
+This is the ``specify the curve used for ec key generation'' option.
+This option takes a string argument.
+Supported values are secp192r1, secp224r1, secp256r1, secp384r1 and secp521r1.
+@subsubheading sec-param option.
+@anchor{p11tool sec-param}
+
+This is the ``specify the security level'' option.
+This option takes a string argument @file{Security parameter}.
+This is alternative to the bits option. Available options are [low, legacy, medium, high, ultra].
+@anchor{p11tool write-object-related-options}
+@subsection write-object-related-options options
+Writing objects.
+@subsubheading set-id option.
 @anchor{p11tool set-id}
-@subsection set-id option
 
 This is the ``set the cka_id (in hex) for the specified by the url object'' option.
 This option takes a string argument.
@@ -220,8 +147,8 @@ write.
 @end itemize
 
 Modifies or sets the CKA_ID in the specified by the URL object. The ID should be specified in hexadecimal format without a '0x' prefix.
+@subsubheading set-label option.
 @anchor{p11tool set-label}
-@subsection set-label option
 
 This is the ``set the cka_label for the specified by the url object'' option.
 This option takes a string argument.
@@ -235,14 +162,19 @@ write, set-id.
 @end itemize
 
 Modifies or sets the CKA_LABEL in the specified by the URL object
+@subsubheading write option.
+@anchor{p11tool write}
+
+This is the ``writes the loaded objects to a pkcs #11 token'' option.
+It can be used to write private keys, certificates or secret keys to a token. Must be combined with a --load option.
+@subsubheading id option.
 @anchor{p11tool id}
-@subsection id option
 
 This is the ``sets an id for the write operation'' option.
 This option takes a string argument.
 Sets the CKA_ID to be set by the write operation. The ID should be specified in hexadecimal format without a '0x' prefix.
+@subsubheading mark-wrap option.
 @anchor{p11tool mark-wrap}
-@subsection mark-wrap option
 
 This is the ``marks the generated key to be a wrapping key'' option.
 
@@ -254,8 +186,8 @@ can be disabled with --no-mark-wrap.
 @end itemize
 
 Marks the generated key with the CKA_WRAP flag.
+@subsubheading mark-trusted option.
 @anchor{p11tool mark-trusted}
-@subsection mark-trusted option
 
 This is the ``marks the object to be written as trusted'' option.
 
@@ -266,9 +198,9 @@ This option has some usage constraints.  It:
 can be disabled with --no-mark-trusted.
 @end itemize
 
-Marks the object to be generated/copied with the CKA_TRUST flag.
+Marks the object to be generated/written with the CKA_TRUST flag.
+@subsubheading mark-decrypt option.
 @anchor{p11tool mark-decrypt}
-@subsection mark-decrypt option
 
 This is the ``marks the object to be written for decryption'' option.
 
@@ -279,9 +211,9 @@ This option has some usage constraints.  It:
 can be disabled with --no-mark-decrypt.
 @end itemize
 
-Marks the object to be generated/copied with the CKA_DECRYPT flag set to true.
+Marks the object to be generated/written with the CKA_DECRYPT flag set to true.
+@subsubheading mark-sign option.
 @anchor{p11tool mark-sign}
-@subsection mark-sign option
 
 This is the ``marks the object to be written for signature generation'' option.
 
@@ -292,9 +224,9 @@ This option has some usage constraints.  It:
 can be disabled with --no-mark-sign.
 @end itemize
 
-Marks the object to be generated/copied with the CKA_SIGN flag set to true.
+Marks the object to be generated/written with the CKA_SIGN flag set to true.
+@subsubheading mark-ca option.
 @anchor{p11tool mark-ca}
-@subsection mark-ca option
 
 This is the ``marks the object to be written as a ca'' option.
 
@@ -305,9 +237,9 @@ This option has some usage constraints.  It:
 can be disabled with --no-mark-ca.
 @end itemize
 
-Marks the object to be generated/copied with the CKA_CERTIFICATE_CATEGORY as CA.
+Marks the object to be generated/written with the CKA_CERTIFICATE_CATEGORY as CA.
+@subsubheading mark-private option.
 @anchor{p11tool mark-private}
-@subsection mark-private option
 
 This is the ``marks the object to be written as private'' option.
 
@@ -320,27 +252,42 @@ can be disabled with --no-mark-private.
 It is enabled by default.
 @end itemize
 
-Marks the object to be generated/copied with the CKA_PRIVATE flag. The written object will require a PIN to be used.
+Marks the object to be generated/written with the CKA_PRIVATE flag. The written object will require a PIN to be used.
+@subsubheading trusted option.
 @anchor{p11tool trusted}
-@subsection trusted option
 
 This is an alias for the @code{mark-trusted} option,
 @pxref{p11tool mark-trusted, the mark-trusted option documentation}.
 
+@subsubheading ca option.
 @anchor{p11tool ca}
-@subsection ca option
 
 This is an alias for the @code{mark-ca} option,
 @pxref{p11tool mark-ca, the mark-ca option documentation}.
 
+@subsubheading private option.
 @anchor{p11tool private}
-@subsection private option
 
 This is an alias for the @code{mark-private} option,
 @pxref{p11tool mark-private, the mark-private option documentation}.
 
+@subsubheading secret-key option.
+@anchor{p11tool secret-key}
+
+This is the ``provide a hex encoded secret key'' option.
+This option takes a string argument.
+This secret key will be written to the module if --write is specified.
+@anchor{p11tool other-options}
+@subsection other-options options
+Other options.
+@subsubheading debug option (-d).
+@anchor{p11tool debug}
+
+This is the ``enable debugging'' option.
+This option takes a number argument.
+Specifies the debug level.
+@subsubheading so-login option.
 @anchor{p11tool so-login}
-@subsection so-login option
 
 This is the ``force security officer login to token'' option.
 
@@ -352,26 +299,27 @@ can be disabled with --no-so-login.
 @end itemize
 
 Forces login to the token as security officer (admin).
+@subsubheading admin-login option.
 @anchor{p11tool admin-login}
-@subsection admin-login option
 
 This is an alias for the @code{so-login} option,
 @pxref{p11tool so-login, the so-login option documentation}.
 
-@anchor{p11tool curve}
-@subsection curve option
+@subsubheading test-sign option.
+@anchor{p11tool test-sign}
 
-This is the ``specify the curve used for ec key generation'' option.
-This option takes a string argument.
-Supported values are secp192r1, secp224r1, secp256r1, secp384r1 and secp521r1.
-@anchor{p11tool sec-param}
-@subsection sec-param option
+This is the ``tests the signature operation of the provided object'' option.
+It can be used to test the correct operation of the signature operation.
+If both a private and a public key are available this operation will sign and verify
+the signed data.
+@subsubheading generate-random option.
+@anchor{p11tool generate-random}
 
-This is the ``specify the security level'' option.
-This option takes a string argument @file{Security parameter}.
-This is alternative to the bits option. Available options are [low, legacy, medium, high, ultra].
+This is the ``generate random data'' option.
+This option takes a number argument.
+Asks the token to generate a number of bytes of random bytes.
+@subsubheading inder option.
 @anchor{p11tool inder}
-@subsection inder option
 
 This is the ``use der/raw format for input'' option.
 
@@ -383,14 +331,14 @@ can be disabled with --no-inder.
 @end itemize
 
 Use DER/RAW format for input certificates and private keys.
+@subsubheading inraw option.
 @anchor{p11tool inraw}
-@subsection inraw option
 
 This is an alias for the @code{inder} option,
 @pxref{p11tool inder, the inder option documentation}.
 
+@subsubheading outder option.
 @anchor{p11tool outder}
-@subsection outder option
 
 This is the ``use der format for output certificates, private keys, and dh parameters'' option.
 
@@ -402,30 +350,23 @@ can be disabled with --no-outder.
 @end itemize
 
 The output will be in DER or RAW format.
+@subsubheading outraw option.
 @anchor{p11tool outraw}
-@subsection outraw option
 
 This is an alias for the @code{outder} option,
 @pxref{p11tool outder, the outder option documentation}.
 
-@anchor{p11tool set-pin}
-@subsection set-pin option
-
-This is the ``specify the pin to use on token initialization'' option.
-This option takes a string argument.
-Alternatively the GNUTLS_PIN environment variable may be used.
-@anchor{p11tool set-so-pin}
-@subsection set-so-pin option
-
-This is the ``specify the security officer's pin to use on token initialization'' option.
-This option takes a string argument.
-Alternatively the GNUTLS_SO_PIN environment variable may be used.
+@subsubheading provider option.
 @anchor{p11tool provider}
-@subsection provider option
 
 This is the ``specify the pkcs #11 provider library'' option.
 This option takes a file argument.
 This will override the default options in /etc/gnutls/pkcs11.conf
+@subsubheading batch option.
+@anchor{p11tool batch}
+
+This is the ``disable all interaction with the tool'' option.
+In batch mode there will be no prompts, all parameters need to be specified on command line.
 @anchor{p11tool exit status}
 @subsection p11tool exit status
 
