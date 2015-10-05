@@ -47,6 +47,7 @@
 #include <gnutls_num.h>
 
 
+static int ext_register(extension_entry_st * mod);
 static void _gnutls_ext_unset_resumed_session_data(gnutls_session_t
 						   session, uint16_t type);
 
@@ -119,19 +120,14 @@ static const char *_gnutls_extension_get_name(uint16_t type)
 static int
 _gnutls_extension_list_check(gnutls_session_t session, uint16_t type)
 {
-	if (session->security_parameters.entity == GNUTLS_CLIENT) {
-		int i;
+	int i;
 
-		for (i = 0; i < session->internals.extensions_sent_size;
-		     i++) {
-			if (type == session->internals.extensions_sent[i])
-				return 0;	/* ok found */
-		}
-
-		return GNUTLS_E_RECEIVED_ILLEGAL_EXTENSION;
+	for (i = 0; i < session->internals.extensions_sent_size; i++) {
+		if (type == session->internals.extensions_sent[i])
+			return 0;	/* ok found */
 	}
 
-	return 0;
+	return GNUTLS_E_RECEIVED_ILLEGAL_EXTENSION;
 }
 
 int
@@ -172,10 +168,14 @@ _gnutls_parse_extensions(gnutls_session_t session,
 		type = _gnutls_read_uint16(&data[pos]);
 		pos += 2;
 
-		if ((ret =
-		     _gnutls_extension_list_check(session, type)) < 0) {
-			gnutls_assert();
-			return ret;
+		if (session->security_parameters.entity == GNUTLS_CLIENT) {
+			if ((ret =
+			     _gnutls_extension_list_check(session, type)) < 0) {
+				gnutls_assert();
+				return ret;
+			}
+		} else {
+			_gnutls_extension_list_add(session, type);
 		}
 
 		DECR_LENGTH_RET(next, 2, 0);
@@ -219,17 +219,15 @@ _gnutls_parse_extensions(gnutls_session_t session,
 void _gnutls_extension_list_add(gnutls_session_t session, uint16_t type)
 {
 
-	if (session->security_parameters.entity == GNUTLS_CLIENT) {
-		if (session->internals.extensions_sent_size <
-		    MAX_EXT_TYPES) {
-			session->internals.extensions_sent[session->
-							   internals.extensions_sent_size]
-			    = type;
-			session->internals.extensions_sent_size++;
-		} else {
-			_gnutls_handshake_log
-			    ("extensions: Increase MAX_EXT_TYPES\n");
-		}
+	if (session->internals.extensions_sent_size <
+	    MAX_EXT_TYPES) {
+		session->internals.extensions_sent[session->
+						   internals.extensions_sent_size]
+		    = type;
+		session->internals.extensions_sent_size++;
+	} else {
+		_gnutls_handshake_log
+		    ("extensions: Increase MAX_EXT_TYPES\n");
 	}
 }
 
@@ -258,6 +256,14 @@ _gnutls_gen_extensions(gnutls_session_t session,
 		    && p->parse_type != parse_type)
 			continue;
 
+		/* ensure we are sending only what we received */
+		if (session->security_parameters.entity == GNUTLS_SERVER) {
+			if ((ret =
+			     _gnutls_extension_list_check(session, p->type)) < 0) {
+				continue;
+			}
+		}
+
 		ret = _gnutls_buffer_append_prefix(extdata, 16, p->type);
 		if (ret < 0)
 			return gnutls_assert_val(ret);
@@ -281,7 +287,8 @@ _gnutls_gen_extensions(gnutls_session_t session,
 
 			/* add this extension to the extension list
 			 */
-			_gnutls_extension_list_add(session, p->type);
+			if (session->security_parameters.entity == GNUTLS_CLIENT)
+				_gnutls_extension_list_add(session, p->type);
 
 			_gnutls_handshake_log
 			    ("EXT[%p]: Sending extension %s (%d bytes)\n",
@@ -308,83 +315,83 @@ int _gnutls_ext_init(void)
 {
 	int ret;
 
-	ret = _gnutls_ext_register(&ext_mod_max_record_size);
+	ret = ext_register(&ext_mod_max_record_size);
 	if (ret != GNUTLS_E_SUCCESS)
 		return ret;
 
-	ret = _gnutls_ext_register(&ext_mod_ext_master_secret);
+	ret = ext_register(&ext_mod_ext_master_secret);
 	if (ret != GNUTLS_E_SUCCESS)
 		return ret;
 
-	ret = _gnutls_ext_register(&ext_mod_etm);
+	ret = ext_register(&ext_mod_etm);
 	if (ret != GNUTLS_E_SUCCESS)
 		return ret;
 
 #ifdef ENABLE_OCSP
-	ret = _gnutls_ext_register(&ext_mod_status_request);
+	ret = ext_register(&ext_mod_status_request);
 	if (ret != GNUTLS_E_SUCCESS)
 		return ret;
 #endif
 
 #ifdef ENABLE_OPENPGP
-	ret = _gnutls_ext_register(&ext_mod_cert_type);
+	ret = ext_register(&ext_mod_cert_type);
 	if (ret != GNUTLS_E_SUCCESS)
 		return ret;
 #endif
 
-	ret = _gnutls_ext_register(&ext_mod_server_name);
+	ret = ext_register(&ext_mod_server_name);
 	if (ret != GNUTLS_E_SUCCESS)
 		return ret;
 
-	ret = _gnutls_ext_register(&ext_mod_sr);
+	ret = ext_register(&ext_mod_sr);
 	if (ret != GNUTLS_E_SUCCESS)
 		return ret;
 
 #ifdef ENABLE_SRP
-	ret = _gnutls_ext_register(&ext_mod_srp);
+	ret = ext_register(&ext_mod_srp);
 	if (ret != GNUTLS_E_SUCCESS)
 		return ret;
 #endif
 
 #ifdef ENABLE_HEARTBEAT
-	ret = _gnutls_ext_register(&ext_mod_heartbeat);
+	ret = ext_register(&ext_mod_heartbeat);
 	if (ret != GNUTLS_E_SUCCESS)
 		return ret;
 #endif
 
 #ifdef ENABLE_SESSION_TICKETS
-	ret = _gnutls_ext_register(&ext_mod_session_ticket);
+	ret = ext_register(&ext_mod_session_ticket);
 	if (ret != GNUTLS_E_SUCCESS)
 		return ret;
 #endif
 
-	ret = _gnutls_ext_register(&ext_mod_supported_ecc);
+	ret = ext_register(&ext_mod_supported_ecc);
 	if (ret != GNUTLS_E_SUCCESS)
 		return ret;
 
-	ret = _gnutls_ext_register(&ext_mod_supported_ecc_pf);
+	ret = ext_register(&ext_mod_supported_ecc_pf);
 	if (ret != GNUTLS_E_SUCCESS)
 		return ret;
 
-	ret = _gnutls_ext_register(&ext_mod_sig);
+	ret = ext_register(&ext_mod_sig);
 	if (ret != GNUTLS_E_SUCCESS)
 		return ret;
 
 #ifdef ENABLE_DTLS_SRTP
-	ret = _gnutls_ext_register(&ext_mod_srtp);
+	ret = ext_register(&ext_mod_srtp);
 	if (ret != GNUTLS_E_SUCCESS)
 		return ret;
 #endif
 
 #ifdef ENABLE_ALPN
-	ret = _gnutls_ext_register(&ext_mod_alpn);
+	ret = ext_register(&ext_mod_alpn);
 	if (ret != GNUTLS_E_SUCCESS)
 		return ret;
 #endif
 
 	/* This must be the last extension registered.
 	 */
-	ret = _gnutls_ext_register(&ext_mod_dumbfw);
+	ret = ext_register(&ext_mod_dumbfw);
 	if (ret != GNUTLS_E_SUCCESS)
 		return ret;
 
@@ -405,7 +412,8 @@ void _gnutls_ext_deinit(void)
 	extfunc_size = 0;
 }
 
-int _gnutls_ext_register(extension_entry_st * mod)
+static
+int ext_register(extension_entry_st * mod)
 {
 	extension_entry_st *p;
 
@@ -772,7 +780,7 @@ gnutls_ext_register(const char *name, int type, gnutls_ext_parse_type_t parse_ty
 	tmp_mod.pack_func = pack_func;
 	tmp_mod.unpack_func = unpack_func;
 
-	ret = _gnutls_ext_register(&tmp_mod);
+	ret = ext_register(&tmp_mod);
 	if (ret < 0) {
 		gnutls_free((void*)tmp_mod.name);
 	}

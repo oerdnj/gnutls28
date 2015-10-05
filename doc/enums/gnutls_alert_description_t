@@ -46,6 +46,8 @@ Error in protocol version.
 Insufficient security.
 @item GNUTLS_@-A_@-INTERNAL_@-ERROR
 Internal error.
+@item GNUTLS_@-A_@-INAPPROPRIATE_@-FALLBACK
+Inappropriate fallback,
 @item GNUTLS_@-A_@-USER_@-CANCELED
 User canceled.
 @item GNUTLS_@-A_@-NO_@-RENEGOTIATION

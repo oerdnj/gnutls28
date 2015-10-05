@@ -1,3 +1,969 @@
+2015-09-12  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* NEWS, configure.ac, m4/hooks.m4: bumped version
+
+2015-09-12  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* doc/manpages/tpmtool.1: tpmtool.1: updated
+
+2015-09-11  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/x509/output.c: Don't use formatted output for fixed strings Resolves #35
+
+2015-09-04  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/pkcs11_privkey.c: pkcs11: when storing public keys, make sure
+	they are marked as not private
+
+2015-08-28  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* NEWS: doc update
+
+2015-08-28  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* src/tests.c: gnutls-cli-debug: corrected typo in inappropriate
+	fallback check
+
+2015-08-28  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* src/cli-debug.c, src/tests.c, src/tests.h: gnutls-cli-debug: added
+	check for inappropriate fallback support
+
+2015-08-26  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* doc/examples/ex-serv-anon.c: corrected typo in ex-server-anon
+
+2015-08-23  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* lib/gnutls_str.c: hex decoding: more reasonable error codes That is, return GNUTLS_E_PARSING_ERROR instead of base64 decoding
+	error, and document that fact.
+
+2015-08-21  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/ext/ext_master_secret.c, lib/gnutls_db.c: Set the extended
+	master secret status based on resumption data only That is, don't require a new negotiation with extensions.
+
+2015-08-21  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* tests/resume-dtls.c, tests/resume.c: tests: corrected resumption
+	tests to disable tickets when needed That is, perform the tests that require no tickets, with tickets
+	disabled.
+
+2015-08-21  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/gnutls_session_pack.c: session packing: corrected issue in PSK
+	session unpack
+
+2015-08-21  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/auth/psk.c: PSK: save the username in client side in the auth
+	structure
+
+2015-08-21  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/gnutls_hash_int.h: _gnutls_hash() returns error code if any.  Ideally we would like to eliminate any return codes from that
+	function. However, since that's on exported API we cannot easily do
+	without breaking the ABI. Reported by Benedikt Klotz.  Resolves #28
+
+2015-08-21  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* NEWS: doc update
+
+2015-08-21  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/x509/verify-high.c, lib/x509/verify-high2.c: x509: when
+	appending CRLs to a trust list ensure that we don't have duplicates That is, overwrite CRLs if they have been obsoleted.
+
+2015-08-21  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* src/certtool.c: certtool: allow exporting very long CRLs
+
+2015-08-13  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* NEWS: doc update
+
+2015-08-13  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* tests/cert-tests/crl: tests: verify whether CRL date setting works
+	as expected
+
+2015-08-13  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* src/certtool-args.def, src/certtool-cfg.c, src/certtool-cfg.h,
+	src/certtool.c: certtool: Allow specifying CRL dates as fixed dates
+
+2015-08-13  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* tests/cert-tests/crl: tests: verify CRL appending effectiveness
+
+2015-08-13  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/x509/crl_write.c: gnutls_x509_crl_set_authority_key_id,
+	gnutls_x509_crl_set_number allow overwritting That allows them to overwrite values which were previously set
+	(e.g., on an imported CRL).
+
+2015-08-13  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* src/certtool-args.def, src/certtool.c: certtool: allow appending
+	certificates to a CRL
+
+2015-08-12  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* NEWS: doc update
+
+2015-08-12  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* src/certtool.c: certtool: removed limit on maximum imported
+	certificates in the -i option
+
+2015-08-12  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* tests/cert-tests/Makefile.am, tests/cert-tests/crl: tests: check
+	whether the CRL generation code works as expected
+
+2015-08-12  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* src/certtool-common.c, src/certtool.c: certtool: eliminated memory
+	leaks due to new cert loading code
+
+2015-08-12  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* src/certtool-common.c, src/certtool-common.h: certtool: lifted
+	limits on file size to load
+
+2015-08-10  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* Makefile.am: before dist ensure that included libopts matches
+	autogen
+
+2015-08-10  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* NEWS: corrected date
+
+2015-08-09  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* tests/cert-tests/Makefile.am: include all cert-tests into dist
+
+2015-08-09  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* doc/Makefile.am, doc/manpages/Makefile.am, symbols.last: updated
+	auto-generated files for new functions
+
+2015-08-09  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* NEWS: doc update
+
+2015-08-06  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* src/pkcs11.c: p11tool: test-sign will not fail if a pubkey is not
+	found
+
+2015-08-04  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* lib/x509/privkey.c: key decoding: set key to null for consistency
+
+2015-08-04  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/x509/privkey.c: key decoding: simplify decoding logic by
+	removing the fallback
+
+2015-08-04  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* NEWS: doc update
+
+2015-08-04  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/x509/privkey.c: key decoding: corrected regression with PKCS
+	#8 key decoding Reported by Daniel Berrange.
+
+2015-08-04  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* tests/Makefile.am, tests/pkcs8-key-decode.c: tests: added check
+	for decoding of a PKCS #8 key as fallback
+
+2015-08-03  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* NEWS: doc update
+
+2015-08-03  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/includes/gnutls/pkcs11.h, lib/pkcs11_privkey.c: pkcs11: set
+	the CKA_TOKEN attribute on generated public keys That also introduces the GNUTLS_PKCS11_OBJ_FLAG_NO_STORE_PUBKEY
+	flag, to simulate the previous behavior.
+
+2015-08-01  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* cfg.mk: cfg.mk: fix order of arguments in gnulib-tool
+
+2015-08-01  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* tests/Makefile.am, tests/fallback-scsv.c: tests: added check for
+	the fallback SCSV
+
+2015-08-01  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* lib/gnutls_handshake.c: handshake: check inappropriate fallback
+	against the configured max version That allows to operate on a server which is explicitly configured to
+	utilize earlier than TLS 1.2 versions.
+
+2015-08-01  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* lib/includes/gnutls/gnutls.h.in: corrected
+	GNUTLS_E_INAPPROPRIATE_FALLBACK error code
+
+2015-08-01  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* NEWS: doc update
+
+2015-08-01  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* lib/gnutls_handshake.c: copy_ciphersuites: use definition for
+	reserved ciphersuites
+
+2015-08-01  Alessandro Ghedini <alessandro@ghedini.me>
+
+	* doc/cha-gtls-app.texi, lib/gnutls_handshake.c, lib/gnutls_int.h,
+	lib/gnutls_priority.c, lib/priority_options.gperf: handshake: add
+	FALLBACK_SCSV priority option This allows clients to enable the TLS_FALLBACK_SCSV mechanism during
+	the handshake, as defined in RFC7507.
+
+2015-08-01  Alessandro Ghedini <alessandro@ghedini.me>
+
+	* lib/algorithms.h, lib/gnutls_alert.c, lib/gnutls_errors.c,
+	lib/gnutls_handshake.c, lib/includes/gnutls/gnutls.h.in: handshake:
+	check for TLS_FALLBACK_SCSV If TLS_FALLBACK_SCSV was sent by the client during the handshake,
+	and the advertised protocol version is lower than
+	GNUTLS_TLS_VERSION_MAX, send the "Inappropriate fallback" fatal
+	alert and abort the handshake.  This mechanism was defined in RFC7507.
+
+2015-08-01  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* build-aux/gendocs.sh, gl/Makefile.am, gl/m4/codeset.m4,
+	gl/m4/extern-inline.m4, gl/m4/gettext.m4, gl/m4/glibc2.m4,
+	gl/m4/glibc21.m4, gl/m4/gnulib-cache.m4, gl/m4/gnulib-common.m4,
+	gl/m4/gnulib-comp.m4, gl/m4/iconv.m4, gl/m4/intdiv0.m4,
+	gl/m4/intl.m4, gl/m4/intldir.m4, gl/m4/intlmacosx.m4,
+	gl/m4/intmax.m4, gl/m4/lcmessage.m4, gl/m4/lock.m4,
+	gl/m4/manywarnings.m4, gl/m4/nls.m4, gl/m4/po.m4,
+	gl/m4/printf-posix.m4, gl/m4/progtest.m4, gl/m4/stdio_h.m4,
+	gl/m4/sys_time_h.m4, gl/m4/threadlib.m4, gl/m4/time_h.m4,
+	gl/m4/uintmax_t.m4, gl/m4/valgrind-tests.m4, gl/m4/visibility.m4,
+	gl/stddef.in.h, gl/stdio.in.h, gl/string.in.h, gl/tests/init.sh,
+	gl/tests/inttypes.in.h, gl/tests/test-read-file.c,
+	gl/tests/test-stddef.c, gl/time.in.h, gl/wchar.in.h,
+	src/gl/Makefile.am, src/gl/error.c, src/gl/error.h,
+	src/gl/fseeko.c, src/gl/m4/extern-inline.m4,
+	src/gl/m4/gnulib-cache.m4, src/gl/m4/gnulib-common.m4,
+	src/gl/m4/stdio_h.m4, src/gl/m4/sys_time_h.m4, src/gl/m4/time_h.m4,
+	src/gl/stddef.in.h, src/gl/stdio.in.h, src/gl/string.in.h,
+	src/gl/time.in.h, src/gl/wchar.in.h, src/gl/xalloc.h: use the
+	gettext-h gnulib module
+
+2015-08-01  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* tests/cert-tests/certtool-long-cn: tests: added missing
+	certtool-long-cn
+
+2015-07-31  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* lib/ext/safe_renegotiation.c: safe renegotiation: simulate
+	receiving the extension on receival of SCSV
+
+2015-07-31  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* lib/x509/common.c: made data2hex() safer, and eliminated mem leak
+
+2015-07-20  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* tests/cert-tests/Makefile.am, tests/cert-tests/very-long-dn.pem: 
+	tests: added check for proper handling of very long CNs
+
+2015-07-31  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* tests/Makefile.am, tests/status-request-ok.c,
+	tests/status-request.c: tests: added check for server sending (or
+	not) status request messages
+
+2015-07-31  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* NEWS: doc update
+
+2015-07-31  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* configure.ac: updated the required gettext version to match the
+	macros from gnulib
+
+2015-07-31  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/ext/safe_renegotiation.c: safe renegotiation: handle case
+	where client didn't send any extension That was affected by the "don't try to send extensions we didn't
+	receive".
+
+2015-07-31  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/tpm.c: tpm: avoid warning
+
+2015-07-31  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/gnutls_extensions.c, lib/gnutls_handshake.c, lib/gnutls_int.h: 
+	As server don't try to send extensions we didn't receive.
+
+2015-07-21  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* NEWS: doc update
+
+2015-07-21  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* lib/tpm.c: tpm: use gnutls_hex_decode for uuid decoding
+
+2015-07-21  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* lib/auth/psk_passwd.c: psk: use gnutls_hex_decode2 for key
+	decoding
+
+2015-07-21  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* lib/system-keys-win.c: system-keys-win: use gnutls_hex_decode for
+	ID decoding
+
+2015-07-21  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* lib/openpgp/gnutls_openpgp.c: openpgp: use gnutls_hex_decode for
+	keyid decoding
+
+2015-07-21  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* lib/x509/common.c: DN decoding: use gnutls_hex_encode
+
+2015-07-21  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* lib/extras/Makefile.am, lib/extras/hex.c, lib/extras/hex.h,
+	lib/extras/licenses/CC0, lib/gnutls_str.c,
+	lib/includes/gnutls/gnutls.h.in, lib/libgnutls.map: Introduced
+	gnutls_hex_encode2() and gnutls_hex_decode2() These also use safer hex decoding functions which don't skip invalid
+	input.
+
+2015-07-20  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* NEWS: doc update
+
+2015-07-20  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* lib/x509/common.c: x509: simplified data to hex conversion in
+	unknown DN names
+
+2015-07-20  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* lib/gnutls_state.c, tests/prf.c: gnutls_prf_rfc5705: Allow for
+	non-null context and zero context length
+
+2015-07-13  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* NEWS, configure.ac, m4/hooks.m4: bumped version
+
+2015-07-20  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* tests/prf.c: tests: added cross-check between gnutls_prf_rfc5705()
+	and gnutls_prf()
+
+2015-07-20  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* tests/Makefile.am, tests/safe-renegotiation/Makefile.am,
+	tests/suite/Makefile.am: removed legacy libgcrypt flags
+
+2015-07-20  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/gnutls_state.c, tests/prf.c: gnutls_prf_rfc5705: optimize in
+	the common use case, by avoiding malloc Also don't handle specially the case of non-NULL context and
+	context_size of zero.
+
+2015-07-20  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* .gitignore: ignore more files
+
+2015-07-20  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* src/p11tool-args.def: p11tool: fix documentation for
+	--generate-ecc and generate-dsa
+
+2015-07-20  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/gnutls_state.c: gnutls_prf_rfc5705: mention the version it was
+	introduced at
+
+2015-07-20  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* NEWS: doc update
+
+2015-07-20  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* tests/Makefile.am, tests/prf.c: tests: added check for
+	gnutls_prf() and gnutls_prf_rfc5705
+
+2015-07-20  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/gnutls_state.c, lib/includes/gnutls/gnutls.h.in,
+	lib/libgnutls.map: gnutls_prf_rfc5705: added That includes support for RFC5705 when the context field is used.
+	Initial patch by Rick van Rein.
+
+2015-07-17  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* doc/cha-tokens.texi: doc update: explain more about PKCS #11 and
+	fork
+
+2015-07-14  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* configure.ac: configure: print the trousers lib only when set
+
+2015-07-14  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* src/tpmtool-args.def, src/tpmtool.c: tpmtool: Added --test-sign
+	parameter
+
+2015-07-13  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* lib/gnutls_global.c, lib/tpm.c: Deinitialize the TPM subsystem
+	only when trousers support is enabled
+
+2015-07-13  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* configure.ac, lib/Makefile.am, lib/gnutls_errors.c,
+	lib/gnutls_global.c, lib/gnutls_global.h,
+	lib/includes/gnutls/gnutls.h.in, lib/tpm.c: TPM: don't link to
+	trousers, use dlopen() That introduces --with-trousers-lib which can be used to specify the
+	library to dlopen().  Resolves #18
+
+2015-07-12  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* doc/Makefile.am, doc/manpages/Makefile.am, symbols.last: updated
+	auto-generated files
+
+2015-07-12  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* NEWS, configure.ac, m4/hooks.m4: bumped version
+
+2015-07-11  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* lib/includes/gnutls/pkcs11.h: pkcs11: mention the version
+	GNUTLS_PKCS11_TOKEN_MODNAME is available from
+
+2015-07-10  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* NEWS: doc update
+
+2015-07-10  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* lib/auth/dhe_psk.c: PSK: set the hint in DHE-PSK and ECDHE-PSK
+	ciphersuites
+
+2015-07-10  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* tests/pskself.c: tests: updated pskself to check the hint in all
+	PSK ciphersuites
+
+2015-07-10  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* NEWS: doc update
+
+2015-07-10  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* src/pkcs11.c: p11tool: be more compact in token URL printing
+
+2015-07-10  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* src/p11tool-args.def: p11tool: group the provided options for
+	readability
+
+2015-07-10  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* src/p11tool-args.def, src/p11tool.c: p11tool: keep backwards
+	compatibility by introducing --list-token-urls That is, the output of --list-tokens remains the same.
+
+2015-07-10  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* src/pkcs11.c: p11tool: print the module name of a token in verbose
+	mode
+
+2015-07-10  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/includes/gnutls/pkcs11.h, lib/pkcs11.c, lib/pkcs11_int.h,
+	lib/pkcs11_write.c, lib/pkcs11x.c: Added GNUTLS_PKCS11_TOKEN_MODNAME
+	for gnutls_pkcs11_token_get_info That allows to obtain the shared module name of a token URL.
+
+2015-07-10  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/includes/gnutls/pkcs11.h: pkcs11.h: doc  update
+
+2015-07-10  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* src/p11tool-args.def, src/p11tool.c: p11tool: less verbose output
+	in --list-tokens unless --verbose is specified
+
+2015-07-09  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* tests/suppressions.valgrind: tests: added suppression for bash mem
+	leak
+
+2015-07-09  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* configure.ac, tests/Makefile.am, tests/cert-tests/Makefile.am: 
+	tests: don't run certtool-utf8 when libidn is 1.30 or less This avoids test suite failures due to libidn.
+
+2015-07-09  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* src/cli-args.def: gnutls-cli: doc update
+
+2015-07-09  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/ext/dumbfw.c: dumbfw: don't append a size prefix in the pad Reported by Hannes Mehnert.
+
+2015-07-08  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* gl/m4/valgrind-tests.m4: gl: use /bin/true to run valgrind during
+	configure Bash has memory leaks, which prevents the valgrind check to operate
+	using the SHELL variable.
+
+2015-07-08  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* tests/cert-tests/Makefile.am, tests/cert-tests/certtool-utf8: 
+	tests: added check for invalid UTF8 encoded string
+
+2015-07-08  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* configure.ac: Revert "libidn support is disabled by default" This reverts commit 5fdffb2c177cb990480fb8b93c9257ccc5dfcaad.
+
+2015-07-06  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* : commit d63c088edd15f20318b396f2298744cbf9e1a392 Author: Daniel
+	Kahn Gillmor <dkg@fifthhorseman.net> Date:   Thu Jul 2 14:28:32 2015
+	-0400
+
+2015-07-01  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* NEWS: doc update
+
+2015-07-01  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/gnutls_pubkey.c: DSA: the numeric number of bits returned from
+	public key should depend on P not Y That allows to do the proper evaluation to check certificate
+	strength.  Reported by Hubert Kario.
+
+2015-07-01  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* tests/dsa/Makefile.am, tests/dsa/dsa-pubkey-1018.pem,
+	tests/dsa/testdsa: tests: check whether we print the prime size in
+	DSA keys
+
+2015-07-01  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/x509/name_constraints.c: name constraints: simplified
+	gnutls_x509_name_constraints_check_crt()
+
+2015-07-01  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* tests/cert-tests/Makefile.am, tests/cert-tests/name-constraints,
+	tests/cert-tests/name-constraints-ip.pem: tests: verify that
+	unsupported name constraints are properly handled
+
+2015-07-01  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/x509/name_constraints.c: name constraints: don't reject
+	certificates if a CA has the URI or IPADDRESS constraints Don't reject certificates if a CA has the URI or IPADDRESS
+	constraints, and the end certificate doesn't have an IPaddress name
+	or a URI set.
+
+2015-06-29  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* po/ms.po.in: Sync with TP.
+
+2015-06-28  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* configure.ac: libidn support is disabled by default That is until the issues with libidn get resolves.  Relates #10
+
+2015-06-27  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* NEWS: doc update
+
+2015-06-27  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* tests/Makefile.am, tests/atfork.c: tests: added a test for the
+	fork detection interface
+
+2015-06-27  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* tests/resume-dtls.c: tests: resume-dtls: increased timeouts
+
+2015-06-26  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* configure.ac, lib/atfork.c, lib/atfork.h: Don't use
+	pthread_atfork(), it is not safe to use with dlopen() http://austingroupbugs.net/view.php?id=851
+
+2015-06-26  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/atfork.c, lib/atfork.h: atfork: added underscore to
+	gnutls_forkid
+
+2015-06-26  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/atfork.c, lib/atfork.h, lib/nettle/rnd-fips.c,
+	lib/nettle/rnd.c, lib/pkcs11.c: simplified fork detection
+
+2015-06-26  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/x509/privkey.c: enhanced header matching code for private keys
+	to skip unrelated data
+
+2015-06-26  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* tests/cert-tests/Makefile.am, tests/cert-tests/privkey-import,
+	tests/cert-tests/privkey1.pem, tests/cert-tests/privkey2.pem,
+	tests/cert-tests/privkey3.pem: tests: added private key import
+	checks
+
+2015-06-25  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/x509/privkey.c: gnutls_x509_privkey_import: optimized private
+	key loading
+
+2015-06-25  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/x509/privkey.c: gnutls_x509_privkey_import2: better behavior
+	when provided with an unencrypted file That is, it will attempt to decode it first as plain file prior to
+	trying all encrypted options.
+
+2015-06-25  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* tests/key-openssl.c: tests: added check to verify that
+	gnutls_x509_privkey_import2 works for plain keys That is, when a password is provided and the key is non encrypted.
+
+2015-06-25  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/x509/key_decode.c, lib/x509/mpi.c: _gnutls_get_asn_mpis() will
+	release any data on failure Resolves #15
+
+2015-06-21  Alon Bar-Lev <alon.barlev@gmail.com>
+
+	* tests/cert-tests/aki, tests/cert-tests/certtool,
+	tests/cert-tests/crq, tests/cert-tests/dane,
+	tests/cert-tests/email, tests/cert-tests/invalid-sig,
+	tests/cert-tests/pathlen, tests/cert-tests/pem-decoding,
+	tests/cert-tests/pkcs7, tests/cert-tests/template-test,
+	tests/dsa/testdsa, tests/dtls/dtls, tests/dtls/dtls-nb,
+	tests/ecdsa/ecdsa, tests/key-tests/key-id, tests/key-tests/pkcs8,
+	tests/nist-pkits/gnutls_test_entry, tests/nist-pkits/pkits_crl,
+	tests/nist-pkits/pkits_crt, tests/nist-pkits/pkits_pkcs12,
+	tests/nist-pkits/pkits_smime, tests/nist-pkits/pkits_test,
+	tests/openpgp-certs/testcerts, tests/openpgp-certs/testselfsigs,
+	tests/pkcs1-padding/pkcs1-pad, tests/pkcs12-decode/pkcs12,
+	tests/pkcs8-decode/pkcs8, tests/rfc2253-escape-test,
+	tests/rsa-md5-collision/rsa-md5-collision, tests/sha2/sha2,
+	tests/sha2/sha2-dsa, tests/slow/override-ciphers,
+	tests/slow/test-ciphers, tests/suite/certs/create-chain.sh,
+	tests/suite/chain, tests/suite/crl-test, tests/suite/eagain,
+	tests/suite/invalid-cert, tests/suite/testcompat-main-openssl,
+	tests/suite/testcompat-main-polarssl,
+	tests/suite/testcompat-openssl, tests/suite/testcompat-polarssl,
+	tests/suite/testdane, tests/suite/testpkcs11,
+	tests/suite/testpkcs11.pkcs15, tests/suite/testpkcs11.sc-hsm,
+	tests/suite/testpkcs11.softhsm, tests/suite/testrandom,
+	tests/suite/testrng, tests/suite/testsrn, tests/userid/userid: 
+	tests: tab indent + minor style changes Signed-off-by: Alon Bar-Lev <alon.barlev@gmail.com>
+
+2015-06-23  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* tests/suite/ciphersuite/scan-gnutls.sh: tests: modified
+	test-ciphersuite-names to work with cpp 5.1.1
+
+2015-06-22  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* tests/suite/test-ciphersuite-names: tests: test-ciphersuite-names:
+	create any needed dirs
+
+2015-06-22  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* tests/suite/Makefile.am, tests/suite/ciphersuite/scan-gnutls.sh,
+	tests/suite/ciphersuite/test-ciphersuites.sh,
+	tests/suite/test-ciphersuite-names: tests: moved
+	test-ciphersuites.sh one level up That simplifies running the script outside make check.
+
+2015-06-21  Alon Bar-Lev <alon.barlev@gmail.com>
+
+	* tests/suite/ciphersuite/scan-gnutls.sh,
+	tests/suite/ciphersuite/test-ciphers.js,
+	tests/suite/ciphersuite/test-ciphersuites.sh: tests: suite:
+	ciphersuite: fixups fix separate builddir issue, without modifying locations, quite
+	ugly.  re-indent using tab.  fix shebang.  Signed-off-by: Alon Bar-Lev <alon.barlev@gmail.com>
+
+2015-06-21  Alon Bar-Lev <alon.barlev@gmail.com>
+
+	* tests/pkcs1-padding/pkcs1-pad, tests/suite/testcompat-openssl,
+	tests/suite/testcompat-polarssl: tests: enforce UTC timezone in
+	datefudge tests Signed-off-by: Alon Bar-Lev <alon.barlev@gmail.com>
+
+2015-06-21  Alon Bar-Lev <alon.barlev@gmail.com>
+
+	* tests/cert-tests/aki, tests/cert-tests/certtool,
+	tests/cert-tests/crq, tests/cert-tests/dane,
+	tests/cert-tests/email, tests/cert-tests/invalid-sig,
+	tests/cert-tests/pathlen, tests/cert-tests/pem-decoding,
+	tests/cert-tests/pkcs7, tests/cert-tests/template-test,
+	tests/ecdsa/ecdsa, tests/key-tests/key-id, tests/key-tests/pkcs8,
+	tests/openpgp-certs/testselfsigs: tests: misc: shell cleanup leftovers minor sync.  Signed-off-by: Alon Bar-Lev <alon.barlev@gmail.com>
+
+2015-06-21  Alon Bar-Lev <alon.barlev@gmail.com>
+
+	* configure.ac, tests/suite/certs/create-chain.sh,
+	tests/suite/chain, tests/suite/crl-test, tests/suite/eagain,
+	tests/suite/invalid-cert, tests/suite/testcompat-common,
+	tests/suite/testcompat-main-openssl,
+	tests/suite/testcompat-main-polarssl,
+	tests/suite/testcompat-openssl, tests/suite/testcompat-polarssl,
+	tests/suite/testdane, tests/suite/testpkcs11,
+	tests/suite/testpkcs11.pkcs15, tests/suite/testpkcs11.sc-hsm,
+	tests/suite/testpkcs11.softhsm, tests/suite/testrandom,
+	tests/suite/testrng, tests/suite/testsrn: tests: suite: cleanup
+	shell usage Add quotes for most usages of variables.  Added ${} for variables.  Cleanup indentation to be consistent with other tests.  Fix separate builddir issues.  Signed-off-by: Alon Bar-Lev <alon.barlev@gmail.com>
+
+2015-06-21  Alon Bar-Lev <alon.barlev@gmail.com>
+
+	* tests/pkcs1-padding/pkcs1-pad, tests/pkcs12-decode/pkcs12,
+	tests/pkcs8-decode/pkcs8, tests/rfc2253-escape-test,
+	tests/rsa-md5-collision/rsa-md5-collision, tests/sha2/sha2,
+	tests/sha2/sha2-dsa, tests/slow/override-ciphers,
+	tests/slow/test-ciphers, tests/userid/userid: tests: misc: cleanup
+	shell usage Add quotes for most usages of variables.  Added ${} for variables.  Cleanup indentation to be consistent with other tests.  Signed-off-by: Alon Bar-Lev <alon.barlev@gmail.com>
+
+2015-06-20  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* tests/Makefile.am: tests: fixed includes
+
+2015-06-20  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* lib/gnutls_alert.c, lib/gnutls_cert.c, lib/gnutls_errors.c,
+	lib/gnutls_global.c, lib/gnutls_str.h, lib/x509/ocsp_output.c: move
+	all gettext definitions in gnutls_str.h
+
+2015-06-20  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* cross.mk: cross.mk: updated for 3.4.2
+
+2015-06-20  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* lib/gnutls_str.h: gnutls_str: include gettext.h when dgettext is
+	available
+
+2015-06-20  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* tests/Makefile.am, tests/mini-dtls-fork.c, tests/mini-dtls-mtu.c,
+	tests/mini-dtls-pthread.c, tests/mini-dtls-record-asym.c,
+	tests/openpgp-auth.c, tests/openpgp-auth2.c, tests/pkcs12_simple.c,
+	tests/rsa-encrypt-decrypt.c, tests/utils.c, tests/utils.h,
+	tests/x509sign-verify.c, tests/x509sign-verify2.c: tests: don't
+	depend on gnulib That dependency unfortunately causes many portability problems on
+	platforms where it should have worked out of the box.
+
+2015-06-20  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* NEWS: doc update
+
+2015-06-20  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* devel/perlasm/cpuid-x86.pl, doc/scripts/cleanup-autogen.pl,
+	doc/scripts/gdoc, doc/scripts/getfuncs-map.pl,
+	doc/scripts/getfuncs.pl, doc/scripts/sort1.pl,
+	doc/scripts/sort2.pl, doc/scripts/split-texi.pl,
+	doc/scripts/split.pl, tests/nist-pkits/build-chain: use the same
+	shebang for perl
+
+2015-06-19  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* tests/cert-tests/certtool: tests: added a verify-chain test case
+
+2015-06-19  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* tests/scripts/common.sh: tests: don't quote provider in common.sh That caused testpkcs11 to fail.
+
+2015-06-18  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* tests/mini-alignment.c: tests: don't enforce alignment rules for
+	caller buffers
+
+2015-06-17  Alon Bar-Lev <alon.barlev@gmail.com>
+
+	* tests/cert-tests/aki, tests/cert-tests/certtool,
+	tests/cert-tests/crq, tests/cert-tests/dane,
+	tests/cert-tests/email, tests/cert-tests/invalid-sig,
+	tests/cert-tests/pathlen, tests/cert-tests/pem-decoding,
+	tests/cert-tests/pkcs7, tests/cert-tests/template-test: tests:
+	cert-tests: cleanup shell usage Add quotes for most usages of variables.  Added ${} for variables.  Cleanup trailing spaces.  Signed-off-by: Alon Bar-Lev <alon.barlev@gmail.com>
+
+2015-06-18  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* .gitlab-ci.yml: Added gitlab-ci.yml
+
+2015-06-18  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/libgnutls.map: reduced the exported functions to the minimum
+	needed
+
+2015-06-18  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/gnutls_extensions.c: _gnutls_ext_register was made static
+
+2015-06-18  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/libgnutls.map: libgnutls.map: use a 3.4 related name for
+	private functions This eliminates any collisions with functions from 3.3.x
+
+2015-06-18  Alon Bar-Lev <alon.barlev@gmail.com>
+
+	* tests/nist-pkits/build-chain, tests/nist-pkits/gnutls_test_entry,
+	tests/nist-pkits/pkits, tests/nist-pkits/pkits_crl,
+	tests/nist-pkits/pkits_crt, tests/nist-pkits/pkits_pkcs12,
+	tests/nist-pkits/pkits_smime, tests/nist-pkits/pkits_test: tests:
+	nist-pkits: cleanup shell/perl usage Add quotes for most usages of variables.  Added ${} for variables.  Consistent indent.  Signed-off-by: Alon Bar-Lev <alon.barlev@gmail.com>
+
+2015-06-18  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* tests/Makefile.am: tests: force link with nettle of mini-alignment
+
+2015-06-18  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* tests/Makefile.am, tests/oids.c: tests: Check the OID functions
+
+2015-06-18  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* NEWS: doc update
+
+2015-06-18  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/algorithms.h, lib/algorithms/ecc.c, lib/algorithms/mac.c,
+	lib/algorithms/publickey.c, lib/algorithms/sign.c, lib/gnutls_pk.c,
+	lib/gnutls_priority.c, lib/includes/gnutls/gnutls.h.in,
+	lib/libgnutls.map, lib/x509/common.c, lib/x509/crl.c,
+	lib/x509/key_decode.c, lib/x509/key_encode.c, lib/x509/mpi.c,
+	lib/x509/ocsp.c, lib/x509/pkcs7.c, lib/x509/privkey.c,
+	lib/x509/privkey_pkcs8.c: Exported functions to convert from and to
+	OIDs
+
+2015-06-18  Saurav Babu <saurav.babu@samsung.com>
+
+	* src/cli.c: gnutls-cli: Fixed Possible Memory Leak This patch fixes possible memory leak in psk_callback() function,
+	rawkey is allocated memory by gnutls_malloc() and is not freed when
+	gnutls_hex_decode() returns with error Signed-off-by: Saurav Babu <saurav.babu@samsung.com>
+
+2015-06-18  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/x509/pkcs7.c: pkcs7: corrected write_signer_id() when
+	GNUTLS_PKCS7_WRITE_SPKI was used
+
+2015-06-18  Alon Bar-Lev <alon.barlev@gmail.com>
+
+	* tests/openpgp-certs/testcerts, tests/openpgp-certs/testselfsigs: 
+	tests: openpgp-certs: cleanup shell usage Add quotes for most usages of variables.  Added ${} for variables.  Signed-off-by: Alon Bar-Lev <alon.barlev@gmail.com>
+
+2015-06-18  Alon Bar-Lev <alon.barlev@gmail.com>
+
+	* tests/key-tests/key-id, tests/key-tests/pkcs8: tests: key-tests:
+	cleanup shell usage Add quotes for most usages of variables.  Added ${} for variables.  Signed-off-by: Alon Bar-Lev <alon.barlev@gmail.com>
+
+2015-06-18  Alon Bar-Lev <alon.barlev@gmail.com>
+
+	* tests/ecdsa/ecdsa: tests: ecdsa: cleanup shell usage Add quotes for most usages of variables.  Added ${} for variables.  Cleanup trailing spaces.  Signed-off-by: Alon Bar-Lev <alon.barlev@gmail.com>
+
+2015-06-18  Alon Bar-Lev <alon.barlev@gmail.com>
+
+	* tests/dsa/testdsa, tests/scripts/common.sh: tests: dsa: cleanup
+	shell usage Add quotes for most usages of variables.  Added ${} for variables.  Cleanup trailing spaces.  Removal of unneeded ';'.  Minor fix in tests/scripts/common.sh at trap to pass message and
+	avoid killing.  Signed-off-by: Alon Bar-Lev <alon.barlev@gmail.com>
+
+2015-06-18  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/gnutls_mbuffers.c: indentation fix
+
+2015-06-18  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/gnutls_int.h: Always align in 16-byte boundary our input to
+	crypto That allows faster operations in almost all instruction sets.
+
+2015-06-18  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* tests/Makefile.am, tests/mini-alignment.c: tests: added check for
+	memory alignment
+
+2015-06-17  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* tests/cert-tests/template-test: tests: only run test with long
+	dates in 64-bit systems
+
+2015-06-17  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* tests/cert-tests/template-date.pem,
+	tests/cert-tests/template-dn.pem,
+	tests/cert-tests/template-generalized.pem,
+	tests/cert-tests/template-nc.pem,
+	tests/cert-tests/template-overflow.pem,
+	tests/cert-tests/template-overflow2.pem,
+	tests/cert-tests/template-test, tests/cert-tests/template-test.pem,
+	tests/cert-tests/template-utf8.pem: tests: regenerate the results in
+	template-test using UTC times
+
+2015-06-17  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/gnutls_pubkey.c: ensure that gnutls_pubkey_verify_data2
+	returns 0 on success
+
+2015-06-17  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/includes/gnutls/pkcs7.h, lib/libgnutls.map, lib/x509/pkcs7.c: 
+	Added gnutls_pkcs7_get_signature_count
+
+2015-06-17  Alon Bar-Lev <alon.barlev@gmail.com>
+
+	* tests/suite/Makefile.am: tests: suite: run testpkcs11 if PKCS#11
+	is enabled Signed-off-by: Alon Bar-Lev <alon.barlev@gmail.com>
+
+2015-06-17  Alon Bar-Lev <alon.barlev@gmail.com>
+
+	* tests/nist-pkits/gnutls_test_entry,
+	tests/suite/certs/create-chain.sh: tests: remove bash usage Signed-off-by: Alon Bar-Lev <alon.barlev@gmail.com>
+
+2015-06-17  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* NEWS: doc update
+
+2015-06-17  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* tests/cert-tests/Makefile.am, tests/cert-tests/template-date.pem,
+	tests/cert-tests/template-dn.pem,
+	tests/cert-tests/template-generalized.pem,
+	tests/cert-tests/template-generalized.tmpl,
+	tests/cert-tests/template-nc.pem,
+	tests/cert-tests/template-overflow.pem,
+	tests/cert-tests/template-overflow2.pem,
+	tests/cert-tests/template-test, tests/cert-tests/template-test.pem,
+	tests/cert-tests/template-utf8.pem: tests: verify that we generate
+	dates with UTCTime prior to 2050 Also that we generate dates with GeneralizedTime format after 2050.
+
+2015-06-17  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/x509/common.c, lib/x509/common.h: When writing the Time ASN.1
+	structure follow the RFC5280 recommendations
+
+2015-06-17  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/x509/common.c: Set time in PKCS #7 structures properly (in
+	UTCTime format).
+
+2015-06-17  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* NEWS: doc update
+
+2015-06-16  Alon Bar-Lev <alon.barlev@gmail.com>
+
+	* tests/cert-tests/pkcs7: tests: cert-tests: pkcs7: support separate
+	builddir Signed-off-by: Alon Bar-Lev <alon.barlev@gmail.com>
+
 2015-06-16  Nikos Mavrogiannopoulos <nmav@gnutls.org>
 
 	* symbols.last: account new symbols
@@ -19744,8 +20710,18 @@
 
 2012-11-07  Nikos Mavrogiannopoulos <nmav@gnutls.org>
 
-	* Removed GNUTLS_CERT_REVOCATION_DATA_INVALID and no longer fail on
-	OCSP parsing errors.
+	* NEWS, lib/gnutls_cert.c, lib/gnutls_x509.c,
+	lib/includes/gnutls/gnutls.h.in: Removed
+	GNUTLS_CERT_REVOCATION_DATA_INVALID and no longer fail on OCSP
+	parsing errors.
+
+2012-11-07  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* doc/cha-cert-auth.texi, doc/cha-tokens.texi: doc update
+
+2012-11-07  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* gnutls-cli-debug uses server name indication.
 
 	-----
 

@@ -30,12 +30,13 @@
 #include <gnutls_num.h>
 #include <x509_b64.h>
 #include "x509_int.h"
+#include "extras/hex.h"
 #include <common.h>
 #include <c-ctype.h>
 
 static int
 data2hex(const void *data, size_t data_size,
-	 void *_out, size_t * sizeof_out);
+	 gnutls_datum_t *out);
 
 struct oid_to_string {
 	const char *oid;
@@ -295,7 +296,6 @@ make_printable_string(unsigned etype, const gnutls_datum_t * input,
 	int printable = 0;
 	int ret;
 	unsigned int i;
-	size_t size;
 
 	if (etype == ASN1_ETYPE_BMP_STRING) {
 		ret = _gnutls_ucs2_to_utf8(input->data, input->size, out, 1);
@@ -331,25 +331,14 @@ make_printable_string(unsigned etype, const gnutls_datum_t * input,
 		return GNUTLS_E_INVALID_REQUEST;
 
 	if (printable == 0) {	/* need to allocate out */
-		out->size = input->size * 2 + 2;
-		out->data = gnutls_malloc(out->size);
-		if (out->data == NULL)
-			return gnutls_assert_val(GNUTLS_E_MEMORY_ERROR);
-
-		size = out->size;
-		ret = data2hex(input->data, input->size, out->data, &size);
+		ret = data2hex(input->data, input->size, out);
 		if (ret < 0) {
 			gnutls_assert();
-			goto cleanup;
+			return ret;
 		}
-		out->size = size;
 	}
 
 	return 0;
-
-      cleanup:
-	_gnutls_free_datum(out);
-	return ret;
 }
 
 static int
@@ -450,7 +439,6 @@ _gnutls_x509_dn_to_string(const char *oid, void *value,
 	const struct oid_to_string *oentry;
 	int ret;
 	gnutls_datum_t tmp;
-	size_t size;
 
 	if (value == NULL || value_size <= 0) {
 		gnutls_assert();
@@ -460,19 +448,11 @@ _gnutls_x509_dn_to_string(const char *oid, void *value,
 	oentry = get_oid_entry(oid);
 	if (oentry == NULL) {	/* unknown OID -> hex */
  unknown_oid:
-		str->size = value_size * 2 + 2;
-		str->data = gnutls_malloc(str->size);
-		if (str->data == NULL)
-			return gnutls_assert_val(GNUTLS_E_MEMORY_ERROR);
-
-		size = str->size;
-		ret = data2hex(value, value_size, str->data, &size);
+		ret = data2hex(value, value_size, str);
 		if (ret < 0) {
 			gnutls_assert();
-			gnutls_free(str->data);
 			return ret;
 		}
-		str->size = size;
 		return 0;
 	}
 
@@ -507,39 +487,35 @@ _gnutls_x509_dn_to_string(const char *oid, void *value,
  */
 static int
 data2hex(const void *data, size_t data_size,
-	 void *_out, size_t * sizeof_out)
+	 gnutls_datum_t *out)
 {
-	char *res;
-	char escaped[MAX_STRING_LEN];
-	unsigned int size, res_size;
-	char *out = _out;
+	gnutls_datum_t tmp, td;
+	int ret;
+	size_t size;
 
-	if (2 * data_size + 1 > MAX_STRING_LEN) {
+	td.size = hex_str_size(data_size) + 1; /* +1 for '#' */
+	td.data = gnutls_malloc(td.size);
+	if (td.data == NULL)
+		return gnutls_assert_val(GNUTLS_E_MEMORY_ERROR);
+
+	tmp.data = (void*)data;
+	tmp.size = data_size;
+
+	td.data[0] = '#';
+	size = td.size-1; /* don't include '#' */
+	ret =
+	    gnutls_hex_encode(&tmp,
+			    (char*)&td.data[1], &size);
+	if (ret < 0) {
 		gnutls_assert();
-		return GNUTLS_E_INTERNAL_ERROR;
-	}
-
-	res =
-	    _gnutls_bin2hex(data, data_size, escaped, sizeof(escaped),
-			    NULL);
-	if (!res) {
-		gnutls_assert();
-		return GNUTLS_E_INTERNAL_ERROR;
-	}
-
-	res_size = strlen(res);
-	size = res_size + 1;	/* +1 for the '#' */
-	if (size + 1 > *sizeof_out) {
-		*sizeof_out = size + 1;
+		gnutls_free(td.data);
 		return GNUTLS_E_SHORT_MEMORY_BUFFER;
 	}
-	*sizeof_out = size;	/* -1 for the null +1 for the '#' */
 
-	if (out) {
-		out[0] = '#';
-		memcpy(&out[1], res, res_size);
-		out[size] = 0;
-	}
+	td.size--; /* don't include null */
+
+	out->data = td.data;
+	out->size = td.size;
 
 	return 0;
 }
@@ -733,8 +709,48 @@ time_t _gnutls_x509_generalTime2gtime(const char *ttime)
 	return time2gtime(ttime, year);
 }
 
+/* tag will contain ASN1_TAG_UTCTime or ASN1_TAG_GENERALIZEDTime */
 static int
-gtime2generalTime(time_t gtime, char *str_time, size_t str_time_size)
+gtime_to_suitable_time(time_t gtime, char *str_time, size_t str_time_size, unsigned *tag)
+{
+	size_t ret;
+	struct tm _tm;
+
+	if (gtime == (time_t)-1
+#if SIZEOF_LONG == 8
+		|| gtime >= 253402210800
+#endif
+	 ) {
+        	if (tag)
+        		*tag = ASN1_TAG_GENERALIZEDTime;
+        	snprintf(str_time, str_time_size, "99991231235959Z");
+        	return 0;
+	}
+
+	if (!gmtime_r(&gtime, &_tm)) {
+		gnutls_assert();
+		return GNUTLS_E_INTERNAL_ERROR;
+	}
+
+	if (_tm.tm_year >= 150) {
+		if (tag)
+        		*tag = ASN1_TAG_GENERALIZEDTime;
+		ret = strftime(str_time, str_time_size, "%Y%m%d%H%M%SZ", &_tm);
+	} else {
+		if (tag)
+        		*tag = ASN1_TAG_UTCTime;
+		ret = strftime(str_time, str_time_size, "%y%m%d%H%M%SZ", &_tm);
+	}
+	if (!ret) {
+		gnutls_assert();
+		return GNUTLS_E_SHORT_MEMORY_BUFFER;
+	}
+
+	return 0;
+}
+
+static int
+gtime_to_generalTime(time_t gtime, char *str_time, size_t str_time_size)
 {
 	size_t ret;
 	struct tm _tm;
@@ -759,7 +775,6 @@ gtime2generalTime(time_t gtime, char *str_time, size_t str_time_size)
 		return GNUTLS_E_SHORT_MEMORY_BUFFER;
 	}
 
-
 	return 0;
 }
 
@@ -768,7 +783,7 @@ gtime2generalTime(time_t gtime, char *str_time, size_t str_time_size)
  * be something like "tbsCertList.thisUpdate".
  */
 #define MAX_TIME 64
-time_t _gnutls_x509_get_time(ASN1_TYPE c2, const char *where, int nochoice)
+time_t _gnutls_x509_get_time(ASN1_TYPE c2, const char *where, int force_general)
 {
 	char ttime[MAX_TIME];
 	char name[128];
@@ -782,7 +797,7 @@ time_t _gnutls_x509_get_time(ASN1_TYPE c2, const char *where, int nochoice)
 		return (time_t) (-1);
 	}
 
-	if (nochoice != 0) {
+	if (force_general != 0) {
 		c_time = _gnutls_x509_generalTime2gtime(ttime);
 	} else {
 		_gnutls_str_cpy(name, sizeof(name), where);
@@ -828,15 +843,16 @@ time_t _gnutls_x509_get_time(ASN1_TYPE c2, const char *where, int nochoice)
  */
 int
 _gnutls_x509_set_time(ASN1_TYPE c2, const char *where, time_t tim,
-		      int nochoice)
+		      int force_general)
 {
 	char str_time[MAX_TIME];
 	char name[128];
 	int result, len;
+	unsigned tag;
 
-	if (nochoice != 0) {
+	if (force_general != 0) {
 		result =
-		    gtime2generalTime(tim, str_time, sizeof(str_time));
+		    gtime_to_generalTime(tim, str_time, sizeof(str_time));
 		if (result < 0)
 			return gnutls_assert_val(result);
 		len = strlen(str_time);
@@ -847,20 +863,26 @@ _gnutls_x509_set_time(ASN1_TYPE c2, const char *where, time_t tim,
 		return 0;
 	}
 
-	_gnutls_str_cpy(name, sizeof(name), where);
-
-	if ((result = asn1_write_value(c2, name, "generalTime", 1)) < 0) {
-		gnutls_assert();
-		return _gnutls_asn2err(result);
-	}
-
-	result = gtime2generalTime(tim, str_time, sizeof(str_time));
+	result = gtime_to_suitable_time(tim, str_time, sizeof(str_time), &tag);
 	if (result < 0) {
 		gnutls_assert();
 		return result;
 	}
 
-	_gnutls_str_cat(name, sizeof(name), ".generalTime");
+	_gnutls_str_cpy(name, sizeof(name), where);
+	if (tag == ASN1_TAG_UTCTime) {
+		if ((result = asn1_write_value(c2, where, "utcTime", 1)) < 0) {
+			gnutls_assert();
+			return _gnutls_asn2err(result);
+		}
+		_gnutls_str_cat(name, sizeof(name), ".utcTime");
+	} else {
+		if ((result = asn1_write_value(c2, where, "generalTime", 1)) < 0) {
+			gnutls_assert();
+			return _gnutls_asn2err(result);
+		}
+		_gnutls_str_cat(name, sizeof(name), ".generalTime");
+	}
 
 	len = strlen(str_time);
 	result = asn1_write_value(c2, name, str_time, len);
@@ -872,20 +894,24 @@ _gnutls_x509_set_time(ASN1_TYPE c2, const char *where, time_t tim,
 	return 0;
 }
 
+/* This will set a DER encoded Time element. To be used in fields
+ * which are of the ANY.
+ */
 int
 _gnutls_x509_set_raw_time(ASN1_TYPE c2, const char *where, time_t tim)
 {
 	char str_time[MAX_TIME];
 	uint8_t buf[128];
 	int result, len, der_len;
+	unsigned tag;
 
 	result =
-	    gtime2generalTime(tim, str_time, sizeof(str_time));
+	    gtime_to_suitable_time(tim, str_time, sizeof(str_time), &tag);
 	if (result < 0)
 		return gnutls_assert_val(result);
 	len = strlen(str_time);
 
-	buf[0] = ASN1_TAG_GENERALIZEDTime;
+	buf[0] = tag;
 	asn1_length_der(len, buf+1, &der_len);
 
 	if ((unsigned)len > sizeof(buf)-der_len-1) {
@@ -1408,7 +1434,7 @@ _gnutls_x509_encode_and_copy_PKI_params(ASN1_TYPE dst,
 	int result;
 	char name[128];
 
-	pk = _gnutls_x509_pk_to_oid(pk_algorithm);
+	pk = gnutls_pk_get_oid(pk_algorithm);
 	if (pk == NULL) {
 		gnutls_assert();
 		return GNUTLS_E_UNKNOWN_PK_ALGORITHM;
@@ -1529,7 +1555,7 @@ _gnutls_x509_get_pk_algorithm(ASN1_TYPE src, const char *src_name,
 		return _gnutls_asn2err(result);
 	}
 
-	algo = _gnutls_x509_oid2pk_algorithm(oid);
+	algo = gnutls_oid_to_pk(oid);
 	if (algo == GNUTLS_PK_UNKNOWN) {
 		_gnutls_debug_log
 		    ("%s: unknown public key algorithm: %s\n", __func__,
@@ -1619,7 +1645,7 @@ _gnutls_x509_get_signature_algorithm(ASN1_TYPE src, const char *src_name)
 		return result;
 	}
 
-	result = _gnutls_x509_oid2sign_algorithm((char *) sa.data);
+	result = gnutls_oid_to_sign((char *) sa.data);
 
 	_gnutls_free_datum(&sa);
 

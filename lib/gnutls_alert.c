@@ -24,11 +24,7 @@
 #include <gnutls_errors.h>
 #include <gnutls_record.h>
 #include <debug.h>
-
-/* I18n of error codes. */
-#include "gettext.h"
-#define _(String) dgettext (PACKAGE, String)
-#define N_(String) gettext_noop (String)
+#include <gnutls_str.h>
 
 typedef struct {
 	gnutls_alert_description_t alert;
@@ -71,6 +67,8 @@ static const gnutls_alert_entry sup_alerts[] = {
 	ALERT_ENTRY(GNUTLS_A_SSL3_NO_CERTIFICATE,
 		    N_("No certificate (SSL 3.0)")),
 	ALERT_ENTRY(GNUTLS_A_INTERNAL_ERROR, N_("Internal error")),
+	ALERT_ENTRY(GNUTLS_A_INAPPROPRIATE_FALLBACK,
+		    N_("Inappropriate fallback")),
 	ALERT_ENTRY(GNUTLS_A_NO_RENEGOTIATION,
 		    N_("No renegotiation is allowed")),
 	ALERT_ENTRY(GNUTLS_A_CERTIFICATE_UNOBTAINABLE,
@@ -277,6 +275,10 @@ int gnutls_error_to_alert(int err, int *level)
 	case GNUTLS_E_NO_TEMPORARY_DH_PARAMS:
 	case GNUTLS_E_NO_TEMPORARY_RSA_PARAMS:
 		ret = GNUTLS_A_INTERNAL_ERROR;
+		_level = GNUTLS_AL_FATAL;
+		break;
+	case GNUTLS_E_INAPPROPRIATE_FALLBACK:
+		ret = GNUTLS_A_INAPPROPRIATE_FALLBACK;
 		_level = GNUTLS_AL_FATAL;
 		break;
 	case GNUTLS_E_OPENPGP_GETKEY_FAILED:

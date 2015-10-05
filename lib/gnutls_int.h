@@ -64,9 +64,7 @@ typedef int ssize_t;
 #define memxor gl_memxor
 #endif
 
-#ifdef ENABLE_CRYPTODEV
-# define ENABLE_ALIGN16
-#endif
+#define ENABLE_ALIGN16
 
 #ifdef __GNUC__
 #ifndef _GNUTLS_GCC_VERSION
@@ -678,6 +676,9 @@ struct gnutls_priority_st {
 	 */
 	gnutls_sec_param_t level;
 	unsigned int dh_prime_bits;	/* old (deprecated) variable */
+
+	/* TLS_FALLBACK_SCSV */
+	bool fallback;
 };
 
 /* Allow around 50KB of length-hiding padding
@@ -871,8 +872,8 @@ typedef struct {
 	struct gnutls_privkey_st *selected_key;
 	bool selected_need_free;
 
-	/* holds the extensions we sent to the peer
-	 * (in case of a client)
+	/* In case of a client holds the extensions we sent to the peer;
+	 * otherwise the extensions we received from the client.
 	 */
 	uint16_t extensions_sent[MAX_EXT_TYPES];
 	uint16_t extensions_sent_size;

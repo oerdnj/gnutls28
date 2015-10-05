@@ -67,6 +67,9 @@
 @item GNUTLS_@-A_@-INTERNAL_@-ERROR
 @tab 80
 @tab Internal error
+@item GNUTLS_@-A_@-INAPPROPRIATE_@-FALLBACK
+@tab 86
+@tab Inappropriate fallback
 @item GNUTLS_@-A_@-USER_@-CANCELED
 @tab 90
 @tab User canceled

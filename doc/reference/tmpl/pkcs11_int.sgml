@@ -74,8 +74,9 @@ pkcs11_int
 </para>
 
 @Param1: 
+@Param2: 
 @tinfo: 
-@Param3: 
+@Param4: 
 @input: 
 @Returns: 
 

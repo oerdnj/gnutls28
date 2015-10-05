@@ -250,6 +250,8 @@ Error in protocol version.
 Insufficient security.
 @item GNUTLS_@-A_@-INTERNAL_@-ERROR
 Internal error.
+@item GNUTLS_@-A_@-INAPPROPRIATE_@-FALLBACK
+Inappropriate fallback,
 @item GNUTLS_@-A_@-USER_@-CANCELED
 User canceled.
 @item GNUTLS_@-A_@-NO_@-RENEGOTIATION
@@ -906,9 +908,11 @@ If set, the object was never marked as extractable (store).
 @item GNUTLS_@-PKCS11_@-OBJ_@-FLAG_@-CRT
 When searching, restrict to certificates only (seek).
 @item GNUTLS_@-PKCS11_@-OBJ_@-FLAG_@-WITH_@-PRIVKEY
-When searching, restrict to objects which have a corresponding private key (seek).
+-- undescribed --
 @item GNUTLS_@-PKCS11_@-OBJ_@-FLAG_@-PUBKEY
 When searching, restrict to public key objects only (seek).
+@item GNUTLS_@-PKCS11_@-OBJ_@-FLAG_@-NO_@-STORE_@-PUBKEY
+When generating a keypair don't store the public key (store).
 @item GNUTLS_@-PKCS11_@-OBJ_@-FLAG_@-PRIVKEY
 When searching, restrict to private key objects only (seek).
 @end table
@@ -940,11 +944,11 @@ The token's model.
 @item GNUTLS_@-PKCS11_@-OBJ_@-ID
 The object ID.
 @item GNUTLS_@-PKCS11_@-OBJ_@-LIBRARY_@-VERSION
-The library's used to access the object version.
+The library's version.
 @item GNUTLS_@-PKCS11_@-OBJ_@-LIBRARY_@-DESCRIPTION
-The library's used to access the object description (name).
+The library's description.
 @item GNUTLS_@-PKCS11_@-OBJ_@-LIBRARY_@-MANUFACTURER
-The library's used to access the object manufacturer name.
+The library's manufacturer name.
 @end table
 
 @c gnutls_pkcs11_token_info_t
@@ -957,6 +961,8 @@ The token's serial number (string)
 The token's manufacturer (string)
 @item GNUTLS_@-PKCS11_@-TOKEN_@-MODEL
 The token's model (string)
+@item GNUTLS_@-PKCS11_@-TOKEN_@-MODNAME
+The token's module name (string - since 3.4.3)
 @end table
 
 @c gnutls_pkcs11_obj_type_t

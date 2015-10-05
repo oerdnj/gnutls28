@@ -1,6 +1,6 @@
-This is gnutls.info, produced by makeinfo version 5.2 from gnutls.texi.
+This is gnutls.info, produced by makeinfo version 6.0 from gnutls.texi.
 
-This manual is last updated 4 March 2015 for version 3.4.2 of GnuTLS.
+This manual is last updated 4 March 2015 for version 3.4.5 of GnuTLS.
 
 Copyright (C) 2001-2015 Free Software Foundation, Inc.\\ Copyright (C)
 2001-2015 Nikos Mavrogiannopoulos
@@ -246,8 +246,8 @@ gnutls_pkcs7_get_crt_count
      This function will return the number of certifcates in the PKCS7 or
      RFC2630 certificate set.
 
-     *Returns:* On success, 'GNUTLS_E_SUCCESS' (0) is returned,
-     otherwise a negative error value.
+     *Returns:* On success, a positive number is returned, otherwise a
+     negative error value.
 
 gnutls_pkcs7_get_crt_raw
 ------------------------
@@ -283,7 +283,8 @@ gnutls_pkcs7_get_crt_raw2
 
      INDX: contains the index of the certificate to extract
 
-     CERT: - undescribed -
+     CERT: will hold the contents of the certificate; must be
+     deallocated with 'gnutls_free()'
 
      This function will return a certificate of the PKCS7 or RFC2630
      certificate set.
@@ -297,6 +298,21 @@ gnutls_pkcs7_get_crt_raw2
      'GNUTLS_E_SHORT_MEMORY_BUFFER' is returned.
 
      *Since:* 3.4.2
+
+gnutls_pkcs7_get_signature_count
+--------------------------------
+
+ -- Function: int gnutls_pkcs7_get_signature_count (gnutls_pkcs7_t
+          PKCS7)
+     PKCS7: should contain a 'gnutls_pkcs7_t' type
+
+     This function will return the number of signatures in the PKCS7
+     structure.
+
+     *Returns:* On success, a positive number is returned, otherwise a
+     negative error value.
+
+     *Since:* 3.4.3
 
 gnutls_pkcs7_get_signature_info
 -------------------------------
@@ -445,9 +461,9 @@ gnutls_pkcs7_sign
           DIG, unsigned FLAGS)
      PKCS7: should contain a 'gnutls_pkcs7_t' type
 
-     SIGNER: the certificate believe to have signed the structure
+     SIGNER: the certificate to sign the structure
 
-     SIGNER_KEY: - undescribed -
+     SIGNER_KEY: the key to sign the structure
 
      DATA: The data to be signed or 'NULL' if the data are already
      embedded
@@ -530,7 +546,7 @@ gnutls_pkcs7_verify_direct
           DATA, unsigned FLAGS)
      PKCS7: should contain a 'gnutls_pkcs7_t' type
 
-     SIGNER: the certificate believe to have signed the structure
+     SIGNER: the certificate believed to have signed the structure
 
      IDX: the index of the signature info to check
 

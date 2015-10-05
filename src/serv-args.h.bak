@@ -110,9 +110,9 @@ typedef enum {
 /** count of all options for gnutls-serv */
 #define OPTION_CT    40
 /** gnutls-serv version */
-#define GNUTLS_SERV_VERSION       "3.4.2"
+#define GNUTLS_SERV_VERSION       "3.4.5"
 /** Full gnutls-serv version text */
-#define GNUTLS_SERV_FULL_VERSION  "gnutls-serv 3.4.2"
+#define GNUTLS_SERV_FULL_VERSION  "gnutls-serv 3.4.5"
 
 /**
  *  Interface defines for all options.  Replace "n" with the UPPER_CASED

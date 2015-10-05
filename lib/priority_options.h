@@ -36,7 +36,7 @@ static const struct priority_options_st *in_word_set(register const char *str, r
 #line 7 "priority_options.gperf"
 struct priority_options_st { const char *name; option_set_func func; };
 
-#define TOTAL_KEYWORDS 27
+#define TOTAL_KEYWORDS 28
 #define MIN_WORD_LENGTH 6
 #define MAX_WORD_LENGTH 27
 #define MIN_HASH_VALUE 6
@@ -61,8 +61,8 @@ hash (register const char *str, register unsigned int len)
       50, 50, 50, 50, 50, 50, 50, 50, 50, 50,
       50, 50, 50, 50, 50, 50, 50, 50, 50, 50,
       25, 50, 50,  5, 50, 50, 20, 50, 50, 50,
-      50, 50, 50, 50, 50,  5, 50,  0,  5, 20,
-      50,  3,  0, 50, 50, 10, 20, 30,  0, 50,
+      50, 50, 50, 50, 50, 10, 50,  0,  5, 20,
+      10,  3,  0, 50, 50, 10, 20, 30,  0, 50,
        5, 50, 50,  0,  0,  0,  0,  0, 50,  5,
       50, 50, 50, 50, 50, 50, 50, 50, 50, 50,
       50, 50, 50, 50, 50, 50, 50, 50, 50, 50,
@@ -98,13 +98,13 @@ static const struct priority_options_st wordlist[] =
     {""},
 #line 11 "priority_options.gperf"
     {"NO_EXTENSIONS", enable_no_extensions},
-#line 35 "priority_options.gperf"
+#line 36 "priority_options.gperf"
     {"NEW_PADDING", dummy_func},
 #line 14 "priority_options.gperf"
     {"NO_SESSION_HASH", enable_no_ext_master_secret},
-#line 28 "priority_options.gperf"
+#line 29 "priority_options.gperf"
     {"PROFILE_LOW", enable_profile_low},
-#line 31 "priority_options.gperf"
+#line 32 "priority_options.gperf"
     {"PROFILE_HIGH", enable_profile_high},
 #line 22 "priority_options.gperf"
     {"SAFE_RENEGOTIATION", enable_safe_renegotiation},
@@ -114,11 +114,11 @@ static const struct priority_options_st wordlist[] =
     {"UNSAFE_RENEGOTIATION", enable_unsafe_renegotiation},
 #line 15 "priority_options.gperf"
     {"STATELESS_COMPRESSION", enable_stateless_compression},
-#line 25 "priority_options.gperf"
+#line 26 "priority_options.gperf"
     {"DISABLE_WILDCARDS", disable_wildcards},
-#line 32 "priority_options.gperf"
-    {"PROFILE_ULTRA", enable_profile_ultra},
-#line 29 "priority_options.gperf"
+#line 25 "priority_options.gperf"
+    {"FALLBACK_SCSV", enable_fallback_scsv},
+#line 30 "priority_options.gperf"
     {"PROFILE_LEGACY", enable_profile_legacy},
 #line 17 "priority_options.gperf"
     {"VERIFY_DISABLE_CRL_CHECKS", disable_crl_checks},
@@ -126,28 +126,30 @@ static const struct priority_options_st wordlist[] =
     {"PARTIAL_RENEGOTIATION", enable_partial_safe_renegotiation},
 #line 20 "priority_options.gperf"
     {"VERIFY_ALLOW_X509_V1_CA_CRT", dummy_func},
-    {""}, {""},
+#line 33 "priority_options.gperf"
+    {"PROFILE_ULTRA", enable_profile_ultra},
+    {""},
 #line 16 "priority_options.gperf"
     {"VERIFY_ALLOW_SIGN_RSA_MD5", enable_verify_allow_rsa_md5},
 #line 24 "priority_options.gperf"
     {"DISABLE_SAFE_RENEGOTIATION", disable_safe_renegotiation},
-#line 27 "priority_options.gperf"
+#line 28 "priority_options.gperf"
     {"PROFILE_VERY_WEAK", enable_profile_very_weak},
     {""}, {""}, {""},
 #line 13 "priority_options.gperf"
     {"NO_ETM", enable_no_etm},
-#line 26 "priority_options.gperf"
+#line 27 "priority_options.gperf"
     {"SERVER_PRECEDENCE", enable_server_precedence},
     {""}, {""}, {""},
 #line 19 "priority_options.gperf"
     {"LATEST_RECORD_VERSION", enable_latest_record_version},
-#line 33 "priority_options.gperf"
+#line 34 "priority_options.gperf"
     {"PROFILE_SUITEB128", enable_profile_suiteb128},
     {""}, {""}, {""}, {""},
-#line 34 "priority_options.gperf"
+#line 35 "priority_options.gperf"
     {"PROFILE_SUITEB192", enable_profile_suiteb192},
     {""},
-#line 30 "priority_options.gperf"
+#line 31 "priority_options.gperf"
     {"PROFILE_MEDIUM", enable_profile_medium}
   };
 
