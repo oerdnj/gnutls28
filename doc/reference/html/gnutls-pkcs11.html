@@ -823,7 +823,7 @@ gnutls_pkcs11_obj_export2 (<em class="parameter"><code><a class="link" href="gnu
 <p>This function will export the PKCS11 object data.  It is normal for
 data to be inaccesible and in that case <a class="link" href="gnutls-gnutls.html#GNUTLS-E-INVALID-REQUEST:CAPS" title="GNUTLS_E_INVALID_REQUEST"><code class="literal">GNUTLS_E_INVALID_REQUEST</code></a>
 will be returned.</p>
-<p>The output buffer is allocated using <code class="function">gnutls_malloc()</code>.</p>
+<p>The output buffer is allocated using <a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-malloc"><code class="function">gnutls_malloc()</code></a>.</p>
 <div class="refsect3">
 <a name="id-1.2.9.6.12.6"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
@@ -1207,7 +1207,7 @@ the token and will not be exportable. This function will
 store the DER-encoded public key in the SubjectPublicKeyInfo format 
 in <em class="parameter"><code>pubkey</code></em>
 . The <em class="parameter"><code>pubkey</code></em>
- should be deinitialized using <code class="function">gnutls_free()</code>.</p>
+ should be deinitialized using <a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-free"><code class="function">gnutls_free()</code></a>.</p>
 <p>Note that when generating an elliptic curve key, the curve
 can be substituted in the place of the bits parameter using the
 <code class="function">GNUTLS_CURVE_TO_BITS()</code> macro.</p>
@@ -1727,7 +1727,7 @@ gnutls_pkcs11_token_get_url (<em class="parameter"><code>unsigned <span class="t
                              <em class="parameter"><code><a class="link" href="gnutls-pkcs11.html#gnutls-pkcs11-url-type-t" title="enum gnutls_pkcs11_url_type_t"><span class="type">gnutls_pkcs11_url_type_t</span></a> detailed</code></em>,
                              <em class="parameter"><code><span class="type">char</span> **url</code></em>);</pre>
 <p>This function will return the URL for each token available
-in system. The url has to be released using <code class="function">gnutls_free()</code></p>
+in system. The url has to be released using <a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-free"><code class="function">gnutls_free()</code></a></p>
 <div class="refsect3">
 <a name="id-1.2.9.6.36.5"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
@@ -2115,6 +2115,7 @@ negative error value.</p>
 
 	/* only when pubkey */
 	gnutls_datum_t pubkey[MAX_PUBLIC_PARAMS_SIZE];
+	unsigned pubkey_size;
 	gnutls_pk_algorithm_t pk_algorithm;
 	unsigned int key_usage;
 

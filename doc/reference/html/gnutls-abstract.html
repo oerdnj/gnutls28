@@ -1058,7 +1058,7 @@ supported by the private key.</p>
 </tr>
 <tr>
 <td class="parameter_name"><p>plaintext</p></td>
-<td class="parameter_description"><p>will contain the decrypted data, allocated with <code class="function">gnutls_malloc()</code></p></td>
+<td class="parameter_description"><p>will contain the decrypted data, allocated with <a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-malloc"><code class="function">gnutls_malloc()</code></a></p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 </tbody>
@@ -1851,7 +1851,7 @@ the hash algorithm.</p>
 </tr>
 <tr>
 <td class="parameter_name"><p>signature</p></td>
-<td class="parameter_description"><p>will contain the signature allocated with <code class="function">gnutls_malloc()</code></p></td>
+<td class="parameter_description"><p>will contain the signature allocated with <a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-malloc"><code class="function">gnutls_malloc()</code></a></p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 </tbody>
@@ -1969,7 +1969,8 @@ gnutls_pubkey_encrypt_data (<em class="parameter"><code><a class="link" href="gn
                             <em class="parameter"><code>const <span class="type">gnutls_datum_t</span> *plaintext</code></em>,
                             <em class="parameter"><code><span class="type">gnutls_datum_t</span> *ciphertext</code></em>);</pre>
 <p>This function will encrypt the given data, using the public
-key.</p>
+key. On success the <em class="parameter"><code>ciphertext</code></em>
+ will be allocated using <a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-malloc"><code class="function">gnutls_malloc()</code></a>.</p>
 <div class="refsect3">
 <a name="id-1.2.5.6.32.5"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
@@ -2075,7 +2076,7 @@ gnutls_pubkey_export2 (<em class="parameter"><code><a class="link" href="gnutls-
 <p>This function will export the public key to DER or PEM format.
 The contents of the exported data is the SubjectPublicKeyInfo
 X.509 structure.</p>
-<p>The output buffer will be allocated using <code class="function">gnutls_malloc()</code>.</p>
+<p>The output buffer will be allocated using <a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-malloc"><code class="function">gnutls_malloc()</code></a>.</p>
 <p>If the structure is PEM encoded, it will have a header
 of "BEGIN CERTIFICATE".</p>
 <div class="refsect3">
@@ -3453,7 +3454,8 @@ information in the certificate request (e.g., the version using
 gnutls_x509_crq_set_pubkey (<em class="parameter"><code><a class="link" href="gnutls-gnutls.html#gnutls-x509-crq-t" title="gnutls_x509_crq_t"><span class="type">gnutls_x509_crq_t</span></a> crq</code></em>,
                             <em class="parameter"><code><a class="link" href="gnutls-abstract.html#gnutls-pubkey-t" title="gnutls_pubkey_t"><span class="type">gnutls_pubkey_t</span></a> key</code></em>);</pre>
 <p>This function will set the public parameters from the given public
-key to the request.</p>
+key to the request. The <em class="parameter"><code>key</code></em>
+ can be deallocated after that.</p>
 <div class="refsect3">
 <a name="id-1.2.5.6.63.5"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
@@ -3546,7 +3548,8 @@ negative error value.</p>
 gnutls_x509_crt_set_pubkey (<em class="parameter"><code><a class="link" href="gnutls-gnutls.html#gnutls-x509-crt-t" title="gnutls_x509_crt_t"><span class="type">gnutls_x509_crt_t</span></a> crt</code></em>,
                             <em class="parameter"><code><a class="link" href="gnutls-abstract.html#gnutls-pubkey-t" title="gnutls_pubkey_t"><span class="type">gnutls_pubkey_t</span></a> key</code></em>);</pre>
 <p>This function will set the public parameters from the given public
-key to the request.</p>
+key to the certificate. The <em class="parameter"><code>key</code></em>
+ can be deallocated after that.</p>
 <div class="refsect3">
 <a name="id-1.2.5.6.65.5"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">

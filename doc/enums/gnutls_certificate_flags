@@ -1,0 +1,7 @@
+
+
+@c gnutls_certificate_flags
+@table @code
+@item GNUTLS_@-CERTIFICATE_@-SKIP_@-KEY_@-CERT_@-MATCH
+Skip the key and certificate matching check.
+@end table

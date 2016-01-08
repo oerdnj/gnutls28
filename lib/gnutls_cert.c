@@ -541,7 +541,7 @@ _gnutls_openpgp_crt_verify_peers(gnutls_session_t session,
 		return GNUTLS_E_NO_CERTIFICATE_FOUND;
 	}
 
-	verify_flags = cred->verify_flags | session->internals.priorities.additional_verify_flags;
+	verify_flags = cred->verify_flags | session->internals.additional_verify_flags;
 
 	/* generate a list of gnutls_certs based on the auth info
 	 * raw certs.
@@ -596,7 +596,9 @@ _gnutls_openpgp_crt_verify_peers(gnutls_session_t session,
  * the verified certificate belongs to the actual peer, see gnutls_x509_crt_check_hostname(),
  * or use gnutls_certificate_verify_peers3().
  *
- * Returns: a negative error code on error and %GNUTLS_E_SUCCESS (0) on success.
+ * Returns: a negative error code on error and %GNUTLS_E_SUCCESS (0)
+ * when the peer's certificate was successfully parsed, whether or not
+ * it was verified.
  **/
 int
 gnutls_certificate_verify_peers2(gnutls_session_t session,
@@ -628,7 +630,9 @@ gnutls_certificate_verify_peers2(gnutls_session_t session,
  * In order to verify the purpose of the end-certificate (by checking the extended
  * key usage), use gnutls_certificate_verify_peers().
  *
- * Returns: a negative error code on error and %GNUTLS_E_SUCCESS (0) on success.
+ * Returns: a negative error code on error and %GNUTLS_E_SUCCESS (0) 
+ * when the peer's certificate was successfully parsed, whether or not
+ * it was verified.
  *
  * Since: 3.1.4
  **/
@@ -672,7 +676,9 @@ gnutls_typed_vdata_st data;
  * usage PKIX extension, it will be required to be have the provided key purpose 
  * or be marked for any purpose, otherwise verification will fail with %GNUTLS_CERT_SIGNER_CONSTRAINTS_FAILURE status.
  *
- * Returns: a negative error code on error and %GNUTLS_E_SUCCESS (0) on success.
+ * Returns: a negative error code on error and %GNUTLS_E_SUCCESS (0)
+ * when the peer's certificate was successfully parsed, whether or not
+ * it was verified.
  *
  * Since: 3.3.0
  **/
@@ -821,6 +827,9 @@ int _gnutls_check_key_cert_match(gnutls_certificate_credentials_t res)
 	gnutls_datum_t test = {(void*)TEST_TEXT, sizeof(TEST_TEXT)-1};
 	gnutls_datum_t sig = {NULL, 0};
 	int pk, pk2, ret;
+
+	if (res->flags & GNUTLS_CERTIFICATE_SKIP_KEY_CERT_MATCH)
+		return 0;
 
 	pk =
 	    gnutls_pubkey_get_pk_algorithm(res->certs[res->ncerts - 1].

@@ -1788,8 +1788,8 @@
    'sig_atomic_t'. */
 #undef SIG_ATOMIC_T_SUFFIX
 
-/* The size of `char*', as computed by sizeof. */
-#undef SIZEOF_CHARP
+/* The size of `char *', as computed by sizeof. */
+#undef SIZEOF_CHAR_P
 
 /* The size of `int', as computed by sizeof. */
 #undef SIZEOF_INT

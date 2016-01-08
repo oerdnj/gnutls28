@@ -311,9 +311,11 @@ am__EXEEXT_7 = mini-record-2$(EXEEXT) simple$(EXEEXT) gc$(EXEEXT) \
 	mini-alignment$(EXEEXT) oids$(EXEEXT) atfork$(EXEEXT) \
 	prf$(EXEEXT) status-request$(EXEEXT) \
 	status-request-ok$(EXEEXT) fallback-scsv$(EXEEXT) \
-	pkcs8-key-decode$(EXEEXT) $(am__EXEEXT_1) $(am__EXEEXT_2) \
-	$(am__EXEEXT_3) $(am__EXEEXT_4) $(am__EXEEXT_5) \
-	$(am__EXEEXT_6)
+	pkcs8-key-decode$(EXEEXT) \
+	mini-session-verify-function$(EXEEXT) auto-verify$(EXEEXT) \
+	mini-x509-default-prio$(EXEEXT) global-init-override$(EXEEXT) \
+	$(am__EXEEXT_1) $(am__EXEEXT_2) $(am__EXEEXT_3) \
+	$(am__EXEEXT_4) $(am__EXEEXT_5) $(am__EXEEXT_6)
 anonself_SOURCES = anonself.c
 anonself_OBJECTS = anonself.$(OBJEXT)
 anonself_LDADD = $(LDADD)
@@ -325,6 +327,12 @@ atfork_SOURCES = atfork.c
 atfork_OBJECTS = atfork-atfork.$(OBJEXT)
 atfork_LDADD = $(LDADD)
 atfork_DEPENDENCIES = ../lib/libgnutls.la libutils.la \
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1)
+auto_verify_SOURCES = auto-verify.c
+auto_verify_OBJECTS = auto-verify.$(OBJEXT)
+auto_verify_LDADD = $(LDADD)
+auto_verify_DEPENDENCIES = ../lib/libgnutls.la libutils.la \
 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
 	$(am__DEPENDENCIES_1)
 certder_SOURCES = certder.c
@@ -445,6 +453,12 @@ global_init_SOURCES = global-init.c
 global_init_OBJECTS = global-init.$(OBJEXT)
 global_init_LDADD = $(LDADD)
 global_init_DEPENDENCIES = ../lib/libgnutls.la libutils.la \
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1)
+global_init_override_SOURCES = global-init-override.c
+global_init_override_OBJECTS = global-init-override.$(OBJEXT)
+global_init_override_LDADD = $(LDADD)
+global_init_override_DEPENDENCIES = ../lib/libgnutls.la libutils.la \
 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
 	$(am__DEPENDENCIES_1)
 hostname_check_SOURCES = hostname-check.c
@@ -706,6 +720,13 @@ mini_server_name_LDADD = $(LDADD)
 mini_server_name_DEPENDENCIES = ../lib/libgnutls.la libutils.la \
 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
 	$(am__DEPENDENCIES_1)
+mini_session_verify_function_SOURCES = mini-session-verify-function.c
+mini_session_verify_function_OBJECTS =  \
+	mini-session-verify-function.$(OBJEXT)
+mini_session_verify_function_LDADD = $(LDADD)
+mini_session_verify_function_DEPENDENCIES = ../lib/libgnutls.la \
+	libutils.la $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1)
 mini_supplementaldata_SOURCES = mini-supplementaldata.c
 mini_supplementaldata_OBJECTS = mini-supplementaldata.$(OBJEXT)
 mini_supplementaldata_LDADD = $(LDADD)
@@ -764,6 +785,12 @@ mini_x509_cert_callback_SOURCES = mini-x509-cert-callback.c
 mini_x509_cert_callback_OBJECTS = mini-x509-cert-callback.$(OBJEXT)
 mini_x509_cert_callback_LDADD = $(LDADD)
 mini_x509_cert_callback_DEPENDENCIES = ../lib/libgnutls.la libutils.la \
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1)
+mini_x509_default_prio_SOURCES = mini-x509-default-prio.c
+mini_x509_default_prio_OBJECTS = mini-x509-default-prio.$(OBJEXT)
+mini_x509_default_prio_LDADD = $(LDADD)
+mini_x509_default_prio_DEPENDENCIES = ../lib/libgnutls.la libutils.la \
 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
 	$(am__DEPENDENCIES_1)
 moredn_SOURCES = moredn.c
@@ -1098,16 +1125,55 @@ AM_V_CCLD = $(am__v_CCLD_@AM_V@)
 am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
-SOURCES = $(libutils_la_SOURCES) anonself.c atfork.c certder.c \
-	certificate_set_x509_crl.c certuniqueid.c chainverify.c \
-	chainverify-unsorted.c crlverify.c crq_apis.c crq_key_id.c \
-	custom-urls.c cve-2008-4989.c cve-2009-1415.c cve-2009-1416.c \
-	dane.c dhepskself.c dn.c dn2.c fallback-scsv.c fips-test.c \
-	gc.c global-init.c hostname-check.c infoaccess.c init_fds.c \
-	init_roundtrip.c key-import-export.c key-openssl.c keygen.c \
-	long-session-id.c mini-alignment.c mini-alpn.c \
-	mini-cert-status.c mini-chain-unsorted.c mini-dtls-discard.c \
-	mini-dtls-fork.c mini-dtls-heartbeat.c \
+SOURCES = $(libutils_la_SOURCES) anonself.c atfork.c auto-verify.c \
+	certder.c certificate_set_x509_crl.c certuniqueid.c \
+	chainverify.c chainverify-unsorted.c crlverify.c crq_apis.c \
+	crq_key_id.c custom-urls.c cve-2008-4989.c cve-2009-1415.c \
+	cve-2009-1416.c dane.c dhepskself.c dn.c dn2.c fallback-scsv.c \
+	fips-test.c gc.c global-init.c global-init-override.c \
+	hostname-check.c infoaccess.c init_fds.c init_roundtrip.c \
+	key-import-export.c key-openssl.c keygen.c long-session-id.c \
+	mini-alignment.c mini-alpn.c mini-cert-status.c \
+	mini-chain-unsorted.c mini-dtls-discard.c mini-dtls-fork.c \
+	mini-dtls-heartbeat.c mini-dtls-hello-verify.c \
+	mini-dtls-large.c mini-dtls-lowmtu.c mini-dtls-mtu.c \
+	mini-dtls-pthread.c mini-dtls-record.c mini-dtls-record-asym.c \
+	mini-dtls-rehandshake.c mini-dtls-srtp.c mini-dtls0-9.c \
+	mini-eagain.c mini-eagain-dtls.c mini-emsgsize-dtls.c \
+	mini-etm.c mini-extension.c mini-global-load.c \
+	mini-handshake-timeout.c mini-key-material.c mini-loss-time.c \
+	mini-overhead.c mini-record.c mini-record-2.c \
+	mini-record-failure.c mini-record-range.c \
+	mini-record-retvals.c mini-rehandshake.c mini-rehandshake-2.c \
+	mini-rsa-psk.c mini-server-name.c \
+	mini-session-verify-function.c mini-supplementaldata.c \
+	mini-tdb.c mini-termination.c mini-tls-nonblock.c mini-x509.c \
+	mini-x509-2.c mini-x509-callbacks.c mini-x509-callbacks-intr.c \
+	mini-x509-cas.c mini-x509-cert-callback.c \
+	mini-x509-default-prio.c moredn.c mpi.c name-constraints.c \
+	no-signal.c nul-in-x509-names.c ocsp.c oids.c openpgp-auth.c \
+	openpgp-auth2.c openpgp-callback.c openpgp-keyring.c \
+	openpgpself.c openssl.c parse_ca.c pgps2kgnu.c pkcs12_encode.c \
+	pkcs12_s2k.c pkcs12_s2k_pem.c pkcs12_simple.c pkcs7-gen.c \
+	pkcs8-key-decode.c prf.c priorities.c pskself.c record-sizes.c \
+	record-sizes-range.c resume.c resume-dtls.c rng-fork.c \
+	rsa-encrypt-decrypt.c sec-params.c set_pkcs12_cred.c \
+	set_x509_key_file.c set_x509_key_mem.c setcredcrash.c \
+	sign-md5-rep.c simple.c status-request.c status-request-ok.c \
+	strict-der.c x509-extensions.c x509-verify-with-crl.c \
+	x509_altname.c x509cert.c x509cert-invalid.c x509cert-tl.c \
+	x509dn.c x509self.c x509sign-verify.c x509sign-verify2.c
+DIST_SOURCES = $(libutils_la_SOURCES) anonself.c atfork.c \
+	auto-verify.c certder.c certificate_set_x509_crl.c \
+	certuniqueid.c chainverify.c chainverify-unsorted.c \
+	crlverify.c crq_apis.c crq_key_id.c custom-urls.c \
+	cve-2008-4989.c cve-2009-1415.c cve-2009-1416.c dane.c \
+	dhepskself.c dn.c dn2.c fallback-scsv.c fips-test.c gc.c \
+	global-init.c global-init-override.c hostname-check.c \
+	infoaccess.c init_fds.c init_roundtrip.c key-import-export.c \
+	key-openssl.c keygen.c long-session-id.c mini-alignment.c \
+	mini-alpn.c mini-cert-status.c mini-chain-unsorted.c \
+	mini-dtls-discard.c mini-dtls-fork.c mini-dtls-heartbeat.c \
 	mini-dtls-hello-verify.c mini-dtls-large.c mini-dtls-lowmtu.c \
 	mini-dtls-mtu.c mini-dtls-pthread.c mini-dtls-record.c \
 	mini-dtls-record-asym.c mini-dtls-rehandshake.c \
@@ -1118,60 +1184,23 @@ SOURCES = $(libutils_la_SOURCES) anonself.c atfork.c certder.c \
 	mini-record.c mini-record-2.c mini-record-failure.c \
 	mini-record-range.c mini-record-retvals.c mini-rehandshake.c \
 	mini-rehandshake-2.c mini-rsa-psk.c mini-server-name.c \
-	mini-supplementaldata.c mini-tdb.c mini-termination.c \
-	mini-tls-nonblock.c mini-x509.c mini-x509-2.c \
-	mini-x509-callbacks.c mini-x509-callbacks-intr.c \
-	mini-x509-cas.c mini-x509-cert-callback.c moredn.c mpi.c \
-	name-constraints.c no-signal.c nul-in-x509-names.c ocsp.c \
-	oids.c openpgp-auth.c openpgp-auth2.c openpgp-callback.c \
-	openpgp-keyring.c openpgpself.c openssl.c parse_ca.c \
-	pgps2kgnu.c pkcs12_encode.c pkcs12_s2k.c pkcs12_s2k_pem.c \
-	pkcs12_simple.c pkcs7-gen.c pkcs8-key-decode.c prf.c \
-	priorities.c pskself.c record-sizes.c record-sizes-range.c \
-	resume.c resume-dtls.c rng-fork.c rsa-encrypt-decrypt.c \
-	sec-params.c set_pkcs12_cred.c set_x509_key_file.c \
-	set_x509_key_mem.c setcredcrash.c sign-md5-rep.c simple.c \
-	status-request.c status-request-ok.c strict-der.c \
-	x509-extensions.c x509-verify-with-crl.c x509_altname.c \
-	x509cert.c x509cert-invalid.c x509cert-tl.c x509dn.c \
-	x509self.c x509sign-verify.c x509sign-verify2.c
-DIST_SOURCES = $(libutils_la_SOURCES) anonself.c atfork.c certder.c \
-	certificate_set_x509_crl.c certuniqueid.c chainverify.c \
-	chainverify-unsorted.c crlverify.c crq_apis.c crq_key_id.c \
-	custom-urls.c cve-2008-4989.c cve-2009-1415.c cve-2009-1416.c \
-	dane.c dhepskself.c dn.c dn2.c fallback-scsv.c fips-test.c \
-	gc.c global-init.c hostname-check.c infoaccess.c init_fds.c \
-	init_roundtrip.c key-import-export.c key-openssl.c keygen.c \
-	long-session-id.c mini-alignment.c mini-alpn.c \
-	mini-cert-status.c mini-chain-unsorted.c mini-dtls-discard.c \
-	mini-dtls-fork.c mini-dtls-heartbeat.c \
-	mini-dtls-hello-verify.c mini-dtls-large.c mini-dtls-lowmtu.c \
-	mini-dtls-mtu.c mini-dtls-pthread.c mini-dtls-record.c \
-	mini-dtls-record-asym.c mini-dtls-rehandshake.c \
-	mini-dtls-srtp.c mini-dtls0-9.c mini-eagain.c \
-	mini-eagain-dtls.c mini-emsgsize-dtls.c mini-etm.c \
-	mini-extension.c mini-global-load.c mini-handshake-timeout.c \
-	mini-key-material.c mini-loss-time.c mini-overhead.c \
-	mini-record.c mini-record-2.c mini-record-failure.c \
-	mini-record-range.c mini-record-retvals.c mini-rehandshake.c \
-	mini-rehandshake-2.c mini-rsa-psk.c mini-server-name.c \
-	mini-supplementaldata.c mini-tdb.c mini-termination.c \
-	mini-tls-nonblock.c mini-x509.c mini-x509-2.c \
-	mini-x509-callbacks.c mini-x509-callbacks-intr.c \
-	mini-x509-cas.c mini-x509-cert-callback.c moredn.c mpi.c \
-	name-constraints.c no-signal.c nul-in-x509-names.c ocsp.c \
-	oids.c openpgp-auth.c openpgp-auth2.c openpgp-callback.c \
-	openpgp-keyring.c openpgpself.c openssl.c parse_ca.c \
-	pgps2kgnu.c pkcs12_encode.c pkcs12_s2k.c pkcs12_s2k_pem.c \
-	pkcs12_simple.c pkcs7-gen.c pkcs8-key-decode.c prf.c \
-	priorities.c pskself.c record-sizes.c record-sizes-range.c \
-	resume.c resume-dtls.c rng-fork.c rsa-encrypt-decrypt.c \
-	sec-params.c set_pkcs12_cred.c set_x509_key_file.c \
-	set_x509_key_mem.c setcredcrash.c sign-md5-rep.c simple.c \
-	status-request.c status-request-ok.c strict-der.c \
-	x509-extensions.c x509-verify-with-crl.c x509_altname.c \
-	x509cert.c x509cert-invalid.c x509cert-tl.c x509dn.c \
-	x509self.c x509sign-verify.c x509sign-verify2.c
+	mini-session-verify-function.c mini-supplementaldata.c \
+	mini-tdb.c mini-termination.c mini-tls-nonblock.c mini-x509.c \
+	mini-x509-2.c mini-x509-callbacks.c mini-x509-callbacks-intr.c \
+	mini-x509-cas.c mini-x509-cert-callback.c \
+	mini-x509-default-prio.c moredn.c mpi.c name-constraints.c \
+	no-signal.c nul-in-x509-names.c ocsp.c oids.c openpgp-auth.c \
+	openpgp-auth2.c openpgp-callback.c openpgp-keyring.c \
+	openpgpself.c openssl.c parse_ca.c pgps2kgnu.c pkcs12_encode.c \
+	pkcs12_s2k.c pkcs12_s2k_pem.c pkcs12_simple.c pkcs7-gen.c \
+	pkcs8-key-decode.c prf.c priorities.c pskself.c record-sizes.c \
+	record-sizes-range.c resume.c resume-dtls.c rng-fork.c \
+	rsa-encrypt-decrypt.c sec-params.c set_pkcs12_cred.c \
+	set_x509_key_file.c set_x509_key_mem.c setcredcrash.c \
+	sign-md5-rep.c simple.c status-request.c status-request-ok.c \
+	strict-der.c x509-extensions.c x509-verify-with-crl.c \
+	x509_altname.c x509cert.c x509cert-invalid.c x509cert-tl.c \
+	x509dn.c x509self.c x509sign-verify.c x509sign-verify2.c
 RECURSIVE_TARGETS = all-recursive check-recursive cscopelist-recursive \
 	ctags-recursive dvi-recursive html-recursive info-recursive \
 	install-data-recursive install-dvi-recursive \
@@ -2427,7 +2456,7 @@ EXTRA_DIST = suppressions.valgrind eagain-common.h test-chains.h \
 	certs/ca-cert-ecc.pem  certs/cert-ecc256.pem  certs/cert-ecc521.pem \
 	certs/cert-rsa-2432.pem certs/ecc384.pem certs/ecc.pem \
 	certs/ca-ecc.pem certs/cert-ecc384.pem certs/cert-ecc.pem certs/ecc256.pem \
-	certs/ecc521.pem certs/rsa-2432.pem x509cert-dir/ca.pem
+	certs/ecc521.pem certs/rsa-2432.pem x509cert-dir/ca.pem cert-common.h
 
 AM_CFLAGS = $(WARN_CFLAGS) $(WERROR_CFLAGS)
 AM_CPPFLAGS = -I$(top_srcdir)/lib/includes \
@@ -2474,8 +2503,10 @@ ctests = mini-record-2 simple gc set_pkcs12_cred certder certuniqueid \
 	keygen mini-tls-nonblock no-signal pkcs7-gen x509sign-verify2 \
 	mini-alignment oids atfork prf status-request \
 	status-request-ok fallback-scsv pkcs8-key-decode \
-	$(am__append_4) $(am__append_5) $(am__append_6) \
-	$(am__append_7) $(am__append_8) $(am__append_9)
+	mini-session-verify-function auto-verify \
+	mini-x509-default-prio global-init-override $(am__append_4) \
+	$(am__append_5) $(am__append_6) $(am__append_7) \
+	$(am__append_8) $(am__append_9)
 mini_dtls_pthread_LDADD = $(LDADD) -lpthread
 mini_alignment_LDADD = $(LDADD) $(NETTLE_LIBS)
 @ENABLE_FIPS140_FALSE@@ENABLE_OPENSSL_TRUE@openssl_LDADD = ../extra/libgnutls-openssl.la $(LDADD)
@@ -2592,6 +2623,10 @@ atfork$(EXEEXT): $(atfork_OBJECTS) $(atfork_DEPENDENCIES) $(EXTRA_atfork_DEPENDE
 	@rm -f atfork$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(atfork_OBJECTS) $(atfork_LDADD) $(LIBS)
 
+auto-verify$(EXEEXT): $(auto_verify_OBJECTS) $(auto_verify_DEPENDENCIES) $(EXTRA_auto_verify_DEPENDENCIES) 
+	@rm -f auto-verify$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(auto_verify_OBJECTS) $(auto_verify_LDADD) $(LIBS)
+
 certder$(EXEEXT): $(certder_OBJECTS) $(certder_DEPENDENCIES) $(EXTRA_certder_DEPENDENCIES) 
 	@rm -f certder$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(certder_OBJECTS) $(certder_LDADD) $(LIBS)
@@ -2671,6 +2706,10 @@ gc$(EXEEXT): $(gc_OBJECTS) $(gc_DEPENDENCIES) $(EXTRA_gc_DEPENDENCIES)
 global-init$(EXEEXT): $(global_init_OBJECTS) $(global_init_DEPENDENCIES) $(EXTRA_global_init_DEPENDENCIES) 
 	@rm -f global-init$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(global_init_OBJECTS) $(global_init_LDADD) $(LIBS)
+
+global-init-override$(EXEEXT): $(global_init_override_OBJECTS) $(global_init_override_DEPENDENCIES) $(EXTRA_global_init_override_DEPENDENCIES) 
+	@rm -f global-init-override$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(global_init_override_OBJECTS) $(global_init_override_LDADD) $(LIBS)
 
 hostname-check$(EXEEXT): $(hostname_check_OBJECTS) $(hostname_check_DEPENDENCIES) $(EXTRA_hostname_check_DEPENDENCIES) 
 	@rm -f hostname-check$(EXEEXT)
@@ -2848,6 +2887,10 @@ mini-server-name$(EXEEXT): $(mini_server_name_OBJECTS) $(mini_server_name_DEPEND
 	@rm -f mini-server-name$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(mini_server_name_OBJECTS) $(mini_server_name_LDADD) $(LIBS)
 
+mini-session-verify-function$(EXEEXT): $(mini_session_verify_function_OBJECTS) $(mini_session_verify_function_DEPENDENCIES) $(EXTRA_mini_session_verify_function_DEPENDENCIES) 
+	@rm -f mini-session-verify-function$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(mini_session_verify_function_OBJECTS) $(mini_session_verify_function_LDADD) $(LIBS)
+
 mini-supplementaldata$(EXEEXT): $(mini_supplementaldata_OBJECTS) $(mini_supplementaldata_DEPENDENCIES) $(EXTRA_mini_supplementaldata_DEPENDENCIES) 
 	@rm -f mini-supplementaldata$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(mini_supplementaldata_OBJECTS) $(mini_supplementaldata_LDADD) $(LIBS)
@@ -2887,6 +2930,10 @@ mini-x509-cas$(EXEEXT): $(mini_x509_cas_OBJECTS) $(mini_x509_cas_DEPENDENCIES) $
 mini-x509-cert-callback$(EXEEXT): $(mini_x509_cert_callback_OBJECTS) $(mini_x509_cert_callback_DEPENDENCIES) $(EXTRA_mini_x509_cert_callback_DEPENDENCIES) 
 	@rm -f mini-x509-cert-callback$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(mini_x509_cert_callback_OBJECTS) $(mini_x509_cert_callback_LDADD) $(LIBS)
+
+mini-x509-default-prio$(EXEEXT): $(mini_x509_default_prio_OBJECTS) $(mini_x509_default_prio_DEPENDENCIES) $(EXTRA_mini_x509_default_prio_DEPENDENCIES) 
+	@rm -f mini-x509-default-prio$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(mini_x509_default_prio_OBJECTS) $(mini_x509_default_prio_LDADD) $(LIBS)
 
 moredn$(EXEEXT): $(moredn_OBJECTS) $(moredn_DEPENDENCIES) $(EXTRA_moredn_DEPENDENCIES) 
 	@rm -f moredn$(EXEEXT)
@@ -3096,6 +3143,7 @@ distclean-compile:
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/anonself.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/atfork-atfork.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/auto-verify.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/certder.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/certificate_set_x509_crl.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/certuniqueid.Po@am__quote@
@@ -3115,6 +3163,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/fallback-scsv.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/fips-test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gc-gc.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/global-init-override.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/global-init.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/hostname-check.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/infoaccess.Po@am__quote@
@@ -3160,6 +3209,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/mini-rehandshake.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/mini-rsa-psk.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/mini-server-name.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/mini-session-verify-function.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/mini-supplementaldata.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/mini-tdb.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/mini-termination.Po@am__quote@
@@ -3169,6 +3219,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/mini-x509-callbacks.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/mini-x509-cas.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/mini-x509-cert-callback.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/mini-x509-default-prio.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/mini-x509.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/moredn.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/mpi-mpi.Po@am__quote@
@@ -4321,6 +4372,34 @@ fallback-scsv.log: fallback-scsv$(EXEEXT)
 pkcs8-key-decode.log: pkcs8-key-decode$(EXEEXT)
 	@p='pkcs8-key-decode$(EXEEXT)'; \
 	b='pkcs8-key-decode'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+mini-session-verify-function.log: mini-session-verify-function$(EXEEXT)
+	@p='mini-session-verify-function$(EXEEXT)'; \
+	b='mini-session-verify-function'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+auto-verify.log: auto-verify$(EXEEXT)
+	@p='auto-verify$(EXEEXT)'; \
+	b='auto-verify'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+mini-x509-default-prio.log: mini-x509-default-prio$(EXEEXT)
+	@p='mini-x509-default-prio$(EXEEXT)'; \
+	b='mini-x509-default-prio'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+global-init-override.log: global-init-override$(EXEEXT)
+	@p='global-init-override$(EXEEXT)'; \
+	b='global-init-override'; \
 	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \

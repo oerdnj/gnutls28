@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnutls 2.8.5\n"
 "Report-Msgid-Bugs-To: bug-gnutls@gnu.org\n"
-"POT-Creation-Date: 2015-09-12 11:48+0200\n"
+"POT-Creation-Date: 2016-01-08 10:03+0100\n"
 "PO-Revision-Date: 2009-12-29 21:15+0100\n"
 "Last-Translator: Nicolas Provost <nprovost@quadriv.com>\n"
 "Language-Team: French <traduc@traduc.org>\n"
@@ -360,468 +360,473 @@ msgstr "Erreur dans le certificat."
 
 #: lib/gnutls_errors.c:157
 #, fuzzy
+msgid "Error in the certificate verification."
+msgstr "Erreur dans le certificat."
+
+#: lib/gnutls_errors.c:159
+#, fuzzy
 msgid "Could not authenticate peer."
 msgstr "Impossible d'obtenir la clef OpenPGP."
 
-#: lib/gnutls_errors.c:160
+#: lib/gnutls_errors.c:162
 msgid "Unknown Subject Alternative name in X.509 certificate."
 msgstr ""
 "L'entrée \"Subject Alternative Name\" (autre nom du sujet) du certificat "
 "X509 est vide."
 
-#: lib/gnutls_errors.c:164
+#: lib/gnutls_errors.c:166
 msgid "Unsupported critical extension in X.509 certificate."
 msgstr "Une extension critique du certificat X509 n'est pas supportée."
 
-#: lib/gnutls_errors.c:166
+#: lib/gnutls_errors.c:168
 #, fuzzy
 msgid "Unsupported extension in X.509 certificate."
 msgstr "Une extension critique du certificat X509 n'est pas supportée."
 
-#: lib/gnutls_errors.c:169
+#: lib/gnutls_errors.c:171
 msgid "Key usage violation in certificate has been detected."
 msgstr "Utilisation de la clef d'un certificat pour un usage non prévu."
 
-#: lib/gnutls_errors.c:171 lib/gnutls_errors.c:388
+#: lib/gnutls_errors.c:173 lib/gnutls_errors.c:390
 msgid "Function was interrupted."
 msgstr "Interruption de fonction."
 
-#: lib/gnutls_errors.c:173
+#: lib/gnutls_errors.c:175
 msgid "TLS Application data were received, while expecting handshake data."
 msgstr ""
 "Des données applicatives TLS ont été reçues alors que des données de "
 "négociation étaient attendues."
 
-#: lib/gnutls_errors.c:175
+#: lib/gnutls_errors.c:177
 msgid "Error in Database backend."
 msgstr "Erreur dans la structure de la base de données."
 
-#: lib/gnutls_errors.c:176
+#: lib/gnutls_errors.c:178
 msgid "The certificate type is not supported."
 msgstr "Ce type de certificat n'est pas supporté."
 
-#: lib/gnutls_errors.c:179
+#: lib/gnutls_errors.c:181
 msgid "The given memory buffer is too short to hold parameters."
 msgstr ""
 "Le tampon mémoire donné est trop petit pour contenir tous les paramètres."
 
-#: lib/gnutls_errors.c:181
+#: lib/gnutls_errors.c:183
 msgid "The request is invalid."
 msgstr "Requête incorrecte."
 
-#: lib/gnutls_errors.c:183
+#: lib/gnutls_errors.c:185
 msgid "The cookie was bad."
 msgstr ""
 
-#: lib/gnutls_errors.c:184
+#: lib/gnutls_errors.c:186
 msgid "An illegal parameter has been received."
 msgstr "Un paramètre incorrect a été reçu."
 
-#: lib/gnutls_errors.c:186
+#: lib/gnutls_errors.c:188
 #, fuzzy
 msgid "An illegal parameter was found."
 msgstr "Un paramètre incorrect a été reçu."
 
-#: lib/gnutls_errors.c:188
+#: lib/gnutls_errors.c:190
 msgid "Error while reading file."
 msgstr "Erreur de lecture de fichier."
 
-#: lib/gnutls_errors.c:190
+#: lib/gnutls_errors.c:192
 msgid "ASN1 parser: Element was not found."
 msgstr "Element manquant durant l'analyse ASN1."
 
-#: lib/gnutls_errors.c:192
+#: lib/gnutls_errors.c:194
 msgid "ASN1 parser: Identifier was not found"
 msgstr "Identifiant non trouvé durant l'analyse ASN1."
 
-#: lib/gnutls_errors.c:194
+#: lib/gnutls_errors.c:196
 msgid "ASN1 parser: Error in DER parsing."
 msgstr "Erreur de décodage DER durant l'analyse ASN1."
 
-#: lib/gnutls_errors.c:196
+#: lib/gnutls_errors.c:198
 msgid "ASN1 parser: Value was not found."
 msgstr "Valeur non trouvée durant l'analyse ASN1."
 
-#: lib/gnutls_errors.c:198
+#: lib/gnutls_errors.c:200
 msgid "ASN1 parser: Generic parsing error."
 msgstr "Erreur durant l'analyse ASN1."
 
-#: lib/gnutls_errors.c:200
+#: lib/gnutls_errors.c:202
 msgid "ASN1 parser: Value is not valid."
 msgstr "Valeur incorrecte détectée durant l'analyse ASN1."
 
-#: lib/gnutls_errors.c:202
+#: lib/gnutls_errors.c:204
 msgid "ASN1 parser: Error in TAG."
 msgstr "Erreur d'étiquette (tag) détectée durant l'analyse ASN1."
 
-#: lib/gnutls_errors.c:204
+#: lib/gnutls_errors.c:206
 msgid "ASN1 parser: error in implicit tag"
 msgstr "Erreur d'étiquette (tag implicite) détectée durant l'analyse ASN1."
 
-#: lib/gnutls_errors.c:206
+#: lib/gnutls_errors.c:208
 msgid "ASN1 parser: Error in type 'ANY'."
 msgstr "Erreur dans un type \"ANY\" détectée lors de l'analyse ASN1."
 
-#: lib/gnutls_errors.c:208
+#: lib/gnutls_errors.c:210
 msgid "ASN1 parser: Syntax error."
 msgstr "Erreur de syntaxe détectée lors de l'analyse ASN1."
 
-#: lib/gnutls_errors.c:210
+#: lib/gnutls_errors.c:212
 msgid "ASN1 parser: Overflow in DER parsing."
 msgstr "Dépassement de capacité lors du décodage DER durant l'analyse ASN1."
 
-#: lib/gnutls_errors.c:214
-msgid "Too many empty record packets have been received."
-msgstr ""
-"Trop de paquets de données applicatives (\"TLS Record\") vides ont été reçus."
-
 #: lib/gnutls_errors.c:216
-#, fuzzy
-msgid "Too many handshake packets have been received."
+msgid "Too many empty record packets have been received."
 msgstr ""
 "Trop de paquets de données applicatives (\"TLS Record\") vides ont été reçus."
 
 #: lib/gnutls_errors.c:218
 #, fuzzy
+msgid "Too many handshake packets have been received."
+msgstr ""
+"Trop de paquets de données applicatives (\"TLS Record\") vides ont été reçus."
+
+#: lib/gnutls_errors.c:220
+#, fuzzy
 msgid "The crypto library version is too old."
 msgstr "La version utilisée de la librairie gcrypt est trop ancienne."
 
-#: lib/gnutls_errors.c:221
+#: lib/gnutls_errors.c:223
 msgid "The tasn1 library version is too old."
 msgstr "La version utilisée de la librairie tasn1 est trop ancienne."
 
-#: lib/gnutls_errors.c:223
+#: lib/gnutls_errors.c:225
 msgid "The OpenPGP User ID is revoked."
 msgstr "L'identifiant d'utilisateur OpenPGP (User ID) est révoqué."
 
-#: lib/gnutls_errors.c:225
+#: lib/gnutls_errors.c:227
 msgid "The OpenPGP key has not a preferred key set."
 msgstr ""
 
-#: lib/gnutls_errors.c:227
+#: lib/gnutls_errors.c:229
 msgid "Error loading the keyring."
 msgstr "Erreur durant le chargement du trousseau de clefs."
 
-#: lib/gnutls_errors.c:229
+#: lib/gnutls_errors.c:231
 #, fuzzy
 msgid "The initialization of crypto backend has failed."
 msgstr "Echec de l'initialisation de LZO."
 
-#: lib/gnutls_errors.c:232
+#: lib/gnutls_errors.c:234
 msgid "No supported compression algorithms have been found."
 msgstr "Aucun algorithme de compression n'est disponible."
 
-#: lib/gnutls_errors.c:234
+#: lib/gnutls_errors.c:236
 msgid "No supported cipher suites have been found."
 msgstr "Aucune méthode de chiffrement n'est disponible."
 
-#: lib/gnutls_errors.c:236
+#: lib/gnutls_errors.c:238
 msgid "Could not get OpenPGP key."
 msgstr "Impossible d'obtenir la clef OpenPGP."
 
-#: lib/gnutls_errors.c:238
+#: lib/gnutls_errors.c:240
 msgid "Could not find OpenPGP subkey."
 msgstr "Impossible de trouver la sous-clef OpenPGP."
 
-#: lib/gnutls_errors.c:240
+#: lib/gnutls_errors.c:242
 #, fuzzy
 msgid "Safe renegotiation failed."
 msgstr "Renégociation interdite"
 
-#: lib/gnutls_errors.c:242
+#: lib/gnutls_errors.c:244
 #, fuzzy
 msgid "Unsafe renegotiation denied."
 msgstr "Renégociation interdite"
 
-#: lib/gnutls_errors.c:245
+#: lib/gnutls_errors.c:247
 msgid "The SRP username supplied is illegal."
 msgstr "Le nom d'utilisateur SRP communiqué est illicite."
 
-#: lib/gnutls_errors.c:247
+#: lib/gnutls_errors.c:249
 #, fuzzy
 msgid "The SRP username supplied is unknown."
 msgstr "Le nom d'utilisateur SRP communiqué est illicite."
 
-#: lib/gnutls_errors.c:250
+#: lib/gnutls_errors.c:252
 msgid "The OpenPGP fingerprint is not supported."
 msgstr "Cette empreinte OpenPGP n'est pas supportée."
 
-#: lib/gnutls_errors.c:252
+#: lib/gnutls_errors.c:254
 #, fuzzy
 msgid "The signature algorithm is not supported."
 msgstr "Ce type de certificat n'est pas supporté."
 
-#: lib/gnutls_errors.c:254
+#: lib/gnutls_errors.c:256
 msgid "The certificate has unsupported attributes."
 msgstr "Le certificat possède des attributs non supportés."
 
-#: lib/gnutls_errors.c:256
+#: lib/gnutls_errors.c:258
 msgid "The OID is not supported."
 msgstr "Identifiant OID non supporté."
 
-#: lib/gnutls_errors.c:258
+#: lib/gnutls_errors.c:260
 msgid "The hash algorithm is unknown."
 msgstr "Algorithme d'empreinte (hash) inconnu."
 
-#: lib/gnutls_errors.c:260
+#: lib/gnutls_errors.c:262
 msgid "The PKCS structure's content type is unknown."
 msgstr "Type de structure PKCS inconnu."
 
-#: lib/gnutls_errors.c:262
+#: lib/gnutls_errors.c:264
 msgid "The PKCS structure's bag type is unknown."
 msgstr "Type de conteneur (bag) PKCS inconnu."
 
-#: lib/gnutls_errors.c:264
+#: lib/gnutls_errors.c:266
 msgid "The given password contains invalid characters."
 msgstr "Le mot de passe fourni comporte des caractères invalides."
 
-#: lib/gnutls_errors.c:267
+#: lib/gnutls_errors.c:269
 msgid "The Message Authentication Code verification failed."
 msgstr "Echec de la vérification du code d'authentification du message (MAC)."
 
-#: lib/gnutls_errors.c:269
+#: lib/gnutls_errors.c:271
 msgid "Some constraint limits were reached."
 msgstr "Certaines valeurs limites ont été atteintes."
 
-#: lib/gnutls_errors.c:271
+#: lib/gnutls_errors.c:273
 msgid "Failed to acquire random data."
 msgstr "Impossible de générer une valeur aléatoire."
 
-#: lib/gnutls_errors.c:273
+#: lib/gnutls_errors.c:275
 msgid "Verifying TLS/IA phase checksum failed"
 msgstr ""
 "Echec de la vérification de la somme de contrôle durant la phase \"TLS/IA"
 "\" (échange complémentaire de données et clefs)."
 
-#: lib/gnutls_errors.c:276
+#: lib/gnutls_errors.c:278
 msgid "The specified algorithm or protocol is unknown."
 msgstr "L'algorithme ou le protocole demandé est inconnu."
 
-#: lib/gnutls_errors.c:279
+#: lib/gnutls_errors.c:281
 msgid "The handshake data size is too large."
 msgstr ""
 
-#: lib/gnutls_errors.c:282
+#: lib/gnutls_errors.c:284
 msgid "Error opening /dev/crypto"
 msgstr ""
 
-#: lib/gnutls_errors.c:285
+#: lib/gnutls_errors.c:287
 msgid "Error interfacing with /dev/crypto"
 msgstr ""
 
-#: lib/gnutls_errors.c:287
+#: lib/gnutls_errors.c:289
 msgid "Peer has terminated the connection"
 msgstr ""
 
-#: lib/gnutls_errors.c:289
+#: lib/gnutls_errors.c:291
 #, fuzzy
 msgid "Channel binding data not available"
 msgstr "Les données demandées ne sont pas disponibles."
 
-#: lib/gnutls_errors.c:292
+#: lib/gnutls_errors.c:294
 msgid "TPM error."
 msgstr ""
 
-#: lib/gnutls_errors.c:294
+#: lib/gnutls_errors.c:296
 msgid "The TPM library (trousers) cannot be found."
 msgstr ""
 
-#: lib/gnutls_errors.c:296
+#: lib/gnutls_errors.c:298
 msgid "TPM is not initialized."
 msgstr ""
 
-#: lib/gnutls_errors.c:298
+#: lib/gnutls_errors.c:300
 msgid "TPM key was not found in persistent storage."
 msgstr ""
 
-#: lib/gnutls_errors.c:300
+#: lib/gnutls_errors.c:302
 msgid "Cannot initialize a session with the TPM."
 msgstr ""
 
-#: lib/gnutls_errors.c:302
+#: lib/gnutls_errors.c:304
 msgid "PKCS #11 error."
 msgstr ""
 
-#: lib/gnutls_errors.c:304
+#: lib/gnutls_errors.c:306
 msgid "PKCS #11 initialization error."
 msgstr ""
 
-#: lib/gnutls_errors.c:306
+#: lib/gnutls_errors.c:308
 #, fuzzy
 msgid "Error in parsing."
 msgstr "Erreur dans le fichier de mots de passe."
 
-#: lib/gnutls_errors.c:308
+#: lib/gnutls_errors.c:310
 #, fuzzy
 msgid "Error in provided PIN."
 msgstr "Erreur dans le fichier de mots de passe."
 
-#: lib/gnutls_errors.c:310
+#: lib/gnutls_errors.c:312
 #, fuzzy
 msgid "Error in provided SRK password for TPM."
 msgstr "Erreur dans le fichier de mots de passe."
 
-#: lib/gnutls_errors.c:313
+#: lib/gnutls_errors.c:315
 msgid "Error in provided password for key to be loaded in TPM."
 msgstr ""
 
-#: lib/gnutls_errors.c:315
+#: lib/gnutls_errors.c:317
 msgid "PKCS #11 error in slot"
 msgstr ""
 
-#: lib/gnutls_errors.c:317
+#: lib/gnutls_errors.c:319
 msgid "Thread locking error"
 msgstr ""
 
-#: lib/gnutls_errors.c:319
+#: lib/gnutls_errors.c:321
 msgid "PKCS #11 error in attribute"
 msgstr ""
 
-#: lib/gnutls_errors.c:321
+#: lib/gnutls_errors.c:323
 msgid "PKCS #11 error in device"
 msgstr ""
 
-#: lib/gnutls_errors.c:323
+#: lib/gnutls_errors.c:325
 msgid "PKCS #11 error in data"
 msgstr ""
 
-#: lib/gnutls_errors.c:325
+#: lib/gnutls_errors.c:327
 msgid "PKCS #11 unsupported feature"
 msgstr ""
 
-#: lib/gnutls_errors.c:327
+#: lib/gnutls_errors.c:329
 msgid "PKCS #11 error in key"
 msgstr ""
 
-#: lib/gnutls_errors.c:329
+#: lib/gnutls_errors.c:331
 msgid "PKCS #11 PIN expired"
 msgstr ""
 
-#: lib/gnutls_errors.c:331
+#: lib/gnutls_errors.c:333
 msgid "PKCS #11 PIN locked"
 msgstr ""
 
-#: lib/gnutls_errors.c:333
+#: lib/gnutls_errors.c:335
 msgid "PKCS #11 error in session"
 msgstr ""
 
-#: lib/gnutls_errors.c:335
+#: lib/gnutls_errors.c:337
 msgid "PKCS #11 error in signature"
 msgstr ""
 
-#: lib/gnutls_errors.c:337
+#: lib/gnutls_errors.c:339
 msgid "PKCS #11 error in token"
 msgstr ""
 
-#: lib/gnutls_errors.c:339
+#: lib/gnutls_errors.c:341
 msgid "PKCS #11 user error"
 msgstr ""
 
-#: lib/gnutls_errors.c:341
+#: lib/gnutls_errors.c:343
 msgid "The operation timed out"
 msgstr ""
 
-#: lib/gnutls_errors.c:343
+#: lib/gnutls_errors.c:345
 msgid "The operation was cancelled due to user error"
 msgstr ""
 
-#: lib/gnutls_errors.c:345
+#: lib/gnutls_errors.c:347
 #, fuzzy
 msgid "No supported ECC curves were found"
 msgstr "Aucune méthode de chiffrement n'est disponible."
 
-#: lib/gnutls_errors.c:347
+#: lib/gnutls_errors.c:349
 #, fuzzy
 msgid "The curve is unsupported"
 msgstr "Algorithme de chiffrement non supporté."
 
-#: lib/gnutls_errors.c:349
+#: lib/gnutls_errors.c:351
 #, fuzzy
 msgid "The requested PKCS #11 object is not available"
 msgstr "Les données demandées ne sont pas disponibles."
 
-#: lib/gnutls_errors.c:352
+#: lib/gnutls_errors.c:354
 msgid ""
 "The provided X.509 certificate list is not sorted (in subject to issuer "
 "order)"
 msgstr ""
 
-#: lib/gnutls_errors.c:354
+#: lib/gnutls_errors.c:356
 #, fuzzy
 msgid "The OCSP response is invalid"
 msgstr "Requête incorrecte."
 
-#: lib/gnutls_errors.c:356
+#: lib/gnutls_errors.c:358
 msgid "There is no certificate status (OCSP)."
 msgstr ""
 
-#: lib/gnutls_errors.c:358
+#: lib/gnutls_errors.c:360
 msgid "Error in the system's randomness device."
 msgstr ""
 
-#: lib/gnutls_errors.c:361
+#: lib/gnutls_errors.c:363
 msgid "No common application protocol could be negotiated."
 msgstr ""
 
-#: lib/gnutls_errors.c:363
+#: lib/gnutls_errors.c:365
 #, fuzzy
 msgid "Error while performing self checks."
 msgstr "Erreur de lecture de fichier."
 
-#: lib/gnutls_errors.c:365
+#: lib/gnutls_errors.c:367
 msgid "There is no self test for this algorithm."
 msgstr ""
 
-#: lib/gnutls_errors.c:367
+#: lib/gnutls_errors.c:369
 msgid ""
 "An error has been detected in the library and cannot continue operations."
 msgstr ""
 
-#: lib/gnutls_errors.c:369
+#: lib/gnutls_errors.c:371
 #, fuzzy
 msgid "Error in sockets initialization."
 msgstr "Erreur au niveau de la fonction \"push\"."
 
-#: lib/gnutls_errors.c:371
+#: lib/gnutls_errors.c:373
 #, fuzzy
 msgid "Error in public key generation."
 msgstr "Erreur au niveau de la fonction \"pull\"."
 
-#: lib/gnutls_errors.c:377
+#: lib/gnutls_errors.c:379
 msgid "Success."
 msgstr "Succès."
 
-#: lib/gnutls_errors.c:378
+#: lib/gnutls_errors.c:380
 msgid "A TLS warning alert has been received."
 msgstr "Un avertissement TLS a été reçu."
 
-#: lib/gnutls_errors.c:380
+#: lib/gnutls_errors.c:382
 #, fuzzy
 msgid "A heartbeat pong message was received."
 msgstr "Un paquet TLS volumineux de données applicatives a été reçu."
 
-#: lib/gnutls_errors.c:382
+#: lib/gnutls_errors.c:384
 #, fuzzy
 msgid "A heartbeat ping message was received."
 msgstr "Un paquet TLS volumineux de données applicatives a été reçu."
 
-#: lib/gnutls_errors.c:384
+#: lib/gnutls_errors.c:386
 msgid "Resource temporarily unavailable, try again."
 msgstr "Ressource temporairement indisponible, réessayer."
 
-#: lib/gnutls_errors.c:386
+#: lib/gnutls_errors.c:388
 msgid "The transmitted packet is too large (EMSGSIZE)."
 msgstr ""
 
-#: lib/gnutls_errors.c:389
+#: lib/gnutls_errors.c:391
 msgid "Rehandshake was requested by the peer."
 msgstr "Une renégociation a été demandée par la machine distante."
 
-#: lib/gnutls_errors.c:391
+#: lib/gnutls_errors.c:393
 msgid "One of the involved algorithms has insufficient security level."
 msgstr ""
 
-#: lib/gnutls_errors.c:482
+#: lib/gnutls_errors.c:484
 msgid "(unknown error code)"
 msgstr "(code d'erreur inconnu)"
 
@@ -1046,7 +1051,7 @@ msgstr "\t\tCréation: %s\n"
 msgid "\t\tThis Update: %s\n"
 msgstr "\t\tProchainement: %s\n"
 
-#: lib/x509/ocsp_output.c:456
+#: lib/x509/ocsp_output.c:455
 #, fuzzy, c-format
 msgid "\t\tNext Update: %s\n"
 msgstr "\t\tProchainement: %s\n"

@@ -157,7 +157,14 @@ pkcs11_list(FILE * outfile, const char *url, int type, unsigned int flags,
 			exit(1);
 		}
 
-		fprintf(outfile, "Object %d:\n\tURL: %s\n", i, output);
+		if (info->only_urls) {
+			fprintf(outfile, "%s\n", output);
+			gnutls_free(output);
+			continue;
+		} else {
+			fprintf(outfile, "Object %d:\n\tURL: %s\n", i, output);
+			gnutls_free(output);
+		}
 
 		otype = gnutls_pkcs11_obj_get_type(crt_list[i]);
 		fprintf(outfile, "\tType: %s\n",
@@ -636,6 +643,7 @@ pkcs11_write(FILE * outfile, const char *url, const char *label,
 {
 	gnutls_x509_crt_t xcrt;
 	gnutls_x509_privkey_t xkey;
+	gnutls_pubkey_t xpubkey;
 	int ret;
 	gnutls_datum_t *secret_key;
 	unsigned key_usage = 0;
@@ -706,9 +714,22 @@ pkcs11_write(FILE * outfile, const char *url, const char *label,
 		}
 	}
 
-	if (xkey == NULL && xcrt == NULL && secret_key == NULL) {
+	xpubkey = load_pubkey(0, info);
+	if (xpubkey != NULL) {
+		ret =
+		    gnutls_pkcs11_copy_pubkey(url, xpubkey, label,
+						     &cid,
+						     0, flags);
+		if (ret < 0) {
+			fprintf(stderr, "Error in %s:%d: %s\n", __func__,
+				__LINE__, gnutls_strerror(ret));
+			exit(1);
+		}
+	}
+
+	if (xkey == NULL && xcrt == NULL && secret_key == NULL && xpubkey == NULL) {
 		fprintf(stderr,
-			"You must use --load-privkey, --load-certificate or --secret-key to load the file to be copied\n");
+			"You must use --load-privkey, --load-certificate, --load-pubkey or --secret-key to load the file to be copied\n");
 		exit(1);
 	}
 

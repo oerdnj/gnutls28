@@ -1,5 +1,6 @@
 /*
- * Copyright (C) 2004-2012 Free Software Foundation, Inc.
+ * Copyright (C) 2004-2015 Free Software Foundation, Inc.
+ * Copyright (C) 2015 Red Hat, Inc.
  *
  * Author: Nikos Mavrogiannopoulos
  *
@@ -533,6 +534,8 @@ gnutls_priority_set(gnutls_session_t session, gnutls_priority_t priority)
 	    session->internals.priorities.kx.algorithms == 0 ||
 	    session->internals.priorities.compression.algorithms == 0)
 		return gnutls_assert_val(GNUTLS_E_NO_PRIORITIES_WERE_SET);
+
+	session->internals.additional_verify_flags |= priority->additional_verify_flags;
 
 	return 0;
 }
@@ -1134,17 +1137,20 @@ gnutls_priority_init(gnutls_priority_t * priority_cache,
 				continue;
 			} else if ((algo =
 				    gnutls_mac_get_id(&broken_list[i][1]))
-				   != GNUTLS_MAC_UNKNOWN)
+				   != GNUTLS_MAC_UNKNOWN) {
 				fn(&(*priority_cache)->mac, algo);
-			else if ((centry = cipher_name_to_entry(&broken_list[i][1])) != NULL) {
-				fn(&(*priority_cache)->cipher, centry->id);
-				if (centry->type == CIPHER_BLOCK)
-					(*priority_cache)->have_cbc = 1;
+			} else if ((centry = cipher_name_to_entry(&broken_list[i][1])) != NULL) {
+				if (_gnutls_cipher_exists(centry->id)) {
+					fn(&(*priority_cache)->cipher, centry->id);
+					if (centry->type == CIPHER_BLOCK)
+						(*priority_cache)->have_cbc = 1;
+				}
 			} else if ((algo =
-				  gnutls_kx_get_id(&broken_list[i][1])) !=
-				 GNUTLS_KX_UNKNOWN)
-				fn(&(*priority_cache)->kx, algo);
-			else if (strncasecmp
+				  _gnutls_kx_get_id(&broken_list[i][1])) !=
+				 GNUTLS_KX_UNKNOWN) {
+				if (algo != GNUTLS_KX_INVALID)
+					fn(&(*priority_cache)->kx, algo);
+			} else if (strncasecmp
 				 (&broken_list[i][1], "VERS-", 5) == 0) {
 				if (strncasecmp
 				    (&broken_list[i][1], "VERS-TLS-ALL",
@@ -1316,7 +1322,7 @@ void gnutls_priority_deinit(gnutls_priority_t priority_cache)
  * gnutls_priority_set_direct:
  * @session: is a #gnutls_session_t type.
  * @priorities: is a string describing priorities
- * @err_pos: In case of an error this will have the position in the string the error occured
+ * @err_pos: In case of an error this will have the position in the string the error occurred
  *
  * Sets the priorities to use on the ciphers, key exchange methods,
  * macs and compression methods.  This function avoids keeping a

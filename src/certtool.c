@@ -64,7 +64,7 @@ void generate_pkcs12(common_info_st *);
 void generate_pkcs8(common_info_st *);
 static void verify_chain(void);
 void verify_crl(common_info_st * cinfo);
-void verify_pkcs7(common_info_st * cinfo, const char *purpose);
+void verify_pkcs7(common_info_st * cinfo, const char *purpose, unsigned display_data);
 void pubkey_info(gnutls_x509_crt_t crt, common_info_st *);
 void pgp_privkey_info(void);
 void pgp_ring_info(void);
@@ -317,6 +317,7 @@ generate_certificate(gnutls_privkey_t * ret_key,
 				gnutls_strerror(result));
 			exit(1);
 		}
+		gnutls_pubkey_deinit(pubkey);
 	} else {
 		result = gnutls_x509_crt_set_crq(crt, crq);
 		if (result < 0) {
@@ -447,6 +448,8 @@ generate_certificate(gnutls_privkey_t * ret_key,
 			}
 		}
 
+		crt_unique_ids_set(crt);
+
 		is_ike = get_ipsec_ike_status();
 		server = get_tls_server_status();
 
@@ -456,8 +459,6 @@ generate_certificate(gnutls_privkey_t * ret_key,
 		get_policy_set(crt);
 
 		if (server != 0) {
-			result = 0;
-
 			result =
 			    gnutls_x509_crt_set_key_purpose_oid(crt,
 								GNUTLS_KP_TLS_WWW_SERVER,
@@ -487,8 +488,12 @@ generate_certificate(gnutls_privkey_t * ret_key,
 				if (result)
 					usage |=
 					    GNUTLS_KEY_KEY_ENCIPHERMENT;
-			} else
+			} else {
+				if (get_encrypt_status(server))
+					fprintf(stderr, "warning: this algorithm does not support encryption; disabling the encryption flag\n");
+
 				usage |= GNUTLS_KEY_DIGITAL_SIGNATURE;
+			}
 
 			if (is_ike) {
 				result =
@@ -877,6 +882,7 @@ static void generate_signed_certificate(common_info_st * cinfo)
 	fwrite(lbuffer, 1, size, outfile);
 
 	gnutls_x509_crt_deinit(crt);
+	gnutls_x509_crt_deinit(ca_crt);
 	gnutls_privkey_deinit(key);
 	gnutls_privkey_deinit(ca_key);
 }
@@ -1265,7 +1271,7 @@ static void cmd_parser(int argc, char **argv)
 	else if (HAVE_OPT(P7_DETACHED_SIGN))
 		pkcs7_sign(&cinfo, 0);
 	else if (HAVE_OPT(P7_VERIFY))
-		verify_pkcs7(&cinfo, OPT_ARG(VERIFY_PURPOSE));
+		verify_pkcs7(&cinfo, OPT_ARG(VERIFY_PURPOSE), ENABLED_OPT(P7_SHOW_DATA));
 	else if (HAVE_OPT(P8_INFO))
 		pkcs8_info();
 	else if (HAVE_OPT(SMIME_TO_P7))
@@ -1303,6 +1309,11 @@ void certificate_info(int pubkey, common_info_st * cinfo)
 
 	pem.data = (void *) fread_file(infile, &size);
 	pem.size = size;
+
+	if (!pem.data) {
+		fprintf(stderr, "%s", infile ? "file" : "standard input");
+		exit(1);
+	}
 
 	ret =
 	    gnutls_x509_crt_list_import2(&crts, &crt_num, &pem, incert_format, 0);
@@ -1362,6 +1373,11 @@ void pgp_certificate_info(void)
 
 	pem.data = (void *) fread_file(infile, &size);
 	pem.size = size;
+
+	if (!pem.data) {
+		fprintf(stderr, "%s", infile ? "file" : "standard input");
+		exit(1);
+	}
 
 	ret = gnutls_openpgp_crt_init(&crt);
 	if (ret < 0) {
@@ -1599,6 +1615,11 @@ void pgp_ring_info(void)
 
 	pem.data = (void *) fread_file(infile, &size);
 	pem.size = size;
+
+	if (!pem.data) {
+		fprintf(stderr, "%s", infile ? "file" : "standard input");
+		exit(1);
+	}
 
 	ret = gnutls_openpgp_keyring_init(&ring);
 	if (ret < 0) {
@@ -2105,8 +2126,12 @@ void generate_request(common_info_st * cinfo)
 				usage |= GNUTLS_KEY_KEY_ENCIPHERMENT;
 			else
 				usage |= GNUTLS_KEY_DIGITAL_SIGNATURE;
-		} else		/* DSA and ECDSA are always signing */
+		} else {	/* DSA and ECDSA are always signing */
+			if (get_encrypt_status(1))
+				fprintf(stderr, "warning: this algorithm does not support encryption; disabling the encryption flag\n");
+
 			usage |= GNUTLS_KEY_DIGITAL_SIGNATURE;
+		}
 
 		if (ca_status) {
 			ret = get_cert_sign_status();
@@ -2541,7 +2566,6 @@ _verify_x509_mem(const void *cert, int cert_size, const void *ca,
 			exit(1);
 		}
 
-		gnutls_free(x509_crl_list);
 	}
 
 	fprintf(stdout, "Loaded %d certificates, %d CAs and %d CRLs\n\n",
@@ -2601,6 +2625,9 @@ _verify_x509_mem(const void *cert, int cert_size, const void *ca,
 	for (i=0;i<x509_ncerts;i++)
 		gnutls_x509_crt_deinit(x509_cert_list[i]);
 	gnutls_free(x509_cert_list);
+	for (i=0;i<x509_ncrls;i++)
+		gnutls_x509_crl_deinit(x509_crl_list[i]);
+	gnutls_free(x509_crl_list);
 
 	if (output != 0)
 		exit(EXIT_FAILURE);
@@ -2720,6 +2747,11 @@ void verify_crl(common_info_st * cinfo)
 
 	pem.data = (void *) fread_file(infile, &size);
 	pem.size = size;
+
+	if (!pem.data) {
+		fprintf(stderr, "%s", infile ? "file" : "standard input");
+		exit(1);
+	}
 
 	ret = gnutls_x509_crl_import(crl, &pem, incert_format);
 	free(pem.data);
@@ -2849,12 +2881,14 @@ static void print_pkcs7_sig_info(gnutls_pkcs7_signature_info_st *info, common_in
 	fprintf(outfile, "\n");
 }
 
-void verify_pkcs7(common_info_st * cinfo, const char *purpose)
+void verify_pkcs7(common_info_st * cinfo, const char *purpose, unsigned display_data)
 {
 	gnutls_pkcs7_t pkcs7;
 	int ret, ecode;
 	size_t size;
 	gnutls_datum_t data, detached = {NULL,0};
+	gnutls_datum_t tmp = {NULL,0};
+	gnutls_datum_t embdata = {NULL,0};
 	int i;
 	gnutls_pkcs7_signature_info_st info;
 	gnutls_x509_trust_list_t tl = NULL;
@@ -2870,6 +2904,11 @@ void verify_pkcs7(common_info_st * cinfo, const char *purpose)
 
 	data.data = (void *) fread_file(infile, &size);
 	data.size = size;
+
+	if (!data.data) {
+		fprintf(stderr, "%s", infile ? "file" : "standard input");
+		exit(1);
+	}
 
 	ret = gnutls_pkcs7_import(pkcs7, &data, cinfo->incert_format);
 	free(data.data);
@@ -2905,10 +2944,42 @@ void verify_pkcs7(common_info_st * cinfo, const char *purpose)
 		ret = gnutls_pkcs7_get_signature_info(pkcs7, i, &info);
 		if (ret < 0)
 			break;
-		if (i==0)
-			fprintf(outfile, "Signers:\n");
 
-		print_pkcs7_sig_info(&info, cinfo);
+		if (!display_data) {
+			if (i==0)
+				fprintf(outfile, "Signers:\n");
+			print_pkcs7_sig_info(&info, cinfo);
+		} else {
+			if (!detached.data) {
+				ret = gnutls_pkcs7_get_embedded_data(pkcs7, i, &tmp);
+				if (ret != GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE || i == 0) {
+					if (ret < 0) {
+						fprintf(stderr, "error getting embedded data: %s\n", gnutls_strerror(ret));
+						exit(1);
+					}
+
+					/* check if the embedded data in subsequent calls remain the same */
+					if (i != 0) {
+						if (tmp.size != embdata.size || memcmp(embdata.data, tmp.data, tmp.size) != 0) {
+							fprintf(stderr, "error: the embedded data differ in signed data with index %d\n", i);
+							exit(1);
+						}
+					}
+
+					if (i == 0) {
+						fwrite(tmp.data, 1, tmp.size, outfile);
+						embdata.data = tmp.data;
+						embdata.size = tmp.size;
+						tmp.data = NULL;
+					} else {
+						gnutls_free(tmp.data);
+					}
+				}
+			} else {
+				if (i==0)
+					fwrite(detached.data, 1, detached.size, outfile);
+			}
+		}
 
 		gnutls_pkcs7_signature_info_deinit(&info);
 
@@ -2931,6 +3002,8 @@ void verify_pkcs7(common_info_st * cinfo, const char *purpose)
 		gnutls_x509_crt_deinit(signer);
 	else
 		gnutls_x509_trust_list_deinit(tl, 1);
+	free(detached.data);
+	gnutls_free(embdata.data);
 	exit(ecode);
 }
 
@@ -2947,6 +3020,9 @@ void pkcs7_sign(common_info_st * cinfo, unsigned embed)
 	if (HAVE_OPT(P7_TIME))
 		flags |= GNUTLS_PKCS7_INCLUDE_TIME;
 
+	if (ENABLED_OPT(P7_INCLUDE_CERT))
+		flags |= GNUTLS_PKCS7_INCLUDE_CERT;
+
 	ret = gnutls_pkcs7_init(&pkcs7);
 	if (ret < 0) {
 		fprintf(stderr, "p7_init: %s\n", gnutls_strerror(ret));
@@ -2955,6 +3031,11 @@ void pkcs7_sign(common_info_st * cinfo, unsigned embed)
 
 	data.data = (void *) fread_file(infile, &size);
 	data.size = size;
+
+	if (!data.data) {
+		fprintf(stderr, "%s", infile ? "file" : "standard input");
+		exit(1);
+	}
 
 	signer = load_cert(1, cinfo);
 	key = load_private_key(1, cinfo);
@@ -3175,6 +3256,7 @@ void generate_pkcs12(common_info_st * cinfo)
 				gnutls_strerror(result));
 			exit(1);
 		}
+		gnutls_pkcs12_bag_deinit(bag);
 	}
 
 	/* Add the ca cert, if any */
@@ -3208,6 +3290,7 @@ void generate_pkcs12(common_info_st * cinfo)
 				gnutls_strerror(result));
 			exit(1);
 		}
+		gnutls_pkcs12_bag_deinit(bag);
 	}
 
 	for (i = 0; i < nkeys; i++) {
@@ -3280,6 +3363,7 @@ void generate_pkcs12(common_info_st * cinfo)
 				gnutls_strerror(result));
 			exit(1);
 		}
+		gnutls_pkcs12_bag_deinit(kbag);
 	}
 
 	result = gnutls_pkcs12_generate_mac(pkcs12, pass);
@@ -3299,7 +3383,11 @@ void generate_pkcs12(common_info_st * cinfo)
 	}
 
 	fwrite(lbuffer, 1, size, outfile);
+	for (i=0;i<ncrts;i++)
+		gnutls_x509_crt_deinit(crts[i]);
 	gnutls_free(crts);
+	gnutls_x509_crt_deinit(ca_crt);
+	gnutls_pkcs12_deinit(pkcs12);
 }
 
 static const char *BAGTYPE(gnutls_pkcs12_bag_type_t x)
@@ -3494,6 +3582,11 @@ void pkcs12_info(common_info_st * cinfo)
 	data.data = (void *) fread_file(infile, &size);
 	data.size = size;
 
+	if (!data.data) {
+		fprintf(stderr, "%s", infile ? "file" : "standard input");
+		exit(1);
+	}
+
 	result = gnutls_pkcs12_import(pkcs12, &data, incert_format, 0);
 	free(data.data);
 	if (result < 0) {
@@ -3526,6 +3619,7 @@ void pkcs12_info(common_info_st * cinfo)
 		fprintf(outfile, "\tSalt size: %u\n", salt_size);
 		fprintf(outfile, "\tIteration count: %u\n\n", mac_iter);
 	}
+	gnutls_free(mac_oid);
 
 	pass = get_password(cinfo, NULL, 0);
 
@@ -3544,8 +3638,10 @@ void pkcs12_info(common_info_st * cinfo)
 		}
 
 		result = gnutls_pkcs12_get_bag(pkcs12, indx, bag);
-		if (result < 0)
+		if (result < 0) {
+			gnutls_pkcs12_bag_deinit(bag);
 			break;
+		}
 
 		result = gnutls_pkcs12_bag_get_count(bag);
 		if (result < 0) {
@@ -3589,6 +3685,8 @@ void pkcs12_info(common_info_st * cinfo)
 
 		gnutls_pkcs12_bag_deinit(bag);
 	}
+
+	gnutls_pkcs12_deinit(pkcs12);
 
 	if (fail) {
 		fprintf(stderr,
@@ -3660,6 +3758,11 @@ void pkcs8_info(void)
 	data.data = (void *) fread_file(infile, &size);
 	data.size = size;
 
+	if (!data.data) {
+		fprintf(stderr, "%s", infile ? "file" : "standard input");
+		exit(1);
+	}
+
 	pkcs8_info_int(&data, incert_format, 0, outfile, "");
 }
 
@@ -3678,6 +3781,11 @@ void pkcs7_info(common_info_st *cinfo)
 
 	data.data = (void *) fread_file(infile, &size);
 	data.size = size;
+
+	if (!data.data) {
+		fprintf(stderr, "%s", infile ? "file" : "standard input");
+		exit(1);
+	}
 
 	result = gnutls_pkcs7_import(pkcs7, &data, incert_format);
 	free(data.data);
@@ -3805,6 +3913,11 @@ gnutls_pubkey_t find_pubkey(gnutls_x509_crt_t crt, common_info_st * cinfo)
 			if (pubkey == NULL) { /* load from stdin */
 				pem.data = (void *) fread_file(infile, &size);
 				pem.size = size;
+
+				if (!pem.data) {
+					fprintf(stderr, "%s", infile ? "file" : "standard input");
+					exit(1);
+				}
 
 				ret = gnutls_pubkey_init(&pubkey);
 				if (ret < 0) {
@@ -3963,6 +4076,11 @@ void certificate_fpr(common_info_st * cinfo)
 		pem.data = (void *) fread_file(infile, &size);
 		pem.size = size;
 
+		if (!pem.data) {
+			fprintf(stderr, "%s", infile ? "file" : "standard input");
+			exit(1);
+		}
+
 		crt_num = 1;
 		ret =
 		    gnutls_x509_crt_list_import(&crt, &crt_num, &pem, incert_format,
@@ -3973,14 +4091,14 @@ void certificate_fpr(common_info_st * cinfo)
 		} else if (ret >= 0 && crt_num == 0) {
 			fprintf(stderr, "no certificates were found.\n");
 		}
+
+		free(pem.data);
 	}
 
 	if (ret < 0) {
 		fprintf(stderr, "import error: %s\n", gnutls_strerror(ret));
 		exit(1);
 	}
-
-	free(pem.data);
 
 	fpr_size = sizeof(fpr);
 

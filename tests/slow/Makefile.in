@@ -110,6 +110,7 @@ check_PROGRAMS = $(am__EXEEXT_1) cipher-test$(EXEEXT) \
 	cipher-override$(EXEEXT) mac-override$(EXEEXT) \
 	cipher-override2$(EXEEXT)
 TESTS = $(am__EXEEXT_1) test-ciphers override-ciphers
+@WINDOWS_TRUE@am__append_2 = WINDOWS=1
 subdir = tests/slow
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/src/gl/m4/arpa_inet_h.m4 \
@@ -232,7 +233,7 @@ cipher_override_SOURCES = cipher-override.c
 cipher_override_OBJECTS = cipher-override.$(OBJEXT)
 cipher_override_LDADD = $(LDADD)
 am__DEPENDENCIES_1 =
-cipher_override_DEPENDENCIES = ../libutils.la \
+cipher_override_DEPENDENCIES = ../libutils.la ../../gl/libgnu.la \
 	$(top_builddir)/lib/libgnutls.la $(am__DEPENDENCIES_1)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
@@ -245,22 +246,22 @@ cipher_override_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC \
 cipher_override2_SOURCES = cipher-override2.c
 cipher_override2_OBJECTS = cipher-override2.$(OBJEXT)
 cipher_override2_LDADD = $(LDADD)
-cipher_override2_DEPENDENCIES = ../libutils.la \
+cipher_override2_DEPENDENCIES = ../libutils.la ../../gl/libgnu.la \
 	$(top_builddir)/lib/libgnutls.la $(am__DEPENDENCIES_1)
 cipher_test_SOURCES = cipher-test.c
 cipher_test_OBJECTS = cipher_test-cipher-test.$(OBJEXT)
 cipher_test_LDADD = $(LDADD)
-cipher_test_DEPENDENCIES = ../libutils.la \
+cipher_test_DEPENDENCIES = ../libutils.la ../../gl/libgnu.la \
 	$(top_builddir)/lib/libgnutls.la $(am__DEPENDENCIES_1)
 gendh_SOURCES = gendh.c
 gendh_OBJECTS = gendh.$(OBJEXT)
 gendh_LDADD = $(LDADD)
-gendh_DEPENDENCIES = ../libutils.la $(top_builddir)/lib/libgnutls.la \
-	$(am__DEPENDENCIES_1)
+gendh_DEPENDENCIES = ../libutils.la ../../gl/libgnu.la \
+	$(top_builddir)/lib/libgnutls.la $(am__DEPENDENCIES_1)
 mac_override_SOURCES = mac-override.c
 mac_override_OBJECTS = mac-override.$(OBJEXT)
 mac_override_LDADD = $(LDADD)
-mac_override_DEPENDENCIES = ../libutils.la \
+mac_override_DEPENDENCIES = ../libutils.la ../../gl/libgnu.la \
 	$(top_builddir)/lib/libgnutls.la $(am__DEPENDENCIES_1)
 mac_override_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
@@ -1510,23 +1511,23 @@ top_srcdir = @top_srcdir@
 AM_CFLAGS = $(WARN_CFLAGS) $(WERROR_CFLAGS)
 AM_CPPFLAGS = -I$(top_srcdir)/lib/includes \
 	-I$(top_builddir)/lib/includes -I$(top_srcdir)/tests/ \
-	-I$(top_srcdir)/lib -I$(top_srcdir)/gl $(am__append_1)
+	-I$(top_srcdir)/lib -I$(top_builddir)/gl -I$(top_srcdir)/gl \
+	$(am__append_1)
 AM_LDFLAGS = -no-install
 LDADD = ../libutils.la \
+	../../gl/libgnu.la \
 	$(top_builddir)/lib/libgnutls.la $(LIBSOCKET)
 
-@ENABLE_SELF_CHECKS_FALSE@cipher_test_CPPFLAGS = $(AM_CPPFLAGS) -I$(top_builddir)/lib/ -I$(top_builddir)/gl/
+@ENABLE_SELF_CHECKS_FALSE@cipher_test_CPPFLAGS = $(AM_CPPFLAGS) -I$(top_builddir)/lib/
 @ENABLE_SELF_CHECKS_TRUE@cipher_test_CPPFLAGS = $(AM_CPPFLAGS)
 ctests = gendh
 @ENABLE_NETTLE_TRUE@cipher_override_LDFLAGS = $(NETTLE_LIBS) $(HOGWEED_LIBS) $(GMP_LIBS) $(LDADD)
 @ENABLE_NETTLE_TRUE@mac_override_LDFLAGS = $(NETTLE_LIBS) $(HOGWEED_LIBS) $(GMP_LIBS) $(LDADD)
 dist_check_SCRIPTS = test-ciphers override-ciphers
 EXTRA_DIST = README
-TESTS_ENVIRONMENT = EXEEXT=$(EXEEXT) \
-	LC_ALL="C"						\
-	top_builddir="$(top_builddir)"				\
-	srcdir="$(srcdir)"
-
+TESTS_ENVIRONMENT = EXEEXT=$(EXEEXT) LC_ALL="C" \
+	top_builddir="$(top_builddir)" srcdir="$(srcdir)" \
+	$(am__append_2)
 all: all-am
 
 .SUFFIXES:

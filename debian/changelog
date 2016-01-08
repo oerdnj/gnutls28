@@ -1,3 +1,34 @@
+gnutls28 (3.4.8-1) experimental; urgency=medium
+
+  * Migrate from libgnutls30-dbg to ddebs. dh_strip's --ddeb-migration
+    option was added to debhelper/unstable with version 9.20150628, bump
+    build-dependency accordingly.
+  * autoreconf requires automake 1.12.2, add build-dependency.
+  * New upstream version.
+    + Update symbol file.
+  * Move Vcs-* from git/http to https.
+
+ -- Andreas Metzler <ametzler@debian.org>  Fri, 08 Jan 2016 19:30:07 +0100
+
+gnutls28 (3.4.7-1) experimental; urgency=medium
+
+  * New upstream version.
+    + Update symbol file.
+
+ -- Andreas Metzler <ametzler@debian.org>  Sun, 22 Nov 2015 15:29:19 +0100
+
+gnutls28 (3.4.6-1) experimental; urgency=medium
+
+  * Make use of autogen's MAN_PAGE_DATE (available in version 5.18.6 and
+    later) to improve reproducibility of build.
+  * New upstream version.
+    + Update symbol file.
+  * Bump debhelper build-dependency to >= 9.20141010 and add b-d on dpkg-dev
+    (>= 1.17.14). Both are required for build-profile support added in
+    previous upload. (Thanks, lintian.)
+
+ -- Andreas Metzler <ametzler@debian.org>  Tue, 20 Oct 2015 20:00:55 +0200
+
 gnutls28 (3.4.5-1) experimental; urgency=medium
 
   [ Helmut Grohne ]

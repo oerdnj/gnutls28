@@ -2,8 +2,9 @@ libgnutls.so.30 libgnutls30 #MINVER#
 * Build-Depends-Package: libgnutls28-dev
  GNUTLS_3_4@GNUTLS_3_4 3.4.0
  GNUTLS_FIPS140_3_4@GNUTLS_FIPS140_3_4 3.4.0
- (regex|optional)"@GNUTLS_PRIVATE_3_4$" 3.4.4-0+private+1
- _gnutls_encode_ber_rs_raw@GNUTLS_FIPS140_3_4 3.4.4-0+private+1
+ (regex|optional)"@GNUTLS_PRIVATE_3_4$" 3.4.7-0+private+1
+ _gnutls_encode_ber_rs_raw@GNUTLS_FIPS140_3_4 3.4.7-0+private+1
+ _gnutls_global_init_skip@GNUTLS_3_4 3.4.7
  gnutls_aead_cipher_decrypt@GNUTLS_3_4 3.4.0
  gnutls_aead_cipher_deinit@GNUTLS_3_4 3.4.0
  gnutls_aead_cipher_encrypt@GNUTLS_3_4 3.4.0
@@ -51,6 +52,7 @@ libgnutls.so.30 libgnutls30 #MINVER#
  gnutls_certificate_send_x509_rdn_sequence@GNUTLS_3_4 3.4.0
  gnutls_certificate_server_set_request@GNUTLS_3_4 3.4.0
  gnutls_certificate_set_dh_params@GNUTLS_3_4 3.4.0
+ gnutls_certificate_set_flags@GNUTLS_3_4 3.4.7
  gnutls_certificate_set_key@GNUTLS_3_4 3.4.0
  gnutls_certificate_set_ocsp_status_request_file@GNUTLS_3_4 3.4.0
  gnutls_certificate_set_ocsp_status_request_function@GNUTLS_3_4 3.4.0
@@ -371,6 +373,7 @@ libgnutls.so.30 libgnutls30 #MINVER#
  gnutls_pk_to_sign@GNUTLS_3_4 3.4.0
  gnutls_pkcs11_add_provider@GNUTLS_3_4 3.4.0
  gnutls_pkcs11_copy_attached_extension@GNUTLS_3_4 3.4.4
+ gnutls_pkcs11_copy_pubkey@GNUTLS_3_4 3.4.6
  gnutls_pkcs11_copy_secret_key@GNUTLS_3_4 3.4.4
  gnutls_pkcs11_copy_x509_crt2@GNUTLS_3_4 3.4.4
  gnutls_pkcs11_copy_x509_privkey2@GNUTLS_3_4 3.4.4
@@ -462,6 +465,7 @@ libgnutls.so.30 libgnutls30 #MINVER#
  gnutls_pkcs7_get_crt_count@GNUTLS_3_4 3.4.0
  gnutls_pkcs7_get_crt_raw2@GNUTLS_3_4 3.4.2
  gnutls_pkcs7_get_crt_raw@GNUTLS_3_4 3.4.0
+ gnutls_pkcs7_get_embedded_data@GNUTLS_3_4 3.4.8
  gnutls_pkcs7_get_signature_count@GNUTLS_3_4 3.4.3
  gnutls_pkcs7_get_signature_info@GNUTLS_3_4 3.4.2
  gnutls_pkcs7_import@GNUTLS_3_4 3.4.0
@@ -625,12 +629,16 @@ libgnutls.so.30 libgnutls30 #MINVER#
  gnutls_session_get_id@GNUTLS_3_4 3.4.0
  gnutls_session_get_ptr@GNUTLS_3_4 3.4.0
  gnutls_session_get_random@GNUTLS_3_4 3.4.0
+ gnutls_session_get_verify_cert_status@GNUTLS_3_4 3.4.6
  gnutls_session_is_resumed@GNUTLS_3_4 3.4.0
  gnutls_session_resumption_requested@GNUTLS_3_4 3.4.0
  gnutls_session_set_data@GNUTLS_3_4 3.4.0
  gnutls_session_set_id@GNUTLS_3_4 3.4.0
  gnutls_session_set_premaster@GNUTLS_3_4 3.4.0
  gnutls_session_set_ptr@GNUTLS_3_4 3.4.0
+ gnutls_session_set_verify_cert2@GNUTLS_3_4 3.4.6
+ gnutls_session_set_verify_cert@GNUTLS_3_4 3.4.6
+ gnutls_session_set_verify_function@GNUTLS_3_4 3.4.6
  gnutls_session_ticket_enable_client@GNUTLS_3_4 3.4.0
  gnutls_session_ticket_enable_server@GNUTLS_3_4 3.4.0
  gnutls_session_ticket_key_generate@GNUTLS_3_4 3.4.0
@@ -911,6 +919,7 @@ libgnutls.so.30 libgnutls30 #MINVER#
  gnutls_x509_crt_set_issuer_alt_name@GNUTLS_3_4 3.4.0
  gnutls_x509_crt_set_issuer_dn@GNUTLS_3_4 3.4.0
  gnutls_x509_crt_set_issuer_dn_by_oid@GNUTLS_3_4 3.4.0
+ gnutls_x509_crt_set_issuer_unique_id@GNUTLS_3_4 3.4.7
  gnutls_x509_crt_set_key@GNUTLS_3_4 3.4.0
  gnutls_x509_crt_set_key_purpose_oid@GNUTLS_3_4 3.4.0
  gnutls_x509_crt_set_key_usage@GNUTLS_3_4 3.4.0
@@ -925,6 +934,7 @@ libgnutls.so.30 libgnutls30 #MINVER#
  gnutls_x509_crt_set_subject_alt_name@GNUTLS_3_4 3.4.0
  gnutls_x509_crt_set_subject_alternative_name@GNUTLS_3_4 3.4.0
  gnutls_x509_crt_set_subject_key_id@GNUTLS_3_4 3.4.0
+ gnutls_x509_crt_set_subject_unique_id@GNUTLS_3_4 3.4.7
  gnutls_x509_crt_set_version@GNUTLS_3_4 3.4.0
  gnutls_x509_crt_sign2@GNUTLS_3_4 3.4.0
  gnutls_x509_crt_sign@GNUTLS_3_4 3.4.0

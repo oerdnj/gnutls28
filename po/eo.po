@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnutls 3.2.1\n"
 "Report-Msgid-Bugs-To: bug-gnutls@gnu.org\n"
-"POT-Creation-Date: 2015-09-12 11:48+0200\n"
+"POT-Creation-Date: 2016-01-08 10:03+0100\n"
 "PO-Revision-Date: 2013-06-28 14:49-0300\n"
 "Last-Translator: Felipe Castro <fefcas@gmail.com>\n"
 "Language-Team: Esperanto <translation-team-eo@lists.sourceforge.net>\n"
@@ -347,363 +347,368 @@ msgid "Error in the certificate."
 msgstr "Eraro en atestilo."
 
 #: lib/gnutls_errors.c:157
+#, fuzzy
+msgid "Error in the certificate verification."
+msgstr "Eraro en atestilo."
+
+#: lib/gnutls_errors.c:159
 msgid "Could not authenticate peer."
 msgstr "Ne eblis aŭtentikigi samtavolanon."
 
-#: lib/gnutls_errors.c:160
+#: lib/gnutls_errors.c:162
 msgid "Unknown Subject Alternative name in X.509 certificate."
 msgstr "Nekonata nomo de temo-alternativo en atestilo X.509."
 
-#: lib/gnutls_errors.c:164
+#: lib/gnutls_errors.c:166
 msgid "Unsupported critical extension in X.509 certificate."
 msgstr "Nesubtenata gravega etendo en atestilo X.509."
 
-#: lib/gnutls_errors.c:166
+#: lib/gnutls_errors.c:168
 msgid "Unsupported extension in X.509 certificate."
 msgstr "Nesubtenata etendo en atestilo X.509."
 
-#: lib/gnutls_errors.c:169
+#: lib/gnutls_errors.c:171
 msgid "Key usage violation in certificate has been detected."
 msgstr "Malrespekto en ŝlosil-uzmaniero estas detektita."
 
-#: lib/gnutls_errors.c:171 lib/gnutls_errors.c:388
+#: lib/gnutls_errors.c:173 lib/gnutls_errors.c:390
 msgid "Function was interrupted."
 msgstr "Funkcio estis haltigata."
 
-#: lib/gnutls_errors.c:173
+#: lib/gnutls_errors.c:175
 msgid "TLS Application data were received, while expecting handshake data."
 msgstr ""
 "TLS-aplikaĵa datumaro estis ricevata, dum ni atendis kvitancan datumaron."
 
-#: lib/gnutls_errors.c:175
+#: lib/gnutls_errors.c:177
 msgid "Error in Database backend."
 msgstr "Eraro en datumara internaĵo."
 
-#: lib/gnutls_errors.c:176
+#: lib/gnutls_errors.c:178
 msgid "The certificate type is not supported."
 msgstr "La tipo de atestilo ne estas subtenata."
 
-#: lib/gnutls_errors.c:179
+#: lib/gnutls_errors.c:181
 msgid "The given memory buffer is too short to hold parameters."
 msgstr "La indikita memor-bufro estas tro mallonga por teni parametrojn."
 
-#: lib/gnutls_errors.c:181
+#: lib/gnutls_errors.c:183
 msgid "The request is invalid."
 msgstr "La peto malvalidas."
 
-#: lib/gnutls_errors.c:183
+#: lib/gnutls_errors.c:185
 msgid "The cookie was bad."
 msgstr "La kuketo malĝustis."
 
-#: lib/gnutls_errors.c:184
+#: lib/gnutls_errors.c:186
 msgid "An illegal parameter has been received."
 msgstr "Malpermesata parametro estas ricevita."
 
-#: lib/gnutls_errors.c:186
+#: lib/gnutls_errors.c:188
 msgid "An illegal parameter was found."
 msgstr "Malpermesata parametro estis trovata."
 
-#: lib/gnutls_errors.c:188
+#: lib/gnutls_errors.c:190
 msgid "Error while reading file."
 msgstr "Eraro dum lego de dosiero."
 
-#: lib/gnutls_errors.c:190
+#: lib/gnutls_errors.c:192
 msgid "ASN1 parser: Element was not found."
 msgstr "Analizilo ASN1: elemento ne estis trovata."
 
-#: lib/gnutls_errors.c:192
+#: lib/gnutls_errors.c:194
 msgid "ASN1 parser: Identifier was not found"
 msgstr "Analizilo ASN1: identiganto ne estis trovata"
 
-#: lib/gnutls_errors.c:194
+#: lib/gnutls_errors.c:196
 msgid "ASN1 parser: Error in DER parsing."
 msgstr "Analizilo ASN1: eraro en analizo de DER."
 
-#: lib/gnutls_errors.c:196
+#: lib/gnutls_errors.c:198
 msgid "ASN1 parser: Value was not found."
 msgstr "Analizilo ASN1: valoro ne estis trovata."
 
-#: lib/gnutls_errors.c:198
+#: lib/gnutls_errors.c:200
 msgid "ASN1 parser: Generic parsing error."
 msgstr "Analizilo ASN1: ĝenerala analiz-eraro."
 
-#: lib/gnutls_errors.c:200
+#: lib/gnutls_errors.c:202
 msgid "ASN1 parser: Value is not valid."
 msgstr "Analizilo ASN1: valoro ne validas."
 
-#: lib/gnutls_errors.c:202
+#: lib/gnutls_errors.c:204
 msgid "ASN1 parser: Error in TAG."
 msgstr "Analizilo ASN1: eraro en TAG."
 
-#: lib/gnutls_errors.c:204
+#: lib/gnutls_errors.c:206
 msgid "ASN1 parser: error in implicit tag"
 msgstr "Analizilo ASN1: eraro en implicita marko"
 
-#: lib/gnutls_errors.c:206
+#: lib/gnutls_errors.c:208
 msgid "ASN1 parser: Error in type 'ANY'."
 msgstr "Analizilo ASN1: eraro en tipo 'ANY'."
 
-#: lib/gnutls_errors.c:208
+#: lib/gnutls_errors.c:210
 msgid "ASN1 parser: Syntax error."
 msgstr "Analizilo ASN1: sintaks-eraro."
 
-#: lib/gnutls_errors.c:210
+#: lib/gnutls_errors.c:212
 msgid "ASN1 parser: Overflow in DER parsing."
 msgstr "Analizilo ASN1: troigo en analizo de DER."
 
-#: lib/gnutls_errors.c:214
+#: lib/gnutls_errors.c:216
 msgid "Too many empty record packets have been received."
 msgstr "Tro multaj malplenaj rikord-paketoj estas ricevitaj."
 
-#: lib/gnutls_errors.c:216
+#: lib/gnutls_errors.c:218
 msgid "Too many handshake packets have been received."
 msgstr "Tro multaj kvitancaj paketoj estas ricevitaj."
 
-#: lib/gnutls_errors.c:218
+#: lib/gnutls_errors.c:220
 msgid "The crypto library version is too old."
 msgstr "La versio de ĉifra biblioteko tro malnovas."
 
-#: lib/gnutls_errors.c:221
+#: lib/gnutls_errors.c:223
 msgid "The tasn1 library version is too old."
 msgstr "La versio de biblioteko tasn1 tro malnovas."
 
-#: lib/gnutls_errors.c:223
+#: lib/gnutls_errors.c:225
 msgid "The OpenPGP User ID is revoked."
 msgstr "La uzant-ID de OpenPGP estas revokita."
 
-#: lib/gnutls_errors.c:225
+#: lib/gnutls_errors.c:227
 msgid "The OpenPGP key has not a preferred key set."
 msgstr "La ŝlosilo OpenPGP ne havas preferatan ŝlosilaron."
 
-#: lib/gnutls_errors.c:227
+#: lib/gnutls_errors.c:229
 msgid "Error loading the keyring."
 msgstr "Eraro dum ŝargo je la ŝlosilringo."
 
-#: lib/gnutls_errors.c:229
+#: lib/gnutls_errors.c:231
 msgid "The initialization of crypto backend has failed."
 msgstr "La ekigo de ĉifra internaĵo fiaskis."
 
-#: lib/gnutls_errors.c:232
+#: lib/gnutls_errors.c:234
 msgid "No supported compression algorithms have been found."
 msgstr "Neniu subtenata densig-algoritmo estas trovita."
 
-#: lib/gnutls_errors.c:234
+#: lib/gnutls_errors.c:236
 msgid "No supported cipher suites have been found."
 msgstr "Neniu subtenata ĉifra algoritmaro estas trovita."
 
-#: lib/gnutls_errors.c:236
+#: lib/gnutls_errors.c:238
 msgid "Could not get OpenPGP key."
 msgstr "Ne eblis havigi ŝlosilon OpenPGP."
 
-#: lib/gnutls_errors.c:238
+#: lib/gnutls_errors.c:240
 msgid "Could not find OpenPGP subkey."
 msgstr "Ne eblis trovi subŝlosilon OpenPGP."
 
-#: lib/gnutls_errors.c:240
+#: lib/gnutls_errors.c:242
 msgid "Safe renegotiation failed."
 msgstr "Sekura renegocado fiaskis."
 
-#: lib/gnutls_errors.c:242
+#: lib/gnutls_errors.c:244
 msgid "Unsafe renegotiation denied."
 msgstr "Malsekura renegocado estas rifuzita."
 
-#: lib/gnutls_errors.c:245
+#: lib/gnutls_errors.c:247
 msgid "The SRP username supplied is illegal."
 msgstr "La liverita SRP-uzantnomo estas malpermesata."
 
-#: lib/gnutls_errors.c:247
+#: lib/gnutls_errors.c:249
 msgid "The SRP username supplied is unknown."
 msgstr "La liverita SRP-uzantnomo estas nekonata."
 
-#: lib/gnutls_errors.c:250
+#: lib/gnutls_errors.c:252
 msgid "The OpenPGP fingerprint is not supported."
 msgstr "La fingropremo OpenPGP ne esats subtenata."
 
-#: lib/gnutls_errors.c:252
+#: lib/gnutls_errors.c:254
 msgid "The signature algorithm is not supported."
 msgstr "La subskriba algoritmo ne estas subtenata."
 
-#: lib/gnutls_errors.c:254
+#: lib/gnutls_errors.c:256
 msgid "The certificate has unsupported attributes."
 msgstr "La atestilo havas nesubtenatajn atributojn."
 
-#: lib/gnutls_errors.c:256
+#: lib/gnutls_errors.c:258
 msgid "The OID is not supported."
 msgstr "La OID ne estas subtenata."
 
-#: lib/gnutls_errors.c:258
+#: lib/gnutls_errors.c:260
 msgid "The hash algorithm is unknown."
 msgstr "La haketa algoritmo estas nekonata."
 
-#: lib/gnutls_errors.c:260
+#: lib/gnutls_errors.c:262
 msgid "The PKCS structure's content type is unknown."
 msgstr "La enhav-tipo de strukturo PKCS estas ne konata."
 
-#: lib/gnutls_errors.c:262
+#: lib/gnutls_errors.c:264
 msgid "The PKCS structure's bag type is unknown."
 msgstr "La ujo-tipo de strukturo PKCS estas ne konata."
 
-#: lib/gnutls_errors.c:264
+#: lib/gnutls_errors.c:266
 msgid "The given password contains invalid characters."
 msgstr "La indikita pasvorto enhavas malvalidajn signojn."
 
-#: lib/gnutls_errors.c:267
+#: lib/gnutls_errors.c:269
 msgid "The Message Authentication Code verification failed."
 msgstr "La kontrolo de mesaĝ-aŭtentikiga kodo fiaskis."
 
-#: lib/gnutls_errors.c:269
+#: lib/gnutls_errors.c:271
 msgid "Some constraint limits were reached."
 msgstr "Kelkaj limigoj estis atingataj."
 
-#: lib/gnutls_errors.c:271
+#: lib/gnutls_errors.c:273
 msgid "Failed to acquire random data."
 msgstr "Ni fiaskis havigi hazardan datumaron."
 
-#: lib/gnutls_errors.c:273
+#: lib/gnutls_errors.c:275
 msgid "Verifying TLS/IA phase checksum failed"
 msgstr "Kontrolo de faza kontrolsumo de TLS/IA fiaskis"
 
-#: lib/gnutls_errors.c:276
+#: lib/gnutls_errors.c:278
 msgid "The specified algorithm or protocol is unknown."
 msgstr "La indikita algoritmo aŭ protokolo estas nekonata."
 
-#: lib/gnutls_errors.c:279
+#: lib/gnutls_errors.c:281
 msgid "The handshake data size is too large."
 msgstr "La kvitanca damutara grando estas troa."
 
-#: lib/gnutls_errors.c:282
+#: lib/gnutls_errors.c:284
 msgid "Error opening /dev/crypto"
 msgstr "Eraro dum malfermo de /dev/crypto"
 
-#: lib/gnutls_errors.c:285
+#: lib/gnutls_errors.c:287
 msgid "Error interfacing with /dev/crypto"
 msgstr "Eraro dum interfaco kun /dev/crypto"
 
-#: lib/gnutls_errors.c:287
+#: lib/gnutls_errors.c:289
 msgid "Peer has terminated the connection"
 msgstr "Samtavolano ĉesigis la konekton"
 
-#: lib/gnutls_errors.c:289
+#: lib/gnutls_errors.c:291
 msgid "Channel binding data not available"
 msgstr "Kanal-bindiga datumaro ne disponeblas"
 
-#: lib/gnutls_errors.c:292
+#: lib/gnutls_errors.c:294
 msgid "TPM error."
 msgstr "Eraro TPM."
 
-#: lib/gnutls_errors.c:294
+#: lib/gnutls_errors.c:296
 msgid "The TPM library (trousers) cannot be found."
 msgstr ""
 
-#: lib/gnutls_errors.c:296
+#: lib/gnutls_errors.c:298
 msgid "TPM is not initialized."
 msgstr "TPM ne estas ekigita."
 
-#: lib/gnutls_errors.c:298
+#: lib/gnutls_errors.c:300
 msgid "TPM key was not found in persistent storage."
 msgstr "Ŝlosilo TPM ne estis trovata en persista konsevado."
 
-#: lib/gnutls_errors.c:300
+#: lib/gnutls_errors.c:302
 msgid "Cannot initialize a session with the TPM."
 msgstr "Ne eblis ekiggi seancon kun la TPM."
 
-#: lib/gnutls_errors.c:302
+#: lib/gnutls_errors.c:304
 msgid "PKCS #11 error."
 msgstr "Eraro PKCS #11."
 
-#: lib/gnutls_errors.c:304
+#: lib/gnutls_errors.c:306
 msgid "PKCS #11 initialization error."
 msgstr "Ekiga eraro PKCS #11."
 
-#: lib/gnutls_errors.c:306
+#: lib/gnutls_errors.c:308
 msgid "Error in parsing."
 msgstr "Eraro dum analizo."
 
-#: lib/gnutls_errors.c:308
+#: lib/gnutls_errors.c:310
 msgid "Error in provided PIN."
 msgstr "Eraro en provizita PIN."
 
-#: lib/gnutls_errors.c:310
+#: lib/gnutls_errors.c:312
 msgid "Error in provided SRK password for TPM."
 msgstr "Eraro en provizita pasvorta SRK por TPM."
 
-#: lib/gnutls_errors.c:313
+#: lib/gnutls_errors.c:315
 msgid "Error in provided password for key to be loaded in TPM."
 msgstr "Eraro en provizita pasvorto por ŝlosilo ŝargota en TPM."
 
-#: lib/gnutls_errors.c:315
+#: lib/gnutls_errors.c:317
 msgid "PKCS #11 error in slot"
 msgstr "Eraro PKCS #11 en konektingo"
 
-#: lib/gnutls_errors.c:317
+#: lib/gnutls_errors.c:319
 msgid "Thread locking error"
 msgstr "Eraro de faden-ŝloso"
 
-#: lib/gnutls_errors.c:319
+#: lib/gnutls_errors.c:321
 msgid "PKCS #11 error in attribute"
 msgstr "Eraro PKCS #11 en atributo"
 
-#: lib/gnutls_errors.c:321
+#: lib/gnutls_errors.c:323
 msgid "PKCS #11 error in device"
 msgstr "Eraro PKCS #11 en aparato"
 
-#: lib/gnutls_errors.c:323
+#: lib/gnutls_errors.c:325
 msgid "PKCS #11 error in data"
 msgstr "Eraro PKCS #11 en datumaro"
 
-#: lib/gnutls_errors.c:325
+#: lib/gnutls_errors.c:327
 msgid "PKCS #11 unsupported feature"
 msgstr "PKCS #11 nesubtenata trajto"
 
-#: lib/gnutls_errors.c:327
+#: lib/gnutls_errors.c:329
 msgid "PKCS #11 error in key"
 msgstr "Eraro PKCS #11 en ŝlosilo"
 
-#: lib/gnutls_errors.c:329
+#: lib/gnutls_errors.c:331
 msgid "PKCS #11 PIN expired"
 msgstr "PKCS #11 PIN senvalidiĝis"
 
-#: lib/gnutls_errors.c:331
+#: lib/gnutls_errors.c:333
 msgid "PKCS #11 PIN locked"
 msgstr "PKCS #11 PIN ŝlosita"
 
-#: lib/gnutls_errors.c:333
+#: lib/gnutls_errors.c:335
 msgid "PKCS #11 error in session"
 msgstr "Eraro PKCS #11 en seanco"
 
-#: lib/gnutls_errors.c:335
+#: lib/gnutls_errors.c:337
 msgid "PKCS #11 error in signature"
 msgstr "Eraro PKCS #11 en subskribo"
 
-#: lib/gnutls_errors.c:337
+#: lib/gnutls_errors.c:339
 msgid "PKCS #11 error in token"
 msgstr "Eraro PKCS #11 en ĵetono"
 
-#: lib/gnutls_errors.c:339
+#: lib/gnutls_errors.c:341
 msgid "PKCS #11 user error"
 msgstr "PKCS #11 uzant-eraro"
 
-#: lib/gnutls_errors.c:341
+#: lib/gnutls_errors.c:343
 msgid "The operation timed out"
 msgstr "La tempo por operacio finis"
 
-#: lib/gnutls_errors.c:343
+#: lib/gnutls_errors.c:345
 msgid "The operation was cancelled due to user error"
 msgstr "La operacio estis nuligata pro uzant-eraro"
 
-#: lib/gnutls_errors.c:345
+#: lib/gnutls_errors.c:347
 msgid "No supported ECC curves were found"
 msgstr "Neniu subtenata kurbo ECC estis trovata"
 
-#: lib/gnutls_errors.c:347
+#: lib/gnutls_errors.c:349
 msgid "The curve is unsupported"
 msgstr "La kurbo estas nesubtenata"
 
-#: lib/gnutls_errors.c:349
+#: lib/gnutls_errors.c:351
 msgid "The requested PKCS #11 object is not available"
 msgstr "La petita objekto PKCS #11 ne disponeblas"
 
-#: lib/gnutls_errors.c:352
+#: lib/gnutls_errors.c:354
 msgid ""
 "The provided X.509 certificate list is not sorted (in subject to issuer "
 "order)"
@@ -711,79 +716,79 @@ msgstr ""
 "La provizita atestilo-listo X.509 ne estas ordigita (laŭ ordo de temo al "
 "eldonanto)"
 
-#: lib/gnutls_errors.c:354
+#: lib/gnutls_errors.c:356
 msgid "The OCSP response is invalid"
 msgstr "La respondo OCSP malvalidas."
 
-#: lib/gnutls_errors.c:356
+#: lib/gnutls_errors.c:358
 msgid "There is no certificate status (OCSP)."
 msgstr "Estas neniu atestila stato (OCSP)."
 
-#: lib/gnutls_errors.c:358
+#: lib/gnutls_errors.c:360
 msgid "Error in the system's randomness device."
 msgstr "Eraro en la hazardec-aparato de la sistemo."
 
-#: lib/gnutls_errors.c:361
+#: lib/gnutls_errors.c:363
 msgid "No common application protocol could be negotiated."
 msgstr "Neniu ordinara aplikaĵ-protokolo povis esti negocata."
 
-#: lib/gnutls_errors.c:363
+#: lib/gnutls_errors.c:365
 #, fuzzy
 msgid "Error while performing self checks."
 msgstr "Eraro dum lego de dosiero."
 
-#: lib/gnutls_errors.c:365
+#: lib/gnutls_errors.c:367
 msgid "There is no self test for this algorithm."
 msgstr ""
 
-#: lib/gnutls_errors.c:367
+#: lib/gnutls_errors.c:369
 msgid ""
 "An error has been detected in the library and cannot continue operations."
 msgstr ""
 
-#: lib/gnutls_errors.c:369
+#: lib/gnutls_errors.c:371
 #, fuzzy
 msgid "Error in sockets initialization."
 msgstr "Eraro en puŝa funkcio."
 
-#: lib/gnutls_errors.c:371
+#: lib/gnutls_errors.c:373
 #, fuzzy
 msgid "Error in public key generation."
 msgstr "Eraro en tira funkcio."
 
-#: lib/gnutls_errors.c:377
+#: lib/gnutls_errors.c:379
 msgid "Success."
 msgstr "Sukceso."
 
-#: lib/gnutls_errors.c:378
+#: lib/gnutls_errors.c:380
 msgid "A TLS warning alert has been received."
 msgstr "Averta atentigo TLS estas ricevita."
 
-#: lib/gnutls_errors.c:380
+#: lib/gnutls_errors.c:382
 msgid "A heartbeat pong message was received."
 msgstr "Korbata mesaĝo 'pong' estis ricevata."
 
-#: lib/gnutls_errors.c:382
+#: lib/gnutls_errors.c:384
 msgid "A heartbeat ping message was received."
 msgstr "Korbata mesaĝo 'ping' estis ricevata."
 
-#: lib/gnutls_errors.c:384
+#: lib/gnutls_errors.c:386
 msgid "Resource temporarily unavailable, try again."
 msgstr "La rimedo estas provizore nedisponebla, provu refoje."
 
-#: lib/gnutls_errors.c:386
+#: lib/gnutls_errors.c:388
 msgid "The transmitted packet is too large (EMSGSIZE)."
 msgstr "La transigita pako tro larĝas (EMSGSIZE)."
 
-#: lib/gnutls_errors.c:389
+#: lib/gnutls_errors.c:391
 msgid "Rehandshake was requested by the peer."
 msgstr "Rekvitanco estis petata de la samtavolano."
 
-#: lib/gnutls_errors.c:391
+#: lib/gnutls_errors.c:393
 msgid "One of the involved algorithms has insufficient security level."
 msgstr ""
 
-#: lib/gnutls_errors.c:482
+#: lib/gnutls_errors.c:484
 msgid "(unknown error code)"
 msgstr "(nekonata erar-kodo)"
 
@@ -1007,7 +1012,7 @@ msgstr "\t\tRevoka horo: %s\n"
 msgid "\t\tThis Update: %s\n"
 msgstr "\t\tTiu ĉi ĝisdatigo: %s\n"
 
-#: lib/x509/ocsp_output.c:456
+#: lib/x509/ocsp_output.c:455
 #, c-format
 msgid "\t\tNext Update: %s\n"
 msgstr "\t\tVenonta ĝisdatigo: %s\n"

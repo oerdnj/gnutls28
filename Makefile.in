@@ -108,7 +108,7 @@ POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
 @ENABLE_DANE_TRUE@am__append_1 = libdane
-@ENABLE_TOOLS_TRUE@am__append_2 = src
+@ENABLE_TOOLS_TRUE@am__append_2 = src/gl src
 @ENABLE_TOOLS_FALSE@am__append_3 = src/gl
 @ENABLE_TESTS_TRUE@am__append_4 = tests
 @HAVE_GUILE_TRUE@am__append_5 = guile
@@ -288,7 +288,7 @@ am__define_uniq_tagged_files = \
 ETAGS = etags
 CTAGS = ctags
 CSCOPE = cscope
-DIST_SUBDIRS = gl lib extra libdane po src src/gl tests guile doc
+DIST_SUBDIRS = gl lib extra libdane po src/gl src tests guile doc
 am__DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/config.h.in \
 	$(top_srcdir)/build-aux/ar-lib $(top_srcdir)/build-aux/compile \
 	$(top_srcdir)/build-aux/config.guess \
@@ -341,8 +341,8 @@ am__relativize = \
   done; \
   reldir="$$dir2"
 GZIP_ENV = --best
-DIST_ARCHIVES = $(distdir).tar.lz $(distdir).tar.xz
-DIST_TARGETS = dist-lzip dist-xz
+DIST_ARCHIVES = $(distdir).tar.xz
+DIST_TARGETS = dist-xz
 distuninstallcheck_listfiles = find . -type f -print
 am__distuninstallcheck_listfiles = $(distuninstallcheck_listfiles) \
   | sed 's|^\./|$(prefix)/|' | grep -v '$(infodir)/dir$$'
@@ -1571,6 +1571,7 @@ dist-gzip: distdir
 dist-bzip2: distdir
 	tardir=$(distdir) && $(am__tar) | BZIP2=$${BZIP2--9} bzip2 -c >$(distdir).tar.bz2
 	$(am__post_remove_distdir)
+
 dist-lzip: distdir
 	tardir=$(distdir) && $(am__tar) | lzip -c $${LZIP_OPT--9} >$(distdir).tar.lz
 	$(am__post_remove_distdir)
@@ -1826,7 +1827,7 @@ dist-hook:
 	@echo "symbols added or removed are correct and copy symbols.last.tmp as"
 	@echo "symbols.last"
 	@echo "*****************************************************************"
-	objdump -T $(srcdir)/lib/.libs/libgnutls.so.30  | grep -v ' \*UND\*' | awk '{print $$7 "@" $$6;}' | sort -u >symbols.last.tmp
+	objdump -T $(srcdir)/lib/.libs/libgnutls.so.30  | grep -v ' \*UND\*' | awk '{print $$7 "@" $$6;}' | grep -v GNUTLS_FIPS140 | grep -v GNUTLS_PRIVATE |  sort -u >symbols.last.tmp
 	diff -u symbols.last symbols.last.tmp >/dev/null 2>&1
 	rm -f symbols.last.tmp
 	abi-compliance-checker -abi -lib gnutls -old devel/abi3.4.xml -new devel/abi.xml

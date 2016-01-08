@@ -1131,7 +1131,7 @@ gnutls_openpgp_crt_export2 (<em class="parameter"><code><a class="link" href="gn
                             <em class="parameter"><code><a class="link" href="gnutls-openpgp.html#gnutls-openpgp-crt-fmt-t" title="enum gnutls_openpgp_crt_fmt_t"><span class="type">gnutls_openpgp_crt_fmt_t</span></a> format</code></em>,
                             <em class="parameter"><code><span class="type">gnutls_datum_t</span> *out</code></em>);</pre>
 <p>This function will convert the given key to RAW or Base64 format.
-The output buffer is allocated using <code class="function">gnutls_malloc()</code>.</p>
+The output buffer is allocated using <a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-malloc"><code class="function">gnutls_malloc()</code></a>.</p>
 <div class="refsect3">
 <a name="id-1.2.7.6.12.5"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
@@ -1477,7 +1477,7 @@ gnutls_openpgp_crt_get_pk_dsa_raw (<em class="parameter"><code><a class="link" h
                                    <em class="parameter"><code><span class="type">gnutls_datum_t</span> *y</code></em>);</pre>
 <p>This function will export the DSA public key's parameters found in
 the given certificate.  The new parameters will be allocated using
-<code class="function">gnutls_malloc()</code> and will be stored in the appropriate datum.</p>
+<a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-malloc"><code class="function">gnutls_malloc()</code></a> and will be stored in the appropriate datum.</p>
 <div class="refsect3">
 <a name="id-1.2.7.6.21.5"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
@@ -1530,7 +1530,7 @@ gnutls_openpgp_crt_get_pk_rsa_raw (<em class="parameter"><code><a class="link" h
                                    <em class="parameter"><code><span class="type">gnutls_datum_t</span> *e</code></em>);</pre>
 <p>This function will export the RSA public key's parameters found in
 the given structure.  The new parameters will be allocated using
-<code class="function">gnutls_malloc()</code> and will be stored in the appropriate datum.</p>
+<a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-malloc"><code class="function">gnutls_malloc()</code></a> and will be stored in the appropriate datum.</p>
 <div class="refsect3">
 <a name="id-1.2.7.6.22.5"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
@@ -1913,7 +1913,7 @@ gnutls_openpgp_crt_get_subkey_pk_dsa_raw
                                 <em class="parameter"><code><span class="type">gnutls_datum_t</span> *y</code></em>);</pre>
 <p>This function will export the DSA public key's parameters found in
 the given certificate.  The new parameters will be allocated using
-<code class="function">gnutls_malloc()</code> and will be stored in the appropriate datum.</p>
+<a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-malloc"><code class="function">gnutls_malloc()</code></a> and will be stored in the appropriate datum.</p>
 <div class="refsect3">
 <a name="id-1.2.7.6.32.5"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
@@ -1973,7 +1973,7 @@ gnutls_openpgp_crt_get_subkey_pk_rsa_raw
                                 <em class="parameter"><code><span class="type">gnutls_datum_t</span> *e</code></em>);</pre>
 <p>This function will export the RSA public key's parameters found in
 the given structure.  The new parameters will be allocated using
-<code class="function">gnutls_malloc()</code> and will be stored in the appropriate datum.</p>
+<a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-malloc"><code class="function">gnutls_malloc()</code></a> and will be stored in the appropriate datum.</p>
 <div class="refsect3">
 <a name="id-1.2.7.6.33.5"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
@@ -2198,7 +2198,7 @@ gnutls_openpgp_crt_print (<em class="parameter"><code><a class="link" href="gnut
 for display to a human.</p>
 <p>The format should be (0) for future compatibility.</p>
 <p>The output <em class="parameter"><code>out</code></em>
- needs to be deallocate using <code class="function">gnutls_free()</code>.</p>
+ needs to be deallocate using <a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-free"><code class="function">gnutls_free()</code></a>.</p>
 <div class="refsect3">
 <a name="id-1.2.7.6.39.7"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
@@ -2663,7 +2663,7 @@ gnutls_openpgp_privkey_export2 (<em class="parameter"><code><a class="link" href
                                 <em class="parameter"><code>unsigned <span class="type">int</span> flags</code></em>,
                                 <em class="parameter"><code><span class="type">gnutls_datum_t</span> *out</code></em>);</pre>
 <p>This function will convert the given key to RAW or Base64 format.
-The output buffer is allocated using <code class="function">gnutls_malloc()</code>.</p>
+The output buffer is allocated using <a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-malloc"><code class="function">gnutls_malloc()</code></a>.</p>
 <div class="refsect3">
 <a name="id-1.2.7.6.51.5"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
@@ -2719,7 +2719,7 @@ gnutls_openpgp_privkey_export_dsa_raw (<em class="parameter"><code><a class="lin
                                        <em class="parameter"><code><span class="type">gnutls_datum_t</span> *x</code></em>);</pre>
 <p>This function will export the DSA private key's parameters found in
 the given certificate.  The new parameters will be allocated using
-<code class="function">gnutls_malloc()</code> and will be stored in the appropriate datum.</p>
+<a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-malloc"><code class="function">gnutls_malloc()</code></a> and will be stored in the appropriate datum.</p>
 <div class="refsect3">
 <a name="id-1.2.7.6.52.5"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
@@ -2781,7 +2781,7 @@ gnutls_openpgp_privkey_export_rsa_raw (<em class="parameter"><code><a class="lin
                                        <em class="parameter"><code><span class="type">gnutls_datum_t</span> *u</code></em>);</pre>
 <p>This function will export the RSA private key's parameters found in
 the given structure.  The new parameters will be allocated using
-<code class="function">gnutls_malloc()</code> and will be stored in the appropriate datum.</p>
+<a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-malloc"><code class="function">gnutls_malloc()</code></a> and will be stored in the appropriate datum.</p>
 <div class="refsect3">
 <a name="id-1.2.7.6.53.5"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
@@ -2849,7 +2849,7 @@ gnutls_openpgp_privkey_export_subkey_dsa_raw
                                 <em class="parameter"><code><span class="type">gnutls_datum_t</span> *x</code></em>);</pre>
 <p>This function will export the DSA private key's parameters found
 in the given certificate.  The new parameters will be allocated
-using <code class="function">gnutls_malloc()</code> and will be stored in the appropriate datum.</p>
+using <a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-malloc"><code class="function">gnutls_malloc()</code></a> and will be stored in the appropriate datum.</p>
 <div class="refsect3">
 <a name="id-1.2.7.6.54.5"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
@@ -2918,7 +2918,7 @@ gnutls_openpgp_privkey_export_subkey_rsa_raw
                                 <em class="parameter"><code><span class="type">gnutls_datum_t</span> *u</code></em>);</pre>
 <p>This function will export the RSA private key's parameters found in
 the given structure.  The new parameters will be allocated using
-<code class="function">gnutls_malloc()</code> and will be stored in the appropriate datum.</p>
+<a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-malloc"><code class="function">gnutls_malloc()</code></a> and will be stored in the appropriate datum.</p>
 <div class="refsect3">
 <a name="id-1.2.7.6.55.5"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
@@ -3634,7 +3634,7 @@ useful on the server, and will only be used if the peer send a key
 fingerprint instead of a full key.  See also
 <a class="link" href="gnutls-openpgp.html#gnutls-openpgp-set-recv-key-function" title="gnutls_openpgp_set_recv_key_function ()"><code class="function">gnutls_openpgp_set_recv_key_function()</code></a>.</p>
 <p>The variable <em class="parameter"><code>key</code></em>
- must be allocated using <code class="function">gnutls_malloc()</code>.</p>
+ must be allocated using <a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-malloc"><code class="function">gnutls_malloc()</code></a>.</p>
 <div class="refsect3">
 <a name="id-1.2.7.6.73.6"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
@@ -3682,7 +3682,7 @@ gnutls_openpgp_set_recv_key_function (<em class="parameter"><code><a class="link
 <p>This funtion will set a key retrieval function for OpenPGP keys. This
 callback is only useful in server side, and will be used if the peer
 sent a key fingerprint instead of a full key.</p>
-<p>The retrieved key must be allocated using <code class="function">gnutls_malloc()</code>.</p>
+<p>The retrieved key must be allocated using <a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-malloc"><code class="function">gnutls_malloc()</code></a>.</p>
 <div class="refsect3">
 <a name="id-1.2.7.6.74.6"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">

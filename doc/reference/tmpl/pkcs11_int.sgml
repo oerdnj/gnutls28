@@ -365,7 +365,7 @@ pkcs11_int
 @pks: 
 @obj: 
 @key_type: 
-@pubkey: 
+@pobj: 
 @Returns: 
 
 

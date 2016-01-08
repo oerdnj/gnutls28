@@ -333,7 +333,10 @@ gnutls_cipher_decrypt2 (<em class="parameter"><code><a class="link" href="gnutls
                         <em class="parameter"><code><span class="type">void</span> *text</code></em>,
                         <em class="parameter"><code><span class="type">size_t</span> textlen</code></em>);</pre>
 <p>This function will decrypt the given data using the algorithm
-specified by the context.</p>
+specified by the context. For block ciphers the <em class="parameter"><code>ctext_len</code></em>
+ must be
+a multiple of the block size. For the supported ciphers the plaintext
+data length will equal the ciphertext size.</p>
 <p>Note that in AEAD ciphers, this will not check the tag. You will
 need to compare the tag sent with the value returned from <a class="link" href="gnutls-crypto.html#gnutls-cipher-tag" title="gnutls_cipher_tag ()"><code class="function">gnutls_cipher_tag()</code></a>.</p>
 <div class="refsect3">
@@ -421,7 +424,10 @@ gnutls_cipher_encrypt2 (<em class="parameter"><code><a class="link" href="gnutls
                         <em class="parameter"><code><span class="type">void</span> *ciphertext</code></em>,
                         <em class="parameter"><code><span class="type">size_t</span> ciphertextlen</code></em>);</pre>
 <p>This function will encrypt the given data using the algorithm
-specified by the context.</p>
+specified by the context. For block ciphers the <em class="parameter"><code>ptext_len</code></em>
+ must be
+a multiple of the block size. For the supported ciphers the encrypted
+data length will equal the plaintext size.</p>
 <div class="refsect3">
 <a name="id-1.2.8.6.7.5"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">

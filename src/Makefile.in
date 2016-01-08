@@ -529,7 +529,7 @@ am__define_uniq_tagged_files = \
   done | $(am__uniquify_input)`
 ETAGS = etags
 CTAGS = ctags
-DIST_SUBDIRS = gl crywrap libopts
+DIST_SUBDIRS = crywrap libopts
 am__DIST_COMMON = $(srcdir)/Makefile.in \
 	$(top_srcdir)/build-aux/depcomp
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
@@ -1530,7 +1530,9 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-SUBDIRS = gl $(am__append_1) $(am__append_2)
+
+# src/gl is being added by the top level makefile
+SUBDIRS = $(am__append_1) $(am__append_2)
 BUILT_SOURCES = srptool-args.c srptool-args.h \
 	psktool-args.c psktool-args.h ocsptool-args.h ocsptool-args.c \
 	serv-args.c serv-args.h cli-args.c cli-args.h \
