@@ -103,7 +103,7 @@ override_dh_compress:
 	dh_compress -X.pdf
 
 override_dh_strip:
-	dh_strip --ddeb-migration='libgnutls30-dbg (<< 3.4.7-2~)'
+	dh_strip --dbg-package=libgnutls30-dbg
 
 override_dh_auto_test:
 	dh_auto_test -O--parallel || touch dh_auto_test.fail
