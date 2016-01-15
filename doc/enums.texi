@@ -3,9 +3,9 @@
 @c gnutls_cipher_algorithm_t
 @table @code
 @item GNUTLS_@-CIPHER_@-UNKNOWN
-Unknown algorithm.
+Value to identify an unknown/unsupported algorithm.
 @item GNUTLS_@-CIPHER_@-NULL
-NULL algorithm.
+The NULL (identity) encryption algorithm.
 @item GNUTLS_@-CIPHER_@-ARCFOUR_@-128
 ARCFOUR stream cipher with 128-bit keys.
 @item GNUTLS_@-CIPHER_@-3DES_@-CBC
@@ -51,23 +51,23 @@ AES in CCM mode with 64-bit tag and 256-bit keys.
 @item GNUTLS_@-CIPHER_@-CHACHA20_@-POLY1305
 The Chacha20 cipher with the Poly1305 authenticator (AEAD).
 @item GNUTLS_@-CIPHER_@-IDEA_@-PGP_@-CFB
-IDEA in CFB mode.
+IDEA in CFB mode (placeholder - unsupported).
 @item GNUTLS_@-CIPHER_@-3DES_@-PGP_@-CFB
-3DES in CFB mode.
+3DES in CFB mode (placeholder - unsupported).
 @item GNUTLS_@-CIPHER_@-CAST5_@-PGP_@-CFB
-CAST5 in CFB mode.
+CAST5 in CFB mode (placeholder - unsupported).
 @item GNUTLS_@-CIPHER_@-BLOWFISH_@-PGP_@-CFB
-Blowfish in CFB mode.
+Blowfish in CFB mode (placeholder - unsupported).
 @item GNUTLS_@-CIPHER_@-SAFER_@-SK128_@-PGP_@-CFB
-Safer-SK in CFB mode with 128-bit keys.
+Safer-SK in CFB mode with 128-bit keys (placeholder - unsupported).
 @item GNUTLS_@-CIPHER_@-AES128_@-PGP_@-CFB
-AES in CFB mode with 128-bit keys.
+AES in CFB mode with 128-bit keys (placeholder - unsupported).
 @item GNUTLS_@-CIPHER_@-AES192_@-PGP_@-CFB
-AES in CFB mode with 192-bit keys.
+AES in CFB mode with 192-bit keys (placeholder - unsupported).
 @item GNUTLS_@-CIPHER_@-AES256_@-PGP_@-CFB
-AES in CFB mode with 256-bit keys.
+AES in CFB mode with 256-bit keys (placeholder - unsupported).
 @item GNUTLS_@-CIPHER_@-TWOFISH_@-PGP_@-CFB
-Twofish in CFB mode.
+Twofish in CFB mode (placeholder - unsupported).
 @end table
 
 @c gnutls_kx_algorithm_t
@@ -536,6 +536,8 @@ Less than 42 bits of security
 128 bits of security
 @item GNUTLS_@-SEC_@-PARAM_@-ULTRA
 192 bits of security
+@item GNUTLS_@-SEC_@-PARAM_@-FUTURE
+256 bits of security
 @end table
 
 @c gnutls_channel_binding_t
@@ -566,6 +568,29 @@ Unknown data format
 NULL cipher with a 80 bit HMAC-SHA1
 @item GNUTLS_@-SRTP_@-NULL_@-HMAC_@-SHA1_@-32
 NULL cipher with a 32 bit HMAC-SHA1
+@end table
+
+@c gnutls_vdata_types_t
+@table @code
+@item GNUTLS_@-DT_@-UNKNOWN
+Unknown data type.
+@item GNUTLS_@-DT_@-DNS_@-HOSTNAME
+The data contain a null-terminated DNS hostname; the hostname will be 
+matched using the RFC6125 rules.
+@item GNUTLS_@-DT_@-KEY_@-PURPOSE_@-OID
+The data contain a null-terminated key purpose OID. It will be matched
+against the certificate's Extended Key Usage extension.
+@item GNUTLS_@-DT_@-RFC822NAME
+The data contain a null-terminated email address; the email will be
+matched against the RFC822Name field of the certificate, or the EMAIL DN component if the
+former isn't available. Prior to matching the email address will be converted to ACE
+(ASCII-compatible-encoding).
+@end table
+
+@c gnutls_certificate_flags
+@table @code
+@item GNUTLS_@-CERTIFICATE_@-SKIP_@-KEY_@-CERT_@-MATCH
+Skip the key and certificate matching check.
 @end table
 
 @c gnutls_psk_key_flags
@@ -605,18 +630,6 @@ OpenPGP private key, @code{gnutls_openpgp_privkey_t} .
 PKCS11 private key, @code{gnutls_pkcs11_privkey_t} .
 @item GNUTLS_@-PRIVKEY_@-EXT
 External private key, operating using callbacks.
-@end table
-
-@c gnutls_vdata_types_t
-@table @code
-@item GNUTLS_@-DT_@-UNKNOWN
-Unknown data type.
-@item GNUTLS_@-DT_@-DNS_@-HOSTNAME
-The data contain a null-terminated DNS hostname.
-@item GNUTLS_@-DT_@-KEY_@-PURPOSE_@-OID
-The data contain a null-terminated key purpose OID.
-@item GNUTLS_@-DT_@-RFC822NAME
-The data contain a null-terminated email address.
 @end table
 
 @c gnutls_pin_flag_t
@@ -1179,4 +1192,16 @@ The CA constraints were violated.
 The certificate obtained via DNS differs.
 @item DANE_@-VERIFY_@-UNKNOWN_@-DANE_@-INFO
 No known DANE data was found in the DNS record.
+@end table
+
+@c gnutls_pkcs7_sign_flags
+@table @code
+@item GNUTLS_@-PKCS7_@-EMBED_@-DATA
+The signed data will be embedded in the structure.
+@item GNUTLS_@-PKCS7_@-INCLUDE_@-TIME
+The signing time will be included in the structure.
+@item GNUTLS_@-PKCS7_@-INCLUDE_@-CERT
+The signer's certificate will be included in the cert list.
+@item GNUTLS_@-PKCS7_@-WRITE_@-SPKI
+Use the signer's key identifier instead of name.
 @end table

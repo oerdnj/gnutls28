@@ -10,6 +10,5 @@
 This function will decode the given encoded data, using the hex
 encoding used by PSK password files.
 
-@strong{Returns:} @code{GNUTLS_E_SHORT_MEMORY_BUFFER}  if the buffer given is not
-long enough, or 0 on success.
+@strong{Returns:} @code{GNUTLS_E_PARSING_ERROR}  on invalid hex data, or 0 on success.
 @end deftypefun

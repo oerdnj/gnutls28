@@ -6,7 +6,7 @@
  *  From the definitions    danetool-args.def
  *  and the template file   options
  *
- * Generated from AutoOpts 41:0:16 templates.
+ * Generated from AutoOpts 41:1:16 templates.
  *
  *  AutoOpts is a copyrighted work.  This header file is not encumbered
  *  by AutoOpts licensing, but is provided under the licensing terms chosen
@@ -19,7 +19,7 @@
  * The danetool program is copyrighted and licensed
  * under the following terms:
  *
- *  Copyright (C) 2000-2015 Free Software Foundation, and others, all rights reserved.
+ *  Copyright (C) 2000-2016 Free Software Foundation, and others, all rights reserved.
  *  This is free software. It is licensed for use, modification and
  *  redistribution under the terms of the GNU General Public License,
  *  version 3 or later <http://gnu.org/licenses/gpl.html>
@@ -55,7 +55,7 @@
  *  tolerable version is at least as old as what was current when the header
  *  template was released.
  */
-#define AO_TEMPLATE_VERSION 167936
+#define AO_TEMPLATE_VERSION 167937
 #if (AO_TEMPLATE_VERSION < OPTIONS_MINIMUM_VERSION) \
  || (AO_TEMPLATE_VERSION > OPTIONS_STRUCT_VERSION)
 # error option template version mismatches autoopts/options.h header
@@ -82,26 +82,27 @@ typedef enum {
     INDEX_OPT_PROTO             = 13,
     INDEX_OPT_PORT              = 14,
     INDEX_OPT_APP_PROTO         = 15,
-    INDEX_OPT_CA                = 16,
-    INDEX_OPT_X509              = 17,
-    INDEX_OPT_LOCAL             = 18,
-    INDEX_OPT_DOMAIN            = 19,
-    INDEX_OPT_LOCAL_DNS         = 20,
-    INDEX_OPT_INSECURE          = 21,
-    INDEX_OPT_INDER             = 22,
-    INDEX_OPT_INRAW             = 23,
-    INDEX_OPT_PRINT_RAW         = 24,
-    INDEX_OPT_QUIET             = 25,
-    INDEX_OPT_VERSION           = 26,
-    INDEX_OPT_HELP              = 27,
-    INDEX_OPT_MORE_HELP         = 28
+    INDEX_OPT_STARTTLS_PROTO    = 16,
+    INDEX_OPT_CA                = 17,
+    INDEX_OPT_X509              = 18,
+    INDEX_OPT_LOCAL             = 19,
+    INDEX_OPT_DOMAIN            = 20,
+    INDEX_OPT_LOCAL_DNS         = 21,
+    INDEX_OPT_INSECURE          = 22,
+    INDEX_OPT_INDER             = 23,
+    INDEX_OPT_INRAW             = 24,
+    INDEX_OPT_PRINT_RAW         = 25,
+    INDEX_OPT_QUIET             = 26,
+    INDEX_OPT_VERSION           = 27,
+    INDEX_OPT_HELP              = 28,
+    INDEX_OPT_MORE_HELP         = 29
 } teOptIndex;
 /** count of all options for danetool */
-#define OPTION_CT    29
+#define OPTION_CT    30
 /** danetool version */
-#define DANETOOL_VERSION       "3.4.5"
+#define DANETOOL_VERSION       "3.4.8"
 /** Full danetool version text */
-#define DANETOOL_FULL_VERSION  "danetool 3.4.5"
+#define DANETOOL_FULL_VERSION  "danetool 3.4.8"
 
 /**
  *  Interface defines for all options.  Replace "n" with the UPPER_CASED
@@ -172,16 +173,17 @@ typedef enum {
 
 #define OPT_VALUE_PORT           (DESC(PORT).optArg.argInt)
 #define VALUE_OPT_APP_PROTO      0x100E
-#define VALUE_OPT_CA             0x100F
-#define VALUE_OPT_X509           0x1010
-#define VALUE_OPT_LOCAL          0x1011
-#define VALUE_OPT_DOMAIN         0x1012
-#define VALUE_OPT_LOCAL_DNS      0x1013
-#define VALUE_OPT_INSECURE       0x1014
-#define VALUE_OPT_INDER          0x1015
-#define VALUE_OPT_INRAW          0x1016
-#define VALUE_OPT_PRINT_RAW      0x1017
-#define VALUE_OPT_QUIET          0x1018
+#define VALUE_OPT_STARTTLS_PROTO 0x100F
+#define VALUE_OPT_CA             0x1010
+#define VALUE_OPT_X509           0x1011
+#define VALUE_OPT_LOCAL          0x1012
+#define VALUE_OPT_DOMAIN         0x1013
+#define VALUE_OPT_LOCAL_DNS      0x1014
+#define VALUE_OPT_INSECURE       0x1015
+#define VALUE_OPT_INDER          0x1016
+#define VALUE_OPT_INRAW          0x1017
+#define VALUE_OPT_PRINT_RAW      0x1018
+#define VALUE_OPT_QUIET          0x1019
 /** option flag (value) for help-value option */
 #define VALUE_OPT_HELP          'h'
 /** option flag (value) for more-help-value option */

@@ -4456,7 +4456,7 @@ The callback function prototype is:</p>
 status.  The callback may return <a class="link" href="gnutls-gnutls.html#GNUTLS-E-NO-CERTIFICATE-STATUS:CAPS" title="GNUTLS_E_NO_CERTIFICATE_STATUS"><code class="literal">GNUTLS_E_NO_CERTIFICATE_STATUS</code></a>, if
 there is no recent OCSP response. If the callback returns <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a>,
 the server will provide the client with the ocsp_response.</p>
-<p>The response must be a value allocated using <code class="function">gnutls_malloc()</code>, and will be
+<p>The response must be a value allocated using <a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-malloc"><code class="function">gnutls_malloc()</code></a>, and will be
 deinitialized when needed.</p>
 <div class="refsect3">
 <a name="id-1.2.4.6.43.8"></a><h4>Parameters</h4>
@@ -5432,7 +5432,7 @@ gnutls_certificate_verification_status_print
 <p>This function will pretty print the status of a verification
 process -- eg. the one obtained by <a class="link" href="gnutls-gnutls.html#gnutls-certificate-verify-peers3" title="gnutls_certificate_verify_peers3 ()"><code class="function">gnutls_certificate_verify_peers3()</code></a>.</p>
 <p>The output <em class="parameter"><code>out</code></em>
- needs to be deallocated using <code class="function">gnutls_free()</code>.</p>
+ needs to be deallocated using <a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-free"><code class="function">gnutls_free()</code></a>.</p>
 <div class="refsect3">
 <a name="id-1.2.4.6.66.6"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
@@ -5520,7 +5520,9 @@ or use <a class="link" href="gnutls-gnutls.html#gnutls-certificate-verify-peers3
 </div>
 <div class="refsect3">
 <a name="id-1.2.4.6.67.9"></a><h4>Returns</h4>
-<p> a negative error code on error and <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) on success.</p>
+<p> a negative error code on error and <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0)
+when the peer's certificate was successfully parsed, whether or not
+it was verified.</p>
 </div>
 </div>
 <hr>
@@ -5576,7 +5578,9 @@ key usage), use <code class="function">gnutls_certificate_verify_peers()</code>.
 </div>
 <div class="refsect3">
 <a name="id-1.2.4.6.68.8"></a><h4>Returns</h4>
-<p> a negative error code on error and <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) on success.</p>
+<p> a negative error code on error and <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0)
+when the peer's certificate was successfully parsed, whether or not
+it was verified.</p>
 </div>
 <p class="since">Since: 3.1.4</p>
 </div>
@@ -6233,7 +6237,7 @@ resumed sessions database.  This function must return a
 gnutls_datum_t containing the data on success, or a gnutls_datum_t
 containing null and 0 on failure.</p>
 <p>The datum's data must be allocated using the function
-<code class="function">gnutls_malloc()</code>.</p>
+<a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-malloc"><code class="function">gnutls_malloc()</code></a>.</p>
 <p>The first argument to <em class="parameter"><code>retr_func</code></em>
  will be null unless
 <a class="link" href="gnutls-gnutls.html#gnutls-db-set-ptr" title="gnutls_db_set_ptr ()"><code class="function">gnutls_db_set_ptr()</code></a> has been called.</p>
@@ -6340,7 +6344,7 @@ gnutls_dh_get_group (<em class="parameter"><code><a class="link" href="gnutls-gn
 Diffie-Hellman key exchange with the peer.  These are the prime and
 the generator used.  This function should be used for both
 anonymous and ephemeral Diffie-Hellman.  The output parameters must
-be freed with <code class="function">gnutls_free()</code>.</p>
+be freed with <a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-free"><code class="function">gnutls_free()</code></a>.</p>
 <p>Note, that the prime and generator are exported as non-negative
 integers and may include a leading zero byte.</p>
 <div class="refsect3">
@@ -6445,7 +6449,7 @@ gnutls_dh_get_pubkey (<em class="parameter"><code><a class="link" href="gnutls-g
 <p>This function will return the peer's public key used in the last
 Diffie-Hellman key exchange.  This function should be used for both
 anonymous and ephemeral Diffie-Hellman.  The output parameters must
-be freed with <code class="function">gnutls_free()</code>.</p>
+be freed with <a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-free"><code class="function">gnutls_free()</code></a>.</p>
 <p>Note, that public key is exported as non-negative
 integer and may include a leading zero byte.</p>
 <div class="refsect3">
@@ -6573,7 +6577,7 @@ gnutls_dh_params_export2_pkcs3 (<em class="parameter"><code><a class="link" href
 <p>This function will export the given dh parameters to a PKCS3
 DHParams structure. This is the format generated by "openssl dhparam" tool.
 The data in <em class="parameter"><code>out</code></em>
- will be allocated using <code class="function">gnutls_malloc()</code>.</p>
+ will be allocated using <a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-malloc"><code class="function">gnutls_malloc()</code></a>.</p>
 <p>If the structure is PEM encoded, it will have a header
 of "BEGIN DH PARAMETERS".</p>
 <div class="refsect3">
@@ -6672,7 +6676,7 @@ gnutls_dh_params_export_raw (<em class="parameter"><code><a class="link" href="g
                              <em class="parameter"><code>unsigned <span class="type">int</span> *bits</code></em>);</pre>
 <p>This function will export the pair of prime and generator for use
 in the Diffie-Hellman key exchange.  The new parameters will be
-allocated using <code class="function">gnutls_malloc()</code> and will be stored in the
+allocated using <a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-malloc"><code class="function">gnutls_malloc()</code></a> and will be stored in the
 appropriate datum.</p>
 <div class="refsect3">
 <a name="id-1.2.4.6.104.5"></a><h4>Parameters</h4>
@@ -6720,7 +6724,7 @@ gnutls_dh_params_generate2 (<em class="parameter"><code><a class="link" href="gn
                             <em class="parameter"><code>unsigned <span class="type">int</span> bits</code></em>);</pre>
 <p>This function will generate a new pair of prime and generator for use in
 the Diffie-Hellman key exchange. The new parameters will be allocated using
-<code class="function">gnutls_malloc()</code> and will be stored in the appropriate datum.
+<a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-malloc"><code class="function">gnutls_malloc()</code></a> and will be stored in the appropriate datum.
 This function is normally slow.</p>
 <p>Do not set the number of bits directly, use <a class="link" href="gnutls-gnutls.html#gnutls-sec-param-to-pk-bits" title="gnutls_sec_param_to_pk_bits ()"><code class="function">gnutls_sec_param_to_pk_bits()</code></a> to
 get bits for <a class="link" href="gnutls-gnutls.html#GNUTLS-PK-DSA:CAPS"><code class="literal">GNUTLS_PK_DSA</code></a>.
@@ -7337,7 +7341,7 @@ gnutls_global_set_mutex (<em class="parameter"><code><a class="link" href="gnutl
 <p>With this function you are allowed to override the default mutex
 locks used in some parts of gnutls and dependent libraries. This function
 should be used if you have complete control of your program and libraries.
-Do not call this function from a library, or preferrably from any application
+Do not call this function from a library, or preferably from any application
 unless really needed to. GnuTLS will use the appropriate locks for the running
 system.</p>
 <p>This function must be called prior to any other gnutls function.</p>
@@ -7886,10 +7890,8 @@ protocol. The retransmission timeout is the time after which a
 message from the peer is not received, the previous request will
 be retransmitted. The total timeout is the time after which the
 handshake will be aborted with <a class="link" href="gnutls-gnutls.html#GNUTLS-E-TIMEDOUT:CAPS" title="GNUTLS_E_TIMEDOUT"><code class="literal">GNUTLS_E_TIMEDOUT</code></a>.</p>
-<p>If the retransmission timeout is zero then the handshake will operate
-in a non-blocking way, i.e., return <a class="link" href="gnutls-gnutls.html#GNUTLS-E-AGAIN:CAPS" title="GNUTLS_E_AGAIN"><code class="literal">GNUTLS_E_AGAIN</code></a>.</p>
 <div class="refsect3">
-<a name="id-1.2.4.6.140.6"></a><h4>Parameters</h4>
+<a name="id-1.2.4.6.140.5"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -8012,7 +8014,7 @@ encoding used by PSK password files.</p>
 <div class="refsect3">
 <a name="id-1.2.4.6.142.7"></a><h4>Returns</h4>
 <p> <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SHORT-MEMORY-BUFFER:CAPS" title="GNUTLS_E_SHORT_MEMORY_BUFFER"><code class="literal">GNUTLS_E_SHORT_MEMORY_BUFFER</code></a> if the buffer given is not
-long enough, or 0 on success.</p>
+long enough, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-PARSING-ERROR:CAPS" title="GNUTLS_E_PARSING_ERROR"><code class="literal">GNUTLS_E_PARSING_ERROR</code></a> on invalid hex data, or 0 on success.</p>
 </div>
 </div>
 <hr>
@@ -8254,7 +8256,7 @@ gnutls_load_file (<em class="parameter"><code>const <span class="type">char</spa
                   <em class="parameter"><code><span class="type">gnutls_datum_t</span> *data</code></em>);</pre>
 <p>This function will load a file into a datum. The data are
 zero terminated but the terminating null is not included in length.
-The returned data are allocated using <code class="function">gnutls_malloc()</code>.</p>
+The returned data are allocated using <a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-malloc"><code class="function">gnutls_malloc()</code></a>.</p>
 <div class="refsect3">
 <a name="id-1.2.4.6.151.5"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
@@ -9476,7 +9478,7 @@ TLS session.  For documentation check the <a class="link" href="gnutls-gnutls.ht
 </tr>
 <tr>
 <td class="parameter_name"><p>err_pos</p></td>
-<td class="parameter_description"><p>In case of an error this will have the position in the string the error occured</p></td>
+<td class="parameter_description"><p>In case of an error this will have the position in the string the error occurred</p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 </tbody>
@@ -9845,7 +9847,7 @@ int (*callback)(gnutls_session_t, char** username,
  gnutls_datum_t* key);</p>
 <p>The <em class="parameter"><code>username</code></em>
  and <em class="parameter"><code>key-&gt;data</code></em>
- must be allocated using <code class="function">gnutls_malloc()</code>.
+ must be allocated using <a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-malloc"><code class="function">gnutls_malloc()</code></a>.
 <em class="parameter"><code>username</code></em>
  should be ASCII strings or UTF-8 strings prepared using
 the "SASLprep" profile of "stringprep".</p>
@@ -9959,7 +9961,7 @@ int (*callback)(gnutls_session_t, const char* username,
 <p><em class="parameter"><code>username</code></em>
  contains the actual username.
 The <em class="parameter"><code>key</code></em>
- must be filled in using the <code class="function">gnutls_malloc()</code>.</p>
+ must be filled in using the <a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-malloc"><code class="function">gnutls_malloc()</code></a>.</p>
 <p>In case the callback returned a negative number then gnutls will
 assume that the username does not exist.</p>
 <p>The callback function will only be called once per handshake.  The
@@ -10132,7 +10134,7 @@ gnutls_random_art (<em class="parameter"><code><a class="link" href="gnutls-gnut
                    <em class="parameter"><code><span class="type">size_t</span> fpr_size</code></em>,
                    <em class="parameter"><code><span class="type">gnutls_datum_t</span> *art</code></em>);</pre>
 <p>This function will convert a given fingerprint to an "artistic"
-image. The returned image is allocated using <code class="function">gnutls_malloc()</code>.</p>
+image. The returned image is allocated using <a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-malloc"><code class="function">gnutls_malloc()</code></a>.</p>
 <div class="refsect3">
 <a name="id-1.2.4.6.205.5"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
@@ -10321,21 +10323,19 @@ gnutls_record_recv (<em class="parameter"><code><a class="link" href="gnutls-gnu
 <p>This function has the similar semantics with <code class="function">recv()</code>.  The only
 difference is that it accepts a GnuTLS session, and uses different
 error codes.
-In the special case that a server requests a renegotiation, the
-client may receive an error code of <a class="link" href="gnutls-gnutls.html#GNUTLS-E-REHANDSHAKE:CAPS" title="GNUTLS_E_REHANDSHAKE"><code class="literal">GNUTLS_E_REHANDSHAKE</code></a>.  This
-message may be simply ignored, replied with an alert
+In the special case that the peer requests a renegotiation, the
+caller will receive an error code of <a class="link" href="gnutls-gnutls.html#GNUTLS-E-REHANDSHAKE:CAPS" title="GNUTLS_E_REHANDSHAKE"><code class="literal">GNUTLS_E_REHANDSHAKE</code></a>.  In case
+of a client, this message may be simply ignored, replied with an alert
 <a class="link" href="gnutls-gnutls.html#GNUTLS-A-NO-RENEGOTIATION:CAPS"><code class="literal">GNUTLS_A_NO_RENEGOTIATION</code></a>, or replied with a new handshake,
-depending on the client's will.
-If <code class="literal">EINTR</code> is returned by the internal push function (the default
+depending on the client's will. A server receiving this error code
+can only initiate a new handshake or terminate the session.</p>
+<p>If <code class="literal">EINTR</code> is returned by the internal push function (the default
 is <code class="function">recv()</code>) then <a class="link" href="gnutls-gnutls.html#GNUTLS-E-INTERRUPTED:CAPS" title="GNUTLS_E_INTERRUPTED"><code class="literal">GNUTLS_E_INTERRUPTED</code></a> will be returned.  If
 <a class="link" href="gnutls-gnutls.html#GNUTLS-E-INTERRUPTED:CAPS" title="GNUTLS_E_INTERRUPTED"><code class="literal">GNUTLS_E_INTERRUPTED</code></a> or <a class="link" href="gnutls-gnutls.html#GNUTLS-E-AGAIN:CAPS" title="GNUTLS_E_AGAIN"><code class="literal">GNUTLS_E_AGAIN</code></a> is returned, you must
 call this function again to get the data.  See also
-<a class="link" href="gnutls-gnutls.html#gnutls-record-get-direction" title="gnutls_record_get_direction ()"><code class="function">gnutls_record_get_direction()</code></a>.
-A server may also receive <a class="link" href="gnutls-gnutls.html#GNUTLS-E-REHANDSHAKE:CAPS" title="GNUTLS_E_REHANDSHAKE"><code class="literal">GNUTLS_E_REHANDSHAKE</code></a> when a client has
-initiated a handshake. In that case the server can only initiate a
-handshake or terminate the connection.</p>
+<a class="link" href="gnutls-gnutls.html#gnutls-record-get-direction" title="gnutls_record_get_direction ()"><code class="function">gnutls_record_get_direction()</code></a>.</p>
 <div class="refsect3">
-<a name="id-1.2.4.6.211.5"></a><h4>Parameters</h4>
+<a name="id-1.2.4.6.211.6"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -10362,7 +10362,7 @@ handshake or terminate the connection.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.4.6.211.6"></a><h4>Returns</h4>
+<a name="id-1.2.4.6.211.7"></a><h4>Returns</h4>
 <p> The number of bytes received and zero on EOF (for stream
 connections).  A negative error code is returned in case of an error.
 The number of bytes received might be less than the requested <em class="parameter"><code>data_size</code></em>
@@ -10905,7 +10905,7 @@ may be resumed later by calling <a class="link" href="gnutls-gnutls.html#gnutls-
 This function must be called after a successful (full) handshake. It should
 not be used in already resumed sessions --see <a class="link" href="gnutls-gnutls.html#gnutls-session-is-resumed" title="gnutls_session_is_resumed ()"><code class="function">gnutls_session_is_resumed()</code></a>.</p>
 <p>The returned <em class="parameter"><code>data</code></em>
- are allocated and must be released using <code class="function">gnutls_free()</code>.</p>
+ are allocated and must be released using <a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-free"><code class="function">gnutls_free()</code></a>.</p>
 <div class="refsect3">
 <a name="id-1.2.4.6.224.6"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
@@ -11938,7 +11938,7 @@ callback's function form is:</p>
 <p>The <em class="parameter"><code>username</code></em>
  and <em class="parameter"><code>password</code></em>
  must be allocated using
-<code class="function">gnutls_malloc()</code>.  <em class="parameter"><code>username</code></em>
+<a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-malloc"><code class="function">gnutls_malloc()</code></a>.  <em class="parameter"><code>username</code></em>
  and <em class="parameter"><code>password</code></em>
  should be ASCII strings
 or UTF-8 strings prepared using the "SASLprep" profile of
@@ -12073,7 +12073,7 @@ The <em class="parameter"><code>salt</code></em>
 , <em class="parameter"><code>generator</code></em>
  and <em class="parameter"><code>prime</code></em>
  must be filled
-in using the <code class="function">gnutls_malloc()</code>. For convenience <em class="parameter"><code>prime</code></em>
+in using the <a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-malloc"><code class="function">gnutls_malloc()</code></a>. For convenience <em class="parameter"><code>prime</code></em>
  and <em class="parameter"><code>generator</code></em>
 
 may also be one of the static parameters defined in gnutls.h.</p>
@@ -12129,7 +12129,7 @@ RFC2945.  The <em class="parameter"><code>prime</code></em>
  and <em class="parameter"><code>generator</code></em>
  should be one of the static
 parameters defined in gnutls/gnutls.h or may be generated.</p>
-<p>The verifier will be allocated with <em class="parameter"><code><code class="function">gnutls_malloc()</code></code></em>
+<p>The verifier will be allocated with <em class="parameter"><code><a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-malloc"><code class="function">gnutls_malloc()</code></a></code></em>
  and will be stored in
 <em class="parameter"><code>res</code></em>
  using binary format.</p>
@@ -12501,7 +12501,7 @@ separated by colons.</p></td>
 </tr>
 <tr>
 <td class="parameter_name"><p>err_pos</p></td>
-<td class="parameter_description"><p>In case of an error this will have the position in the string the error occured, may be NULL.</p></td>
+<td class="parameter_description"><p>In case of an error this will have the position in the string the error occurred, may be NULL.</p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 </tbody>
@@ -14854,7 +14854,7 @@ or a negative error value on other errors.</p>
 <hr>
 <div class="refsect2">
 <a name="GNUTLS-VERSION:CAPS"></a><h3>GNUTLS_VERSION</h3>
-<pre class="programlisting">#define GNUTLS_VERSION "3.4.4"
+<pre class="programlisting">#define GNUTLS_VERSION "3.4.8"
 </pre>
 <p>
 </p>
@@ -14878,7 +14878,7 @@ or a negative error value on other errors.</p>
 <hr>
 <div class="refsect2">
 <a name="GNUTLS-VERSION-NUMBER:CAPS"></a><h3>GNUTLS_VERSION_NUMBER</h3>
-<pre class="programlisting">#define GNUTLS_VERSION_NUMBER 0x030404
+<pre class="programlisting">#define GNUTLS_VERSION_NUMBER 0x030408
 </pre>
 <p>
 </p>
@@ -14886,7 +14886,7 @@ or a negative error value on other errors.</p>
 <hr>
 <div class="refsect2">
 <a name="GNUTLS-VERSION-PATCH:CAPS"></a><h3>GNUTLS_VERSION_PATCH</h3>
-<pre class="programlisting">#define GNUTLS_VERSION_PATCH 4
+<pre class="programlisting">#define GNUTLS_VERSION_PATCH 8
 </pre>
 <p>
 </p>
@@ -15467,14 +15467,14 @@ certificate verification.</p>
 <tr>
 <td class="enum_member_name"><p><a name="GNUTLS-CIPHER-UNKNOWN:CAPS"></a>GNUTLS_CIPHER_UNKNOWN</p></td>
 <td class="enum_member_description">
-<p>Unknown algorithm.</p>
+<p>Value to identify an unknown/unsupported algorithm.</p>
 </td>
 <td class="enum_member_annotations"> </td>
 </tr>
 <tr>
 <td class="enum_member_name"><p><a name="GNUTLS-CIPHER-NULL:CAPS"></a>GNUTLS_CIPHER_NULL</p></td>
 <td class="enum_member_description">
-<p>NULL algorithm.</p>
+<p>The NULL (identity) encryption algorithm.</p>
 </td>
 <td class="enum_member_annotations"> </td>
 </tr>
@@ -15635,63 +15635,63 @@ certificate verification.</p>
 <tr>
 <td class="enum_member_name"><p><a name="GNUTLS-CIPHER-IDEA-PGP-CFB:CAPS"></a>GNUTLS_CIPHER_IDEA_PGP_CFB</p></td>
 <td class="enum_member_description">
-<p>IDEA in CFB mode.</p>
+<p>IDEA in CFB mode (placeholder - unsupported).</p>
 </td>
 <td class="enum_member_annotations"> </td>
 </tr>
 <tr>
 <td class="enum_member_name"><p><a name="GNUTLS-CIPHER-3DES-PGP-CFB:CAPS"></a>GNUTLS_CIPHER_3DES_PGP_CFB</p></td>
 <td class="enum_member_description">
-<p>3DES in CFB mode.</p>
+<p>3DES in CFB mode (placeholder - unsupported).</p>
 </td>
 <td class="enum_member_annotations"> </td>
 </tr>
 <tr>
 <td class="enum_member_name"><p><a name="GNUTLS-CIPHER-CAST5-PGP-CFB:CAPS"></a>GNUTLS_CIPHER_CAST5_PGP_CFB</p></td>
 <td class="enum_member_description">
-<p>CAST5 in CFB mode.</p>
+<p>CAST5 in CFB mode (placeholder - unsupported).</p>
 </td>
 <td class="enum_member_annotations"> </td>
 </tr>
 <tr>
 <td class="enum_member_name"><p><a name="GNUTLS-CIPHER-BLOWFISH-PGP-CFB:CAPS"></a>GNUTLS_CIPHER_BLOWFISH_PGP_CFB</p></td>
 <td class="enum_member_description">
-<p>Blowfish in CFB mode.</p>
+<p>Blowfish in CFB mode (placeholder - unsupported).</p>
 </td>
 <td class="enum_member_annotations"> </td>
 </tr>
 <tr>
 <td class="enum_member_name"><p><a name="GNUTLS-CIPHER-SAFER-SK128-PGP-CFB:CAPS"></a>GNUTLS_CIPHER_SAFER_SK128_PGP_CFB</p></td>
 <td class="enum_member_description">
-<p>Safer-SK in CFB mode with 128-bit keys.</p>
+<p>Safer-SK in CFB mode with 128-bit keys (placeholder - unsupported).</p>
 </td>
 <td class="enum_member_annotations"> </td>
 </tr>
 <tr>
 <td class="enum_member_name"><p><a name="GNUTLS-CIPHER-AES128-PGP-CFB:CAPS"></a>GNUTLS_CIPHER_AES128_PGP_CFB</p></td>
 <td class="enum_member_description">
-<p>AES in CFB mode with 128-bit keys.</p>
+<p>AES in CFB mode with 128-bit keys (placeholder - unsupported).</p>
 </td>
 <td class="enum_member_annotations"> </td>
 </tr>
 <tr>
 <td class="enum_member_name"><p><a name="GNUTLS-CIPHER-AES192-PGP-CFB:CAPS"></a>GNUTLS_CIPHER_AES192_PGP_CFB</p></td>
 <td class="enum_member_description">
-<p>AES in CFB mode with 192-bit keys.</p>
+<p>AES in CFB mode with 192-bit keys (placeholder - unsupported).</p>
 </td>
 <td class="enum_member_annotations"> </td>
 </tr>
 <tr>
 <td class="enum_member_name"><p><a name="GNUTLS-CIPHER-AES256-PGP-CFB:CAPS"></a>GNUTLS_CIPHER_AES256_PGP_CFB</p></td>
 <td class="enum_member_description">
-<p>AES in CFB mode with 256-bit keys.</p>
+<p>AES in CFB mode with 256-bit keys (placeholder - unsupported).</p>
 </td>
 <td class="enum_member_annotations"> </td>
 </tr>
 <tr>
 <td class="enum_member_name"><p><a name="GNUTLS-CIPHER-TWOFISH-PGP-CFB:CAPS"></a>GNUTLS_CIPHER_TWOFISH_PGP_CFB</p></td>
 <td class="enum_member_description">
-<p>Twofish in CFB mode.</p>
+<p>Twofish in CFB mode (placeholder - unsupported).</p>
 </td>
 <td class="enum_member_annotations"> </td>
 </tr>
@@ -16972,6 +16972,13 @@ algorithms.</p>
 <td class="enum_member_name"><p><a name="GNUTLS-SEC-PARAM-ULTRA:CAPS"></a>GNUTLS_SEC_PARAM_ULTRA</p></td>
 <td class="enum_member_description">
 <p>192 bits of security</p>
+</td>
+<td class="enum_member_annotations"> </td>
+</tr>
+<tr>
+<td class="enum_member_name"><p><a name="GNUTLS-SEC-PARAM-FUTURE:CAPS"></a>GNUTLS_SEC_PARAM_FUTURE</p></td>
+<td class="enum_member_description">
+<p>256 bits of security</p>
 </td>
 <td class="enum_member_annotations"> </td>
 </tr>

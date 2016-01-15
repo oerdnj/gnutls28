@@ -22,4 +22,6 @@ Less than 42 bits of security
 128 bits of security
 @item GNUTLS_@-SEC_@-PARAM_@-ULTRA
 192 bits of security
+@item GNUTLS_@-SEC_@-PARAM_@-FUTURE
+256 bits of security
 @end table

@@ -108,15 +108,13 @@ POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
 check_PROGRAMS = rng$(EXEEXT) $(am__EXEEXT_1)
-TESTS = test-ciphersuite-names eagain testsrn chain invalid-cert \
-	testrng testcompat-openssl testcompat-polarssl $(am__EXEEXT_2) \
-	$(am__append_3) $(am__append_4)
-@ENABLE_PKCS11_TRUE@am__append_1 = pkcs11-chainverify pkcs11-get-issuer pkcs11-is-known pkcs11-combo pkcs11-privkey
-@ENABLE_PKCS11_TRUE@am__append_2 = testpkcs11 pkcs11-chainverify pkcs11-get-issuer crl-test pkcs11-is-known pkcs11-combo pkcs11-privkey
-@ENABLE_DANE_TRUE@am__append_3 = testdane
+@ENABLE_PKCS11_TRUE@am__append_1 = pkcs11-chainverify pkcs11-get-issuer pkcs11-is-known pkcs11-combo pkcs11-privkey pkcs11-pubkey-import-rsa pkcs11-pubkey-import-ecdsa
+@ENABLE_PKCS11_TRUE@am__append_2 = testpkcs11.sh pkcs11-chainverify pkcs11-get-issuer crl-test pkcs11-is-known pkcs11-combo pkcs11-privkey pkcs11-pubkey-import-ecdsa pkcs11-pubkey-import-rsa
+@ENABLE_DANE_TRUE@am__append_3 = testdane.sh
 @MACOSX_FALSE@@WINDOWS_FALSE@noinst_PROGRAMS = eagain-cli$(EXEEXT) \
 @MACOSX_FALSE@@WINDOWS_FALSE@	mini-record-timing$(EXEEXT)
-@MACOSX_FALSE@@WINDOWS_FALSE@am__append_4 = eagain
+@MACOSX_FALSE@@WINDOWS_FALSE@am__append_4 = eagain.sh
+TESTS = $(am__EXEEXT_3)
 subdir = tests/suite
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/src/gl/m4/arpa_inet_h.m4 \
@@ -305,7 +303,9 @@ libecore_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
 @ENABLE_PKCS11_TRUE@	pkcs11-get-issuer$(EXEEXT) \
 @ENABLE_PKCS11_TRUE@	pkcs11-is-known$(EXEEXT) \
 @ENABLE_PKCS11_TRUE@	pkcs11-combo$(EXEEXT) \
-@ENABLE_PKCS11_TRUE@	pkcs11-privkey$(EXEEXT)
+@ENABLE_PKCS11_TRUE@	pkcs11-privkey$(EXEEXT) \
+@ENABLE_PKCS11_TRUE@	pkcs11-pubkey-import-rsa$(EXEEXT) \
+@ENABLE_PKCS11_TRUE@	pkcs11-pubkey-import-ecdsa$(EXEEXT)
 PROGRAMS = $(noinst_PROGRAMS)
 @MACOSX_FALSE@@WINDOWS_FALSE@nodist_eagain_cli_OBJECTS =  \
 @MACOSX_FALSE@@WINDOWS_FALSE@	mini-eagain2.$(OBJEXT)
@@ -350,6 +350,19 @@ pkcs11_privkey_LDADD = $(LDADD)
 pkcs11_privkey_DEPENDENCIES = ../../lib/libgnutls.la \
 	../../gl/libgnu.la ../libutils.la $(am__DEPENDENCIES_1) \
 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
+pkcs11_pubkey_import_ecdsa_SOURCES = pkcs11-pubkey-import-ecdsa.c
+pkcs11_pubkey_import_ecdsa_OBJECTS =  \
+	pkcs11-pubkey-import-ecdsa.$(OBJEXT)
+pkcs11_pubkey_import_ecdsa_LDADD = $(LDADD)
+pkcs11_pubkey_import_ecdsa_DEPENDENCIES = ../../lib/libgnutls.la \
+	../../gl/libgnu.la ../libutils.la $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
+pkcs11_pubkey_import_rsa_SOURCES = pkcs11-pubkey-import-rsa.c
+pkcs11_pubkey_import_rsa_OBJECTS = pkcs11-pubkey-import-rsa.$(OBJEXT)
+pkcs11_pubkey_import_rsa_LDADD = $(LDADD)
+pkcs11_pubkey_import_rsa_DEPENDENCIES = ../../lib/libgnutls.la \
+	../../gl/libgnu.la ../libutils.la $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
 rng_SOURCES = rng.c
 rng_OBJECTS = rng.$(OBJEXT)
 rng_LDADD = $(LDADD)
@@ -392,10 +405,12 @@ am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
 SOURCES = $(nodist_libecore_la_SOURCES) $(nodist_eagain_cli_SOURCES) \
 	mini-record-timing.c pkcs11-chainverify.c pkcs11-combo.c \
-	pkcs11-get-issuer.c pkcs11-is-known.c pkcs11-privkey.c rng.c
+	pkcs11-get-issuer.c pkcs11-is-known.c pkcs11-privkey.c \
+	pkcs11-pubkey-import-ecdsa.c pkcs11-pubkey-import-rsa.c rng.c
 DIST_SOURCES = mini-record-timing.c pkcs11-chainverify.c \
 	pkcs11-combo.c pkcs11-get-issuer.c pkcs11-is-known.c \
-	pkcs11-privkey.c rng.c
+	pkcs11-privkey.c pkcs11-pubkey-import-ecdsa.c \
+	pkcs11-pubkey-import-rsa.c rng.c
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -604,14 +619,18 @@ am__set_TESTS_bases = \
   bases=`echo $$bases`
 RECHECK_LOGS = $(TEST_LOGS)
 AM_RECURSIVE_TARGETS = check recheck
-@ENABLE_PKCS11_TRUE@am__EXEEXT_2 = testpkcs11 \
+@ENABLE_PKCS11_TRUE@am__EXEEXT_2 = testpkcs11.sh \
 @ENABLE_PKCS11_TRUE@	pkcs11-chainverify$(EXEEXT) \
 @ENABLE_PKCS11_TRUE@	pkcs11-get-issuer$(EXEEXT) crl-test \
 @ENABLE_PKCS11_TRUE@	pkcs11-is-known$(EXEEXT) \
 @ENABLE_PKCS11_TRUE@	pkcs11-combo$(EXEEXT) \
-@ENABLE_PKCS11_TRUE@	pkcs11-privkey$(EXEEXT)
+@ENABLE_PKCS11_TRUE@	pkcs11-privkey$(EXEEXT) \
+@ENABLE_PKCS11_TRUE@	pkcs11-pubkey-import-ecdsa$(EXEEXT) \
+@ENABLE_PKCS11_TRUE@	pkcs11-pubkey-import-rsa$(EXEEXT)
+am__EXEEXT_3 = testsrn.sh chain.sh invalid-cert.sh testpkcs11.sh \
+	testrng.sh testcompat-polarssl.sh testcompat-openssl.sh \
+	testrandom.sh $(am__EXEEXT_2) $(am__append_3) $(am__append_4)
 TEST_SUITE_LOG = test-suite.log
-TEST_EXTENSIONS = @EXEEXT@ .test
 LOG_DRIVER = $(SHELL) $(top_srcdir)/build-aux/test-driver
 LOG_COMPILE = $(LOG_COMPILER) $(AM_LOG_FLAGS) $(LOG_FLAGS)
 am__set_b = \
@@ -626,10 +645,9 @@ am__set_b = \
   esac
 am__test_logs1 = $(TESTS:=.log)
 am__test_logs2 = $(am__test_logs1:@EXEEXT@.log=.log)
-TEST_LOGS = $(am__test_logs2:.test.log=.log)
-TEST_LOG_DRIVER = $(SHELL) $(top_srcdir)/build-aux/test-driver
-TEST_LOG_COMPILE = $(TEST_LOG_COMPILER) $(AM_TEST_LOG_FLAGS) \
-	$(TEST_LOG_FLAGS)
+TEST_LOGS = $(am__test_logs2:.sh.log=.log)
+SH_LOG_DRIVER = $(SHELL) $(top_srcdir)/build-aux/test-driver
+SH_LOG_COMPILE = $(SH_LOG_COMPILER) $(AM_SH_LOG_FLAGS) $(SH_LOG_FLAGS)
 am__DIST_COMMON = $(srcdir)/Makefile.in \
 	$(top_srcdir)/build-aux/depcomp \
 	$(top_srcdir)/build-aux/test-driver README
@@ -1619,7 +1637,9 @@ AM_CPPFLAGS = \
 	-I$(top_srcdir)/tests/suite/ecore/src/include \
 	-I$(top_srcdir)/tests/suite/ecore/src/lib
 
-EXTRA_DIST = crl/long.crl crl/long.pem
+EXTRA_DIST = crl/long.crl crl/long.pem testcompat-main-polarssl \
+	testcompat-main-openssl testcompat-common testpkcs11.pkcs15 \
+	testpkcs11.softhsm testpkcs11.sc-hsm
 AM_LDFLAGS = -no-install
 LDADD = ../../lib/libgnutls.la \
 	../../gl/libgnu.la \
@@ -1668,15 +1688,13 @@ nodist_libecore_la_SOURCES = ecore/src/lib/ecore_anim.c			\
 	ecore/src/lib/eina_unicode.c ecore/src/lib/eina_ustrbuf.c	\
 	ecore/src/lib/eina_ustringshare.c ecore/src/lib/eina_value.c
 
-nodist_check_SCRIPTS = eagain testsrn chain invalid-cert testrandom \
-	testpkcs11 testpkcs11.pkcs15 testpkcs11.softhsm testpkcs11.sc-hsm \
-	testrng testcompat-main-polarssl testcompat-main-openssl testcompat-common \
-	testcompat-polarssl testcompat-openssl
-
+nodist_check_SCRIPTS = testsrn.sh chain.sh invalid-cert.sh \
+	testpkcs11.sh testrng.sh testcompat-polarssl.sh \
+	testcompat-openssl.sh testrandom.sh $(am__append_2) \
+	$(am__append_3) $(am__append_4)
 TESTS_ENVIRONMENT = EXEEXT=$(EXEEXT) \
 	LC_ALL="C"					\
 	VALGRIND="$(VALGRIND)"				\
-	LIBTOOL="$(LIBTOOL)"				\
 	top_builddir="$(top_builddir)"			\
 	srcdir="$(srcdir)"
 
@@ -1684,10 +1702,13 @@ TESTS_ENVIRONMENT = EXEEXT=$(EXEEXT) \
 @MACOSX_FALSE@@WINDOWS_FALSE@mini_record_timing_LDADD = -lrt $(LDADD)
 @MACOSX_FALSE@@WINDOWS_FALSE@eagain_cli_LDADD = libecore.la -lrt -lm -ldl -lpthread $(LDADD)
 @MACOSX_FALSE@@WINDOWS_FALSE@nodist_eagain_cli_SOURCES = mini-eagain2.c
+TEST_EXTENSIONS = .sh
+@WANT_TEST_SUITE_TRUE@LOG_COMPILER = $(VALGRIND)
+@WANT_TEST_SUITE_TRUE@SH_LOG_COMPILER = 
 all: all-am
 
 .SUFFIXES:
-.SUFFIXES: .c .lo .log .o .obj .test .test$(EXEEXT) .trs
+.SUFFIXES: .c .lo .log .o .obj .sh .sh$(EXEEXT) .trs
 $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
@@ -1940,6 +1961,14 @@ pkcs11-privkey$(EXEEXT): $(pkcs11_privkey_OBJECTS) $(pkcs11_privkey_DEPENDENCIES
 	@rm -f pkcs11-privkey$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(pkcs11_privkey_OBJECTS) $(pkcs11_privkey_LDADD) $(LIBS)
 
+pkcs11-pubkey-import-ecdsa$(EXEEXT): $(pkcs11_pubkey_import_ecdsa_OBJECTS) $(pkcs11_pubkey_import_ecdsa_DEPENDENCIES) $(EXTRA_pkcs11_pubkey_import_ecdsa_DEPENDENCIES) 
+	@rm -f pkcs11-pubkey-import-ecdsa$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(pkcs11_pubkey_import_ecdsa_OBJECTS) $(pkcs11_pubkey_import_ecdsa_LDADD) $(LIBS)
+
+pkcs11-pubkey-import-rsa$(EXEEXT): $(pkcs11_pubkey_import_rsa_OBJECTS) $(pkcs11_pubkey_import_rsa_DEPENDENCIES) $(EXTRA_pkcs11_pubkey_import_rsa_DEPENDENCIES) 
+	@rm -f pkcs11-pubkey-import-rsa$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(pkcs11_pubkey_import_rsa_OBJECTS) $(pkcs11_pubkey_import_rsa_LDADD) $(LIBS)
+
 rng$(EXEEXT): $(rng_OBJECTS) $(rng_DEPENDENCIES) $(EXTRA_rng_DEPENDENCIES) 
 	@rm -f rng$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(rng_OBJECTS) $(rng_LDADD) $(LIBS)
@@ -1959,6 +1988,8 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pkcs11-get-issuer.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pkcs11-is-known.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pkcs11-privkey.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pkcs11-pubkey-import-ecdsa.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pkcs11-pubkey-import-rsa.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/rng.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@ecore/src/lib/$(DEPDIR)/libecore_la-ecore.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@ecore/src/lib/$(DEPDIR)/libecore_la-ecore_anim.Plo@am__quote@
@@ -2633,69 +2664,6 @@ recheck: all $(check_PROGRAMS) $(nodist_check_SCRIPTS)
 	        am__force_recheck=am--force-recheck \
 	        TEST_LOGS="$$log_list"; \
 	exit $$?
-test-ciphersuite-names.log: test-ciphersuite-names
-	@p='test-ciphersuite-names'; \
-	b='test-ciphersuite-names'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-eagain.log: eagain
-	@p='eagain'; \
-	b='eagain'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-testsrn.log: testsrn
-	@p='testsrn'; \
-	b='testsrn'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-chain.log: chain
-	@p='chain'; \
-	b='chain'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-invalid-cert.log: invalid-cert
-	@p='invalid-cert'; \
-	b='invalid-cert'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-testrng.log: testrng
-	@p='testrng'; \
-	b='testrng'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-testcompat-openssl.log: testcompat-openssl
-	@p='testcompat-openssl'; \
-	b='testcompat-openssl'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-testcompat-polarssl.log: testcompat-polarssl
-	@p='testcompat-polarssl'; \
-	b='testcompat-polarssl'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-testpkcs11.log: testpkcs11
-	@p='testpkcs11'; \
-	b='testpkcs11'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
 pkcs11-chainverify.log: pkcs11-chainverify$(EXEEXT)
 	@p='pkcs11-chainverify$(EXEEXT)'; \
 	b='pkcs11-chainverify'; \
@@ -2738,26 +2706,33 @@ pkcs11-privkey.log: pkcs11-privkey$(EXEEXT)
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
 	"$$tst" $(AM_TESTS_FD_REDIRECT)
-testdane.log: testdane
-	@p='testdane'; \
-	b='testdane'; \
+pkcs11-pubkey-import-ecdsa.log: pkcs11-pubkey-import-ecdsa$(EXEEXT)
+	@p='pkcs11-pubkey-import-ecdsa$(EXEEXT)'; \
+	b='pkcs11-pubkey-import-ecdsa'; \
 	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
 	"$$tst" $(AM_TESTS_FD_REDIRECT)
-.test.log:
+pkcs11-pubkey-import-rsa.log: pkcs11-pubkey-import-rsa$(EXEEXT)
+	@p='pkcs11-pubkey-import-rsa$(EXEEXT)'; \
+	b='pkcs11-pubkey-import-rsa'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+.sh.log:
 	@p='$<'; \
 	$(am__set_b); \
-	$(am__check_pre) $(TEST_LOG_DRIVER) --test-name "$$f" \
+	$(am__check_pre) $(SH_LOG_DRIVER) --test-name "$$f" \
 	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_TEST_LOG_DRIVER_FLAGS) $(TEST_LOG_DRIVER_FLAGS) -- $(TEST_LOG_COMPILE) \
+	$(am__common_driver_flags) $(AM_SH_LOG_DRIVER_FLAGS) $(SH_LOG_DRIVER_FLAGS) -- $(SH_LOG_COMPILE) \
 	"$$tst" $(AM_TESTS_FD_REDIRECT)
-@am__EXEEXT_TRUE@.test$(EXEEXT).log:
+@am__EXEEXT_TRUE@.sh$(EXEEXT).log:
 @am__EXEEXT_TRUE@	@p='$<'; \
 @am__EXEEXT_TRUE@	$(am__set_b); \
-@am__EXEEXT_TRUE@	$(am__check_pre) $(TEST_LOG_DRIVER) --test-name "$$f" \
+@am__EXEEXT_TRUE@	$(am__check_pre) $(SH_LOG_DRIVER) --test-name "$$f" \
 @am__EXEEXT_TRUE@	--log-file $$b.log --trs-file $$b.trs \
-@am__EXEEXT_TRUE@	$(am__common_driver_flags) $(AM_TEST_LOG_DRIVER_FLAGS) $(TEST_LOG_DRIVER_FLAGS) -- $(TEST_LOG_COMPILE) \
+@am__EXEEXT_TRUE@	$(am__common_driver_flags) $(AM_SH_LOG_DRIVER_FLAGS) $(SH_LOG_DRIVER_FLAGS) -- $(SH_LOG_COMPILE) \
 @am__EXEEXT_TRUE@	"$$tst" $(AM_TESTS_FD_REDIRECT)
 
 distdir: $(DISTFILES)
@@ -2922,12 +2897,6 @@ uninstall-am:
 
 .PRECIOUS: Makefile
 
-
-#pkcs11-chainverify cannot run under valgrind (or hell breaks loose)
-
-#if WANT_TEST_SUITE
-#LOG_COMPILER = $(VALGRIND)
-#endif
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

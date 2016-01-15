@@ -176,9 +176,6 @@ handshake will be aborted with @code{GNUTLS_E_TIMEDOUT} .
 The DTLS protocol recommends the values of 1 sec and 60 seconds
 respectively, and these are the default values.
 
-If the retransmission timeout is zero then the handshake will operate
-in a non-blocking way, i.e., return @code{GNUTLS_E_AGAIN} .
-
 To disable retransmissions set a  @code{retrans_timeout} larger than the  @code{total_timeout} .
 
 @strong{Since:} 3.0

@@ -16,5 +16,5 @@ Initially  @code{result_size} must hold the maximum size available in
  @code{result} , and on return it will contain the number of bytes written.
 
 @strong{Returns:} @code{GNUTLS_E_SHORT_MEMORY_BUFFER}  if the buffer given is not
-long enough, or 0 on success.
+long enough, @code{GNUTLS_E_PARSING_ERROR}  on invalid hex data, or 0 on success.
 @end deftypefun

@@ -109,8 +109,9 @@ build_triplet = @build@
 host_triplet = @host@
 @HAVE_BUGGY_LIBIDN_FALSE@am__append_1 = certtool-utf8
 @ENABLE_NON_SUITEB_CURVES_TRUE@am__append_2 = crq
-@WINDOWS_FALSE@am__append_3 = template-test
+@WINDOWS_FALSE@am__append_3 = template-test pem-decoding
 @ENABLE_DANE_TRUE@am__append_4 = dane
+@WINDOWS_TRUE@am__append_5 = WINDOWS=1
 subdir = tests/cert-tests
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/src/gl/m4/arpa_inet_h.m4 \
@@ -228,9 +229,9 @@ mkinstalldirs = $(install_sh) -d
 CONFIG_HEADER = $(top_builddir)/config.h
 CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
-am__dist_check_SCRIPTS_DIST = pathlen aki pem-decoding certtool \
-	invalid-sig email pkcs7 privkey-import name-constraints \
-	certtool-long-cn crl certtool-utf8 crq template-test dane
+am__dist_check_SCRIPTS_DIST = pathlen aki certtool invalid-sig email \
+	pkcs7 privkey-import name-constraints certtool-long-cn crl \
+	certtool-utf8 crq template-test pem-decoding dane
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -1444,20 +1445,17 @@ EXTRA_DIST = ca-no-pathlen.pem no-ca-or-pathlen.pem aki-cert.pem \
 	single-ca.p7b single-ca.p7b.out full.p7b full.p7b.out detached.p7b \
 	pkcs7-detached.txt p7-combined.out template-generalized.pem \
 	template-generalized.tmpl privkey1.pem privkey2.pem privkey3.pem \
-	name-constraints-ip.pem cert-invalid-utf8.der very-long-dn.pem
+	name-constraints-ip.pem cert-invalid-utf8.der very-long-dn.pem \
+	template-unique.tmpl template-unique.pem
 
-dist_check_SCRIPTS = pathlen aki pem-decoding certtool invalid-sig \
-	email pkcs7 privkey-import name-constraints certtool-long-cn \
-	crl $(am__append_1) $(am__append_2) $(am__append_3) \
+dist_check_SCRIPTS = pathlen aki certtool invalid-sig email pkcs7 \
+	privkey-import name-constraints certtool-long-cn crl \
+	$(am__append_1) $(am__append_2) $(am__append_3) \
 	$(am__append_4)
 TESTS = $(dist_check_SCRIPTS)
-TESTS_ENVIRONMENT = EXEEXT=$(EXEEXT) \
-	LC_ALL="C"				\
-	VALGRIND="$(VALGRIND)" 			\
-	LIBTOOL="$(LIBTOOL)"			\
-	top_builddir="$(top_builddir)"		\
-	srcdir="$(srcdir)"
-
+TESTS_ENVIRONMENT = EXEEXT=$(EXEEXT) LC_ALL="C" VALGRIND="$(VALGRIND)" \
+	LIBTOOL="$(LIBTOOL)" top_builddir="$(top_builddir)" \
+	srcdir="$(srcdir)" $(am__append_5)
 all: all-am
 
 .SUFFIXES:
@@ -1659,13 +1657,6 @@ aki.log: aki
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
 	"$$tst" $(AM_TESTS_FD_REDIRECT)
-pem-decoding.log: pem-decoding
-	@p='pem-decoding'; \
-	b='pem-decoding'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
 certtool.log: certtool
 	@p='certtool'; \
 	b='certtool'; \
@@ -1739,6 +1730,13 @@ crq.log: crq
 template-test.log: template-test
 	@p='template-test'; \
 	b='template-test'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+pem-decoding.log: pem-decoding
+	@p='pem-decoding'; \
+	b='pem-decoding'; \
 	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \

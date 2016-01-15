@@ -659,7 +659,7 @@ will be stored as a string.  Any of <em class="parameter"><code>oid</code></em>
  may
 be NULL which means that the caller is not interested in getting
 that information back.</p>
-<p>The caller needs to deallocate memory by calling <code class="function">gnutls_free()</code> on
+<p>The caller needs to deallocate memory by calling <a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-free"><code class="function">gnutls_free()</code></a> on
 <em class="parameter"><code>oid-&gt;data</code></em>
  and <em class="parameter"><code>data-&gt;data</code></em>
 .</p>
@@ -716,7 +716,7 @@ gnutls_ocsp_req_get_nonce (<em class="parameter"><code><a class="link" href="gnu
                            <em class="parameter"><code>unsigned <span class="type">int</span> *critical</code></em>,
                            <em class="parameter"><code><span class="type">gnutls_datum_t</span> *nonce</code></em>);</pre>
 <p>This function will return the OCSP request nonce extension data.</p>
-<p>The caller needs to deallocate memory by calling <code class="function">gnutls_free()</code> on
+<p>The caller needs to deallocate memory by calling <a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-free"><code class="function">gnutls_free()</code></a> on
 <em class="parameter"><code>nonce-&gt;data</code></em>
 .</p>
 <div class="refsect3">
@@ -856,7 +856,7 @@ display to a human.</p>
 <p>If the format is <a class="link" href="gnutls-ocsp.html#GNUTLS-OCSP-PRINT-FULL:CAPS"><code class="literal">GNUTLS_OCSP_PRINT_FULL</code></a> then all fields of the
 request will be output, on multiple lines.</p>
 <p>The output <em class="parameter"><code>out-&gt;data</code></em>
- needs to be deallocate using <code class="function">gnutls_free()</code>.</p>
+ needs to be deallocate using <a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-free"><code class="function">gnutls_free()</code></a>.</p>
 <div class="refsect3">
 <a name="id-1.2.11.6.12.7"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
@@ -1123,7 +1123,7 @@ Basic OCSP Response.  The <em class="parameter"><code>certs</code></em>
 allocated zero-terminated array with X.509 certificates.</p>
 <p>Every certificate in the array needs to be de-allocated with
 <a class="link" href="gnutls-x509.html#gnutls-x509-crt-deinit" title="gnutls_x509_crt_deinit ()"><code class="function">gnutls_x509_crt_deinit()</code></a> and the array itself must be freed using
-<code class="function">gnutls_free()</code>.</p>
+<a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-free"><code class="function">gnutls_free()</code></a>.</p>
 <p>Both the <em class="parameter"><code>certs</code></em>
  and <em class="parameter"><code>ncerts</code></em>
  variables may be NULL.  Then the
@@ -1181,7 +1181,7 @@ will be stored as a string.  Any of <em class="parameter"><code>oid</code></em>
  may
 be NULL which means that the caller is not interested in getting
 that information back.</p>
-<p>The caller needs to deallocate memory by calling <code class="function">gnutls_free()</code> on
+<p>The caller needs to deallocate memory by calling <a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-free"><code class="function">gnutls_free()</code></a> on
 <em class="parameter"><code>oid-&gt;data</code></em>
  and <em class="parameter"><code>data-&gt;data</code></em>
 .</p>
@@ -1239,7 +1239,7 @@ gnutls_ocsp_resp_get_nonce (<em class="parameter"><code><a class="link" href="gn
                             <em class="parameter"><code><span class="type">gnutls_datum_t</span> *nonce</code></em>);</pre>
 <p>This function will return the Basic OCSP Response nonce extension
 data.</p>
-<p>The caller needs to deallocate memory by calling <code class="function">gnutls_free()</code> on
+<p>The caller needs to deallocate memory by calling <a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-free"><code class="function">gnutls_free()</code></a> on
 <em class="parameter"><code>nonce-&gt;data</code></em>
 .</p>
 <div class="refsect3">
@@ -1315,7 +1315,7 @@ will be ASCII or UTF-8 encoded, depending on the certificate data.</p>
 <p>If the responder ID is not a name but a hash, this function
 will return zero and the <em class="parameter"><code>dn</code></em>
  elements will be set to <code class="literal">NULL</code>.</p>
-<p>The caller needs to deallocate memory by calling <code class="function">gnutls_free()</code> on
+<p>The caller needs to deallocate memory by calling <a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-free"><code class="function">gnutls_free()</code></a> on
 <em class="parameter"><code>dn-&gt;data</code></em>
 .</p>
 <div class="refsect3">
@@ -1694,7 +1694,7 @@ display to a human.</p>
 <p>If the format is <a class="link" href="gnutls-ocsp.html#GNUTLS-OCSP-PRINT-FULL:CAPS"><code class="literal">GNUTLS_OCSP_PRINT_FULL</code></a> then all fields of the
 response will be output, on multiple lines.</p>
 <p>The output <em class="parameter"><code>out-&gt;data</code></em>
- needs to be deallocate using <code class="function">gnutls_free()</code>.</p>
+ needs to be deallocate using <a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-free"><code class="function">gnutls_free()</code></a>.</p>
 <div class="refsect3">
 <a name="id-1.2.11.6.32.7"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">

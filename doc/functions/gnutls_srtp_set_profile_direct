@@ -8,7 +8,7 @@
 @var{profiles}: is a string that contains the supported SRTP profiles,
 separated by colons.
 
-@var{err_pos}: In case of an error this will have the position in the string the error occured, may be NULL.
+@var{err_pos}: In case of an error this will have the position in the string the error occurred, may be NULL.
 
 This function is to be used by both clients and servers, to declare
 what SRTP profiles they support, to negotiate with the peer.

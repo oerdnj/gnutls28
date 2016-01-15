@@ -53,6 +53,7 @@ struct gnutls_pkcs11_obj_st {
 
 	/* only when pubkey */
 	gnutls_datum_t pubkey[MAX_PUBLIC_PARAMS_SIZE];
+	unsigned pubkey_size;
 	gnutls_pk_algorithm_t pk_algorithm;
 	unsigned int key_usage;
 
@@ -98,7 +99,7 @@ pkcs11_find_slot(struct ck_function_list **module, ck_slot_id_t * slot,
 
 int pkcs11_read_pubkey(struct ck_function_list *module,
 		       ck_session_handle_t pks, ck_object_handle_t obj,
-		       ck_key_type_t key_type, gnutls_datum_t * pubkey);
+		       ck_key_type_t key_type, gnutls_pkcs11_obj_t pobj);
 
 int pkcs11_override_cert_exts(struct pkcs11_session_info *sinfo, gnutls_datum_t *spki, gnutls_datum_t *der);
 
@@ -173,7 +174,17 @@ static inline int pk_to_mech(gnutls_pk_algorithm_t pk)
 		return CKM_RSA_PKCS;
 }
 
-static inline gnutls_pk_algorithm_t mech_to_pk(ck_key_type_t m)
+static inline int pk_to_key_type(gnutls_pk_algorithm_t pk)
+{
+	if (pk == GNUTLS_PK_DSA)
+		return CKK_DSA;
+	else if (pk == GNUTLS_PK_EC)
+		return CKK_ECDSA;
+	else
+		return CKK_RSA;
+}
+
+static inline gnutls_pk_algorithm_t key_type_to_pk(ck_key_type_t m)
 {
 	if (m == CKK_RSA)
 		return GNUTLS_PK_RSA;

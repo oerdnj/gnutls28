@@ -152,6 +152,7 @@
 @item -345 @tab GNUTLS_@-E_@-SOCKETS_@-INIT_@-ERROR @tab Error in sockets initialization.
 @item -346 @tab GNUTLS_@-E_@-KEY_@-IMPORT_@-FAILED @tab Failed to import the key into store.
 @item -347 @tab GNUTLS_@-E_@-INAPPROPRIATE_@-FALLBACK @tab A connection with inappropriate fallback was attempted.
+@item -348 @tab GNUTLS_@-E_@-CERTIFICATE_@-VERIFICATION_@-ERROR @tab Error in the certificate verification.
 @item -400 @tab GNUTLS_@-E_@-SELF_@-TEST_@-ERROR @tab Error while performing self checks.
 @item -401 @tab GNUTLS_@-E_@-NO_@-SELF_@-TEST @tab There is no self test for this algorithm.
 @item -402 @tab GNUTLS_@-E_@-LIB_@-IN_@-ERROR_@-STATE @tab An error has been detected in the library and cannot continue operations.

@@ -2242,7 +2242,7 @@ gnutls_pkcs7_export2 (<em class="parameter"><code><a class="link" href="gnutls-x
                       <em class="parameter"><code><a class="link" href="gnutls-gnutls.html#gnutls-x509-crt-fmt-t" title="enum gnutls_x509_crt_fmt_t"><span class="type">gnutls_x509_crt_fmt_t</span></a> format</code></em>,
                       <em class="parameter"><code><span class="type">gnutls_datum_t</span> *out</code></em>);</pre>
 <p>This function will export the pkcs7 structure to DER or PEM format.</p>
-<p>The output buffer is allocated using <code class="function">gnutls_malloc()</code>.</p>
+<p>The output buffer is allocated using <a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-malloc"><code class="function">gnutls_malloc()</code></a>.</p>
 <p>If the structure is PEM encoded, it will have a header
 of "BEGIN PKCS7".</p>
 <div class="refsect3">
@@ -2284,7 +2284,7 @@ negative error value.</p>
 <a name="gnutls-pkcs7-get-crl-count"></a><h3>gnutls_pkcs7_get_crl_count ()</h3>
 <pre class="programlisting"><span class="returnvalue">int</span>
 gnutls_pkcs7_get_crl_count (<em class="parameter"><code><a class="link" href="gnutls-x509.html#gnutls-pkcs7-t" title="gnutls_pkcs7_t"><span class="type">gnutls_pkcs7_t</span></a> pkcs7</code></em>);</pre>
-<p>This function will return the number of certifcates in the PKCS7
+<p>This function will return the number of certificates in the PKCS7
 or RFC2630 crl set.</p>
 <div class="refsect3">
 <a name="id-1.2.6.6.7.5"></a><h4>Parameters</h4>
@@ -2363,7 +2363,7 @@ returned.  After the last crl has been read
 <a name="gnutls-pkcs7-get-crt-count"></a><h3>gnutls_pkcs7_get_crt_count ()</h3>
 <pre class="programlisting"><span class="returnvalue">int</span>
 gnutls_pkcs7_get_crt_count (<em class="parameter"><code><a class="link" href="gnutls-x509.html#gnutls-pkcs7-t" title="gnutls_pkcs7_t"><span class="type">gnutls_pkcs7_t</span></a> pkcs7</code></em>);</pre>
-<p>This function will return the number of certifcates in the PKCS7
+<p>This function will return the number of certificates in the PKCS7
 or RFC2630 certificate set.</p>
 <div class="refsect3">
 <a name="id-1.2.6.6.9.5"></a><h4>Parameters</h4>
@@ -2776,7 +2776,7 @@ gnutls_x509_crl_export2 (<em class="parameter"><code><a class="link" href="gnutl
                          <em class="parameter"><code><a class="link" href="gnutls-gnutls.html#gnutls-x509-crt-fmt-t" title="enum gnutls_x509_crt_fmt_t"><span class="type">gnutls_x509_crt_fmt_t</span></a> format</code></em>,
                          <em class="parameter"><code><span class="type">gnutls_datum_t</span> *out</code></em>);</pre>
 <p>This function will export the revocation list to DER or PEM format.</p>
-<p>The output buffer is allocated using <code class="function">gnutls_malloc()</code>.</p>
+<p>The output buffer is allocated using <a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-malloc"><code class="function">gnutls_malloc()</code></a>.</p>
 <p>If the structure is PEM encoded, it will have a header
 of "BEGIN X509 CRL".</p>
 <div class="refsect3">
@@ -3808,7 +3808,7 @@ gnutls_x509_crl_print (<em class="parameter"><code><a class="link" href="gnutls-
 <p>This function will pretty print a X.509 certificate revocation
 list, suitable for display to a human.</p>
 <p>The output <em class="parameter"><code>out</code></em>
- needs to be deallocated using <code class="function">gnutls_free()</code>.</p>
+ needs to be deallocated using <a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-free"><code class="function">gnutls_free()</code></a>.</p>
 <div class="refsect3">
 <a name="id-1.2.6.6.42.6"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
@@ -4319,7 +4319,7 @@ gnutls_x509_crq_export2 (<em class="parameter"><code><a class="link" href="gnutl
                          <em class="parameter"><code><span class="type">gnutls_datum_t</span> *out</code></em>);</pre>
 <p>This function will export the certificate request to a PEM or DER
 encoded PKCS10 structure.</p>
-<p>The output buffer is allocated using <code class="function">gnutls_malloc()</code>.</p>
+<p>The output buffer is allocated using <a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-malloc"><code class="function">gnutls_malloc()</code></a>.</p>
 <p>If the structure is PEM encoded, it will have a header of "BEGIN
 NEW CERTIFICATE REQUEST".</p>
 <div class="refsect3">
@@ -5088,7 +5088,7 @@ gnutls_x509_crq_get_key_rsa_raw (<em class="parameter"><code><a class="link" hre
                                  <em class="parameter"><code><span class="type">gnutls_datum_t</span> *e</code></em>);</pre>
 <p>This function will export the RSA public key's parameters found in
 the given structure.  The new parameters will be allocated using
-<code class="function">gnutls_malloc()</code> and will be stored in the appropriate datum.</p>
+<a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-malloc"><code class="function">gnutls_malloc()</code></a> and will be stored in the appropriate datum.</p>
 <div class="refsect3">
 <a name="id-1.2.6.6.68.5"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
@@ -5507,7 +5507,7 @@ gnutls_x509_crq_print (<em class="parameter"><code><a class="link" href="gnutls-
 <p>This function will pretty print a certificate request, suitable for
 display to a human.</p>
 <p>The output <em class="parameter"><code>out</code></em>
- needs to be deallocated using <code class="function">gnutls_free()</code>.</p>
+ needs to be deallocated using <a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-free"><code class="function">gnutls_free()</code></a>.</p>
 <div class="refsect3">
 <a name="id-1.2.6.6.77.6"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
@@ -6370,7 +6370,7 @@ gnutls_x509_crt_export2 (<em class="parameter"><code><a class="link" href="gnutl
                          <em class="parameter"><code><a class="link" href="gnutls-gnutls.html#gnutls-x509-crt-fmt-t" title="enum gnutls_x509_crt_fmt_t"><span class="type">gnutls_x509_crt_fmt_t</span></a> format</code></em>,
                          <em class="parameter"><code><span class="type">gnutls_datum_t</span> *out</code></em>);</pre>
 <p>This function will export the certificate to DER or PEM format.
-The output buffer is allocated using <code class="function">gnutls_malloc()</code>.</p>
+The output buffer is allocated using <a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-malloc"><code class="function">gnutls_malloc()</code></a>.</p>
 <p>If the structure is PEM encoded, it will have a header
 of "BEGIN CERTIFICATE".</p>
 <div class="refsect3">
@@ -6530,7 +6530,7 @@ is non-critical, as required by RFC 5280.</p>
 </tr>
 <tr>
 <td class="parameter_name"><p>data</p></td>
-<td class="parameter_description"><p>output data to be freed with <code class="function">gnutls_free()</code>.</p></td>
+<td class="parameter_description"><p>output data to be freed with <a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-free"><code class="function">gnutls_free()</code></a>.</p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 <tr>
@@ -7803,8 +7803,16 @@ the given certificate.</p>
 <p>If the user allocated memory buffer is not large enough to hold the
 full subjectUniqueID, then a GNUTLS_E_SHORT_MEMORY_BUFFER error will be
 returned, and buf_size will be set to the actual length.</p>
+<p>This function had a bug prior to 3.4.8 that prevented the setting
+of <code class="literal">NULL</code> <em class="parameter"><code>buf</code></em>
+ to discover the <em class="parameter"><code>buf_size</code></em>
+. To use this function safely
+with the older versions the <em class="parameter"><code>buf</code></em>
+ must be a valid buffer that can hold
+at least a single byte if <em class="parameter"><code>buf_size</code></em>
+ is zero.</p>
 <div class="refsect3">
-<a name="id-1.2.6.6.121.6"></a><h4>Parameters</h4>
+<a name="id-1.2.6.6.121.7"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -7832,7 +7840,7 @@ actual size of the unique ID on return.</p></td>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.6.6.121.7"></a><h4>Returns</h4>
+<a name="id-1.2.6.6.121.8"></a><h4>Returns</h4>
 <p> <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> on success, otherwise a negative error code.</p>
 </div>
 <p class="since">Since: 2.12.0</p>
@@ -8055,7 +8063,7 @@ gnutls_x509_crt_get_pk_dsa_raw (<em class="parameter"><code><a class="link" href
                                 <em class="parameter"><code><span class="type">gnutls_datum_t</span> *y</code></em>);</pre>
 <p>This function will export the DSA public key's parameters found in
 the given certificate.  The new parameters will be allocated using
-<code class="function">gnutls_malloc()</code> and will be stored in the appropriate datum.</p>
+<a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-malloc"><code class="function">gnutls_malloc()</code></a> and will be stored in the appropriate datum.</p>
 <div class="refsect3">
 <a name="id-1.2.6.6.126.5"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
@@ -8107,7 +8115,7 @@ gnutls_x509_crt_get_pk_rsa_raw (<em class="parameter"><code><a class="link" href
                                 <em class="parameter"><code><span class="type">gnutls_datum_t</span> *e</code></em>);</pre>
 <p>This function will export the RSA public key's parameters found in
 the given structure.  The new parameters will be allocated using
-<code class="function">gnutls_malloc()</code> and will be stored in the appropriate datum.</p>
+<a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-malloc"><code class="function">gnutls_malloc()</code></a> and will be stored in the appropriate datum.</p>
 <div class="refsect3">
 <a name="id-1.2.6.6.127.5"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
@@ -8310,7 +8318,7 @@ otherwise a negative error code is returned.</p>
 gnutls_x509_crt_get_raw_dn (<em class="parameter"><code><a class="link" href="gnutls-gnutls.html#gnutls-x509-crt-t" title="gnutls_x509_crt_t"><span class="type">gnutls_x509_crt_t</span></a> cert</code></em>,
                             <em class="parameter"><code><span class="type">gnutls_datum_t</span> *start</code></em>);</pre>
 <p>This function will return a pointer to the DER encoded DN structure and
-the length. This points to allocated data that must be free'd using <code class="function">gnutls_free()</code>.</p>
+the length. This points to allocated data that must be free'd using <a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-free"><code class="function">gnutls_free()</code></a>.</p>
 <div class="refsect3">
 <a name="id-1.2.6.6.131.5"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
@@ -8339,7 +8347,7 @@ negative error value. or a negative error code on error.</p>
 gnutls_x509_crt_get_raw_issuer_dn (<em class="parameter"><code><a class="link" href="gnutls-gnutls.html#gnutls-x509-crt-t" title="gnutls_x509_crt_t"><span class="type">gnutls_x509_crt_t</span></a> cert</code></em>,
                                    <em class="parameter"><code><span class="type">gnutls_datum_t</span> *start</code></em>);</pre>
 <p>This function will return a pointer to the DER encoded DN structure
-and the length. This points to allocated data that must be free'd using <code class="function">gnutls_free()</code>.</p>
+and the length. This points to allocated data that must be free'd using <a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-free"><code class="function">gnutls_free()</code></a>.</p>
 <div class="refsect3">
 <a name="id-1.2.6.6.132.5"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
@@ -8785,8 +8793,16 @@ the given certificate.</p>
 <p>If the user allocated memory buffer is not large enough to hold the
 full subjectUniqueID, then a GNUTLS_E_SHORT_MEMORY_BUFFER error will be
 returned, and buf_size will be set to the actual length.</p>
+<p>This function had a bug prior to 3.4.8 that prevented the setting
+of <code class="literal">NULL</code> <em class="parameter"><code>buf</code></em>
+ to discover the <em class="parameter"><code>buf_size</code></em>
+. To use this function safely
+with the older versions the <em class="parameter"><code>buf</code></em>
+ must be a valid buffer that can hold
+at least a single byte if <em class="parameter"><code>buf_size</code></em>
+ is zero.</p>
 <div class="refsect3">
-<a name="id-1.2.6.6.141.6"></a><h4>Parameters</h4>
+<a name="id-1.2.6.6.141.7"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -8814,7 +8830,7 @@ actual size of the unique ID on return.</p></td>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.6.6.141.7"></a><h4>Returns</h4>
+<a name="id-1.2.6.6.141.8"></a><h4>Returns</h4>
 <p> <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> on success, otherwise a negative error code.</p>
 </div>
 </div>
@@ -8996,7 +9012,7 @@ in <em class="parameter"><code>certs</code></em>
 CERTIFICATE", or "CERTIFICATE".</p>
 <p>To deinitialize <em class="parameter"><code>certs</code></em>
 , you need to deinitialize each crt structure
-independently, and use <code class="function">gnutls_free()</code> at</p>
+independently, and use <a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-free"><code class="function">gnutls_free()</code></a> at</p>
 <div class="refsect3">
 <a name="id-1.2.6.6.146.7"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
@@ -9134,7 +9150,7 @@ certificate will be output, on multiple lines.  The
 <a class="link" href="gnutls-gnutls.html#GNUTLS-CRT-PRINT-ONELINE:CAPS"><code class="literal">GNUTLS_CRT_PRINT_ONELINE</code></a> format will generate one line with some
 selected fields, which is useful for logging purposes.</p>
 <p>The output <em class="parameter"><code>out</code></em>
- needs to be deallocated using <code class="function">gnutls_free()</code>.</p>
+ needs to be deallocated using <a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-free"><code class="function">gnutls_free()</code></a>.</p>
 <div class="refsect3">
 <a name="id-1.2.6.6.148.7"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
@@ -9246,7 +9262,7 @@ URI.</p>
 </tr>
 <tr>
 <td class="parameter_name"><p>data</p></td>
-<td class="parameter_description"><p>output data to be freed with <code class="function">gnutls_free()</code>.</p></td>
+<td class="parameter_description"><p>output data to be freed with <a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-free"><code class="function">gnutls_free()</code></a>.</p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 </tbody>
@@ -9786,10 +9802,11 @@ negative error value.</p>
 gnutls_x509_crt_set_key (<em class="parameter"><code><a class="link" href="gnutls-gnutls.html#gnutls-x509-crt-t" title="gnutls_x509_crt_t"><span class="type">gnutls_x509_crt_t</span></a> crt</code></em>,
                          <em class="parameter"><code><a class="link" href="gnutls-gnutls.html#gnutls-x509-privkey-t" title="gnutls_x509_privkey_t"><span class="type">gnutls_x509_privkey_t</span></a> key</code></em>);</pre>
 <p>This function will set the public parameters from the given
-private key to the certificate. Only RSA keys are currently
-supported.</p>
+private key to the certificate.</p>
+<p>To export the public key (i.e., the SubjectPublicKeyInfo part), check
+<a class="link" href="gnutls-abstract.html#gnutls-pubkey-import-x509" title="gnutls_pubkey_import_x509 ()"><code class="function">gnutls_pubkey_import_x509()</code></a>.</p>
 <div class="refsect3">
-<a name="id-1.2.6.6.162.5"></a><h4>Parameters</h4>
+<a name="id-1.2.6.6.162.6"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -9811,7 +9828,7 @@ supported.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.6.6.162.6"></a><h4>Returns</h4>
+<a name="id-1.2.6.6.162.7"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
 </div>
@@ -10622,7 +10639,7 @@ gnutls_x509_dn_export2 (<em class="parameter"><code><a class="link" href="gnutls
                         <em class="parameter"><code><a class="link" href="gnutls-gnutls.html#gnutls-x509-crt-fmt-t" title="enum gnutls_x509_crt_fmt_t"><span class="type">gnutls_x509_crt_fmt_t</span></a> format</code></em>,
                         <em class="parameter"><code><span class="type">gnutls_datum_t</span> *out</code></em>);</pre>
 <p>This function will export the DN to DER or PEM format.</p>
-<p>The output buffer is allocated using <code class="function">gnutls_malloc()</code>.</p>
+<p>The output buffer is allocated using <a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-malloc"><code class="function">gnutls_malloc()</code></a>.</p>
 <p>If the structure is PEM encoded, it will have a header
 of "BEGIN NAME".</p>
 <div class="refsect3">
@@ -11011,7 +11028,7 @@ gnutls_x509_privkey_export2 (<em class="parameter"><code><a class="link" href="g
 <p>This function will export the private key to a PKCS1 structure for
 RSA keys, or an integer sequence for DSA keys.  The DSA keys are in
 the same format with the parameters used by openssl.</p>
-<p>The output buffer is allocated using <code class="function">gnutls_malloc()</code>.</p>
+<p>The output buffer is allocated using <a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-malloc"><code class="function">gnutls_malloc()</code></a>.</p>
 <p>If the structure is PEM encoded, it will have a header
 of "BEGIN RSA PRIVATE KEY".</p>
 <div class="refsect3">
@@ -11064,7 +11081,7 @@ cipher, then the default 3DES (PBES2) will be used.</p>
 <p>The <em class="parameter"><code>password</code></em>
  can be either ASCII or UTF-8 in the default PBES2
 encryption schemas, or ASCII for the PKCS12 schemas.</p>
-<p>The output buffer is allocated using <code class="function">gnutls_malloc()</code>.</p>
+<p>The output buffer is allocated using <a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-malloc"><code class="function">gnutls_malloc()</code></a>.</p>
 <p>If the structure is PEM encoded, it will have a header
 of "BEGIN ENCRYPTED PRIVATE KEY" or "BEGIN PRIVATE KEY" if
 encryption is not used.</p>
@@ -11124,7 +11141,7 @@ gnutls_x509_privkey_export_dsa_raw (<em class="parameter"><code><a class="link" 
                                     <em class="parameter"><code><span class="type">gnutls_datum_t</span> *x</code></em>);</pre>
 <p>This function will export the DSA private key's parameters found
 in the given structure. The new parameters will be allocated using
-<code class="function">gnutls_malloc()</code> and will be stored in the appropriate datum.</p>
+<a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-malloc"><code class="function">gnutls_malloc()</code></a> and will be stored in the appropriate datum.</p>
 <div class="refsect3">
 <a name="id-1.2.6.6.192.5"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
@@ -11184,7 +11201,7 @@ gnutls_x509_privkey_export_ecc_raw (<em class="parameter"><code><a class="link" 
                                     <em class="parameter"><code><span class="type">gnutls_datum_t</span> *k</code></em>);</pre>
 <p>This function will export the ECC private key's parameters found
 in the given structure. The new parameters will be allocated using
-<code class="function">gnutls_malloc()</code> and will be stored in the appropriate datum.</p>
+<a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-malloc"><code class="function">gnutls_malloc()</code></a> and will be stored in the appropriate datum.</p>
 <div class="refsect3">
 <a name="id-1.2.6.6.193.5"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
@@ -11314,7 +11331,7 @@ gnutls_x509_privkey_export_rsa_raw (<em class="parameter"><code><a class="link" 
                                     <em class="parameter"><code><span class="type">gnutls_datum_t</span> *u</code></em>);</pre>
 <p>This function will export the RSA private key's parameters found
 in the given structure. The new parameters will be allocated using
-<code class="function">gnutls_malloc()</code> and will be stored in the appropriate datum.</p>
+<a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-malloc"><code class="function">gnutls_malloc()</code></a> and will be stored in the appropriate datum.</p>
 <div class="refsect3">
 <a name="id-1.2.6.6.195.5"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
@@ -11383,7 +11400,7 @@ gnutls_x509_privkey_export_rsa_raw2 (<em class="parameter"><code><a class="link"
                                      <em class="parameter"><code><span class="type">gnutls_datum_t</span> *e2</code></em>);</pre>
 <p>This function will export the RSA private key's parameters found
 in the given structure. The new parameters will be allocated using
-<code class="function">gnutls_malloc()</code> and will be stored in the appropriate datum.</p>
+<a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-malloc"><code class="function">gnutls_malloc()</code></a> and will be stored in the appropriate datum.</p>
 <div class="refsect3">
 <a name="id-1.2.6.6.196.5"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
@@ -12436,7 +12453,10 @@ gnutls_x509_trust_list_add_crls (<em class="parameter"><code><a class="link" hre
 to the trusted list. The list of CRLs must not be deinitialized
 during this structure's lifetime.</p>
 <p>This function must be called after <a class="link" href="gnutls-x509.html#gnutls-x509-trust-list-add-cas" title="gnutls_x509_trust_list_add_cas ()"><code class="function">gnutls_x509_trust_list_add_cas()</code></a>
-to allow verifying the CRLs for validity.</p>
+to allow verifying the CRLs for validity. If the flag <code class="literal">GNUTLS_TL_NO_DUPLICATES</code>
+is given, then any provided CRLs that are a duplicate, will be deinitialized
+and not added to the list (that assumes that <a class="link" href="gnutls-x509.html#gnutls-x509-trust-list-deinit" title="gnutls_x509_trust_list_deinit ()"><code class="function">gnutls_x509_trust_list_deinit()</code></a>
+will be called with all=1).</p>
 <div class="refsect3">
 <a name="id-1.2.6.6.217.6"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">

@@ -15,8 +15,5 @@ message from the peer is not received, the previous request will
 be retransmitted. The total timeout is the time after which the
 handshake will be aborted with @code{GNUTLS_E_TIMEDOUT} .
 
-If the retransmission timeout is zero then the handshake will operate
-in a non-blocking way, i.e., return @code{GNUTLS_E_AGAIN} .
-
 @strong{Since:} 3.1.2
 @end deftypefun
