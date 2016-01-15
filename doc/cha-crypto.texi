@@ -11,7 +11,7 @@ to the random number generation. For a low-level crypto API the usage of nettle
 @menu
 * Symmetric algorithms::
 * Public key algorithms::
-* Hash and HMAC functions::
+* Hash and MAC functions::
 * Random number generation::
 * Overriding algorithms::
 @end menu
@@ -23,7 +23,9 @@ to the random number generation. For a low-level crypto API the usage of nettle
 
 The available functions to access symmetric crypto algorithms operations
 are shown below. The supported algorithms are the algorithms required by the TLS protocol.
-They are listed in @ref{tab:ciphers}.
+They are listed in @ref{gnutls_cipher_algorithm_t}.
+
+@showenumdesc{gnutls_cipher_algorithm_t,The supported ciphers.}
 
 @showfuncE{gnutls_cipher_init,gnutls_cipher_encrypt2,gnutls_cipher_decrypt2,gnutls_cipher_set_iv,gnutls_cipher_deinit}
 
@@ -44,21 +46,56 @@ accessed using the abstract key API in @ref{Abstract key types}. This
 is a high level API with the advantage of transparently handling keys
 in memory and keys present in smart cards.
 
-@node Hash and HMAC functions
-@section Hash and HMAC functions
+@subsection PKCS #7 signing
+@cindex PKCS #7
+@cindex file signing
+
+The PKCS #7 format is common format used for digital signatures. It allows to sign
+by embedding the data into the signature, or creating detached signatures of the data,
+including a timestamp, additional certificates etc. In certain cases this format is also
+used to transport lists of certificates and CRLs.
+
+The basic functions to initialize, deinitialize, import, export or print information
+about a PKCS #7 structure are shown below.
+@showfuncE{gnutls_pkcs7_init,gnutls_pkcs7_deinit,gnutls_pkcs7_export2,gnutls_pkcs7_import,gnutls_pkcs7_print}
+
+The following functions allow the verification of a structure using either a trust list, or
+individual certificates. The @funcref{gnutls_pkcs7_sign} function is the data signing function.
+
+@showfuncB{gnutls_pkcs7_verify_direct,gnutls_pkcs7_verify}
+@showfuncdesc{gnutls_pkcs7_sign}
+
+@showenumdesc{gnutls_pkcs7_sign_flags,Flags applicable to gnutls_pkcs7_sign()}
+
+Other helper functions which allow to access the signatures, or certificates attached
+in the structure are listed below.
+
+@showfuncF{gnutls_pkcs7_get_signature_count,gnutls_pkcs7_get_signature_info,gnutls_pkcs7_get_crt_count,gnutls_pkcs7_get_crt_raw2,gnutls_pkcs7_get_crl_count,gnutls_pkcs7_get_crl_raw2}
+
+To append certificates, or CRLs in the structure the following functions are provided.
+@showfuncD{gnutls_pkcs7_set_crt_raw,gnutls_pkcs7_set_crt,gnutls_pkcs7_set_crl_raw,gnutls_pkcs7_set_crl}
+
+@node Hash and MAC functions
+@section Hash and MAC functions
 @cindex hash functions
 @cindex HMAC functions
+@cindex MAC functions
 
 The available operations to access hash functions and hash-MAC (HMAC) algorithms
-are shown below. HMAC algorithms provided keyed hash functionality. They supported HMAC algorithms are listed in @ref{tab:macs}.
+are shown below. HMAC algorithms provided keyed hash functionality. The supported MAC and HMAC
+algorithms are listed in @ref{gnutls_mac_algorithm_t}.
+
+@showenumdesc{gnutls_mac_algorithm_t,The supported MAC and HMAC algorithms.}
 
 @showfuncF{gnutls_hmac_init,gnutls_hmac,gnutls_hmac_output,gnutls_hmac_deinit,gnutls_hmac_get_len,gnutls_hmac_fast}
 
 The available functions to access hash functions are shown below. The supported hash functions
-are the same as the HMAC algorithms.
+are shown in @ref{gnutls_digest_algorithm_t}.
 
 @showfuncF{gnutls_hash_init,gnutls_hash,gnutls_hash_output,gnutls_hash_deinit,gnutls_hash_get_len,gnutls_hash_fast}
 @showfuncA{gnutls_fingerprint}
+
+@showenumdesc{gnutls_digest_algorithm_t,The supported hash algorithms.}
 
 @node Random number generation
 @section Random number generation

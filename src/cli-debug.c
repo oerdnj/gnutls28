@@ -103,7 +103,7 @@ static const TLS_TEST tls_tests[] = {
 	{"for TLS 1.2 (RFC5246) support", test_tls1_2, "yes", "no", "dunno"},
 	{"fallback from TLS 1.6 to", test_tls1_6_fallback, NULL,
 	 "failed (server requires fallback dance)", "dunno"},
-	{"for RFC7507 inappropriate fallback", test_rfc7507, "yes", "no", "dunno"},
+	{"for inappropriate fallback (RFC7507) support", test_rfc7507, "yes", "no", "dunno"},
 	{"for HTTPS server name", test_server, NULL, "failed", "not checked", 1},
 	{"for certificate information", test_certificate, NULL, "", ""},
 	{"for certificate chain order", test_chain_order, "sorted", "unsorted", "unknown"},
@@ -114,7 +114,7 @@ static const TLS_TEST tls_tests[] = {
 	 test_safe_renegotiation_scsv,
 	 "yes", "no", "dunno"},
 	{"for encrypt-then-MAC (RFC7366) support", test_etm, "yes", "no", "dunno"},
-	{"for ext master secret (draft-ietf-tls-session-hash) support", test_ext_master_secret, "yes", "no", "dunno"},
+	{"for ext master secret (RFC7627) support", test_ext_master_secret, "yes", "no", "dunno"},
 	{"for heartbeat (RFC6520) support", test_heartbeat_extension, "yes", "no", "dunno"},
 	{"for version rollback bug in RSA PMS", test_rsa_pms, "no", "yes",
 	 "dunno"},
@@ -339,8 +339,12 @@ static void cmd_parser(int argc, char **argv)
 
 	if (HAVE_OPT(PORT))
 		port = OPT_VALUE_PORT;
-	else
-		port = 443;
+	else {
+		if (HAVE_OPT(APP_PROTO))
+			port = starttls_proto_to_port(OPT_ARG(STARTTLS_PROTO));
+		else
+			port = 443;
+	}
 
 	if (rest == NULL)
 		hostname = "localhost";

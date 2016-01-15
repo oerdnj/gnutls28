@@ -739,6 +739,7 @@
 <ANCHOR id="GNUTLS-SEC-PARAM-MEDIUM:CAPS" href="gnutls/gnutls-gnutls.html#GNUTLS-SEC-PARAM-MEDIUM:CAPS">
 <ANCHOR id="GNUTLS-SEC-PARAM-HIGH:CAPS" href="gnutls/gnutls-gnutls.html#GNUTLS-SEC-PARAM-HIGH:CAPS">
 <ANCHOR id="GNUTLS-SEC-PARAM-ULTRA:CAPS" href="gnutls/gnutls-gnutls.html#GNUTLS-SEC-PARAM-ULTRA:CAPS">
+<ANCHOR id="GNUTLS-SEC-PARAM-FUTURE:CAPS" href="gnutls/gnutls-gnutls.html#GNUTLS-SEC-PARAM-FUTURE:CAPS">
 <ANCHOR id="gnutls-server-name-type-t" href="gnutls/gnutls-gnutls.html#gnutls-server-name-type-t">
 <ANCHOR id="GNUTLS-NAME-DNS:CAPS" href="gnutls/gnutls-gnutls.html#GNUTLS-NAME-DNS:CAPS">
 <ANCHOR id="gnutls-session-int" href="gnutls/gnutls-gnutls.html#gnutls-session-int">

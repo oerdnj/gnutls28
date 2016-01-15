@@ -836,7 +836,7 @@ gnutls_pkcs12_export2 (<em class="parameter"><code><a class="link" href="gnutls-
                        <em class="parameter"><code><a class="link" href="gnutls-gnutls.html#gnutls-x509-crt-fmt-t" title="enum gnutls_x509_crt_fmt_t"><span class="type">gnutls_x509_crt_fmt_t</span></a> format</code></em>,
                        <em class="parameter"><code><span class="type">gnutls_datum_t</span> *out</code></em>);</pre>
 <p>This function will export the pkcs12 structure to DER or PEM format.</p>
-<p>The output buffer is allocated using <code class="function">gnutls_malloc()</code>.</p>
+<p>The output buffer is allocated using <a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-malloc"><code class="function">gnutls_malloc()</code></a>.</p>
 <p>If the structure is PEM encoded, it will have a header
 of "BEGIN PKCS12".</p>
 <div class="refsect3">
@@ -1087,7 +1087,7 @@ certificates and a CRL.</p>
 and both may be set to <code class="literal">NULL</code>. If either is non-<code class="literal">NULL</code>, then both must
 be set. The value for <em class="parameter"><code>extra_certs</code></em>
  is allocated
-using <code class="function">gnutls_malloc()</code>.</p>
+using <a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-malloc"><code class="function">gnutls_malloc()</code></a>.</p>
 <p>Encrypted PKCS12 bags and PKCS8 private keys are supported, but
 only with password based security and the same password for all
 operations.</p>

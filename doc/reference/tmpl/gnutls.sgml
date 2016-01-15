@@ -3910,6 +3910,7 @@ gnutls
 @GNUTLS_SEC_PARAM_MEDIUM: 
 @GNUTLS_SEC_PARAM_HIGH: 
 @GNUTLS_SEC_PARAM_ULTRA: 
+@GNUTLS_SEC_PARAM_FUTURE: 
 
 <!-- ##### FUNCTION gnutls_sec_param_to_pk_bits ##### -->
 <para>

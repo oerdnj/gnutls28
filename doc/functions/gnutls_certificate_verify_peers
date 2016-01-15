@@ -29,7 +29,9 @@ If a key purpose OID is provided and the end-certificate contains the extended k
 usage PKIX extension, it will be required to be have the provided key purpose 
 or be marked for any purpose, otherwise verification will fail with @code{GNUTLS_CERT_SIGNER_CONSTRAINTS_FAILURE}  status.
 
-@strong{Returns:} a negative error code on error and @code{GNUTLS_E_SUCCESS}  (0) on success.
+@strong{Returns:} a negative error code on error and @code{GNUTLS_E_SUCCESS}  (0)
+when the peer's certificate was successfully parsed, whether or not
+it was verified.
 
 @strong{Since:} 3.3.0
 @end deftypefun

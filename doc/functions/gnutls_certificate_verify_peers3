@@ -25,7 +25,9 @@ If names do not match the @code{GNUTLS_CERT_UNEXPECTED_OWNER}  status flag will 
 In order to verify the purpose of the end-certificate (by checking the extended
 key usage), use @code{gnutls_certificate_verify_peers()} .
 
-@strong{Returns:} a negative error code on error and @code{GNUTLS_E_SUCCESS}  (0) on success.
+@strong{Returns:} a negative error code on error and @code{GNUTLS_E_SUCCESS}  (0) 
+when the peer's certificate was successfully parsed, whether or not
+it was verified.
 
 @strong{Since:} 3.1.4
 @end deftypefun

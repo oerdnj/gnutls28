@@ -514,7 +514,7 @@ int _gnutls_dh_set_peer_public(gnutls_session_t session, bigint_t public)
 			anon_auth_info_t info;
 			info = _gnutls_get_auth_info(session, GNUTLS_CRD_ANON);
 			if (info == NULL)
-				return GNUTLS_E_INTERNAL_ERROR;
+				return gnutls_assert_val(GNUTLS_E_INTERNAL_ERROR);
 
 			dh = &info->dh;
 			break;
@@ -524,7 +524,7 @@ int _gnutls_dh_set_peer_public(gnutls_session_t session, bigint_t public)
 			psk_auth_info_t info;
 			info = _gnutls_get_auth_info(session, GNUTLS_CRD_PSK);
 			if (info == NULL)
-				return GNUTLS_E_INTERNAL_ERROR;
+				return gnutls_assert_val(GNUTLS_E_INTERNAL_ERROR);
 
 			dh = &info->dh;
 			break;
@@ -535,14 +535,13 @@ int _gnutls_dh_set_peer_public(gnutls_session_t session, bigint_t public)
 
 			info = _gnutls_get_auth_info(session, GNUTLS_CRD_CERTIFICATE);
 			if (info == NULL)
-				return GNUTLS_E_INTERNAL_ERROR;
+				return gnutls_assert_val(GNUTLS_E_INTERNAL_ERROR);
 
 			dh = &info->dh;
 			break;
 		}
 	default:
-		gnutls_assert();
-		return GNUTLS_E_INTERNAL_ERROR;
+		return gnutls_assert_val(GNUTLS_E_INTERNAL_ERROR);
 	}
 
 	if (dh->public_key.data)
@@ -565,7 +564,7 @@ int _gnutls_dh_set_secret_bits(gnutls_session_t session, unsigned bits)
 			anon_auth_info_t info;
 			info = _gnutls_get_auth_info(session, GNUTLS_CRD_ANON);
 			if (info == NULL)
-				return GNUTLS_E_INTERNAL_ERROR;
+				return gnutls_assert_val(GNUTLS_E_INTERNAL_ERROR);
 			info->dh.secret_bits = bits;
 			break;
 		}
@@ -574,7 +573,7 @@ int _gnutls_dh_set_secret_bits(gnutls_session_t session, unsigned bits)
 			psk_auth_info_t info;
 			info = _gnutls_get_auth_info(session, GNUTLS_CRD_PSK);
 			if (info == NULL)
-				return GNUTLS_E_INTERNAL_ERROR;
+				return gnutls_assert_val(GNUTLS_E_INTERNAL_ERROR);
 			info->dh.secret_bits = bits;
 			break;
 		}
@@ -584,13 +583,12 @@ int _gnutls_dh_set_secret_bits(gnutls_session_t session, unsigned bits)
 
 			info = _gnutls_get_auth_info(session, GNUTLS_CRD_CERTIFICATE);
 			if (info == NULL)
-				return GNUTLS_E_INTERNAL_ERROR;
+				return gnutls_assert_val(GNUTLS_E_INTERNAL_ERROR);
 
 			info->dh.secret_bits = bits;
 			break;
 	default:
-			gnutls_assert();
-			return GNUTLS_E_INTERNAL_ERROR;
+			return gnutls_assert_val(GNUTLS_E_INTERNAL_ERROR);
 		}
 	}
 
@@ -612,7 +610,7 @@ _gnutls_dh_set_group(gnutls_session_t session, bigint_t gen,
 			anon_auth_info_t info;
 			info = _gnutls_get_auth_info(session, GNUTLS_CRD_ANON);
 			if (info == NULL)
-				return GNUTLS_E_INTERNAL_ERROR;
+				return gnutls_assert_val(GNUTLS_E_INTERNAL_ERROR);
 
 			dh = &info->dh;
 			break;
@@ -622,7 +620,7 @@ _gnutls_dh_set_group(gnutls_session_t session, bigint_t gen,
 			psk_auth_info_t info;
 			info = _gnutls_get_auth_info(session, GNUTLS_CRD_PSK);
 			if (info == NULL)
-				return GNUTLS_E_INTERNAL_ERROR;
+				return gnutls_assert_val(GNUTLS_E_INTERNAL_ERROR);
 
 			dh = &info->dh;
 			break;
@@ -633,14 +631,13 @@ _gnutls_dh_set_group(gnutls_session_t session, bigint_t gen,
 
 			info = _gnutls_get_auth_info(session, GNUTLS_CRD_CERTIFICATE);
 			if (info == NULL)
-				return GNUTLS_E_INTERNAL_ERROR;
+				return gnutls_assert_val(GNUTLS_E_INTERNAL_ERROR);
 
 			dh = &info->dh;
 			break;
 		}
 	default:
-		gnutls_assert();
-		return GNUTLS_E_INTERNAL_ERROR;
+		return gnutls_assert_val(GNUTLS_E_INTERNAL_ERROR);
 	}
 
 	if (dh->prime.data)
@@ -1319,6 +1316,37 @@ void gnutls_session_set_ptr(gnutls_session_t session, void *ptr)
 	session->internals.user_ptr = ptr;
 }
 
+/**
+ * gnutls_session_set_verify_function:
+ * @session: is a #gnutls_session_t type.
+ * @func: is the callback function
+ *
+ * This function sets a callback to be called when peer's certificate
+ * has been received in order to verify it on receipt rather than
+ * doing after the handshake is completed. This overrides any callback
+ * set using gnutls_certificate_set_verify_function().
+ *
+ * The callback's function prototype is:
+ * int (*callback)(gnutls_session_t);
+ *
+ * If the callback function is provided then gnutls will call it, in the
+ * handshake, just after the certificate message has been received.
+ * To verify or obtain the certificate the gnutls_certificate_verify_peers2(),
+ * gnutls_certificate_type_get(), gnutls_certificate_get_peers() functions
+ * can be used.
+ *
+ * The callback function should return 0 for the handshake to continue
+ * or non-zero to terminate.
+ *
+ * Since: 3.4.6
+ **/
+void
+ gnutls_session_set_verify_function
+    (gnutls_session_t session,
+     gnutls_certificate_verify_function * func)
+{
+	session->internals.verify_callback = func;
+}
 
 /**
  * gnutls_record_get_direction:

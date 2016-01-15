@@ -1294,7 +1294,7 @@ APIMANS = gnutls_aead_cipher_decrypt.3 gnutls_aead_cipher_deinit.3 \
 	gnutls_certificate_send_x509_rdn_sequence.3 \
 	gnutls_certificate_server_set_request.3 \
 	gnutls_certificate_set_dh_params.3 \
-	gnutls_certificate_set_key.3 \
+	gnutls_certificate_set_flags.3 gnutls_certificate_set_key.3 \
 	gnutls_certificate_set_ocsp_status_request_file.3 \
 	gnutls_certificate_set_ocsp_status_request_function.3 \
 	gnutls_certificate_set_openpgp_key.3 \
@@ -1504,8 +1504,8 @@ APIMANS = gnutls_aead_cipher_decrypt.3 gnutls_aead_cipher_deinit.3 \
 	gnutls_pk_algorithm_get_name.3 gnutls_pk_bits_to_sec_param.3 \
 	gnutls_pkcs11_add_provider.3 \
 	gnutls_pkcs11_copy_attached_extension.3 \
-	gnutls_pkcs11_copy_secret_key.3 gnutls_pkcs11_copy_x509_crt.3 \
-	gnutls_pkcs11_copy_x509_crt2.3 \
+	gnutls_pkcs11_copy_pubkey.3 gnutls_pkcs11_copy_secret_key.3 \
+	gnutls_pkcs11_copy_x509_crt.3 gnutls_pkcs11_copy_x509_crt2.3 \
 	gnutls_pkcs11_copy_x509_privkey.3 \
 	gnutls_pkcs11_copy_x509_privkey2.3 \
 	gnutls_pkcs11_crt_is_known.3 gnutls_pkcs11_deinit.3 \
@@ -1564,6 +1564,7 @@ APIMANS = gnutls_aead_cipher_decrypt.3 gnutls_aead_cipher_deinit.3 \
 	gnutls_pkcs7_get_crl_count.3 gnutls_pkcs7_get_crl_raw.3 \
 	gnutls_pkcs7_get_crl_raw2.3 gnutls_pkcs7_get_crt_count.3 \
 	gnutls_pkcs7_get_crt_raw.3 gnutls_pkcs7_get_crt_raw2.3 \
+	gnutls_pkcs7_get_embedded_data.3 \
 	gnutls_pkcs7_get_signature_count.3 \
 	gnutls_pkcs7_get_signature_info.3 gnutls_pkcs7_import.3 \
 	gnutls_pkcs7_init.3 gnutls_pkcs7_print.3 \
@@ -1665,10 +1666,14 @@ APIMANS = gnutls_aead_cipher_decrypt.3 gnutls_aead_cipher_deinit.3 \
 	gnutls_session_get_data2.3 gnutls_session_get_desc.3 \
 	gnutls_session_get_id.3 gnutls_session_get_id2.3 \
 	gnutls_session_get_ptr.3 gnutls_session_get_random.3 \
+	gnutls_session_get_verify_cert_status.3 \
 	gnutls_session_is_resumed.3 \
 	gnutls_session_resumption_requested.3 \
 	gnutls_session_set_data.3 gnutls_session_set_id.3 \
 	gnutls_session_set_premaster.3 gnutls_session_set_ptr.3 \
+	gnutls_session_set_verify_cert.3 \
+	gnutls_session_set_verify_cert2.3 \
+	gnutls_session_set_verify_function.3 \
 	gnutls_session_ticket_enable_client.3 \
 	gnutls_session_ticket_enable_server.3 \
 	gnutls_session_ticket_key_generate.3 \
@@ -1869,6 +1874,7 @@ APIMANS = gnutls_aead_cipher_decrypt.3 gnutls_aead_cipher_deinit.3 \
 	gnutls_x509_crt_set_issuer_alt_name.3 \
 	gnutls_x509_crt_set_issuer_dn.3 \
 	gnutls_x509_crt_set_issuer_dn_by_oid.3 \
+	gnutls_x509_crt_set_issuer_unique_id.3 \
 	gnutls_x509_crt_set_key.3 \
 	gnutls_x509_crt_set_key_purpose_oid.3 \
 	gnutls_x509_crt_set_key_usage.3 \
@@ -1881,6 +1887,7 @@ APIMANS = gnutls_aead_cipher_decrypt.3 gnutls_aead_cipher_deinit.3 \
 	gnutls_x509_crt_set_subject_alternative_name.3 \
 	gnutls_x509_crt_set_subject_alt_name.3 \
 	gnutls_x509_crt_set_subject_key_id.3 \
+	gnutls_x509_crt_set_subject_unique_id.3 \
 	gnutls_x509_crt_set_version.3 gnutls_x509_crt_sign.3 \
 	gnutls_x509_crt_sign2.3 gnutls_x509_crt_verify.3 \
 	gnutls_x509_crt_verify_data2.3 gnutls_x509_dn_deinit.3 \

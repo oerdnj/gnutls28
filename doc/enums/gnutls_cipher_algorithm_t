@@ -3,9 +3,9 @@
 @c gnutls_cipher_algorithm_t
 @table @code
 @item GNUTLS_@-CIPHER_@-UNKNOWN
-Unknown algorithm.
+Value to identify an unknown/unsupported algorithm.
 @item GNUTLS_@-CIPHER_@-NULL
-NULL algorithm.
+The NULL (identity) encryption algorithm.
 @item GNUTLS_@-CIPHER_@-ARCFOUR_@-128
 ARCFOUR stream cipher with 128-bit keys.
 @item GNUTLS_@-CIPHER_@-3DES_@-CBC
@@ -51,21 +51,21 @@ AES in CCM mode with 64-bit tag and 256-bit keys.
 @item GNUTLS_@-CIPHER_@-CHACHA20_@-POLY1305
 The Chacha20 cipher with the Poly1305 authenticator (AEAD).
 @item GNUTLS_@-CIPHER_@-IDEA_@-PGP_@-CFB
-IDEA in CFB mode.
+IDEA in CFB mode (placeholder - unsupported).
 @item GNUTLS_@-CIPHER_@-3DES_@-PGP_@-CFB
-3DES in CFB mode.
+3DES in CFB mode (placeholder - unsupported).
 @item GNUTLS_@-CIPHER_@-CAST5_@-PGP_@-CFB
-CAST5 in CFB mode.
+CAST5 in CFB mode (placeholder - unsupported).
 @item GNUTLS_@-CIPHER_@-BLOWFISH_@-PGP_@-CFB
-Blowfish in CFB mode.
+Blowfish in CFB mode (placeholder - unsupported).
 @item GNUTLS_@-CIPHER_@-SAFER_@-SK128_@-PGP_@-CFB
-Safer-SK in CFB mode with 128-bit keys.
+Safer-SK in CFB mode with 128-bit keys (placeholder - unsupported).
 @item GNUTLS_@-CIPHER_@-AES128_@-PGP_@-CFB
-AES in CFB mode with 128-bit keys.
+AES in CFB mode with 128-bit keys (placeholder - unsupported).
 @item GNUTLS_@-CIPHER_@-AES192_@-PGP_@-CFB
-AES in CFB mode with 192-bit keys.
+AES in CFB mode with 192-bit keys (placeholder - unsupported).
 @item GNUTLS_@-CIPHER_@-AES256_@-PGP_@-CFB
-AES in CFB mode with 256-bit keys.
+AES in CFB mode with 256-bit keys (placeholder - unsupported).
 @item GNUTLS_@-CIPHER_@-TWOFISH_@-PGP_@-CFB
-Twofish in CFB mode.
+Twofish in CFB mode (placeholder - unsupported).
 @end table

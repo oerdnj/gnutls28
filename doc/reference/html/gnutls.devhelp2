@@ -1378,6 +1378,7 @@
     <keyword type="constant" name="GNUTLS_SEC_PARAM_MEDIUM" link="gnutls-gnutls.html#GNUTLS-SEC-PARAM-MEDIUM:CAPS"/>
     <keyword type="constant" name="GNUTLS_SEC_PARAM_HIGH" link="gnutls-gnutls.html#GNUTLS-SEC-PARAM-HIGH:CAPS"/>
     <keyword type="constant" name="GNUTLS_SEC_PARAM_ULTRA" link="gnutls-gnutls.html#GNUTLS-SEC-PARAM-ULTRA:CAPS"/>
+    <keyword type="constant" name="GNUTLS_SEC_PARAM_FUTURE" link="gnutls-gnutls.html#GNUTLS-SEC-PARAM-FUTURE:CAPS"/>
     <keyword type="constant" name="GNUTLS_NAME_DNS" link="gnutls-gnutls.html#GNUTLS-NAME-DNS:CAPS"/>
     <keyword type="constant" name="GNUTLS_SIGN_UNKNOWN" link="gnutls-gnutls.html#GNUTLS-SIGN-UNKNOWN:CAPS"/>
     <keyword type="constant" name="GNUTLS_SIGN_RSA_SHA1" link="gnutls-gnutls.html#GNUTLS-SIGN-RSA-SHA1:CAPS"/>

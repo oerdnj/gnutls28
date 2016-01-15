@@ -6,7 +6,7 @@
  *  From the definitions    cli-debug-args.def
  *  and the template file   options
  *
- * Generated from AutoOpts 41:0:16 templates.
+ * Generated from AutoOpts 41:1:16 templates.
  *
  *  AutoOpts is a copyrighted work.  This header file is not encumbered
  *  by AutoOpts licensing, but is provided under the licensing terms chosen
@@ -19,7 +19,7 @@
  * The gnutls-cli-debug program is copyrighted and licensed
  * under the following terms:
  *
- *  Copyright (C) 2000-2015 Free Software Foundation, and others, all rights reserved.
+ *  Copyright (C) 2000-2016 Free Software Foundation, and others, all rights reserved.
  *  This is free software. It is licensed for use, modification and
  *  redistribution under the terms of the GNU General Public License,
  *  version 3 or later <http://gnu.org/licenses/gpl.html>
@@ -55,7 +55,7 @@
  *  tolerable version is at least as old as what was current when the header
  *  template was released.
  */
-#define AO_TEMPLATE_VERSION 167936
+#define AO_TEMPLATE_VERSION 167937
 #if (AO_TEMPLATE_VERSION < OPTIONS_MINIMUM_VERSION) \
  || (AO_TEMPLATE_VERSION > OPTIONS_STRUCT_VERSION)
 # error option template version mismatches autoopts/options.h header
@@ -66,20 +66,21 @@
  *  Enumeration of each option type for gnutls-cli-debug
  */
 typedef enum {
-    INDEX_OPT_DEBUG       =  0,
-    INDEX_OPT_VERBOSE     =  1,
-    INDEX_OPT_PORT        =  2,
-    INDEX_OPT_APP_PROTO   =  3,
-    INDEX_OPT_VERSION     =  4,
-    INDEX_OPT_HELP        =  5,
-    INDEX_OPT_MORE_HELP   =  6
+    INDEX_OPT_DEBUG           =  0,
+    INDEX_OPT_VERBOSE         =  1,
+    INDEX_OPT_PORT            =  2,
+    INDEX_OPT_APP_PROTO       =  3,
+    INDEX_OPT_STARTTLS_PROTO  =  4,
+    INDEX_OPT_VERSION         =  5,
+    INDEX_OPT_HELP            =  6,
+    INDEX_OPT_MORE_HELP       =  7
 } teOptIndex;
 /** count of all options for gnutls-cli-debug */
-#define OPTION_CT    7
+#define OPTION_CT    8
 /** gnutls-cli-debug version */
-#define GNUTLS_CLI_DEBUG_VERSION       "3.4.5"
+#define GNUTLS_CLI_DEBUG_VERSION       "3.4.8"
 /** Full gnutls-cli-debug version text */
-#define GNUTLS_CLI_DEBUG_FULL_VERSION  "gnutls-cli-debug 3.4.5"
+#define GNUTLS_CLI_DEBUG_FULL_VERSION  "gnutls-cli-debug 3.4.8"
 
 /**
  *  Interface defines for all options.  Replace "n" with the UPPER_CASED
@@ -138,6 +139,7 @@ typedef enum {
 
 #define OPT_VALUE_PORT           (DESC(PORT).optArg.argInt)
 #define VALUE_OPT_APP_PROTO      0x1001
+#define VALUE_OPT_STARTTLS_PROTO 0x1002
 /** option flag (value) for help-value option */
 #define VALUE_OPT_HELP          'h'
 /** option flag (value) for more-help-value option */

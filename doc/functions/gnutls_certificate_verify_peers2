@@ -26,5 +26,7 @@ Note that you must also check the peer's name in order to check if
 the verified certificate belongs to the actual peer, see @code{gnutls_x509_crt_check_hostname()} ,
 or use @code{gnutls_certificate_verify_peers3()} .
 
-@strong{Returns:} a negative error code on error and @code{GNUTLS_E_SUCCESS}  (0) on success.
+@strong{Returns:} a negative error code on error and @code{GNUTLS_E_SUCCESS}  (0)
+when the peer's certificate was successfully parsed, whether or not
+it was verified.
 @end deftypefun

@@ -1424,15 +1424,17 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 EXTRA_DIST = client.p12 noclient.p12 unclient.p12 pkcs12_2certs.p12 \
-	pkcs12_5certs.p12 test-null.p12 cert-ca.p12 sha256.p12
+	pkcs12_5certs.p12 test-null.p12 cert-ca.p12 sha256.p12 suppressions.valgrind
 
 dist_check_SCRIPTS = pkcs12
 @ENABLE_FIPS140_FALSE@TESTS = pkcs12
 TESTS_ENVIRONMENT = EXEEXT=$(EXEEXT) \
 	LC_ALL="C"						\
+	VALGRIND="$(VALGRIND)"					\
 	top_builddir="$(top_builddir)"				\
 	srcdir="$(srcdir)"
 
+@WANT_TEST_SUITE_TRUE@LOG_COMPILER = $(VALGRIND)
 all: all-am
 
 .SUFFIXES:

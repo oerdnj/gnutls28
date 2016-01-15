@@ -35,14 +35,14 @@
 # include <windows.h>
 # include <wincrypt.h>
 # if defined(__MINGW32__) && !defined(__MINGW64__) && __MINGW32_MAJOR_VERSION <= 3 && __MINGW32_MINOR_VERSION <= 20
-typedef PCCRL_CONTEXT WINAPI(*Type_CertEnumCRLsInStore) (HCERTSTORE
+typedef PCCRL_CONTEXT WINAPI(*CertEnumCRLsInStoreFunc) (HCERTSTORE
 							 hCertStore,
 							 PCCRL_CONTEXT
 							 pPrevCrlContext);
-static Type_CertEnumCRLsInStore Loaded_CertEnumCRLsInStore;
+static CertEnumCRLsInStoreFunc pCertEnumCRLsInStore;
 static HMODULE Crypt32_dll;
 # else
-#  define Loaded_CertEnumCRLsInStore CertEnumCRLsInStore
+#  define pCertEnumCRLsInStore CertEnumCRLsInStore
 # endif
 
 #else /* _WIN32 */
@@ -167,13 +167,8 @@ int gnutls_system_recv_timeout(gnutls_transport_ptr_t ptr, unsigned int ms)
 	FD_ZERO(&rfds);
 	FD_SET(fd, &rfds);
 
-	tv.tv_sec = 0;
-	tv.tv_usec = ms * 1000;
-
-	while (tv.tv_usec >= 1000000) {
-		tv.tv_usec -= 1000000;
-		tv.tv_sec++;
-	}
+	tv.tv_sec = ms/1000;
+	tv.tv_usec = (ms % 1000) * 1000;
 
 	ret = select(fd + 1, &rfds, NULL, NULL, &tv);
 	if (ret <= 0)
@@ -312,10 +307,10 @@ int gnutls_system_global_init(void)
 	if (crypto == NULL)
 		return GNUTLS_E_CRYPTO_INIT_FAILED;
 
-	Loaded_CertEnumCRLsInStore =
-	    (Type_CertEnumCRLsInStore) GetProcAddress(crypto,
+	pCertEnumCRLsInStore =
+	    (CertEnumCRLsInStoreFunc) GetProcAddress(crypto,
 						      "CertEnumCRLsInStore");
-	if (Loaded_CertEnumCRLsInStore == NULL) {
+	if (pCertEnumCRLsInStore == NULL) {
 		FreeLibrary(crypto);
 		return GNUTLS_E_CRYPTO_INIT_FAILED;
 	}
@@ -453,7 +448,7 @@ int add_system_trust(gnutls_x509_trust_list_t list, unsigned int tl_flags,
 			return GNUTLS_E_FILE_ERROR;
 
 		cert = CertEnumCertificatesInStore(store, NULL);
-		crl = Loaded_CertEnumCRLsInStore(store, NULL);
+		crl = pCertEnumCRLsInStore(store, NULL);
 
 		while (cert != NULL) {
 			if (cert->dwCertEncodingType == X509_ASN_ENCODING) {
@@ -479,7 +474,7 @@ int add_system_trust(gnutls_x509_trust_list_t list, unsigned int tl_flags,
 								     tl_flags,
 								     tl_vflags);
 			}
-			crl = Loaded_CertEnumCRLsInStore(store, crl);
+			crl = pCertEnumCRLsInStore(store, crl);
 		}
 		CertCloseStore(store, 0);
 	}

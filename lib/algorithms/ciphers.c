@@ -31,7 +31,9 @@
  * View first: "The order of encryption and authentication for
  * protecting communications" by Hugo Krawczyk - CRYPTO 2001
  *
- * Make sure to update MAX_CIPHER_BLOCK_SIZE and MAX_CIPHER_KEY_SIZE as well.
+ * On update, make sure to update MAX_CIPHER_BLOCK_SIZE and MAX_CIPHER_KEY_SIZE
+ * as well. If any ciphers are removed, modify the is_legacy() functions
+ * in priority.c.
  */
 static const cipher_entry_st algorithms[] = {
 	{ .name = "AES-256-CBC",
@@ -153,8 +155,9 @@ static const cipher_entry_st algorithms[] = {
 	  .blocksize = 64,
 	  .keysize = 32,
 	  .type = CIPHER_AEAD,
-	  .implicit_iv = 4,
-	  .explicit_iv = 8,
+	  .implicit_iv = 12,
+	  .explicit_iv = 0,
+	  .xor_nonce = 1,
 	  .cipher_iv = 12,
 	  .tagsize = 16
 	},
@@ -198,18 +201,12 @@ static const cipher_entry_st algorithms[] = {
 	  .type = CIPHER_BLOCK,
 	  .explicit_iv = 8,
 	  .cipher_iv = 8},
-#ifndef ENABLE_FIPS140
-	/* All the other ciphers are disabled on the back-end library.
-	 * This needs to be disabled here as it is merely a placeholder
-	 * rather than an actual cipher.
-	 */
 	{ .name = "NULL",
 	  .id = GNUTLS_CIPHER_NULL,
 	  .blocksize = 1,
 	  .keysize = 0,
 	  .type = CIPHER_STREAM
 	},
-#endif
 	{0, 0, 0, 0, 0, 0, 0}
 };
 
@@ -229,13 +226,14 @@ const cipher_entry_st *cipher_to_entry(gnutls_cipher_algorithm_t c)
 	return NULL;
 }
 
-const cipher_entry_st * cipher_name_to_entry(const char *name)
+/* Returns cipher entry even for ciphers that are not supported,
+ * but are listed (e.g., deprecated ciphers).
+ */
+const cipher_entry_st *cipher_name_to_entry(const char *name)
 {
 	GNUTLS_CIPHER_LOOP(
 		if (strcasecmp(p->name, name) == 0) {
-			if (p->id == GNUTLS_CIPHER_NULL || _gnutls_cipher_exists(p->id))
-				return p;
-			break;
+			return p;
 		}
 	);
 

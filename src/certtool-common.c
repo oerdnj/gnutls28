@@ -679,6 +679,16 @@ gnutls_pubkey_t load_public_key_or_import(int mand,
 	return pubkey;
 }
 
+static const char *bits_to_sp(gnutls_pk_algorithm_t pk, unsigned int bits)
+{
+	gnutls_sec_param_t s = gnutls_pk_bits_to_sec_param(pk, bits);
+	if (s == GNUTLS_SEC_PARAM_UNKNOWN) {
+		return gnutls_sec_param_get_name(GNUTLS_SEC_PARAM_MEDIUM);
+	}
+
+	return gnutls_sec_param_get_name(s);
+}
+
 int
 get_bits(gnutls_pk_algorithm_t key_type, int info_bits,
 	 const char *info_sec_param, int warn)
@@ -691,16 +701,14 @@ get_bits(gnutls_pk_algorithm_t key_type, int info_bits,
 		if (warned == 0 && warn != 0 && GNUTLS_BITS_ARE_CURVE(info_bits)==0) {
 			warned = 1;
 			fprintf(stderr,
-				"** Note: Please use the --sec-param instead of --bits\n");
+				"** Note: You may use '--sec-param %s' instead of '--bits %d'\n",
+				bits_to_sp(key_type, info_bits), info_bits);
 		}
 		bits = info_bits;
 	} else {
 		if (info_sec_param == 0) {
 			/* For ECDSA keys use 256 bits or better, as they are widely supported */
-			if (key_type == GNUTLS_PK_EC)
-				info_sec_param = "HIGH";
-			else
-				info_sec_param = "MEDIUM";
+			info_sec_param = "HIGH";
 		}
 		bits =
 		    gnutls_sec_param_to_pk_bits(key_type,
@@ -723,6 +731,8 @@ gnutls_sec_param_t str_to_sec_param(const char *str)
 		return GNUTLS_SEC_PARAM_HIGH;
 	} else if (strcasecmp(str, "ultra") == 0) {
 		return GNUTLS_SEC_PARAM_ULTRA;
+	} else if (strcasecmp(str, "future") == 0) {
+		return GNUTLS_SEC_PARAM_FUTURE;
 	} else {
 		fprintf(stderr, "Unknown security parameter string: %s\n",
 			str);
@@ -742,8 +752,9 @@ print_hex_datum(FILE * outfile, gnutls_datum_t * dat, int cprint)
 		for (j = 0; j < dat->size; j++) {
 			fprintf(outfile, "\\x%.2x",
 				(unsigned char) dat->data[j]);
-			if ((j + 1) % 15 == 0)
+			if ((j + 1) % 16 == 0) {
 				fprintf(outfile, "\"\n" SPACE "\"");
+			}
 		}
 		fprintf(outfile, "\";\n\n");
 
@@ -752,9 +763,12 @@ print_hex_datum(FILE * outfile, gnutls_datum_t * dat, int cprint)
 
 	fprintf(outfile, "\n" SPACE);
 	for (j = 0; j < dat->size; j++) {
-		fprintf(outfile, "%.2x:", (unsigned char) dat->data[j]);
-		if ((j + 1) % 15 == 0)
+		if ((j + 1) % 16 == 0) {
+			fprintf(outfile, "%.2x", (unsigned char) dat->data[j]);
 			fprintf(outfile, "\n" SPACE);
+		} else {
+			fprintf(outfile, "%.2x:", (unsigned char) dat->data[j]);
+		}
 	}
 	fprintf(outfile, "\n\n");
 }

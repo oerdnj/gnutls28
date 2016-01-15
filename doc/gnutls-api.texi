@@ -607,6 +607,20 @@ to the parameters are stored in the certificate handle, so you
 must not deallocate the parameters before the certificate is deallocated.
 @end deftypefun
 
+@subheading gnutls_certificate_set_flags
+@anchor{gnutls_certificate_set_flags}
+@deftypefun {void} {gnutls_certificate_set_flags} (gnutls_certificate_credentials_t @var{res}, unsigned int @var{flags})
+@var{res}: is a gnutls_certificate_credentials_t type
+
+@var{flags}: are the flags of @code{gnutls_certificate_flags}  type
+
+This function will set flags to tweak the operation of
+the credentials structure. See the @code{gnutls_certificate_flags}  enumerations
+for more information on the available flags. 
+
+@strong{Since:} 3.4.7
+@end deftypefun
+
 @subheading gnutls_certificate_set_ocsp_status_request_file
 @anchor{gnutls_certificate_set_ocsp_status_request_file}
 @deftypefun {int} {gnutls_certificate_set_ocsp_status_request_file} (gnutls_certificate_credentials_t @var{sc}, const char * @var{response_file}, unsigned int @var{flags})
@@ -1296,7 +1310,9 @@ If a key purpose OID is provided and the end-certificate contains the extended k
 usage PKIX extension, it will be required to be have the provided key purpose 
 or be marked for any purpose, otherwise verification will fail with @code{GNUTLS_CERT_SIGNER_CONSTRAINTS_FAILURE}  status.
 
-@strong{Returns:} a negative error code on error and @code{GNUTLS_E_SUCCESS}  (0) on success.
+@strong{Returns:} a negative error code on error and @code{GNUTLS_E_SUCCESS}  (0)
+when the peer's certificate was successfully parsed, whether or not
+it was verified.
 
 @strong{Since:} 3.3.0
 @end deftypefun
@@ -1327,7 +1343,9 @@ Note that you must also check the peer's name in order to check if
 the verified certificate belongs to the actual peer, see @code{gnutls_x509_crt_check_hostname()} ,
 or use @code{gnutls_certificate_verify_peers3()} .
 
-@strong{Returns:} a negative error code on error and @code{GNUTLS_E_SUCCESS}  (0) on success.
+@strong{Returns:} a negative error code on error and @code{GNUTLS_E_SUCCESS}  (0)
+when the peer's certificate was successfully parsed, whether or not
+it was verified.
 @end deftypefun
 
 @subheading gnutls_certificate_verify_peers3
@@ -1355,7 +1373,9 @@ If names do not match the @code{GNUTLS_CERT_UNEXPECTED_OWNER}  status flag will 
 In order to verify the purpose of the end-certificate (by checking the extended
 key usage), use @code{gnutls_certificate_verify_peers()} .
 
-@strong{Returns:} a negative error code on error and @code{GNUTLS_E_SUCCESS}  (0) on success.
+@strong{Returns:} a negative error code on error and @code{GNUTLS_E_SUCCESS}  (0) 
+when the peer's certificate was successfully parsed, whether or not
+it was verified.
 
 @strong{Since:} 3.1.4
 @end deftypefun
@@ -2393,7 +2413,7 @@ Use a log level over 10 to enable all debugging options.
 With this function you are allowed to override the default mutex
 locks used in some parts of gnutls and dependent libraries. This function
 should be used if you have complete control of your program and libraries.
-Do not call this function from a library, or preferrably from any application
+Do not call this function from a library, or preferably from any application
 unless really needed to. GnuTLS will use the appropriate locks for the running
 system.
 
@@ -2732,9 +2752,6 @@ message from the peer is not received, the previous request will
 be retransmitted. The total timeout is the time after which the
 handshake will be aborted with @code{GNUTLS_E_TIMEDOUT} .
 
-If the retransmission timeout is zero then the handshake will operate
-in a non-blocking way, i.e., return @code{GNUTLS_E_AGAIN} .
-
 @strong{Since:} 3.1.2
 @end deftypefun
 
@@ -2775,7 +2792,7 @@ Initially  @code{result_size} must hold the maximum size available in
  @code{result} , and on return it will contain the number of bytes written.
 
 @strong{Returns:} @code{GNUTLS_E_SHORT_MEMORY_BUFFER}  if the buffer given is not
-long enough, or 0 on success.
+long enough, @code{GNUTLS_E_PARSING_ERROR}  on invalid hex data, or 0 on success.
 @end deftypefun
 
 @subheading gnutls_hex_decode2
@@ -2788,8 +2805,7 @@ long enough, or 0 on success.
 This function will decode the given encoded data, using the hex
 encoding used by PSK password files.
 
-@strong{Returns:} @code{GNUTLS_E_SHORT_MEMORY_BUFFER}  if the buffer given is not
-long enough, or 0 on success.
+@strong{Returns:} @code{GNUTLS_E_PARSING_ERROR}  on invalid hex data, or 0 on success.
 @end deftypefun
 
 @subheading gnutls_hex_encode
@@ -3724,7 +3740,7 @@ macs and compression methods.
 
 @var{priorities}: is a string describing priorities
 
-@var{err_pos}: In case of an error this will have the position in the string the error occured
+@var{err_pos}: In case of an error this will have the position in the string the error occurred
 
 Sets the priorities to use on the ciphers, key exchange methods,
 macs and compression methods.  This function avoids keeping a
@@ -4227,19 +4243,18 @@ due to TLS (or DTLS) per record.
 This function has the similar semantics with @code{recv()} .  The only
 difference is that it accepts a GnuTLS session, and uses different
 error codes.
-In the special case that a server requests a renegotiation, the
-client may receive an error code of @code{GNUTLS_E_REHANDSHAKE} .  This
-message may be simply ignored, replied with an alert
+In the special case that the peer requests a renegotiation, the
+caller will receive an error code of @code{GNUTLS_E_REHANDSHAKE} .  In case
+of a client, this message may be simply ignored, replied with an alert
 @code{GNUTLS_A_NO_RENEGOTIATION} , or replied with a new handshake,
-depending on the client's will.
+depending on the client's will. A server receiving this error code
+can only initiate a new handshake or terminate the session.
+
 If @code{EINTR}  is returned by the internal push function (the default
 is @code{recv()} ) then @code{GNUTLS_E_INTERRUPTED}  will be returned.  If
 @code{GNUTLS_E_INTERRUPTED}  or @code{GNUTLS_E_AGAIN}  is returned, you must
 call this function again to get the data.  See also
 @code{gnutls_record_get_direction()} .
-A server may also receive @code{GNUTLS_E_REHANDSHAKE}  when a client has
-initiated a handshake. In that case the server can only initiate a
-handshake or terminate the connection.
 
 @strong{Returns:} The number of bytes received and zero on EOF (for stream
 connections).  A negative error code is returned in case of an error.  
@@ -4783,6 +4798,23 @@ will be garbage.
 @strong{Since:} 3.0
 @end deftypefun
 
+@subheading gnutls_session_get_verify_cert_status
+@anchor{gnutls_session_get_verify_cert_status}
+@deftypefun {unsigned int} {gnutls_session_get_verify_cert_status} (gnutls_session_t @var{session})
+@var{session}: is a gnutls session
+
+This function returns the status of the verification when initiated
+via auto-verification, i.e., by @code{gnutls_session_set_verify_cert2()}  or
+@code{gnutls_session_set_verify_cert()} . If no certificate verification
+was occurred then the return value would be set to ((unsigned int)-1).
+
+The certificate verification status is the same as in @code{gnutls_certificate_verify_peers()} .
+
+@strong{Returns:} the certificate verification status.
+
+@strong{Since:} 3.4.6
+@end deftypefun
+
 @subheading gnutls_session_is_resumed
 @anchor{gnutls_session_is_resumed}
 @deftypefun {int} {gnutls_session_is_resumed} (gnutls_session_t @var{session})
@@ -4884,6 +4916,82 @@ an error code is returned.
 This function will set (associate) the user given pointer  @code{ptr} to
 the session structure.  This pointer can be accessed with
 @code{gnutls_session_get_ptr()} .
+@end deftypefun
+
+@subheading gnutls_session_set_verify_cert
+@anchor{gnutls_session_set_verify_cert}
+@deftypefun {void} {gnutls_session_set_verify_cert} (gnutls_session_t @var{session}, const char * @var{hostname}, unsigned @var{flags})
+@var{session}: is a gnutls session
+
+@var{hostname}: is the expected name of the peer; may be @code{NULL} 
+
+@var{flags}: flags for certificate verification -- @code{gnutls_certificate_verify_flags} 
+
+This function instructs GnuTLS to verify the peer's certificate
+using the provided hostname. If the verification fails the handshake
+will also fail with @code{GNUTLS_E_CERTIFICATE_VERIFICATION_ERROR} . In that
+case the verification result can be obtained using @code{gnutls_session_get_verify_cert_status()} .
+
+The  @code{hostname} pointer provided must remain valid for the lifetime
+of the session. More precisely it should be available during any subsequent
+handshakes. If no hostname is provided, no hostname verification
+will be performed. For a more advanced verification function check
+@code{gnutls_session_set_verify_cert2()} .
+
+The @code{gnutls_session_set_verify_cert()}  function is intended to be used by TLS
+clients to verify the server's certificate.
+
+@strong{Since:} 3.4.6
+@end deftypefun
+
+@subheading gnutls_session_set_verify_cert2
+@anchor{gnutls_session_set_verify_cert2}
+@deftypefun {void} {gnutls_session_set_verify_cert2} (gnutls_session_t @var{session}, gnutls_typed_vdata_st * @var{data}, unsigned @var{elements}, unsigned @var{flags})
+@var{session}: is a gnutls session
+
+@var{data}: an array of typed data
+
+@var{elements}: the number of data elements
+
+@var{flags}: flags for certificate verification -- @code{gnutls_certificate_verify_flags} 
+
+This function instructs GnuTLS to verify the peer's certificate
+using the provided typed data information. If the verification fails the handshake
+will also fail with @code{GNUTLS_E_CERTIFICATE_VERIFICATION_ERROR} . In that
+case the verification result can be obtained using @code{gnutls_session_get_verify_cert_status()} .
+
+The acceptable typed data are the same as in @code{gnutls_certificate_verify_peers()} ,
+and once set must remain valid for the lifetime of the session. More precisely
+they should be available during any subsequent handshakes.
+
+@strong{Since:} 3.4.6
+@end deftypefun
+
+@subheading gnutls_session_set_verify_function
+@anchor{gnutls_session_set_verify_function}
+@deftypefun {void} {gnutls_session_set_verify_function} (gnutls_session_t @var{session}, gnutls_certificate_verify_function * @var{func})
+@var{session}: is a @code{gnutls_session_t}  type.
+
+@var{func}: is the callback function
+
+This function sets a callback to be called when peer's certificate
+has been received in order to verify it on receipt rather than
+doing after the handshake is completed. This overrides any callback
+set using @code{gnutls_certificate_set_verify_function()} .
+
+The callback's function prototype is:
+int (*callback)(gnutls_session_t);
+
+If the callback function is provided then gnutls will call it, in the
+handshake, just after the certificate message has been received.
+To verify or obtain the certificate the @code{gnutls_certificate_verify_peers2()} ,
+@code{gnutls_certificate_type_get()} , @code{gnutls_certificate_get_peers()}  functions
+can be used.
+
+The callback function should return 0 for the handshake to continue
+or non-zero to terminate.
+
+@strong{Since:} 3.4.6
 @end deftypefun
 
 @subheading gnutls_session_ticket_enable_client
@@ -5522,7 +5630,7 @@ Since 3.1.4
 @var{profiles}: is a string that contains the supported SRTP profiles,
 separated by colons.
 
-@var{err_pos}: In case of an error this will have the position in the string the error occured, may be NULL.
+@var{err_pos}: In case of an error this will have the position in the string the error occurred, may be NULL.
 
 This function is to be used by both clients and servers, to declare
 what SRTP profiles they support, to negotiate with the peer.

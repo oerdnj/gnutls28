@@ -3949,6 +3949,23 @@ certificate.
 negative error value.
 @end deftypefun
 
+@subheading gnutls_x509_crt_set_issuer_unique_id
+@anchor{gnutls_x509_crt_set_issuer_unique_id}
+@deftypefun {int} {gnutls_x509_crt_set_issuer_unique_id} (gnutls_x509_crt_t @var{cert}, const void * @var{id}, size_t @var{id_size})
+@var{cert}: a certificate of type @code{gnutls_x509_crt_t} 
+
+@var{id}: The unique ID
+
+@var{id_size}: Holds the size of the unique ID.
+
+This function will set the X.509 certificate's issuer unique ID field.
+
+@strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (0) is returned, otherwise a
+negative error value.
+
+@strong{Since:} 3.4.7
+@end deftypefun
+
 @subheading gnutls_x509_crt_set_key
 @anchor{gnutls_x509_crt_set_key}
 @deftypefun {int} {gnutls_x509_crt_set_key} (gnutls_x509_crt_t @var{crt}, gnutls_x509_privkey_t @var{key})
@@ -4189,6 +4206,23 @@ extension.
 
 @strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (0) is returned, otherwise a
 negative error value.
+@end deftypefun
+
+@subheading gnutls_x509_crt_set_subject_unique_id
+@anchor{gnutls_x509_crt_set_subject_unique_id}
+@deftypefun {int} {gnutls_x509_crt_set_subject_unique_id} (gnutls_x509_crt_t @var{cert}, const void * @var{id}, size_t @var{id_size})
+@var{cert}: a certificate of type @code{gnutls_x509_crt_t} 
+
+@var{id}: The unique ID
+
+@var{id_size}: Holds the size of the unique ID.
+
+This function will set the X.509 certificate's subject unique ID field.
+
+@strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (0) is returned, otherwise a
+negative error value.
+
+@strong{Since:} 3.4.7
 @end deftypefun
 
 @subheading gnutls_x509_crt_set_version
@@ -5975,7 +6009,10 @@ to the trusted list. The list of CRLs must not be deinitialized
 during this structure's lifetime.
 
 This function must be called after @code{gnutls_x509_trust_list_add_cas()} 
-to allow verifying the CRLs for validity.
+to allow verifying the CRLs for validity. If the flag @code{GNUTLS_TL_NO_DUPLICATES} 
+is given, then any provided CRLs that are a duplicate, will be deinitialized
+and not added to the list (that assumes that @code{gnutls_x509_trust_list_deinit()} 
+will be called with all=1).
 
 @strong{Returns:} The number of added elements is returned.
 

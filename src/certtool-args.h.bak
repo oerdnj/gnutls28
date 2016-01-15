@@ -6,7 +6,7 @@
  *  From the definitions    certtool-args.def
  *  and the template file   options
  *
- * Generated from AutoOpts 41:0:16 templates.
+ * Generated from AutoOpts 41:1:16 templates.
  *
  *  AutoOpts is a copyrighted work.  This header file is not encumbered
  *  by AutoOpts licensing, but is provided under the licensing terms chosen
@@ -19,7 +19,7 @@
  * The certtool program is copyrighted and licensed
  * under the following terms:
  *
- *  Copyright (C) 2000-2015 Free Software Foundation, and others, all rights reserved.
+ *  Copyright (C) 2000-2016 Free Software Foundation, and others, all rights reserved.
  *  This is free software. It is licensed for use, modification and
  *  redistribution under the terms of the GNU General Public License,
  *  version 3 or later <http://gnu.org/licenses/gpl.html>
@@ -55,7 +55,7 @@
  *  tolerable version is at least as old as what was current when the header
  *  template was released.
  */
-#define AO_TEMPLATE_VERSION 167936
+#define AO_TEMPLATE_VERSION 167937
 #if (AO_TEMPLATE_VERSION < OPTIONS_MINIMUM_VERSION) \
  || (AO_TEMPLATE_VERSION > OPTIONS_STRUCT_VERSION)
 # error option template version mismatches autoopts/options.h header
@@ -113,46 +113,48 @@ typedef enum {
     INDEX_OPT_P7_GENERATE           = 44,
     INDEX_OPT_P7_SIGN               = 45,
     INDEX_OPT_P7_DETACHED_SIGN      = 46,
-    INDEX_OPT_P7_TIME               = 47,
-    INDEX_OPT_P7_INFO               = 48,
-    INDEX_OPT_P7_VERIFY             = 49,
-    INDEX_OPT_P8_INFO               = 50,
-    INDEX_OPT_SMIME_TO_P7           = 51,
-    INDEX_OPT_KEY_INFO              = 52,
-    INDEX_OPT_PGP_KEY_INFO          = 53,
-    INDEX_OPT_PUBKEY_INFO           = 54,
-    INDEX_OPT_V1                    = 55,
-    INDEX_OPT_TO_P12                = 56,
-    INDEX_OPT_TO_P8                 = 57,
-    INDEX_OPT_PKCS8                 = 58,
-    INDEX_OPT_RSA                   = 59,
-    INDEX_OPT_DSA                   = 60,
-    INDEX_OPT_ECC                   = 61,
-    INDEX_OPT_ECDSA                 = 62,
-    INDEX_OPT_HASH                  = 63,
-    INDEX_OPT_INDER                 = 64,
-    INDEX_OPT_INRAW                 = 65,
-    INDEX_OPT_OUTDER                = 66,
-    INDEX_OPT_OUTRAW                = 67,
-    INDEX_OPT_BITS                  = 68,
-    INDEX_OPT_CURVE                 = 69,
-    INDEX_OPT_SEC_PARAM             = 70,
-    INDEX_OPT_DISABLE_QUICK_RANDOM  = 71,
-    INDEX_OPT_TEMPLATE              = 72,
-    INDEX_OPT_STDOUT_INFO           = 73,
-    INDEX_OPT_ASK_PASS              = 74,
-    INDEX_OPT_PKCS_CIPHER           = 75,
-    INDEX_OPT_PROVIDER              = 76,
-    INDEX_OPT_VERSION               = 77,
-    INDEX_OPT_HELP                  = 78,
-    INDEX_OPT_MORE_HELP             = 79
+    INDEX_OPT_P7_INCLUDE_CERT       = 47,
+    INDEX_OPT_P7_TIME               = 48,
+    INDEX_OPT_P7_SHOW_DATA          = 49,
+    INDEX_OPT_P7_INFO               = 50,
+    INDEX_OPT_P7_VERIFY             = 51,
+    INDEX_OPT_P8_INFO               = 52,
+    INDEX_OPT_SMIME_TO_P7           = 53,
+    INDEX_OPT_KEY_INFO              = 54,
+    INDEX_OPT_PGP_KEY_INFO          = 55,
+    INDEX_OPT_PUBKEY_INFO           = 56,
+    INDEX_OPT_V1                    = 57,
+    INDEX_OPT_TO_P12                = 58,
+    INDEX_OPT_TO_P8                 = 59,
+    INDEX_OPT_PKCS8                 = 60,
+    INDEX_OPT_RSA                   = 61,
+    INDEX_OPT_DSA                   = 62,
+    INDEX_OPT_ECC                   = 63,
+    INDEX_OPT_ECDSA                 = 64,
+    INDEX_OPT_HASH                  = 65,
+    INDEX_OPT_INDER                 = 66,
+    INDEX_OPT_INRAW                 = 67,
+    INDEX_OPT_OUTDER                = 68,
+    INDEX_OPT_OUTRAW                = 69,
+    INDEX_OPT_BITS                  = 70,
+    INDEX_OPT_CURVE                 = 71,
+    INDEX_OPT_SEC_PARAM             = 72,
+    INDEX_OPT_DISABLE_QUICK_RANDOM  = 73,
+    INDEX_OPT_TEMPLATE              = 74,
+    INDEX_OPT_STDOUT_INFO           = 75,
+    INDEX_OPT_ASK_PASS              = 76,
+    INDEX_OPT_PKCS_CIPHER           = 77,
+    INDEX_OPT_PROVIDER              = 78,
+    INDEX_OPT_VERSION               = 79,
+    INDEX_OPT_HELP                  = 80,
+    INDEX_OPT_MORE_HELP             = 81
 } teOptIndex;
 /** count of all options for certtool */
-#define OPTION_CT    80
+#define OPTION_CT    82
 /** certtool version */
-#define CERTTOOL_VERSION       "3.4.5"
+#define CERTTOOL_VERSION       "3.4.8"
 /** Full certtool version text */
-#define CERTTOOL_FULL_VERSION  "certtool 3.4.5"
+#define CERTTOOL_FULL_VERSION  "certtool 3.4.8"
 
 /**
  *  Interface defines for all options.  Replace "n" with the UPPER_CASED
@@ -252,38 +254,40 @@ typedef enum {
 #define VALUE_OPT_P7_GENERATE    0x1023
 #define VALUE_OPT_P7_SIGN        0x1024
 #define VALUE_OPT_P7_DETACHED_SIGN 0x1025
-#define VALUE_OPT_P7_TIME        0x1026
-#define VALUE_OPT_P7_INFO        0x1027
-#define VALUE_OPT_P7_VERIFY      0x1028
-#define VALUE_OPT_P8_INFO        0x1029
-#define VALUE_OPT_SMIME_TO_P7    0x102A
+#define VALUE_OPT_P7_INCLUDE_CERT 0x1026
+#define VALUE_OPT_P7_TIME        0x1027
+#define VALUE_OPT_P7_SHOW_DATA   0x1028
+#define VALUE_OPT_P7_INFO        0x1029
+#define VALUE_OPT_P7_VERIFY      0x102A
+#define VALUE_OPT_P8_INFO        0x102B
+#define VALUE_OPT_SMIME_TO_P7    0x102C
 #define VALUE_OPT_KEY_INFO       'k'
-#define VALUE_OPT_PGP_KEY_INFO   0x102B
-#define VALUE_OPT_PUBKEY_INFO    0x102C
-#define VALUE_OPT_V1             0x102D
-#define VALUE_OPT_TO_P12         0x102E
-#define VALUE_OPT_TO_P8          0x102F
+#define VALUE_OPT_PGP_KEY_INFO   0x102D
+#define VALUE_OPT_PUBKEY_INFO    0x102E
+#define VALUE_OPT_V1             0x102F
+#define VALUE_OPT_TO_P12         0x1030
+#define VALUE_OPT_TO_P8          0x1031
 #define VALUE_OPT_PKCS8          '8'
-#define VALUE_OPT_RSA            0x1030
-#define VALUE_OPT_DSA            0x1031
-#define VALUE_OPT_ECC            0x1032
-#define VALUE_OPT_ECDSA          0x1033
-#define VALUE_OPT_HASH           0x1034
-#define VALUE_OPT_INDER          0x1035
-#define VALUE_OPT_INRAW          0x1036
-#define VALUE_OPT_OUTDER         0x1037
-#define VALUE_OPT_OUTRAW         0x1038
-#define VALUE_OPT_BITS           0x1039
+#define VALUE_OPT_RSA            0x1032
+#define VALUE_OPT_DSA            0x1033
+#define VALUE_OPT_ECC            0x1034
+#define VALUE_OPT_ECDSA          0x1035
+#define VALUE_OPT_HASH           0x1036
+#define VALUE_OPT_INDER          0x1037
+#define VALUE_OPT_INRAW          0x1038
+#define VALUE_OPT_OUTDER         0x1039
+#define VALUE_OPT_OUTRAW         0x103A
+#define VALUE_OPT_BITS           0x103B
 
 #define OPT_VALUE_BITS           (DESC(BITS).optArg.argInt)
-#define VALUE_OPT_CURVE          0x103A
-#define VALUE_OPT_SEC_PARAM      0x103B
-#define VALUE_OPT_DISABLE_QUICK_RANDOM 0x103C
-#define VALUE_OPT_TEMPLATE       0x103D
-#define VALUE_OPT_STDOUT_INFO    0x103E
-#define VALUE_OPT_ASK_PASS       0x103F
-#define VALUE_OPT_PKCS_CIPHER    0x1040
-#define VALUE_OPT_PROVIDER       0x1041
+#define VALUE_OPT_CURVE          0x103C
+#define VALUE_OPT_SEC_PARAM      0x103D
+#define VALUE_OPT_DISABLE_QUICK_RANDOM 0x103E
+#define VALUE_OPT_TEMPLATE       0x103F
+#define VALUE_OPT_STDOUT_INFO    0x1040
+#define VALUE_OPT_ASK_PASS       0x1041
+#define VALUE_OPT_PKCS_CIPHER    0x1042
+#define VALUE_OPT_PROVIDER       0x1043
 /** option flag (value) for help-value option */
 #define VALUE_OPT_HELP          'h'
 /** option flag (value) for more-help-value option */

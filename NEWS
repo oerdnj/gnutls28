@@ -3,6 +3,105 @@ Copyright (C) 2000-2015 Free Software Foundation, Inc.
 Copyright (C) 2013-2015 Nikos Mavrogiannopoulos
 See the end for copying conditions.
 
+* Version 3.4.8 (released 2016-01-08)
+
+** libgnutls: Corrected memory leak in gnutls_pubkey_import_privkey() when
+   used with PKCS #11 keys.
+
+** libgnutls: For DSA and ECDSA keys in PKCS #11 objects, import
+   their public keys from either a public key object or a certificate.
+   That is, because private keys do not contain all the required
+   parameters for a direct import. Reported by Jan Vcelak.
+
+** libgnutls: Fixed issue when writing ECDSA private keys in PKCS #11
+   tokens.
+
+** libgnutls: Fixed out-of-bounds read in gnutls_x509_ext_export_key_usage(),
+   report and patch by Tim Kosse.
+
+** libgnutls: The CHACHA20-POLY1305 ciphersuites were updated to conform to
+   draft-ietf-tls-chacha20-poly1305-02.
+
+** libgnutls: Several fixes in PKCS #7 signing which improve compatibility
+   with the MacOSX tools. Reported by sskaje (#59).
+
+** libgnutls: The max-record extension not negotiated on DTLS. This resolves
+   issue with the max-record being negotiated but ignored.
+
+** certtool: Added the --p7-include-cert and --p7-show-data options.
+
+** API and ABI modifications:
+gnutls_pkcs7_get_embedded_data: Added
+
+
+* Version 3.4.7 (released 2015-11-22)
+
+** libgnutls: Properly require TLS 1.2 in all CBC-SHA256 and CBC-SHA384
+   ciphersuites. This solves an interoperability issue with openssl.
+   Reported by Viktor Dukhovni.
+
+** libgnutls: Corrected the setting of salt size in gnutls_pkcs12_mac_info().
+
+** libgnutls: On a rehandshake allow switching from anonymous to ECDHE and
+   DHE ciphersuites.
+
+** libgnutls: Corrected regression from 3.3.x which prevented ARCFOUR128
+   from using arbitrary key sizes. Reported by Andreas Schneider.
+
+** libgnutls: Added GNUTLS_SKIP_GLOBAL_INIT macro to allow programs skipping
+   the implicit global initialization.
+
+** gnutls.pc: Don't include libtool specific options to link flags.
+   Reported by Dan Kegel.
+
+** tools: Better support for FTP AUTH TLS negotiation
+
+** API and ABI modifications:
+gnutls_x509_crt_set_issuer_unique_id: Added
+gnutls_x509_crt_set_subject_unique_id: Added
+gnutls_certificate_set_flags: Added
+GNUTLS_CERTIFICATE_SKIP_KEY_CERT_MATCH: Added
+
+
+* Version 3.4.6 (released 2015-10-20)
+
+** libgnutls: Added new simple verification functions. That avoids the need
+   to install a callback to perform certificate verification. See
+   doc/examples/ex-client-x509.c for usage.
+
+** libgnutls: Introduced the security parameter 'future' which is at
+   the 256-bit level of security, and 'ultra' was aligned to its documented
+   size at 192-bits.
+
+** libgnutls: When writing a certificate into a PKCS #11 token, ensure
+   that CKA_SERIAL_NUMBER and CKA_ISSUER are written. Reported by Sumit
+   Bose.
+
+** libgnutls: Allow the presence of legacy ciphers and key exchanges in
+   priority strings and consider them a no-op.
+
+** libgnutls: Handle the extended master secret as a mandatory extension.
+   That fixes incompatibility issues with Chromium (#45). Reported by
+   Hubert Kario.
+
+** libgnutls: Added the ability to copy a public key into a PKCS #11
+   token.
+
+** tools: Added support for LDAP and XMPP negotiation for STARTTLS.
+
+** p11tool: Allow writing a public key into a PKCS #11 token.
+
+** certtool: Key generation security level was switched to HIGH. That
+   is, by default the tool generates 3072 bit keys for RSA and DSA.
+
+** API and ABI modifications:
+gnutls_session_set_verify_function: Added
+gnutls_session_set_verify_cert: Added
+gnutls_session_set_verify_cert2: Added
+gnutls_session_get_verify_cert_status: Added
+gnutls_pkcs11_copy_pubkey: Added
+
+
 * Version 3.4.5 (released 2015-09-12)
 
 ** libgnutls: When re-importing CRLs to a trust list ensure that there
