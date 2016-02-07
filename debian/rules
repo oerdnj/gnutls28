@@ -103,10 +103,15 @@ override_dh_compress:
 	dh_compress -X.pdf
 
 override_dh_strip:
-	dh_strip --dbg-package=libgnutls30-dbg
+	dh_strip --ddeb-migration='libgnutls30-dbg (<< 3.4.7-2~)'
 
 override_dh_auto_test:
-	:
+	dh_auto_test -O--parallel || touch dh_auto_test.fail
+	@if test -e dh_auto_test.fail ; then \
+		find -name test-suite.log | \
+		while read i ; do \
+		echo "----dh_auto_test.fail" ; echo $$i ; echo ---- ; \
+		cat $$i ; echo ; done ; rm -f dh_auto_test.fail; false; fi
 
 override_dh_clean:
 	dh_clean -X.bak

@@ -1,3 +1,36 @@
+gnutls28 (3.4.9-2) unstable; urgency=medium
+
+  * Upload to unstable.
+
+ -- Andreas Metzler <ametzler@debian.org>  Sun, 07 Feb 2016 15:18:46 +0100
+
+gnutls28 (3.4.9-1) experimental; urgency=medium
+
+  * New upstream version.
+  * Drop 35_Revert-Fix-out-of-bounds-read-in-gnutls_x509_ext_exp.patch and
+    36_Revert-tests-updated-to-account-for-cert-generation.patch.
+
+ -- Andreas Metzler <ametzler@debian.org>  Sat, 06 Feb 2016 15:57:24 +0100
+
+gnutls28 (3.4.8-3) unstable; urgency=medium
+
+  * Pull 35_Revert-Fix-out-of-bounds-read-in-gnutls_x509_ext_exp.patch and
+    36_Revert-tests-updated-to-account-for-cert-generation.patch
+    from upstream GIT. Closes: #813243
+
+ -- Andreas Metzler <ametzler@debian.org>  Sun, 31 Jan 2016 17:28:05 +0100
+
+gnutls28 (3.4.8-2) unstable; urgency=medium
+
+  * Merge master branch into experimental.
+    + Drop ancient Conflicts/Replaces: gnutls0, gnutls0.4.
+    + libgnutls-deb0-28 temporarily Conflicts with libnettle4, libhogweed2.
+      This is a kludge and technically wrong, but will prevent partial
+      upgrades from stable. See: #788735
+  * Upload to unstable.
+
+ -- Andreas Metzler <ametzler@debian.org>  Thu, 21 Jan 2016 15:45:49 +0100
+
 gnutls28 (3.4.8-1) experimental; urgency=medium
 
   * Migrate from libgnutls30-dbg to ddebs. dh_strip's --ddeb-migration
@@ -101,6 +134,83 @@ gnutls28 (3.4.1-1) experimental; urgency=medium
     (s/-disable-silent-rules/--disable-silent-rules).
 
  -- Andreas Metzler <ametzler@debian.org>  Fri, 05 Jun 2015 11:39:19 +0200
+
+gnutls28 (3.3.20-1) unstable; urgency=medium
+
+  * autoreconf requires automake 1.12.2, add build-dependency.
+  * New upstream version.
+  * Move Vcs-* from git/http to https.
+
+ -- Andreas Metzler <ametzler@debian.org>  Fri, 08 Jan 2016 18:57:41 +0100
+
+gnutls28 (3.3.19-1) unstable; urgency=medium
+
+  * New upstream version.
+   + Refresh 20_debian_specific_soname.diff.
+   + Update symbol file.
+
+ -- Andreas Metzler <ametzler@debian.org>  Sun, 22 Nov 2015 17:48:27 +0100
+
+gnutls28 (3.3.18-1) unstable; urgency=medium
+
+  * New upstream version.
+
+ -- Andreas Metzler <ametzler@debian.org>  Wed, 30 Sep 2015 18:49:13 +0200
+
+gnutls28 (3.3.17-1) unstable; urgency=medium
+
+  * New upstream version.
+   + Drop superfluous patches.
+    (45_As-server-don-t-try-to-send-extensions-we-didn-t-rec.patch,
+     46_safe-renegotiation-handle-case-where-client-didn-t-s.patch,
+     47_safe-renegotiation-simulate-receiving-the-extension-.patch)
+   + GNUTLS_PKCS11_OBJ_FLAG_NO_STORE_PUBKEY added to gnutls_pkcs11_obj_flags,
+     bump dependency info for functions taking it as argument or returning it.
+   + Bump dependency info on private symbols.
+   + Fixes double free in DN decoding [GNUTLS-SA-2015-3]. Closes: #795068
+     CVE-2015-6251
+
+ -- Andreas Metzler <ametzler@debian.org>  Mon, 10 Aug 2015 19:48:11 +0200
+
+gnutls28 (3.3.16-2) unstable; urgency=medium
+
+  * Refresh 40_no_more_ssl3.diff.
+  * 45_As-server-don-t-try-to-send-extensions-we-didn-t-rec.patch
+    46_safe-renegotiation-handle-case-where-client-didn-t-s.patch
+    47_safe-renegotiation-simulate-receiving-the-extension-.patch
+    Pull three patches from upstream GIT to fix issue with server side sending
+    the status request extension even when not requested.
+    <http://article.gmane.org/gmane.network.gnutls.general/3929>
+
+ -- Andreas Metzler <ametzler@debian.org>  Sat, 01 Aug 2015 11:30:17 +0200
+
+gnutls28 (3.3.16-1) unstable; urgency=medium
+
+  * Limit watchfile to 3.3.x versions.
+  * New upstream version.
+    + Drop superfluous patches
+      (50_updated-sign-md5-rep-to-reduce-false-failures.patch,
+      55_nettle3.patch,
+      56_Corrected-camellia256-set-key-in-nettle3-compat-mode.patch)
+    + Bump private symbol versioning.
+
+ -- Andreas Metzler <ametzler@debian.org>  Sun, 12 Jul 2015 19:00:04 +0200
+
+gnutls28 (3.3.15-7) unstable; urgency=medium
+
+  * libgnutls-deb0-28 temporarily Conflicts with libnettle4, libhogweed2. This
+    is a kludge and technically wrong, but will prevent partial upgrades from
+    stable. Closes: #788735
+  * Drop ancient Conflicts/Replaces: gnutls0, gnutls0.4.
+
+ -- Andreas Metzler <ametzler@debian.org>  Tue, 16 Jun 2015 19:06:09 +0200
+
+gnutls28 (3.3.15-6) unstable; urgency=high
+
+  * Pull 56_Corrected-camellia256-set-key-in-nettle3-compat-mode.patch
+    Closes: #788011
+
+ -- Andreas Metzler <ametzler@debian.org>  Fri, 12 Jun 2015 19:10:33 +0200
 
 gnutls28 (3.3.15-5) unstable; urgency=medium
 

@@ -711,7 +711,7 @@ gnutls_certificate_set_openpgp_key_file
                                 <em class="parameter"><code>const <span class="type">char</span> *certfile</code></em>,
                                 <em class="parameter"><code>const <span class="type">char</span> *keyfile</code></em>,
                                 <em class="parameter"><code><a class="link" href="gnutls-openpgp.html#gnutls-openpgp-crt-fmt-t" title="enum gnutls_openpgp_crt_fmt_t"><span class="type">gnutls_openpgp_crt_fmt_t</span></a> format</code></em>);</pre>
-<p>This funtion is used to load OpenPGP keys into the GnuTLS
+<p>This function is used to load OpenPGP keys into the GnuTLS
 credentials structure. The file should contain at least one valid non encrypted subkey.</p>
 <div class="refsect3">
 <a name="id-1.2.7.6.3.5"></a><h4>Parameters</h4>
@@ -761,7 +761,7 @@ gnutls_certificate_set_openpgp_key_file2
                                 <em class="parameter"><code>const <span class="type">char</span> *keyfile</code></em>,
                                 <em class="parameter"><code>const <span class="type">char</span> *subkey_id</code></em>,
                                 <em class="parameter"><code><a class="link" href="gnutls-openpgp.html#gnutls-openpgp-crt-fmt-t" title="enum gnutls_openpgp_crt_fmt_t"><span class="type">gnutls_openpgp_crt_fmt_t</span></a> format</code></em>);</pre>
-<p>This funtion is used to load OpenPGP keys into the GnuTLS credential 
+<p>This function is used to load OpenPGP keys into the GnuTLS credential 
 structure. The file should contain at least one valid non encrypted subkey.</p>
 <p>The special keyword "auto" is also accepted as <em class="parameter"><code>subkey_id</code></em>
 .  In that
@@ -820,7 +820,7 @@ gnutls_certificate_set_openpgp_key_mem
                                 <em class="parameter"><code>const <span class="type">gnutls_datum_t</span> *cert</code></em>,
                                 <em class="parameter"><code>const <span class="type">gnutls_datum_t</span> *key</code></em>,
                                 <em class="parameter"><code><a class="link" href="gnutls-openpgp.html#gnutls-openpgp-crt-fmt-t" title="enum gnutls_openpgp_crt_fmt_t"><span class="type">gnutls_openpgp_crt_fmt_t</span></a> format</code></em>);</pre>
-<p>This funtion is used to load OpenPGP keys into the GnuTLS credential 
+<p>This function is used to load OpenPGP keys into the GnuTLS credential 
 structure. The datum should contain at least one valid non encrypted subkey.</p>
 <div class="refsect3">
 <a name="id-1.2.7.6.5.5"></a><h4>Parameters</h4>
@@ -870,7 +870,7 @@ gnutls_certificate_set_openpgp_key_mem2
                                 <em class="parameter"><code>const <span class="type">gnutls_datum_t</span> *key</code></em>,
                                 <em class="parameter"><code>const <span class="type">char</span> *subkey_id</code></em>,
                                 <em class="parameter"><code><a class="link" href="gnutls-openpgp.html#gnutls-openpgp-crt-fmt-t" title="enum gnutls_openpgp_crt_fmt_t"><span class="type">gnutls_openpgp_crt_fmt_t</span></a> format</code></em>);</pre>
-<p>This funtion is used to load OpenPGP keys into the GnuTLS
+<p>This function is used to load OpenPGP keys into the GnuTLS
 credentials structure. The datum should contain at least one valid non encrypted subkey.</p>
 <p>The special keyword "auto" is also accepted as <em class="parameter"><code>subkey_id</code></em>
 .  In that
@@ -3679,7 +3679,7 @@ otherwise an error code is returned.</p>
 <pre class="programlisting"><span class="returnvalue">void</span>
 gnutls_openpgp_set_recv_key_function (<em class="parameter"><code><a class="link" href="gnutls-gnutls.html#gnutls-session-t" title="gnutls_session_t"><span class="type">gnutls_session_t</span></a> session</code></em>,
                                       <em class="parameter"><code><a class="link" href="gnutls-openpgp.html#gnutls-openpgp-recv-key-func" title="gnutls_openpgp_recv_key_func ()"><span class="type">gnutls_openpgp_recv_key_func</span></a> func</code></em>);</pre>
-<p>This funtion will set a key retrieval function for OpenPGP keys. This
+<p>This function will set a key retrieval function for OpenPGP keys. This
 callback is only useful in server side, and will be used if the peer
 sent a key fingerprint instead of a full key.</p>
 <p>The retrieved key must be allocated using <a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-malloc"><code class="function">gnutls_malloc()</code></a>.</p>
