@@ -1,3 +1,98 @@
+2016-02-03  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* tests/suite/pkcs11-pubkey-import-ecdsa.c: tests:
+	pkcs11-pubkey-import-ecdsa will only work under softhsmv2
+
+2016-02-03  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* NEWS, configure.ac, m4/hooks.m4: bumped version
+
+2016-01-31  Andreas Metzler <ametzler@bebt.de>
+
+	* lib/gnutls_pubkey.c, lib/openpgp/gnutls_openpgp.c,
+	lib/x509/pkcs12_bag.c, lib/x509/x509.c, lib/x509/x509_ext.c,
+	src/certtool-cfg.c: Fix some more typos.  certifcate, funtion, withing, missmatch
+
+2016-01-31  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* NEWS: doc update [ci skip]
+
+2016-01-30  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* tests/cert-tests/template-date.pem,
+	tests/cert-tests/template-dn.pem,
+	tests/cert-tests/template-generalized.pem,
+	tests/cert-tests/template-nc.pem,
+	tests/cert-tests/template-overflow.pem,
+	tests/cert-tests/template-overflow2.pem,
+	tests/cert-tests/template-test.pem,
+	tests/cert-tests/template-unique.pem: Revert "tests: updated to
+	account for cert generation after
+	2adb9b2bfb31afebbdd9f990e2b74c9a3d4e5c57 fix" This reverts commit 735dbde324be6c8785a3dea5f09c82b6a8ad298b.
+
+2016-01-30  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/x509/x509_ext.c: Revert "Fix out-of-bounds read in
+	gnutls_x509_ext_export_key_usage" This was not really an out-of-bounds check. Added documentation to
+	make that clear.  This reverts commit ffbc9aaea7dcf29c03784d128b83f0682357858d.
+
+2016-01-18  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* lib/gnutls_global.c: gnutls_global_init: log gnutls' version on
+	initialization
+
+2016-01-18  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* doc/cha-gtls-app.texi: doc: corrected typo [ci skip]
+
+2016-01-14  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* NEWS: doc update
+
+2015-08-26  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/x509/output.c: x509: tolerate missing subject or issuer fields
+
+2016-01-13  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/gnutls_pubkey.c: gnutls_pubkey_import_x509_raw: fixed memory
+	leak
+
+2016-01-11  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/x509/output.c: x509: place newline when printing unsupported
+	othernames
+
+2016-01-10  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* NEWS: doc update [ci skip]
+
+2016-01-10  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* lib/ext/alpn.c: alpn: when parsing the list of protocols return at
+	the first mutually common That resolves an issue where the server wouldn't select the first
+	mutually supported.  Resolves #63
+
+2016-01-10  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* tests/mini-alpn.c: tests: mini-alpn: corrected protocol selection
+	order
+
+2016-01-10  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* tests/mini-alpn.c: tests: alpn: enhance the testing of ALPN
+	negotiation
+
+2016-01-09  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* lib/ext/alpn.c: alpn: document how the selected protocol is
+	selected [ci skip]
+
+2016-01-09  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* tests/mini-alpn.c: tests: verify that the selected ALPN protocol
+	is the first advertised
+
 2015-12-15  Nikos Mavrogiannopoulos <nmav@gnutls.org>
 
 	* Makefile.am, src/Makefile.am: build: fix make distclean by
