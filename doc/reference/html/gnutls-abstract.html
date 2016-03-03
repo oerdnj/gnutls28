@@ -2312,7 +2312,7 @@ gnutls_pubkey_get_preferred_hash_algorithm
                                (<em class="parameter"><code><a class="link" href="gnutls-abstract.html#gnutls-pubkey-t" title="gnutls_pubkey_t"><span class="type">gnutls_pubkey_t</span></a> key</code></em>,
                                 <em class="parameter"><code><a class="link" href="gnutls-gnutls.html#gnutls-digest-algorithm-t" title="enum gnutls_digest_algorithm_t"><span class="type">gnutls_digest_algorithm_t</span></a> *hash</code></em>,
                                 <em class="parameter"><code>unsigned <span class="type">int</span> *mand</code></em>);</pre>
-<p>This function will read the certifcate and return the appropriate digest
+<p>This function will read the certificate and return the appropriate digest
 algorithm to use for signing with this certificate. Some certificates (i.e.
 DSA might not be able to sign without the preferred algorithm).</p>
 <p>To get the signature algorithm instead of just the hash use <a class="link" href="gnutls-gnutls.html#gnutls-pk-to-sign" title="gnutls_pk_to_sign ()"><code class="function">gnutls_pk_to_sign()</code></a>

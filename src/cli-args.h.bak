@@ -127,9 +127,9 @@ typedef enum {
 /** count of all options for gnutls-cli */
 #define OPTION_CT    57
 /** gnutls-cli version */
-#define GNUTLS_CLI_VERSION       "3.4.8"
+#define GNUTLS_CLI_VERSION       "3.4.9"
 /** Full gnutls-cli version text */
-#define GNUTLS_CLI_FULL_VERSION  "gnutls-cli 3.4.8"
+#define GNUTLS_CLI_FULL_VERSION  "gnutls-cli 3.4.9"
 
 /**
  *  Interface defines for all options.  Replace "n" with the UPPER_CASED
