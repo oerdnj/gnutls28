@@ -74,6 +74,7 @@ Usage:  ocsptool [ -<flag> [<val>] | --<name>[@{=| @}<val>] ]...
                                 - file must pre-exist
    -S, --load-response=file   Read DER encoded OCSP response from file
                                 - file must pre-exist
+       --ignore-errors        Ignore any verification errors
    -v, --version[=arg]        output version information and exit
    -h, --help                 display extended usage information and exit
    -!, --more-help            extended usage information passed thru pager

@@ -23,6 +23,7 @@
 #ifndef UTILS_H
 #define UTILS_H
 
+#include <signal.h>
 #include <string.h>
 #include <stdarg.h>
 #include <gnutls/gnutls.h>
@@ -49,6 +50,8 @@ extern int break_on_error;
 extern const char *pkcs3;
 
 extern void fail(const char *format, ...)
+    __attribute__ ((format(printf, 1, 2)));
+extern void fail_ignore(const char *format, ...)
     __attribute__ ((format(printf, 1, 2)));
 extern void success(const char *format, ...)
     __attribute__ ((format(printf, 1, 2)));

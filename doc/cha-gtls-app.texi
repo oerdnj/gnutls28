@@ -59,7 +59,7 @@ finished using @acronym{GnuTLS}.
 The credentials structures are used by the authentication methods, such
 as certificate authentication. They store certificates, privates keys,
 and other information that is needed to prove the identity to the peer,
-and/or verify the indentity of the peer. The information stored in
+and/or verify the identity of the peer. The information stored in
 the credentials structures is initialized once and then can be 
 shared by many @acronym{TLS} sessions.
 
@@ -162,7 +162,7 @@ error. Other available environment variables are shown in @ref{tab:environment}.
 @item @code{GNUTLS_CPUID_OVERRIDE}
 @tab That environment variable can be used to
 explicitly enable/disable the use of certain CPU capabilities. Note that CPU
-detection cannot be overriden, i.e., VIA options cannot be enabled on an Intel
+detection cannot be overridden, i.e., VIA options cannot be enabled on an Intel
 CPU. The currently available options are:
 @itemize
 @item 0x1: Disable all run-time detected optimizations
@@ -256,6 +256,7 @@ operation.
 @item gettimeofday
 @item clock_gettime
 @item getrusage
+@item getpid
 @item send
 @item recv
 @item writev
@@ -265,7 +266,7 @@ operation.
 @end itemize
 
 As well as any calls needed for memory allocation to work. Note however, that GnuTLS
-depends on libc for the system calls, and there is no guarrantee that libc will
+depends on libc for the system calls, and there is no guarantee that libc will
 call the expected system call. For that it is recommended to test your
 program in all the targetted platforms when filters like seccomp are in place.
 
@@ -338,7 +339,7 @@ precalculations needed, opens any required system devices (e.g., /dev/urandom on
 and initializes subsystems that could be used later.
 
 The resources allocated by the initialization process will be released 
-on library deinitialization, or explictly by calling @funcref{gnutls_global_deinit}.
+on library deinitialization, or explicitly by calling @funcref{gnutls_global_deinit}.
 
 Note that during initialization file descriptors may be kept open by
 GnuTLS (e.g. /dev/urandom) on library load. Applications closing all unknown file
@@ -475,8 +476,7 @@ with the credential types is shown in @ref{tab:key-exchange-cred}.
 @code{KX_DHE_RSA},
 @code{KX_DHE_DSS},
 @code{KX_ECDHE_RSA},
-@code{KX_ECDHE_ECDSA},
-@code{KX_RSA_EXPORT}
+@code{KX_ECDHE_ECDSA}
 @tab @code{CRD_CERTIFICATE}
 @tab @code{CRD_CERTIFICATE}
 
@@ -614,7 +614,7 @@ Certificate verification is possible by loading the trusted
 authorities into the credentials structure by using
 the following functions, applicable to X.509 and OpenPGP certificates.
 
-@showfuncC{gnutls_certificate_set_x509_system_trust,gnutls_certificate_set_x509_trust_file,gnutls_certificate_set_openpgp_keyring_file}
+@showfuncD{gnutls_certificate_set_x509_system_trust,gnutls_certificate_set_x509_trust_file,gnutls_certificate_set_x509_trust_dir,gnutls_certificate_set_openpgp_keyring_file}
 
 The peer's certificate will be automatically verified if
 @funcref{gnutls_session_set_verify_cert} is called prior to handshake.
@@ -791,7 +791,7 @@ The blocking, due to network interaction, calls such as
 can be set to non-blocking by setting the underlying sockets to non-blocking.
 If other push and pull functions are setup, then they should behave the same
 way as @funcintref{recv} and @funcintref{send} when used in a non-blocking
-way, i.e., set errno to @code{EAGAIN}. Since, during a TLS protocol session 
+way, i.e., return -1 and set errno to @code{EAGAIN}. Since, during a TLS protocol session 
 @acronym{GnuTLS} does not block except for network interaction, the non blocking
 @code{EAGAIN} errno will be propagated and @acronym{GnuTLS} functions 
 will return the @code{GNUTLS_E_AGAIN} error code. Such calls can be resumed the 
@@ -800,13 +800,13 @@ The only exception is @funcref{gnutls_record_send},
 which if interrupted subsequent calls need not to include the data to be
 sent (can be called with NULL argument).
 
-When using the @funcintref{select} system call though, one should remember
-that it is only applicable to the kernel sockets API. To check for any
-available buffers in a @acronym{GnuTLS} session, 
+When using the @funcintref{poll} or @funcintref{select} system calls though, one should remember
+that they only apply to the kernel sockets API. To check for any
+available buffered data in a @acronym{GnuTLS} session, 
 utilize @funcref{gnutls_record_check_pending},
-either before the @funcintref{select} system call, or after a call to
-@funcref{gnutls_record_recv}. @acronym{GnuTLS} does not keep a write buffer,
-thus when writing no additional actions are required.
+either before the @funcintref{poll} system call, or after a call to
+@funcref{gnutls_record_recv}. Data queued by @funcref{gnutls_record_send}
+(when interrupted) can be discarded using @funcref{gnutls_record_discard_queued}.
 
 The following paragraphs describe the detailed requirements for non-blocking
 operation when using the TLS or DTLS protocols.
@@ -823,7 +823,7 @@ call the @funcref{gnutls_init} function with the
 When in non-blocking mode the function, the @funcref{gnutls_init} function 
 must be called with the @code{GNUTLS_NONBLOCK} flag set (see @ref{Session initialization}). 
 
-In constrast with the TLS protocol, the pull timeout function is required,
+In contrast with the TLS protocol, the pull timeout function is required,
 but will only be called with a timeout of zero. In that case it should indicate
 whether there are data to be received or not. When not using the default pull function,
 then @funcref{gnutls_transport_set_pull_timeout_function} should be called.
@@ -921,8 +921,8 @@ protocol, this field allows distinguishing out-of-order messages.
 
 The @funcref{gnutls_record_check_pending} helper function is available to 
 allow checking whether data are available to be read in a @acronym{GnuTLS} session 
-buffers. Note that this function complements but does not replace @funcintref{select},
-i.e., @funcref{gnutls_record_check_pending} reports no data to be read, @funcintref{select}
+buffers. Note that this function complements but does not replace @funcintref{poll},
+i.e., @funcref{gnutls_record_check_pending} reports no data to be read, @funcintref{poll}
 should be called to check for data in the network buffers.
 
 @showfuncdesc{gnutls_record_check_pending}
@@ -1096,8 +1096,9 @@ are shown in @ref{tab:prio-algorithms}.
 To avoid collisions in order to specify a compression algorithm in
 the priority string you have to prefix it with "COMP-", protocol versions
 with "VERS-", signature algorithms with "SIGN-" and certificate types with "CTYPE-". 
-All other algorithms don't need a prefix. Each specified keyword can
-be prefixed with any of the following characters.
+All other algorithms don't need a prefix. Each specified keyword (except
+for @emph{special keywords}) can be prefixed with any of the following
+characters.
 
 @table @asis
 @item '!' or '-' 
@@ -1503,7 +1504,7 @@ the risk of a compromised CA being undetected.
 
 @subsubsection Trust on first use
 
-The GnuTLS library includes functionlity to use an SSH-like trust on first use authentication.
+The GnuTLS library includes functionality to use an SSH-like trust on first use authentication.
 The available functions to store and verify public keys are listed below.
 
 @showfuncdesc{gnutls_verify_stored_pubkey}

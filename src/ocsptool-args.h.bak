@@ -83,16 +83,17 @@ typedef enum {
     INDEX_OPT_INDER             = 14,
     INDEX_OPT_LOAD_REQUEST      = 15,
     INDEX_OPT_LOAD_RESPONSE     = 16,
-    INDEX_OPT_VERSION           = 17,
-    INDEX_OPT_HELP              = 18,
-    INDEX_OPT_MORE_HELP         = 19
+    INDEX_OPT_IGNORE_ERRORS     = 17,
+    INDEX_OPT_VERSION           = 18,
+    INDEX_OPT_HELP              = 19,
+    INDEX_OPT_MORE_HELP         = 20
 } teOptIndex;
 /** count of all options for ocsptool */
-#define OPTION_CT    20
+#define OPTION_CT    21
 /** ocsptool version */
-#define OCSPTOOL_VERSION       "3.4.9"
+#define OCSPTOOL_VERSION       "3.4.11"
 /** Full ocsptool version text */
-#define OCSPTOOL_FULL_VERSION  "ocsptool 3.4.9"
+#define OCSPTOOL_FULL_VERSION  "ocsptool 3.4.11"
 
 /**
  *  Interface defines for all options.  Replace "n" with the UPPER_CASED
@@ -162,6 +163,7 @@ typedef enum {
 #define VALUE_OPT_INDER          0x1009
 #define VALUE_OPT_LOAD_REQUEST   'Q'
 #define VALUE_OPT_LOAD_RESPONSE  'S'
+#define VALUE_OPT_IGNORE_ERRORS  0x100A
 /** option flag (value) for help-value option */
 #define VALUE_OPT_HELP          'h'
 /** option flag (value) for more-help-value option */

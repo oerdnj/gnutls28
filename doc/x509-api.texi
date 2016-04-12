@@ -400,7 +400,7 @@ This function will initialize a CRL distribution points type.
 
 @var{reasons}: Revocation reasons. An ORed sequence of flags from @code{gnutls_x509_crl_reason_flags_t} .
 
-This function will store the specified CRL distibution point value
+This function will store the specified CRL distribution point value
 the  @code{cdp} type.
 
 @strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (0), otherwise a negative error value.
@@ -2980,6 +2980,11 @@ If the user allocated memory buffer is not large enough to hold the
 full subjectUniqueID, then a GNUTLS_E_SHORT_MEMORY_BUFFER error will be
 returned, and buf_size will be set to the actual length.
 
+This function had a bug prior to 3.4.8 that prevented the setting
+of @code{NULL}   @code{buf} to discover the  @code{buf_size} . To use this function safely
+with the older versions the  @code{buf} must be a valid buffer that can hold
+at least a single byte if  @code{buf_size} is zero.
+
 @strong{Returns:} @code{GNUTLS_E_SUCCESS}  on success, otherwise a negative error code.
 
 @strong{Since:} 2.12.0
@@ -3457,6 +3462,11 @@ the given certificate.
 If the user allocated memory buffer is not large enough to hold the
 full subjectUniqueID, then a GNUTLS_E_SHORT_MEMORY_BUFFER error will be
 returned, and buf_size will be set to the actual length.
+
+This function had a bug prior to 3.4.8 that prevented the setting
+of @code{NULL}   @code{buf} to discover the  @code{buf_size} . To use this function safely
+with the older versions the  @code{buf} must be a valid buffer that can hold
+at least a single byte if  @code{buf_size} is zero.
 
 @strong{Returns:} @code{GNUTLS_E_SUCCESS}  on success, otherwise a negative error code.
 @end deftypefun
@@ -3974,8 +3984,10 @@ negative error value.
 @var{key}: holds a private key
 
 This function will set the public parameters from the given
-private key to the certificate. Only RSA keys are currently
-supported.
+private key to the certificate.
+
+To export the public key (i.e., the SubjectPublicKeyInfo part), check
+@code{gnutls_pubkey_import_x509()} .
 
 @strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (0) is returned, otherwise a
 negative error value.

@@ -1,6 +1,6 @@
 This is gnutls.info, produced by makeinfo version 6.0 from gnutls.texi.
 
-This manual is last updated 4 March 2015 for version 3.4.9 of GnuTLS.
+This manual is last updated 4 March 2015 for version 3.4.11 of GnuTLS.
 
 Copyright (C) 2001-2015 Free Software Foundation, Inc.\\ Copyright (C)
 2001-2015 Nikos Mavrogiannopoulos
@@ -1814,6 +1814,9 @@ gnutls_alpn_get_selected_protocol
      returned protocol should be treated as opaque, constant value and
      only valid during the session life.
 
+     The selected protocol is the first supported by the list sent by
+     the client.
+
      *Returns:* On success, 'GNUTLS_E_SUCCESS' (0) is returned,
      otherwise a negative error code is returned.
 
@@ -3498,10 +3501,10 @@ gnutls_credentials_set
 
      CRED: the credentials to set
 
-     Sets the needed credentials for the specified type.  Eg username,
-     password - or public and private keys etc.  The 'cred' parameter is
-     a structure that depends on the specified type and on the current
-     session (client or server).
+     Sets the needed credentials for the specified type.  E.g.
+     username, password - or public and private keys etc.  The 'cred'
+     parameter is a structure that depends on the specified type and on
+     the current session (client or server).
 
      In order to minimize memory usage, and share credentials between
      several threads gnutls keeps a pointer to cred, and not the whole
@@ -4219,7 +4222,7 @@ gnutls_ext_register
 
      This function will register a new extension type.  The extension
      will remain registered until 'gnutls_global_deinit()' is called.
-     If the extension type is already registred then
+     If the extension type is already registered then
      'GNUTLS_E_ALREADY_REGISTERED' will be returned.
 
      Each registered extension can store temporary data into the
@@ -5136,7 +5139,8 @@ gnutls_ocsp_status_request_is_checked
 
      If the flag 'GNUTLS_OCSP_SR_IS_AVAIL' is specified, the return
      value of the function indicates whether an OCSP status response
-     have been received (even if invalid).
+     have been received (even if invalid).  The flag was introduced in
+     GnuTLS 3.4.0.
 
      *Returns:* non zero if the response was valid, or a zero if it
      wasn't sent, or sent and was invalid.
@@ -6299,21 +6303,18 @@ gnutls_record_get_direction
      SESSION: is a 'gnutls_session_t' type.
 
      This function provides information about the internals of the
-     record protocol and is only useful if a prior gnutls function call
-     (e.g.  'gnutls_handshake()' ) was interrupted for some reason, that
+     record protocol and is only useful if a prior gnutls function call,
+     e.g.  'gnutls_handshake()' , was interrupted for some reason.  That
      is, if a function returned 'GNUTLS_E_INTERRUPTED' or
      'GNUTLS_E_AGAIN' .  In such a case, you might want to call
-     'select()' or 'poll()' before calling the interrupted gnutls
-     function again.  To tell you whether a file descriptor should be
-     selected for either reading or writing,
-     'gnutls_record_get_direction()' returns 0 if the interrupted
-     function was trying to read data, and 1 if it was trying to write
-     data.
+     'select()' or 'poll()' before restoring the interrupted gnutls
+     function.
 
-     This function's output is unreliable if you are using the 'session'
-     in different threads, for sending and receiving.
+     This function's output is unreliable if you are using the same
+     'session' in different threads, for sending and receiving.
 
-     *Returns:* 0 if trying to read data, 1 if trying to write data.
+     *Returns:* 0 if interrupted while trying to read data, or 1 while
+     trying to write data.
 
 gnutls_record_get_max_size
 --------------------------

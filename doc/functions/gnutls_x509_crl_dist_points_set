@@ -11,7 +11,7 @@
 
 @var{reasons}: Revocation reasons. An ORed sequence of flags from @code{gnutls_x509_crl_reason_flags_t} .
 
-This function will store the specified CRL distibution point value
+This function will store the specified CRL distribution point value
 the  @code{cdp} type.
 
 @strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (0), otherwise a negative error value.

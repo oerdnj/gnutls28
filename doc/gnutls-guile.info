@@ -1,7 +1,8 @@
 This is gnutls-guile.info, produced by makeinfo version 6.0 from
 gnutls-guile.texi.
 
-This manual is last updated 19 January 2015 for version 3.4.9 of GnuTLS.
+This manual is last updated 19 January 2015 for version 3.4.11 of
+GnuTLS.
 
 Copyright (C) 2001-2012, 2014 Free Software Foundation, Inc.
 
@@ -22,7 +23,8 @@ File: gnutls-guile.info,  Node: Top,  Next: Preface,  Up: (dir)
 GnuTLS-Guile
 ************
 
-This manual is last updated 19 January 2015 for version 3.4.9 of GnuTLS.
+This manual is last updated 19 January 2015 for version 3.4.11 of
+GnuTLS.
 
 Copyright (C) 2001-2012, 2014 Free Software Foundation, Inc.
 
@@ -130,7 +132,7 @@ the version number of the loaded library as follows:
      $ guile
      guile> (use-modules (gnutls))
      guile> (gnutls-version)
-     "3.4.9"
+     "3.4.11"
      guile>
 
 
@@ -1697,22 +1699,22 @@ Concept Index
 
 
 Tag Table:
-Node: Top784
-Node: Preface1838
-Node: Guile Preparations2404
-Node: Guile API Conventions5042
-Node: Enumerates and Constants5616
-Node: Procedure Names7941
-Node: Representation of Binary Data8924
-Node: Input and Output9970
-Node: Exception Handling11843
-Node: Guile Examples13671
-Node: Anonymous Authentication Guile Example14125
-Node: OpenPGP Authentication Guile Example16687
-Node: Importing OpenPGP Keys Guile Example19173
-Node: Guile Reference20613
-Node: Copying Information39633
-Node: Procedure Index64819
-Node: Concept Index75487
+Node: Top785
+Node: Preface1840
+Node: Guile Preparations2406
+Node: Guile API Conventions5045
+Node: Enumerates and Constants5619
+Node: Procedure Names7944
+Node: Representation of Binary Data8927
+Node: Input and Output9973
+Node: Exception Handling11846
+Node: Guile Examples13674
+Node: Anonymous Authentication Guile Example14128
+Node: OpenPGP Authentication Guile Example16690
+Node: Importing OpenPGP Keys Guile Example19176
+Node: Guile Reference20616
+Node: Copying Information39636
+Node: Procedure Index64822
+Node: Concept Index75490
 
 End Tag Table

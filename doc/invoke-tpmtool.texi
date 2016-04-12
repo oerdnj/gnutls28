@@ -56,7 +56,7 @@ Usage:  tpmtool [ -<flag> [<val>] | --<name>[@{=| @}<val>] ]...
        --user                 Any registered key will be a user key
                                 - requires the option 'register'
                                 -- and prohibits the option 'system'
-       --system               Any registred key will be a system key
+       --system               Any registered key will be a system key
                                 - requires the option 'register'
                                 -- and prohibits the option 'user'
        --pubkey=str           Prints the public key of the provided key
@@ -114,7 +114,7 @@ The generated key will be stored in a user specific persistent storage.
 @anchor{tpmtool system}
 @subsection system option
 
-This is the ``any registred key will be a system key'' option.
+This is the ``any registered key will be a system key'' option.
 
 @noindent
 This option has some usage constraints.  It:

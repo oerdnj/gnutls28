@@ -90,7 +90,7 @@ otherwise a negative error code is returned.
 
 @var{format}: the format of the keys
 
-This funtion is used to load OpenPGP keys into the GnuTLS
+This function is used to load OpenPGP keys into the GnuTLS
 credentials structure. The file should contain at least one valid non encrypted subkey.
 
 @strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (0) is returned, otherwise a
@@ -110,7 +110,7 @@ negative error value.
 
 @var{format}: the format of the keys
 
-This funtion is used to load OpenPGP keys into the GnuTLS credential 
+This function is used to load OpenPGP keys into the GnuTLS credential 
 structure. The file should contain at least one valid non encrypted subkey.
 
 The special keyword "auto" is also accepted as  @code{subkey_id} .  In that
@@ -134,7 +134,7 @@ negative error value.
 
 @var{format}: the format of the keys
 
-This funtion is used to load OpenPGP keys into the GnuTLS credential 
+This function is used to load OpenPGP keys into the GnuTLS credential 
 structure. The datum should contain at least one valid non encrypted subkey.
 
 @strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (0) is returned, otherwise a
@@ -154,7 +154,7 @@ negative error value.
 
 @var{format}: the format of the keys
 
-This funtion is used to load OpenPGP keys into the GnuTLS
+This function is used to load OpenPGP keys into the GnuTLS
 credentials structure. The datum should contain at least one valid non encrypted subkey.
 
 The special keyword "auto" is also accepted as  @code{subkey_id} .  In that
@@ -1293,7 +1293,7 @@ otherwise a negative error code is returned.
 
 @var{func}: the callback
 
-This funtion will set a key retrieval function for OpenPGP keys. This
+This function will set a key retrieval function for OpenPGP keys. This
 callback is only useful in server side, and will be used if the peer
 sent a key fingerprint instead of a full key.
 

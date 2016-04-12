@@ -11,7 +11,7 @@
 
 @var{format}: the format of the keys
 
-This funtion is used to load OpenPGP keys into the GnuTLS
+This function is used to load OpenPGP keys into the GnuTLS
 credentials structure. The file should contain at least one valid non encrypted subkey.
 
 @strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (0) is returned, otherwise a

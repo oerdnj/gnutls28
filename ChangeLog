@@ -1,3 +1,492 @@
+2016-04-10  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* NEWS: released 3.4.11
+
+2016-04-10  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* configure.ac: tests: do not enable valgrind in non-git builds
+
+2016-04-09  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* lib/x509/ocsp_output.c, lib/x509/output.c: x509 output: don't warn
+	about insecure algorithm when unknown
+
+2016-04-09  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* tests/suite/Makefile.am, tests/suite/testcompat-openssl.sh: tests:
+	disable unsupported curves from compatibility checks This allows running make check even when compiling with
+	disable-suiteb-curves.
+
+2016-03-31  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/gnutls_state.c: dtls: added missing dtls.h to state.c
+
+2016-04-09  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* configure.ac, m4/hooks.m4: bumped version
+
+2016-04-09  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* NEWS: doc update
+
+2016-04-09  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* lib/minitasn1/coding.c, lib/minitasn1/decoding.c,
+	lib/minitasn1/element.c, lib/minitasn1/element.h,
+	lib/minitasn1/int.h, lib/minitasn1/libtasn1.h,
+	lib/minitasn1/parser_aux.c, lib/minitasn1/parser_aux.h,
+	lib/minitasn1/structure.c: minitasn1: updated to latest git version
+
+2016-04-08  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* doc/cha-gtls-app.texi: doc: Replace references to select with poll
+	and other fixes
+
+2016-04-08  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* doc/cha-gtls-app.texi: doc: replace inaccurate sentence with
+	reference to gnutls_record_discard_queued [ci skip]
+
+2016-04-08  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/gnutls_state.c: gnutls_record_get_direction: doc update [ci
+	skip]
+
+2016-04-08  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* tests/x509sign-verify2.c: tests: reduce the number of loops in
+	x509sign-verify2 This enables running the test in reasonable time under valgrind.
+
+2016-04-08  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/pkix.asn, lib/pkix_asn1_tab.c: pkix.asn: corrected byKey
+	definition OCSP is defined in an EXPLICIT tags module, and as such we must tag
+	explicitly all of its tags.
+
+2016-04-05  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/x509/name_constraints.c: name constraints: enforce the rules
+	for IP constraints when adding This will prevent gnutls from generating badly formed certificates.
+
+2016-04-05  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/x509/common.c, lib/x509/common.h, lib/x509/x509.c: 
+	_gnutls_parse_general_name2: allow parsing empty names This allows parsing empty general names such as an empty DNSname
+	used in name constraints.
+
+2016-04-02  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* NEWS: doc update
+
+2016-04-02  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* src/ocsptool-common.c: ocsptool: use HTTP/1.0 for requests This avoids issue with servers serving chunk encoding which ocsptool
+	doesn't support. Reported by Thomas Klute.
+
+2016-03-30  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* NEWS: doc update
+
+2016-03-29  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* tests/cert-tests/certtool-long-cn: tests: delete outfile in
+	certtool-long-cn
+
+2016-03-29  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* tests/cert-tests/Makefile.am, tests/cert-tests/name-constraints,
+	tests/cert-tests/name-constraints-ip2.pem: tests: verify the output
+	of name constraints IP decoding
+
+2016-03-30  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/x509/output.c: x509/output: simplified cidr_to_string()
+
+2016-03-29  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/x509/output.c: x509/output: print RFC5280 CIDRs in name
+	constraints
+
+2016-03-30  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* NEWS: doc update
+
+2016-03-30  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/gnutls_dtls.c, lib/gnutls_dtls.h, lib/gnutls_state.c: dtls:
+	reset the record number sliding window on gnutls_record_set_state() This addresses issue where gnutls_record_set_state() was called with
+	a new state but the sliding window information was not updated, thus
+	blocking any incoming packets.  Resolves #82
+
+2016-03-29  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/gnutls_record.c: DTLS: save last valid record sequence number This will allow to report a valid number to
+	gnutls_record_get_state() callers in case of DTLS. Reported by
+	Fridolin Pokorny.
+
+2016-03-29  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/gnutls_state.c: gnutls_record_get_state: Allow for NULL
+	parameters
+
+2016-03-24  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* src/ocsptool.c: ocsptool: don't exit with error code on
+	verification failures when --ignore-errors is given
+
+2016-03-23  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* src/ocsptool.c: ocsptool: exit with error on verification failures
+
+2016-03-23  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* lib/x509/ocsp.c: ocsp: gnutls_ocsp_resp_verify_direct will skip
+	additional checks for certificates matching issuer That eliminates issue with ocsptool rejecting OCSP responses signed
+	by the same CA that signed the certificate. Reported by Thomas
+	Klute.
+
+2016-03-23  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* src/ocsptool-args.def, src/ocsptool.c: ocsptool: Allow saving
+	responses even if verification fails In addition do not enter a spurious newline to responses.
+
+2016-03-23  Maya Rashish <coypu@sdf.org>
+
+	* tests/dtls/dtls-stress.c: Avoid using strerror in dtls stress test Using it results in build failure on NetBSD: undefined reference to
+	`rpl_strerror'
+
+2016-03-23  Maya Rashish <coypu@sdf.org>
+
+	* tests/utils.h: Add missing header to testsuite This causes a problem for NetBSD+clang tests, because SIGTERM and
+	kill are undefined.  Resolves #80 Signed-off-by: Maya Rashish <coypu@sdf.org>
+
+2016-03-18  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* NEWS: doc update [ci skip]
+
+2016-03-18  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* tests/mini-x509-callbacks.c: tests: verify that the
+	post-client-hello callback has access to ALPN data
+
+2016-03-18  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/gnutls_handshake.c: handshake: parse the mandatory to parse
+	extension prior to any callback call This relates to the change of ALPN extension to mandatory to parse,
+	and allows applications to get ALPN data prior to handshake
+	completion.
+
+2016-03-18  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* tests/resume.c: tests: added checks for session resumption and
+	ALPN This checks whether the ALPN extension is re-read on resumption and
+	is negotiated.
+
+2016-02-11  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* tests/resume.c: tests: resume: simplified structure assignment
+	using C99 syntax
+
+2016-03-15  Yuriy M. Kaminskiy <yumkam@gmail.com>
+
+	* lib/ext/alpn.c: alpn: ALPN state is per-connection, it should not
+	be saved with session data In addition the extension was moved to the mandatory to parse to
+	ensure it is always parsed when sessions are resumed.  rfc7301:     Unlike many other TLS extensions, this extension does not
+	    establish properties of the session, only of the connection.
+	    When session resumption or session tickets [RFC5077] are used, the
+	    previous contents of this extension are irrelevant, and only the
+	    values in the new handshake messages are considered.  Signed-off-by: Yuriy M. Kaminskiy <yumkam@gmail.com> Signed-off-by:
+	Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+2016-03-16  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/accelerated/x86/x86-common.c: x86-common: CPUID override will
+	only work if CPU has already the capability present This resolves test suite failure on CPUs with limited capabilities.
+	Reported by Andreas Metzler.
+
+2016-03-16  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* NEWS: doc update
+
+2016-03-16  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* lib/ext/server_name.c: gnutls_server_name_set: accept non-null
+	terminated hostnames The introduction of IDNA support introduced a regression and this
+	function does not operate correctly when given non-null terminated
+	strings. Reported by Tim Ruehsen.  Relates #78
+
+2016-03-16  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* tests/mini-server-name.c: tests: added check for non-null
+	terminated server name This checks whether a non-null terminated server name, but with
+	correct length is correctly accepted by gnutls_server_name_set().  Relates #78
+
+2016-03-15  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* tests/cert-tests/template-nc.pem: tests: template-test was updated
+	for OCSP key purpose reordering
+
+2016-03-15  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* NEWS: doc update
+
+2016-03-15  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* src/certtool.c: certtool: do not require a CA for OCSP signing This follows the recommendations in RFC6960 in 4.2.2.2 which allow a
+	CA to delegate OCSP signing to another certificate without requiring
+	it to be a CA.  Reported by Thomas Klute.
+
+2016-03-13  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* devel/ABI-x86_64.dump, devel/abi-unchecked-symbols,
+	devel/abi-unchecked-symbols.txt: abi-check: corrected type of
+	gnutls_x509_crl_get_issuer_dn That will avoid any accidental ABI breakage on that symbol.
+
+2016-03-11  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* .gitlab-ci.yml: .gitlab-ci.yml: added abi-checker rule This allows to test ABI incompatibilities as soon as possible.
+
+2016-03-11  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* Makefile.am, devel/ABI-dane-x86_64.dump, devel/ABI-x86_64.dump,
+	devel/abi-unchecked-symbols, devel/abi-unchecked-symbols.txt,
+	devel/abi.xml, devel/abi3.2.xml, devel/abi3.4.xml: Makefile: made
+	abi-checks self-contained That is, they no longer assume a given directory structure to exist
+	outside git. It now includes a static dump of the symbols in 3.4.0
+	for x86_64 and we compare with it.
+
+2016-03-11  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* src/cli.c: gnutls-cli: fix invalid initialization in
+	cert_verify_ocsp()
+
+2016-03-08  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* NEWS: doc update
+
+2016-03-08  Jan Vcelak <jan.vcelak@nic.cz>
+
+	* lib/pkcs11_privkey.c: pkcs11: implement correct DSA key pair
+	generating Signed-off-by: Jan Vcelak <jan.vcelak@nic.cz>
+
+2016-02-25  Jan Vcelak <jan.vcelak@nic.cz>
+
+	* lib/pkcs11_int.c, lib/pkcs11_int.h: pkcs11: add interface for
+	C_GenerateKey Signed-off-by: Jan Vcelak <jan.vcelak@nic.cz>
+
+2016-03-08  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* tests/suite/testpkcs11.sh: tests: testpkcs11: the test will always
+	fail in code path failures
+
+2016-03-07  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* tests/mini-loss-time.c: tests: mini-loss-time: improved timeout
+	detection
+
+2016-02-15  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* tests/mini-loss-time.c: tests: mini-loss-time: ensure client
+	timeouts after the server is This addresses issue with the server detecting the client
+	disconnection prior to its timeout. Reported by Steven Chamberlain,
+	Andreas Metzler.
+
+2016-03-07  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/gnutls_ui.c: gnutls_ocsp_status_request_is_checked: document
+	the version the flag was introduced at
+
+2016-03-07  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* doc/doc.mk: doc: generate manpages for all functions That addresses issue where certain manpages were created empty.  See
+	https://bugzilla.redhat.com/show_bug.cgi?id=1306800
+
+2016-03-07  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* doc/cha-gtls-app.texi: doc: mention
+	gnutls_certificate_set_x509_trust_dir() It was not mentioned in the "Client or server certificate
+	verification" section.  Resolves #76
+
+2016-03-03  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* tests/slow/Makefile.am: tests: include test-hash-large into dist
+
+2016-03-03  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* NEWS: doc update
+
+2016-03-03  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* po/zh_CN.po.in: Sync with TP [ci skip]
+
+2016-03-01  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/gnutls_global.c: Disable weak symbols for
+	_gnutls_global_init_skip() under windows That is to avoid an issue with running gnutls under windows; that
+	renders GNUTLS_SKIP_GLOBAL_INIT a no-op under windows.  Relates #74
+
+2016-02-29  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* configure.ac, m4/hooks.m4: bumped version [ci skip]
+
+2016-02-29  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/ext/ecc.c: ecc: optimized extension parsing
+
+2016-02-29  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* NEWS: doc update [ci skip]
+
+2016-02-29  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/gnutls_state.c: timespec_sub_ms: fixed operation in 32-bit
+	systems
+
+2016-02-29  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/pkcs11.c, lib/pkcs11_int.h: pkcs11: Fixes to prevent undefined
+	behavior (found with libubsan)
+
+2016-02-29  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/nettle/cipher.c: cipher.c: Fixes to prevent undefined behavior
+	(found with libubsan)
+
+2016-02-29  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/opencdk/misc.c: opencdk: Fixes to prevent undefined behavior
+	(found with libubsan)
+
+2016-02-29  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/includes/gnutls/gnutls.h.in: gnutls.h: Fixes to prevent
+	undefined behavior (found with libubsan)
+
+2016-02-29  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/gnutls_mem.h, lib/x509/x509.c: x509: Fixes to prevent
+	undefined behavior (found with libubsan)
+
+2016-02-28  Andreas Metzler <ametzler@bebt.de>
+
+	* src/p11tool-args.def: Let p11tool --provider option accept
+	filenames.  Drop 'file-exists = yes;' to allow specifying either an absolute
+	pathname or a file in P11_MODULE_PATH.
+
+2016-02-27  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* tests/suite/pkcs11-chainverify.c, tests/suite/pkcs11-is-known.c,
+	tests/suite/softhsm.h, tests/suite/testpkcs11.softhsm,
+	tests/utils.c, tests/utils.h: tests: enable softhsmv2 test suite by
+	default Also do not fatally fail with known softhsmv2 bugs.
+
+2016-02-27  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* NEWS: doc update
+
+2016-02-26  Jan Vcelak <jan.vcelak@nic.cz>
+
+	* tests/suite/testpkcs11.sh: pkcs11: tests for RSA, ECC, DSA private
+	key import Signed-off-by: Jan Vcelak <jan.vcelak@nic.cz>
+
+2016-02-26  Jan Vcelak <jan.vcelak@nic.cz>
+
+	* tests/suite/testpkcs11.sh: pkcs11: tests for DSA key generating Signed-off-by: Jan Vcelak <jan.vcelak@nic.cz>
+
+2016-02-27  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* doc/cha-gtls-app.texi: added getpid() to the list of system calls
+	used
+
+2016-02-25  Jan Vcelak <jan.vcelak@nic.cz>
+
+	* lib/x509/privkey_pkcs8.c: gnutls_x509_privkey_import: add missing
+	algorithm setting for DSA keys The algorithm number was set only in the private key structure, not
+	in the nested structure with parameters. This made certain
+	operations to fail (e.g., copying the key into a PKCS #11 token).  Signed-off-by: Jan Vcelak <jan.vcelak@nic.cz>
+
+2016-02-24  Sebastian Dröge <sebastian@centricular.com>
+
+	* configure.ac: configure: Android is ELF too Without this, compiling Android for x86 or x86-64 fails because the
+	assembly optimizations are not compiled in.
+
+2016-02-18  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* NEWS: doc update
+
+2016-02-18  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* tests/Makefile.am, tests/pcert-list.c: tests: added tests for
+	gnutls_pcert_list_import_x509_raw()
+
+2016-02-18  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/x509/x509.c: gnutls_x509_crt_list_import: corrected memory
+	leak This was triggered if GNUTLS_X509_CRT_LIST_FAIL_IF_UNSORTED was
+	specified and a failure occurred.
+
+2016-02-18  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/x509/common.c: _gnutls_sort_clist: fixed issues when used with
+	func option This function would incorrectly call func() on elements that were
+	included in the list, and would not call func() if the size of the
+	final chain was one.
+
+2016-02-13  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* lib/algorithms/secparams.c: DH/DSA: allow the generation of larger
+	than 15360 bit parameters
+
+2016-02-13  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* tests/slow/hash-large.c: tests: eliminated mem leak in hash-large
+
+2016-02-12  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* NEWS: doc update [ci skip]
+
+2016-02-12  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* tests/slow/Makefile.am, tests/slow/hash-large.c,
+	tests/slow/test-hash-large: tests: check whether large buffer hashes
+	and MAC work as expected
+
+2016-02-12  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* lib/accelerated/x86/hmac-padlock.c,
+	lib/accelerated/x86/hmac-x86-ssse3.c,
+	lib/accelerated/x86/sha-padlock.c,
+	lib/accelerated/x86/sha-padlock.h,
+	lib/accelerated/x86/sha-x86-ssse3.c, lib/nettle/mac.c: nettle: use
+	the correct type for hash and MAC functions
+
+2016-02-11  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* src/benchmark-cipher.c: gnutls-cli: improved indentation in
+	benchmark output
+
+2016-02-10  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* tests/set_pkcs12_cred.c: tests: set_pkcs12_cred: existing tests
+	are disabled when in FIPS140-2 mode The tests require access to the RC4 cipher which is not available.
+
+2016-02-09  Andreas Metzler <ametzler@bebt.de>
+
+	* doc/cha-gtls-app.texi: improve doc on special keywords in priority
+	string Special keywords in priority strings like %COMPAT may not be
+	prefixed with +, - or !, "NORMAL:+%COMPAT is invalid.
+
+2016-02-06  Attila Molnar <attilamolnar@hush.com>
+
+	* doc/cha-cert-auth.texi, doc/cha-gtls-app.texi,
+	doc/cha-tokens.texi, lib/gnutls_auth.c, lib/gnutls_dtls.c,
+	lib/gnutls_extensions.c, src/tpmtool-args.def: doc: Fix some typos
+
+2016-02-06  Attila Molnar <attilamolnar@hush.com>
+
+	* doc/cha-gtls-app.texi, src/certtool-cfg.c, src/serv-args.def: 
+	Remove remaining RSA-EXPORT support leftovers from doc and messages
+
 2016-02-03  Nikos Mavrogiannopoulos <nmav@gnutls.org>
 
 	* tests/suite/pkcs11-pubkey-import-ecdsa.c: tests:

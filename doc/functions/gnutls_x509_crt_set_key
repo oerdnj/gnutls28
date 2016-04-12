@@ -8,8 +8,10 @@
 @var{key}: holds a private key
 
 This function will set the public parameters from the given
-private key to the certificate. Only RSA keys are currently
-supported.
+private key to the certificate.
+
+To export the public key (i.e., the SubjectPublicKeyInfo part), check
+@code{gnutls_pubkey_import_x509()} .
 
 @strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (0) is returned, otherwise a
 negative error value.

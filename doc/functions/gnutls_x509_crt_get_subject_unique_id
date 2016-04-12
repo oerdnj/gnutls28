@@ -17,5 +17,10 @@ If the user allocated memory buffer is not large enough to hold the
 full subjectUniqueID, then a GNUTLS_E_SHORT_MEMORY_BUFFER error will be
 returned, and buf_size will be set to the actual length.
 
+This function had a bug prior to 3.4.8 that prevented the setting
+of @code{NULL}   @code{buf} to discover the  @code{buf_size} . To use this function safely
+with the older versions the  @code{buf} must be a valid buffer that can hold
+at least a single byte if  @code{buf_size} is zero.
+
 @strong{Returns:} @code{GNUTLS_E_SUCCESS}  on success, otherwise a negative error code.
 @end deftypefun

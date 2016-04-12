@@ -1,8 +1,18 @@
 #! /usr/bin/make -f
 # Build the gnutls package for Debian.
 
+export DEB_BUILD_MAINT_OPTIONS := hardening=+bindnow
 export DEB_CFLAGS_MAINT_APPEND := -Wall
 export DEB_CXXFLAGS_MAINT_APPEND := -Wall
+
+# used by autogen
+ifndef SOURCE_DATE_EPOCH
+	export MAN_PAGE_DATE = $(shell env LC_ALL=C date -u -d \
+		"`dpkg-parsechangelog --show-field Date`" +%Y-%m-%d)
+else
+	export MAN_PAGE_DATE = $(shell env LC_ALL=C date -u -d \
+		"@$(SOURCE_DATE_EPOCH)" +%Y-%m-%d)
+endif
 
 AMCONFBUILDINDEP := $(shell if dh_listpackages | grep -q gnutls-doc ; \
 	then echo "--enable-gtk-doc" ; \
@@ -31,7 +41,7 @@ override_dh_auto_configure:
 
 override_dh_makeshlibs:
 	dh_makeshlibs -p libgnutlsxx28 -V 'libgnutlsxx28 (>= 3.3.8-0)'
-	dh_makeshlibs -p libgnutls30  -V 'libgnutls30 (>= 3.4.2-0)' -- -c4
+	dh_makeshlibs -p libgnutls30  -V 'libgnutls30 (>= 3.4.6-0)' -- -c4
 	dh_makeshlibs -p libgnutls-openssl27 -V 'libgnutls-openssl27 (>= 3.0-0)'
 	dh_makeshlibs --remaining-packages -Xguile/2.0/guile-gnutls-v-2.so
 
@@ -94,10 +104,10 @@ override_dh_compress:
 	dh_compress -X.pdf
 
 override_dh_strip:
-	dh_strip --dbg-package=libgnutls30-dbg
+	dh_strip --ddeb-migration='libgnutls30-dbg (<< 3.4.7-2~)'
 
 override_dh_auto_test:
-	:
+	dh_auto_test -O--parallel --verbose -- VERBOSE=1
 
 override_dh_clean:
 	dh_clean -X.bak

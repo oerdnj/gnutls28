@@ -1,2 +1,3 @@
 14_version_gettextcat.diff
 30_guile-snarf.diff
+40_src-added-systemkey-args-to-BUILT_SOURCES.patch

@@ -139,7 +139,6 @@ Other options:
                                 - disabled as '--no-outder'
    -4, --outraw               an alias for the 'outder' option
    -5, --provider=file        Specify the PKCS #11 provider library
-                                - file must pre-exist
    -6, --detailed-url         Print detailed URLs
                                 - disabled as '--no-detailed-url'
    -7, --only-urls            Print a compact listing using only the URLs

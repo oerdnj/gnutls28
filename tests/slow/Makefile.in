@@ -108,8 +108,8 @@ host_triplet = @host@
 @ENABLE_MINITASN1_TRUE@am__append_1 = -I$(top_builddir)/lib/minitasn1
 check_PROGRAMS = $(am__EXEEXT_1) cipher-test$(EXEEXT) \
 	cipher-override$(EXEEXT) mac-override$(EXEEXT) \
-	cipher-override2$(EXEEXT)
-TESTS = $(am__EXEEXT_1) test-ciphers override-ciphers
+	cipher-override2$(EXEEXT) hash-large$(EXEEXT)
+TESTS = $(am__EXEEXT_1) test-ciphers override-ciphers test-hash-large
 @WINDOWS_TRUE@am__append_2 = WINDOWS=1
 subdir = tests/slow
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -258,6 +258,11 @@ gendh_OBJECTS = gendh.$(OBJEXT)
 gendh_LDADD = $(LDADD)
 gendh_DEPENDENCIES = ../libutils.la ../../gl/libgnu.la \
 	$(top_builddir)/lib/libgnutls.la $(am__DEPENDENCIES_1)
+hash_large_SOURCES = hash-large.c
+hash_large_OBJECTS = hash-large.$(OBJEXT)
+hash_large_LDADD = $(LDADD)
+hash_large_DEPENDENCIES = ../libutils.la ../../gl/libgnu.la \
+	$(top_builddir)/lib/libgnutls.la $(am__DEPENDENCIES_1)
 mac_override_SOURCES = mac-override.c
 mac_override_OBJECTS = mac-override.$(OBJEXT)
 mac_override_LDADD = $(LDADD)
@@ -301,9 +306,9 @@ am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
 SOURCES = cipher-override.c cipher-override2.c cipher-test.c gendh.c \
-	mac-override.c
+	hash-large.c mac-override.c
 DIST_SOURCES = cipher-override.c cipher-override2.c cipher-test.c \
-	gendh.c mac-override.c
+	gendh.c hash-large.c mac-override.c
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -1523,7 +1528,7 @@ LDADD = ../libutils.la \
 ctests = gendh
 @ENABLE_NETTLE_TRUE@cipher_override_LDFLAGS = $(NETTLE_LIBS) $(HOGWEED_LIBS) $(GMP_LIBS) $(LDADD)
 @ENABLE_NETTLE_TRUE@mac_override_LDFLAGS = $(NETTLE_LIBS) $(HOGWEED_LIBS) $(GMP_LIBS) $(LDADD)
-dist_check_SCRIPTS = test-ciphers override-ciphers
+dist_check_SCRIPTS = test-ciphers override-ciphers test-hash-large
 EXTRA_DIST = README
 TESTS_ENVIRONMENT = EXEEXT=$(EXEEXT) LC_ALL="C" \
 	top_builddir="$(top_builddir)" srcdir="$(srcdir)" \
@@ -1587,6 +1592,10 @@ gendh$(EXEEXT): $(gendh_OBJECTS) $(gendh_DEPENDENCIES) $(EXTRA_gendh_DEPENDENCIE
 	@rm -f gendh$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(gendh_OBJECTS) $(gendh_LDADD) $(LIBS)
 
+hash-large$(EXEEXT): $(hash_large_OBJECTS) $(hash_large_DEPENDENCIES) $(EXTRA_hash_large_DEPENDENCIES) 
+	@rm -f hash-large$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(hash_large_OBJECTS) $(hash_large_LDADD) $(LIBS)
+
 mac-override$(EXEEXT): $(mac_override_OBJECTS) $(mac_override_DEPENDENCIES) $(EXTRA_mac_override_DEPENDENCIES) 
 	@rm -f mac-override$(EXEEXT)
 	$(AM_V_CCLD)$(mac_override_LINK) $(mac_override_OBJECTS) $(mac_override_LDADD) $(LIBS)
@@ -1601,6 +1610,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/cipher-override2.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/cipher_test-cipher-test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gendh.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/hash-large.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/mac-override.Po@am__quote@
 
 .c.o:
@@ -1857,6 +1867,13 @@ test-ciphers.log: test-ciphers
 override-ciphers.log: override-ciphers
 	@p='override-ciphers'; \
 	b='override-ciphers'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+test-hash-large.log: test-hash-large
+	@p='test-hash-large'; \
+	b='test-hash-large'; \
 	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \

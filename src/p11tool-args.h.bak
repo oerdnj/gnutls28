@@ -131,9 +131,9 @@ typedef enum {
 /** count of all options for p11tool */
 #define OPTION_CT    66
 /** p11tool version */
-#define P11TOOL_VERSION       "3.4.9"
+#define P11TOOL_VERSION       "3.4.11"
 /** Full p11tool version text */
-#define P11TOOL_FULL_VERSION  "p11tool 3.4.9"
+#define P11TOOL_FULL_VERSION  "p11tool 3.4.11"
 
 /**
  *  Interface defines for all options.  Replace "n" with the UPPER_CASED

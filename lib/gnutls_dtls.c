@@ -443,6 +443,37 @@ int _dtls_wait_and_retransmit(gnutls_session_t session)
 #define window_size rp->record_sw_size
 #define window_head_idx rp->record_sw_head_idx
 
+#define LOAD_UINT48(out, ubytes) \
+	for (i = 2; i < 8; i++) { \
+		out <<= 8; \
+		out |= ubytes[i] & 0xff; \
+	}
+
+void _dtls_reset_window(gnutls_session_t session, uint8_t _seq[8])
+{
+	record_parameters_st *rp;
+	int ret;
+	unsigned i;
+	uint64_t seq = 0;
+
+	ret =
+	    _gnutls_epoch_get(session, EPOCH_READ_CURRENT, &rp);
+	if (ret < 0)
+		return;
+
+	LOAD_UINT48(seq, _seq);
+
+	if (seq == 0) {
+		window_size = 0;
+		window_head_idx = 0;
+		return;
+	}
+
+	window_size = 1;
+	window_head_idx = 0;
+	window_table[window_head_idx] = seq - 1;
+}
+
 static void slide_window(struct record_parameters_st *rp,
 			 unsigned int places)
 {
@@ -470,10 +501,7 @@ int _dtls_record_check(struct record_parameters_st *rp, uint64 * _seq)
 	unsigned int i, offset = 0;
 	unsigned int last_idx;
 
-	for (i = 2; i < 8; i++) {
-		seq <<= 8;
-		seq |= _seq->i[i] & 0xff;
-	}
+	LOAD_UINT48(seq, _seq->i);
 
 	/* only two values allowed in window_size */
 	if (window_size == 0) {
@@ -569,7 +597,7 @@ void gnutls_dtls_set_timeouts(gnutls_session_t session,
  * This function will set the maximum transfer unit of the transport
  * that DTLS packets are sent over. Note that this should exclude
  * the IP (or IPv6) and UDP headers. So for DTLS over IPv6 on an
- * Ethenet device with MTU 1500, the DTLS MTU set with this function
+ * Ethernet device with MTU 1500, the DTLS MTU set with this function
  * would be 1500 - 40 (IPV6 header) - 8 (UDP header) = 1452.
  *
  * Since: 3.0

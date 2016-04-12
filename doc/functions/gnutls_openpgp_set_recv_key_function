@@ -7,7 +7,7 @@
 
 @var{func}: the callback
 
-This funtion will set a key retrieval function for OpenPGP keys. This
+This function will set a key retrieval function for OpenPGP keys. This
 callback is only useful in server side, and will be used if the peer
 sent a key fingerprint instead of a full key.
 

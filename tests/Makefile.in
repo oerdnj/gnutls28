@@ -314,8 +314,9 @@ am__EXEEXT_7 = mini-record-2$(EXEEXT) simple$(EXEEXT) gc$(EXEEXT) \
 	pkcs8-key-decode$(EXEEXT) \
 	mini-session-verify-function$(EXEEXT) auto-verify$(EXEEXT) \
 	mini-x509-default-prio$(EXEEXT) global-init-override$(EXEEXT) \
-	$(am__EXEEXT_1) $(am__EXEEXT_2) $(am__EXEEXT_3) \
-	$(am__EXEEXT_4) $(am__EXEEXT_5) $(am__EXEEXT_6)
+	pcert-list$(EXEEXT) $(am__EXEEXT_1) $(am__EXEEXT_2) \
+	$(am__EXEEXT_3) $(am__EXEEXT_4) $(am__EXEEXT_5) \
+	$(am__EXEEXT_6)
 anonself_SOURCES = anonself.c
 anonself_OBJECTS = anonself.$(OBJEXT)
 anonself_LDADD = $(LDADD)
@@ -875,6 +876,12 @@ parse_ca_LDADD = $(LDADD)
 parse_ca_DEPENDENCIES = ../lib/libgnutls.la libutils.la \
 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
 	$(am__DEPENDENCIES_1)
+pcert_list_SOURCES = pcert-list.c
+pcert_list_OBJECTS = pcert-list.$(OBJEXT)
+pcert_list_LDADD = $(LDADD)
+pcert_list_DEPENDENCIES = ../lib/libgnutls.la libutils.la \
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1)
 pgps2kgnu_SOURCES = pgps2kgnu.c
 pgps2kgnu_OBJECTS = pgps2kgnu.$(OBJEXT)
 pgps2kgnu_LDADD = $(LDADD)
@@ -1153,16 +1160,17 @@ SOURCES = $(libutils_la_SOURCES) anonself.c atfork.c auto-verify.c \
 	mini-x509-default-prio.c moredn.c mpi.c name-constraints.c \
 	no-signal.c nul-in-x509-names.c ocsp.c oids.c openpgp-auth.c \
 	openpgp-auth2.c openpgp-callback.c openpgp-keyring.c \
-	openpgpself.c openssl.c parse_ca.c pgps2kgnu.c pkcs12_encode.c \
-	pkcs12_s2k.c pkcs12_s2k_pem.c pkcs12_simple.c pkcs7-gen.c \
-	pkcs8-key-decode.c prf.c priorities.c pskself.c record-sizes.c \
-	record-sizes-range.c resume.c resume-dtls.c rng-fork.c \
-	rsa-encrypt-decrypt.c sec-params.c set_pkcs12_cred.c \
-	set_x509_key_file.c set_x509_key_mem.c setcredcrash.c \
-	sign-md5-rep.c simple.c status-request.c status-request-ok.c \
-	strict-der.c x509-extensions.c x509-verify-with-crl.c \
-	x509_altname.c x509cert.c x509cert-invalid.c x509cert-tl.c \
-	x509dn.c x509self.c x509sign-verify.c x509sign-verify2.c
+	openpgpself.c openssl.c parse_ca.c pcert-list.c pgps2kgnu.c \
+	pkcs12_encode.c pkcs12_s2k.c pkcs12_s2k_pem.c pkcs12_simple.c \
+	pkcs7-gen.c pkcs8-key-decode.c prf.c priorities.c pskself.c \
+	record-sizes.c record-sizes-range.c resume.c resume-dtls.c \
+	rng-fork.c rsa-encrypt-decrypt.c sec-params.c \
+	set_pkcs12_cred.c set_x509_key_file.c set_x509_key_mem.c \
+	setcredcrash.c sign-md5-rep.c simple.c status-request.c \
+	status-request-ok.c strict-der.c x509-extensions.c \
+	x509-verify-with-crl.c x509_altname.c x509cert.c \
+	x509cert-invalid.c x509cert-tl.c x509dn.c x509self.c \
+	x509sign-verify.c x509sign-verify2.c
 DIST_SOURCES = $(libutils_la_SOURCES) anonself.c atfork.c \
 	auto-verify.c certder.c certificate_set_x509_crl.c \
 	certuniqueid.c chainverify.c chainverify-unsorted.c \
@@ -1191,16 +1199,17 @@ DIST_SOURCES = $(libutils_la_SOURCES) anonself.c atfork.c \
 	mini-x509-default-prio.c moredn.c mpi.c name-constraints.c \
 	no-signal.c nul-in-x509-names.c ocsp.c oids.c openpgp-auth.c \
 	openpgp-auth2.c openpgp-callback.c openpgp-keyring.c \
-	openpgpself.c openssl.c parse_ca.c pgps2kgnu.c pkcs12_encode.c \
-	pkcs12_s2k.c pkcs12_s2k_pem.c pkcs12_simple.c pkcs7-gen.c \
-	pkcs8-key-decode.c prf.c priorities.c pskself.c record-sizes.c \
-	record-sizes-range.c resume.c resume-dtls.c rng-fork.c \
-	rsa-encrypt-decrypt.c sec-params.c set_pkcs12_cred.c \
-	set_x509_key_file.c set_x509_key_mem.c setcredcrash.c \
-	sign-md5-rep.c simple.c status-request.c status-request-ok.c \
-	strict-der.c x509-extensions.c x509-verify-with-crl.c \
-	x509_altname.c x509cert.c x509cert-invalid.c x509cert-tl.c \
-	x509dn.c x509self.c x509sign-verify.c x509sign-verify2.c
+	openpgpself.c openssl.c parse_ca.c pcert-list.c pgps2kgnu.c \
+	pkcs12_encode.c pkcs12_s2k.c pkcs12_s2k_pem.c pkcs12_simple.c \
+	pkcs7-gen.c pkcs8-key-decode.c prf.c priorities.c pskself.c \
+	record-sizes.c record-sizes-range.c resume.c resume-dtls.c \
+	rng-fork.c rsa-encrypt-decrypt.c sec-params.c \
+	set_pkcs12_cred.c set_x509_key_file.c set_x509_key_mem.c \
+	setcredcrash.c sign-md5-rep.c simple.c status-request.c \
+	status-request-ok.c strict-der.c x509-extensions.c \
+	x509-verify-with-crl.c x509_altname.c x509cert.c \
+	x509cert-invalid.c x509cert-tl.c x509dn.c x509self.c \
+	x509sign-verify.c x509sign-verify2.c
 RECURSIVE_TARGETS = all-recursive check-recursive cscopelist-recursive \
 	ctags-recursive dvi-recursive html-recursive info-recursive \
 	install-data-recursive install-dvi-recursive \
@@ -2504,9 +2513,9 @@ ctests = mini-record-2 simple gc set_pkcs12_cred certder certuniqueid \
 	mini-alignment oids atfork prf status-request \
 	status-request-ok fallback-scsv pkcs8-key-decode \
 	mini-session-verify-function auto-verify \
-	mini-x509-default-prio global-init-override $(am__append_4) \
-	$(am__append_5) $(am__append_6) $(am__append_7) \
-	$(am__append_8) $(am__append_9)
+	mini-x509-default-prio global-init-override pcert-list \
+	$(am__append_4) $(am__append_5) $(am__append_6) \
+	$(am__append_7) $(am__append_8) $(am__append_9)
 mini_dtls_pthread_LDADD = $(LDADD) -lpthread
 mini_alignment_LDADD = $(LDADD) $(NETTLE_LIBS)
 @ENABLE_FIPS140_FALSE@@ENABLE_OPENSSL_TRUE@openssl_LDADD = ../extra/libgnutls-openssl.la $(LDADD)
@@ -2991,6 +3000,10 @@ parse_ca$(EXEEXT): $(parse_ca_OBJECTS) $(parse_ca_DEPENDENCIES) $(EXTRA_parse_ca
 	@rm -f parse_ca$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(parse_ca_OBJECTS) $(parse_ca_LDADD) $(LIBS)
 
+pcert-list$(EXEEXT): $(pcert_list_OBJECTS) $(pcert_list_DEPENDENCIES) $(EXTRA_pcert_list_DEPENDENCIES) 
+	@rm -f pcert-list$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(pcert_list_OBJECTS) $(pcert_list_LDADD) $(LIBS)
+
 pgps2kgnu$(EXEEXT): $(pgps2kgnu_OBJECTS) $(pgps2kgnu_DEPENDENCIES) $(EXTRA_pgps2kgnu_DEPENDENCIES) 
 	@rm -f pgps2kgnu$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(pgps2kgnu_OBJECTS) $(pgps2kgnu_LDADD) $(LIBS)
@@ -3235,6 +3248,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/openpgpself.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/openssl.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/parse_ca.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pcert-list.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pgps2kgnu.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pkcs12_encode.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pkcs12_s2k-pkcs12_s2k.Po@am__quote@
@@ -4400,6 +4414,13 @@ mini-x509-default-prio.log: mini-x509-default-prio$(EXEEXT)
 global-init-override.log: global-init-override$(EXEEXT)
 	@p='global-init-override$(EXEEXT)'; \
 	b='global-init-override'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+pcert-list.log: pcert-list$(EXEEXT)
+	@p='pcert-list$(EXEEXT)'; \
+	b='pcert-list'; \
 	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \

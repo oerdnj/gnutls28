@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <!-- This manual is last updated 4 March 2015 for version
-3.4.9 of GnuTLS.
+3.4.11 of GnuTLS.
 
 Copyright (C) 2001-2015 Free Software Foundation, Inc.\\
 Copyright (C) 2001-2015 Nikos Mavrogiannopoulos
@@ -14,10 +14,10 @@ copy of the license is included in the section entitled "GNU Free
 Documentation License". -->
 <!-- Created by GNU Texinfo 6.0, http://www.gnu.org/software/texinfo/ -->
 <head>
-<title>GnuTLS 3.4.9</title>
+<title>GnuTLS 3.4.11</title>
 
-<meta name="description" content="GnuTLS 3.4.9">
-<meta name="keywords" content="GnuTLS 3.4.9">
+<meta name="description" content="GnuTLS 3.4.11">
+<meta name="keywords" content="GnuTLS 3.4.11">
 <meta name="resource-type" content="document">
 <meta name="distribution" content="global">
 <meta name="Generator" content="makeinfo">
@@ -154,7 +154,7 @@ dl {
 </head>
 
 <body lang="en">
-<h1 class="settitle" align="center">GnuTLS 3.4.9</h1>
+<h1 class="settitle" align="center">GnuTLS 3.4.11</h1>
 
 
 
@@ -505,7 +505,7 @@ Next: <a href="#Preface" accesskey="n" rel="next">Preface</a>, Up: <a href="dir.
 <h1 class="top">GnuTLS</h1>
 
 <p>This manual is last updated 4 March 2015 for version
-3.4.9 of GnuTLS.
+3.4.11 of GnuTLS.
 </p>
 <p>Copyright &copy; 2001-2015 Free Software Foundation, Inc.\\
 Copyright &copy; 2001-2015 Nikos Mavrogiannopoulos
@@ -2789,7 +2789,7 @@ authority list may also be set using:
 </dl>
 
 <p>These functions allow the specification of the trusted certificate authorities, either
-via a file, a directory or use the system-specified certificate authories. 
+via a file, a directory or use the system-specified certificate authorities. 
 Unless the authorities are application specific, it is generally recommended
 to use the system trust storage (see <a href="#gnutls_005fcertificate_005fset_005fx509_005fsystem_005ftrust">gnutls_certificate_set_x509_system_trust</a>).
 </p>
@@ -4300,6 +4300,10 @@ Usage:  certtool [ -&lt;flag&gt; [&lt;val&gt;] | --&lt;name&gt;[{=| }&lt;val&gt;
        --verify               Verify a PEM encoded certificate chain using a trusted list
        --verify-crl           Verify a CRL using a trusted list
                                 - requires the option 'load-ca-certificate'
+       --verify-hostname=str  Specify a hostname to be used for certificate chain verification
+       --verify-email=str     Specify a email to be used for certificate chain verification
+                                - prohibits the option 'verify-hostname'
+       --verify-purpose=str   Specify a purpose OID to be used for certificate chain verification
        --generate-dh-params   Generate PKCS #3 encoded Diffie-Hellman parameters
        --get-dh-params        Get the included PKCS #3 encoded Diffie-Hellman parameters
        --dh-info              Print information PKCS #3 encoded Diffie-Hellman parameters
@@ -4309,50 +4313,65 @@ Usage:  certtool [ -&lt;flag&gt; [&lt;val&gt;] | --&lt;name&gt;[{=| }&lt;val&gt;
        --load-certificate=str Loads a certificate file
        --load-ca-privkey=str  Loads the certificate authority's private key file
        --load-ca-certificate=str Loads the certificate authority's certificate file
+       --load-crl=str         Loads the provided CRL
+       --load-data=str        Loads auxilary data
        --password=str         Password to use
        --null-password        Enforce a NULL password
        --empty-password       Enforce an empty password
        --hex-numbers          Print big number in an easier format to parse
        --cprint               In certain operations it prints the information in C-friendly format
    -i, --certificate-info     Print information on the given certificate
+       --fingerprint          Print the fingerprint of the given certificate
+       --key-id               Print the key ID of the given certificate
        --certificate-pubkey   Print certificate's public key
        --pgp-certificate-info  Print information on the given OpenPGP certificate
        --pgp-ring-info        Print information on the given OpenPGP keyring structure
    -l, --crl-info             Print information on the given CRL structure
        --crq-info             Print information on the given certificate request
        --no-crq-extensions    Do not use extensions in certificate requests
-       --p12-info             Print information on a PKCS #12 structure
-       --p12-name=str         The PKCS #12 friendly name to use
-       --p7-info              Print information on a PKCS #7 structure
-       --smime-to-p7          Convert S/MIME to PKCS #7 structure
+   -!, --p12-info             Print information on a PKCS #12 structure
+   -&quot;, --p12-name=str         The PKCS #12 friendly name to use
+   -#, --p7-generate          Generate a PKCS #7 structure
+   -$, --p7-sign              Signs using a PKCS #7 structure
+   -%, --p7-detached-sign     Signs using a detached PKCS #7 structure
+   -&amp;, --p7-include-cert      The signer's certificate will be included in the cert list.
+                                - disabled as '--no-p7-include-cert'
+                                - enabled by default
+   -', --p7-time              Will include a timestamp in the PKCS #7 structure
+   -(, --p7-show-data         Will show the embedded data in the PKCS #7 structure
+                                - disabled as '--no-p7-show-data'
+   -), --p7-info              Print information on a PKCS #7 structure
+   -*, --p7-verify            Verify the provided PKCS #7 structure
+   -+, --p8-info              Print information on a PKCS #8 structure
+   -,, --smime-to-p7          Convert S/MIME to PKCS #7 structure
    -k, --key-info             Print information on a private key
-       --pgp-key-info         Print information on an OpenPGP private key
-       --pubkey-info          Print information on a public key
-       --v1                   Generate an X.509 version 1 certificate (with no extensions)
-   -!, --to-p12               Generate a PKCS #12 structure
+   --, --pgp-key-info         Print information on an OpenPGP private key
+   -., --pubkey-info          Print information on a public key
+   -/, --v1                   Generate an X.509 version 1 certificate (with no extensions)
+   -0, --to-p12               Generate a PKCS #12 structure
                                 - requires the option 'load-certificate'
-   -&quot;, --to-p8                Generate a PKCS #8 structure
+   -1, --to-p8                Generate a PKCS #8 structure
    -8, --pkcs8                Use PKCS #8 format for private keys
-   -#, --rsa                  Generate RSA key
-   -$, --dsa                  Generate DSA key
-   -%, --ecc                  Generate ECC (ECDSA) key
-   -&amp;, --ecdsa                an alias for the 'ecc' option
-   -', --hash=str             Hash algorithm to use for signing
-   -(, --inder                Use DER format for input certificates, private keys, and DH parameters
+   -2, --rsa                  Generate RSA key
+   -3, --dsa                  Generate DSA key
+   -4, --ecc                  Generate ECC (ECDSA) key
+   -5, --ecdsa                an alias for the 'ecc' option
+   -6, --hash=str             Hash algorithm to use for signing
+   -7, --inder                Use DER format for input certificates, private keys, and DH parameters
                                 - disabled as '--no-inder'
-   -), --inraw                an alias for the 'inder' option
-   -*, --outder               Use DER format for output certificates, private keys, and DH parameters
+   -8, --inraw                an alias for the 'inder' option
+   -9, --outder               Use DER format for output certificates, private keys, and DH parameters
                                 - disabled as '--no-outder'
-   -+, --outraw               an alias for the 'outder' option
-   -,, --bits=num             Specify the number of bits for key generate
-   --, --curve=str            Specify the curve used for EC key generation
-   -., --sec-param=str        Specify the security level [low, legacy, medium, high, ultra]
-   -/, --disable-quick-random  No effect
-   -0, --template=str         Template file to use for non-interactive operation
-   -1, --stdout-info          Print information to stdout instead of stderr
-   -2, --ask-pass             Enable interaction for entering password when in batch mode.
-   -3, --pkcs-cipher=str      Cipher to use for PKCS #8 and #12 operations
-   -4, --provider=str         Specify the PKCS #11 provider library
+   -:, --outraw               an alias for the 'outder' option
+   -;, --bits=num             Specify the number of bits for key generate
+   -&lt;, --curve=str            Specify the curve used for EC key generation
+   -=, --sec-param=str        Specify the security level [low, legacy, medium, high, ultra]
+   -&gt;, --disable-quick-random  No effect
+   -?, --template=str         Template file to use for non-interactive operation
+   -@, --stdout-info          Print information to stdout instead of stderr
+   -A, --ask-pass             Enable interaction for entering password when in batch mode.
+   -B, --pkcs-cipher=str      Cipher to use for PKCS #8 and #12 operations
+   -C, --provider=str         Specify the PKCS #11 provider library
    -v, --version[=arg]        output version information and exit
    -h, --help                 display extended usage information and exit
    -!, --more-help            extended usage information passed thru pager
@@ -5167,6 +5186,7 @@ Usage:  ocsptool [ -&lt;flag&gt; [&lt;val&gt;] | --&lt;name&gt;[{=| }&lt;val&gt;
                                 - file must pre-exist
    -S, --load-response=file   Read DER encoded OCSP response from file
                                 - file must pre-exist
+       --ignore-errors        Ignore any verification errors
    -v, --version[=arg]        output version information and exit
    -h, --help                 display extended usage information and exit
    -!, --more-help            extended usage information passed thru pager
@@ -6218,7 +6238,7 @@ Next: <a href="#How-to-use-GnuTLS-in-applications" accesskey="n" rel="next">How 
 <p>In several cases storing the long term cryptographic keys in a hard disk or
 even in memory poses a significant risk. Once the system they are stored
 is compromised the keys must be replaced as the secrecy of future sessions
-is no longer guarranteed. Moreover, past sessions that were not protected by a
+is no longer guaranteed. Moreover, past sessions that were not protected by a
 perfect forward secrecy offering ciphersuite are also to be assumed compromised.
 </p>
 <p>If such threats need to be addressed, then it may be wise storing the keys in a security
@@ -6598,7 +6618,7 @@ is returned, and zero or positive code on success.
 <p><var>ciphertext</var>: contains the encrypted data
 </p>
 <p>This function will encrypt the given data, using the public
-key.
+key. On success the  <code>ciphertext</code> will be allocated using <code>gnutls_malloc()</code> .
 </p>
 <p><strong>Returns:</strong> On success, <code>GNUTLS_E_SUCCESS</code>  (0) is returned, otherwise a
 negative error value.
@@ -6706,7 +6726,7 @@ key abstractions.
 <p><var>key</var>: holds a public key
 </p>
 <p>This function will set the public parameters from the given public
-key to the request.
+key to the request. The  <code>key</code> can be deallocated after that.
 </p>
 <p><strong>Returns:</strong> On success, <code>GNUTLS_E_SUCCESS</code>  (0) is returned, otherwise a
 negative error value.
@@ -6724,7 +6744,7 @@ negative error value.
 <p><var>key</var>: holds a public key
 </p>
 <p>This function will set the public parameters from the given public
-key to the request.
+key to the certificate. The  <code>key</code> can be deallocated after that.
 </p>
 <p><strong>Returns:</strong> On success, <code>GNUTLS_E_SUCCESS</code>  (0) is returned, otherwise a
 negative error value.
@@ -6937,7 +6957,7 @@ Next: <a href="#Accessing-objects-that-require-a-PIN" accesskey="n" rel="next">A
 </div>
 <a name="Initialization-1"></a>
 <h4 class="subsection">5.3.1 Initialization</h4>
-<p>To allow all <acronym>GnuTLS</acronym> applications to transparently access smard cards
+<p>To allow all <acronym>GnuTLS</acronym> applications to transparently access smart cards
 and tokens, <acronym>PKCS</acronym> #11 is automatically initialized during the first
 call of a <acronym>PKCS</acronym> #11 related function. The initialization process, based
 on p11-kit configuration, loads any appropriate modules. The p11-kit configuration
@@ -7492,7 +7512,6 @@ Other options:
                                 - disabled as '--no-outder'
    -4, --outraw               an alias for the 'outder' option
    -5, --provider=file        Specify the PKCS #11 provider library
-                                - file must pre-exist
    -6, --detailed-url         Print detailed URLs
                                 - disabled as '--no-detailed-url'
    -7, --only-urls            Print a compact listing using only the URLs
@@ -8190,7 +8209,7 @@ Usage:  tpmtool [ -&lt;flag&gt; [&lt;val&gt;] | --&lt;name&gt;[{=| }&lt;val&gt;]
        --user                 Any registered key will be a user key
                                 - requires the option 'register'
                                 -- and prohibits the option 'system'
-       --system               Any registred key will be a system key
+       --system               Any registered key will be a system key
                                 - requires the option 'register'
                                 -- and prohibits the option 'user'
        --pubkey=str           Prints the public key of the provided key
@@ -8244,7 +8263,7 @@ system.
 <a name="tpmtool-system"></a></p><a name="system-option"></a>
 <h4 class="subsection">5.4.9 system option</h4>
 
-<p>This is the &ldquo;any registred key will be a system key&rdquo; option.
+<p>This is the &ldquo;any registered key will be a system key&rdquo; option.
 </p>
 <p>This option has some usage constraints.  It:
 </p><ul>
@@ -8435,7 +8454,7 @@ finished using <acronym>GnuTLS</acronym>.
 <p>The credentials structures are used by the authentication methods, such
 as certificate authentication. They store certificates, privates keys,
 and other information that is needed to prove the identity to the peer,
-and/or verify the indentity of the peer. The information stored in
+and/or verify the identity of the peer. The information stored in
 the credentials structures is initialized once and then can be 
 shared by many <acronym>TLS</acronym> sessions.
 </p>
@@ -8550,7 +8569,7 @@ error. Other available environment variables are shown in <a href="#tab_003aenvi
 <tr><td width="30%"><code>GNUTLS_DEBUG_LEVEL</code></td><td width="70%">When set to a numeric value, it sets the default debugging level for GnuTLS applications.</td></tr>
 <tr><td width="30%"><code>GNUTLS_CPUID_OVERRIDE</code></td><td width="70%">That environment variable can be used to
 explicitly enable/disable the use of certain CPU capabilities. Note that CPU
-detection cannot be overriden, i.e., VIA options cannot be enabled on an Intel
+detection cannot be overridden, i.e., VIA options cannot be enabled on an Intel
 CPU. The currently available options are:
 <ul>
 <li> 0x1: Disable all run-time detected optimizations
@@ -8694,6 +8713,7 @@ operation.
 </li><li> gettimeofday
 </li><li> clock_gettime
 </li><li> getrusage
+</li><li> getpid
 </li><li> send
 </li><li> recv
 </li><li> writev
@@ -8703,7 +8723,7 @@ operation.
 </li></ul>
 
 <p>As well as any calls needed for memory allocation to work. Note however, that GnuTLS
-depends on libc for the system calls, and there is no guarrantee that libc will
+depends on libc for the system calls, and there is no guarantee that libc will
 call the expected system call. For that it is recommended to test your
 program in all the targetted platforms when filters like seccomp are in place.
 </p>
@@ -8810,7 +8830,7 @@ precalculations needed, opens any required system devices (e.g., /dev/urandom on
 and initializes subsystems that could be used later.
 </p>
 <p>The resources allocated by the initialization process will be released 
-on library deinitialization, or explictly by calling <a href="#gnutls_005fglobal_005fdeinit">gnutls_global_deinit</a>.
+on library deinitialization, or explicitly by calling <a href="#gnutls_005fglobal_005fdeinit">gnutls_global_deinit</a>.
 </p>
 <p>Note that during initialization file descriptors may be kept open by
 GnuTLS (e.g. /dev/urandom) on library load. Applications closing all unknown file
@@ -8974,7 +8994,7 @@ current session using <a href="#gnutls_005fcredentials_005fset">gnutls_credentia
 </p>
 <p><var>cred</var>: the credentials to set
 </p>
-<p>Sets the needed credentials for the specified type.  Eg username,
+<p>Sets the needed credentials for the specified type.  E.g. username,
 password - or public and private keys etc.  The  <code>cred</code> parameter is
 a structure that depends on the specified type and on the current
 session (client or server).
@@ -9032,8 +9052,7 @@ with the credential types is shown in <a href="#tab_003akey_002dexchange_002dcre
 <code>KX_DHE_RSA</code>,
 <code>KX_DHE_DSS</code>,
 <code>KX_ECDHE_RSA</code>,
-<code>KX_ECDHE_ECDSA</code>,
-<code>KX_RSA_EXPORT</code></td><td width="20%"><code>CRD_CERTIFICATE</code></td><td width="20%"><code>CRD_CERTIFICATE</code></td></tr>
+<code>KX_ECDHE_ECDSA</code></td><td width="20%"><code>CRD_CERTIFICATE</code></td><td width="20%"><code>CRD_CERTIFICATE</code></td></tr>
 <tr><td width="25%">Password and certificate</td><td width="25%"><code>KX_SRP_RSA</code>, <code>KX_SRP_DSS</code></td><td width="20%"><code>CRD_SRP</code></td><td width="20%"><code>CRD_CERTIFICATE</code>, <code>CRD_SRP</code></td></tr>
 <tr><td width="25%">Password</td><td width="25%"><code>KX_SRP</code></td><td width="20%"><code>CRD_SRP</code></td><td width="20%"><code>CRD_SRP</code></td></tr>
 <tr><td width="25%">Anonymous</td><td width="25%"><code>KX_ANON_DH</code>,
@@ -9269,6 +9288,7 @@ the following functions, applicable to X.509 and OpenPGP certificates.
 <dl compact="compact">
 <dt><code><var>int</var> <a href="#gnutls_005fcertificate_005fset_005fx509_005fsystem_005ftrust">gnutls_certificate_set_x509_system_trust</a> (gnutls_certificate_credentials_t       <var>cred</var>)</code></dt>
 <dt><code><var>int</var> <a href="#gnutls_005fcertificate_005fset_005fx509_005ftrust_005ffile">gnutls_certificate_set_x509_trust_file</a> (gnutls_certificate_credentials_t            <var>cred</var>, const char * <var>cafile</var>, gnutls_x509_crt_fmt_t <var>type</var>)</code></dt>
+<dt><code><var>int</var> <a href="#gnutls_005fcertificate_005fset_005fx509_005ftrust_005fdir">gnutls_certificate_set_x509_trust_dir</a> (gnutls_certificate_credentials_t <var>cred</var>, const char * <var>ca_dir</var>, gnutls_x509_crt_fmt_t <var>type</var>)</code></dt>
 <dt><code><var>int</var> <a href="#gnutls_005fcertificate_005fset_005fopenpgp_005fkeyring_005ffile">gnutls_certificate_set_openpgp_keyring_file</a> (gnutls_certificate_credentials_t <var>c</var>, const char * <var>file</var>, gnutls_openpgp_crt_fmt_t <var>format</var>)</code></dt>
 </dl>
 
@@ -9823,7 +9843,7 @@ The blocking, due to network interaction, calls such as
 can be set to non-blocking by setting the underlying sockets to non-blocking.
 If other push and pull functions are setup, then they should behave the same
 way as <code>recv</code> and <code>send</code> when used in a non-blocking
-way, i.e., set errno to <code>EAGAIN</code>. Since, during a TLS protocol session 
+way, i.e., return -1 and set errno to <code>EAGAIN</code>. Since, during a TLS protocol session 
 <acronym>GnuTLS</acronym> does not block except for network interaction, the non blocking
 <code>EAGAIN</code> errno will be propagated and <acronym>GnuTLS</acronym> functions 
 will return the <code>GNUTLS_E_AGAIN</code> error code. Such calls can be resumed the 
@@ -9832,13 +9852,13 @@ The only exception is <a href="#gnutls_005frecord_005fsend">gnutls_record_send</
 which if interrupted subsequent calls need not to include the data to be
 sent (can be called with NULL argument).
 </p>
-<p>When using the <code>select</code> system call though, one should remember
-that it is only applicable to the kernel sockets API. To check for any
-available buffers in a <acronym>GnuTLS</acronym> session, 
+<p>When using the <code>poll</code> or <code>select</code> system calls though, one should remember
+that they only apply to the kernel sockets API. To check for any
+available buffered data in a <acronym>GnuTLS</acronym> session, 
 utilize <a href="#gnutls_005frecord_005fcheck_005fpending">gnutls_record_check_pending</a>,
-either before the <code>select</code> system call, or after a call to
-<a href="#gnutls_005frecord_005frecv">gnutls_record_recv</a>. <acronym>GnuTLS</acronym> does not keep a write buffer,
-thus when writing no additional actions are required.
+either before the <code>poll</code> system call, or after a call to
+<a href="#gnutls_005frecord_005frecv">gnutls_record_recv</a>. Data queued by <a href="#gnutls_005frecord_005fsend">gnutls_record_send</a>
+(when interrupted) can be discarded using <a href="#gnutls_005frecord_005fdiscard_005fqueued">gnutls_record_discard_queued</a>.
 </p>
 <p>The following paragraphs describe the detailed requirements for non-blocking
 operation when using the TLS or DTLS protocols.
@@ -9857,7 +9877,7 @@ call the <a href="#gnutls_005finit">gnutls_init</a> function with the
 <p>When in non-blocking mode the function, the <a href="#gnutls_005finit">gnutls_init</a> function 
 must be called with the <code>GNUTLS_NONBLOCK</code> flag set (see <a href="#Session-initialization">Session initialization</a>). 
 </p>
-<p>In constrast with the TLS protocol, the pull timeout function is required,
+<p>In contrast with the TLS protocol, the pull timeout function is required,
 but will only be called with a timeout of zero. In that case it should indicate
 whether there are data to be received or not. When not using the default pull function,
 then <a href="#gnutls_005ftransport_005fset_005fpull_005ftimeout_005ffunction">gnutls_transport_set_pull_timeout_function</a> should be called.
@@ -9877,20 +9897,16 @@ to decide which direction to check prior to restoring a function call.
 <dd><p><var>session</var>: is a <code>gnutls_session_t</code>  type.
 </p>
 <p>This function provides information about the internals of the
-record protocol and is only useful if a prior gnutls function call
-(e.g.  <code>gnutls_handshake()</code> ) was interrupted for some reason, that
+record protocol and is only useful if a prior gnutls function call,
+e.g.  <code>gnutls_handshake()</code> , was interrupted for some reason. That
 is, if a function returned <code>GNUTLS_E_INTERRUPTED</code>  or
-<code>GNUTLS_E_AGAIN</code> .  In such a case, you might want to call <code>select()</code> 
-or <code>poll()</code>  before calling the interrupted gnutls function again.  To
-tell you whether a file descriptor should be selected for either
-reading or writing, <code>gnutls_record_get_direction()</code>  returns 0 if the
-interrupted function was trying to read data, and 1 if it was
-trying to write data.
+<code>GNUTLS_E_AGAIN</code> . In such a case, you might want to call <code>select()</code> 
+or <code>poll()</code>  before restoring the interrupted gnutls function.
 </p>
-<p>This function&rsquo;s output is unreliable if you are using the
+<p>This function&rsquo;s output is unreliable if you are using the same
  <code>session</code> in different threads, for sending and receiving.
 </p>
-<p><strong>Returns:</strong> 0 if trying to read data, 1 if trying to write data.
+<p><strong>Returns:</strong> 0 if interrupted while trying to read data, or 1 while trying to write data.
 </p></dd></dl>
 
 <p>When calling <a href="#gnutls_005fhandshake">gnutls_handshake</a> through a multi-plexer,
@@ -10186,8 +10202,8 @@ received might be less than  <code>data_size</code> .
 
 <p>The <a href="#gnutls_005frecord_005fcheck_005fpending">gnutls_record_check_pending</a> helper function is available to 
 allow checking whether data are available to be read in a <acronym>GnuTLS</acronym> session 
-buffers. Note that this function complements but does not replace <code>select</code>,
-i.e., <a href="#gnutls_005frecord_005fcheck_005fpending">gnutls_record_check_pending</a> reports no data to be read, <code>select</code>
+buffers. Note that this function complements but does not replace <code>poll</code>,
+i.e., <a href="#gnutls_005frecord_005fcheck_005fpending">gnutls_record_check_pending</a> reports no data to be read, <code>poll</code>
 should be called to check for data in the network buffers.
 </p>
 
@@ -10532,8 +10548,9 @@ are shown in <a href="#tab_003aprio_002dalgorithms">Table 6.4</a>.
 To avoid collisions in order to specify a compression algorithm in
 the priority string you have to prefix it with &quot;COMP-&quot;, protocol versions
 with &quot;VERS-&quot;, signature algorithms with &quot;SIGN-&quot; and certificate types with &quot;CTYPE-&quot;. 
-All other algorithms don&rsquo;t need a prefix. Each specified keyword can
-be prefixed with any of the following characters.
+All other algorithms don&rsquo;t need a prefix. Each specified keyword (except
+for <em>special keywords</em>) can be prefixed with any of the following
+characters.
 </p>
 <dl compact="compact">
 <dt>&rsquo;!&rsquo; or &rsquo;-&rsquo;</dt>
@@ -10973,7 +10990,7 @@ the risk of a compromised CA being undetected.
 <a name="Trust-on-first-use"></a>
 <h4 class="subsubsection">6.12.2.1 Trust on first use</h4>
 
-<p>The GnuTLS library includes functionlity to use an SSH-like trust on first use authentication.
+<p>The GnuTLS library includes functionality to use an SSH-like trust on first use authentication.
 The available functions to store and verify public keys are listed below.
 </p>
 
@@ -16611,7 +16628,7 @@ Usage:  gnutls-serv [ -&lt;flag&gt; [&lt;val&gt;] | --&lt;name&gt;[{=| }&lt;val&
                                 - it must be in the range:
                                   0 to 9999
        --noticket             Don't accept session tickets
-   -g, --generate             Generate Diffie-Hellman and RSA-export parameters
+   -g, --generate             Generate Diffie-Hellman parameters
    -q, --quiet                Suppress some messages
        --nodb                 Do not use a resumption database
        --http                 Act as an HTTP server
@@ -18598,6 +18615,9 @@ an error code is returned.
 returned protocol should be treated as opaque, constant value and
 only valid during the session life.
 </p>
+<p>The selected protocol is the first supported by the list sent
+by the client.
+</p>
 <p><strong>Returns:</strong> On success, <code>GNUTLS_E_SUCCESS</code>  (0) is returned,
 otherwise a negative error code is returned.
 </p>
@@ -20171,7 +20191,7 @@ otherwise a negative error code is returned.
 </p>
 <p><var>cred</var>: the credentials to set
 </p>
-<p>Sets the needed credentials for the specified type.  Eg username,
+<p>Sets the needed credentials for the specified type.  E.g. username,
 password - or public and private keys etc.  The  <code>cred</code> parameter is
 a structure that depends on the specified type and on the current
 session (client or server).
@@ -20882,7 +20902,7 @@ after a completed handshake.
 </p>
 <p>This function will register a new extension type. The extension will remain
 registered until <code>gnutls_global_deinit()</code>  is called. If the extension type
-is already registred then <code>GNUTLS_E_ALREADY_REGISTERED</code>  will be returned.
+is already registered then <code>GNUTLS_E_ALREADY_REGISTERED</code>  will be returned.
 </p>
 <p>Each registered extension can store temporary data into the gnutls_session_t
 structure using <code>gnutls_ext_set_data()</code> , and they can be retrieved using
@@ -21771,7 +21791,7 @@ any of gnutls_certificate_verify_peers*() are called.
 </p>
 <p>If the flag <code>GNUTLS_OCSP_SR_IS_AVAIL</code>  is specified, the return
 value of the function indicates whether an OCSP status response have
-been received (even if invalid).
+been received (even if invalid). The flag was introduced in GnuTLS 3.4.0.
 </p>
 <p><strong>Returns:</strong> non zero if the response was valid, or a zero if it wasn&rsquo;t sent,
 or sent and was invalid.
@@ -22907,20 +22927,16 @@ These are the packets queued after an interrupted <code>gnutls_record_send()</co
 <dd><p><var>session</var>: is a <code>gnutls_session_t</code>  type.
 </p>
 <p>This function provides information about the internals of the
-record protocol and is only useful if a prior gnutls function call
-(e.g.  <code>gnutls_handshake()</code> ) was interrupted for some reason, that
+record protocol and is only useful if a prior gnutls function call,
+e.g.  <code>gnutls_handshake()</code> , was interrupted for some reason. That
 is, if a function returned <code>GNUTLS_E_INTERRUPTED</code>  or
-<code>GNUTLS_E_AGAIN</code> .  In such a case, you might want to call <code>select()</code> 
-or <code>poll()</code>  before calling the interrupted gnutls function again.  To
-tell you whether a file descriptor should be selected for either
-reading or writing, <code>gnutls_record_get_direction()</code>  returns 0 if the
-interrupted function was trying to read data, and 1 if it was
-trying to write data.
+<code>GNUTLS_E_AGAIN</code> . In such a case, you might want to call <code>select()</code> 
+or <code>poll()</code>  before restoring the interrupted gnutls function.
 </p>
-<p>This function&rsquo;s output is unreliable if you are using the
+<p>This function&rsquo;s output is unreliable if you are using the same
  <code>session</code> in different threads, for sending and receiving.
 </p>
-<p><strong>Returns:</strong> 0 if trying to read data, 1 if trying to write data.
+<p><strong>Returns:</strong> 0 if interrupted while trying to read data, or 1 while trying to write data.
 </p></dd></dl>
 
 <a name="gnutls_005frecord_005fget_005fmax_005fsize-1"></a>
@@ -25208,7 +25224,7 @@ the maximum MTU of your transport layer.
 <p>This function will set the maximum transfer unit of the transport
 that DTLS packets are sent over. Note that this should exclude
 the IP (or IPv6) and UDP headers. So for DTLS over IPv6 on an
-Ethenet device with MTU 1500, the DTLS MTU set with this function
+Ethernet device with MTU 1500, the DTLS MTU set with this function
 would be 1500 - 40 (IPV6 header) - 8 (UDP header) = 1452.
 </p>
 <p><strong>Since:</strong> 3.0
@@ -25693,7 +25709,7 @@ if the index is out of bounds, otherwise a negative error value.
 </p>
 <p><var>reasons</var>: Revocation reasons. An ORed sequence of flags from <code>gnutls_x509_crl_reason_flags_t</code> .
 </p>
-<p>This function will store the specified CRL distibution point value
+<p>This function will store the specified CRL distribution point value
 the  <code>cdp</code> type.
 </p>
 <p><strong>Returns:</strong> On success, <code>GNUTLS_E_SUCCESS</code>  (0), otherwise a negative error value.
@@ -28391,6 +28407,11 @@ the given certificate.
 full subjectUniqueID, then a GNUTLS_E_SHORT_MEMORY_BUFFER error will be
 returned, and buf_size will be set to the actual length.
 </p>
+<p>This function had a bug prior to 3.4.8 that prevented the setting
+of <code>NULL</code>   <code>buf</code> to discover the  <code>buf_size</code> . To use this function safely
+with the older versions the  <code>buf</code> must be a valid buffer that can hold
+at least a single byte if  <code>buf_size</code> is zero.
+</p>
 <p><strong>Returns:</strong> <code>GNUTLS_E_SUCCESS</code>  on success, otherwise a negative error code.
 </p>
 <p><strong>Since:</strong> 2.12.0
@@ -28890,6 +28911,11 @@ the given certificate.
 <p>If the user allocated memory buffer is not large enough to hold the
 full subjectUniqueID, then a GNUTLS_E_SHORT_MEMORY_BUFFER error will be
 returned, and buf_size will be set to the actual length.
+</p>
+<p>This function had a bug prior to 3.4.8 that prevented the setting
+of <code>NULL</code>   <code>buf</code> to discover the  <code>buf_size</code> . To use this function safely
+with the older versions the  <code>buf</code> must be a valid buffer that can hold
+at least a single byte if  <code>buf_size</code> is zero.
 </p>
 <p><strong>Returns:</strong> <code>GNUTLS_E_SUCCESS</code>  on success, otherwise a negative error code.
 </p></dd></dl>
@@ -29433,8 +29459,10 @@ negative error value.
 <p><var>key</var>: holds a private key
 </p>
 <p>This function will set the public parameters from the given
-private key to the certificate. Only RSA keys are currently
-supported.
+private key to the certificate.
+</p>
+<p>To export the public key (i.e., the SubjectPublicKeyInfo part), check
+<code>gnutls_pubkey_import_x509()</code> .
 </p>
 <p><strong>Returns:</strong> On success, <code>GNUTLS_E_SUCCESS</code>  (0) is returned, otherwise a
 negative error value.
@@ -33400,7 +33428,7 @@ otherwise a negative error code is returned.
 </p>
 <p><var>format</var>: the format of the keys
 </p>
-<p>This funtion is used to load OpenPGP keys into the GnuTLS
+<p>This function is used to load OpenPGP keys into the GnuTLS
 credentials structure. The file should contain at least one valid non encrypted subkey.
 </p>
 <p><strong>Returns:</strong> On success, <code>GNUTLS_E_SUCCESS</code>  (0) is returned, otherwise a
@@ -33421,7 +33449,7 @@ negative error value.
 </p>
 <p><var>format</var>: the format of the keys
 </p>
-<p>This funtion is used to load OpenPGP keys into the GnuTLS credential 
+<p>This function is used to load OpenPGP keys into the GnuTLS credential 
 structure. The file should contain at least one valid non encrypted subkey.
 </p>
 <p>The special keyword &quot;auto&quot; is also accepted as  <code>subkey_id</code> .  In that
@@ -33446,7 +33474,7 @@ negative error value.
 </p>
 <p><var>format</var>: the format of the keys
 </p>
-<p>This funtion is used to load OpenPGP keys into the GnuTLS credential 
+<p>This function is used to load OpenPGP keys into the GnuTLS credential 
 structure. The datum should contain at least one valid non encrypted subkey.
 </p>
 <p><strong>Returns:</strong> On success, <code>GNUTLS_E_SUCCESS</code>  (0) is returned, otherwise a
@@ -33467,7 +33495,7 @@ negative error value.
 </p>
 <p><var>format</var>: the format of the keys
 </p>
-<p>This funtion is used to load OpenPGP keys into the GnuTLS
+<p>This function is used to load OpenPGP keys into the GnuTLS
 credentials structure. The datum should contain at least one valid non encrypted subkey.
 </p>
 <p>The special keyword &quot;auto&quot; is also accepted as  <code>subkey_id</code> .  In that
@@ -34675,7 +34703,7 @@ otherwise a negative error code is returned.
 </p>
 <p><var>func</var>: the callback
 </p>
-<p>This funtion will set a key retrieval function for OpenPGP keys. This
+<p>This function will set a key retrieval function for OpenPGP keys. This
 callback is only useful in server side, and will be used if the peer
 sent a key fingerprint instead of a full key.
 </p>
@@ -34772,7 +34800,7 @@ otherwise a negative error code is returned.
 <dt><a name="index-gnutls_005fpkcs12_005fbag_005fget_005fcount"></a>Function: <em>int</em> <strong>gnutls_pkcs12_bag_get_count</strong> <em>(gnutls_pkcs12_bag_t <var>bag</var>)</em></dt>
 <dd><p><var>bag</var>: The bag
 </p>
-<p>This function will return the number of the elements withing the bag.
+<p>This function will return the number of the elements within the bag.
 </p>
 <p><strong>Returns:</strong> Number of elements in bag, or an negative error code on
 error.
@@ -37600,7 +37628,7 @@ negative error value.
 <p><var>ciphertext</var>: contains the encrypted data
 </p>
 <p>This function will encrypt the given data, using the public
-key.
+key. On success the  <code>ciphertext</code> will be allocated using <code>gnutls_malloc()</code> .
 </p>
 <p><strong>Returns:</strong> On success, <code>GNUTLS_E_SUCCESS</code>  (0) is returned, otherwise a
 negative error value.
@@ -37855,7 +37883,7 @@ success, or a negative error code on error.
 </p>
 <p><var>mand</var>: If non zero it means that the algorithm MUST use this hash. May be NULL.
 </p>
-<p>This function will read the certifcate and return the appropriate digest
+<p>This function will read the certificate and return the appropriate digest
 algorithm to use for signing with this certificate. Some certificates (i.e.
 DSA might not be able to sign without the preferred algorithm).
 </p>
@@ -38496,7 +38524,7 @@ information in the certificate request (e.g., the version using
 <p><var>key</var>: holds a public key
 </p>
 <p>This function will set the public parameters from the given public
-key to the request.
+key to the request. The  <code>key</code> can be deallocated after that.
 </p>
 <p><strong>Returns:</strong> On success, <code>GNUTLS_E_SUCCESS</code>  (0) is returned, otherwise a
 negative error value.
@@ -38537,7 +38565,7 @@ negative error value.
 <p><var>key</var>: holds a public key
 </p>
 <p>This function will set the public parameters from the given public
-key to the request.
+key to the certificate. The  <code>key</code> can be deallocated after that.
 </p>
 <p><strong>Returns:</strong> On success, <code>GNUTLS_E_SUCCESS</code>  (0) is returned, otherwise a
 negative error value.
@@ -39092,7 +39120,9 @@ need to compare the tag sent with the value returned from <code>gnutls_cipher_ta
 <p><var>ptext_len</var>: the available length for decrypted data
 </p>
 <p>This function will decrypt the given data using the algorithm
-specified by the context.
+specified by the context. For block ciphers the  <code>ctext_len</code> must be
+a multiple of the block size. For the supported ciphers the plaintext
+data length will equal the ciphertext size.
 </p>
 <p>Note that in AEAD ciphers, this will not check the tag. You will
 need to compare the tag sent with the value returned from <code>gnutls_cipher_tag()</code> .
@@ -39147,7 +39177,9 @@ specified by the context.
 <p><var>ctext_len</var>: the available length for encrypted data
 </p>
 <p>This function will encrypt the given data using the algorithm
-specified by the context.
+specified by the context. For block ciphers the  <code>ptext_len</code> must be
+a multiple of the block size. For the supported ciphers the encrypted
+data length will equal the plaintext size.
 </p>
 <p><strong>Returns:</strong> Zero or a negative error code on error.
 </p>
@@ -39760,7 +39792,7 @@ negative error value.
 </p>
 <p><var>mand</var>: If non-zero it means that the algorithm MUST use this hash. May be NULL.
 </p>
-<p>This function will read the certifcate and return the appropriate digest
+<p>This function will read the certificate and return the appropriate digest
 algorithm to use for signing with this certificate. Some certificates (i.e.
 DSA might not be able to sign without the preferred algorithm).
 </p>
