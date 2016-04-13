@@ -5970,7 +5970,7 @@ gnutls_credentials_clear (<em class="parameter"><code><a class="link" href="gnut
 gnutls_credentials_set (<em class="parameter"><code><a class="link" href="gnutls-gnutls.html#gnutls-session-t" title="gnutls_session_t"><span class="type">gnutls_session_t</span></a> session</code></em>,
                         <em class="parameter"><code><a class="link" href="gnutls-gnutls.html#gnutls-credentials-type-t" title="enum gnutls_credentials_type_t"><span class="type">gnutls_credentials_type_t</span></a> type</code></em>,
                         <em class="parameter"><code><span class="type">void</span> *cred</code></em>);</pre>
-<p>Sets the needed credentials for the specified type.  Eg username,
+<p>Sets the needed credentials for the specified type.  E.g. username,
 password - or public and private keys etc.  The <em class="parameter"><code>cred</code></em>
  parameter is
 a structure that depends on the specified type and on the current
@@ -8522,7 +8522,7 @@ OCSP validity check on the peer's certificate. Should be called after
 any of gnutls_certificate_verify_peers*() are called.</p>
 <p>If the flag <code class="literal">GNUTLS_OCSP_SR_IS_AVAIL</code> is specified, the return
 value of the function indicates whether an OCSP status response have
-been received (even if invalid).</p>
+been received (even if invalid). The flag was introduced in GnuTLS 3.4.0.</p>
 <div class="refsect3">
 <a name="id-1.2.4.6.160.6"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
@@ -10254,16 +10254,12 @@ by default unless requested using <code class="function">gnutls_range_send_messa
 <pre class="programlisting"><span class="returnvalue">int</span>
 gnutls_record_get_direction (<em class="parameter"><code><a class="link" href="gnutls-gnutls.html#gnutls-session-t" title="gnutls_session_t"><span class="type">gnutls_session_t</span></a> session</code></em>);</pre>
 <p>This function provides information about the internals of the
-record protocol and is only useful if a prior gnutls function call
-(e.g.  <a class="link" href="gnutls-gnutls.html#gnutls-handshake" title="gnutls_handshake ()"><code class="function">gnutls_handshake()</code></a>) was interrupted for some reason, that
+record protocol and is only useful if a prior gnutls function call,
+e.g.  <a class="link" href="gnutls-gnutls.html#gnutls-handshake" title="gnutls_handshake ()"><code class="function">gnutls_handshake()</code></a>, was interrupted for some reason. That
 is, if a function returned <a class="link" href="gnutls-gnutls.html#GNUTLS-E-INTERRUPTED:CAPS" title="GNUTLS_E_INTERRUPTED"><code class="literal">GNUTLS_E_INTERRUPTED</code></a> or
-<a class="link" href="gnutls-gnutls.html#GNUTLS-E-AGAIN:CAPS" title="GNUTLS_E_AGAIN"><code class="literal">GNUTLS_E_AGAIN</code></a>.  In such a case, you might want to call <code class="function">select()</code>
-or <code class="function">poll()</code> before calling the interrupted gnutls function again.  To
-tell you whether a file descriptor should be selected for either
-reading or writing, <a class="link" href="gnutls-gnutls.html#gnutls-record-get-direction" title="gnutls_record_get_direction ()"><code class="function">gnutls_record_get_direction()</code></a> returns 0 if the
-interrupted function was trying to read data, and 1 if it was
-trying to write data.</p>
-<p>This function's output is unreliable if you are using the
+<a class="link" href="gnutls-gnutls.html#GNUTLS-E-AGAIN:CAPS" title="GNUTLS_E_AGAIN"><code class="literal">GNUTLS_E_AGAIN</code></a>. In such a case, you might want to call <code class="function">select()</code>
+or <code class="function">poll()</code> before restoring the interrupted gnutls function.</p>
+<p>This function's output is unreliable if you are using the same
 <em class="parameter"><code>session</code></em>
  in different threads, for sending and receiving.</p>
 <div class="refsect3">
@@ -10283,7 +10279,7 @@ trying to write data.</p>
 </div>
 <div class="refsect3">
 <a name="id-1.2.4.6.209.7"></a><h4>Returns</h4>
-<p> 0 if trying to read data, 1 if trying to write data.</p>
+<p> 0 if interrupted while trying to read data, or 1 while trying to write data.</p>
 </div>
 </div>
 <hr>
@@ -14854,7 +14850,7 @@ or a negative error value on other errors.</p>
 <hr>
 <div class="refsect2">
 <a name="GNUTLS-VERSION:CAPS"></a><h3>GNUTLS_VERSION</h3>
-<pre class="programlisting">#define GNUTLS_VERSION "3.4.9"
+<pre class="programlisting">#define GNUTLS_VERSION "3.4.11"
 </pre>
 <p>
 </p>
@@ -14878,7 +14874,7 @@ or a negative error value on other errors.</p>
 <hr>
 <div class="refsect2">
 <a name="GNUTLS-VERSION-NUMBER:CAPS"></a><h3>GNUTLS_VERSION_NUMBER</h3>
-<pre class="programlisting">#define GNUTLS_VERSION_NUMBER 0x030409
+<pre class="programlisting">#define GNUTLS_VERSION_NUMBER 0x03040b
 </pre>
 <p>
 </p>
@@ -14886,7 +14882,7 @@ or a negative error value on other errors.</p>
 <hr>
 <div class="refsect2">
 <a name="GNUTLS-VERSION-PATCH:CAPS"></a><h3>GNUTLS_VERSION_PATCH</h3>
-<pre class="programlisting">#define GNUTLS_VERSION_PATCH 9
+<pre class="programlisting">#define GNUTLS_VERSION_PATCH 11
 </pre>
 <p>
 </p>

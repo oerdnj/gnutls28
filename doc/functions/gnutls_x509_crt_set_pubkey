@@ -8,7 +8,7 @@
 @var{key}: holds a public key
 
 This function will set the public parameters from the given public
-key to the request.
+key to the certificate. The  @code{key} can be deallocated after that.
 
 @strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (0) is returned, otherwise a
 negative error value.

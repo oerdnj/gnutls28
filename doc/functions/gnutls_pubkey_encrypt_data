@@ -12,7 +12,7 @@
 @var{ciphertext}: contains the encrypted data
 
 This function will encrypt the given data, using the public
-key.
+key. On success the  @code{ciphertext} will be allocated using @code{gnutls_malloc()} .
 
 @strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (0) is returned, otherwise a
 negative error value.

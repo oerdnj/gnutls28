@@ -110,10 +110,11 @@ host_triplet = @host@
 check_PROGRAMS = rng$(EXEEXT) $(am__EXEEXT_1)
 @ENABLE_PKCS11_TRUE@am__append_1 = pkcs11-chainverify pkcs11-get-issuer pkcs11-is-known pkcs11-combo pkcs11-privkey pkcs11-pubkey-import-rsa pkcs11-pubkey-import-ecdsa
 @ENABLE_PKCS11_TRUE@am__append_2 = testpkcs11.sh pkcs11-chainverify pkcs11-get-issuer crl-test pkcs11-is-known pkcs11-combo pkcs11-privkey pkcs11-pubkey-import-ecdsa pkcs11-pubkey-import-rsa
-@ENABLE_DANE_TRUE@am__append_3 = testdane.sh
+@ENABLE_NON_SUITEB_CURVES_TRUE@am__append_3 = ENABLE_NON_SUITEB_CURVES=1
+@ENABLE_DANE_TRUE@am__append_4 = testdane.sh
 @MACOSX_FALSE@@WINDOWS_FALSE@noinst_PROGRAMS = eagain-cli$(EXEEXT) \
 @MACOSX_FALSE@@WINDOWS_FALSE@	mini-record-timing$(EXEEXT)
-@MACOSX_FALSE@@WINDOWS_FALSE@am__append_4 = eagain.sh
+@MACOSX_FALSE@@WINDOWS_FALSE@am__append_5 = eagain.sh
 TESTS = $(am__EXEEXT_3)
 subdir = tests/suite
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -629,7 +630,7 @@ AM_RECURSIVE_TARGETS = check recheck
 @ENABLE_PKCS11_TRUE@	pkcs11-pubkey-import-rsa$(EXEEXT)
 am__EXEEXT_3 = testsrn.sh chain.sh invalid-cert.sh testpkcs11.sh \
 	testrng.sh testcompat-polarssl.sh testcompat-openssl.sh \
-	testrandom.sh $(am__EXEEXT_2) $(am__append_3) $(am__append_4)
+	testrandom.sh $(am__EXEEXT_2) $(am__append_4) $(am__append_5)
 TEST_SUITE_LOG = test-suite.log
 LOG_DRIVER = $(SHELL) $(top_srcdir)/build-aux/test-driver
 LOG_COMPILE = $(LOG_COMPILER) $(AM_LOG_FLAGS) $(LOG_FLAGS)
@@ -1691,13 +1692,10 @@ nodist_libecore_la_SOURCES = ecore/src/lib/ecore_anim.c			\
 nodist_check_SCRIPTS = testsrn.sh chain.sh invalid-cert.sh \
 	testpkcs11.sh testrng.sh testcompat-polarssl.sh \
 	testcompat-openssl.sh testrandom.sh $(am__append_2) \
-	$(am__append_3) $(am__append_4)
-TESTS_ENVIRONMENT = EXEEXT=$(EXEEXT) \
-	LC_ALL="C"					\
-	VALGRIND="$(VALGRIND)"				\
-	top_builddir="$(top_builddir)"			\
-	srcdir="$(srcdir)"
-
+	$(am__append_4) $(am__append_5)
+TESTS_ENVIRONMENT = EXEEXT=$(EXEEXT) LC_ALL="C" VALGRIND="$(VALGRIND)" \
+	top_builddir="$(top_builddir)" srcdir="$(srcdir)" \
+	$(am__append_3)
 @MACOSX_FALSE@@WINDOWS_FALSE@noinst_LTLIBRARIES = libecore.la
 @MACOSX_FALSE@@WINDOWS_FALSE@mini_record_timing_LDADD = -lrt $(LDADD)
 @MACOSX_FALSE@@WINDOWS_FALSE@eagain_cli_LDADD = libecore.la -lrt -lm -ldl -lpthread $(LDADD)

@@ -142,7 +142,7 @@ ck_object_class_t pkcs11_strtype_to_class(const char *type);
  * @GNUTLS_PKCS11_OBJ_FLAG_EXPECT_PRIVKEY: Hint for private key */
 #define GNUTLS_PKCS11_OBJ_FLAG_EXPECT_CERT (1<<29)
 #define GNUTLS_PKCS11_OBJ_FLAG_EXPECT_PRIVKEY (1<<30)
-#define GNUTLS_PKCS11_OBJ_FLAG_EXPECT_PUBKEY (1<<31)
+#define GNUTLS_PKCS11_OBJ_FLAG_EXPECT_PUBKEY ((unsigned int)1<<31)
 
 int pkcs11_token_matches_info(struct p11_kit_uri *info,
 			      struct ck_token_info *tinfo,
@@ -211,6 +211,14 @@ static inline int pk_to_genmech(gnutls_pk_algorithm_t pk, ck_key_type_t *type)
 }
 
 ck_object_class_t pkcs11_type_to_class(gnutls_pkcs11_obj_type_t type);
+
+ck_rv_t
+pkcs11_generate_key(struct ck_function_list * module,
+		    ck_session_handle_t sess,
+		    struct ck_mechanism * mechanism,
+		    struct ck_attribute * templ,
+		    unsigned long count,
+		    ck_object_handle_t * key);
 
 ck_rv_t
 pkcs11_generate_key_pair(struct ck_function_list * module,

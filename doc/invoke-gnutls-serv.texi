@@ -42,7 +42,7 @@ Usage:  gnutls-serv [ -<flag> [<val>] | --<name>[@{=| @}<val>] ]...
                                 - it must be in the range:
                                   0 to 9999
        --noticket             Don't accept session tickets
-   -g, --generate             Generate Diffie-Hellman and RSA-export parameters
+   -g, --generate             Generate Diffie-Hellman parameters
    -q, --quiet                Suppress some messages
        --nodb                 Do not use a resumption database
        --http                 Act as an HTTP server

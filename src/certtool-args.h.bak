@@ -152,9 +152,9 @@ typedef enum {
 /** count of all options for certtool */
 #define OPTION_CT    82
 /** certtool version */
-#define CERTTOOL_VERSION       "3.4.9"
+#define CERTTOOL_VERSION       "3.4.11"
 /** Full certtool version text */
-#define CERTTOOL_FULL_VERSION  "certtool 3.4.9"
+#define CERTTOOL_FULL_VERSION  "certtool 3.4.11"
 
 /**
  *  Interface defines for all options.  Replace "n" with the UPPER_CASED
