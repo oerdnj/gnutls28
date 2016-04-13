@@ -8,14 +8,14 @@ Uploaders: Andreas Metzler <ametzler@debian.org>,
  Simon Josefsson <simon@josefsson.org>
 Build-Depends: debhelper (>= 9.20150628), nettle-dev (>= 3.1), zlib1g-dev,
  libtasn1-6-dev (>= 4.3), autotools-dev,
- datefudge <!nocheck>, dpkg-dev (>= 1.17.14),
+ datefudge, dpkg-dev (>= 1.17.14),
  libp11-kit-dev (>= 0.23.1), pkg-config, chrpath, libidn11-dev (>= 1.31),
- autogen (>= 1:5.16-0), bison, dh-autoreconf, libcmocka-dev <!nocheck>,
+ autogen (>= 1:5.16-0), bison, dh-autoreconf, libcmocka-dev,
  libgmp-dev (>= 2:6),
  libopts25-dev, automake (>= 1:1.12.2),
- net-tools [!kfreebsd-i386 !kfreebsd-amd64] <!nocheck>,
- freebsd-net-tools [kfreebsd-i386 kfreebsd-amd64] <!nocheck>,
- libssl-dev <!nocheck>
+ net-tools [!kfreebsd-i386 !kfreebsd-amd64],
+ freebsd-net-tools [kfreebsd-i386 kfreebsd-amd64],
+ libssl-dev
 # The b-d on libgmp-dev is not technically necessary, since nettle brings
 # it along. However we want to enforce that gnutls is only built if the
 # dual-licensed GMP is available, otherwise the resulting binary
