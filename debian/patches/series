@@ -1,3 +1,7 @@
 14_version_gettextcat.diff
 30_guile-snarf.diff
 40_src-added-systemkey-args-to-BUILT_SOURCES.patch
+45_01_gnutls_ocsp_resp_get_single-fail-if-thisUpdate-is-no.patch
+45_02_gnutls_packet_get-avoid-null-pointer-dereference-on-.patch
+45_03_configure-corrected-regression-which-prevented-the-b.patch
+45_04_handshake-do-not-overwrite-the-server-s-signature-al.patch

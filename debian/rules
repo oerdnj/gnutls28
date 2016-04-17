@@ -104,10 +104,10 @@ override_dh_compress:
 	dh_compress -X.pdf
 
 override_dh_strip:
-	dh_strip --ddeb-migration='libgnutls30-dbg (<< 3.4.7-2~)' || dh_strip
+	dh_strip --ddeb-migration='libgnutls30-dbg (<< 3.4.7-2~)'
 
 override_dh_auto_test:
-	:
+	dh_auto_test -O--parallel --verbose -- VERBOSE=1
 
 override_dh_clean:
 	dh_clean -X.bak

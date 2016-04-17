@@ -1,0 +1,33 @@
+From 52dd79f7d4657218903783106562a82dcce7b9cc Mon Sep 17 00:00:00 2001
+From: Nikos Mavrogiannopoulos <nmav@redhat.com>
+Date: Tue, 12 Apr 2016 12:12:40 +0200
+Subject: [PATCH 1/4] gnutls_ocsp_resp_get_single: fail if thisUpdate is not
+ available or unparsable
+
+That is because this field is not optional, and a failure on its
+parsing is always fatal. Reported by Yuan Jochen Kang.
+---
+ lib/x509/ocsp.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/lib/x509/ocsp.c b/lib/x509/ocsp.c
+index 6bebcb4..9748b6a 100644
+--- a/lib/x509/ocsp.c
++++ b/lib/x509/ocsp.c
+@@ -1500,10 +1500,11 @@ gnutls_ocsp_resp_get_single(gnutls_ocsp_resp_t resp,
+ 		ret = asn1_read_value(resp->basicresp, name, ttime, &len);
+ 		if (ret != ASN1_SUCCESS) {
+ 			gnutls_assert();
+-			*this_update = (time_t) (-1);
+-		} else
++			return GNUTLS_E_ASN1_DER_ERROR;
++		} else {
+ 			*this_update =
+ 			    _gnutls_x509_generalTime2gtime(ttime);
++		}
+ 	}
+ 
+ 	if (next_update) {
+-- 
+2.8.0.rc3
+

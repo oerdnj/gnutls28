@@ -6,9 +6,9 @@ Uploaders: Andreas Metzler <ametzler@debian.org>,
  Eric Dorland <eric@debian.org>,
  James Westby <jw+debian@jameswestby.net>,
  Simon Josefsson <simon@josefsson.org>
-Build-Depends: debhelper (>= 9), nettle-dev (>= 3.1), zlib1g-dev,
+Build-Depends: debhelper (>= 9.20150628), nettle-dev (>= 3.1), zlib1g-dev,
  libtasn1-6-dev (>= 4.3), autotools-dev, guile-2.0-dev [!ia64 !m68k],
- datefudge,
+ datefudge <!nocheck>, dpkg-dev (>= 1.17.14),
  libp11-kit-dev (>= 0.23.1), pkg-config, chrpath, libidn11-dev (>= 1.31),
  autogen (>= 1:5.16-0), bison, dh-autoreconf, libgmp-dev (>= 2:6),
  libopts25-dev, automake (>= 1:1.12.2)
@@ -61,6 +61,7 @@ Architecture: any
 # GMP >= 6 is dual-licensed GPLv2+/LGPLv2.1+. Be nice to rdeps and
 # enforce usage of this version. - Remove on gmp soname bump!
 Depends: ${shlibs:Depends}, ${misc:Depends}, libgmp10 (>= 2:6)
+Conflicts: libnettle4, libhogweed2
 Pre-Depends: ${misc:Pre-Depends}
 Suggests: gnutls-bin
 Multi-Arch: same

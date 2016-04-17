@@ -1,7 +1,23 @@
+gnutls28 (3.4.11-3) unstable; urgency=medium
+
+  * Upload to unstable.
+
+ -- Andreas Metzler <ametzler@debian.org>  Sun, 17 Apr 2016 12:54:35 +0200
+
+gnutls28 (3.4.11-2) experimental; urgency=medium
+
+  * Pull post-release fixes from upstream gnutls_3_4_x branch.
+    (45_01_gnutls_ocsp_resp_get_single-fail-if-thisUpdate-is-no.patch
+    45_02_gnutls_packet_get-avoid-null-pointer-dereference-on-.patch
+    45_03_configure-corrected-regression-which-prevented-the-b.patch
+    45_04_handshake-do-not-overwrite-the-server-s-signature-al.patch)
+
+ -- Andreas Metzler <ametzler@debian.org>  Sat, 16 Apr 2016 11:59:38 +0200
+
 gnutls28 (3.4.11-1) experimental; urgency=medium
 
   * New upstream version.
-    + Drop superflouous patches.
+    + Drop superfluous patches.
       (41_tests-mini-loss-time-ensure-client-timeouts.diff
       42_mini-loss-time-improved-timeout-detection.patch
       43_fix_cpucapoverride.diff)

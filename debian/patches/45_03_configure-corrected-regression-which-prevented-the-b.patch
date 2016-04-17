@@ -1,0 +1,27 @@
+From 95f682816a31909bf97ff5467a5998024caef36f Mon Sep 17 00:00:00 2001
+From: Nikos Mavrogiannopoulos <nmav@gnutls.org>
+Date: Tue, 12 Apr 2016 22:53:57 +0200
+Subject: [PATCH 3/4] configure: corrected regression which prevented the build
+ of tests/suite
+
+This regression was introduced at 8b97662c40c67a6d4087ce6e1f0c6fb6ea4a8b2c
+---
+ configure.ac | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/configure.ac b/configure.ac
+index d1a9a02..99cf3ce 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -292,7 +292,7 @@ if test "$can_do_valgrind_tests" != "yes";then
+ 	opt_valgrind_tests=no
+ fi
+ 
+-AM_CONDITIONAL(WANT_TEST_SUITE, [test "$opt_valgrind_tests" != no])
++AM_CONDITIONAL(WANT_TEST_SUITE, [test -f "$SUITE_FILE"])
+ 
+ dnl GCC warnings to enable
+ 
+-- 
+2.8.0.rc3
+

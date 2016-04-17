@@ -1,0 +1,30 @@
+From a64707030ea0b054ff1b6a09068ee17de1ca4652 Mon Sep 17 00:00:00 2001
+From: Nikos Mavrogiannopoulos <nmav@redhat.com>
+Date: Wed, 13 Apr 2016 13:59:02 +0200
+Subject: [PATCH 4/4] handshake: do not overwrite the server's signature
+ algorithm
+
+That is, correct a bug under which a client sending a certificate
+would overwrite the server's idea about the used signature algorithm.
+Reported by Hubert Kario.
+---
+ lib/gnutls_sig.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/lib/gnutls_sig.c b/lib/gnutls_sig.c
+index 4764e14..ff2e0de 100644
+--- a/lib/gnutls_sig.c
++++ b/lib/gnutls_sig.c
+@@ -249,7 +249,8 @@ verify_tls_hash(gnutls_session_t session,
+ 		return GNUTLS_E_INTERNAL_ERROR;
+ 	}
+ 
+-	gnutls_sign_algorithm_set_server(session, sign_algo);
++	if (session->security_parameters.entity == GNUTLS_CLIENT)
++		gnutls_sign_algorithm_set_server(session, sign_algo);
+ 
+ 	ret = gnutls_pubkey_verify_hash2(cert->pubkey, sign_algo, flags,
+ 					 &vdata, signature);
+-- 
+2.8.0.rc3
+
