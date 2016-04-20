@@ -61,7 +61,6 @@ Architecture: any
 # GMP >= 6 is dual-licensed GPLv2+/LGPLv2.1+. Be nice to rdeps and
 # enforce usage of this version. - Remove on gmp soname bump!
 Depends: ${shlibs:Depends}, ${misc:Depends}, libgmp10 (>= 2:6)
-Conflicts: libnettle4, libhogweed2
 Pre-Depends: ${misc:Pre-Depends}
 Suggests: gnutls-bin
 Multi-Arch: same
