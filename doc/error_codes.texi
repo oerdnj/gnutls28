@@ -157,4 +157,5 @@
 @item -401 @tab GNUTLS_@-E_@-NO_@-SELF_@-TEST @tab There is no self test for this algorithm.
 @item -402 @tab GNUTLS_@-E_@-LIB_@-IN_@-ERROR_@-STATE @tab An error has been detected in the library and cannot continue operations.
 @item -403 @tab GNUTLS_@-E_@-PK_@-GENERATION_@-ERROR @tab Error in public key generation.
+@item -404 @tab GNUTLS_@-E_@-IDNA_@-ERROR @tab There was an issue converting to or from UTF8.
 @end multitable

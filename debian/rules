@@ -17,17 +17,13 @@ endif
 AMCONFBUILDINDEP := $(shell if dh_listpackages | grep -q gnutls-doc ; \
 	then echo "--enable-gtk-doc" ; \
 	else echo "--disable-gtk-doc --disable-doc"; fi)
-AMCONFBUILDGUILE := $(shell if dh_listpackages | grep -q guile-gnutls ; \
-	then \
-	echo " --enable-guile --with-guile-site-dir=/usr/share/guile/site" ;\
-	else echo " --disable-guile" ; fi)
 
 override_dh_auto_configure:
 	dh_auto_configure --verbose -- \
 	--enable-ld-version-script --enable-cxx \
 	--enable-static \
 	--without-lzo \
-	--disable-libdane --without-tpm \
+	--disable-libdane --without-tpm --disable-guile \
 	--disable-heartbeat-support \
 	--enable-openssl-compatibility \
 	--disable-silent-rules \
@@ -35,15 +31,14 @@ override_dh_auto_configure:
 	--with-packager=Debian \
 	--with-packager-bug-reports=http://bugs.debian.org/ \
 	--with-packager-version=$(shell dpkg-parsechangelog | sed -n '/^Version: /s/^Version: //p') \
-	$(AMCONFBUILDINDEP) \
-	$(AMCONFBUILDGUILE)
+	$(AMCONFBUILDINDEP)
 
 
 override_dh_makeshlibs:
 	dh_makeshlibs -p libgnutlsxx28 -V 'libgnutlsxx28 (>= 3.3.8-0)'
 	dh_makeshlibs -p libgnutls30  -V 'libgnutls30 (>= 3.4.6-0)' -- -c4
 	dh_makeshlibs -p libgnutls-openssl27 -V 'libgnutls-openssl27 (>= 3.0-0)'
-	dh_makeshlibs --remaining-packages -Xguile/2.0/guile-gnutls-v-2.so
+	dh_makeshlibs --remaining-packages
 
 
 # pre-clean rule: save gnutls.pdf since it is expensive to regenerate.
@@ -81,19 +76,6 @@ override_dh_installinfo:
 		sed -i -e 's:image src="\([^"]*.png"\):image src="/usr/share/doc/gnutls-doc/html/\1:g' *.info* ; \
 	fi
 
-override_dh_install:
-	dh_install
-	# See #658110
-	if [ "" != `ls debian/guile-gnutls/usr/lib/*/guile` ] ; then \
-	mv -v debian/guile-gnutls/usr/lib/*/guile debian/guile-gnutls/usr/lib \
-		&&\
-		rmdir -v --ignore-fail-on-non-empty \
-			debian/guile-gnutls/usr/lib/*-* ; \
-	sed -i -e 's_usr/lib/[^/]*/guile/_usr/lib/guile/_' \
-		debian/guile-gnutls/usr/share/guile/site/gnutls.scm ;\
-	else echo "Debian build DEBUG: no guile files found" ;\
-	fi
-
 override_dh_installchangelogs:
 	dh_installchangelogs
 	rm -vrf debian/libgnutlsxx28/usr/share/doc/libgnutlsxx28
@@ -104,10 +86,10 @@ override_dh_compress:
 	dh_compress -X.pdf
 
 override_dh_strip:
-	dh_strip --ddeb-migration='libgnutls30-dbg (<< 3.4.7-2~)' || dh_strip
+	dh_strip --ddeb-migration='libgnutls30-dbg (<< 3.4.7-2~)'
 
 override_dh_auto_test:
-	:
+	dh_auto_test -O--parallel --verbose -- VERBOSE=1
 
 override_dh_clean:
 	dh_clean -X.bak

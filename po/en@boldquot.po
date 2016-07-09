@@ -30,10 +30,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gnutls 3.4.11\n"
+"Project-Id-Version: gnutls 3.4.14\n"
 "Report-Msgid-Bugs-To: bug-gnutls@gnu.org\n"
-"POT-Creation-Date: 2016-04-09 11:21+0200\n"
-"PO-Revision-Date: 2016-04-09 11:21+0200\n"
+"POT-Creation-Date: 2016-07-05 18:39+0200\n"
+"PO-Revision-Date: 2016-07-05 18:39+0200\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "Language: en@boldquot\n"
@@ -396,7 +396,7 @@ msgstr "Unsupported extension in X.509 certificate."
 msgid "Key usage violation in certificate has been detected."
 msgstr "Key usage violation in certificate has been detected."
 
-#: lib/gnutls_errors.c:173 lib/gnutls_errors.c:390
+#: lib/gnutls_errors.c:173 lib/gnutls_errors.c:392
 msgid "Function was interrupted."
 msgstr "Function was interrupted."
 
@@ -778,39 +778,43 @@ msgstr "Error in sockets initialization."
 msgid "Error in public key generation."
 msgstr "Error in public key generation."
 
-#: lib/gnutls_errors.c:379
+#: lib/gnutls_errors.c:375
+msgid "There was an issue converting to or from UTF8."
+msgstr "There was an issue converting to or from UTF8."
+
+#: lib/gnutls_errors.c:381
 msgid "Success."
 msgstr "Success."
 
-#: lib/gnutls_errors.c:380
+#: lib/gnutls_errors.c:382
 msgid "A TLS warning alert has been received."
 msgstr "A TLS warning alert has been received."
 
-#: lib/gnutls_errors.c:382
+#: lib/gnutls_errors.c:384
 msgid "A heartbeat pong message was received."
 msgstr "A heartbeat pong message was received."
 
-#: lib/gnutls_errors.c:384
+#: lib/gnutls_errors.c:386
 msgid "A heartbeat ping message was received."
 msgstr "A heartbeat ping message was received."
 
-#: lib/gnutls_errors.c:386
+#: lib/gnutls_errors.c:388
 msgid "Resource temporarily unavailable, try again."
 msgstr "Resource temporarily unavailable, try again."
 
-#: lib/gnutls_errors.c:388
+#: lib/gnutls_errors.c:390
 msgid "The transmitted packet is too large (EMSGSIZE)."
 msgstr "The transmitted packet is too large (EMSGSIZE)."
 
-#: lib/gnutls_errors.c:391
+#: lib/gnutls_errors.c:393
 msgid "Rehandshake was requested by the peer."
 msgstr "Rehandshake was requested by the peer."
 
-#: lib/gnutls_errors.c:393
+#: lib/gnutls_errors.c:395
 msgid "One of the involved algorithms has insufficient security level."
 msgstr "One of the involved algorithms has insufficient security level."
 
-#: lib/gnutls_errors.c:484
+#: lib/gnutls_errors.c:486
 msgid "(unknown error code)"
 msgstr "(unknown error code)"
 
@@ -995,13 +999,13 @@ msgstr "unknown key algorithm (%d)"
 msgid "OpenPGP Certificate Information:\n"
 msgstr "OpenPGP Certificate Information:\n"
 
-#: lib/x509/ocsp_output.c:136 lib/x509/ocsp_output.c:503
-#: lib/x509/output.c:2005 lib/x509/output.c:2377
+#: lib/x509/ocsp_output.c:136 lib/x509/ocsp_output.c:503 lib/x509/output.c:2005
+#: lib/x509/output.c:2377
 msgid "\t\t\tASCII: "
 msgstr "\t\t\tASCII: "
 
-#: lib/x509/ocsp_output.c:141 lib/x509/ocsp_output.c:508
-#: lib/x509/output.c:2009 lib/x509/output.c:2382
+#: lib/x509/ocsp_output.c:141 lib/x509/ocsp_output.c:508 lib/x509/output.c:2009
+#: lib/x509/output.c:2382
 msgid "\t\t\tHexdump: "
 msgstr "\t\t\tHexdump: "
 

@@ -62,7 +62,7 @@ Usage:  gnutls-cli [ -<flag> [<val>] | --<name>[@{=| @}<val>] ]... [hostname]
    -s, --starttls             Connect, establish a plain session and start TLS
        --app-proto=str        an alias for the 'starttls-proto' option
        --starttls-proto=str   The application protocol to be used to obtain the server's certificate
-(https, ftp, smtp, imap)
+(https, ftp, smtp, imap, ldap, xmpp)
                                 - prohibits the option 'starttls'
    -u, --udp                  Use DTLS (datagram TLS) over UDP
        --mtu=num              Set MTU for datagram TLS
@@ -382,6 +382,13 @@ Connecting to '127.0.0.1:5556'...
 - Simple Client Mode:
 @end example
 By keeping the --pskusername parameter and removing the --pskkey parameter, it will query only for the password during the handshake. 
+
+@subheading Connecting to STARTTLS services
+
+You could also use the client to connect to services with starttls capability.
+@example
+$ gnutls-cli --starttls-proto smtp --port 25 localhost
+@end example
 
 @subheading Listing ciphersuites in a priority string
 To list the ciphersuites in a priority string:

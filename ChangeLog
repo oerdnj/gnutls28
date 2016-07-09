@@ -1,3 +1,532 @@
+2016-07-06  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* NEWS: released 3.4.14
+
+2016-07-05  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* configure.ac, m4/hooks.m4: bumped version
+
+2016-07-05  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* libdane/errors.c, libdane/includes/gnutls/dane.h: dane: corrected
+	the license of libdane files The license was always LGPL version 2.1, and these files mentioned
+	LGPL version 3. Reported by Thomas Petazzoni.
+
+2016-06-30  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/pkcs11_int.c: pkcs11_get_attribute_avalue: correctly handle a
+	-1 value length from C_GetAttributeValue That is, work-around modules which do not return an error on
+	sensitive objects.  Relates #108
+
+2016-06-29  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* tests/cert-tests/Makefile.am: tests: name-constraints moved to
+	non-windows running scripts That is because datefudge doesn't work there.
+
+2016-06-29  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* NEWS: doc update [ci skip]
+
+2016-06-29  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* lib/pkcs11_int.c: pkcs11_get_attribute_avalue: do not assign
+	values on failure When C_GetAttributeValue() returns size but does not return data
+	then pkcs11_get_attribute_avalue() would set the return data pointer
+	to a free'd value. This is against the convention expected by
+	callers, i.e, set data to NULL. Reported by Anthony Alba in #108.
+
+2016-06-29  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* tests/cert-tests/name-constraints: tests: use datefudge in
+	name-constraints test This avoids the expiration of the used certificate to affect the
+	test.
+
+2016-06-28  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* tests/suite/pkcs11-is-known.c: tests: backported pkcs11-is-known
+	from master branch
+
+2016-06-23  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/pkcs11.c: gnutls_pkcs11_crt_is_known: always assume
+	GNUTLS_PKCS11_OBJ_FLAG_COMPARE unless
+	GNUTLS_PKCS11_OBJ_FLAG_RETRIEVE_DISTRUSTED is given
+
+2016-06-28  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/pkcs11.c: find_cert_cb: minor cleanups in find_cert_cb
+
+2016-06-22  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/pkcs11.c: pkcs11: correctly encode the serial number when
+	searching for certificate In gnutls_pkcs11_crt_is_known() corrected the encoding of the serial
+	number to TLV DER from LV DER. This is the encoding we use when
+	storing that number.
+
+2016-06-22  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/pkcs11.c: pkcs11: correctly account check_found_cert()
+
+2016-06-16  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* NEWS: doc update [ci skip]
+
+2016-06-16  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* NEWS: doc update
+
+2016-06-16  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/gnutls_buffers.c: dtls: corrected reconstruction of handshake
+	packets received out of order That is, when the handshake packet is split into multiple different
+	chunks and received out of order, make sure that reconstruction
+	occurs properly. Reported by Guillaume Roguez.
+
+2016-06-16  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/pkcs11_write.c: Corrected the writing of serial number in
+	PKCS#11 modules That is previously the serial number was written in raw format, but
+	in PKCS#11 the serial number must be set encoded as integer. Report
+	and fix by Stanislav Zidek.
+
+2016-06-08  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* doc/cha-gtls-app.texi: doc: remove references to GNUTLS_KEYLOGFILE
+	[ci skip]
+
+2016-06-06  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* tests/Makefile.am: tests: link libutils against gnutls
+
+2016-06-06  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* NEWS, configure.ac, m4/hooks.m4: bumped versions
+
+2016-06-06  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* NEWS: doc update
+
+2016-06-06  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* tests/Makefile.am, tests/cert-common.h, tests/keylog-env.c,
+	tests/utils-adv.c, tests/utils.c, tests/utils.h: tests: backported
+	keylog test
+
+2016-06-06  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* lib/gnutls_global.c, lib/gnutls_global.h, lib/gnutls_kx.c: 
+	keylogfile: only consider the SSLKEYLOGFILE variable In addition do not check the environment in the constructor but
+	instead use static variables to save the key file name.  The
+	GNUTLS_KEYLOGFILE environment variable is no longer used since there
+	is no reason to have a separate one.
+
+2016-05-31  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/x509/pkcs12_bag.c, lib/x509/x509_ext.c: doc update [ci skip]
+
+2016-05-28  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* GNUmakefile, build-aux/config.rpath, build-aux/gendocs.sh,
+	build-aux/pmccabe2html, build-aux/snippet/arg-nonnull.h,
+	build-aux/snippet/c++defs.h, build-aux/snippet/warn-on-use.h,
+	build-aux/useless-if-before-free, build-aux/vc-list-files,
+	doc/gendocs_template, gl/Makefile.am, gl/alloca.in.h,
+	gl/asnprintf.c, gl/asprintf.c, gl/base64.c, gl/base64.h,
+	gl/byteswap.in.h, gl/c-ctype.c, gl/c-ctype.h, gl/errno.in.h,
+	gl/float+.h, gl/float.c, gl/float.in.h, gl/fstat.c, gl/ftell.c,
+	gl/ftello.c, gl/getdelim.c, gl/getline.c, gl/gettext.h,
+	gl/gettimeofday.c, gl/hash-pjw-bare.c, gl/hash-pjw-bare.h,
+	gl/intprops.h, gl/itold.c, gl/lseek.c, gl/m4/00gnulib.m4,
+	gl/m4/absolute-header.m4, gl/m4/alloca.m4, gl/m4/base64.m4,
+	gl/m4/byteswap.m4, gl/m4/ctype.m4, gl/m4/errno_h.m4,
+	gl/m4/exponentd.m4, gl/m4/extensions.m4, gl/m4/extern-inline.m4,
+	gl/m4/fcntl-o.m4, gl/m4/fcntl_h.m4, gl/m4/fdopen.m4,
+	gl/m4/float_h.m4, gl/m4/fpieee.m4, gl/m4/fseeko.m4, gl/m4/fstat.m4,
+	gl/m4/ftell.m4, gl/m4/ftello.m4, gl/m4/func.m4, gl/m4/getdelim.m4,
+	gl/m4/getline.m4, gl/m4/getpagesize.m4, gl/m4/gettimeofday.m4,
+	gl/m4/gnulib-cache.m4, gl/m4/gnulib-common.m4,
+	gl/m4/gnulib-comp.m4, gl/m4/gnulib-tool.m4, gl/m4/include_next.m4,
+	gl/m4/intmax_t.m4, gl/m4/inttypes-pri.m4, gl/m4/inttypes.m4,
+	gl/m4/inttypes_h.m4, gl/m4/largefile.m4, gl/m4/ld-output-def.m4,
+	gl/m4/ld-version-script.m4, gl/m4/lib-ld.m4, gl/m4/lib-link.m4,
+	gl/m4/lib-prefix.m4, gl/m4/longlong.m4, gl/m4/lseek.m4,
+	gl/m4/malloc.m4, gl/m4/manywarnings.m4, gl/m4/math_h.m4,
+	gl/m4/memchr.m4, gl/m4/memmem.m4, gl/m4/minmax.m4,
+	gl/m4/mmap-anon.m4, gl/m4/msvc-inval.m4, gl/m4/msvc-nothrow.m4,
+	gl/m4/multiarch.m4, gl/m4/netdb_h.m4, gl/m4/netinet_in_h.m4,
+	gl/m4/off_t.m4, gl/m4/printf.m4, gl/m4/read-file.m4,
+	gl/m4/realloc.m4, gl/m4/secure_getenv.m4, gl/m4/size_max.m4,
+	gl/m4/snprintf.m4, gl/m4/socklen.m4, gl/m4/sockpfaf.m4,
+	gl/m4/ssize_t.m4, gl/m4/stdalign.m4, gl/m4/stdbool.m4,
+	gl/m4/stddef_h.m4, gl/m4/stdint.m4, gl/m4/stdint_h.m4,
+	gl/m4/stdio_h.m4, gl/m4/stdlib_h.m4, gl/m4/strcase.m4,
+	gl/m4/string_h.m4, gl/m4/strings_h.m4, gl/m4/strndup.m4,
+	gl/m4/strnlen.m4, gl/m4/strtok_r.m4, gl/m4/strverscmp.m4,
+	gl/m4/sys_socket_h.m4, gl/m4/sys_stat_h.m4, gl/m4/sys_time_h.m4,
+	gl/m4/sys_types_h.m4, gl/m4/sys_uio_h.m4, gl/m4/time_h.m4,
+	gl/m4/time_r.m4, gl/m4/ungetc.m4, gl/m4/unistd_h.m4,
+	gl/m4/valgrind-tests.m4, gl/m4/vasnprintf.m4, gl/m4/vasprintf.m4,
+	gl/m4/vsnprintf.m4, gl/m4/warn-on-use.m4, gl/m4/warnings.m4,
+	gl/m4/wchar_h.m4, gl/m4/wchar_t.m4, gl/m4/wint_t.m4,
+	gl/m4/xsize.m4, gl/malloc.c, gl/memchr.c, gl/memmem.c, gl/minmax.h,
+	gl/msvc-inval.c, gl/msvc-inval.h, gl/msvc-nothrow.c,
+	gl/msvc-nothrow.h, gl/netdb.in.h, gl/netinet_in.in.h,
+	gl/printf-args.c, gl/printf-args.h, gl/printf-parse.c,
+	gl/printf-parse.h, gl/read-file.c, gl/read-file.h, gl/realloc.c,
+	gl/secure_getenv.c, gl/size_max.h, gl/snprintf.c, gl/stdalign.in.h,
+	gl/stdbool.in.h, gl/stddef.in.h, gl/stdint.in.h, gl/stdio-impl.h,
+	gl/stdio.in.h, gl/stdlib.in.h, gl/str-two-way.h, gl/strcasecmp.c,
+	gl/string.in.h, gl/strings.in.h, gl/strncasecmp.c, gl/strndup.c,
+	gl/strnlen.c, gl/strtok_r.c, gl/strverscmp.c, gl/sys_socket.c,
+	gl/sys_socket.in.h, gl/sys_stat.in.h, gl/sys_time.in.h,
+	gl/sys_types.in.h, gl/sys_uio.in.h, gl/tests/Makefile.am,
+	gl/tests/binary-io.c, gl/tests/binary-io.h, gl/tests/ctype.in.h,
+	gl/tests/fcntl.in.h, gl/tests/fdopen.c, gl/tests/fpucw.h,
+	gl/tests/getpagesize.c, gl/tests/init.sh, gl/tests/inttypes.in.h,
+	gl/tests/macros.h, gl/tests/signature.h,
+	gl/tests/test-alloca-opt.c, gl/tests/test-base64.c,
+	gl/tests/test-binary-io.c, gl/tests/test-byteswap.c,
+	gl/tests/test-c-ctype.c, gl/tests/test-ctype.c,
+	gl/tests/test-errno.c, gl/tests/test-fcntl-h.c,
+	gl/tests/test-fdopen.c, gl/tests/test-fgetc.c,
+	gl/tests/test-float.c, gl/tests/test-fputc.c,
+	gl/tests/test-fread.c, gl/tests/test-fstat.c,
+	gl/tests/test-ftell.c, gl/tests/test-ftell3.c,
+	gl/tests/test-ftello.c, gl/tests/test-ftello3.c,
+	gl/tests/test-ftello4.c, gl/tests/test-func.c,
+	gl/tests/test-fwrite.c, gl/tests/test-getdelim.c,
+	gl/tests/test-getline.c, gl/tests/test-gettimeofday.c,
+	gl/tests/test-iconv.c, gl/tests/test-init.sh,
+	gl/tests/test-intprops.c, gl/tests/test-inttypes.c,
+	gl/tests/test-memchr.c, gl/tests/test-netdb.c,
+	gl/tests/test-netinet_in.c, gl/tests/test-read-file.c,
+	gl/tests/test-snprintf.c, gl/tests/test-stdalign.c,
+	gl/tests/test-stdbool.c, gl/tests/test-stddef.c,
+	gl/tests/test-stdint.c, gl/tests/test-stdio.c,
+	gl/tests/test-stdlib.c, gl/tests/test-string.c,
+	gl/tests/test-strings.c, gl/tests/test-strnlen.c,
+	gl/tests/test-strverscmp.c, gl/tests/test-sys_socket.c,
+	gl/tests/test-sys_stat.c, gl/tests/test-sys_time.c,
+	gl/tests/test-sys_types.c, gl/tests/test-sys_uio.c,
+	gl/tests/test-sys_wait.h, gl/tests/test-time.c,
+	gl/tests/test-unistd.c, gl/tests/test-vasnprintf.c,
+	gl/tests/test-vasprintf.c, gl/tests/test-vc-list-files-cvs.sh,
+	gl/tests/test-vc-list-files-git.sh, gl/tests/test-verify.c,
+	gl/tests/test-vsnprintf.c, gl/tests/test-wchar.c,
+	gl/tests/zerosize-ptr.h, gl/time.in.h, gl/time_r.c, gl/unistd.c,
+	gl/unistd.in.h, gl/vasnprintf.c, gl/vasnprintf.h, gl/vasprintf.c,
+	gl/verify.h, gl/vsnprintf.c, gl/wchar.in.h, gl/xsize.h,
+	lib/gnutls_mem.h, maint.mk: Rely on gnulib's secure_getenv()
+
+2016-05-28  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* lib/accelerated/x86/x86-common.c: x86-common: use secure_getenv()
+
+2016-05-27  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* configure.ac: configure.ac: check for secure_getenv where
+	available and always enable system extensions
+
+2016-05-27  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* NEWS: doc update
+
+2016-05-27  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* lib/fips.c, lib/gnutls_global.c, lib/gnutls_mem.h, lib/system.c: 
+	env: use secure_getenv when reading environment variables
+
+2016-05-27  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* doc/cha-gtls-app.texi, lib/gnutls_global.c, lib/gnutls_global.h,
+	lib/gnutls_kx.c: Append keys on keylogfile Also consider the SSLKEYLOGFILE variable, since the format is
+	identical and we are always appending keys.
+
+2016-05-23  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/pkcs11.c: pkcs11: added sanity check to find_obj_url_cb() for
+	object validity Also avoid unnecessary recursion.
+
+2016-05-20  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* tests/scripts/common.sh, tests/suite/eagain.sh,
+	tests/suite/testcompat-main-openssl,
+	tests/suite/testcompat-main-polarssl, tests/suite/testdane.sh,
+	tests/suite/testpkcs11.sh, tests/suite/testrng.sh,
+	tests/suite/testsrn.sh: tests: use /bin/bash in tests which require
+	common.sh
+
+2016-05-13  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* tests/dsa/testdsa, tests/openpgp-certs/testcerts,
+	tests/scripts/common.sh, tests/suite/eagain.sh,
+	tests/suite/mini-eagain2.c, tests/suite/testcompat-main-openssl,
+	tests/suite/testcompat-main-polarssl, tests/suite/testpkcs11.sh,
+	tests/suite/testsrn.sh: tests: simplified server launching process Also attempt to use a new port on every started server and added a
+	waiting period for the port to become re-usable.
+
+2016-05-20  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* .gitlab-ci.yml: .gitlab-ci.yml: restrict windows build checks to
+	tests/ subdir That is because there is an issue with the gnulib self tests when
+	run under windows.
+
+2016-05-20  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* tests/Makefile.am: tests: do not use pkglib to generate
+	libpkcs11mock1.so This resulted in the test library being installed. Install we use
+	noinst for the library, but pass -rpath to LDFLAGS as a hack to for
+	libtool to generate the shared version.
+
+2016-05-20  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* .gitlab-ci.yml: .gitlab-ci.yml: added windows DLL build for 3.4.x
+	branch
+
+2016-05-20  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* doc/manpages/Makefile.am: updated auto-generated files
+
+2016-05-20  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* NEWS, configure.ac, m4/hooks.m4: released 3.4.12
+
+2016-05-19  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* tests/priorities.c: tests: priorities: account for the addition of
+	CHACHA20-POLY1305
+
+2016-01-21  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/gnutls_priority.c: CHACHA20_POLY1305 was added to the default
+	priority strings That is the NORMAL and PERFORMANCE priority strings now will enable
+	CHACHA20-POLY1305 by default.
+
+2016-05-19  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* src/cli.c, src/socket.c, src/socket.h: gnutls-cli: allow operation
+	with stdin input That is once commands from stdin are given, they are not only sent
+	to server, but we also wait for a response prior to exiting.  Resolves #96
+
+2016-05-18  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* NEWS: doc update
+
+2016-05-18  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/gnutls_kx.c: Write session keys into a file when
+	GNUTLS_KEYLOGFILE is exported That is the file pointed from the variable is written to, and
+	contain the session parameters in the following format (identical to
+	NSS key log format): CLIENT_RANDOM <space> <64 bytes of hex encoded client_random>
+	<space> <96 bytes of hex encoded master secret> and for the old RSA ciphersuites also in the format: RSA <space> <16
+	bytes of hex encoded encrypted pre master secret> <space> <96 bytes
+	of hex encoded master secret> Resolves #64
+
+2016-05-17  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* NEWS: doc update
+
+2016-05-17  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* src/cli.c: gnutls-cli: corrected check for OCSP verification
+	success
+
+2016-05-12  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* NEWS: doc update
+
+2016-05-12  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/gnutls_errors.c: errors: include GNUTLS_E_IDNA_ERROR to the
+	list
+
+2016-05-12  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/ext/server_name.c: server_name: only save the supported server
+	names in the session Invalid server names with embedded nulls and unsupported types are
+	not saved.
+
+2016-05-10  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* lib/gnutls_pubkey.c: gnutls_pubkey_verify_data2: simplified return
+	logic
+
+2016-05-10  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* lib/x509/pkcs7-output.c: gnutls_pkcs7_print: corrected type of
+	unsigned count variable
+
+2016-05-10  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* NEWS: doc update
+
+2016-05-10  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/gnutls_x509.c: cert cred: add the CN to the list of known
+	hostnames only if no dns_names That is, follow rfc6125 and support CN as a fallback only.
+
+2016-05-10  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/gnutls_x509.c: gnutls_certificate_set_key: import the DNS
+	names of the certificates That is, only when no (NULL) names are provided.
+
+2016-05-10  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/system.c: reset the global time func on init/deinit
+
+2016-05-03  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/gnutls_x509.c: gnutls_certificate_set_key: duplicate the
+	provided memory That is, do not assume that a heap allocated value is provided.
+
+2016-05-03  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* NEWS: doc update
+
+2016-05-02  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* tests/Makefile.am, tests/pkcs11/pkcs11-cert-import-url-exts.c,
+	tests/pkcs11/pkcs11-get-exts.c,
+	tests/pkcs11/pkcs11-get-raw-issuer-exts.c,
+	tests/pkcs11/pkcs11-mock.c, tests/pkcs11/pkcs11-mock.h: tests: added
+	a basic PKCS#11 mock module This is used to test gnutls_pkcs11_obj_get_exts(),
+	gnutls_x509_crt_import_url(), and gnutls_pkcs11_get_raw_issuer()
+	with the GNUTLS_PKCS11_OBJ_FLAG_OVERWRITE_TRUSTMOD_EXT flag.
+
+2016-05-03  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/pkcs11.c: pkcs11: find_cert_cb: do not use C_FindObjectsInit()
+	when another is already running While some modules implicitly terminated the previous run, this is
+	not something that PKCS#11 modules are expected to typically do.
+
+2016-05-03  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/pkcs11.c: pkcs11: the flag
+	GNUTLS_PKCS11_OBJ_FLAG_OVERWRITE_TRUSTMOD_EXT will be respected by
+	imported certificates That is, certificates imported with gnutls_pkcs11_obj_import_url()
+	or gnutls_x509_crt_import_url() will be able to be extracted with
+	their extensions overriden. Previously that was available only on
+	gnutls_pkcs11_get_raw_issuer() and friends.
+
+2016-05-03  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/pkcs11x.c: pkcs11: find_ext_cb: eliminated memory leak
+
+2016-05-02  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/pkcs11x.c: gnutls_pkcs11_obj_get_exts: updated documentation
+
+2016-05-02  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/x509/x509.c: gnutls_x509_crt_import_url: updated documentation
+	for new function name
+
+2016-04-30  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* NEWS: doc update [ci skip]
+
+2016-04-30  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* lib/x509_b64.c: doc: mention the version after which
+	gnutls_pem_base64_en/decode2() are available
+
+2016-04-29  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* lib/gnutls_privkey_raw.c: corrected import issue in
+	gnutls_privkey_import_ecc_raw
+
+2016-04-29  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* lib/x509/privkey.c: x509/privkey: in raw import functions set the
+	parameter's algorithm type
+
+2016-04-27  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* doc/examples/ex-client-x509.c: examples: backported main client
+	example [ci skip]
+
+2016-04-26  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* tests/dane.c: tests: enhanced dane testing with offline
+	verification checks
+
+2016-04-26  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* libdane/dane.c: dane: verification will not fail if a CA entry is
+	encountered but cannot be verified That addresses the issue of verifying a single certificate against a
+	list of TLSA entries that contain an entry with CA usage (cert usage
+	0). With the previous behavior verification would have failed, while
+	now this entry will be skipped.
+
+2016-04-26  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/gnutls_cert.c, libdane/dane.c: doc: improved documentation on
+	certificate and DANE verification functions
+
+2016-04-26  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* libdane/dane.c: dane: updated documentation of dane_verify_crt_raw
+	[ci skip]
+
+2016-04-26  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* doc/manpages/Makefile.am: manpages: include the dane functions
+	into the distributed pages
+
+2016-04-19  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* src/cli-debug.c: gnutls-cli-debug: enable socket verbosity when
+	--verbose is given
+
+2016-04-19  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* src/socket.c: tools: explicitly initialize socket struct to zero That resolves issue where verbose was enabled by default.
+
+2016-04-19  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* src/cli-debug.c, src/danetool.c: tools: avoid extracting the value
+	of the app-proto alias Instead always extract the starttls-proto value, as it seems that
+	libopts doesn't report any value for the former. This corrects the
+	starttls capability of danetool and gnutls-cli-debug.
+
+2016-04-19  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* src/cli-args.def, src/cli-debug-args.def, src/socket.c: tools:
+	document the starttls capability
+
+2016-04-18  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/nettle/pk.c: _wrap_nettle_pk_derive: reject values of public
+	key that are over the prime That is do not canonicalise the value we get from the network, but
+	rather check it for validity. This saves a modular reduction on
+	handshake and performs a sanity check on the peer's (client)
+	parameters.  Reported by Hubert Kario.  Resolves #84
+
+2016-04-13  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/gnutls_sig.c: handshake: do not overwrite the server's
+	signature algorithm That is, correct a bug under which a client sending a certificate
+	would overwrite the server's idea about the used signature
+	algorithm.  Reported by Hubert Kario.
+
+2016-04-12  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* configure.ac: configure: corrected regression which prevented the
+	build of tests/suite This regression was introduced at
+	8b97662c40c67a6d4087ce6e1f0c6fb6ea4a8b2c
+
+2016-04-12  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/gnutls_record.c: gnutls_packet_get: avoid null pointer
+	dereference on NULL input That is, still allow the function to handle a NULL packet input but
+	reset the data contents.
+
+2016-04-12  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/x509/ocsp.c: gnutls_ocsp_resp_get_single: fail if thisUpdate
+	is not available or unparsable That is because this field is not optional, and a failure on its
+	parsing is always fatal. Reported by Yuan Jochen Kang.
+
 2016-04-10  Nikos Mavrogiannopoulos <nmav@gnutls.org>
 
 	* NEWS: released 3.4.11

@@ -1,6 +1,6 @@
-This is gnutls.info, produced by makeinfo version 6.0 from gnutls.texi.
+This is gnutls.info, produced by makeinfo version 6.1 from gnutls.texi.
 
-This manual is last updated 4 March 2015 for version 3.4.11 of GnuTLS.
+This manual is last updated 4 March 2015 for version 3.4.14 of GnuTLS.
 
 Copyright (C) 2001-2015 Free Software Foundation, Inc.\\ Copyright (C)
 2001-2015 Nikos Mavrogiannopoulos
@@ -125,7 +125,7 @@ gnutls-cli(1), gnutls-serv(1)
 gnutls-cli-debug Examples
 -------------------------
 
-     $ ../src/gnutls-cli-debug localhost
+     $ gnutls-cli-debug localhost
      GnuTLS debug client 3.5.0
      Checking localhost:443
                                   for SSL 3.0 (RFC6101) support... yes
@@ -173,6 +173,10 @@ gnutls-cli-debug Examples
                           for max record size (RFC6066) support... no
                      for OCSP status response (RFC6066) support... no
                    for OpenPGP authentication (RFC6091) support... no
+
+You could also use the client to debug services with starttls
+capability.
+     $ gnutls-cli-debug --starttls-proto smtp --port 25 localhost
 
 
 File: gnutls.info,  Node: Internal architecture of GnuTLS,  Next: Upgrading from previous versions,  Prev: Other included programs,  Up: Top
@@ -1366,6 +1370,9 @@ expressions.
                                           operations.
 -403        GNUTLS_E_PK_GENERATION_ERROR  Error in public key
                                           generation.
+-404        GNUTLS_E_IDNA_ERROR           There was an issue
+                                          converting to or from
+                                          UTF8.
 
 
 File: gnutls.info,  Node: Supported ciphersuites,  Next: API reference,  Prev: Error codes,  Up: Top

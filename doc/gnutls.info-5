@@ -1,6 +1,6 @@
-This is gnutls.info, produced by makeinfo version 6.0 from gnutls.texi.
+This is gnutls.info, produced by makeinfo version 6.1 from gnutls.texi.
 
-This manual is last updated 4 March 2015 for version 3.4.11 of GnuTLS.
+This manual is last updated 4 March 2015 for version 3.4.14 of GnuTLS.
 
 Copyright (C) 2001-2015 Free Software Foundation, Inc.\\ Copyright (C)
 2001-2015 Nikos Mavrogiannopoulos
@@ -5829,11 +5829,11 @@ dane_verify_crt
      function will check whether the key of the peer matches the key
      advertized in the DANE entry.
 
-     If the 'q' parameter is provided it will be used for caching
-     entries.
-
-     *Returns:* On success, 'DANE_E_SUCCESS' (0) is returned, otherwise
-     a negative error value.
+     *Returns:* a negative error code on error and 'DANE_E_SUCCESS' (0)
+     when the DANE entries were successfully parsed, irrespective of
+     whether they were verified (see 'verify' for that information).  If
+     no usable entries were encountered
+     'DANE_E_REQUESTED_DATA_NOT_AVAILABLE' will be returned.
 
 dane_verify_crt_raw
 -------------------
@@ -5859,30 +5859,17 @@ dane_verify_crt_raw
 
      VERIFY: An OR'ed list of 'dane_verify_status_t' .
 
-     This function will verify the given certificate chain against the
-     CA constrains and/or the certificate available via DANE. If no
-     information via DANE can be obtained the flag
-     'DANE_VERIFY_NO_DANE_INFO' is set.  If a DNSSEC signature is not
-     available for the DANE record then the verify flag
-     'DANE_VERIFY_NO_DNSSEC_DATA' is set.
+     This is the low-level function of 'dane_verify_crt()' .  See the
+     high level function for documentation.
 
-     Due to the many possible options of DANE, there is no single threat
-     model countered.  When notifying the user about DANE verification
-     results it may be better to mention: DANE verification did not
-     reject the certificate, rather than mentioning a successful DANE
-     verication.
+     This function does not perform any resolving, it utilizes cached
+     entries from 'r' .
 
-     Note that this function is designed to be run in addition to PKIX -
-     certificate chain - verification.  To be run independently the
-     'DANE_VFLAG_ONLY_CHECK_EE_USAGE' flag should be specified; then the
-     function will check whether the key of the peer matches the key
-     advertized in the DANE entry.
-
-     If the 'q' parameter is provided it will be used for caching
-     entries.
-
-     *Returns:* On success, 'DANE_E_SUCCESS' (0) is returned, otherwise
-     a negative error value.
+     *Returns:* a negative error code on error and 'DANE_E_SUCCESS' (0)
+     when the DANE entries were successfully parsed, irrespective of
+     whether they were verified (see 'verify' for that information).  If
+     no usable entries were encountered
+     'DANE_E_REQUESTED_DATA_NOT_AVAILABLE' will be returned.
 
 dane_verify_session_crt
 -----------------------
@@ -5916,8 +5903,11 @@ dane_verify_session_crt
      verification is restricted to end certificates, this must be be
      performed separately using 'gnutls_certificate_verify_peers3()' .
 
-     *Returns:* On success, 'DANE_E_SUCCESS' (0) is returned, otherwise
-     a negative error value.
+     *Returns:* a negative error code on error and 'DANE_E_SUCCESS' (0)
+     when the DANE entries were successfully parsed, irrespective of
+     whether they were verified (see 'verify' for that information).  If
+     no usable entries were encountered
+     'DANE_E_REQUESTED_DATA_NOT_AVAILABLE' will be returned.
 
 
 File: gnutls.info,  Node: Cryptographic API,  Next: Compatibility API,  Prev: DANE API,  Up: API reference
@@ -7585,7 +7575,7 @@ Function and Data Index
                                                              (line  165)
 * dane_verify_crt <1>:                   DANE API.           (line  251)
 * dane_verify_crt_raw:                   DANE API.           (line  305)
-* dane_verify_session_crt:               DANE API.           (line  354)
+* dane_verify_session_crt:               DANE API.           (line  341)
 * gnutls_aead_cipher_decrypt:            Cryptographic API.  (line   12)
 * gnutls_aead_cipher_deinit:             Cryptographic API.  (line   49)
 * gnutls_aead_cipher_encrypt:            Cryptographic API.  (line   61)
@@ -7814,7 +7804,7 @@ Function and Data Index
 * gnutls_global_deinit:                  Core TLS API.       (line 2591)
 * gnutls_global_init:                    Core TLS API.       (line 2599)
 * gnutls_global_set_audit_log_function:  Debugging and auditing.
-                                                             (line   57)
+                                                             (line   62)
 * gnutls_global_set_audit_log_function <1>: Core TLS API.    (line 2628)
 * gnutls_global_set_log_function:        Core TLS API.       (line 2647)
 * gnutls_global_set_log_level:           Core TLS API.       (line 2662)

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnutls 3.2.1\n"
 "Report-Msgid-Bugs-To: bug-gnutls@gnu.org\n"
-"POT-Creation-Date: 2016-04-09 11:21+0200\n"
+"POT-Creation-Date: 2016-07-05 18:39+0200\n"
 "PO-Revision-Date: 2013-06-13 19:14+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <translation-team-uk@lists.sourceforge.net>\n"
@@ -378,7 +378,7 @@ msgstr "Непідтримуване розширення у сертифіка�
 msgid "Key usage violation in certificate has been detected."
 msgstr "Виявлено порушення правил використання ключів сертифіката."
 
-#: lib/gnutls_errors.c:173 lib/gnutls_errors.c:390
+#: lib/gnutls_errors.c:173 lib/gnutls_errors.c:392
 msgid "Function was interrupted."
 msgstr "Роботу функції було перервано."
 
@@ -764,40 +764,44 @@ msgstr "Помилка у функції push."
 msgid "Error in public key generation."
 msgstr "Помилка у функції pull."
 
-#: lib/gnutls_errors.c:379
+#: lib/gnutls_errors.c:375
+msgid "There was an issue converting to or from UTF8."
+msgstr ""
+
+#: lib/gnutls_errors.c:381
 msgid "Success."
 msgstr "Успіх."
 
-#: lib/gnutls_errors.c:380
+#: lib/gnutls_errors.c:382
 msgid "A TLS warning alert has been received."
 msgstr "Отримано попередження TLS."
 
-#: lib/gnutls_errors.c:382
+#: lib/gnutls_errors.c:384
 msgid "A heartbeat pong message was received."
 msgstr "Отримано повідомлення-відповідь підтримування зв’язку."
 
-#: lib/gnutls_errors.c:384
+#: lib/gnutls_errors.c:386
 msgid "A heartbeat ping message was received."
 msgstr "Отримано вхідне повідомлення підтримування зв’язку."
 
-#: lib/gnutls_errors.c:386
+#: lib/gnutls_errors.c:388
 msgid "Resource temporarily unavailable, try again."
 msgstr "Ресурс тимчасово недоступний, повторіть спробу."
 
-#: lib/gnutls_errors.c:388
+#: lib/gnutls_errors.c:390
 msgid "The transmitted packet is too large (EMSGSIZE)."
 msgstr "Переданий пакет є надто великим (EMSGSIZE)."
 
-#: lib/gnutls_errors.c:391
+#: lib/gnutls_errors.c:393
 msgid "Rehandshake was requested by the peer."
 msgstr ""
 "Вузол надіслав запит на повторне надсилання даних підтвердження з’єднання."
 
-#: lib/gnutls_errors.c:393
+#: lib/gnutls_errors.c:395
 msgid "One of the involved algorithms has insufficient security level."
 msgstr ""
 
-#: lib/gnutls_errors.c:484
+#: lib/gnutls_errors.c:486
 msgid "(unknown error code)"
 msgstr "(невідомий код помилки)"
 
@@ -982,13 +986,13 @@ msgstr "невідомий алгоритм ключа (%d)"
 msgid "OpenPGP Certificate Information:\n"
 msgstr "Дані щодо сертифіката OpenPGP:\n"
 
-#: lib/x509/ocsp_output.c:136 lib/x509/ocsp_output.c:503
-#: lib/x509/output.c:2005 lib/x509/output.c:2377
+#: lib/x509/ocsp_output.c:136 lib/x509/ocsp_output.c:503 lib/x509/output.c:2005
+#: lib/x509/output.c:2377
 msgid "\t\t\tASCII: "
 msgstr "\t\t\tASCII: "
 
-#: lib/x509/ocsp_output.c:141 lib/x509/ocsp_output.c:508
-#: lib/x509/output.c:2009 lib/x509/output.c:2382
+#: lib/x509/ocsp_output.c:141 lib/x509/ocsp_output.c:508 lib/x509/output.c:2009
+#: lib/x509/output.c:2382
 msgid "\t\t\tHexdump: "
 msgstr "\t\t\tШіст. дамп: "
 

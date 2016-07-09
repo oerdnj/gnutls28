@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
-<book xmlns="http://www.devhelp.net/book" title="GnuTLS API Reference Manual" link="index.html" author="" name="gnutls" version="2" language="c">
+<book xmlns="http://www.devhelp.net/book" title="GnuTLS API Reference Manual" link="index.html" author="" name="gnutls" version="2" language="c" online="http://www.gnutls.org/reference/">
   <chapters>
     <sub name="GnuTLS API Reference Manual" link="intro.html">
       <sub name="gnutls" link="gnutls-gnutls.html"/>
@@ -16,14 +16,6 @@
     <sub name="API Index" link="api-index-full.html"/>
   </chapters>
   <functions>
-    <keyword type="macro" name="GNUTLS_CLIENT" link="gnutls-gnutls.html#GNUTLS-CLIENT:CAPS"/>
-    <keyword type="macro" name="GNUTLS_DATAGRAM" link="gnutls-gnutls.html#GNUTLS-DATAGRAM:CAPS"/>
-    <keyword type="macro" name="GNUTLS_DEFAULT_HANDSHAKE_TIMEOUT" link="gnutls-gnutls.html#GNUTLS-DEFAULT-HANDSHAKE-TIMEOUT:CAPS"/>
-    <keyword type="macro" name="GNUTLS_HB_LOCAL_ALLOWED_TO_SEND" link="gnutls-gnutls.html#GNUTLS-HB-LOCAL-ALLOWED-TO-SEND:CAPS"/>
-    <keyword type="macro" name="GNUTLS_HB_PEER_ALLOWED_TO_SEND" link="gnutls-gnutls.html#GNUTLS-HB-PEER-ALLOWED-TO-SEND:CAPS"/>
-    <keyword type="macro" name="GNUTLS_HB_PEER_NOT_ALLOWED_TO_SEND" link="gnutls-gnutls.html#GNUTLS-HB-PEER-NOT-ALLOWED-TO-SEND:CAPS"/>
-    <keyword type="macro" name="GNUTLS_NONBLOCK" link="gnutls-gnutls.html#GNUTLS-NONBLOCK:CAPS"/>
-    <keyword type="macro" name="GNUTLS_NO_EXTENSIONS" link="gnutls-gnutls.html#GNUTLS-NO-EXTENSIONS:CAPS"/>
     <keyword type="function" name="gnutls_alert_get ()" link="gnutls-gnutls.html#gnutls-alert-get"/>
     <keyword type="function" name="gnutls_alert_get_name ()" link="gnutls-gnutls.html#gnutls-alert-get-name"/>
     <keyword type="function" name="gnutls_alert_get_strname ()" link="gnutls-gnutls.html#gnutls-alert-get-strname" since="3.0"/>
@@ -315,6 +307,9 @@
     <keyword type="macro" name="GNUTLS_CIPHER_RIJNDAEL_128_CBC" link="gnutls-gnutls.html#GNUTLS-CIPHER-RIJNDAEL-128-CBC:CAPS"/>
     <keyword type="macro" name="GNUTLS_CIPHER_RIJNDAEL_256_CBC" link="gnutls-gnutls.html#GNUTLS-CIPHER-RIJNDAEL-256-CBC:CAPS"/>
     <keyword type="macro" name="GNUTLS_CIPHER_RIJNDAEL_CBC" link="gnutls-gnutls.html#GNUTLS-CIPHER-RIJNDAEL-CBC:CAPS"/>
+    <keyword type="macro" name="GNUTLS_CLIENT" link="gnutls-gnutls.html#GNUTLS-CLIENT:CAPS"/>
+    <keyword type="macro" name="GNUTLS_DATAGRAM" link="gnutls-gnutls.html#GNUTLS-DATAGRAM:CAPS"/>
+    <keyword type="macro" name="GNUTLS_DEFAULT_HANDSHAKE_TIMEOUT" link="gnutls-gnutls.html#GNUTLS-DEFAULT-HANDSHAKE-TIMEOUT:CAPS"/>
     <keyword type="macro" name="GNUTLS_DIG_SHA" link="gnutls-gnutls.html#GNUTLS-DIG-SHA:CAPS"/>
     <keyword type="macro" name="GNUTLS_E_AGAIN" link="gnutls-gnutls.html#GNUTLS-E-AGAIN:CAPS"/>
     <keyword type="macro" name="GNUTLS_E_APPLICATION_ERROR_MAX" link="gnutls-gnutls.html#GNUTLS-E-APPLICATION-ERROR-MAX:CAPS"/>
@@ -471,6 +466,9 @@
     <keyword type="macro" name="GNUTLS_E_X509_UNSUPPORTED_CRITICAL_EXTENSION" link="gnutls-gnutls.html#GNUTLS-E-X509-UNSUPPORTED-CRITICAL-EXTENSION:CAPS"/>
     <keyword type="macro" name="GNUTLS_E_X509_UNSUPPORTED_EXTENSION" link="gnutls-gnutls.html#GNUTLS-E-X509-UNSUPPORTED-EXTENSION:CAPS"/>
     <keyword type="macro" name="GNUTLS_E_X509_UNSUPPORTED_OID" link="gnutls-gnutls.html#GNUTLS-E-X509-UNSUPPORTED-OID:CAPS"/>
+    <keyword type="macro" name="GNUTLS_HB_LOCAL_ALLOWED_TO_SEND" link="gnutls-gnutls.html#GNUTLS-HB-LOCAL-ALLOWED-TO-SEND:CAPS"/>
+    <keyword type="macro" name="GNUTLS_HB_PEER_ALLOWED_TO_SEND" link="gnutls-gnutls.html#GNUTLS-HB-PEER-ALLOWED-TO-SEND:CAPS"/>
+    <keyword type="macro" name="GNUTLS_HB_PEER_NOT_ALLOWED_TO_SEND" link="gnutls-gnutls.html#GNUTLS-HB-PEER-NOT-ALLOWED-TO-SEND:CAPS"/>
     <keyword type="macro" name="GNUTLS_HEARTBEAT_WAIT" link="gnutls-gnutls.html#GNUTLS-HEARTBEAT-WAIT:CAPS"/>
     <keyword type="macro" name="GNUTLS_KEY_CRL_SIGN" link="gnutls-gnutls.html#GNUTLS-KEY-CRL-SIGN:CAPS"/>
     <keyword type="macro" name="GNUTLS_KEY_DATA_ENCIPHERMENT" link="gnutls-gnutls.html#GNUTLS-KEY-DATA-ENCIPHERMENT:CAPS"/>
@@ -484,6 +482,8 @@
     <keyword type="macro" name="GNUTLS_MAC_SHA" link="gnutls-gnutls.html#GNUTLS-MAC-SHA:CAPS"/>
     <keyword type="macro" name="GNUTLS_MAX_ALGORITHM_NUM" link="gnutls-gnutls.html#GNUTLS-MAX-ALGORITHM-NUM:CAPS"/>
     <keyword type="macro" name="GNUTLS_MAX_SESSION_ID" link="gnutls-gnutls.html#GNUTLS-MAX-SESSION-ID:CAPS"/>
+    <keyword type="macro" name="GNUTLS_NONBLOCK" link="gnutls-gnutls.html#GNUTLS-NONBLOCK:CAPS"/>
+    <keyword type="macro" name="GNUTLS_NO_EXTENSIONS" link="gnutls-gnutls.html#GNUTLS-NO-EXTENSIONS:CAPS"/>
     <keyword type="macro" name="GNUTLS_PKCS11_PIN_CONTEXT_SPECIFIC" link="gnutls-gnutls.html#GNUTLS-PKCS11-PIN-CONTEXT-SPECIFIC:CAPS"/>
     <keyword type="macro" name="GNUTLS_PKCS11_PIN_COUNT_LOW" link="gnutls-gnutls.html#GNUTLS-PKCS11-PIN-COUNT-LOW:CAPS"/>
     <keyword type="macro" name="GNUTLS_PKCS11_PIN_FINAL_TRY" link="gnutls-gnutls.html#GNUTLS-PKCS11-PIN-FINAL-TRY:CAPS"/>
@@ -1158,14 +1158,14 @@
     <keyword type="function" name="gnutls_dtls_set_timeouts ()" link="gnutls-dtls.html#gnutls-dtls-set-timeouts" since="3.0"/>
     <keyword type="function" name="gnutls_record_get_discarded ()" link="gnutls-dtls.html#gnutls-record-get-discarded" since="3.0"/>
     <keyword type="macro" name="GNUTLS_COOKIE_KEY_SIZE" link="gnutls-dtls.html#GNUTLS-COOKIE-KEY-SIZE:CAPS"/>
-    <keyword type="macro" name="GNUTLS_TPM_KEY_SIGNING" link="gnutls-tpm.html#GNUTLS-TPM-KEY-SIGNING:CAPS"/>
-    <keyword type="macro" name="GNUTLS_TPM_KEY_USER" link="gnutls-tpm.html#GNUTLS-TPM-KEY-USER:CAPS"/>
-    <keyword type="macro" name="GNUTLS_TPM_REGISTER_KEY" link="gnutls-tpm.html#GNUTLS-TPM-REGISTER-KEY:CAPS"/>
     <keyword type="function" name="gnutls_tpm_get_registered ()" link="gnutls-tpm.html#gnutls-tpm-get-registered" since="3.1.0"/>
     <keyword type="function" name="gnutls_tpm_key_list_deinit ()" link="gnutls-tpm.html#gnutls-tpm-key-list-deinit" since="3.1.0"/>
     <keyword type="function" name="gnutls_tpm_key_list_get_url ()" link="gnutls-tpm.html#gnutls-tpm-key-list-get-url" since="3.1.0"/>
     <keyword type="function" name="gnutls_tpm_privkey_delete ()" link="gnutls-tpm.html#gnutls-tpm-privkey-delete" since="3.1.0"/>
     <keyword type="function" name="gnutls_tpm_privkey_generate ()" link="gnutls-tpm.html#gnutls-tpm-privkey-generate" since="3.1.0"/>
+    <keyword type="macro" name="GNUTLS_TPM_KEY_SIGNING" link="gnutls-tpm.html#GNUTLS-TPM-KEY-SIGNING:CAPS"/>
+    <keyword type="macro" name="GNUTLS_TPM_KEY_USER" link="gnutls-tpm.html#GNUTLS-TPM-KEY-USER:CAPS"/>
+    <keyword type="macro" name="GNUTLS_TPM_REGISTER_KEY" link="gnutls-tpm.html#GNUTLS-TPM-REGISTER-KEY:CAPS"/>
     <keyword type="typedef" name="gnutls_tpm_key_list_t" link="gnutls-tpm.html#gnutls-tpm-key-list-t"/>
     <keyword type="enum" name="enum gnutls_tpmkey_fmt_t" link="gnutls-tpm.html#gnutls-tpmkey-fmt-t"/>
     <keyword type="struct" name="struct tpm_key_list_st" link="gnutls-tpm.html#tpm-key-list-st"/>

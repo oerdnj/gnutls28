@@ -95,6 +95,36 @@ int _gnutls_generate_master(gnutls_session_t session, int keep_premaster)
 	return 0;
 }
 
+static void write_nss_key_log(gnutls_session_t session, const gnutls_datum_t *premaster)
+{
+	char buf[512];
+	char buf2[512];
+	FILE *fp;
+	static const char *keylogfile = NULL;
+	static unsigned checked_env = 0;
+
+	if (!checked_env) {
+		checked_env = 1;
+		keylogfile = secure_getenv("SSLKEYLOGFILE");
+	}
+
+	if (keylogfile == NULL)
+		return;
+
+	fp = fopen(keylogfile, "a");
+	if (fp == NULL)
+		return;
+
+	fprintf(fp, "CLIENT_RANDOM %s %s\n", 
+		 _gnutls_bin2hex(session->security_parameters.
+				 client_random, 32, buf,
+				 sizeof(buf), NULL),
+		 _gnutls_bin2hex(session->security_parameters.
+				 master_secret, GNUTLS_MASTER_SIZE,
+				 buf2, sizeof(buf2), NULL));
+	fclose(fp);
+}
+
 /* here we generate the TLS Master secret.
  */
 static int
@@ -174,6 +204,8 @@ generate_normal_master(gnutls_session_t session,
 			 _gnutls_bin2hex(session->security_parameters.
 					 master_secret, GNUTLS_MASTER_SIZE,
 					 buf, sizeof(buf), NULL));
+
+	write_nss_key_log(session, premaster);
 
 	return ret;
 }

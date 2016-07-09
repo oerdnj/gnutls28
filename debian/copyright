@@ -423,3 +423,20 @@ License: CC0 license
       Affirmer offers the Work as-is and makes no representations or warranties of any kind concerning the Work, express, implied, statutory or otherwise, including without limitation warranties of title, merchantability, fitness for a particular purpose, non infringement, or the absence of latent or other defects, accuracy, or the present or absence of errors, whether or not discoverable, all to the greatest extent permissible under applicable law.
       Affirmer disclaims responsibility for clearing rights of other persons that may apply to the Work or any use thereof, including without limitation any person's Copyright and Related Rights in the Work. Further, Affirmer disclaims responsibility for obtaining any necessary consents, permissions or other rights required for any use of the Work.
       Affirmer understands and acknowledges that Creative Commons is not a party to this document and has no duty or obligation with respect to this CC0 or use of the Work.
+
+============================================
+
+tests/pkcs11/pkcs11-mock.*
+Author: Jaroslav Imrich <jimrich@jimrich.sk>
+Copyright (c) 2015 JWC s.r.o. <http://www.jwc.sk>
+License
+ for open source projects:
+ *  PKCS11-MOCK is available under the terms of the GNU Affero General
+ *  Public License version 3 as published by the Free Software Foundation.
+ *  Please see <http://www.gnu.org/licenses/agpl-3.0.html> for more details.
+ *
+ for other types of projects:
+ *  PKCS11-MOCK is available under the terms of flexible commercial license.
+ *  Please contact JWC s.r.o. at <info@pkcs11interop.net> for more details.
+ On Debian systems the complete text of the license can be found in
+ /usr/share/doc/libgnutls30/AGPLv3.license

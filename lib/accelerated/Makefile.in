@@ -151,7 +151,8 @@ am__aclocal_m4_deps = $(top_srcdir)/src/gl/m4/arpa_inet_h.m4 \
 	$(top_srcdir)/gl/m4/00gnulib.m4 \
 	$(top_srcdir)/gl/m4/absolute-header.m4 \
 	$(top_srcdir)/gl/m4/alloca.m4 $(top_srcdir)/gl/m4/base64.m4 \
-	$(top_srcdir)/gl/m4/byteswap.m4 $(top_srcdir)/gl/m4/errno_h.m4 \
+	$(top_srcdir)/gl/m4/byteswap.m4 $(top_srcdir)/gl/m4/ctype.m4 \
+	$(top_srcdir)/gl/m4/errno_h.m4 \
 	$(top_srcdir)/gl/m4/exponentd.m4 \
 	$(top_srcdir)/gl/m4/extensions.m4 \
 	$(top_srcdir)/gl/m4/extern-inline.m4 \
@@ -183,13 +184,14 @@ am__aclocal_m4_deps = $(top_srcdir)/src/gl/m4/arpa_inet_h.m4 \
 	$(top_srcdir)/gl/m4/off_t.m4 \
 	$(top_srcdir)/gl/m4/onceonly_2_57.m4 \
 	$(top_srcdir)/gl/m4/printf.m4 $(top_srcdir)/gl/m4/read-file.m4 \
-	$(top_srcdir)/gl/m4/realloc.m4 $(top_srcdir)/gl/m4/snprintf.m4 \
-	$(top_srcdir)/gl/m4/socklen.m4 $(top_srcdir)/gl/m4/sockpfaf.m4 \
-	$(top_srcdir)/gl/m4/ssize_t.m4 $(top_srcdir)/gl/m4/stdalign.m4 \
-	$(top_srcdir)/gl/m4/stdbool.m4 $(top_srcdir)/gl/m4/stddef_h.m4 \
-	$(top_srcdir)/gl/m4/stdint.m4 $(top_srcdir)/gl/m4/stdio_h.m4 \
-	$(top_srcdir)/gl/m4/stdlib_h.m4 $(top_srcdir)/gl/m4/strcase.m4 \
-	$(top_srcdir)/gl/m4/string_h.m4 \
+	$(top_srcdir)/gl/m4/realloc.m4 \
+	$(top_srcdir)/gl/m4/secure_getenv.m4 \
+	$(top_srcdir)/gl/m4/snprintf.m4 $(top_srcdir)/gl/m4/socklen.m4 \
+	$(top_srcdir)/gl/m4/sockpfaf.m4 $(top_srcdir)/gl/m4/ssize_t.m4 \
+	$(top_srcdir)/gl/m4/stdalign.m4 $(top_srcdir)/gl/m4/stdbool.m4 \
+	$(top_srcdir)/gl/m4/stddef_h.m4 $(top_srcdir)/gl/m4/stdint.m4 \
+	$(top_srcdir)/gl/m4/stdio_h.m4 $(top_srcdir)/gl/m4/stdlib_h.m4 \
+	$(top_srcdir)/gl/m4/strcase.m4 $(top_srcdir)/gl/m4/string_h.m4 \
 	$(top_srcdir)/gl/m4/strings_h.m4 \
 	$(top_srcdir)/gl/m4/strndup.m4 $(top_srcdir)/gl/m4/strnlen.m4 \
 	$(top_srcdir)/gl/m4/strtok_r.m4 \
@@ -486,6 +488,7 @@ GNULIB_IMAXDIV = @GNULIB_IMAXDIV@
 GNULIB_INET_NTOP = @GNULIB_INET_NTOP@
 GNULIB_INET_PTON = @GNULIB_INET_PTON@
 GNULIB_ISATTY = @GNULIB_ISATTY@
+GNULIB_ISBLANK = @GNULIB_ISBLANK@
 GNULIB_LCHMOD = @GNULIB_LCHMOD@
 GNULIB_LCHOWN = @GNULIB_LCHOWN@
 GNULIB_LINK = @GNULIB_LINK@
@@ -762,6 +765,7 @@ HAVE_GETTIMEOFDAY = @HAVE_GETTIMEOFDAY@
 HAVE_GRANTPT = @HAVE_GRANTPT@
 HAVE_GROUP_MEMBER = @HAVE_GROUP_MEMBER@
 HAVE_INTTYPES_H = @HAVE_INTTYPES_H@
+HAVE_ISBLANK = @HAVE_ISBLANK@
 HAVE_LCHMOD = @HAVE_LCHMOD@
 HAVE_LCHOWN = @HAVE_LCHOWN@
 HAVE_LIBDL = @HAVE_LIBDL@
@@ -997,6 +1001,7 @@ NETTLE_CFLAGS = @NETTLE_CFLAGS@
 NETTLE_LIBS = @NETTLE_LIBS@
 NEXT_ARPA_INET_H = @NEXT_ARPA_INET_H@
 NEXT_AS_FIRST_DIRECTIVE_ARPA_INET_H = @NEXT_AS_FIRST_DIRECTIVE_ARPA_INET_H@
+NEXT_AS_FIRST_DIRECTIVE_CTYPE_H = @NEXT_AS_FIRST_DIRECTIVE_CTYPE_H@
 NEXT_AS_FIRST_DIRECTIVE_ERRNO_H = @NEXT_AS_FIRST_DIRECTIVE_ERRNO_H@
 NEXT_AS_FIRST_DIRECTIVE_FCNTL_H = @NEXT_AS_FIRST_DIRECTIVE_FCNTL_H@
 NEXT_AS_FIRST_DIRECTIVE_FLOAT_H = @NEXT_AS_FIRST_DIRECTIVE_FLOAT_H@
@@ -1019,6 +1024,7 @@ NEXT_AS_FIRST_DIRECTIVE_SYS_UIO_H = @NEXT_AS_FIRST_DIRECTIVE_SYS_UIO_H@
 NEXT_AS_FIRST_DIRECTIVE_TIME_H = @NEXT_AS_FIRST_DIRECTIVE_TIME_H@
 NEXT_AS_FIRST_DIRECTIVE_UNISTD_H = @NEXT_AS_FIRST_DIRECTIVE_UNISTD_H@
 NEXT_AS_FIRST_DIRECTIVE_WCHAR_H = @NEXT_AS_FIRST_DIRECTIVE_WCHAR_H@
+NEXT_CTYPE_H = @NEXT_CTYPE_H@
 NEXT_ERRNO_H = @NEXT_ERRNO_H@
 NEXT_FCNTL_H = @NEXT_FCNTL_H@
 NEXT_FLOAT_H = @NEXT_FLOAT_H@

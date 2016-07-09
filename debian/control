@@ -6,12 +6,14 @@ Uploaders: Andreas Metzler <ametzler@debian.org>,
  Eric Dorland <eric@debian.org>,
  James Westby <jw+debian@jameswestby.net>,
  Simon Josefsson <simon@josefsson.org>
-Build-Depends: debhelper (>= 9), nettle-dev (>= 3.1), zlib1g-dev,
- libtasn1-6-dev (>= 4.3), autotools-dev, guile-2.0-dev [!ia64 !m68k],
- datefudge,
+Build-Depends: debhelper (>= 9.20150628), nettle-dev (>= 3.1), zlib1g-dev,
+ libtasn1-6-dev (>= 4.3), autotools-dev,
+ datefudge <!nocheck>, dpkg-dev (>= 1.17.14),
  libp11-kit-dev (>= 0.23.1), pkg-config, chrpath, libidn11-dev (>= 1.31),
  autogen (>= 1:5.16-0), bison, dh-autoreconf, libgmp-dev (>= 2:6),
- libopts25-dev, automake (>= 1:1.12.2)
+ libopts25-dev, automake (>= 1:1.12.2),
+ net-tools [!kfreebsd-i386 !kfreebsd-amd64] <!nocheck>,
+ freebsd-net-tools [kfreebsd-i386 kfreebsd-amd64] <!nocheck>
 # The b-d on libgmp-dev is not technically necessary, since nettle brings
 # it along. However we want to enforce that gnutls is only built if the
 # dual-licensed GMP is available, otherwise the resulting binary
@@ -32,7 +34,7 @@ Depends: libgnutls30 (= ${binary:Version}),
  libgnutlsxx28 (= ${binary:Version}), 
  nettle-dev, libc6-dev | libc-dev, zlib1g-dev,
  libtasn1-6-dev, libp11-kit-dev, libidn11-dev (>= 1.31), ${misc:Depends}
-Suggests: gnutls-doc, gnutls-bin, guile-gnutls
+Suggests: gnutls-doc, gnutls-bin
 Conflicts: gnutls-dev
 Replaces: gnutls-dev
 Multi-Arch: same
@@ -137,30 +139,6 @@ Description: GNU TLS library - documentation and examples
     Camellia (RFC 4132)).
  .
  This package contains all the GnuTLS documentation.
-
-Package: guile-gnutls
-# everything except ia64 - Field must be single line, unfolded!
-Architecture: amd64 arm64 armel armhf i386 kfreebsd-amd64 kfreebsd-i386 mips mipsel powerpc ppc64el s390 s390x sparc hurd-i386
-Section: lisp
-Depends: ${misc:Depends},${shlibs:Depends}, guile-2.0
-Description: GNU TLS library - GNU Guile bindings
- GnuTLS is a portable library which implements the Transport Layer
- Security (TLS 1.0, 1.1, 1.2) and Secure Sockets Layer (SSL) 3.0 and Datagram
- Transport Layer Security (DTLS 1.0, 1.2) protocols.
- .
- GnuTLS features support for:
-  - TLS extensions: server name indication, max record size, opaque PRF
-    input, etc.
-  - authentication using the SRP protocol.
-  - authentication using both X.509 certificates and OpenPGP keys.
-  - TLS Pre-Shared-Keys (PSK) extension.
-  - Inner Application (TLS/IA) extension.
-  - X.509 and OpenPGP certificate handling.
-  - X.509 Proxy Certificates (RFC 3820).
-  - all the strong encryption algorithms (including SHA-256/384/512 and
-    Camellia (RFC 4132)).
- .
- This package contains the GNU Guile 2.0 modules.
 
 Package: libgnutlsxx28
 Priority: extra
