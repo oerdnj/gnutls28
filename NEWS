@@ -1,7 +1,74 @@
 GnuTLS NEWS -- History of user-visible changes.                -*- outline -*-
-Copyright (C) 2000-2015 Free Software Foundation, Inc.
-Copyright (C) 2013-2015 Nikos Mavrogiannopoulos
+Copyright (C) 2000-2016 Free Software Foundation, Inc.
+Copyright (C) 2013-2016 Nikos Mavrogiannopoulos
 See the end for copying conditions.
+
+* Version 3.4.14 (released 2016-06-06)
+
+** libgnutls: Address issue when utilizing the p11-kit trust store
+   for certificate verification (GNUTLS-SA-2016-2).
+
+** libgnutls: Fixed DTLS handshake packet reconstruction. Reported by
+   Guillaume Roguez.
+
+** libgnutls: Fixed issues with PKCS#11 reading of sensitive objects
+   from SafeNet Network HSM. Reported by Anthony Alba.
+
+** libgnutls: Corrected the writing of PKCS#11 CKA_SERIAL_NUMBER. Report
+   and fix by Stanislav Židek.
+
+** API and ABI modifications:
+No changes since last version.
+
+
+* Version 3.4.13 (released 2016-06-06)
+
+** libgnutls: Consider the SSLKEYLOGFILE environment to be compatible with
+   NSS instead of using a separate variable; in addition append any keys to
+   the file instead of overwriting it.
+
+** libgnutls: use secure_getenv() where available to obtain environment
+   variables. Addresses GNUTLS-SA-2016-1.
+
+** API and ABI modifications:
+No changes since last version.
+
+
+* Version 3.4.12 (released 2016-05-20)
+
+** libgnutls: The CHACHA20-POLY1305 ciphersuite is enabled by default. This
+   cipher is prioritized after AES-GCM.
+
+** libgnutls: Fixes in gnutls_privkey_import_ecc_raw().
+
+** libgnutls: Fixed gnutls_pkcs11_get_raw_issuer() usage with the
+   GNUTLS_PKCS11_OBJ_FLAG_OVERWRITE_TRUSTMOD_EXT flag. Previously that
+   operation could fail on certain PKCS#11 modules.
+
+** libgnutls: gnutls_pkcs11_obj_import_url() and gnutls_x509_crt_import_url()
+   can accept the GNUTLS_PKCS11_OBJ_FLAG_OVERWRITE_TRUSTMOD_EXT flag.
+
+** libgnutls: gnutls_certificate_set_key() was enhanced to import the DNS
+   name of the certificates if the provided names are NULL.
+
+** libgnutls: when receiving SNI names, only save and expose to application
+   the supported DNS names.
+
+** libgnutls: when importing the certificate names at the
+   gnutls_certificate_set* functions, only consider the CN as a fallback
+   if DNS names are provided via the alternative name extension.
+
+** gnutls-cli: on OCSP verification do not fail if we have a single valid
+   reply. Report and reproducer by Thomas Klute.
+
+** libgnutls: The GNUTLS_KEYLOGFILE environment variable can be used to
+   log session keys in client side. These session keys are compatible with
+   the NSS Key Log Format and can be used to decrypt the session for
+   debugging using wireshark.
+
+** API and ABI modifications:
+No changes since last version.
+
 
 * Version 3.4.11 (released 2016-04-11)
 

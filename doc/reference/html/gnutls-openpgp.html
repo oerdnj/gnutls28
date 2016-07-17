@@ -3,12 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>openpgp: GnuTLS API Reference Manual</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
 <link rel="home" href="index.html" title="GnuTLS API Reference Manual">
 <link rel="up" href="intro.html" title="GnuTLS API Reference Manual">
 <link rel="prev" href="gnutls-x509.html" title="x509">
 <link rel="next" href="gnutls-crypto.html" title="crypto">
-<meta name="generator" content="GTK-Doc V1.24 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.25 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -33,7 +33,7 @@
 </tr></table></div>
 <div class="refsect1">
 <a name="gnutls-openpgp.functions"></a><h2>Functions</h2>
-<div class="informaltable"><table width="100%" border="0">
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="functions_return">
 <col class="functions_name">
@@ -628,7 +628,7 @@
 </div>
 <div class="refsect1">
 <a name="gnutls-openpgp.other"></a><h2>Types and Values</h2>
-<div class="informaltable"><table width="100%" border="0">
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="name">
 <col class="description">
@@ -670,8 +670,8 @@ for the server).</p>
 been set and be used. See <a class="link" href="gnutls-openpgp.html#gnutls-openpgp-crt-set-preferred-key-id" title="gnutls_openpgp_crt_set_preferred_key_id ()"><code class="function">gnutls_openpgp_crt_set_preferred_key_id()</code></a>.
 Otherwise the master key will be used.</p>
 <div class="refsect3">
-<a name="id-1.2.7.6.2.6"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-certificate-set-openpgp-key.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -697,7 +697,7 @@ Otherwise the master key will be used.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.7.6.2.7"></a><h4>Returns</h4>
+<a name="gnutls-certificate-set-openpgp-key.returns"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned,
 otherwise a negative error code is returned.</p>
 </div>
@@ -714,8 +714,8 @@ gnutls_certificate_set_openpgp_key_file
 <p>This function is used to load OpenPGP keys into the GnuTLS
 credentials structure. The file should contain at least one valid non encrypted subkey.</p>
 <div class="refsect3">
-<a name="id-1.2.7.6.3.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-certificate-set-openpgp-key-file.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -746,7 +746,7 @@ credentials structure. The file should contain at least one valid non encrypted 
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.7.6.3.6"></a><h4>Returns</h4>
+<a name="gnutls-certificate-set-openpgp-key-file.returns"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
 </div>
@@ -768,8 +768,8 @@ structure. The file should contain at least one valid non encrypted subkey.</p>
 case the <a class="link" href="gnutls-openpgp.html#gnutls-openpgp-crt-get-auth-subkey" title="gnutls_openpgp_crt_get_auth_subkey ()"><code class="function">gnutls_openpgp_crt_get_auth_subkey()</code></a> will be used to
 retrieve the subkey.</p>
 <div class="refsect3">
-<a name="id-1.2.7.6.4.6"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-certificate-set-openpgp-key-file2.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -805,7 +805,7 @@ retrieve the subkey.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.7.6.4.7"></a><h4>Returns</h4>
+<a name="gnutls-certificate-set-openpgp-key-file2.returns"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
 </div>
@@ -823,8 +823,8 @@ gnutls_certificate_set_openpgp_key_mem
 <p>This function is used to load OpenPGP keys into the GnuTLS credential 
 structure. The datum should contain at least one valid non encrypted subkey.</p>
 <div class="refsect3">
-<a name="id-1.2.7.6.5.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-certificate-set-openpgp-key-mem.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -855,7 +855,7 @@ structure. The datum should contain at least one valid non encrypted subkey.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.7.6.5.6"></a><h4>Returns</h4>
+<a name="gnutls-certificate-set-openpgp-key-mem.returns"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
 </div>
@@ -877,8 +877,8 @@ credentials structure. The datum should contain at least one valid non encrypted
 case the <a class="link" href="gnutls-openpgp.html#gnutls-openpgp-crt-get-auth-subkey" title="gnutls_openpgp_crt_get_auth_subkey ()"><code class="function">gnutls_openpgp_crt_get_auth_subkey()</code></a> will be used to
 retrieve the subkey.</p>
 <div class="refsect3">
-<a name="id-1.2.7.6.6.6"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-certificate-set-openpgp-key-mem2.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -914,7 +914,7 @@ retrieve the subkey.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.7.6.6.7"></a><h4>Returns</h4>
+<a name="gnutls-certificate-set-openpgp-key-mem2.returns"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
 </div>
@@ -933,8 +933,8 @@ by various OpenPGP functions. For example to find a key when it
 is needed for an operations. The keyring will also be used at the
 verification functions.</p>
 <div class="refsect3">
-<a name="id-1.2.7.6.7.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-certificate-set-openpgp-keyring-file.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -960,7 +960,7 @@ verification functions.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.7.6.7.6"></a><h4>Returns</h4>
+<a name="gnutls-certificate-set-openpgp-keyring-file.returns"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
 </div>
@@ -979,8 +979,8 @@ by various OpenPGP functions. For example to find a key when it
 is needed for an operations. The keyring will also be used at the
 verification functions.</p>
 <div class="refsect3">
-<a name="id-1.2.7.6.8.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-certificate-set-openpgp-keyring-mem.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -1011,7 +1011,7 @@ verification functions.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.7.6.8.6"></a><h4>Returns</h4>
+<a name="gnutls-certificate-set-openpgp-keyring-mem.returns"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
 </div>
@@ -1026,8 +1026,8 @@ gnutls_openpgp_crt_check_hostname (<em class="parameter"><code><a class="link" h
 given hostname. This is a basic implementation of the matching
 described in RFC2818 (HTTPS), which takes into account wildcards.</p>
 <div class="refsect3">
-<a name="id-1.2.7.6.9.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-openpgp-crt-check-hostname.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -1048,7 +1048,7 @@ described in RFC2818 (HTTPS), which takes into account wildcards.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.7.6.9.6"></a><h4>Returns</h4>
+<a name="gnutls-openpgp-crt-check-hostname.returns"></a><h4>Returns</h4>
 <p> non-zero for a successful match, and zero on failure.</p>
 </div>
 </div>
@@ -1059,8 +1059,8 @@ described in RFC2818 (HTTPS), which takes into account wildcards.</p>
 gnutls_openpgp_crt_deinit (<em class="parameter"><code><a class="link" href="gnutls-gnutls.html#gnutls-openpgp-crt-t" title="gnutls_openpgp_crt_t"><span class="type">gnutls_openpgp_crt_t</span></a> key</code></em>);</pre>
 <p>This function will deinitialize a key structure.</p>
 <div class="refsect3">
-<a name="id-1.2.7.6.10.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-openpgp-crt-deinit.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -1086,8 +1086,8 @@ gnutls_openpgp_crt_export (<em class="parameter"><code><a class="link" href="gnu
 If the buffer provided is not long enough to hold the output, then
 <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SHORT-MEMORY-BUFFER:CAPS" title="GNUTLS_E_SHORT_MEMORY_BUFFER"><code class="literal">GNUTLS_E_SHORT_MEMORY_BUFFER</code></a> will be returned.</p>
 <div class="refsect3">
-<a name="id-1.2.7.6.11.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-openpgp-crt-export.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -1119,7 +1119,7 @@ be replaced by the actual size of parameters)</p></td>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.7.6.11.6"></a><h4>Returns</h4>
+<a name="gnutls-openpgp-crt-export.returns"></a><h4>Returns</h4>
 <p> <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> on success, or an error code.</p>
 </div>
 </div>
@@ -1131,10 +1131,10 @@ gnutls_openpgp_crt_export2 (<em class="parameter"><code><a class="link" href="gn
                             <em class="parameter"><code><a class="link" href="gnutls-openpgp.html#gnutls-openpgp-crt-fmt-t" title="enum gnutls_openpgp_crt_fmt_t"><span class="type">gnutls_openpgp_crt_fmt_t</span></a> format</code></em>,
                             <em class="parameter"><code><span class="type">gnutls_datum_t</span> *out</code></em>);</pre>
 <p>This function will convert the given key to RAW or Base64 format.
-The output buffer is allocated using <a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-malloc"><code class="function">gnutls_malloc()</code></a>.</p>
+The output buffer is allocated using <code class="function">gnutls_malloc()</code>.</p>
 <div class="refsect3">
-<a name="id-1.2.7.6.12.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-openpgp-crt-export2.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -1160,7 +1160,7 @@ The output buffer is allocated using <a href="http://www.gnutls.org/reference/gn
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.7.6.12.6"></a><h4>Returns</h4>
+<a name="gnutls-openpgp-crt-export2.returns"></a><h4>Returns</h4>
 <p> <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> on success, or an error code.</p>
 </div>
 <p class="since">Since: 3.1.3</p>
@@ -1177,8 +1177,8 @@ for authentication.  If flag is non-zero and no authentication
 subkey exists, then a valid subkey will be returned even if it is
 not marked for authentication.</p>
 <div class="refsect3">
-<a name="id-1.2.7.6.13.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-openpgp-crt-get-auth-subkey.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -1204,7 +1204,7 @@ not marked for authentication.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.7.6.13.6"></a><h4>Returns</h4>
+<a name="gnutls-openpgp-crt-get-auth-subkey.returns"></a><h4>Returns</h4>
 <p> <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> on success, or an error code.</p>
 </div>
 </div>
@@ -1215,8 +1215,8 @@ not marked for authentication.</p>
 gnutls_openpgp_crt_get_creation_time (<em class="parameter"><code><a class="link" href="gnutls-gnutls.html#gnutls-openpgp-crt-t" title="gnutls_openpgp_crt_t"><span class="type">gnutls_openpgp_crt_t</span></a> key</code></em>);</pre>
 <p>Get key creation time.</p>
 <div class="refsect3">
-<a name="id-1.2.7.6.14.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-openpgp-crt-get-creation-time.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -1230,7 +1230,7 @@ gnutls_openpgp_crt_get_creation_time (<em class="parameter"><code><a class="link
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.7.6.14.6"></a><h4>Returns</h4>
+<a name="gnutls-openpgp-crt-get-creation-time.returns"></a><h4>Returns</h4>
 <p> the timestamp when the OpenPGP key was created.</p>
 </div>
 </div>
@@ -1243,8 +1243,8 @@ gnutls_openpgp_crt_get_expiration_time
 <p>Get key expiration time.  A value of '0' means that the key doesn't
 expire at all.</p>
 <div class="refsect3">
-<a name="id-1.2.7.6.15.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-openpgp-crt-get-expiration-time.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -1258,7 +1258,7 @@ expire at all.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.7.6.15.6"></a><h4>Returns</h4>
+<a name="gnutls-openpgp-crt-get-expiration-time.returns"></a><h4>Returns</h4>
 <p> the time when the OpenPGP key expires.</p>
 </div>
 </div>
@@ -1272,8 +1272,8 @@ gnutls_openpgp_crt_get_fingerprint (<em class="parameter"><code><a class="link" 
 <p>Get key fingerprint.  Depending on the algorithm, the fingerprint
 can be 16 or 20 bytes.</p>
 <div class="refsect3">
-<a name="id-1.2.7.6.16.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-openpgp-crt-get-fingerprint.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -1299,7 +1299,7 @@ can be 16 or 20 bytes.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.7.6.16.6"></a><h4>Returns</h4>
+<a name="gnutls-openpgp-crt-get-fingerprint.returns"></a><h4>Returns</h4>
 <p> On success, 0 is returned.  Otherwise, an error code.</p>
 </div>
 </div>
@@ -1311,8 +1311,8 @@ gnutls_openpgp_crt_get_key_id (<em class="parameter"><code><a class="link" href=
                                <em class="parameter"><code><span class="type">gnutls_openpgp_keyid_t</span> keyid</code></em>);</pre>
 <p>Get key id string.</p>
 <div class="refsect3">
-<a name="id-1.2.7.6.17.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-openpgp-crt-get-key-id.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -1333,7 +1333,7 @@ gnutls_openpgp_crt_get_key_id (<em class="parameter"><code><a class="link" href=
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.7.6.17.6"></a><h4>Returns</h4>
+<a name="gnutls-openpgp-crt-get-key-id.returns"></a><h4>Returns</h4>
 <p> the 64-bit keyID of the OpenPGP key.</p>
 </div>
 <p class="since">Since: 2.4.0</p>
@@ -1348,8 +1348,8 @@ gnutls_openpgp_crt_get_key_usage (<em class="parameter"><code><a class="link" hr
 key algorithm. The key usage value will ORed values of the:
 <a class="link" href="gnutls-gnutls.html#GNUTLS-KEY-DIGITAL-SIGNATURE:CAPS" title="GNUTLS_KEY_DIGITAL_SIGNATURE"><code class="literal">GNUTLS_KEY_DIGITAL_SIGNATURE</code></a>, <a class="link" href="gnutls-gnutls.html#GNUTLS-KEY-KEY-ENCIPHERMENT:CAPS" title="GNUTLS_KEY_KEY_ENCIPHERMENT"><code class="literal">GNUTLS_KEY_KEY_ENCIPHERMENT</code></a>.</p>
 <div class="refsect3">
-<a name="id-1.2.7.6.18.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-openpgp-crt-get-key-usage.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -1370,7 +1370,7 @@ key algorithm. The key usage value will ORed values of the:
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.7.6.18.6"></a><h4>Returns</h4>
+<a name="gnutls-openpgp-crt-get-key-usage.returns"></a><h4>Returns</h4>
 <p> <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> on success, or an error code.</p>
 </div>
 </div>
@@ -1384,8 +1384,8 @@ gnutls_openpgp_crt_get_name (<em class="parameter"><code><a class="link" href="g
                              <em class="parameter"><code><span class="type">size_t</span> *sizeof_buf</code></em>);</pre>
 <p>Extracts the userID from the parsed OpenPGP key.</p>
 <div class="refsect3">
-<a name="id-1.2.7.6.19.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-openpgp-crt-get-name.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -1421,7 +1421,7 @@ actual/required size of <em class="parameter"><code>buf</code></em>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.7.6.19.6"></a><h4>Returns</h4>
+<a name="gnutls-openpgp-crt-get-name.returns"></a><h4>Returns</h4>
 <p> <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> on success, and if the index of the ID
 does not exist <a class="link" href="gnutls-gnutls.html#GNUTLS-E-REQUESTED-DATA-NOT-AVAILABLE:CAPS" title="GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE"><code class="literal">GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE</code></a>, or an
 error code.</p>
@@ -1439,8 +1439,8 @@ certificate.</p>
 size in bits. For RSA the bits returned is the modulus.
 For DSA the bits returned are of the public exponent.</p>
 <div class="refsect3">
-<a name="id-1.2.7.6.20.6"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-openpgp-crt-get-pk-algorithm.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -1461,7 +1461,7 @@ For DSA the bits returned are of the public exponent.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.7.6.20.7"></a><h4>Returns</h4>
+<a name="gnutls-openpgp-crt-get-pk-algorithm.returns"></a><h4>Returns</h4>
 <p> a member of the <a class="link" href="gnutls-gnutls.html#gnutls-pk-algorithm-t" title="enum gnutls_pk_algorithm_t"><span class="type">gnutls_pk_algorithm_t</span></a> enumeration on
 success, or GNUTLS_PK_UNKNOWN on error.</p>
 </div>
@@ -1477,10 +1477,10 @@ gnutls_openpgp_crt_get_pk_dsa_raw (<em class="parameter"><code><a class="link" h
                                    <em class="parameter"><code><span class="type">gnutls_datum_t</span> *y</code></em>);</pre>
 <p>This function will export the DSA public key's parameters found in
 the given certificate.  The new parameters will be allocated using
-<a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-malloc"><code class="function">gnutls_malloc()</code></a> and will be stored in the appropriate datum.</p>
+<code class="function">gnutls_malloc()</code> and will be stored in the appropriate datum.</p>
 <div class="refsect3">
-<a name="id-1.2.7.6.21.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-openpgp-crt-get-pk-dsa-raw.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -1516,7 +1516,7 @@ the given certificate.  The new parameters will be allocated using
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.7.6.21.6"></a><h4>Returns</h4>
+<a name="gnutls-openpgp-crt-get-pk-dsa-raw.returns"></a><h4>Returns</h4>
 <p> <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> on success, otherwise a negative error code.</p>
 </div>
 <p class="since">Since: 2.4.0</p>
@@ -1530,10 +1530,10 @@ gnutls_openpgp_crt_get_pk_rsa_raw (<em class="parameter"><code><a class="link" h
                                    <em class="parameter"><code><span class="type">gnutls_datum_t</span> *e</code></em>);</pre>
 <p>This function will export the RSA public key's parameters found in
 the given structure.  The new parameters will be allocated using
-<a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-malloc"><code class="function">gnutls_malloc()</code></a> and will be stored in the appropriate datum.</p>
+<code class="function">gnutls_malloc()</code> and will be stored in the appropriate datum.</p>
 <div class="refsect3">
-<a name="id-1.2.7.6.22.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-openpgp-crt-get-pk-rsa-raw.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -1559,7 +1559,7 @@ the given structure.  The new parameters will be allocated using
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.7.6.22.6"></a><h4>Returns</h4>
+<a name="gnutls-openpgp-crt-get-pk-rsa-raw.returns"></a><h4>Returns</h4>
 <p> <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> on success, otherwise a negative error code.</p>
 </div>
 <p class="since">Since: 2.4.0</p>
@@ -1574,8 +1574,8 @@ gnutls_openpgp_crt_get_preferred_key_id
 <p>Get preferred key id.  If it hasn't been set it returns
 <a class="link" href="gnutls-gnutls.html#GNUTLS-E-INVALID-REQUEST:CAPS" title="GNUTLS_E_INVALID_REQUEST"><code class="literal">GNUTLS_E_INVALID_REQUEST</code></a>.</p>
 <div class="refsect3">
-<a name="id-1.2.7.6.23.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-openpgp-crt-get-preferred-key-id.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -1596,7 +1596,7 @@ gnutls_openpgp_crt_get_preferred_key_id
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.7.6.23.6"></a><h4>Returns</h4>
+<a name="gnutls-openpgp-crt-get-preferred-key-id.returns"></a><h4>Returns</h4>
 <p> the 64-bit preferred keyID of the OpenPGP key.</p>
 </div>
 </div>
@@ -1607,8 +1607,8 @@ gnutls_openpgp_crt_get_preferred_key_id
 gnutls_openpgp_crt_get_revoked_status (<em class="parameter"><code><a class="link" href="gnutls-gnutls.html#gnutls-openpgp-crt-t" title="gnutls_openpgp_crt_t"><span class="type">gnutls_openpgp_crt_t</span></a> key</code></em>);</pre>
 <p>Get revocation status of key.</p>
 <div class="refsect3">
-<a name="id-1.2.7.6.24.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-openpgp-crt-get-revoked-status.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -1622,7 +1622,7 @@ gnutls_openpgp_crt_get_revoked_status (<em class="parameter"><code><a class="lin
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.7.6.24.6"></a><h4>Returns</h4>
+<a name="gnutls-openpgp-crt-get-revoked-status.returns"></a><h4>Returns</h4>
 <p> true (1) if the key has been revoked, or false (0) if it
 has not.</p>
 </div>
@@ -1636,8 +1636,8 @@ gnutls_openpgp_crt_get_subkey_count (<em class="parameter"><code><a class="link"
 <p>This function will return the number of subkeys present in the
 given OpenPGP certificate.</p>
 <div class="refsect3">
-<a name="id-1.2.7.6.25.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-openpgp-crt-get-subkey-count.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -1651,7 +1651,7 @@ given OpenPGP certificate.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.7.6.25.6"></a><h4>Returns</h4>
+<a name="gnutls-openpgp-crt-get-subkey-count.returns"></a><h4>Returns</h4>
 <p> the number of subkeys, or a negative error code on error.</p>
 </div>
 <p class="since">Since: 2.4.0</p>
@@ -1665,8 +1665,8 @@ gnutls_openpgp_crt_get_subkey_creation_time
                                 <em class="parameter"><code>unsigned <span class="type">int</span> idx</code></em>);</pre>
 <p>Get subkey creation time.</p>
 <div class="refsect3">
-<a name="id-1.2.7.6.26.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-openpgp-crt-get-subkey-creation-time.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -1687,7 +1687,7 @@ gnutls_openpgp_crt_get_subkey_creation_time
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.7.6.26.6"></a><h4>Returns</h4>
+<a name="gnutls-openpgp-crt-get-subkey-creation-time.returns"></a><h4>Returns</h4>
 <p> the timestamp when the OpenPGP sub-key was created.</p>
 </div>
 <p class="since">Since: 2.4.0</p>
@@ -1702,8 +1702,8 @@ gnutls_openpgp_crt_get_subkey_expiration_time
 <p>Get subkey expiration time.  A value of '0' means that the key
 doesn't expire at all.</p>
 <div class="refsect3">
-<a name="id-1.2.7.6.27.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-openpgp-crt-get-subkey-expiration-time.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -1724,7 +1724,7 @@ doesn't expire at all.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.7.6.27.6"></a><h4>Returns</h4>
+<a name="gnutls-openpgp-crt-get-subkey-expiration-time.returns"></a><h4>Returns</h4>
 <p> the time when the OpenPGP key expires.</p>
 </div>
 <p class="since">Since: 2.4.0</p>
@@ -1741,8 +1741,8 @@ gnutls_openpgp_crt_get_subkey_fingerprint
 <p>Get key fingerprint of a subkey.  Depending on the algorithm, the
 fingerprint can be 16 or 20 bytes.</p>
 <div class="refsect3">
-<a name="id-1.2.7.6.28.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-openpgp-crt-get-subkey-fingerprint.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -1773,7 +1773,7 @@ fingerprint can be 16 or 20 bytes.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.7.6.28.6"></a><h4>Returns</h4>
+<a name="gnutls-openpgp-crt-get-subkey-fingerprint.returns"></a><h4>Returns</h4>
 <p> On success, 0 is returned.  Otherwise, an error code.</p>
 </div>
 <p class="since">Since: 2.4.0</p>
@@ -1787,8 +1787,8 @@ gnutls_openpgp_crt_get_subkey_id (<em class="parameter"><code><a class="link" hr
                                   <em class="parameter"><code><span class="type">gnutls_openpgp_keyid_t</span> keyid</code></em>);</pre>
 <p>Get the subkey's key-id.</p>
 <div class="refsect3">
-<a name="id-1.2.7.6.29.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-openpgp-crt-get-subkey-id.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -1814,7 +1814,7 @@ gnutls_openpgp_crt_get_subkey_id (<em class="parameter"><code><a class="link" hr
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.7.6.29.6"></a><h4>Returns</h4>
+<a name="gnutls-openpgp-crt-get-subkey-id.returns"></a><h4>Returns</h4>
 <p> the 64-bit keyID of the OpenPGP key.</p>
 </div>
 </div>
@@ -1826,8 +1826,8 @@ gnutls_openpgp_crt_get_subkey_idx (<em class="parameter"><code><a class="link" h
                                    <em class="parameter"><code>const <span class="type">gnutls_openpgp_keyid_t</span> keyid</code></em>);</pre>
 <p>Get subkey's index.</p>
 <div class="refsect3">
-<a name="id-1.2.7.6.30.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-openpgp-crt-get-subkey-idx.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -1848,7 +1848,7 @@ gnutls_openpgp_crt_get_subkey_idx (<em class="parameter"><code><a class="link" h
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.7.6.30.6"></a><h4>Returns</h4>
+<a name="gnutls-openpgp-crt-get-subkey-idx.returns"></a><h4>Returns</h4>
 <p> the index of the subkey or a negative error value.</p>
 </div>
 <p class="since">Since: 2.4.0</p>
@@ -1867,8 +1867,8 @@ certificate.</p>
 parameters size in bits.  For RSA the bits returned is the modulus.
 For DSA the bits returned are of the public exponent.</p>
 <div class="refsect3">
-<a name="id-1.2.7.6.31.6"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-openpgp-crt-get-subkey-pk-algorithm.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -1894,7 +1894,7 @@ For DSA the bits returned are of the public exponent.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.7.6.31.7"></a><h4>Returns</h4>
+<a name="gnutls-openpgp-crt-get-subkey-pk-algorithm.returns"></a><h4>Returns</h4>
 <p> a member of the <a class="link" href="gnutls-gnutls.html#gnutls-pk-algorithm-t" title="enum gnutls_pk_algorithm_t"><span class="type">gnutls_pk_algorithm_t</span></a> enumeration on
 success, or GNUTLS_PK_UNKNOWN on error.</p>
 </div>
@@ -1913,10 +1913,10 @@ gnutls_openpgp_crt_get_subkey_pk_dsa_raw
                                 <em class="parameter"><code><span class="type">gnutls_datum_t</span> *y</code></em>);</pre>
 <p>This function will export the DSA public key's parameters found in
 the given certificate.  The new parameters will be allocated using
-<a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-malloc"><code class="function">gnutls_malloc()</code></a> and will be stored in the appropriate datum.</p>
+<code class="function">gnutls_malloc()</code> and will be stored in the appropriate datum.</p>
 <div class="refsect3">
-<a name="id-1.2.7.6.32.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-openpgp-crt-get-subkey-pk-dsa-raw.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -1957,7 +1957,7 @@ the given certificate.  The new parameters will be allocated using
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.7.6.32.6"></a><h4>Returns</h4>
+<a name="gnutls-openpgp-crt-get-subkey-pk-dsa-raw.returns"></a><h4>Returns</h4>
 <p> <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> on success, otherwise a negative error code.</p>
 </div>
 <p class="since">Since: 2.4.0</p>
@@ -1973,10 +1973,10 @@ gnutls_openpgp_crt_get_subkey_pk_rsa_raw
                                 <em class="parameter"><code><span class="type">gnutls_datum_t</span> *e</code></em>);</pre>
 <p>This function will export the RSA public key's parameters found in
 the given structure.  The new parameters will be allocated using
-<a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-malloc"><code class="function">gnutls_malloc()</code></a> and will be stored in the appropriate datum.</p>
+<code class="function">gnutls_malloc()</code> and will be stored in the appropriate datum.</p>
 <div class="refsect3">
-<a name="id-1.2.7.6.33.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-openpgp-crt-get-subkey-pk-rsa-raw.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -2007,7 +2007,7 @@ the given structure.  The new parameters will be allocated using
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.7.6.33.6"></a><h4>Returns</h4>
+<a name="gnutls-openpgp-crt-get-subkey-pk-rsa-raw.returns"></a><h4>Returns</h4>
 <p> <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> on success, otherwise a negative error code.</p>
 </div>
 <p class="since">Since: 2.4.0</p>
@@ -2021,8 +2021,8 @@ gnutls_openpgp_crt_get_subkey_revoked_status
                                 <em class="parameter"><code>unsigned <span class="type">int</span> idx</code></em>);</pre>
 <p>Get subkey revocation status.  A negative error code indicates an error.</p>
 <div class="refsect3">
-<a name="id-1.2.7.6.34.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-openpgp-crt-get-subkey-revoked-status.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -2043,7 +2043,7 @@ gnutls_openpgp_crt_get_subkey_revoked_status
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.7.6.34.6"></a><h4>Returns</h4>
+<a name="gnutls-openpgp-crt-get-subkey-revoked-status.returns"></a><h4>Returns</h4>
 <p> true (1) if the key has been revoked, or false (0) if it
 has not.</p>
 </div>
@@ -2061,8 +2061,8 @@ key algorithm.  The key usage value will ORed values of
 <a class="link" href="gnutls-gnutls.html#GNUTLS-KEY-DIGITAL-SIGNATURE:CAPS" title="GNUTLS_KEY_DIGITAL_SIGNATURE"><code class="literal">GNUTLS_KEY_DIGITAL_SIGNATURE</code></a> or <a class="link" href="gnutls-gnutls.html#GNUTLS-KEY-KEY-ENCIPHERMENT:CAPS" title="GNUTLS_KEY_KEY_ENCIPHERMENT"><code class="literal">GNUTLS_KEY_KEY_ENCIPHERMENT</code></a>.</p>
 <p>A negative error code may be returned in case of parsing error.</p>
 <div class="refsect3">
-<a name="id-1.2.7.6.35.6"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-openpgp-crt-get-subkey-usage.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -2088,7 +2088,7 @@ key algorithm.  The key usage value will ORed values of
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.7.6.35.7"></a><h4>Returns</h4>
+<a name="gnutls-openpgp-crt-get-subkey-usage.returns"></a><h4>Returns</h4>
 <p> key usage value.</p>
 </div>
 <p class="since">Since: 2.4.0</p>
@@ -2100,8 +2100,8 @@ key algorithm.  The key usage value will ORed values of
 gnutls_openpgp_crt_get_version (<em class="parameter"><code><a class="link" href="gnutls-gnutls.html#gnutls-openpgp-crt-t" title="gnutls_openpgp_crt_t"><span class="type">gnutls_openpgp_crt_t</span></a> key</code></em>);</pre>
 <p>Extract the version of the OpenPGP key.</p>
 <div class="refsect3">
-<a name="id-1.2.7.6.36.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-openpgp-crt-get-version.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -2115,7 +2115,7 @@ gnutls_openpgp_crt_get_version (<em class="parameter"><code><a class="link" href
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.7.6.36.6"></a><h4>Returns</h4>
+<a name="gnutls-openpgp-crt-get-version.returns"></a><h4>Returns</h4>
 <p> the version number is returned, or a negative error code on errors.</p>
 </div>
 </div>
@@ -2130,8 +2130,8 @@ gnutls_openpgp_crt_import (<em class="parameter"><code><a class="link" href="gnu
 the native <a class="link" href="gnutls-gnutls.html#gnutls-openpgp-crt-t" title="gnutls_openpgp_crt_t"><span class="type">gnutls_openpgp_crt_t</span></a> format. The output will be stored
 in 'key'.</p>
 <div class="refsect3">
-<a name="id-1.2.7.6.37.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-openpgp-crt-import.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -2157,7 +2157,7 @@ in 'key'.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.7.6.37.6"></a><h4>Returns</h4>
+<a name="gnutls-openpgp-crt-import.returns"></a><h4>Returns</h4>
 <p> <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> on success, or an error code.</p>
 </div>
 </div>
@@ -2168,8 +2168,8 @@ in 'key'.</p>
 gnutls_openpgp_crt_init (<em class="parameter"><code><a class="link" href="gnutls-gnutls.html#gnutls-openpgp-crt-t" title="gnutls_openpgp_crt_t"><span class="type">gnutls_openpgp_crt_t</span></a> *key</code></em>);</pre>
 <p>This function will initialize an OpenPGP key structure.</p>
 <div class="refsect3">
-<a name="id-1.2.7.6.38.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-openpgp-crt-init.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -2183,7 +2183,7 @@ gnutls_openpgp_crt_init (<em class="parameter"><code><a class="link" href="gnutl
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.7.6.38.6"></a><h4>Returns</h4>
+<a name="gnutls-openpgp-crt-init.returns"></a><h4>Returns</h4>
 <p> <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> on success, or an error code.</p>
 </div>
 </div>
@@ -2198,10 +2198,10 @@ gnutls_openpgp_crt_print (<em class="parameter"><code><a class="link" href="gnut
 for display to a human.</p>
 <p>The format should be (0) for future compatibility.</p>
 <p>The output <em class="parameter"><code>out</code></em>
- needs to be deallocate using <a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-free"><code class="function">gnutls_free()</code></a>.</p>
+ needs to be deallocate using <code class="function">gnutls_free()</code>.</p>
 <div class="refsect3">
-<a name="id-1.2.7.6.39.7"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-openpgp-crt-print.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -2227,7 +2227,7 @@ for display to a human.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.7.6.39.8"></a><h4>Returns</h4>
+<a name="gnutls-openpgp-crt-print.returns"></a><h4>Returns</h4>
 <p> <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> on success, or an error code.</p>
 </div>
 </div>
@@ -2244,8 +2244,8 @@ This key will be used by functions that involve key handling.</p>
  is <code class="literal">NULL</code> then the master key is
 set as preferred.</p>
 <div class="refsect3">
-<a name="id-1.2.7.6.40.6"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-openpgp-crt-set-preferred-key-id.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -2266,7 +2266,7 @@ set as preferred.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.7.6.40.7"></a><h4>Returns</h4>
+<a name="gnutls-openpgp-crt-set-preferred-key-id.returns"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned,
 otherwise a negative error code is returned.</p>
 </div>
@@ -2289,8 +2289,8 @@ bitwise or'd.</p>
 You may use GnuPG for that purpose, or any other external PGP
 application.</p>
 <div class="refsect3">
-<a name="id-1.2.7.6.41.7"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-openpgp-crt-verify-ring.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -2321,7 +2321,7 @@ application.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.7.6.41.8"></a><h4>Returns</h4>
+<a name="gnutls-openpgp-crt-verify-ring.returns"></a><h4>Returns</h4>
 <p> <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> on success, or an error code.</p>
 </div>
 </div>
@@ -2337,8 +2337,8 @@ output will be put in <em class="parameter"><code>verify</code></em>
  and will be one or more of the
 gnutls_certificate_status_t enumerated elements bitwise or'd.</p>
 <div class="refsect3">
-<a name="id-1.2.7.6.42.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-openpgp-crt-verify-self.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -2364,7 +2364,7 @@ gnutls_certificate_status_t enumerated elements bitwise or'd.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.7.6.42.6"></a><h4>Returns</h4>
+<a name="gnutls-openpgp-crt-verify-self.returns"></a><h4>Returns</h4>
 <p> <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> on success, or an error code.</p>
 </div>
 </div>
@@ -2377,8 +2377,8 @@ gnutls_openpgp_keyring_check_id (<em class="parameter"><code><a class="link" hre
                                  <em class="parameter"><code>unsigned <span class="type">int</span> flags</code></em>);</pre>
 <p>Check if a given key ID exists in the keyring.</p>
 <div class="refsect3">
-<a name="id-1.2.7.6.43.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-openpgp-keyring-check-id.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -2404,7 +2404,7 @@ gnutls_openpgp_keyring_check_id (<em class="parameter"><code><a class="link" hre
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.7.6.43.6"></a><h4>Returns</h4>
+<a name="gnutls-openpgp-keyring-check-id.returns"></a><h4>Returns</h4>
 <p> <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> on success (if keyid exists) and a
 negative error code on failure.</p>
 </div>
@@ -2416,8 +2416,8 @@ negative error code on failure.</p>
 gnutls_openpgp_keyring_deinit (<em class="parameter"><code><a class="link" href="gnutls-gnutls.html#gnutls-openpgp-keyring-t" title="gnutls_openpgp_keyring_t"><span class="type">gnutls_openpgp_keyring_t</span></a> keyring</code></em>);</pre>
 <p>This function will deinitialize a keyring structure.</p>
 <div class="refsect3">
-<a name="id-1.2.7.6.44.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-openpgp-keyring-deinit.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -2443,8 +2443,8 @@ keyring.  If the index given is out of range
 <a class="link" href="gnutls-gnutls.html#GNUTLS-E-REQUESTED-DATA-NOT-AVAILABLE:CAPS" title="GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE"><code class="literal">GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE</code></a> will be returned. The
 returned structure needs to be deinited.</p>
 <div class="refsect3">
-<a name="id-1.2.7.6.45.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-openpgp-keyring-get-crt.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -2470,7 +2470,7 @@ returned structure needs to be deinited.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.7.6.45.6"></a><h4>Returns</h4>
+<a name="gnutls-openpgp-keyring-get-crt.returns"></a><h4>Returns</h4>
 <p> <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> on success, or an error code.</p>
 </div>
 </div>
@@ -2482,8 +2482,8 @@ gnutls_openpgp_keyring_get_crt_count (<em class="parameter"><code><a class="link
 <p>This function will return the number of OpenPGP certificates
 present in the given keyring.</p>
 <div class="refsect3">
-<a name="id-1.2.7.6.46.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-openpgp-keyring-get-crt-count.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -2497,7 +2497,7 @@ present in the given keyring.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.7.6.46.6"></a><h4>Returns</h4>
+<a name="gnutls-openpgp-keyring-get-crt-count.returns"></a><h4>Returns</h4>
 <p> the number of subkeys, or a negative error code on error.</p>
 </div>
 </div>
@@ -2512,8 +2512,8 @@ gnutls_openpgp_keyring_import (<em class="parameter"><code><a class="link" href=
 to the native <a class="link" href="gnutls-gnutls.html#gnutls-openpgp-keyring-t" title="gnutls_openpgp_keyring_t"><span class="type">gnutls_openpgp_keyring_t</span></a> format.  The output will be
 stored in 'keyring'.</p>
 <div class="refsect3">
-<a name="id-1.2.7.6.47.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-openpgp-keyring-import.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -2539,7 +2539,7 @@ stored in 'keyring'.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.7.6.47.6"></a><h4>Returns</h4>
+<a name="gnutls-openpgp-keyring-import.returns"></a><h4>Returns</h4>
 <p> <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> on success, or an error code.</p>
 </div>
 </div>
@@ -2550,8 +2550,8 @@ stored in 'keyring'.</p>
 gnutls_openpgp_keyring_init (<em class="parameter"><code><a class="link" href="gnutls-gnutls.html#gnutls-openpgp-keyring-t" title="gnutls_openpgp_keyring_t"><span class="type">gnutls_openpgp_keyring_t</span></a> *keyring</code></em>);</pre>
 <p>This function will initialize an keyring structure.</p>
 <div class="refsect3">
-<a name="id-1.2.7.6.48.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-openpgp-keyring-init.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -2565,7 +2565,7 @@ gnutls_openpgp_keyring_init (<em class="parameter"><code><a class="link" href="g
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.7.6.48.6"></a><h4>Returns</h4>
+<a name="gnutls-openpgp-keyring-init.returns"></a><h4>Returns</h4>
 <p> <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> on success, or an error code.</p>
 </div>
 </div>
@@ -2576,8 +2576,8 @@ gnutls_openpgp_keyring_init (<em class="parameter"><code><a class="link" href="g
 gnutls_openpgp_privkey_deinit (<em class="parameter"><code><a class="link" href="gnutls-gnutls.html#gnutls-openpgp-privkey-t" title="gnutls_openpgp_privkey_t"><span class="type">gnutls_openpgp_privkey_t</span></a> key</code></em>);</pre>
 <p>This function will deinitialize a key structure.</p>
 <div class="refsect3">
-<a name="id-1.2.7.6.49.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-openpgp-privkey-deinit.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -2605,8 +2605,8 @@ gnutls_openpgp_privkey_export (<em class="parameter"><code><a class="link" href=
 If the buffer provided is not long enough to hold the output, then
 GNUTLS_E_SHORT_MEMORY_BUFFER will be returned.</p>
 <div class="refsect3">
-<a name="id-1.2.7.6.50.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-openpgp-privkey-export.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -2648,7 +2648,7 @@ replaced by the actual size of parameters)</p></td>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.7.6.50.6"></a><h4>Returns</h4>
+<a name="gnutls-openpgp-privkey-export.returns"></a><h4>Returns</h4>
 <p> <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> on success, or an error code.</p>
 </div>
 <p class="since">Since: 2.4.0</p>
@@ -2663,10 +2663,10 @@ gnutls_openpgp_privkey_export2 (<em class="parameter"><code><a class="link" href
                                 <em class="parameter"><code>unsigned <span class="type">int</span> flags</code></em>,
                                 <em class="parameter"><code><span class="type">gnutls_datum_t</span> *out</code></em>);</pre>
 <p>This function will convert the given key to RAW or Base64 format.
-The output buffer is allocated using <a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-malloc"><code class="function">gnutls_malloc()</code></a>.</p>
+The output buffer is allocated using <code class="function">gnutls_malloc()</code>.</p>
 <div class="refsect3">
-<a name="id-1.2.7.6.51.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-openpgp-privkey-export2.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -2702,7 +2702,7 @@ The output buffer is allocated using <a href="http://www.gnutls.org/reference/gn
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.7.6.51.6"></a><h4>Returns</h4>
+<a name="gnutls-openpgp-privkey-export2.returns"></a><h4>Returns</h4>
 <p> <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> on success, or an error code.</p>
 </div>
 <p class="since">Since: 3.1.3</p>
@@ -2719,10 +2719,10 @@ gnutls_openpgp_privkey_export_dsa_raw (<em class="parameter"><code><a class="lin
                                        <em class="parameter"><code><span class="type">gnutls_datum_t</span> *x</code></em>);</pre>
 <p>This function will export the DSA private key's parameters found in
 the given certificate.  The new parameters will be allocated using
-<a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-malloc"><code class="function">gnutls_malloc()</code></a> and will be stored in the appropriate datum.</p>
+<code class="function">gnutls_malloc()</code> and will be stored in the appropriate datum.</p>
 <div class="refsect3">
-<a name="id-1.2.7.6.52.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-openpgp-privkey-export-dsa-raw.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -2763,7 +2763,7 @@ the given certificate.  The new parameters will be allocated using
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.7.6.52.6"></a><h4>Returns</h4>
+<a name="gnutls-openpgp-privkey-export-dsa-raw.returns"></a><h4>Returns</h4>
 <p> <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> on success, otherwise a negative error code.</p>
 </div>
 <p class="since">Since: 2.4.0</p>
@@ -2781,10 +2781,10 @@ gnutls_openpgp_privkey_export_rsa_raw (<em class="parameter"><code><a class="lin
                                        <em class="parameter"><code><span class="type">gnutls_datum_t</span> *u</code></em>);</pre>
 <p>This function will export the RSA private key's parameters found in
 the given structure.  The new parameters will be allocated using
-<a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-malloc"><code class="function">gnutls_malloc()</code></a> and will be stored in the appropriate datum.</p>
+<code class="function">gnutls_malloc()</code> and will be stored in the appropriate datum.</p>
 <div class="refsect3">
-<a name="id-1.2.7.6.53.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-openpgp-privkey-export-rsa-raw.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -2830,7 +2830,7 @@ the given structure.  The new parameters will be allocated using
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.7.6.53.6"></a><h4>Returns</h4>
+<a name="gnutls-openpgp-privkey-export-rsa-raw.returns"></a><h4>Returns</h4>
 <p> <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> on success, otherwise a negative error code.</p>
 </div>
 <p class="since">Since: 2.4.0</p>
@@ -2849,10 +2849,10 @@ gnutls_openpgp_privkey_export_subkey_dsa_raw
                                 <em class="parameter"><code><span class="type">gnutls_datum_t</span> *x</code></em>);</pre>
 <p>This function will export the DSA private key's parameters found
 in the given certificate.  The new parameters will be allocated
-using <a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-malloc"><code class="function">gnutls_malloc()</code></a> and will be stored in the appropriate datum.</p>
+using <code class="function">gnutls_malloc()</code> and will be stored in the appropriate datum.</p>
 <div class="refsect3">
-<a name="id-1.2.7.6.54.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-openpgp-privkey-export-subkey-dsa-raw.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -2898,7 +2898,7 @@ using <a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-malloc"
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.7.6.54.6"></a><h4>Returns</h4>
+<a name="gnutls-openpgp-privkey-export-subkey-dsa-raw.returns"></a><h4>Returns</h4>
 <p> <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> on success, otherwise a negative error code.</p>
 </div>
 <p class="since">Since: 2.4.0</p>
@@ -2918,10 +2918,10 @@ gnutls_openpgp_privkey_export_subkey_rsa_raw
                                 <em class="parameter"><code><span class="type">gnutls_datum_t</span> *u</code></em>);</pre>
 <p>This function will export the RSA private key's parameters found in
 the given structure.  The new parameters will be allocated using
-<a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-malloc"><code class="function">gnutls_malloc()</code></a> and will be stored in the appropriate datum.</p>
+<code class="function">gnutls_malloc()</code> and will be stored in the appropriate datum.</p>
 <div class="refsect3">
-<a name="id-1.2.7.6.55.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-openpgp-privkey-export-subkey-rsa-raw.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -2972,7 +2972,7 @@ the given structure.  The new parameters will be allocated using
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.7.6.55.6"></a><h4>Returns</h4>
+<a name="gnutls-openpgp-privkey-export-subkey-rsa-raw.returns"></a><h4>Returns</h4>
 <p> <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> on success, otherwise a negative error code.</p>
 </div>
 <p class="since">Since: 2.4.0</p>
@@ -2988,8 +2988,8 @@ gnutls_openpgp_privkey_get_fingerprint
 <p>Get the fingerprint of the OpenPGP key. Depends on the
 algorithm, the fingerprint can be 16 or 20 bytes.</p>
 <div class="refsect3">
-<a name="id-1.2.7.6.56.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-openpgp-privkey-get-fingerprint.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -3015,7 +3015,7 @@ algorithm, the fingerprint can be 16 or 20 bytes.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.7.6.56.6"></a><h4>Returns</h4>
+<a name="gnutls-openpgp-privkey-get-fingerprint.returns"></a><h4>Returns</h4>
 <p> On success, 0 is returned, or an error code.</p>
 </div>
 <p class="since">Since: 2.4.0</p>
@@ -3028,8 +3028,8 @@ gnutls_openpgp_privkey_get_key_id (<em class="parameter"><code><a class="link" h
                                    <em class="parameter"><code><span class="type">gnutls_openpgp_keyid_t</span> keyid</code></em>);</pre>
 <p>Get key-id.</p>
 <div class="refsect3">
-<a name="id-1.2.7.6.57.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-openpgp-privkey-get-key-id.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -3050,7 +3050,7 @@ gnutls_openpgp_privkey_get_key_id (<em class="parameter"><code><a class="link" h
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.7.6.57.6"></a><h4>Returns</h4>
+<a name="gnutls-openpgp-privkey-get-key-id.returns"></a><h4>Returns</h4>
 <p> the 64-bit keyID of the OpenPGP key.</p>
 </div>
 <p class="since">Since: 2.4.0</p>
@@ -3068,8 +3068,8 @@ certificate.</p>
 size in bits. For RSA the bits returned is the modulus.
 For DSA the bits returned are of the public exponent.</p>
 <div class="refsect3">
-<a name="id-1.2.7.6.58.6"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-openpgp-privkey-get-pk-algorithm.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -3090,7 +3090,7 @@ For DSA the bits returned are of the public exponent.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.7.6.58.7"></a><h4>Returns</h4>
+<a name="gnutls-openpgp-privkey-get-pk-algorithm.returns"></a><h4>Returns</h4>
 <p> a member of the <a class="link" href="gnutls-gnutls.html#gnutls-pk-algorithm-t" title="enum gnutls_pk_algorithm_t"><span class="type">gnutls_pk_algorithm_t</span></a> enumeration on
 success, or a negative error code on error.</p>
 </div>
@@ -3105,8 +3105,8 @@ gnutls_openpgp_privkey_get_preferred_key_id
                                 <em class="parameter"><code><span class="type">gnutls_openpgp_keyid_t</span> keyid</code></em>);</pre>
 <p>Get the preferred key-id for the key.</p>
 <div class="refsect3">
-<a name="id-1.2.7.6.59.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-openpgp-privkey-get-preferred-key-id.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -3127,7 +3127,7 @@ gnutls_openpgp_privkey_get_preferred_key_id
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.7.6.59.6"></a><h4>Returns</h4>
+<a name="gnutls-openpgp-privkey-get-preferred-key-id.returns"></a><h4>Returns</h4>
 <p> the 64-bit preferred keyID of the OpenPGP key, or if it
 hasn't been set it returns <a class="link" href="gnutls-gnutls.html#GNUTLS-E-INVALID-REQUEST:CAPS" title="GNUTLS_E_INVALID_REQUEST"><code class="literal">GNUTLS_E_INVALID_REQUEST</code></a>.</p>
 </div>
@@ -3140,8 +3140,8 @@ gnutls_openpgp_privkey_get_revoked_status
                                (<em class="parameter"><code><a class="link" href="gnutls-gnutls.html#gnutls-openpgp-privkey-t" title="gnutls_openpgp_privkey_t"><span class="type">gnutls_openpgp_privkey_t</span></a> key</code></em>);</pre>
 <p>Get revocation status of key.</p>
 <div class="refsect3">
-<a name="id-1.2.7.6.60.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-openpgp-privkey-get-revoked-status.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -3155,7 +3155,7 @@ gnutls_openpgp_privkey_get_revoked_status
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.7.6.60.6"></a><h4>Returns</h4>
+<a name="gnutls-openpgp-privkey-get-revoked-status.returns"></a><h4>Returns</h4>
 <p> true (1) if the key has been revoked, or false (0) if it
 has not, or a negative error code indicates an error.</p>
 </div>
@@ -3170,8 +3170,8 @@ gnutls_openpgp_privkey_get_subkey_count
 <p>This function will return the number of subkeys present in the
 given OpenPGP certificate.</p>
 <div class="refsect3">
-<a name="id-1.2.7.6.61.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-openpgp-privkey-get-subkey-count.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -3185,7 +3185,7 @@ given OpenPGP certificate.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.7.6.61.6"></a><h4>Returns</h4>
+<a name="gnutls-openpgp-privkey-get-subkey-count.returns"></a><h4>Returns</h4>
 <p> the number of subkeys, or a negative error code on error.</p>
 </div>
 <p class="since">Since: 2.4.0</p>
@@ -3199,8 +3199,8 @@ gnutls_openpgp_privkey_get_subkey_creation_time
                                 <em class="parameter"><code>unsigned <span class="type">int</span> idx</code></em>);</pre>
 <p>Get subkey creation time.</p>
 <div class="refsect3">
-<a name="id-1.2.7.6.62.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-openpgp-privkey-get-subkey-creation-time.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -3221,7 +3221,7 @@ gnutls_openpgp_privkey_get_subkey_creation_time
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.7.6.62.6"></a><h4>Returns</h4>
+<a name="gnutls-openpgp-privkey-get-subkey-creation-time.returns"></a><h4>Returns</h4>
 <p> the timestamp when the OpenPGP key was created.</p>
 </div>
 <p class="since">Since: 2.4.0</p>
@@ -3236,8 +3236,8 @@ gnutls_openpgp_privkey_get_subkey_expiration_time
 <p>Get subkey expiration time.  A value of '0' means that the key
 doesn't expire at all.</p>
 <div class="refsect3">
-<a name="id-1.2.7.6.63.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-openpgp-privkey-get-subkey-expiration-time.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -3258,7 +3258,7 @@ doesn't expire at all.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.7.6.63.6"></a><h4>Returns</h4>
+<a name="gnutls-openpgp-privkey-get-subkey-expiration-time.returns"></a><h4>Returns</h4>
 <p> the time when the OpenPGP key expires.</p>
 </div>
 <p class="since">Since: 2.4.0</p>
@@ -3275,8 +3275,8 @@ gnutls_openpgp_privkey_get_subkey_fingerprint
 <p>Get the fingerprint of an OpenPGP subkey.  Depends on the
 algorithm, the fingerprint can be 16 or 20 bytes.</p>
 <div class="refsect3">
-<a name="id-1.2.7.6.64.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-openpgp-privkey-get-subkey-fingerprint.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -3307,7 +3307,7 @@ algorithm, the fingerprint can be 16 or 20 bytes.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.7.6.64.6"></a><h4>Returns</h4>
+<a name="gnutls-openpgp-privkey-get-subkey-fingerprint.returns"></a><h4>Returns</h4>
 <p> On success, 0 is returned, or an error code.</p>
 </div>
 <p class="since">Since: 2.4.0</p>
@@ -3321,8 +3321,8 @@ gnutls_openpgp_privkey_get_subkey_id (<em class="parameter"><code><a class="link
                                       <em class="parameter"><code><span class="type">gnutls_openpgp_keyid_t</span> keyid</code></em>);</pre>
 <p>Get the key-id for the subkey.</p>
 <div class="refsect3">
-<a name="id-1.2.7.6.65.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-openpgp-privkey-get-subkey-id.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -3348,7 +3348,7 @@ gnutls_openpgp_privkey_get_subkey_id (<em class="parameter"><code><a class="link
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.7.6.65.6"></a><h4>Returns</h4>
+<a name="gnutls-openpgp-privkey-get-subkey-id.returns"></a><h4>Returns</h4>
 <p> the 64-bit keyID of the OpenPGP key.</p>
 </div>
 <p class="since">Since: 2.4.0</p>
@@ -3361,8 +3361,8 @@ gnutls_openpgp_privkey_get_subkey_idx (<em class="parameter"><code><a class="lin
                                        <em class="parameter"><code>const <span class="type">gnutls_openpgp_keyid_t</span> keyid</code></em>);</pre>
 <p>Get index of subkey.</p>
 <div class="refsect3">
-<a name="id-1.2.7.6.66.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-openpgp-privkey-get-subkey-idx.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -3383,7 +3383,7 @@ gnutls_openpgp_privkey_get_subkey_idx (<em class="parameter"><code><a class="lin
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.7.6.66.6"></a><h4>Returns</h4>
+<a name="gnutls-openpgp-privkey-get-subkey-idx.returns"></a><h4>Returns</h4>
 <p> the index of the subkey or a negative error value.</p>
 </div>
 <p class="since">Since: 2.4.0</p>
@@ -3402,8 +3402,8 @@ certificate.</p>
 size in bits. For RSA the bits returned is the modulus.
 For DSA the bits returned are of the public exponent.</p>
 <div class="refsect3">
-<a name="id-1.2.7.6.67.6"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-openpgp-privkey-get-subkey-pk-algorithm.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -3429,7 +3429,7 @@ For DSA the bits returned are of the public exponent.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.7.6.67.7"></a><h4>Returns</h4>
+<a name="gnutls-openpgp-privkey-get-subkey-pk-algorithm.returns"></a><h4>Returns</h4>
 <p> a member of the <a class="link" href="gnutls-gnutls.html#gnutls-pk-algorithm-t" title="enum gnutls_pk_algorithm_t"><span class="type">gnutls_pk_algorithm_t</span></a> enumeration on
 success, or a negative error code on error.</p>
 </div>
@@ -3444,8 +3444,8 @@ gnutls_openpgp_privkey_get_subkey_revoked_status
                                 <em class="parameter"><code>unsigned <span class="type">int</span> idx</code></em>);</pre>
 <p>Get revocation status of key.</p>
 <div class="refsect3">
-<a name="id-1.2.7.6.68.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-openpgp-privkey-get-subkey-revoked-status.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -3466,7 +3466,7 @@ gnutls_openpgp_privkey_get_subkey_revoked_status
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.7.6.68.6"></a><h4>Returns</h4>
+<a name="gnutls-openpgp-privkey-get-subkey-revoked-status.returns"></a><h4>Returns</h4>
 <p> true (1) if the key has been revoked, or false (0) if it
 has not, or a negative error code indicates an error.</p>
 </div>
@@ -3485,8 +3485,8 @@ gnutls_openpgp_privkey_import (<em class="parameter"><code><a class="link" href=
 the native gnutls_openpgp_privkey_t format.  The output will be
 stored in 'key'.</p>
 <div class="refsect3">
-<a name="id-1.2.7.6.69.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-openpgp-privkey-import.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -3522,7 +3522,7 @@ stored in 'key'.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.7.6.69.6"></a><h4>Returns</h4>
+<a name="gnutls-openpgp-privkey-import.returns"></a><h4>Returns</h4>
 <p> <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> on success, or an error code.</p>
 </div>
 </div>
@@ -3533,8 +3533,8 @@ stored in 'key'.</p>
 gnutls_openpgp_privkey_init (<em class="parameter"><code><a class="link" href="gnutls-gnutls.html#gnutls-openpgp-privkey-t" title="gnutls_openpgp_privkey_t"><span class="type">gnutls_openpgp_privkey_t</span></a> *key</code></em>);</pre>
 <p>This function will initialize an OpenPGP key structure.</p>
 <div class="refsect3">
-<a name="id-1.2.7.6.70.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-openpgp-privkey-init.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -3548,7 +3548,7 @@ gnutls_openpgp_privkey_init (<em class="parameter"><code><a class="link" href="g
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.7.6.70.6"></a><h4>Returns</h4>
+<a name="gnutls-openpgp-privkey-init.returns"></a><h4>Returns</h4>
 <p> <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> on success, or an error code.</p>
 </div>
 </div>
@@ -3560,8 +3560,8 @@ gnutls_openpgp_privkey_sec_param (<em class="parameter"><code><a class="link" hr
 <p>This function will return the security parameter appropriate with
 this private key.</p>
 <div class="refsect3">
-<a name="id-1.2.7.6.71.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-openpgp-privkey-sec-param.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -3575,7 +3575,7 @@ this private key.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.7.6.71.6"></a><h4>Returns</h4>
+<a name="gnutls-openpgp-privkey-sec-param.returns"></a><h4>Returns</h4>
 <p> On success, a valid security parameter is returned otherwise
 <a class="link" href="gnutls-gnutls.html#GNUTLS-SEC-PARAM-UNKNOWN:CAPS"><code class="literal">GNUTLS_SEC_PARAM_UNKNOWN</code></a> is returned.</p>
 </div>
@@ -3594,8 +3594,8 @@ This key will be used by functions that involve key handling.</p>
  is <code class="literal">NULL</code> then the master key is
 set as preferred.</p>
 <div class="refsect3">
-<a name="id-1.2.7.6.72.6"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-openpgp-privkey-set-preferred-key-id.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -3616,7 +3616,7 @@ set as preferred.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.7.6.72.7"></a><h4>Returns</h4>
+<a name="gnutls-openpgp-privkey-set-preferred-key-id.returns"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned,
 otherwise a negative error code is returned.</p>
 </div>
@@ -3634,10 +3634,10 @@ useful on the server, and will only be used if the peer send a key
 fingerprint instead of a full key.  See also
 <a class="link" href="gnutls-openpgp.html#gnutls-openpgp-set-recv-key-function" title="gnutls_openpgp_set_recv_key_function ()"><code class="function">gnutls_openpgp_set_recv_key_function()</code></a>.</p>
 <p>The variable <em class="parameter"><code>key</code></em>
- must be allocated using <a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-malloc"><code class="function">gnutls_malloc()</code></a>.</p>
+ must be allocated using <code class="function">gnutls_malloc()</code>.</p>
 <div class="refsect3">
-<a name="id-1.2.7.6.73.6"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-openpgp-recv-key-func.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -3668,7 +3668,7 @@ fingerprint instead of a full key.  See also
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.7.6.73.7"></a><h4>Returns</h4>
+<a name="gnutls-openpgp-recv-key-func.returns"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (zero) is returned,
 otherwise an error code is returned.</p>
 </div>
@@ -3682,10 +3682,10 @@ gnutls_openpgp_set_recv_key_function (<em class="parameter"><code><a class="link
 <p>This function will set a key retrieval function for OpenPGP keys. This
 callback is only useful in server side, and will be used if the peer
 sent a key fingerprint instead of a full key.</p>
-<p>The retrieved key must be allocated using <a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-malloc"><code class="function">gnutls_malloc()</code></a>.</p>
+<p>The retrieved key must be allocated using <code class="function">gnutls_malloc()</code>.</p>
 <div class="refsect3">
-<a name="id-1.2.7.6.74.6"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-openpgp-set-recv-key-function.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -3729,8 +3729,8 @@ sent a key fingerprint instead of a full key.</p>
 <a name="gnutls-openpgp-crt-fmt-t"></a><h3>enum gnutls_openpgp_crt_fmt_t</h3>
 <p>Enumeration of different OpenPGP key formats.</p>
 <div class="refsect3">
-<a name="id-1.2.7.7.4.4"></a><h4>Members</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-openpgp-crt-fmt-t.members"></a><h4>Members</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="300px" class="enum_members_name">
 <col class="enum_members_description">
@@ -3758,6 +3758,6 @@ sent a key fingerprint instead of a full key.</p>
 </div>
 </div>
 <div class="footer">
-<hr>Generated by GTK-Doc V1.24</div>
+<hr>Generated by GTK-Doc V1.25</div>
 </body>
 </html>

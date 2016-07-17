@@ -3,12 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>crypto: GnuTLS API Reference Manual</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
 <link rel="home" href="index.html" title="GnuTLS API Reference Manual">
 <link rel="up" href="intro.html" title="GnuTLS API Reference Manual">
 <link rel="prev" href="gnutls-openpgp.html" title="openpgp">
 <link rel="next" href="gnutls-pkcs11.html" title="pkcs11">
-<meta name="generator" content="GTK-Doc V1.24 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.25 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -33,7 +33,7 @@
 </tr></table></div>
 <div class="refsect1">
 <a name="gnutls-crypto.functions"></a><h2>Functions</h2>
-<div class="informaltable"><table width="100%" border="0">
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="functions_return">
 <col class="functions_name">
@@ -228,7 +228,7 @@
 </div>
 <div class="refsect1">
 <a name="gnutls-crypto.other"></a><h2>Types and Values</h2>
-<div class="informaltable"><table width="100%" border="0">
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="name">
 <col class="description">
@@ -271,8 +271,8 @@ associated data (AEAD) ciphers and authenticate the
 input data. This function can only be called once
 and before any encryption operations.</p>
 <div class="refsect3">
-<a name="id-1.2.8.6.2.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-cipher-add-auth.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -286,7 +286,7 @@ and before any encryption operations.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.8.6.2.6"></a><h4>Returns</h4>
+<a name="gnutls-cipher-add-auth.returns"></a><h4>Returns</h4>
 <p> Zero or a negative error code on error.</p>
 </div>
 <p class="since">Since: 3.0</p>
@@ -303,8 +303,8 @@ specified by the context.</p>
 <p>Note that in AEAD ciphers, this will not check the tag. You will
 need to compare the tag sent with the value returned from <a class="link" href="gnutls-crypto.html#gnutls-cipher-tag" title="gnutls_cipher_tag ()"><code class="function">gnutls_cipher_tag()</code></a>.</p>
 <div class="refsect3">
-<a name="id-1.2.8.6.3.6"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-cipher-decrypt.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -318,7 +318,7 @@ need to compare the tag sent with the value returned from <a class="link" href="
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.8.6.3.7"></a><h4>Returns</h4>
+<a name="gnutls-cipher-decrypt.returns"></a><h4>Returns</h4>
 <p> Zero or a negative error code on error.</p>
 </div>
 <p class="since">Since: 2.10.0</p>
@@ -340,8 +340,8 @@ data length will equal the ciphertext size.</p>
 <p>Note that in AEAD ciphers, this will not check the tag. You will
 need to compare the tag sent with the value returned from <a class="link" href="gnutls-crypto.html#gnutls-cipher-tag" title="gnutls_cipher_tag ()"><code class="function">gnutls_cipher_tag()</code></a>.</p>
 <div class="refsect3">
-<a name="id-1.2.8.6.4.6"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-cipher-decrypt2.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -355,7 +355,7 @@ need to compare the tag sent with the value returned from <a class="link" href="
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.8.6.4.7"></a><h4>Returns</h4>
+<a name="gnutls-cipher-decrypt2.returns"></a><h4>Returns</h4>
 <p> Zero or a negative error code on error.</p>
 </div>
 <p class="since">Since: 2.12.0</p>
@@ -368,8 +368,8 @@ gnutls_cipher_deinit (<em class="parameter"><code><a class="link" href="gnutls-c
 <p>This function will deinitialize all resources occupied by the given
 encryption context.</p>
 <div class="refsect3">
-<a name="id-1.2.8.6.5.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-cipher-deinit.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -394,8 +394,8 @@ gnutls_cipher_encrypt (<em class="parameter"><code>const <a class="link" href="g
 <p>This function will encrypt the given data using the algorithm
 specified by the context.</p>
 <div class="refsect3">
-<a name="id-1.2.8.6.6.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-cipher-encrypt.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -409,7 +409,7 @@ specified by the context.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.8.6.6.6"></a><h4>Returns</h4>
+<a name="gnutls-cipher-encrypt.returns"></a><h4>Returns</h4>
 <p> Zero or a negative error code on error.</p>
 </div>
 <p class="since">Since: 2.10.0</p>
@@ -429,8 +429,8 @@ specified by the context. For block ciphers the <em class="parameter"><code>ptex
 a multiple of the block size. For the supported ciphers the encrypted
 data length will equal the plaintext size.</p>
 <div class="refsect3">
-<a name="id-1.2.8.6.7.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-cipher-encrypt2.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -444,7 +444,7 @@ data length will equal the plaintext size.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.8.6.7.6"></a><h4>Returns</h4>
+<a name="gnutls-cipher-encrypt2.returns"></a><h4>Returns</h4>
 <p> Zero or a negative error code on error.</p>
 </div>
 <p class="since">Since: 2.12.0</p>
@@ -455,8 +455,8 @@ data length will equal the plaintext size.</p>
 <pre class="programlisting"><span class="returnvalue">int</span>
 gnutls_cipher_get_block_size (<em class="parameter"><code><a class="link" href="gnutls-gnutls.html#gnutls-cipher-algorithm-t" title="enum gnutls_cipher_algorithm_t"><span class="type">gnutls_cipher_algorithm_t</span></a> algorithm</code></em>);</pre>
 <div class="refsect3">
-<a name="id-1.2.8.6.8.4"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-cipher-get-block-size.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -470,7 +470,7 @@ gnutls_cipher_get_block_size (<em class="parameter"><code><a class="link" href="
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.8.6.8.5"></a><h4>Returns</h4>
+<a name="gnutls-cipher-get-block-size.returns"></a><h4>Returns</h4>
 <p> the block size of the encryption algorithm.</p>
 </div>
 <p class="since">Since: 2.10.0</p>
@@ -489,8 +489,8 @@ for encryption/decryption of data. This will effectively use the
 current crypto backend in use by gnutls or the cryptographic
 accelerator in use.</p>
 <div class="refsect3">
-<a name="id-1.2.8.6.9.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-cipher-init.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -521,7 +521,7 @@ accelerator in use.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.8.6.9.6"></a><h4>Returns</h4>
+<a name="gnutls-cipher-init.returns"></a><h4>Returns</h4>
 <p> Zero or a negative error code on error.</p>
 </div>
 <p class="since">Since: 2.10.0</p>
@@ -536,8 +536,8 @@ gnutls_cipher_set_iv (<em class="parameter"><code><a class="link" href="gnutls-c
 <p>This function will set the IV to be used for the next
 encryption block.</p>
 <div class="refsect3">
-<a name="id-1.2.8.6.10.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-cipher-set-iv.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -575,8 +575,8 @@ gnutls_cipher_tag (<em class="parameter"><code><a class="link" href="gnutls-cryp
 associated data (AEAD) ciphers and will return the
 output tag.</p>
 <div class="refsect3">
-<a name="id-1.2.8.6.11.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-cipher-tag.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -602,7 +602,7 @@ output tag.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.8.6.11.6"></a><h4>Returns</h4>
+<a name="gnutls-cipher-tag.returns"></a><h4>Returns</h4>
 <p> Zero or a negative error code on error.</p>
 </div>
 <p class="since">Since: 3.0</p>
@@ -617,8 +617,8 @@ gnutls_hash (<em class="parameter"><code><a class="link" href="gnutls-crypto.htm
 <p>This function will hash the given data using the algorithm
 specified by the context.</p>
 <div class="refsect3">
-<a name="id-1.2.8.6.12.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-hash.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -632,7 +632,7 @@ specified by the context.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.8.6.12.6"></a><h4>Returns</h4>
+<a name="gnutls-hash.returns"></a><h4>Returns</h4>
 <p> Zero or a negative error code on error.</p>
 </div>
 <p class="since">Since: 2.10.0</p>
@@ -646,8 +646,8 @@ gnutls_hash_deinit (<em class="parameter"><code><a class="link" href="gnutls-cry
 <p>This function will deinitialize all resources occupied by
 the given hash context.</p>
 <div class="refsect3">
-<a name="id-1.2.8.6.13.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-hash-deinit.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -680,8 +680,8 @@ gnutls_hash_fast (<em class="parameter"><code><a class="link" href="gnutls-gnutl
 <p>This convenience function will hash the given data and return output
 on a single call.</p>
 <div class="refsect3">
-<a name="id-1.2.8.6.14.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-hash-fast.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -702,7 +702,7 @@ on a single call.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.8.6.14.6"></a><h4>Returns</h4>
+<a name="gnutls-hash-fast.returns"></a><h4>Returns</h4>
 <p> Zero or a negative error code on error.</p>
 </div>
 <p class="since">Since: 2.10.0</p>
@@ -715,8 +715,8 @@ gnutls_hash_get_len (<em class="parameter"><code><a class="link" href="gnutls-gn
 <p>This function will return the length of the output data
 of the given hash algorithm.</p>
 <div class="refsect3">
-<a name="id-1.2.8.6.15.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-hash-get-len.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -730,7 +730,7 @@ of the given hash algorithm.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.8.6.15.6"></a><h4>Returns</h4>
+<a name="gnutls-hash-get-len.returns"></a><h4>Returns</h4>
 <p> The length or zero on error.</p>
 </div>
 <p class="since">Since: 2.10.0</p>
@@ -746,8 +746,8 @@ produce a Message Digest of data.  This will effectively use the
 current crypto backend in use by gnutls or the cryptographic
 accelerator in use.</p>
 <div class="refsect3">
-<a name="id-1.2.8.6.16.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-hash-init.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -768,7 +768,7 @@ accelerator in use.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.8.6.16.6"></a><h4>Returns</h4>
+<a name="gnutls-hash-init.returns"></a><h4>Returns</h4>
 <p> Zero or a negative error code on error.</p>
 </div>
 <p class="since">Since: 2.10.0</p>
@@ -782,8 +782,8 @@ gnutls_hash_output (<em class="parameter"><code><a class="link" href="gnutls-cry
 <p>This function will output the current hash value
 and reset the state of the hash.</p>
 <div class="refsect3">
-<a name="id-1.2.8.6.17.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-hash-output.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -815,8 +815,8 @@ gnutls_hmac (<em class="parameter"><code><a class="link" href="gnutls-crypto.htm
 <p>This function will hash the given data using the algorithm
 specified by the context.</p>
 <div class="refsect3">
-<a name="id-1.2.8.6.18.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-hmac.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -830,7 +830,7 @@ specified by the context.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.8.6.18.6"></a><h4>Returns</h4>
+<a name="gnutls-hmac.returns"></a><h4>Returns</h4>
 <p> Zero or a negative error code on error.</p>
 </div>
 <p class="since">Since: 2.10.0</p>
@@ -844,8 +844,8 @@ gnutls_hmac_deinit (<em class="parameter"><code><a class="link" href="gnutls-cry
 <p>This function will deinitialize all resources occupied by
 the given hmac context.</p>
 <div class="refsect3">
-<a name="id-1.2.8.6.19.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-hmac-deinit.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -880,8 +880,8 @@ gnutls_hmac_fast (<em class="parameter"><code><a class="link" href="gnutls-gnutl
 <p>This convenience function will hash the given data and return output
 on a single call.</p>
 <div class="refsect3">
-<a name="id-1.2.8.6.20.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-hmac-fast.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -912,7 +912,7 @@ on a single call.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.8.6.20.6"></a><h4>Returns</h4>
+<a name="gnutls-hmac-fast.returns"></a><h4>Returns</h4>
 <p> Zero or a negative error code on error.</p>
 </div>
 <p class="since">Since: 2.10.0</p>
@@ -925,8 +925,8 @@ gnutls_hmac_get_len (<em class="parameter"><code><a class="link" href="gnutls-gn
 <p>This function will return the length of the output data
 of the given hmac algorithm.</p>
 <div class="refsect3">
-<a name="id-1.2.8.6.21.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-hmac-get-len.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -940,7 +940,7 @@ of the given hmac algorithm.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.8.6.21.6"></a><h4>Returns</h4>
+<a name="gnutls-hmac-get-len.returns"></a><h4>Returns</h4>
 <p> The length or zero on error.</p>
 </div>
 <p class="since">Since: 2.10.0</p>
@@ -960,8 +960,8 @@ cryptographic accelerator in use.</p>
 <p>Note that despite the name of this function, it can be used
 for other MAC algorithms than HMAC.</p>
 <div class="refsect3">
-<a name="id-1.2.8.6.22.6"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-hmac-init.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -992,7 +992,7 @@ for other MAC algorithms than HMAC.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.8.6.22.7"></a><h4>Returns</h4>
+<a name="gnutls-hmac-init.returns"></a><h4>Returns</h4>
 <p> Zero or a negative error code on error.</p>
 </div>
 <p class="since">Since: 2.10.0</p>
@@ -1006,8 +1006,8 @@ gnutls_hmac_output (<em class="parameter"><code><a class="link" href="gnutls-cry
 <p>This function will output the current MAC value
 and reset the state of the MAC.</p>
 <div class="refsect3">
-<a name="id-1.2.8.6.23.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-hmac-output.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -1040,8 +1040,8 @@ gnutls_rnd (<em class="parameter"><code><a class="link" href="gnutls-crypto.html
 buffer.</p>
 <p>This function is thread-safe and also fork-safe.</p>
 <div class="refsect3">
-<a name="id-1.2.8.6.24.6"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-rnd.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -1067,7 +1067,7 @@ buffer.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.8.6.24.7"></a><h4>Returns</h4>
+<a name="gnutls-rnd.returns"></a><h4>Returns</h4>
 <p> Zero on success, or a negative error code on error.</p>
 </div>
 <p class="since">Since: 2.12.0</p>
@@ -1103,8 +1103,8 @@ buffer.</p>
 <a name="gnutls-rnd-level-t"></a><h3>enum gnutls_rnd_level_t</h3>
 <p>Enumeration of random quality levels.</p>
 <div class="refsect3">
-<a name="id-1.2.8.7.5.4"></a><h4>Members</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-rnd-level-t.members"></a><h4>Members</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="300px" class="enum_members_name">
 <col class="enum_members_description">
@@ -1141,6 +1141,6 @@ buffer.</p>
 </div>
 </div>
 <div class="footer">
-<hr>Generated by GTK-Doc V1.24</div>
+<hr>Generated by GTK-Doc V1.25</div>
 </body>
 </html>

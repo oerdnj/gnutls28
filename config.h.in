@@ -225,6 +225,9 @@
 /* Define to 1 when the gnulib module recvfrom should be tested. */
 #undef GNULIB_TEST_RECVFROM
 
+/* Define to 1 when the gnulib module secure_getenv should be tested. */
+#undef GNULIB_TEST_SECURE_GETENV
+
 /* Define to 1 when the gnulib module select should be tested. */
 #undef GNULIB_TEST_SELECT
 
@@ -614,6 +617,9 @@
 /* Define to 1 if <sys/socket.h> defines AF_INET6. */
 #undef HAVE_IPV6
 
+/* Define to 1 if you have the `issetugid' function. */
+#undef HAVE_ISSETUGID
+
 /* Define to 1 if you have the `kqueue' function. */
 #undef HAVE_KQUEUE
 
@@ -934,6 +940,9 @@
 
 /* Define to 1 if isatty is declared even after undefining macros. */
 #undef HAVE_RAW_DECL_ISATTY
+
+/* Define to 1 if isblank is declared even after undefining macros. */
+#undef HAVE_RAW_DECL_ISBLANK
 
 /* Define to 1 if lchmod is declared even after undefining macros. */
 #undef HAVE_RAW_DECL_LCHMOD
@@ -1379,6 +1388,9 @@
 /* Define to 1 if you have the <search.h> header file. */
 #undef HAVE_SEARCH_H
 
+/* Define to 1 if you have the `secure_getenv' function. */
+#undef HAVE_SECURE_GETENV
+
 /* Define to 1 if you have the `select' function. */
 #undef HAVE_SELECT
 
@@ -1707,6 +1719,9 @@
 /* Define to 1 if you have the `__register_atfork' function. */
 #undef HAVE___REGISTER_ATFORK
 
+/* Define to 1 if you have the `__secure_getenv' function. */
+#undef HAVE___SECURE_GETENV
+
 /* Have __va_copy() */
 #undef HAVE___VA_COPY
 
@@ -1969,6 +1984,12 @@
 /* Define to 1 if you need to in order for 'stat' and other things to work. */
 #undef _POSIX_SOURCE
 
+/* Define to 1 if the system <stdint.h> predates C++11. */
+#undef __STDC_CONSTANT_MACROS
+
+/* Define to 1 if the system <stdint.h> predates C++11. */
+#undef __STDC_LIMIT_MACROS
+
 /* Define as a replacement for the ISO C99 __func__ variable. */
 #undef __func__
 
@@ -2018,6 +2039,7 @@
       ? defined __GNUC_STDC_INLINE__ && __GNUC_STDC_INLINE__ \
       : (199901L <= __STDC_VERSION__ \
          && !defined __HP_cc \
+         && !defined __PGI \
          && !(defined __SUNPRO_C && __STDC__))) \
      && !defined _GL_EXTERN_INLINE_STDHEADER_BUG)
 # define _GL_INLINE inline

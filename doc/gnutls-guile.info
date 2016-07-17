@@ -1,7 +1,7 @@
-This is gnutls-guile.info, produced by makeinfo version 6.0 from
+This is gnutls-guile.info, produced by makeinfo version 6.1 from
 gnutls-guile.texi.
 
-This manual is last updated 19 January 2015 for version 3.4.11 of
+This manual is last updated 19 January 2015 for version 3.4.14 of
 GnuTLS.
 
 Copyright (C) 2001-2012, 2014 Free Software Foundation, Inc.
@@ -23,7 +23,7 @@ File: gnutls-guile.info,  Node: Top,  Next: Preface,  Up: (dir)
 GnuTLS-Guile
 ************
 
-This manual is last updated 19 January 2015 for version 3.4.11 of
+This manual is last updated 19 January 2015 for version 3.4.14 of
 GnuTLS.
 
 Copyright (C) 2001-2012, 2014 Free Software Foundation, Inc.
@@ -132,7 +132,7 @@ the version number of the loaded library as follows:
      $ guile
      guile> (use-modules (gnutls))
      guile> (gnutls-version)
-     "3.4.11"
+     "3.4.14"
      guile>
 
 
@@ -1690,7 +1690,7 @@ Concept Index
 * errors:                                Exception Handling.    (line 6)
 * exceptions:                            Exception Handling.    (line 6)
 * FDL, GNU Free Documentation License:   Copying Information.   (line 6)
-* 'gnutls-error':                        Exception Handling.    (line 6)
+* gnutls-error:                          Exception Handling.    (line 6)
 * homogeneous vector:                    Representation of Binary Data.
                                                                 (line 9)
 * SRFI-4:                                Representation of Binary Data.

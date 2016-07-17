@@ -27,6 +27,9 @@ This will not verify the chain for validity; unless the DANE
 verification is restricted to end certificates, this must be
 be performed separately using @code{gnutls_certificate_verify_peers3()} .
 
-@strong{Returns:} On success, @code{DANE_E_SUCCESS}  (0) is returned, otherwise a
-negative error value.
+@strong{Returns:} a negative error code on error and @code{DANE_E_SUCCESS}  (0)
+when the DANE entries were successfully parsed, irrespective of
+whether they were verified (see  @code{verify} for that information). If
+no usable entries were encountered @code{DANE_E_REQUESTED_DATA_NOT_AVAILABLE} 
+will be returned.
 @end deftypefun

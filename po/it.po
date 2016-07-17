@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnutls-3.2.3\n"
 "Report-Msgid-Bugs-To: bug-gnutls@gnu.org\n"
-"POT-Creation-Date: 2016-04-09 11:21+0200\n"
+"POT-Creation-Date: 2016-07-05 18:39+0200\n"
 "PO-Revision-Date: 2013-09-08 17:08+0200\n"
 "Last-Translator: Milo Casagrande <milo@milo.name>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
@@ -378,7 +378,7 @@ msgid "Key usage violation in certificate has been detected."
 msgstr ""
 "È stata rilevata una violazione nell'utilizzo della chiave nel certificato."
 
-#: lib/gnutls_errors.c:173 lib/gnutls_errors.c:390
+#: lib/gnutls_errors.c:173 lib/gnutls_errors.c:392
 msgid "Function was interrupted."
 msgstr "La funzione è stata interrotta."
 
@@ -764,39 +764,43 @@ msgstr "Errore nella funzione push."
 msgid "Error in public key generation."
 msgstr "Errore nella funzione pull."
 
-#: lib/gnutls_errors.c:379
+#: lib/gnutls_errors.c:375
+msgid "There was an issue converting to or from UTF8."
+msgstr ""
+
+#: lib/gnutls_errors.c:381
 msgid "Success."
 msgstr "Successo."
 
-#: lib/gnutls_errors.c:380
+#: lib/gnutls_errors.c:382
 msgid "A TLS warning alert has been received."
 msgstr "È stato ricevuto un segnale di avviso TLS."
 
-#: lib/gnutls_errors.c:382
+#: lib/gnutls_errors.c:384
 msgid "A heartbeat pong message was received."
 msgstr "È stato ricevuto un messaggio di heartbeat pong."
 
-#: lib/gnutls_errors.c:384
+#: lib/gnutls_errors.c:386
 msgid "A heartbeat ping message was received."
 msgstr "È stato ricevuto un messaggio di heartbeat ping."
 
-#: lib/gnutls_errors.c:386
+#: lib/gnutls_errors.c:388
 msgid "Resource temporarily unavailable, try again."
 msgstr "Risorsa temporaneamente non disponibile, riprovare."
 
-#: lib/gnutls_errors.c:388
+#: lib/gnutls_errors.c:390
 msgid "The transmitted packet is too large (EMSGSIZE)."
 msgstr "Il pacchetto trasmesso è troppo grande (EMSGSIZE)."
 
-#: lib/gnutls_errors.c:391
+#: lib/gnutls_errors.c:393
 msgid "Rehandshake was requested by the peer."
 msgstr "Il nodo ha richiesto nuovamente l'handshake."
 
-#: lib/gnutls_errors.c:393
+#: lib/gnutls_errors.c:395
 msgid "One of the involved algorithms has insufficient security level."
 msgstr ""
 
-#: lib/gnutls_errors.c:484
+#: lib/gnutls_errors.c:486
 msgid "(unknown error code)"
 msgstr "(codice di errore sconosciuto)"
 
@@ -981,13 +985,13 @@ msgstr "algoritmo di chiave sconosciuto (%d)"
 msgid "OpenPGP Certificate Information:\n"
 msgstr "Informazioni sul certificato OpenPGP:\n"
 
-#: lib/x509/ocsp_output.c:136 lib/x509/ocsp_output.c:503
-#: lib/x509/output.c:2005 lib/x509/output.c:2377
+#: lib/x509/ocsp_output.c:136 lib/x509/ocsp_output.c:503 lib/x509/output.c:2005
+#: lib/x509/output.c:2377
 msgid "\t\t\tASCII: "
 msgstr "\t\t\tASCII: "
 
-#: lib/x509/ocsp_output.c:141 lib/x509/ocsp_output.c:508
-#: lib/x509/output.c:2009 lib/x509/output.c:2382
+#: lib/x509/ocsp_output.c:141 lib/x509/ocsp_output.c:508 lib/x509/output.c:2009
+#: lib/x509/output.c:2382
 msgid "\t\t\tHexdump: "
 msgstr "\t\t\tDump esadecimale: "
 

@@ -14,7 +14,7 @@
 
 @SET_MAKE@
 
-# Copyright (C) 2002-2015 Free Software Foundation, Inc.
+# Copyright (C) 2002-2016 Free Software Foundation, Inc.
 #
 # This file is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -114,34 +114,34 @@ build_triplet = @build@
 host_triplet = @host@
 TESTS = test-alloca-opt$(EXEEXT) test-base64$(EXEEXT) \
 	test-binary-io.sh test-byteswap$(EXEEXT) test-c-ctype$(EXEEXT) \
-	test-errno$(EXEEXT) test-fcntl-h$(EXEEXT) test-fdopen$(EXEEXT) \
-	test-fgetc$(EXEEXT) test-float$(EXEEXT) test-fputc$(EXEEXT) \
-	test-fread$(EXEEXT) test-fstat$(EXEEXT) test-ftell.sh \
-	test-ftell2.sh test-ftell3$(EXEEXT) test-ftello.sh \
-	test-ftello2.sh test-ftello3$(EXEEXT) test-ftello4.sh \
-	test-func$(EXEEXT) test-fwrite$(EXEEXT) test-getdelim$(EXEEXT) \
-	test-getline$(EXEEXT) test-gettimeofday$(EXEEXT) \
-	test-iconv$(EXEEXT) test-intprops$(EXEEXT) \
-	test-inttypes$(EXEEXT) test-memchr$(EXEEXT) \
-	test-netdb$(EXEEXT) test-netinet_in$(EXEEXT) \
-	test-read-file$(EXEEXT) test-snprintf$(EXEEXT) \
-	test-stdalign$(EXEEXT) test-stdbool$(EXEEXT) \
-	test-stddef$(EXEEXT) test-stdint$(EXEEXT) test-stdio$(EXEEXT) \
-	test-stdlib$(EXEEXT) test-string$(EXEEXT) \
-	test-strings$(EXEEXT) test-strnlen$(EXEEXT) \
-	test-strverscmp$(EXEEXT) test-sys_socket$(EXEEXT) \
-	test-sys_stat$(EXEEXT) test-sys_time$(EXEEXT) \
-	test-sys_types$(EXEEXT) test-sys_uio$(EXEEXT) test-init.sh \
-	test-time$(EXEEXT) test-unistd$(EXEEXT) \
-	test-vasnprintf$(EXEEXT) test-vasprintf$(EXEEXT) \
-	test-vc-list-files-git.sh test-vc-list-files-cvs.sh \
-	test-verify$(EXEEXT) test-verify.sh test-vsnprintf$(EXEEXT) \
-	test-wchar$(EXEEXT)
+	test-ctype$(EXEEXT) test-errno$(EXEEXT) test-fcntl-h$(EXEEXT) \
+	test-fdopen$(EXEEXT) test-fgetc$(EXEEXT) test-float$(EXEEXT) \
+	test-fputc$(EXEEXT) test-fread$(EXEEXT) test-fstat$(EXEEXT) \
+	test-ftell.sh test-ftell2.sh test-ftell3$(EXEEXT) \
+	test-ftello.sh test-ftello2.sh test-ftello3$(EXEEXT) \
+	test-ftello4.sh test-func$(EXEEXT) test-fwrite$(EXEEXT) \
+	test-getdelim$(EXEEXT) test-getline$(EXEEXT) \
+	test-gettimeofday$(EXEEXT) test-iconv$(EXEEXT) \
+	test-intprops$(EXEEXT) test-inttypes$(EXEEXT) \
+	test-memchr$(EXEEXT) test-netdb$(EXEEXT) \
+	test-netinet_in$(EXEEXT) test-read-file$(EXEEXT) \
+	test-snprintf$(EXEEXT) test-stdalign$(EXEEXT) \
+	test-stdbool$(EXEEXT) test-stddef$(EXEEXT) \
+	test-stdint$(EXEEXT) test-stdio$(EXEEXT) test-stdlib$(EXEEXT) \
+	test-string$(EXEEXT) test-strings$(EXEEXT) \
+	test-strnlen$(EXEEXT) test-strverscmp$(EXEEXT) \
+	test-sys_socket$(EXEEXT) test-sys_stat$(EXEEXT) \
+	test-sys_time$(EXEEXT) test-sys_types$(EXEEXT) \
+	test-sys_uio$(EXEEXT) test-init.sh test-time$(EXEEXT) \
+	test-unistd$(EXEEXT) test-vasnprintf$(EXEEXT) \
+	test-vasprintf$(EXEEXT) test-vc-list-files-git.sh \
+	test-vc-list-files-cvs.sh test-verify$(EXEEXT) test-verify.sh \
+	test-vsnprintf$(EXEEXT) test-wchar$(EXEEXT)
 XFAIL_TESTS =
 noinst_PROGRAMS =
 check_PROGRAMS = test-alloca-opt$(EXEEXT) test-base64$(EXEEXT) \
 	test-binary-io$(EXEEXT) test-byteswap$(EXEEXT) \
-	test-c-ctype$(EXEEXT) test-errno$(EXEEXT) \
+	test-c-ctype$(EXEEXT) test-ctype$(EXEEXT) test-errno$(EXEEXT) \
 	test-fcntl-h$(EXEEXT) test-fdopen$(EXEEXT) test-fgetc$(EXEEXT) \
 	test-float$(EXEEXT) test-fputc$(EXEEXT) test-fread$(EXEEXT) \
 	test-fstat$(EXEEXT) test-ftell$(EXEEXT) test-ftell3$(EXEEXT) \
@@ -201,7 +201,8 @@ am__aclocal_m4_deps = $(top_srcdir)/src/gl/m4/arpa_inet_h.m4 \
 	$(top_srcdir)/gl/m4/00gnulib.m4 \
 	$(top_srcdir)/gl/m4/absolute-header.m4 \
 	$(top_srcdir)/gl/m4/alloca.m4 $(top_srcdir)/gl/m4/base64.m4 \
-	$(top_srcdir)/gl/m4/byteswap.m4 $(top_srcdir)/gl/m4/errno_h.m4 \
+	$(top_srcdir)/gl/m4/byteswap.m4 $(top_srcdir)/gl/m4/ctype.m4 \
+	$(top_srcdir)/gl/m4/errno_h.m4 \
 	$(top_srcdir)/gl/m4/exponentd.m4 \
 	$(top_srcdir)/gl/m4/extensions.m4 \
 	$(top_srcdir)/gl/m4/extern-inline.m4 \
@@ -233,13 +234,14 @@ am__aclocal_m4_deps = $(top_srcdir)/src/gl/m4/arpa_inet_h.m4 \
 	$(top_srcdir)/gl/m4/off_t.m4 \
 	$(top_srcdir)/gl/m4/onceonly_2_57.m4 \
 	$(top_srcdir)/gl/m4/printf.m4 $(top_srcdir)/gl/m4/read-file.m4 \
-	$(top_srcdir)/gl/m4/realloc.m4 $(top_srcdir)/gl/m4/snprintf.m4 \
-	$(top_srcdir)/gl/m4/socklen.m4 $(top_srcdir)/gl/m4/sockpfaf.m4 \
-	$(top_srcdir)/gl/m4/ssize_t.m4 $(top_srcdir)/gl/m4/stdalign.m4 \
-	$(top_srcdir)/gl/m4/stdbool.m4 $(top_srcdir)/gl/m4/stddef_h.m4 \
-	$(top_srcdir)/gl/m4/stdint.m4 $(top_srcdir)/gl/m4/stdio_h.m4 \
-	$(top_srcdir)/gl/m4/stdlib_h.m4 $(top_srcdir)/gl/m4/strcase.m4 \
-	$(top_srcdir)/gl/m4/string_h.m4 \
+	$(top_srcdir)/gl/m4/realloc.m4 \
+	$(top_srcdir)/gl/m4/secure_getenv.m4 \
+	$(top_srcdir)/gl/m4/snprintf.m4 $(top_srcdir)/gl/m4/socklen.m4 \
+	$(top_srcdir)/gl/m4/sockpfaf.m4 $(top_srcdir)/gl/m4/ssize_t.m4 \
+	$(top_srcdir)/gl/m4/stdalign.m4 $(top_srcdir)/gl/m4/stdbool.m4 \
+	$(top_srcdir)/gl/m4/stddef_h.m4 $(top_srcdir)/gl/m4/stdint.m4 \
+	$(top_srcdir)/gl/m4/stdio_h.m4 $(top_srcdir)/gl/m4/stdlib_h.m4 \
+	$(top_srcdir)/gl/m4/strcase.m4 $(top_srcdir)/gl/m4/string_h.m4 \
 	$(top_srcdir)/gl/m4/strings_h.m4 \
 	$(top_srcdir)/gl/m4/strndup.m4 $(top_srcdir)/gl/m4/strnlen.m4 \
 	$(top_srcdir)/gl/m4/strtok_r.m4 \
@@ -318,6 +320,11 @@ test_c_ctype_SOURCES = test-c-ctype.c
 test_c_ctype_OBJECTS = test-c-ctype.$(OBJEXT)
 test_c_ctype_LDADD = $(LDADD)
 test_c_ctype_DEPENDENCIES = libtests.a ../../gl/libgnu.la libtests.a \
+	$(am__DEPENDENCIES_1)
+test_ctype_SOURCES = test-ctype.c
+test_ctype_OBJECTS = test-ctype.$(OBJEXT)
+test_ctype_LDADD = $(LDADD)
+test_ctype_DEPENDENCIES = libtests.a ../../gl/libgnu.la libtests.a \
 	$(am__DEPENDENCIES_1)
 test_errno_SOURCES = test-errno.c
 test_errno_OBJECTS = test-errno.$(OBJEXT)
@@ -595,11 +602,11 @@ am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
 SOURCES = $(libtests_a_SOURCES) $(EXTRA_libtests_a_SOURCES) \
 	test-alloca-opt.c test-base64.c test-binary-io.c \
-	test-byteswap.c test-c-ctype.c test-errno.c test-fcntl-h.c \
-	test-fdopen.c test-fgetc.c test-float.c test-fputc.c \
-	test-fread.c test-fstat.c test-ftell.c test-ftell3.c \
-	test-ftello.c test-ftello3.c test-ftello4.c test-func.c \
-	test-fwrite.c test-getdelim.c test-getline.c \
+	test-byteswap.c test-c-ctype.c test-ctype.c test-errno.c \
+	test-fcntl-h.c test-fdopen.c test-fgetc.c test-float.c \
+	test-fputc.c test-fread.c test-fstat.c test-ftell.c \
+	test-ftell3.c test-ftello.c test-ftello3.c test-ftello4.c \
+	test-func.c test-fwrite.c test-getdelim.c test-getline.c \
 	test-gettimeofday.c test-iconv.c test-intprops.c \
 	test-inttypes.c test-memchr.c test-netdb.c test-netinet_in.c \
 	test-read-file.c test-snprintf.c test-stdalign.c \
@@ -611,11 +618,11 @@ SOURCES = $(libtests_a_SOURCES) $(EXTRA_libtests_a_SOURCES) \
 	test-vsnprintf.c test-wchar.c
 DIST_SOURCES = $(libtests_a_SOURCES) $(EXTRA_libtests_a_SOURCES) \
 	test-alloca-opt.c test-base64.c test-binary-io.c \
-	test-byteswap.c test-c-ctype.c test-errno.c test-fcntl-h.c \
-	test-fdopen.c test-fgetc.c test-float.c test-fputc.c \
-	test-fread.c test-fstat.c test-ftell.c test-ftell3.c \
-	test-ftello.c test-ftello3.c test-ftello4.c test-func.c \
-	test-fwrite.c test-getdelim.c test-getline.c \
+	test-byteswap.c test-c-ctype.c test-ctype.c test-errno.c \
+	test-fcntl-h.c test-fdopen.c test-fgetc.c test-float.c \
+	test-fputc.c test-fread.c test-fstat.c test-ftell.c \
+	test-ftell3.c test-ftello.c test-ftello3.c test-ftello4.c \
+	test-func.c test-fwrite.c test-getdelim.c test-getline.c \
 	test-gettimeofday.c test-iconv.c test-intprops.c \
 	test-inttypes.c test-memchr.c test-netdb.c test-netinet_in.c \
 	test-read-file.c test-snprintf.c test-stdalign.c \
@@ -1042,6 +1049,7 @@ GNULIB_IMAXDIV = @GNULIB_IMAXDIV@
 GNULIB_INET_NTOP = @GNULIB_INET_NTOP@
 GNULIB_INET_PTON = @GNULIB_INET_PTON@
 GNULIB_ISATTY = @GNULIB_ISATTY@
+GNULIB_ISBLANK = @GNULIB_ISBLANK@
 GNULIB_LCHMOD = @GNULIB_LCHMOD@
 GNULIB_LCHOWN = @GNULIB_LCHOWN@
 GNULIB_LINK = @GNULIB_LINK@
@@ -1318,6 +1326,7 @@ HAVE_GETTIMEOFDAY = @HAVE_GETTIMEOFDAY@
 HAVE_GRANTPT = @HAVE_GRANTPT@
 HAVE_GROUP_MEMBER = @HAVE_GROUP_MEMBER@
 HAVE_INTTYPES_H = @HAVE_INTTYPES_H@
+HAVE_ISBLANK = @HAVE_ISBLANK@
 HAVE_LCHMOD = @HAVE_LCHMOD@
 HAVE_LCHOWN = @HAVE_LCHOWN@
 HAVE_LIBDL = @HAVE_LIBDL@
@@ -1553,6 +1562,7 @@ NETTLE_CFLAGS = @NETTLE_CFLAGS@
 NETTLE_LIBS = @NETTLE_LIBS@
 NEXT_ARPA_INET_H = @NEXT_ARPA_INET_H@
 NEXT_AS_FIRST_DIRECTIVE_ARPA_INET_H = @NEXT_AS_FIRST_DIRECTIVE_ARPA_INET_H@
+NEXT_AS_FIRST_DIRECTIVE_CTYPE_H = @NEXT_AS_FIRST_DIRECTIVE_CTYPE_H@
 NEXT_AS_FIRST_DIRECTIVE_ERRNO_H = @NEXT_AS_FIRST_DIRECTIVE_ERRNO_H@
 NEXT_AS_FIRST_DIRECTIVE_FCNTL_H = @NEXT_AS_FIRST_DIRECTIVE_FCNTL_H@
 NEXT_AS_FIRST_DIRECTIVE_FLOAT_H = @NEXT_AS_FIRST_DIRECTIVE_FLOAT_H@
@@ -1575,6 +1585,7 @@ NEXT_AS_FIRST_DIRECTIVE_SYS_UIO_H = @NEXT_AS_FIRST_DIRECTIVE_SYS_UIO_H@
 NEXT_AS_FIRST_DIRECTIVE_TIME_H = @NEXT_AS_FIRST_DIRECTIVE_TIME_H@
 NEXT_AS_FIRST_DIRECTIVE_UNISTD_H = @NEXT_AS_FIRST_DIRECTIVE_UNISTD_H@
 NEXT_AS_FIRST_DIRECTIVE_WCHAR_H = @NEXT_AS_FIRST_DIRECTIVE_WCHAR_H@
+NEXT_CTYPE_H = @NEXT_CTYPE_H@
 NEXT_ERRNO_H = @NEXT_ERRNO_H@
 NEXT_FCNTL_H = @NEXT_FCNTL_H@
 NEXT_FLOAT_H = @NEXT_FLOAT_H@
@@ -1880,21 +1891,21 @@ noinst_LIBRARIES =
 check_LIBRARIES = libtests.a
 EXTRA_DIST = test-alloca-opt.c test-base64.c macros.h \
 	test-binary-io.sh test-binary-io.c macros.h test-byteswap.c \
-	macros.h test-c-ctype.c macros.h test-errno.c fcntl.in.h \
-	test-fcntl-h.c fdopen.c test-fdopen.c signature.h macros.h \
-	test-fgetc.c signature.h macros.h test-float.c macros.h \
-	fpucw.h test-fputc.c signature.h macros.h test-fread.c \
-	signature.h macros.h test-fstat.c signature.h macros.h \
-	test-ftell.c test-ftell.sh test-ftell2.sh test-ftell3.c \
-	signature.h macros.h test-ftello.c test-ftello.sh \
-	test-ftello2.sh test-ftello3.c test-ftello4.c test-ftello4.sh \
-	signature.h macros.h test-func.c macros.h test-fwrite.c \
-	signature.h macros.h test-getdelim.c signature.h macros.h \
-	test-getline.c signature.h macros.h getpagesize.c signature.h \
-	test-gettimeofday.c test-iconv.c signature.h macros.h \
-	test-intprops.c macros.h inttypes.in.h test-inttypes.c \
-	test-memchr.c zerosize-ptr.h signature.h macros.h test-netdb.c \
-	test-netinet_in.c test-read-file.c \
+	macros.h test-c-ctype.c macros.h ctype.in.h test-ctype.c \
+	test-errno.c fcntl.in.h test-fcntl-h.c fdopen.c test-fdopen.c \
+	signature.h macros.h test-fgetc.c signature.h macros.h \
+	test-float.c macros.h fpucw.h test-fputc.c signature.h \
+	macros.h test-fread.c signature.h macros.h test-fstat.c \
+	signature.h macros.h test-ftell.c test-ftell.sh test-ftell2.sh \
+	test-ftell3.c signature.h macros.h test-ftello.c \
+	test-ftello.sh test-ftello2.sh test-ftello3.c test-ftello4.c \
+	test-ftello4.sh signature.h macros.h test-func.c macros.h \
+	test-fwrite.c signature.h macros.h test-getdelim.c signature.h \
+	macros.h test-getline.c signature.h macros.h getpagesize.c \
+	signature.h test-gettimeofday.c test-iconv.c signature.h \
+	macros.h test-intprops.c macros.h inttypes.in.h \
+	test-inttypes.c test-memchr.c zerosize-ptr.h signature.h \
+	macros.h test-netdb.c test-netinet_in.c test-read-file.c \
 	$(top_srcdir)/build-aux/snippet/_Noreturn.h \
 	$(top_srcdir)/build-aux/snippet/arg-nonnull.h \
 	$(top_srcdir)/build-aux/snippet/c++defs.h \
@@ -1920,13 +1931,18 @@ EXTRA_DIST = test-alloca-opt.c test-base64.c macros.h \
 # statements but through direct file reference. Therefore this snippet must be
 # present in all Makefile.am that need it. This is ensured by the applicability
 # 'all' defined above.
-BUILT_SOURCES = fcntl.h inttypes.h arg-nonnull.h c++defs.h \
+BUILT_SOURCES = ctype.h fcntl.h inttypes.h arg-nonnull.h c++defs.h \
 	warn-on-use.h
 SUFFIXES = 
-MOSTLYCLEANFILES = core *.stackdump fcntl.h fcntl.h-t t-ftell3.tmp \
-	t-ftello3.tmp test-getdelim.txt test-getline.txt inttypes.h \
-	inttypes.h-t arg-nonnull.h arg-nonnull.h-t c++defs.h \
-	c++defs.h-t warn-on-use.h warn-on-use.h-t
+
+# This test expects compilation of test-verify.c to fail, and
+# each time it fails, the makefile rule does not perform the usual
+#  "mv -f $name.Tpo $name.po, so tell make clean to remove that file.
+MOSTLYCLEANFILES = core *.stackdump ctype.h ctype.h-t fcntl.h \
+	fcntl.h-t t-ftell3.tmp t-ftello3.tmp test-getdelim.txt \
+	test-getline.txt inttypes.h inttypes.h-t arg-nonnull.h \
+	arg-nonnull.h-t c++defs.h c++defs.h-t warn-on-use.h \
+	warn-on-use.h-t .deps/test-verify.Tpo
 MOSTLYCLEANDIRS = 
 CLEANFILES = 
 DISTCLEANFILES = 
@@ -2035,6 +2051,10 @@ test-byteswap$(EXEEXT): $(test_byteswap_OBJECTS) $(test_byteswap_DEPENDENCIES) $
 test-c-ctype$(EXEEXT): $(test_c_ctype_OBJECTS) $(test_c_ctype_DEPENDENCIES) $(EXTRA_test_c_ctype_DEPENDENCIES) 
 	@rm -f test-c-ctype$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(test_c_ctype_OBJECTS) $(test_c_ctype_LDADD) $(LIBS)
+
+test-ctype$(EXEEXT): $(test_ctype_OBJECTS) $(test_ctype_DEPENDENCIES) $(EXTRA_test_ctype_DEPENDENCIES) 
+	@rm -f test-ctype$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(test_ctype_OBJECTS) $(test_ctype_LDADD) $(LIBS)
 
 test-errno$(EXEEXT): $(test_errno_OBJECTS) $(test_errno_DEPENDENCIES) $(EXTRA_test_errno_DEPENDENCIES) 
 	@rm -f test-errno$(EXEEXT)
@@ -2242,6 +2262,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-binary-io.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-byteswap.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-c-ctype.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-ctype.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-errno.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-fcntl-h.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-fdopen.Po@am__quote@
@@ -2592,6 +2613,13 @@ test-byteswap.log: test-byteswap$(EXEEXT)
 test-c-ctype.log: test-c-ctype$(EXEEXT)
 	@p='test-c-ctype$(EXEEXT)'; \
 	b='test-c-ctype'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+test-ctype.log: test-ctype$(EXEEXT)
+	@p='test-ctype$(EXEEXT)'; \
+	b='test-ctype'; \
 	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
@@ -3184,6 +3212,24 @@ uninstall-am:
 
 .PRECIOUS: Makefile
 
+
+# We need the following in order to create <ctype.h> when the system
+# doesn't have one that works with the given compiler.
+ctype.h: ctype.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(WARN_ON_USE_H)
+	$(AM_V_GEN)rm -f $@-t $@ && \
+	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+	  sed -e 's|@''GUARD_PREFIX''@|GL|g' \
+	      -e 's|@''INCLUDE_NEXT''@|$(INCLUDE_NEXT)|g' \
+	      -e 's|@''PRAGMA_SYSTEM_HEADER''@|@PRAGMA_SYSTEM_HEADER@|g' \
+	      -e 's|@''PRAGMA_COLUMNS''@|@PRAGMA_COLUMNS@|g' \
+	      -e 's|@''NEXT_CTYPE_H''@|$(NEXT_CTYPE_H)|g' \
+	      -e 's/@''GNULIB_ISBLANK''@/$(GNULIB_ISBLANK)/g' \
+	      -e 's/@''HAVE_ISBLANK''@/$(HAVE_ISBLANK)/g' \
+	      -e '/definitions of _GL_FUNCDECL_RPL/r $(CXXDEFS_H)' \
+	      -e '/definition of _GL_WARN_ON_USE/r $(WARN_ON_USE_H)' \
+	      < $(srcdir)/ctype.in.h; \
+	} > $@-t && \
+	mv $@-t $@
 
 # We need the following in order to create <fcntl.h> when the system
 # doesn't have one that works with the given compiler.

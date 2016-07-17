@@ -3,12 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>dtls: GnuTLS API Reference Manual</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
 <link rel="home" href="index.html" title="GnuTLS API Reference Manual">
 <link rel="up" href="intro.html" title="GnuTLS API Reference Manual">
 <link rel="prev" href="gnutls-ocsp.html" title="ocsp">
 <link rel="next" href="gnutls-tpm.html" title="tpm">
-<meta name="generator" content="GTK-Doc V1.24 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.25 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -33,7 +33,7 @@
 </tr></table></div>
 <div class="refsect1">
 <a name="gnutls-dtls.functions"></a><h2>Functions</h2>
-<div class="informaltable"><table width="100%" border="0">
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="functions_return">
 <col class="functions_name">
@@ -120,7 +120,7 @@
 </div>
 <div class="refsect1">
 <a name="gnutls-dtls.other"></a><h2>Types and Values</h2>
-<div class="informaltable"><table width="100%" border="0">
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="name">
 <col class="description">
@@ -157,8 +157,8 @@ original incoming packet was originated from.</p>
 prior to allocating any resources and must be succeeded
 by <a class="link" href="gnutls-dtls.html#gnutls-dtls-cookie-verify" title="gnutls_dtls_cookie_verify ()"><code class="function">gnutls_dtls_cookie_verify()</code></a>.</p>
 <div class="refsect3">
-<a name="id-1.2.12.6.2.6"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-dtls-cookie-send.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -200,7 +200,7 @@ by <a class="link" href="gnutls-dtls.html#gnutls-dtls-cookie-verify" title="gnut
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.12.6.2.7"></a><h4>Returns</h4>
+<a name="gnutls-dtls-cookie-send.returns"></a><h4>Returns</h4>
 <p> the number of bytes sent, or a negative error code.  </p>
 </div>
 <p class="since">Since: 3.0</p>
@@ -221,8 +221,8 @@ it should be associated with the session using
 <a class="link" href="gnutls-dtls.html#gnutls-dtls-prestate-set" title="gnutls_dtls_prestate_set ()"><code class="function">gnutls_dtls_prestate_set()</code></a>;</p>
 <p>This function must be called after <a class="link" href="gnutls-dtls.html#gnutls-dtls-cookie-send" title="gnutls_dtls_cookie_send ()"><code class="function">gnutls_dtls_cookie_send()</code></a>.</p>
 <div class="refsect3">
-<a name="id-1.2.12.6.3.6"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-dtls-cookie-verify.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -263,7 +263,7 @@ it should be associated with the session using
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.12.6.3.7"></a><h4>Returns</h4>
+<a name="gnutls-dtls-cookie-verify.returns"></a><h4>Returns</h4>
 <p> <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) on success, or a negative error code.  </p>
 </div>
 <p class="since">Since: 3.0</p>
@@ -277,8 +277,8 @@ gnutls_dtls_get_data_mtu (<em class="parameter"><code><a class="link" href="gnut
 application data. I.e. DTLS headers are subtracted from the
 actual MTU which is set using <a class="link" href="gnutls-dtls.html#gnutls-dtls-set-mtu" title="gnutls_dtls_set_mtu ()"><code class="function">gnutls_dtls_set_mtu()</code></a>.</p>
 <div class="refsect3">
-<a name="id-1.2.12.6.4.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-dtls-get-data-mtu.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -292,7 +292,7 @@ actual MTU which is set using <a class="link" href="gnutls-dtls.html#gnutls-dtls
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.12.6.4.6"></a><h4>Returns</h4>
+<a name="gnutls-dtls-get-data-mtu.returns"></a><h4>Returns</h4>
 <p> the maximum allowed transfer unit.</p>
 </div>
 <p class="since">Since: 3.0</p>
@@ -307,8 +307,8 @@ gnutls_dtls_get_mtu (<em class="parameter"><code><a class="link" href="gnutls-gn
 of data you can transmit. Use <a class="link" href="gnutls-dtls.html#gnutls-dtls-get-data-mtu" title="gnutls_dtls_get_data_mtu ()"><code class="function">gnutls_dtls_get_data_mtu()</code></a>
 for that reason.</p>
 <div class="refsect3">
-<a name="id-1.2.12.6.5.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-dtls-get-mtu.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -322,7 +322,7 @@ for that reason.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.12.6.5.6"></a><h4>Returns</h4>
+<a name="gnutls-dtls-get-mtu.returns"></a><h4>Returns</h4>
 <p> the set maximum transfer unit.</p>
 </div>
 <p class="since">Since: 3.0</p>
@@ -338,8 +338,8 @@ message. This function is useful when DTLS is used in
 non-blocking mode, to estimate when to call <a class="link" href="gnutls-gnutls.html#gnutls-handshake" title="gnutls_handshake ()"><code class="function">gnutls_handshake()</code></a>
 if no packets have been received.</p>
 <div class="refsect3">
-<a name="id-1.2.12.6.6.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-dtls-get-timeout.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -353,7 +353,7 @@ if no packets have been received.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.12.6.6.6"></a><h4>Returns</h4>
+<a name="gnutls-dtls-get-timeout.returns"></a><h4>Returns</h4>
 <p> the remaining time in milliseconds.</p>
 </div>
 <p class="since">Since: 3.0</p>
@@ -370,8 +370,8 @@ established session.</p>
 <p>This functions must be called after a successful <a class="link" href="gnutls-dtls.html#gnutls-dtls-cookie-verify" title="gnutls_dtls_cookie_verify ()"><code class="function">gnutls_dtls_cookie_verify()</code></a>
 and should be succeeded by the actual DTLS handshake using <a class="link" href="gnutls-gnutls.html#gnutls-handshake" title="gnutls_handshake ()"><code class="function">gnutls_handshake()</code></a>.</p>
 <div class="refsect3">
-<a name="id-1.2.12.6.7.6"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-dtls-prestate-set.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -409,8 +409,8 @@ account for the new protocol overhead.</p>
 <p>In most cases you only need to call <a class="link" href="gnutls-dtls.html#gnutls-dtls-set-mtu" title="gnutls_dtls_set_mtu ()"><code class="function">gnutls_dtls_set_mtu()</code></a> with
 the maximum MTU of your transport layer.</p>
 <div class="refsect3">
-<a name="id-1.2.12.6.8.6"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-dtls-set-data-mtu.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -431,7 +431,7 @@ the maximum MTU of your transport layer.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.12.6.8.7"></a><h4>Returns</h4>
+<a name="gnutls-dtls-set-data-mtu.returns"></a><h4>Returns</h4>
 <p> <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) on success, or a negative error code.</p>
 </div>
 <p class="since">Since: 3.1</p>
@@ -448,8 +448,8 @@ the IP (or IPv6) and UDP headers. So for DTLS over IPv6 on an
 Ethernet device with MTU 1500, the DTLS MTU set with this function
 would be 1500 - 40 (IPV6 header) - 8 (UDP header) = 1452.</p>
 <div class="refsect3">
-<a name="id-1.2.12.6.9.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-dtls-set-mtu.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -489,8 +489,8 @@ respectively, and these are the default values.</p>
  larger than the <em class="parameter"><code>total_timeout</code></em>
 .</p>
 <div class="refsect3">
-<a name="id-1.2.12.6.10.7"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-dtls-set-timeouts.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -525,8 +525,8 @@ gnutls_record_get_discarded (<em class="parameter"><code><a class="link" href="g
 <p>Returns the number of discarded packets in a
 DTLS connection.</p>
 <div class="refsect3">
-<a name="id-1.2.12.6.11.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-record-get-discarded.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -540,7 +540,7 @@ DTLS connection.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.12.6.11.6"></a><h4>Returns</h4>
+<a name="gnutls-record-get-discarded.returns"></a><h4>Returns</h4>
 <p> The number of discarded packets.</p>
 </div>
 <p class="since">Since: 3.0</p>
@@ -558,6 +558,6 @@ DTLS connection.</p>
 </div>
 </div>
 <div class="footer">
-<hr>Generated by GTK-Doc V1.24</div>
+<hr>Generated by GTK-Doc V1.25</div>
 </body>
 </html>

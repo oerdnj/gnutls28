@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <!-- This manual is last updated 4 March 2015 for version
-3.4.11 of GnuTLS.
+3.4.14 of GnuTLS.
 
 Copyright (C) 2001-2015 Free Software Foundation, Inc.\\
 Copyright (C) 2001-2015 Nikos Mavrogiannopoulos
@@ -12,12 +12,12 @@ any later version published by the Free Software Foundation; with no
 Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.  A
 copy of the license is included in the section entitled "GNU Free
 Documentation License". -->
-<!-- Created by GNU Texinfo 6.0, http://www.gnu.org/software/texinfo/ -->
+<!-- Created by GNU Texinfo 6.1, http://www.gnu.org/software/texinfo/ -->
 <head>
-<title>GnuTLS 3.4.11</title>
+<title>GnuTLS 3.4.14</title>
 
-<meta name="description" content="GnuTLS 3.4.11">
-<meta name="keywords" content="GnuTLS 3.4.11">
+<meta name="description" content="GnuTLS 3.4.14">
+<meta name="keywords" content="GnuTLS 3.4.14">
 <meta name="resource-type" content="document">
 <meta name="distribution" content="global">
 <meta name="Generator" content="makeinfo">
@@ -47,9 +47,8 @@ pre.smalldisplay {font-family: inherit; font-size: smaller}
 pre.smallexample {font-size: smaller}
 pre.smallformat {font-family: inherit; font-size: smaller}
 pre.smalllisp {font-size: smaller}
-span.nocodebreak {white-space: nowrap}
 span.nolinebreak {white-space: nowrap}
-span.roman {font-family: serif; font-weight: normal}
+span.roman {font-family: initial; font-weight: normal}
 span.sansserif {font-family: sans-serif; font-weight: normal}
 ul.no-bullet {list-style: none}
 body { 
@@ -154,7 +153,7 @@ dl {
 </head>
 
 <body lang="en">
-<h1 class="settitle" align="center">GnuTLS 3.4.11</h1>
+<h1 class="settitle" align="center">GnuTLS 3.4.14</h1>
 
 
 
@@ -505,7 +504,7 @@ Next: <a href="#Preface" accesskey="n" rel="next">Preface</a>, Up: <a href="dir.
 <h1 class="top">GnuTLS</h1>
 
 <p>This manual is last updated 4 March 2015 for version
-3.4.11 of GnuTLS.
+3.4.14 of GnuTLS.
 </p>
 <p>Copyright &copy; 2001-2015 Free Software Foundation, Inc.\\
 Copyright &copy; 2001-2015 Nikos Mavrogiannopoulos
@@ -8567,6 +8566,8 @@ error. Other available environment variables are shown in <a href="#tab_003aenvi
 <table>
 <thead><tr><th width="30%">Variable</th><th width="70%">Purpose</th></tr></thead>
 <tr><td width="30%"><code>GNUTLS_DEBUG_LEVEL</code></td><td width="70%">When set to a numeric value, it sets the default debugging level for GnuTLS applications.</td></tr>
+<tr><td width="30%"><code>SSLKEYLOGFILE</code></td><td width="70%">When set to a filename, GnuTLS will append to it the session keys in the NSS Key Log
+format. That format can be read by wireshark and will allow decryption of the session for debugging.</td></tr>
 <tr><td width="30%"><code>GNUTLS_CPUID_OVERRIDE</code></td><td width="70%">That environment variable can be used to
 explicitly enable/disable the use of certain CPU capabilities. Note that CPU
 detection cannot be overridden, i.e., VIA options cannot be enabled on an Intel
@@ -11192,10 +11193,11 @@ the <code>DANE_VFLAG_ONLY_CHECK_EE_USAGE</code>  flag should be specified;
 then the function will check whether the key of the peer matches the
 key advertized in the DANE entry.
 </p>
-<p>If the  <code>q</code> parameter is provided it will be used for caching entries.
-</p>
-<p><strong>Returns:</strong> On success, <code>DANE_E_SUCCESS</code>  (0) is returned, otherwise a
-negative error value.
+<p><strong>Returns:</strong> a negative error code on error and <code>DANE_E_SUCCESS</code>  (0)
+when the DANE entries were successfully parsed, irrespective of
+whether they were verified (see  <code>verify</code> for that information). If
+no usable entries were encountered <code>DANE_E_REQUESTED_DATA_NOT_AVAILABLE</code> 
+will be returned.
 </p></dd></dl>
 
 <dl compact="compact">
@@ -11631,14 +11633,16 @@ resumption.
 #include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
 #include &lt;string.h&gt;
+#include &lt;assert.h&gt;
 #include &lt;gnutls/gnutls.h&gt;
 #include &lt;gnutls/x509.h&gt;
 #include &quot;examples.h&quot;
 
 /* A very basic TLS client, with X.509 authentication and server certificate
- * verification. Note that error checking for missing files etc. is omitted
- * for simplicity.
+ * verification. Note that error recovery is minimal for simplicity.
  */
+
+#define CHECK(x) assert((x)&gt;=0)
 
 #define MAX_BUF 1024
 #define CAFILE &quot;/etc/ssl/certs/ca-certificates.crt&quot;
@@ -11666,15 +11670,15 @@ int main(void)
         }
 
         /* for backwards compatibility with gnutls &lt; 3.3.0 */
-        gnutls_global_init();
+        CHECK(gnutls_global_init());
 
         /* X509 stuff */
-        gnutls_certificate_allocate_credentials(&amp;xcred);
+        CHECK(gnutls_certificate_allocate_credentials(&amp;xcred));
 
         /* sets the trusted cas file
          */
-        gnutls_certificate_set_x509_trust_file(xcred, CAFILE,
-                                               GNUTLS_X509_FMT_PEM);
+        CHECK(gnutls_certificate_set_x509_trust_file(xcred, CAFILE,
+                                                     GNUTLS_X509_FMT_PEM));
 
         /* If client holds a certificate it can be set using the following:
          *
@@ -11685,15 +11689,15 @@ int main(void)
 
         /* Initialize TLS session 
          */
-        gnutls_init(&amp;session, GNUTLS_CLIENT);
+        CHECK(gnutls_init(&amp;session, GNUTLS_CLIENT));
 
         gnutls_session_set_ptr(session, (void *) &quot;my_host_name&quot;);
 
-        gnutls_server_name_set(session, GNUTLS_NAME_DNS, &quot;my_host_name&quot;,
-                               strlen(&quot;my_host_name&quot;));
+        CHECK(gnutls_server_name_set(session, GNUTLS_NAME_DNS, &quot;my_host_name&quot;,
+                                     strlen(&quot;my_host_name&quot;)));
 
         /* It is recommended to use the default priorities */
-        gnutls_set_default_priority(session);
+        CHECK(gnutls_set_default_priority(session));
 #if 0
 	/* if more fine-graned control is required */
         ret = gnutls_priority_set_direct(session, 
@@ -11708,7 +11712,7 @@ int main(void)
 
         /* put the x509 credentials to the current session
          */
-        gnutls_credentials_set(session, GNUTLS_CRD_CERTIFICATE, xcred);
+        CHECK(gnutls_credentials_set(session, GNUTLS_CRD_CERTIFICATE, xcred));
         gnutls_session_set_verify_cert(session, &quot;my_host_name&quot;, 0);
 
         /* connect to the peer
@@ -11726,8 +11730,16 @@ int main(void)
         }
         while (ret &lt; 0 &amp;&amp; gnutls_error_is_fatal(ret) == 0);
         if (ret &lt; 0) {
-                fprintf(stderr, &quot;*** Handshake failed\n&quot;);
-                gnutls_perror(ret);
+                if (ret == GNUTLS_E_CERTIFICATE_VERIFICATION_ERROR) {
+                        /* check certificate verification status */
+                        type = gnutls_certificate_type_get(session);
+                        status = gnutls_session_get_verify_cert_status(session);
+                        CHECK(gnutls_certificate_verification_status_print(status,
+                              type, &amp;out, 0));
+                        printf(&quot;cert verify output: %s\n&quot;, out.data);
+                        gnutls_free(out.data);
+                }
+                fprintf(stderr, &quot;*** Handshake failed: %s\n&quot;, gnutls_strerror(ret));
                 goto end;
         } else {
                 char *desc;
@@ -11737,22 +11749,8 @@ int main(void)
                 gnutls_free(desc);
         }
 
-        /* check certificate verification status */
-        type = gnutls_certificate_type_get(session);
-        status = gnutls_session_get_verify_cert_status(session);
-        ret =
-            gnutls_certificate_verification_status_print(status, type,
-                                                         &amp;out, 0);
-        if (ret &lt; 0) {
-                printf(&quot;Error\n&quot;);
-                return GNUTLS_E_CERTIFICATE_ERROR;
-        }
-
-        printf(&quot;%s&quot;, out.data);
-        gnutls_free(out.data);
-
 	/* send data */
-        gnutls_record_send(session, MSG, strlen(MSG));
+        CHECK(gnutls_record_send(session, MSG, strlen(MSG)));
 
         ret = gnutls_record_recv(session, buffer, MAX_BUF);
         if (ret == 0) {
@@ -11773,7 +11771,7 @@ int main(void)
                 fputs(&quot;\n&quot;, stdout);
         }
 
-        gnutls_bye(session, GNUTLS_SHUT_RDWR);
+        CHECK(gnutls_bye(session, GNUTLS_SHUT_RDWR));
 
       end:
 
@@ -16232,7 +16230,7 @@ Usage:  gnutls-cli [ -&lt;flag&gt; [&lt;val&gt;] | --&lt;name&gt;[{=| }&lt;val&g
    -s, --starttls             Connect, establish a plain session and start TLS
        --app-proto=str        an alias for the 'starttls-proto' option
        --starttls-proto=str   The application protocol to be used to obtain the server's certificate
-(https, ftp, smtp, imap)
+(https, ftp, smtp, imap, ldap, xmpp)
                                 - prohibits the option 'starttls'
    -u, --udp                  Use DTLS (datagram TLS) over UDP
        --mtu=num              Set MTU for datagram TLS
@@ -16536,6 +16534,14 @@ Connecting to '127.0.0.1:5556'...
 </pre></div>
 <p>By keeping the &ndash;pskusername parameter and removing the &ndash;pskkey parameter, it will query only for the password during the handshake. 
 </p>
+<a name="Connecting-to-STARTTLS-services"></a>
+<h4 class="subheading">Connecting to STARTTLS services</h4>
+
+<p>You could also use the client to connect to services with starttls capability.
+</p><div class="example">
+<pre class="example">$ gnutls-cli --starttls-proto smtp --port 25 localhost
+</pre></div>
+
 <a name="Listing-ciphersuites-in-a-priority-string"></a>
 <h4 class="subheading">Listing ciphersuites in a priority string</h4>
 <p>To list the ciphersuites in a priority string:
@@ -17016,7 +17022,7 @@ Specify the application layer protocol for STARTTLS. If the protocol is supporte
 <a name="gnutls_002dcli_002ddebug-Examples"></a></p><a name="gnutls_002dcli_002ddebug-Examples-1"></a>
 <h4 class="subheading">gnutls-cli-debug Examples</h4>
 <div class="example">
-<pre class="example">$ ../src/gnutls-cli-debug localhost
+<pre class="example">$ gnutls-cli-debug localhost
 GnuTLS debug client 3.5.0
 Checking localhost:443
                              for SSL 3.0 (RFC6101) support... yes
@@ -17064,6 +17070,11 @@ whether a bogus TLS record version in the client hello is accepted... yes
                      for max record size (RFC6066) support... no
                 for OCSP status response (RFC6066) support... no
               for OpenPGP authentication (RFC6091) support... no
+</pre></div>
+
+<p>You could also use the client to debug services with starttls capability.
+</p><div class="example">
+<pre class="example">$ gnutls-cli-debug --starttls-proto smtp --port 25 localhost
 </pre></div>
 
 <hr>
@@ -18133,6 +18144,7 @@ expressions.
 <tr><td width="15%">-401</td><td width="40%">GNUTLS_E_NO_SELF_TEST</td><td width="37%">There is no self test for this algorithm.</td></tr>
 <tr><td width="15%">-402</td><td width="40%">GNUTLS_E_LIB_IN_ERROR_STATE</td><td width="37%">An error has been detected in the library and cannot continue operations.</td></tr>
 <tr><td width="15%">-403</td><td width="40%">GNUTLS_E_PK_GENERATION_ERROR</td><td width="37%">Error in public key generation.</td></tr>
+<tr><td width="15%">-404</td><td width="40%">GNUTLS_E_IDNA_ERROR</td><td width="37%">There was an issue converting to or from UTF8.</td></tr>
 </table>
 
 
@@ -38869,10 +38881,11 @@ the <code>DANE_VFLAG_ONLY_CHECK_EE_USAGE</code>  flag should be specified;
 then the function will check whether the key of the peer matches the
 key advertized in the DANE entry.
 </p>
-<p>If the  <code>q</code> parameter is provided it will be used for caching entries.
-</p>
-<p><strong>Returns:</strong> On success, <code>DANE_E_SUCCESS</code>  (0) is returned, otherwise a
-negative error value.
+<p><strong>Returns:</strong> a negative error code on error and <code>DANE_E_SUCCESS</code>  (0)
+when the DANE entries were successfully parsed, irrespective of
+whether they were verified (see  <code>verify</code> for that information). If
+no usable entries were encountered <code>DANE_E_REQUESTED_DATA_NOT_AVAILABLE</code> 
+will be returned.
 </p></dd></dl>
 
 <a name="dane_005fverify_005fcrt_005fraw-1"></a>
@@ -38895,27 +38908,17 @@ negative error value.
 </p>
 <p><var>verify</var>: An OR&rsquo;ed list of <code>dane_verify_status_t</code> .
 </p>
-<p>This function will verify the given certificate chain against the
-CA constrains and/or the certificate available via DANE.
-If no information via DANE can be obtained the flag <code>DANE_VERIFY_NO_DANE_INFO</code> 
-is set. If a DNSSEC signature is not available for the DANE
-record then the verify flag <code>DANE_VERIFY_NO_DNSSEC_DATA</code>  is set.
+<p>This is the low-level function of <code>dane_verify_crt()</code> . See the
+high level function for documentation.
 </p>
-<p>Due to the many possible options of DANE, there is no single threat
-model countered. When notifying the user about DANE verification results
-it may be better to mention: DANE verification did not reject the certificate,
-rather than mentioning a successful DANE verication.
+<p>This function does not perform any resolving, it utilizes
+cached entries from  <code>r</code> .
 </p>
-<p>Note that this function is designed to be run in addition to
-PKIX - certificate chain - verification. To be run independently
-the <code>DANE_VFLAG_ONLY_CHECK_EE_USAGE</code>  flag should be specified; 
-then the function will check whether the key of the peer matches the
-key advertized in the DANE entry.
-</p>
-<p>If the  <code>q</code> parameter is provided it will be used for caching entries.
-</p>
-<p><strong>Returns:</strong> On success, <code>DANE_E_SUCCESS</code>  (0) is returned, otherwise a
-negative error value.
+<p><strong>Returns:</strong> a negative error code on error and <code>DANE_E_SUCCESS</code>  (0)
+when the DANE entries were successfully parsed, irrespective of
+whether they were verified (see  <code>verify</code> for that information). If
+no usable entries were encountered <code>DANE_E_REQUESTED_DATA_NOT_AVAILABLE</code> 
+will be returned.
 </p></dd></dl>
 
 <a name="dane_005fverify_005fsession_005fcrt-1"></a>
@@ -38946,8 +38949,11 @@ See <code>dane_verify_crt()</code>  for more information.
 verification is restricted to end certificates, this must be
 be performed separately using <code>gnutls_certificate_verify_peers3()</code> .
 </p>
-<p><strong>Returns:</strong> On success, <code>DANE_E_SUCCESS</code>  (0) is returned, otherwise a
-negative error value.
+<p><strong>Returns:</strong> a negative error code on error and <code>DANE_E_SUCCESS</code>  (0)
+when the DANE entries were successfully parsed, irrespective of
+whether they were verified (see  <code>verify</code> for that information). If
+no usable entries were encountered <code>DANE_E_REQUESTED_DATA_NOT_AVAILABLE</code> 
+will be returned.
 </p></dd></dl>
 
 

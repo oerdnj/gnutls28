@@ -111,16 +111,44 @@ host_triplet = @host@
 @ENABLE_OPENPGP_TRUE@am__append_1 = openpgp-certs
 @WANT_TEST_SUITE_TRUE@am__append_2 = suite
 @ENABLE_MINITASN1_TRUE@am__append_3 = -I$(srcdir)/../lib/minitasn1
-@ENABLE_OCSP_TRUE@am__append_4 = ocsp
-@ENABLE_DANE_TRUE@am__append_5 = dane
-@ENABLE_FIPS140_FALSE@@ENABLE_OPENSSL_TRUE@am__append_6 = openssl
-@ENABLE_OPENPGP_TRUE@am__append_7 = openpgp-auth openpgp-auth2 openpgp-keyring pgps2kgnu
-@HAVE_FORK_TRUE@am__append_8 = x509self x509dn anonself pskself dhepskself	\
+@ENABLE_PKCS11_TRUE@@WINDOWS_FALSE@am__append_4 = libpkcs11mock1.la
+@ENABLE_PKCS11_FALSE@pkcs11_cert_import_url_exts_DEPENDENCIES =  \
+@ENABLE_PKCS11_FALSE@	../lib/libgnutls.la libutils.la \
+@ENABLE_PKCS11_FALSE@	$(am__DEPENDENCIES_1) \
+@ENABLE_PKCS11_FALSE@	$(am__DEPENDENCIES_1) \
+@ENABLE_PKCS11_FALSE@	$(am__DEPENDENCIES_1)
+@WINDOWS_TRUE@pkcs11_cert_import_url_exts_DEPENDENCIES =  \
+@WINDOWS_TRUE@	../lib/libgnutls.la libutils.la \
+@WINDOWS_TRUE@	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
+@WINDOWS_TRUE@	$(am__DEPENDENCIES_1)
+@ENABLE_PKCS11_FALSE@pkcs11_get_exts_DEPENDENCIES =  \
+@ENABLE_PKCS11_FALSE@	../lib/libgnutls.la libutils.la \
+@ENABLE_PKCS11_FALSE@	$(am__DEPENDENCIES_1) \
+@ENABLE_PKCS11_FALSE@	$(am__DEPENDENCIES_1) \
+@ENABLE_PKCS11_FALSE@	$(am__DEPENDENCIES_1)
+@WINDOWS_TRUE@pkcs11_get_exts_DEPENDENCIES = ../lib/libgnutls.la \
+@WINDOWS_TRUE@	libutils.la $(am__DEPENDENCIES_1) \
+@WINDOWS_TRUE@	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
+@ENABLE_PKCS11_FALSE@pkcs11_get_raw_issuer_exts_DEPENDENCIES =  \
+@ENABLE_PKCS11_FALSE@	../lib/libgnutls.la libutils.la \
+@ENABLE_PKCS11_FALSE@	$(am__DEPENDENCIES_1) \
+@ENABLE_PKCS11_FALSE@	$(am__DEPENDENCIES_1) \
+@ENABLE_PKCS11_FALSE@	$(am__DEPENDENCIES_1)
+@WINDOWS_TRUE@pkcs11_get_raw_issuer_exts_DEPENDENCIES =  \
+@WINDOWS_TRUE@	../lib/libgnutls.la libutils.la \
+@WINDOWS_TRUE@	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
+@WINDOWS_TRUE@	$(am__DEPENDENCIES_1)
+@ENABLE_PKCS11_TRUE@@WINDOWS_FALSE@am__append_5 = pkcs11-cert-import-url-exts pkcs11-get-exts pkcs11-get-raw-issuer-exts
+@ENABLE_OCSP_TRUE@am__append_6 = ocsp
+@ENABLE_DANE_TRUE@am__append_7 = dane
+@ENABLE_FIPS140_FALSE@@ENABLE_OPENSSL_TRUE@am__append_8 = openssl
+@ENABLE_OPENPGP_TRUE@am__append_9 = openpgp-auth openpgp-auth2 openpgp-keyring pgps2kgnu
+@HAVE_FORK_TRUE@am__append_10 = x509self x509dn anonself pskself dhepskself	\
 @HAVE_FORK_TRUE@	resume setcredcrash
 
-@ENABLE_OPENPGP_TRUE@@HAVE_FORK_TRUE@am__append_9 = openpgpself 
-check_PROGRAMS = $(am__EXEEXT_7)
-TESTS = $(am__EXEEXT_7) $(dist_check_SCRIPTS)
+@ENABLE_OPENPGP_TRUE@@HAVE_FORK_TRUE@am__append_11 = openpgpself 
+check_PROGRAMS = $(am__EXEEXT_8)
+TESTS = $(am__EXEEXT_8) $(dist_check_SCRIPTS)
 subdir = tests
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/src/gl/m4/arpa_inet_h.m4 \
@@ -159,7 +187,8 @@ am__aclocal_m4_deps = $(top_srcdir)/src/gl/m4/arpa_inet_h.m4 \
 	$(top_srcdir)/gl/m4/00gnulib.m4 \
 	$(top_srcdir)/gl/m4/absolute-header.m4 \
 	$(top_srcdir)/gl/m4/alloca.m4 $(top_srcdir)/gl/m4/base64.m4 \
-	$(top_srcdir)/gl/m4/byteswap.m4 $(top_srcdir)/gl/m4/errno_h.m4 \
+	$(top_srcdir)/gl/m4/byteswap.m4 $(top_srcdir)/gl/m4/ctype.m4 \
+	$(top_srcdir)/gl/m4/errno_h.m4 \
 	$(top_srcdir)/gl/m4/exponentd.m4 \
 	$(top_srcdir)/gl/m4/extensions.m4 \
 	$(top_srcdir)/gl/m4/extern-inline.m4 \
@@ -191,13 +220,14 @@ am__aclocal_m4_deps = $(top_srcdir)/src/gl/m4/arpa_inet_h.m4 \
 	$(top_srcdir)/gl/m4/off_t.m4 \
 	$(top_srcdir)/gl/m4/onceonly_2_57.m4 \
 	$(top_srcdir)/gl/m4/printf.m4 $(top_srcdir)/gl/m4/read-file.m4 \
-	$(top_srcdir)/gl/m4/realloc.m4 $(top_srcdir)/gl/m4/snprintf.m4 \
-	$(top_srcdir)/gl/m4/socklen.m4 $(top_srcdir)/gl/m4/sockpfaf.m4 \
-	$(top_srcdir)/gl/m4/ssize_t.m4 $(top_srcdir)/gl/m4/stdalign.m4 \
-	$(top_srcdir)/gl/m4/stdbool.m4 $(top_srcdir)/gl/m4/stddef_h.m4 \
-	$(top_srcdir)/gl/m4/stdint.m4 $(top_srcdir)/gl/m4/stdio_h.m4 \
-	$(top_srcdir)/gl/m4/stdlib_h.m4 $(top_srcdir)/gl/m4/strcase.m4 \
-	$(top_srcdir)/gl/m4/string_h.m4 \
+	$(top_srcdir)/gl/m4/realloc.m4 \
+	$(top_srcdir)/gl/m4/secure_getenv.m4 \
+	$(top_srcdir)/gl/m4/snprintf.m4 $(top_srcdir)/gl/m4/socklen.m4 \
+	$(top_srcdir)/gl/m4/sockpfaf.m4 $(top_srcdir)/gl/m4/ssize_t.m4 \
+	$(top_srcdir)/gl/m4/stdalign.m4 $(top_srcdir)/gl/m4/stdbool.m4 \
+	$(top_srcdir)/gl/m4/stddef_h.m4 $(top_srcdir)/gl/m4/stdint.m4 \
+	$(top_srcdir)/gl/m4/stdio_h.m4 $(top_srcdir)/gl/m4/stdlib_h.m4 \
+	$(top_srcdir)/gl/m4/strcase.m4 $(top_srcdir)/gl/m4/string_h.m4 \
 	$(top_srcdir)/gl/m4/strings_h.m4 \
 	$(top_srcdir)/gl/m4/strndup.m4 $(top_srcdir)/gl/m4/strnlen.m4 \
 	$(top_srcdir)/gl/m4/strtok_r.m4 \
@@ -239,28 +269,43 @@ CONFIG_HEADER = $(top_builddir)/config.h
 CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 LTLIBRARIES = $(noinst_LTLIBRARIES)
-libutils_la_LIBADD =
-am_libutils_la_OBJECTS = utils.lo
-libutils_la_OBJECTS = $(am_libutils_la_OBJECTS)
+libpkcs11mock1_la_LIBADD =
+am__libpkcs11mock1_la_SOURCES_DIST = pkcs11/pkcs11-mock.c \
+	pkcs11/pkcs11-mock.h
+am__dirstamp = $(am__leading_dot)dirstamp
+@ENABLE_PKCS11_TRUE@@WINDOWS_FALSE@am_libpkcs11mock1_la_OBJECTS =  \
+@ENABLE_PKCS11_TRUE@@WINDOWS_FALSE@	pkcs11/pkcs11-mock.lo
+libpkcs11mock1_la_OBJECTS = $(am_libpkcs11mock1_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
 am__v_lt_0 = --silent
 am__v_lt_1 = 
-@ENABLE_OCSP_TRUE@am__EXEEXT_1 = ocsp$(EXEEXT)
-@ENABLE_DANE_TRUE@am__EXEEXT_2 = dane$(EXEEXT)
-@ENABLE_FIPS140_FALSE@@ENABLE_OPENSSL_TRUE@am__EXEEXT_3 =  \
+libpkcs11mock1_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC \
+	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CCLD) \
+	$(AM_CFLAGS) $(CFLAGS) $(libpkcs11mock1_la_LDFLAGS) $(LDFLAGS) \
+	-o $@
+@ENABLE_PKCS11_TRUE@@WINDOWS_FALSE@am_libpkcs11mock1_la_rpath =
+libutils_la_DEPENDENCIES = ../lib/libgnutls.la
+am_libutils_la_OBJECTS = utils.lo utils-adv.lo
+libutils_la_OBJECTS = $(am_libutils_la_OBJECTS)
+@ENABLE_PKCS11_TRUE@@WINDOWS_FALSE@am__EXEEXT_1 = pkcs11-cert-import-url-exts$(EXEEXT) \
+@ENABLE_PKCS11_TRUE@@WINDOWS_FALSE@	pkcs11-get-exts$(EXEEXT) \
+@ENABLE_PKCS11_TRUE@@WINDOWS_FALSE@	pkcs11-get-raw-issuer-exts$(EXEEXT)
+@ENABLE_OCSP_TRUE@am__EXEEXT_2 = ocsp$(EXEEXT)
+@ENABLE_DANE_TRUE@am__EXEEXT_3 = dane$(EXEEXT)
+@ENABLE_FIPS140_FALSE@@ENABLE_OPENSSL_TRUE@am__EXEEXT_4 =  \
 @ENABLE_FIPS140_FALSE@@ENABLE_OPENSSL_TRUE@	openssl$(EXEEXT)
-@ENABLE_OPENPGP_TRUE@am__EXEEXT_4 = openpgp-auth$(EXEEXT) \
+@ENABLE_OPENPGP_TRUE@am__EXEEXT_5 = openpgp-auth$(EXEEXT) \
 @ENABLE_OPENPGP_TRUE@	openpgp-auth2$(EXEEXT) \
 @ENABLE_OPENPGP_TRUE@	openpgp-keyring$(EXEEXT) \
 @ENABLE_OPENPGP_TRUE@	pgps2kgnu$(EXEEXT)
-@HAVE_FORK_TRUE@am__EXEEXT_5 = x509self$(EXEEXT) x509dn$(EXEEXT) \
+@HAVE_FORK_TRUE@am__EXEEXT_6 = x509self$(EXEEXT) x509dn$(EXEEXT) \
 @HAVE_FORK_TRUE@	anonself$(EXEEXT) pskself$(EXEEXT) \
 @HAVE_FORK_TRUE@	dhepskself$(EXEEXT) resume$(EXEEXT) \
 @HAVE_FORK_TRUE@	setcredcrash$(EXEEXT)
-@ENABLE_OPENPGP_TRUE@@HAVE_FORK_TRUE@am__EXEEXT_6 =  \
+@ENABLE_OPENPGP_TRUE@@HAVE_FORK_TRUE@am__EXEEXT_7 =  \
 @ENABLE_OPENPGP_TRUE@@HAVE_FORK_TRUE@	openpgpself$(EXEEXT)
-am__EXEEXT_7 = mini-record-2$(EXEEXT) simple$(EXEEXT) gc$(EXEEXT) \
+am__EXEEXT_8 = mini-record-2$(EXEEXT) simple$(EXEEXT) gc$(EXEEXT) \
 	set_pkcs12_cred$(EXEEXT) certder$(EXEEXT) \
 	certuniqueid$(EXEEXT) mpi$(EXEEXT) \
 	certificate_set_x509_crl$(EXEEXT) dn$(EXEEXT) \
@@ -314,9 +359,9 @@ am__EXEEXT_7 = mini-record-2$(EXEEXT) simple$(EXEEXT) gc$(EXEEXT) \
 	pkcs8-key-decode$(EXEEXT) \
 	mini-session-verify-function$(EXEEXT) auto-verify$(EXEEXT) \
 	mini-x509-default-prio$(EXEEXT) global-init-override$(EXEEXT) \
-	pcert-list$(EXEEXT) $(am__EXEEXT_1) $(am__EXEEXT_2) \
-	$(am__EXEEXT_3) $(am__EXEEXT_4) $(am__EXEEXT_5) \
-	$(am__EXEEXT_6)
+	pcert-list$(EXEEXT) keylog-env$(EXEEXT) $(am__EXEEXT_1) \
+	$(am__EXEEXT_2) $(am__EXEEXT_3) $(am__EXEEXT_4) \
+	$(am__EXEEXT_5) $(am__EXEEXT_6) $(am__EXEEXT_7)
 anonself_SOURCES = anonself.c
 anonself_OBJECTS = anonself.$(OBJEXT)
 anonself_LDADD = $(LDADD)
@@ -502,6 +547,12 @@ keygen_SOURCES = keygen.c
 keygen_OBJECTS = keygen.$(OBJEXT)
 keygen_LDADD = $(LDADD)
 keygen_DEPENDENCIES = ../lib/libgnutls.la libutils.la \
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1)
+keylog_env_SOURCES = keylog-env.c
+keylog_env_OBJECTS = keylog-env.$(OBJEXT)
+keylog_env_LDADD = $(LDADD)
+keylog_env_DEPENDENCIES = ../lib/libgnutls.la libutils.la \
 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
 	$(am__DEPENDENCIES_1)
 long_session_id_SOURCES = long-session-id.c
@@ -888,6 +939,22 @@ pgps2kgnu_LDADD = $(LDADD)
 pgps2kgnu_DEPENDENCIES = ../lib/libgnutls.la libutils.la \
 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
 	$(am__DEPENDENCIES_1)
+am__pkcs11_cert_import_url_exts_SOURCES_DIST =  \
+	pkcs11/pkcs11-cert-import-url-exts.c
+@ENABLE_PKCS11_TRUE@@WINDOWS_FALSE@am_pkcs11_cert_import_url_exts_OBJECTS = pkcs11/pkcs11-cert-import-url-exts.$(OBJEXT)
+pkcs11_cert_import_url_exts_OBJECTS =  \
+	$(am_pkcs11_cert_import_url_exts_OBJECTS)
+pkcs11_cert_import_url_exts_LDADD = $(LDADD)
+am__pkcs11_get_exts_SOURCES_DIST = pkcs11/pkcs11-get-exts.c
+@ENABLE_PKCS11_TRUE@@WINDOWS_FALSE@am_pkcs11_get_exts_OBJECTS = pkcs11/pkcs11-get-exts.$(OBJEXT)
+pkcs11_get_exts_OBJECTS = $(am_pkcs11_get_exts_OBJECTS)
+pkcs11_get_exts_LDADD = $(LDADD)
+am__pkcs11_get_raw_issuer_exts_SOURCES_DIST =  \
+	pkcs11/pkcs11-get-raw-issuer-exts.c
+@ENABLE_PKCS11_TRUE@@WINDOWS_FALSE@am_pkcs11_get_raw_issuer_exts_OBJECTS = pkcs11/pkcs11-get-raw-issuer-exts.$(OBJEXT)
+pkcs11_get_raw_issuer_exts_OBJECTS =  \
+	$(am_pkcs11_get_raw_issuer_exts_OBJECTS)
+pkcs11_get_raw_issuer_exts_LDADD = $(LDADD)
 pkcs12_encode_SOURCES = pkcs12_encode.c
 pkcs12_encode_OBJECTS = pkcs12_encode.$(OBJEXT)
 pkcs12_encode_LDADD = $(LDADD)
@@ -1132,14 +1199,15 @@ AM_V_CCLD = $(am__v_CCLD_@AM_V@)
 am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
-SOURCES = $(libutils_la_SOURCES) anonself.c atfork.c auto-verify.c \
-	certder.c certificate_set_x509_crl.c certuniqueid.c \
-	chainverify.c chainverify-unsorted.c crlverify.c crq_apis.c \
-	crq_key_id.c custom-urls.c cve-2008-4989.c cve-2009-1415.c \
-	cve-2009-1416.c dane.c dhepskself.c dn.c dn2.c fallback-scsv.c \
-	fips-test.c gc.c global-init.c global-init-override.c \
-	hostname-check.c infoaccess.c init_fds.c init_roundtrip.c \
-	key-import-export.c key-openssl.c keygen.c long-session-id.c \
+SOURCES = $(libpkcs11mock1_la_SOURCES) $(libutils_la_SOURCES) \
+	anonself.c atfork.c auto-verify.c certder.c \
+	certificate_set_x509_crl.c certuniqueid.c chainverify.c \
+	chainverify-unsorted.c crlverify.c crq_apis.c crq_key_id.c \
+	custom-urls.c cve-2008-4989.c cve-2009-1415.c cve-2009-1416.c \
+	dane.c dhepskself.c dn.c dn2.c fallback-scsv.c fips-test.c \
+	gc.c global-init.c global-init-override.c hostname-check.c \
+	infoaccess.c init_fds.c init_roundtrip.c key-import-export.c \
+	key-openssl.c keygen.c keylog-env.c long-session-id.c \
 	mini-alignment.c mini-alpn.c mini-cert-status.c \
 	mini-chain-unsorted.c mini-dtls-discard.c mini-dtls-fork.c \
 	mini-dtls-heartbeat.c mini-dtls-hello-verify.c \
@@ -1161,27 +1229,30 @@ SOURCES = $(libutils_la_SOURCES) anonself.c atfork.c auto-verify.c \
 	no-signal.c nul-in-x509-names.c ocsp.c oids.c openpgp-auth.c \
 	openpgp-auth2.c openpgp-callback.c openpgp-keyring.c \
 	openpgpself.c openssl.c parse_ca.c pcert-list.c pgps2kgnu.c \
-	pkcs12_encode.c pkcs12_s2k.c pkcs12_s2k_pem.c pkcs12_simple.c \
-	pkcs7-gen.c pkcs8-key-decode.c prf.c priorities.c pskself.c \
-	record-sizes.c record-sizes-range.c resume.c resume-dtls.c \
-	rng-fork.c rsa-encrypt-decrypt.c sec-params.c \
-	set_pkcs12_cred.c set_x509_key_file.c set_x509_key_mem.c \
-	setcredcrash.c sign-md5-rep.c simple.c status-request.c \
-	status-request-ok.c strict-der.c x509-extensions.c \
-	x509-verify-with-crl.c x509_altname.c x509cert.c \
-	x509cert-invalid.c x509cert-tl.c x509dn.c x509self.c \
-	x509sign-verify.c x509sign-verify2.c
-DIST_SOURCES = $(libutils_la_SOURCES) anonself.c atfork.c \
-	auto-verify.c certder.c certificate_set_x509_crl.c \
-	certuniqueid.c chainverify.c chainverify-unsorted.c \
-	crlverify.c crq_apis.c crq_key_id.c custom-urls.c \
-	cve-2008-4989.c cve-2009-1415.c cve-2009-1416.c dane.c \
-	dhepskself.c dn.c dn2.c fallback-scsv.c fips-test.c gc.c \
-	global-init.c global-init-override.c hostname-check.c \
-	infoaccess.c init_fds.c init_roundtrip.c key-import-export.c \
-	key-openssl.c keygen.c long-session-id.c mini-alignment.c \
-	mini-alpn.c mini-cert-status.c mini-chain-unsorted.c \
-	mini-dtls-discard.c mini-dtls-fork.c mini-dtls-heartbeat.c \
+	$(pkcs11_cert_import_url_exts_SOURCES) \
+	$(pkcs11_get_exts_SOURCES) \
+	$(pkcs11_get_raw_issuer_exts_SOURCES) pkcs12_encode.c \
+	pkcs12_s2k.c pkcs12_s2k_pem.c pkcs12_simple.c pkcs7-gen.c \
+	pkcs8-key-decode.c prf.c priorities.c pskself.c record-sizes.c \
+	record-sizes-range.c resume.c resume-dtls.c rng-fork.c \
+	rsa-encrypt-decrypt.c sec-params.c set_pkcs12_cred.c \
+	set_x509_key_file.c set_x509_key_mem.c setcredcrash.c \
+	sign-md5-rep.c simple.c status-request.c status-request-ok.c \
+	strict-der.c x509-extensions.c x509-verify-with-crl.c \
+	x509_altname.c x509cert.c x509cert-invalid.c x509cert-tl.c \
+	x509dn.c x509self.c x509sign-verify.c x509sign-verify2.c
+DIST_SOURCES = $(am__libpkcs11mock1_la_SOURCES_DIST) \
+	$(libutils_la_SOURCES) anonself.c atfork.c auto-verify.c \
+	certder.c certificate_set_x509_crl.c certuniqueid.c \
+	chainverify.c chainverify-unsorted.c crlverify.c crq_apis.c \
+	crq_key_id.c custom-urls.c cve-2008-4989.c cve-2009-1415.c \
+	cve-2009-1416.c dane.c dhepskself.c dn.c dn2.c fallback-scsv.c \
+	fips-test.c gc.c global-init.c global-init-override.c \
+	hostname-check.c infoaccess.c init_fds.c init_roundtrip.c \
+	key-import-export.c key-openssl.c keygen.c keylog-env.c \
+	long-session-id.c mini-alignment.c mini-alpn.c \
+	mini-cert-status.c mini-chain-unsorted.c mini-dtls-discard.c \
+	mini-dtls-fork.c mini-dtls-heartbeat.c \
 	mini-dtls-hello-verify.c mini-dtls-large.c mini-dtls-lowmtu.c \
 	mini-dtls-mtu.c mini-dtls-pthread.c mini-dtls-record.c \
 	mini-dtls-record-asym.c mini-dtls-rehandshake.c \
@@ -1200,16 +1271,18 @@ DIST_SOURCES = $(libutils_la_SOURCES) anonself.c atfork.c \
 	no-signal.c nul-in-x509-names.c ocsp.c oids.c openpgp-auth.c \
 	openpgp-auth2.c openpgp-callback.c openpgp-keyring.c \
 	openpgpself.c openssl.c parse_ca.c pcert-list.c pgps2kgnu.c \
-	pkcs12_encode.c pkcs12_s2k.c pkcs12_s2k_pem.c pkcs12_simple.c \
-	pkcs7-gen.c pkcs8-key-decode.c prf.c priorities.c pskself.c \
-	record-sizes.c record-sizes-range.c resume.c resume-dtls.c \
-	rng-fork.c rsa-encrypt-decrypt.c sec-params.c \
-	set_pkcs12_cred.c set_x509_key_file.c set_x509_key_mem.c \
-	setcredcrash.c sign-md5-rep.c simple.c status-request.c \
-	status-request-ok.c strict-der.c x509-extensions.c \
-	x509-verify-with-crl.c x509_altname.c x509cert.c \
-	x509cert-invalid.c x509cert-tl.c x509dn.c x509self.c \
-	x509sign-verify.c x509sign-verify2.c
+	$(am__pkcs11_cert_import_url_exts_SOURCES_DIST) \
+	$(am__pkcs11_get_exts_SOURCES_DIST) \
+	$(am__pkcs11_get_raw_issuer_exts_SOURCES_DIST) pkcs12_encode.c \
+	pkcs12_s2k.c pkcs12_s2k_pem.c pkcs12_simple.c pkcs7-gen.c \
+	pkcs8-key-decode.c prf.c priorities.c pskself.c record-sizes.c \
+	record-sizes-range.c resume.c resume-dtls.c rng-fork.c \
+	rsa-encrypt-decrypt.c sec-params.c set_pkcs12_cred.c \
+	set_x509_key_file.c set_x509_key_mem.c setcredcrash.c \
+	sign-md5-rep.c simple.c status-request.c status-request-ok.c \
+	strict-der.c x509-extensions.c x509-verify-with-crl.c \
+	x509_altname.c x509cert.c x509cert-invalid.c x509cert-tl.c \
+	x509dn.c x509self.c x509sign-verify.c x509sign-verify2.c
 RECURSIVE_TARGETS = all-recursive check-recursive cscopelist-recursive \
 	ctags-recursive dvi-recursive html-recursive info-recursive \
 	install-data-recursive install-dvi-recursive \
@@ -1629,6 +1702,7 @@ GNULIB_IMAXDIV = @GNULIB_IMAXDIV@
 GNULIB_INET_NTOP = @GNULIB_INET_NTOP@
 GNULIB_INET_PTON = @GNULIB_INET_PTON@
 GNULIB_ISATTY = @GNULIB_ISATTY@
+GNULIB_ISBLANK = @GNULIB_ISBLANK@
 GNULIB_LCHMOD = @GNULIB_LCHMOD@
 GNULIB_LCHOWN = @GNULIB_LCHOWN@
 GNULIB_LINK = @GNULIB_LINK@
@@ -1905,6 +1979,7 @@ HAVE_GETTIMEOFDAY = @HAVE_GETTIMEOFDAY@
 HAVE_GRANTPT = @HAVE_GRANTPT@
 HAVE_GROUP_MEMBER = @HAVE_GROUP_MEMBER@
 HAVE_INTTYPES_H = @HAVE_INTTYPES_H@
+HAVE_ISBLANK = @HAVE_ISBLANK@
 HAVE_LCHMOD = @HAVE_LCHMOD@
 HAVE_LCHOWN = @HAVE_LCHOWN@
 HAVE_LIBDL = @HAVE_LIBDL@
@@ -2140,6 +2215,7 @@ NETTLE_CFLAGS = @NETTLE_CFLAGS@
 NETTLE_LIBS = @NETTLE_LIBS@
 NEXT_ARPA_INET_H = @NEXT_ARPA_INET_H@
 NEXT_AS_FIRST_DIRECTIVE_ARPA_INET_H = @NEXT_AS_FIRST_DIRECTIVE_ARPA_INET_H@
+NEXT_AS_FIRST_DIRECTIVE_CTYPE_H = @NEXT_AS_FIRST_DIRECTIVE_CTYPE_H@
 NEXT_AS_FIRST_DIRECTIVE_ERRNO_H = @NEXT_AS_FIRST_DIRECTIVE_ERRNO_H@
 NEXT_AS_FIRST_DIRECTIVE_FCNTL_H = @NEXT_AS_FIRST_DIRECTIVE_FCNTL_H@
 NEXT_AS_FIRST_DIRECTIVE_FLOAT_H = @NEXT_AS_FIRST_DIRECTIVE_FLOAT_H@
@@ -2162,6 +2238,7 @@ NEXT_AS_FIRST_DIRECTIVE_SYS_UIO_H = @NEXT_AS_FIRST_DIRECTIVE_SYS_UIO_H@
 NEXT_AS_FIRST_DIRECTIVE_TIME_H = @NEXT_AS_FIRST_DIRECTIVE_TIME_H@
 NEXT_AS_FIRST_DIRECTIVE_UNISTD_H = @NEXT_AS_FIRST_DIRECTIVE_UNISTD_H@
 NEXT_AS_FIRST_DIRECTIVE_WCHAR_H = @NEXT_AS_FIRST_DIRECTIVE_WCHAR_H@
+NEXT_CTYPE_H = @NEXT_CTYPE_H@
 NEXT_ERRNO_H = @NEXT_ERRNO_H@
 NEXT_FCNTL_H = @NEXT_FCNTL_H@
 NEXT_FLOAT_H = @NEXT_FLOAT_H@
@@ -2468,7 +2545,7 @@ EXTRA_DIST = suppressions.valgrind eagain-common.h test-chains.h \
 	certs/ecc521.pem certs/rsa-2432.pem x509cert-dir/ca.pem cert-common.h
 
 AM_CFLAGS = $(WARN_CFLAGS) $(WERROR_CFLAGS)
-AM_CPPFLAGS = -I$(top_srcdir)/lib/includes \
+AM_CPPFLAGS = $(P11_KIT_CFLAGS) -I$(top_srcdir)/lib/includes \
 	-I$(top_builddir)/lib/includes \
 	-I$(top_srcdir)/libdane/includes \
 	-I$(top_builddir)/libdane/includes \
@@ -2481,8 +2558,9 @@ LDADD = ../lib/libgnutls.la \
 	$(LIBSOCKET) $(INET_NTOP_LIB) $(INET_PTON_LIB)
 
 dane_LDADD = $(LDADD) ../libdane/libgnutls-dane.la
-noinst_LTLIBRARIES = libutils.la
-libutils_la_SOURCES = utils.h utils.c
+noinst_LTLIBRARIES = libutils.la $(am__append_4)
+libutils_la_SOURCES = utils.h utils.c utils-adv.c
+libutils_la_LIBADD = ../lib/libgnutls.la
 ctests = mini-record-2 simple gc set_pkcs12_cred certder certuniqueid \
 	mpi certificate_set_x509_crl dn parse_ca moredn record-sizes \
 	hostname-check cve-2008-4989 pkcs12_s2k chainverify \
@@ -2514,9 +2592,18 @@ ctests = mini-record-2 simple gc set_pkcs12_cred certder certuniqueid \
 	status-request-ok fallback-scsv pkcs8-key-decode \
 	mini-session-verify-function auto-verify \
 	mini-x509-default-prio global-init-override pcert-list \
-	$(am__append_4) $(am__append_5) $(am__append_6) \
-	$(am__append_7) $(am__append_8) $(am__append_9)
+	keylog-env $(am__append_5) $(am__append_6) $(am__append_7) \
+	$(am__append_8) $(am__append_9) $(am__append_10) \
+	$(am__append_11)
 mini_dtls_pthread_LDADD = $(LDADD) -lpthread
+@ENABLE_PKCS11_TRUE@@WINDOWS_FALSE@libpkcs11mock1_la_SOURCES = pkcs11/pkcs11-mock.c pkcs11/pkcs11-mock.h
+@ENABLE_PKCS11_TRUE@@WINDOWS_FALSE@libpkcs11mock1_la_LDFLAGS = -shared -rpath $(pkglibdir) -module -no-undefined -avoid-version
+@ENABLE_PKCS11_TRUE@@WINDOWS_FALSE@pkcs11_cert_import_url_exts_SOURCES = pkcs11/pkcs11-cert-import-url-exts.c
+@ENABLE_PKCS11_TRUE@@WINDOWS_FALSE@pkcs11_cert_import_url_exts_DEPENDENCIES = libpkcs11mock1.la libutils.la
+@ENABLE_PKCS11_TRUE@@WINDOWS_FALSE@pkcs11_get_exts_SOURCES = pkcs11/pkcs11-get-exts.c
+@ENABLE_PKCS11_TRUE@@WINDOWS_FALSE@pkcs11_get_exts_DEPENDENCIES = libpkcs11mock1.la libutils.la
+@ENABLE_PKCS11_TRUE@@WINDOWS_FALSE@pkcs11_get_raw_issuer_exts_SOURCES = pkcs11/pkcs11-get-raw-issuer-exts.c
+@ENABLE_PKCS11_TRUE@@WINDOWS_FALSE@pkcs11_get_raw_issuer_exts_DEPENDENCIES = libpkcs11mock1.la libutils.la
 mini_alignment_LDADD = $(LDADD) $(NETTLE_LIBS)
 @ENABLE_FIPS140_FALSE@@ENABLE_OPENSSL_TRUE@openssl_LDADD = ../extra/libgnutls-openssl.la $(LDADD)
 gc_CPPFLAGS = $(CPPFLAGS) \
@@ -2555,6 +2642,7 @@ dist_check_SCRIPTS = rfc2253-escape-test
 TESTS_ENVIRONMENT = \
 	LC_ALL="C"						\
 	CAFILE=$(srcdir)/cert-tests/ca-certs.pem		\
+	P11MOCKLIB1=$(abs_builddir)/.libs/libpkcs11mock1.so	\
 	PKCS12_MANY_CERTS_FILE=$(srcdir)/pkcs12-decode/pkcs12_5certs.p12	\
 	PKCS12FILE=$(srcdir)/pkcs12-decode/client.p12		\
 	PKCS12PASSWORD=foobar					\
@@ -2611,6 +2699,17 @@ clean-noinstLTLIBRARIES:
 	  echo rm -f $${locs}; \
 	  rm -f $${locs}; \
 	}
+pkcs11/$(am__dirstamp):
+	@$(MKDIR_P) pkcs11
+	@: > pkcs11/$(am__dirstamp)
+pkcs11/$(DEPDIR)/$(am__dirstamp):
+	@$(MKDIR_P) pkcs11/$(DEPDIR)
+	@: > pkcs11/$(DEPDIR)/$(am__dirstamp)
+pkcs11/pkcs11-mock.lo: pkcs11/$(am__dirstamp) \
+	pkcs11/$(DEPDIR)/$(am__dirstamp)
+
+libpkcs11mock1.la: $(libpkcs11mock1_la_OBJECTS) $(libpkcs11mock1_la_DEPENDENCIES) $(EXTRA_libpkcs11mock1_la_DEPENDENCIES) 
+	$(AM_V_CCLD)$(libpkcs11mock1_la_LINK) $(am_libpkcs11mock1_la_rpath) $(libpkcs11mock1_la_OBJECTS) $(libpkcs11mock1_la_LIBADD) $(LIBS)
 
 libutils.la: $(libutils_la_OBJECTS) $(libutils_la_DEPENDENCIES) $(EXTRA_libutils_la_DEPENDENCIES) 
 	$(AM_V_CCLD)$(LINK)  $(libutils_la_OBJECTS) $(libutils_la_LIBADD) $(LIBS)
@@ -2747,6 +2846,10 @@ key-openssl$(EXEEXT): $(key_openssl_OBJECTS) $(key_openssl_DEPENDENCIES) $(EXTRA
 keygen$(EXEEXT): $(keygen_OBJECTS) $(keygen_DEPENDENCIES) $(EXTRA_keygen_DEPENDENCIES) 
 	@rm -f keygen$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(keygen_OBJECTS) $(keygen_LDADD) $(LIBS)
+
+keylog-env$(EXEEXT): $(keylog_env_OBJECTS) $(keylog_env_DEPENDENCIES) $(EXTRA_keylog_env_DEPENDENCIES) 
+	@rm -f keylog-env$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(keylog_env_OBJECTS) $(keylog_env_LDADD) $(LIBS)
 
 long-session-id$(EXEEXT): $(long_session_id_OBJECTS) $(long_session_id_DEPENDENCIES) $(EXTRA_long_session_id_DEPENDENCIES) 
 	@rm -f long-session-id$(EXEEXT)
@@ -3007,6 +3110,24 @@ pcert-list$(EXEEXT): $(pcert_list_OBJECTS) $(pcert_list_DEPENDENCIES) $(EXTRA_pc
 pgps2kgnu$(EXEEXT): $(pgps2kgnu_OBJECTS) $(pgps2kgnu_DEPENDENCIES) $(EXTRA_pgps2kgnu_DEPENDENCIES) 
 	@rm -f pgps2kgnu$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(pgps2kgnu_OBJECTS) $(pgps2kgnu_LDADD) $(LIBS)
+pkcs11/pkcs11-cert-import-url-exts.$(OBJEXT): pkcs11/$(am__dirstamp) \
+	pkcs11/$(DEPDIR)/$(am__dirstamp)
+
+pkcs11-cert-import-url-exts$(EXEEXT): $(pkcs11_cert_import_url_exts_OBJECTS) $(pkcs11_cert_import_url_exts_DEPENDENCIES) $(EXTRA_pkcs11_cert_import_url_exts_DEPENDENCIES) 
+	@rm -f pkcs11-cert-import-url-exts$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(pkcs11_cert_import_url_exts_OBJECTS) $(pkcs11_cert_import_url_exts_LDADD) $(LIBS)
+pkcs11/pkcs11-get-exts.$(OBJEXT): pkcs11/$(am__dirstamp) \
+	pkcs11/$(DEPDIR)/$(am__dirstamp)
+
+pkcs11-get-exts$(EXEEXT): $(pkcs11_get_exts_OBJECTS) $(pkcs11_get_exts_DEPENDENCIES) $(EXTRA_pkcs11_get_exts_DEPENDENCIES) 
+	@rm -f pkcs11-get-exts$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(pkcs11_get_exts_OBJECTS) $(pkcs11_get_exts_LDADD) $(LIBS)
+pkcs11/pkcs11-get-raw-issuer-exts.$(OBJEXT): pkcs11/$(am__dirstamp) \
+	pkcs11/$(DEPDIR)/$(am__dirstamp)
+
+pkcs11-get-raw-issuer-exts$(EXEEXT): $(pkcs11_get_raw_issuer_exts_OBJECTS) $(pkcs11_get_raw_issuer_exts_DEPENDENCIES) $(EXTRA_pkcs11_get_raw_issuer_exts_DEPENDENCIES) 
+	@rm -f pkcs11-get-raw-issuer-exts$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(pkcs11_get_raw_issuer_exts_OBJECTS) $(pkcs11_get_raw_issuer_exts_LDADD) $(LIBS)
 
 pkcs12_encode$(EXEEXT): $(pkcs12_encode_OBJECTS) $(pkcs12_encode_DEPENDENCIES) $(EXTRA_pkcs12_encode_DEPENDENCIES) 
 	@rm -f pkcs12_encode$(EXEEXT)
@@ -3150,6 +3271,8 @@ x509sign-verify2$(EXEEXT): $(x509sign_verify2_OBJECTS) $(x509sign_verify2_DEPEND
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
+	-rm -f pkcs11/*.$(OBJEXT)
+	-rm -f pkcs11/*.lo
 
 distclean-compile:
 	-rm -f *.tab.c
@@ -3185,6 +3308,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/key-import-export.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/key-openssl.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/keygen.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/keylog-env.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/long-session-id.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/mini-alignment.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/mini-alpn.Po@am__quote@
@@ -3275,6 +3399,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/status-request-ok.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/status-request.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/strict-der.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/utils-adv.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/utils.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/x509-extensions.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/x509-verify-with-crl.Po@am__quote@
@@ -3286,6 +3411,10 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/x509self.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/x509sign-verify.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/x509sign-verify2.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@pkcs11/$(DEPDIR)/pkcs11-cert-import-url-exts.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@pkcs11/$(DEPDIR)/pkcs11-get-exts.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@pkcs11/$(DEPDIR)/pkcs11-get-raw-issuer-exts.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@pkcs11/$(DEPDIR)/pkcs11-mock.Plo@am__quote@
 
 .c.o:
 @am__fastdepCC_TRUE@	$(AM_V_CC)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.o$$||'`;\
@@ -3372,6 +3501,7 @@ mostlyclean-libtool:
 
 clean-libtool:
 	-rm -rf .libs _libs
+	-rm -rf pkcs11/.libs pkcs11/_libs
 
 # This directory's subdirectories are mostly independent; you can cd
 # into them and run 'make' without going through this Makefile.
@@ -4425,6 +4555,34 @@ pcert-list.log: pcert-list$(EXEEXT)
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
 	"$$tst" $(AM_TESTS_FD_REDIRECT)
+keylog-env.log: keylog-env$(EXEEXT)
+	@p='keylog-env$(EXEEXT)'; \
+	b='keylog-env'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+pkcs11-cert-import-url-exts.log: pkcs11-cert-import-url-exts$(EXEEXT)
+	@p='pkcs11-cert-import-url-exts$(EXEEXT)'; \
+	b='pkcs11-cert-import-url-exts'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+pkcs11-get-exts.log: pkcs11-get-exts$(EXEEXT)
+	@p='pkcs11-get-exts$(EXEEXT)'; \
+	b='pkcs11-get-exts'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+pkcs11-get-raw-issuer-exts.log: pkcs11-get-raw-issuer-exts$(EXEEXT)
+	@p='pkcs11-get-raw-issuer-exts$(EXEEXT)'; \
+	b='pkcs11-get-raw-issuer-exts'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
 ocsp.log: ocsp$(EXEEXT)
 	@p='ocsp$(EXEEXT)'; \
 	b='ocsp'; \
@@ -4644,6 +4802,8 @@ clean-generic:
 distclean-generic:
 	-test -z "$(CONFIG_CLEAN_FILES)" || rm -f $(CONFIG_CLEAN_FILES)
 	-test . = "$(srcdir)" || test -z "$(CONFIG_CLEAN_VPATH_FILES)" || rm -f $(CONFIG_CLEAN_VPATH_FILES)
+	-rm -f pkcs11/$(DEPDIR)/$(am__dirstamp)
+	-rm -f pkcs11/$(am__dirstamp)
 
 maintainer-clean-generic:
 	@echo "This command is intended for maintainers to use"
@@ -4654,7 +4814,7 @@ clean-am: clean-checkPROGRAMS clean-generic clean-libtool \
 	clean-noinstLTLIBRARIES mostlyclean-am
 
 distclean: distclean-recursive
-	-rm -rf ./$(DEPDIR)
+	-rm -rf ./$(DEPDIR) pkcs11/$(DEPDIR)
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
 	distclean-tags
@@ -4700,7 +4860,7 @@ install-ps-am:
 installcheck-am:
 
 maintainer-clean: maintainer-clean-recursive
-	-rm -rf ./$(DEPDIR)
+	-rm -rf ./$(DEPDIR) pkcs11/$(DEPDIR)
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 

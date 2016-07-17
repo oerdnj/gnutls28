@@ -3,12 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>pkcs11: GnuTLS API Reference Manual</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
 <link rel="home" href="index.html" title="GnuTLS API Reference Manual">
 <link rel="up" href="intro.html" title="GnuTLS API Reference Manual">
 <link rel="prev" href="gnutls-crypto.html" title="crypto">
 <link rel="next" href="gnutls-pkcs12.html" title="pkcs12">
-<meta name="generator" content="GTK-Doc V1.24 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.25 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -33,7 +33,7 @@
 </tr></table></div>
 <div class="refsect1">
 <a name="gnutls-pkcs11.functions"></a><h2>Functions</h2>
-<div class="informaltable"><table width="100%" border="0">
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="functions_return">
 <col class="functions_name">
@@ -359,7 +359,7 @@
 </div>
 <div class="refsect1">
 <a name="gnutls-pkcs11.other"></a><h2>Types and Values</h2>
-<div class="informaltable"><table width="100%" border="0">
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="name">
 <col class="description">
@@ -436,8 +436,8 @@ use the string 'trusted' as <em class="parameter"><code>params</code></em>
 .</p>
 <p>Note that this function is not thread safe.</p>
 <div class="refsect3">
-<a name="id-1.2.9.6.2.7"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-pkcs11-add-provider.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -458,7 +458,7 @@ use the string 'trusted' as <em class="parameter"><code>params</code></em>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.9.6.2.8"></a><h4>Returns</h4>
+<a name="gnutls-pkcs11-add-provider.returns"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
 </div>
@@ -476,8 +476,8 @@ gnutls_pkcs11_copy_secret_key (<em class="parameter"><code>const <span class="ty
 <p>This function will copy a raw secret (symmetric) key into a PKCS <span class="type">11</span> 
 token specified by a URL. The key can be marked as sensitive or not.</p>
 <div class="refsect3">
-<a name="id-1.2.9.6.3.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-pkcs11-copy-secret-key.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -513,7 +513,7 @@ token specified by a URL. The key can be marked as sensitive or not.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.9.6.3.6"></a><h4>Returns</h4>
+<a name="gnutls-pkcs11-copy-secret-key.returns"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
 </div>
@@ -530,8 +530,8 @@ gnutls_pkcs11_copy_x509_crt (<em class="parameter"><code>const <span class="type
 <p>This function will copy a certificate into a PKCS <span class="type">11</span> token specified by
 a URL. The certificate can be marked as trusted or not.</p>
 <div class="refsect3">
-<a name="id-1.2.9.6.4.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-pkcs11-copy-x509-crt.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -562,7 +562,7 @@ a URL. The certificate can be marked as trusted or not.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.9.6.4.6"></a><h4>Returns</h4>
+<a name="gnutls-pkcs11-copy-x509-crt.returns"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
 </div>
@@ -581,8 +581,8 @@ gnutls_pkcs11_copy_x509_privkey (<em class="parameter"><code>const <span class="
 a URL. It is highly recommended flags to contain <code class="literal">GNUTLS_PKCS11_OBJ_FLAG_MARK_SENSITIVE</code>
 unless there is a strong reason not to.</p>
 <div class="refsect3">
-<a name="id-1.2.9.6.5.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-pkcs11-copy-x509-privkey.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -618,7 +618,7 @@ unless there is a strong reason not to.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.9.6.5.6"></a><h4>Returns</h4>
+<a name="gnutls-pkcs11-copy-x509-privkey.returns"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
 </div>
@@ -643,8 +643,8 @@ gnutls_pkcs11_delete_url (<em class="parameter"><code>const <span class="type">c
 <p>This function will delete objects matching the given URL.
 Note that not all tokens support the delete operation.</p>
 <div class="refsect3">
-<a name="id-1.2.9.6.7.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-pkcs11-delete-url.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -665,7 +665,7 @@ Note that not all tokens support the delete operation.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.9.6.7.6"></a><h4>Returns</h4>
+<a name="gnutls-pkcs11-delete-url.returns"></a><h4>Returns</h4>
 <p> On success, the number of objects deleted is returned, otherwise a
 negative error value.</p>
 </div>
@@ -679,8 +679,8 @@ gnutls_pkcs11_get_pin_function (<em class="parameter"><code><span class="type">v
 <p>This function will return the callback function set using
 <a class="link" href="gnutls-pkcs11.html#gnutls-pkcs11-set-pin-function" title="gnutls_pkcs11_set_pin_function ()"><code class="function">gnutls_pkcs11_set_pin_function()</code></a>.</p>
 <div class="refsect3">
-<a name="id-1.2.9.6.8.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-pkcs11-get-pin-function.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -694,7 +694,7 @@ gnutls_pkcs11_get_pin_function (<em class="parameter"><code><span class="type">v
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.9.6.8.6"></a><h4>Returns</h4>
+<a name="gnutls-pkcs11-get-pin-function.returns"></a><h4>Returns</h4>
 <p> The function set or NULL otherwise.</p>
 </div>
 <p class="since">Since: 3.1.0</p>
@@ -714,8 +714,8 @@ during the first request PKCS 11 operation. That call will assume the <a class="
 flag. If another flags are required then it must be called independently
 prior to any PKCS 11 operation.</p>
 <div class="refsect3">
-<a name="id-1.2.9.6.9.6"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-pkcs11-init.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -737,7 +737,7 @@ configuration file</p></td>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.9.6.9.7"></a><h4>Returns</h4>
+<a name="gnutls-pkcs11-init.returns"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
 </div>
@@ -750,8 +750,8 @@ negative error value.</p>
 gnutls_pkcs11_obj_deinit (<em class="parameter"><code><a class="link" href="gnutls-pkcs11.html#gnutls-pkcs11-obj-t" title="gnutls_pkcs11_obj_t"><span class="type">gnutls_pkcs11_obj_t</span></a> obj</code></em>);</pre>
 <p>This function will deinitialize a certificate structure.</p>
 <div class="refsect3">
-<a name="id-1.2.9.6.10.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-pkcs11-obj-deinit.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -780,8 +780,8 @@ will be returned.</p>
 *output_data_size is updated and GNUTLS_E_SHORT_MEMORY_BUFFER will
 be returned.</p>
 <div class="refsect3">
-<a name="id-1.2.9.6.11.6"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-pkcs11-obj-export.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -808,7 +808,7 @@ replaced by the actual size of parameters)</p></td>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.9.6.11.7"></a><h4>Returns</h4>
+<a name="gnutls-pkcs11-obj-export.returns"></a><h4>Returns</h4>
 <p> In case of failure a negative error code will be
 returned, and <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) on success.</p>
 </div>
@@ -823,10 +823,10 @@ gnutls_pkcs11_obj_export2 (<em class="parameter"><code><a class="link" href="gnu
 <p>This function will export the PKCS11 object data.  It is normal for
 data to be inaccesible and in that case <a class="link" href="gnutls-gnutls.html#GNUTLS-E-INVALID-REQUEST:CAPS" title="GNUTLS_E_INVALID_REQUEST"><code class="literal">GNUTLS_E_INVALID_REQUEST</code></a>
 will be returned.</p>
-<p>The output buffer is allocated using <a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-malloc"><code class="function">gnutls_malloc()</code></a>.</p>
+<p>The output buffer is allocated using <code class="function">gnutls_malloc()</code>.</p>
 <div class="refsect3">
-<a name="id-1.2.9.6.12.6"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-pkcs11-obj-export2.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -847,7 +847,7 @@ will be returned.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.9.6.12.7"></a><h4>Returns</h4>
+<a name="gnutls-pkcs11-obj-export2.returns"></a><h4>Returns</h4>
 <p> In case of failure a negative error code will be
 returned, and <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) on success.</p>
 </div>
@@ -862,8 +862,8 @@ gnutls_pkcs11_obj_export_url (<em class="parameter"><code><a class="link" href="
                               <em class="parameter"><code><span class="type">char</span> **url</code></em>);</pre>
 <p>This function will export a URL identifying the given certificate.</p>
 <div class="refsect3">
-<a name="id-1.2.9.6.13.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-pkcs11-obj-export-url.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -889,7 +889,7 @@ gnutls_pkcs11_obj_export_url (<em class="parameter"><code><a class="link" href="
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.9.6.13.6"></a><h4>Returns</h4>
+<a name="gnutls-pkcs11-obj-export-url.returns"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
 </div>
@@ -909,8 +909,8 @@ stored. When output is text it returns null terminated string
 although <em class="parameter"><code>output_size</code></em>
  contains the size of the actual data only.</p>
 <div class="refsect3">
-<a name="id-1.2.9.6.14.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-pkcs11-obj-get-info.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -936,7 +936,7 @@ although <em class="parameter"><code>output_size</code></em>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.9.6.14.6"></a><h4>Returns</h4>
+<a name="gnutls-pkcs11-obj-get-info.returns"></a><h4>Returns</h4>
 <p> <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) on success or a negative error code on error.</p>
 </div>
 <p class="since">Since: 2.12.0</p>
@@ -953,8 +953,8 @@ to the <a class="link" href="gnutls-pkcs11.html#gnutls-pkcs11-obj-t" title="gnut
 parsing (such as X.509 or OpenPGP) since the <a class="link" href="gnutls-pkcs11.html#gnutls-pkcs11-obj-t" title="gnutls_pkcs11_obj_t"><span class="type">gnutls_pkcs11_obj_t</span></a> is
 format agnostic. Only data are transferred.</p>
 <div class="refsect3">
-<a name="id-1.2.9.6.15.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-pkcs11-obj-import-url.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -980,7 +980,7 @@ format agnostic. Only data are transferred.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.9.6.15.6"></a><h4>Returns</h4>
+<a name="gnutls-pkcs11-obj-import-url.returns"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
 </div>
@@ -993,8 +993,8 @@ negative error value.</p>
 gnutls_pkcs11_obj_init (<em class="parameter"><code><a class="link" href="gnutls-pkcs11.html#gnutls-pkcs11-obj-t" title="gnutls_pkcs11_obj_t"><span class="type">gnutls_pkcs11_obj_t</span></a> *obj</code></em>);</pre>
 <p>This function will initialize a pkcs11 certificate structure.</p>
 <div class="refsect3">
-<a name="id-1.2.9.6.16.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-pkcs11-obj-init.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -1008,7 +1008,7 @@ gnutls_pkcs11_obj_init (<em class="parameter"><code><a class="link" href="gnutls
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.9.6.16.6"></a><h4>Returns</h4>
+<a name="gnutls-pkcs11-obj-init.returns"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
 </div>
@@ -1041,8 +1041,8 @@ gnutls_pkcs11_obj_set_pin_function (<em class="parameter"><code><a class="link" 
 required to access the object. This function overrides the global
 set using <a class="link" href="gnutls-pkcs11.html#gnutls-pkcs11-set-pin-function" title="gnutls_pkcs11_set_pin_function ()"><code class="function">gnutls_pkcs11_set_pin_function()</code></a>.</p>
 <div class="refsect3">
-<a name="id-1.2.9.6.19.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-pkcs11-obj-set-pin-function.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -1076,8 +1076,8 @@ set using <a class="link" href="gnutls-pkcs11.html#gnutls-pkcs11-set-pin-functio
 gnutls_pkcs11_privkey_deinit (<em class="parameter"><code><a class="link" href="gnutls-gnutls.html#gnutls-pkcs11-privkey-t" title="gnutls_pkcs11_privkey_t"><span class="type">gnutls_pkcs11_privkey_t</span></a> key</code></em>);</pre>
 <p>This function will deinitialize a private key structure.</p>
 <div class="refsect3">
-<a name="id-1.2.9.6.20.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-pkcs11-privkey-deinit.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -1100,8 +1100,8 @@ gnutls_pkcs11_privkey_export_url (<em class="parameter"><code><a class="link" hr
                                   <em class="parameter"><code><span class="type">char</span> **url</code></em>);</pre>
 <p>This function will export a URL identifying the given key.</p>
 <div class="refsect3">
-<a name="id-1.2.9.6.21.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-pkcs11-privkey-export-url.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -1127,7 +1127,7 @@ gnutls_pkcs11_privkey_export_url (<em class="parameter"><code><a class="link" hr
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.9.6.21.6"></a><h4>Returns</h4>
+<a name="gnutls-pkcs11-privkey-export-url.returns"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
 </div>
@@ -1146,8 +1146,8 @@ by the <em class="parameter"><code>url</code></em>
  token. The private key will be generate within
 the token and will not be exportable.</p>
 <div class="refsect3">
-<a name="id-1.2.9.6.22.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-pkcs11-privkey-generate.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -1183,7 +1183,7 @@ the token and will not be exportable.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.9.6.22.6"></a><h4>Returns</h4>
+<a name="gnutls-pkcs11-privkey-generate.returns"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
 </div>
@@ -1207,13 +1207,13 @@ the token and will not be exportable. This function will
 store the DER-encoded public key in the SubjectPublicKeyInfo format 
 in <em class="parameter"><code>pubkey</code></em>
 . The <em class="parameter"><code>pubkey</code></em>
- should be deinitialized using <a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-free"><code class="function">gnutls_free()</code></a>.</p>
+ should be deinitialized using <code class="function">gnutls_free()</code>.</p>
 <p>Note that when generating an elliptic curve key, the curve
 can be substituted in the place of the bits parameter using the
 <code class="function">GNUTLS_CURVE_TO_BITS()</code> macro.</p>
 <div class="refsect3">
-<a name="id-1.2.9.6.23.6"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-pkcs11-privkey-generate2.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -1259,7 +1259,7 @@ can be substituted in the place of the bits parameter using the
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.9.6.23.7"></a><h4>Returns</h4>
+<a name="gnutls-pkcs11-privkey-generate2.returns"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
 </div>
@@ -1278,8 +1278,8 @@ as the label, id as well as token information where the key is stored. When
 output is text it returns null terminated string although <span class="type">output_size</span> contains
 the size of the actual data only.</p>
 <div class="refsect3">
-<a name="id-1.2.9.6.24.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-pkcs11-privkey-get-info.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -1310,7 +1310,7 @@ the size of the actual data only.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.9.6.24.6"></a><h4>Returns</h4>
+<a name="gnutls-pkcs11-privkey-get-info.returns"></a><h4>Returns</h4>
 <p> <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) on success or a negative error code on error.</p>
 </div>
 </div>
@@ -1324,8 +1324,8 @@ gnutls_pkcs11_privkey_get_pk_algorithm
 <p>This function will return the public key algorithm of a private
 key.</p>
 <div class="refsect3">
-<a name="id-1.2.9.6.25.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-pkcs11-privkey-get-pk-algorithm.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -1346,7 +1346,7 @@ key.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.9.6.25.6"></a><h4>Returns</h4>
+<a name="gnutls-pkcs11-privkey-get-pk-algorithm.returns"></a><h4>Returns</h4>
 <p> a member of the <a class="link" href="gnutls-gnutls.html#gnutls-pk-algorithm-t" title="enum gnutls_pk_algorithm_t"><span class="type">gnutls_pk_algorithm_t</span></a> enumeration on
 success, or a negative error code on error.</p>
 </div>
@@ -1363,8 +1363,8 @@ key to the <a class="link" href="gnutls-gnutls.html#gnutls-pkcs11-privkey-t" tit
 in most cases keys cannot be exported, the private key structure
 is being associated with the available operations on the token.</p>
 <div class="refsect3">
-<a name="id-1.2.9.6.26.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-pkcs11-privkey-import-url.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -1390,7 +1390,7 @@ is being associated with the available operations on the token.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.9.6.26.6"></a><h4>Returns</h4>
+<a name="gnutls-pkcs11-privkey-import-url.returns"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
 </div>
@@ -1402,8 +1402,8 @@ negative error value.</p>
 gnutls_pkcs11_privkey_init (<em class="parameter"><code><a class="link" href="gnutls-gnutls.html#gnutls-pkcs11-privkey-t" title="gnutls_pkcs11_privkey_t"><span class="type">gnutls_pkcs11_privkey_t</span></a> *key</code></em>);</pre>
 <p>This function will initialize an private key structure.</p>
 <div class="refsect3">
-<a name="id-1.2.9.6.27.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-pkcs11-privkey-init.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -1417,7 +1417,7 @@ gnutls_pkcs11_privkey_init (<em class="parameter"><code><a class="link" href="gn
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.9.6.27.6"></a><h4>Returns</h4>
+<a name="gnutls-pkcs11-privkey-init.returns"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
 </div>
@@ -1434,8 +1434,8 @@ gnutls_pkcs11_privkey_set_pin_function
 required to access the object. This function overrides the global
 set using <a class="link" href="gnutls-pkcs11.html#gnutls-pkcs11-set-pin-function" title="gnutls_pkcs11_set_pin_function ()"><code class="function">gnutls_pkcs11_set_pin_function()</code></a>.</p>
 <div class="refsect3">
-<a name="id-1.2.9.6.28.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-pkcs11-privkey-set-pin-function.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -1473,7 +1473,7 @@ reinitialization function must be called on the child.</p>
 <p>Note that since GnuTLS 3.3.0, the reinitialization of the PKCS <span class="type">11</span>
 subsystem occurs automatically after fork.</p>
 <div class="refsect3">
-<a name="id-1.2.9.6.29.6"></a><h4>Returns</h4>
+<a name="gnutls-pkcs11-reinit.returns"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
 </div>
@@ -1489,8 +1489,8 @@ gnutls_pkcs11_set_pin_function (<em class="parameter"><code><a class="link" href
 required for PKCS 11 operations.  See
 <a class="link" href="gnutls-gnutls.html#gnutls-pin-callback-t" title="gnutls_pin_callback_t ()"><code class="function">gnutls_pin_callback_t()</code></a> on how the callback should behave.</p>
 <div class="refsect3">
-<a name="id-1.2.9.6.30.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-pkcs11-set-pin-function.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -1521,8 +1521,8 @@ gnutls_pkcs11_set_token_function (<em class="parameter"><code><a class="link" hr
 <p>This function will set a callback function to be used when a token
 needs to be inserted to continue PKCS 11 operations.</p>
 <div class="refsect3">
-<a name="id-1.2.9.6.31.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-pkcs11-set-token-function.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -1558,8 +1558,8 @@ a negative error code otherwise.  It might be called multiple times
 if the token is not detected and the retry counter will be
 increased.</p>
 <div class="refsect3">
-<a name="id-1.2.9.6.32.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-pkcs11-token-callback-t.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -1585,7 +1585,7 @@ increased.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.9.6.32.6"></a><h4>Returns</h4>
+<a name="gnutls-pkcs11-token-callback-t.returns"></a><h4>Returns</h4>
 <p> <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) on success or a negative error code
 on error.</p>
 </div>
@@ -1600,8 +1600,8 @@ gnutls_pkcs11_token_get_flags (<em class="parameter"><code>const <span class="ty
 <p>This function will return information about the PKCS 11 token flags.</p>
 <p>The supported flags are: <a class="link" href="gnutls-pkcs11.html#GNUTLS-PKCS11-TOKEN-HW:CAPS" title="GNUTLS_PKCS11_TOKEN_HW"><code class="literal">GNUTLS_PKCS11_TOKEN_HW</code></a> and <code class="literal">GNUTLS_PKCS11_TOKEN_TRUSTED</code>.</p>
 <div class="refsect3">
-<a name="id-1.2.9.6.33.6"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-pkcs11-token-get-flags.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -1622,7 +1622,7 @@ gnutls_pkcs11_token_get_flags (<em class="parameter"><code>const <span class="ty
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.9.6.33.7"></a><h4>Returns</h4>
+<a name="gnutls-pkcs11-token-get-flags.returns"></a><h4>Returns</h4>
 <p> <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) on success or a negative error code on error.</p>
 </div>
 <p class="since">Since: 2.12.0</p>
@@ -1638,8 +1638,8 @@ gnutls_pkcs11_token_get_info (<em class="parameter"><code>const <span class="typ
 <p>This function will return information about the PKCS 11 token such
 as the label, id, etc.</p>
 <div class="refsect3">
-<a name="id-1.2.9.6.34.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-pkcs11-token-get-info.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -1670,7 +1670,7 @@ as the label, id, etc.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.9.6.34.6"></a><h4>Returns</h4>
+<a name="gnutls-pkcs11-token-get-info.returns"></a><h4>Returns</h4>
 <p> <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) on success or a negative error code
 on error.</p>
 </div>
@@ -1687,8 +1687,8 @@ gnutls_pkcs11_token_get_mechanism (<em class="parameter"><code>const <span class
 by the token. It should be called with an increasing index until
 it return GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE.</p>
 <div class="refsect3">
-<a name="id-1.2.9.6.35.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-pkcs11-token-get-mechanism.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -1714,7 +1714,7 @@ it return GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.9.6.35.6"></a><h4>Returns</h4>
+<a name="gnutls-pkcs11-token-get-mechanism.returns"></a><h4>Returns</h4>
 <p> <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) on success or a negative error code on error.</p>
 </div>
 <p class="since">Since: 2.12.0</p>
@@ -1727,10 +1727,10 @@ gnutls_pkcs11_token_get_url (<em class="parameter"><code>unsigned <span class="t
                              <em class="parameter"><code><a class="link" href="gnutls-pkcs11.html#gnutls-pkcs11-url-type-t" title="enum gnutls_pkcs11_url_type_t"><span class="type">gnutls_pkcs11_url_type_t</span></a> detailed</code></em>,
                              <em class="parameter"><code><span class="type">char</span> **url</code></em>);</pre>
 <p>This function will return the URL for each token available
-in system. The url has to be released using <a href="http://www.gnutls.org/reference/gnutls-gnutls.html#gnutls-free"><code class="function">gnutls_free()</code></a></p>
+in system. The url has to be released using <code class="function">gnutls_free()</code></p>
 <div class="refsect3">
-<a name="id-1.2.9.6.36.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-pkcs11-token-get-url.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -1756,7 +1756,7 @@ in system. The url has to be released using <a href="http://www.gnutls.org/refer
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.9.6.36.6"></a><h4>Returns</h4>
+<a name="gnutls-pkcs11-token-get-url.returns"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned,
 <a class="link" href="gnutls-gnutls.html#GNUTLS-E-REQUESTED-DATA-NOT-AVAILABLE:CAPS" title="GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE"><code class="literal">GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE</code></a> if the sequence number
 exceeds the available tokens, otherwise a negative error value.</p>
@@ -1774,8 +1774,8 @@ gnutls_pkcs11_token_init (<em class="parameter"><code>const <span class="type">c
 at a factory defaults state the security officer's PIN given will be
 set to be the default. Otherwise it should match the officer's PIN.</p>
 <div class="refsect3">
-<a name="id-1.2.9.6.37.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-pkcs11-token-init.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -1801,7 +1801,7 @@ set to be the default. Otherwise it should match the officer's PIN.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.9.6.37.6"></a><h4>Returns</h4>
+<a name="gnutls-pkcs11-token-init.returns"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
 </div>
@@ -1818,8 +1818,8 @@ gnutls_pkcs11_token_set_pin (<em class="parameter"><code>const <span class="type
 If it is called to set a user pin for first time the oldpin must
 be NULL.</p>
 <div class="refsect3">
-<a name="id-1.2.9.6.38.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-pkcs11-token-set-pin.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -1850,7 +1850,7 @@ be NULL.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.9.6.38.6"></a><h4>Returns</h4>
+<a name="gnutls-pkcs11-token-set-pin.returns"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
 </div>
@@ -1865,8 +1865,8 @@ PKCS11 object type <em class="parameter"><code>obj</code></em>
 .  It will return "Unknown" for unknown
 types.</p>
 <div class="refsect3">
-<a name="id-1.2.9.6.39.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-pkcs11-type-get-name.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -1880,7 +1880,7 @@ types.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.9.6.39.6"></a><h4>Returns</h4>
+<a name="gnutls-pkcs11-type-get-name.returns"></a><h4>Returns</h4>
 <p> human readable string labeling the PKCS11 object type
 <em class="parameter"><code>type</code></em>
 .</p>
@@ -1896,8 +1896,8 @@ gnutls_x509_crt_import_pkcs11 (<em class="parameter"><code><a class="link" href=
 <p>This function will import a PKCS 11 certificate to a <a class="link" href="gnutls-gnutls.html#gnutls-x509-crt-t" title="gnutls_x509_crt_t"><span class="type">gnutls_x509_crt_t</span></a>
 structure.</p>
 <div class="refsect3">
-<a name="id-1.2.9.6.40.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-x509-crt-import-pkcs11.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -1918,7 +1918,7 @@ structure.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.9.6.40.6"></a><h4>Returns</h4>
+<a name="gnutls-x509-crt-import-pkcs11.returns"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
 </div>
@@ -1935,8 +1935,8 @@ gnutls_x509_crt_list_import_pkcs11 (<em class="parameter"><code><a class="link" 
 <p>This function will import a PKCS 11 certificate list to a list of 
 <a class="link" href="gnutls-gnutls.html#gnutls-x509-crt-t" title="gnutls_x509_crt_t"><span class="type">gnutls_x509_crt_t</span></a> type. These must not be initialized.</p>
 <div class="refsect3">
-<a name="id-1.2.9.6.41.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-x509-crt-list-import-pkcs11.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -1967,7 +1967,7 @@ gnutls_x509_crt_list_import_pkcs11 (<em class="parameter"><code><a class="link" 
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.9.6.41.6"></a><h4>Returns</h4>
+<a name="gnutls-x509-crt-list-import-pkcs11.returns"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
 </div>
@@ -2020,8 +2020,8 @@ negative error value.</p>
 <a name="gnutls-pkcs11-obj-info-t"></a><h3>enum gnutls_pkcs11_obj_info_t</h3>
 <p>Enumeration of several object information types.</p>
 <div class="refsect3">
-<a name="id-1.2.9.7.7.4"></a><h4>Members</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-pkcs11-obj-info-t.members"></a><h4>Members</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="300px" class="enum_members_name">
 <col class="enum_members_description">
@@ -2138,8 +2138,8 @@ negative error value.</p>
 <a name="gnutls-pkcs11-obj-type-t"></a><h3>enum gnutls_pkcs11_obj_type_t</h3>
 <p>Enumeration of object types.</p>
 <div class="refsect3">
-<a name="id-1.2.9.7.10.4"></a><h4>Members</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-pkcs11-obj-type-t.members"></a><h4>Members</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="300px" class="enum_members_name">
 <col class="enum_members_description">
@@ -2204,8 +2204,8 @@ negative error value.</p>
 <a name="gnutls-pkcs11-token-info-t"></a><h3>enum gnutls_pkcs11_token_info_t</h3>
 <p>Enumeration of types for retrieving token information.</p>
 <div class="refsect3">
-<a name="id-1.2.9.7.11.4"></a><h4>Members</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-pkcs11-token-info-t.members"></a><h4>Members</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="300px" class="enum_members_name">
 <col class="enum_members_description">
@@ -2256,8 +2256,8 @@ negative error value.</p>
 <a name="gnutls-pkcs11-url-type-t"></a><h3>enum gnutls_pkcs11_url_type_t</h3>
 <p>Enumeration of different URL extraction flags.</p>
 <div class="refsect3">
-<a name="id-1.2.9.7.12.4"></a><h4>Members</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-pkcs11-url-type-t.members"></a><h4>Members</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="300px" class="enum_members_name">
 <col class="enum_members_description">
@@ -2300,6 +2300,6 @@ negative error value.</p>
 </div>
 </div>
 <div class="footer">
-<hr>Generated by GTK-Doc V1.24</div>
+<hr>Generated by GTK-Doc V1.25</div>
 </body>
 </html>

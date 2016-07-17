@@ -3,12 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>tpm: GnuTLS API Reference Manual</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
 <link rel="home" href="index.html" title="GnuTLS API Reference Manual">
 <link rel="up" href="intro.html" title="GnuTLS API Reference Manual">
 <link rel="prev" href="gnutls-dtls.html" title="dtls">
 <link rel="next" href="api-index-full.html" title="API Index">
-<meta name="generator" content="GTK-Doc V1.24 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.25 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -33,24 +33,12 @@
 </tr></table></div>
 <div class="refsect1">
 <a name="gnutls-tpm.functions"></a><h2>Functions</h2>
-<div class="informaltable"><table width="100%" border="0">
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="functions_return">
 <col class="functions_name">
 </colgroup>
 <tbody>
-<tr>
-<td class="define_keyword">#define</td>
-<td class="function_name"><a class="link" href="gnutls-tpm.html#GNUTLS-TPM-KEY-SIGNING:CAPS" title="GNUTLS_TPM_KEY_SIGNING">GNUTLS_TPM_KEY_SIGNING</a></td>
-</tr>
-<tr>
-<td class="define_keyword">#define</td>
-<td class="function_name"><a class="link" href="gnutls-tpm.html#GNUTLS-TPM-KEY-USER:CAPS" title="GNUTLS_TPM_KEY_USER">GNUTLS_TPM_KEY_USER</a></td>
-</tr>
-<tr>
-<td class="define_keyword">#define</td>
-<td class="function_name"><a class="link" href="gnutls-tpm.html#GNUTLS-TPM-REGISTER-KEY:CAPS" title="GNUTLS_TPM_REGISTER_KEY">GNUTLS_TPM_REGISTER_KEY</a></td>
-</tr>
 <tr>
 <td class="function_type">
 <span class="returnvalue">int</span>
@@ -96,12 +84,24 @@
 </div>
 <div class="refsect1">
 <a name="gnutls-tpm.other"></a><h2>Types and Values</h2>
-<div class="informaltable"><table width="100%" border="0">
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="name">
 <col class="description">
 </colgroup>
 <tbody>
+<tr>
+<td class="define_keyword">#define</td>
+<td class="function_name"><a class="link" href="gnutls-tpm.html#GNUTLS-TPM-KEY-SIGNING:CAPS" title="GNUTLS_TPM_KEY_SIGNING">GNUTLS_TPM_KEY_SIGNING</a></td>
+</tr>
+<tr>
+<td class="define_keyword">#define</td>
+<td class="function_name"><a class="link" href="gnutls-tpm.html#GNUTLS-TPM-KEY-USER:CAPS" title="GNUTLS_TPM_KEY_USER">GNUTLS_TPM_KEY_USER</a></td>
+</tr>
+<tr>
+<td class="define_keyword">#define</td>
+<td class="function_name"><a class="link" href="gnutls-tpm.html#GNUTLS-TPM-REGISTER-KEY:CAPS" title="GNUTLS_TPM_REGISTER_KEY">GNUTLS_TPM_REGISTER_KEY</a></td>
+</tr>
 <tr>
 <td class="typedef_keyword">typedef</td>
 <td class="function_name"><a class="link" href="gnutls-tpm.html#gnutls-tpm-key-list-t" title="gnutls_tpm_key_list_t">gnutls_tpm_key_list_t</a></td>
@@ -125,38 +125,14 @@
 <div class="refsect1">
 <a name="gnutls-tpm.functions_details"></a><h2>Functions</h2>
 <div class="refsect2">
-<a name="GNUTLS-TPM-KEY-SIGNING:CAPS"></a><h3>GNUTLS_TPM_KEY_SIGNING</h3>
-<pre class="programlisting">#define GNUTLS_TPM_KEY_SIGNING (1&lt;&lt;1)
-</pre>
-<p>
-</p>
-</div>
-<hr>
-<div class="refsect2">
-<a name="GNUTLS-TPM-KEY-USER:CAPS"></a><h3>GNUTLS_TPM_KEY_USER</h3>
-<pre class="programlisting">#define GNUTLS_TPM_KEY_USER (1&lt;&lt;3)
-</pre>
-<p>
-</p>
-</div>
-<hr>
-<div class="refsect2">
-<a name="GNUTLS-TPM-REGISTER-KEY:CAPS"></a><h3>GNUTLS_TPM_REGISTER_KEY</h3>
-<pre class="programlisting">#define GNUTLS_TPM_REGISTER_KEY (1&lt;&lt;2)
-</pre>
-<p>
-</p>
-</div>
-<hr>
-<div class="refsect2">
 <a name="gnutls-tpm-get-registered"></a><h3>gnutls_tpm_get_registered ()</h3>
 <pre class="programlisting"><span class="returnvalue">int</span>
 gnutls_tpm_get_registered (<em class="parameter"><code><a class="link" href="gnutls-tpm.html#gnutls-tpm-key-list-t" title="gnutls_tpm_key_list_t"><span class="type">gnutls_tpm_key_list_t</span></a> *list</code></em>);</pre>
 <p>This function will get a list of stored keys in the TPM. The uuid
 of those keys</p>
 <div class="refsect3">
-<a name="id-1.2.13.6.5.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-tpm-get-registered.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -170,7 +146,7 @@ of those keys</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.13.6.5.6"></a><h4>Returns</h4>
+<a name="gnutls-tpm-get-registered.returns"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
 </div>
@@ -183,8 +159,8 @@ negative error value.</p>
 gnutls_tpm_key_list_deinit (<em class="parameter"><code><a class="link" href="gnutls-tpm.html#gnutls-tpm-key-list-t" title="gnutls_tpm_key_list_t"><span class="type">gnutls_tpm_key_list_t</span></a> list</code></em>);</pre>
 <p>This function will deinitialize the list of stored keys in the TPM.</p>
 <div class="refsect3">
-<a name="id-1.2.13.6.6.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-tpm-key-list-deinit.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -212,8 +188,8 @@ the corresponding key.
 If the provided index is out of bounds then <a class="link" href="gnutls-gnutls.html#GNUTLS-E-REQUESTED-DATA-NOT-AVAILABLE:CAPS" title="GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE"><code class="literal">GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE</code></a>
 is returned.</p>
 <div class="refsect3">
-<a name="id-1.2.13.6.7.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-tpm-key-list-get-url.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -244,7 +220,7 @@ is returned.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.13.6.7.6"></a><h4>Returns</h4>
+<a name="gnutls-tpm-key-list-get-url.returns"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
 </div>
@@ -259,8 +235,8 @@ gnutls_tpm_privkey_delete (<em class="parameter"><code>const <span class="type">
 <p>This function will unregister the private key from the TPM
 chip.</p>
 <div class="refsect3">
-<a name="id-1.2.13.6.8.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-tpm-privkey-delete.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -281,7 +257,7 @@ chip.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.13.6.8.6"></a><h4>Returns</h4>
+<a name="gnutls-tpm-privkey-delete.returns"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
 </div>
@@ -315,8 +291,8 @@ one of 512, 1024, 2048, 4096, 8192 and 16384.</p>
 case <em class="parameter"><code>privkey</code></em>
  would contain a URL with the UUID.</p>
 <div class="refsect3">
-<a name="id-1.2.13.6.9.9"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-tpm-privkey-generate.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -372,7 +348,7 @@ case <em class="parameter"><code>privkey</code></em>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.13.6.9.10"></a><h4>Returns</h4>
+<a name="gnutls-tpm-privkey-generate.returns"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" title="GNUTLS_E_SUCCESS"><code class="literal">GNUTLS_E_SUCCESS</code></a> (0) is returned, otherwise a
 negative error value.</p>
 </div>
@@ -381,6 +357,30 @@ negative error value.</p>
 </div>
 <div class="refsect1">
 <a name="gnutls-tpm.other_details"></a><h2>Types and Values</h2>
+<div class="refsect2">
+<a name="GNUTLS-TPM-KEY-SIGNING:CAPS"></a><h3>GNUTLS_TPM_KEY_SIGNING</h3>
+<pre class="programlisting">#define GNUTLS_TPM_KEY_SIGNING (1&lt;&lt;1)
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="GNUTLS-TPM-KEY-USER:CAPS"></a><h3>GNUTLS_TPM_KEY_USER</h3>
+<pre class="programlisting">#define GNUTLS_TPM_KEY_USER (1&lt;&lt;3)
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="GNUTLS-TPM-REGISTER-KEY:CAPS"></a><h3>GNUTLS_TPM_REGISTER_KEY</h3>
+<pre class="programlisting">#define GNUTLS_TPM_REGISTER_KEY (1&lt;&lt;2)
+</pre>
+<p>
+</p>
+</div>
+<hr>
 <div class="refsect2">
 <a name="gnutls-tpm-key-list-t"></a><h3>gnutls_tpm_key_list_t</h3>
 <pre class="programlisting">typedef struct tpm_key_list_st *gnutls_tpm_key_list_t;
@@ -393,8 +393,8 @@ negative error value.</p>
 <a name="gnutls-tpmkey-fmt-t"></a><h3>enum gnutls_tpmkey_fmt_t</h3>
 <p>Enumeration of different certificate encoding formats.</p>
 <div class="refsect3">
-<a name="id-1.2.13.7.3.4"></a><h4>Members</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gnutls-tpmkey-fmt-t.members"></a><h4>Members</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="300px" class="enum_members_name">
 <col class="enum_members_description">
@@ -436,6 +436,6 @@ negative error value.</p>
 </div>
 </div>
 <div class="footer">
-<hr>Generated by GTK-Doc V1.24</div>
+<hr>Generated by GTK-Doc V1.25</div>
 </body>
 </html>

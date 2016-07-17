@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnutls 3.2.3\n"
 "Report-Msgid-Bugs-To: bug-gnutls@gnu.org\n"
-"POT-Creation-Date: 2016-04-09 11:21+0200\n"
+"POT-Creation-Date: 2016-07-05 18:39+0200\n"
 "PO-Revision-Date: 2015-11-10 09:47-0500\n"
 "Last-Translator: Mingye Wang (Arthur2e5) <arthur200126@gmail.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
@@ -373,7 +373,7 @@ msgstr "X.509 证书中含有不支持的扩展。"
 msgid "Key usage violation in certificate has been detected."
 msgstr "在证书中检测到违规的密钥用法。"
 
-#: lib/gnutls_errors.c:173 lib/gnutls_errors.c:390
+#: lib/gnutls_errors.c:173 lib/gnutls_errors.c:392
 msgid "Function was interrupted."
 msgstr "函数被中断。"
 
@@ -755,39 +755,43 @@ msgstr "在 push 函数中出错。"
 msgid "Error in public key generation."
 msgstr "在 pull 函数中出错。"
 
-#: lib/gnutls_errors.c:379
+#: lib/gnutls_errors.c:375
+msgid "There was an issue converting to or from UTF8."
+msgstr ""
+
+#: lib/gnutls_errors.c:381
 msgid "Success."
 msgstr "成功。"
 
-#: lib/gnutls_errors.c:380
+#: lib/gnutls_errors.c:382
 msgid "A TLS warning alert has been received."
 msgstr "收到一个 TLS 警告信息。"
 
-#: lib/gnutls_errors.c:382
+#: lib/gnutls_errors.c:384
 msgid "A heartbeat pong message was received."
 msgstr "收到了非常大的 pong（响应）消息。"
 
-#: lib/gnutls_errors.c:384
+#: lib/gnutls_errors.c:386
 msgid "A heartbeat ping message was received."
 msgstr "收到了非常大的 ping（请求）消息。"
 
-#: lib/gnutls_errors.c:386
+#: lib/gnutls_errors.c:388
 msgid "Resource temporarily unavailable, try again."
 msgstr "资源临时不可用，请重试。"
 
-#: lib/gnutls_errors.c:388
+#: lib/gnutls_errors.c:390
 msgid "The transmitted packet is too large (EMSGSIZE)."
 msgstr "传送的包太大（EMSGSIZE）。"
 
-#: lib/gnutls_errors.c:391
+#: lib/gnutls_errors.c:393
 msgid "Rehandshake was requested by the peer."
 msgstr "按对方请求重新握手。"
 
-#: lib/gnutls_errors.c:393
+#: lib/gnutls_errors.c:395
 msgid "One of the involved algorithms has insufficient security level."
 msgstr ""
 
-#: lib/gnutls_errors.c:484
+#: lib/gnutls_errors.c:486
 msgid "(unknown error code)"
 msgstr "（未知错误代码）"
 
@@ -972,13 +976,13 @@ msgstr "未知密钥算法（%d）"
 msgid "OpenPGP Certificate Information:\n"
 msgstr "OpenPGP 证书信息：\n"
 
-#: lib/x509/ocsp_output.c:136 lib/x509/ocsp_output.c:503
-#: lib/x509/output.c:2005 lib/x509/output.c:2377
+#: lib/x509/ocsp_output.c:136 lib/x509/ocsp_output.c:503 lib/x509/output.c:2005
+#: lib/x509/output.c:2377
 msgid "\t\t\tASCII: "
 msgstr "\t\t\tASCII： "
 
-#: lib/x509/ocsp_output.c:141 lib/x509/ocsp_output.c:508
-#: lib/x509/output.c:2009 lib/x509/output.c:2382
+#: lib/x509/ocsp_output.c:141 lib/x509/ocsp_output.c:508 lib/x509/output.c:2009
+#: lib/x509/output.c:2382
 msgid "\t\t\tHexdump: "
 msgstr "\t\t\t十六进制转储： "
 
