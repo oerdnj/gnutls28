@@ -2,7 +2,7 @@
 
 
 
-@deftypefun {int} {gnutls_x509_crt_check_issuer} (gnutls_x509_crt_t @var{cert}, gnutls_x509_crt_t @var{issuer})
+@deftypefun {unsigned} {gnutls_x509_crt_check_issuer} (gnutls_x509_crt_t @var{cert}, gnutls_x509_crt_t @var{issuer})
 @var{cert}: is the certificate to be checked
 
 @var{issuer}: is the certificate of a possible issuer

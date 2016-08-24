@@ -15,6 +15,8 @@ size in bits. For RSA the bits returned is the modulus.
 For DSA the bits returned are of the public
 exponent.
 
+Unknown/unsupported algorithms are mapped to @code{GNUTLS_PK_UNKNOWN} .
+
 @strong{Returns:} a member of the @code{gnutls_pk_algorithm_t}  enumeration on
 success, or a negative error code on error.
 @end deftypefun

@@ -1165,6 +1165,10 @@ gnutls_privkey_import_ext (<em class="parameter"><code><a class="link" href="gnu
 <p>This function will associate the given callbacks with the
 <a class="link" href="gnutls-abstract.html#gnutls-privkey-t" title="gnutls_privkey_t"><span class="type">gnutls_privkey_t</span></a> type. At least one of the two callbacks
 must be non-null.</p>
+<p>Note that the signing function is supposed to "raw" sign data, i.e.,
+without any hashing or preprocessing. In case of RSA the DigestInfo
+will be provided, and the signing function is expected to do the PKCS #1
+1.5 padding and the exponentiation.</p>
 <p>See also <code class="function">gnutls_privkey_import_ext3()</code>.</p>
 <div class="refsect3">
 <a name="gnutls-privkey-import-ext.parameters"></a><h4>Parameters</h4>
@@ -2315,7 +2319,7 @@ gnutls_pubkey_get_preferred_hash_algorithm
 <p>This function will read the certificate and return the appropriate digest
 algorithm to use for signing with this certificate. Some certificates (i.e.
 DSA might not be able to sign without the preferred algorithm).</p>
-<p>To get the signature algorithm instead of just the hash use <a class="link" href="gnutls-gnutls.html#gnutls-pk-to-sign" title="gnutls_pk_to_sign ()"><code class="function">gnutls_pk_to_sign()</code></a>
+<p>To get the signature algorithm instead of just the hash use <a href="/usr/share/gtk-doc/html/gnutlsgnutls-gnutls.html#gnutls-pk-to-sign"><code class="function">gnutls_pk_to_sign()</code></a>
 with the algorithm of the certificate/key and the provided <em class="parameter"><code>hash</code></em>
 .</p>
 <div class="refsect3">
@@ -2744,6 +2748,8 @@ gnutls_pubkey_import_privkey (<em class="parameter"><code><a class="link" href="
                               <em class="parameter"><code>unsigned <span class="type">int</span> flags</code></em>);</pre>
 <p>Imports the public key from a private.  This function will import
 the given public key to the abstract <a class="link" href="gnutls-abstract.html#gnutls-pubkey-t" title="gnutls_pubkey_t"><span class="type">gnutls_pubkey_t</span></a> type.</p>
+<p>Note that in certain keys this operation may not be possible, e.g.,
+in other than RSA PKCS<span class="type">11</span> keys.</p>
 <div class="refsect3">
 <a name="gnutls-pubkey-import-privkey.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">
@@ -3290,7 +3296,7 @@ gnutls_pubkey_verify_hash2 (<em class="parameter"><code><a class="link" href="gn
 <p>This function will verify the given signed digest, using the
 parameters from the public key. Note that unlike <a class="link" href="gnutls-abstract.html#gnutls-privkey-sign-hash" title="gnutls_privkey_sign_hash ()"><code class="function">gnutls_privkey_sign_hash()</code></a>,
 this function accepts a signature algorithm instead of a digest algorithm.
-You can use <a class="link" href="gnutls-gnutls.html#gnutls-pk-to-sign" title="gnutls_pk_to_sign ()"><code class="function">gnutls_pk_to_sign()</code></a> to get the appropriate value.</p>
+You can use <a href="/usr/share/gtk-doc/html/gnutlsgnutls-gnutls.html#gnutls-pk-to-sign"><code class="function">gnutls_pk_to_sign()</code></a> to get the appropriate value.</p>
 <div class="refsect3">
 <a name="gnutls-pubkey-verify-hash2.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">

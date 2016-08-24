@@ -22,16 +22,17 @@ of @code{gnutls_certificate_verify_peers2()}  for details in the verification pr
 The acceptable  @code{data} types are @code{GNUTLS_DT_DNS_HOSTNAME} , @code{GNUTLS_DT_RFC822NAME}  and @code{GNUTLS_DT_KEY_PURPOSE_OID} .
 The former two accept as data a null-terminated hostname or email address, and the latter a null-terminated
 object identifier (e.g., @code{GNUTLS_KP_TLS_WWW_SERVER} ).
+
 If a DNS hostname is provided then this function will compare
 the hostname in the certificate against the given. If names do not match the 
 @code{GNUTLS_CERT_UNEXPECTED_OWNER}  status flag will be set.
 If a key purpose OID is provided and the end-certificate contains the extended key
 usage PKIX extension, it will be required to be have the provided key purpose 
-or be marked for any purpose, otherwise verification will fail with @code{GNUTLS_CERT_SIGNER_CONSTRAINTS_FAILURE}  status.
+or be marked for any purpose, otherwise verification status will have the
+@code{GNUTLS_CERT_SIGNER_CONSTRAINTS_FAILURE}  flag set.
 
-@strong{Returns:} a negative error code on error and @code{GNUTLS_E_SUCCESS}  (0)
-when the peer's certificate was successfully parsed, whether or not
-it was verified.
+@strong{Returns:} @code{GNUTLS_E_SUCCESS}  (0) when the validation is performed, or a negative error code otherwise.
+A sucessful error code means that the  @code{status} parameter must be checked to obtain the validation status.
 
 @strong{Since:} 3.3.0
 @end deftypefun

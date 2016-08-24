@@ -2,7 +2,7 @@
 
 
 
-@deftypefun {int} {gnutls_pkcs11_crt_is_known} (const char * @var{url}, gnutls_x509_crt_t @var{cert}, unsigned int @var{flags})
+@deftypefun {unsigned} {gnutls_pkcs11_crt_is_known} (const char * @var{url}, gnutls_x509_crt_t @var{cert}, unsigned int @var{flags})
 @var{url}: A PKCS 11 url identifying a token
 
 @var{cert}: is the certificate to find issuer for

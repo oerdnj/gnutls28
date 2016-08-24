@@ -52,12 +52,22 @@ of 192.
 "NONE" means nothing is enabled.  This disables even protocols and
 compression methods.
 
-" @code{KEYWORD} " The system administrator imposed settings. The provided keywords
-will be expanded from a configuration-time provided file - default is:
-/etc/gnutls/default-priorities. Any keywords that follow it, will 
-be appended to the expanded string. If there is no system string,
-then the function will fail. The system file should be formatted
-as "KEYWORD=VALUE", e.g., "SYSTEM=NORMAL:+ARCFOUR-128".
+"@ @code{KEYWORD1} ,KEYWORD2,..." The system administrator imposed settings.
+The provided keyword(s) will be expanded from a configuration-time
+provided file - default is: /etc/gnutls/default-priorities.
+Any attributes that follow it, will be appended to the expanded
+string. If multiple keywords are provided, separated by commas,
+then the first keyword that exists in the configuration file
+will be used. At least one of the keywords must exist, or this
+function will return an error. Typical usage would be to specify
+an application specified keyword first, followed by "SYSTEM" as
+a default fallback. e.g., " @code{LIBVIRT} ,SYSTEM:!-VERS-SSL3.0" will
+first try to find a config file entry matching "LIBVIRT", but if
+that does not exist will use the entry for "SYSTEM". If "SYSTEM"
+does not exist either, an error will be returned. In all cases,
+the SSL3.0 protocol will be disabled. The system priority file
+entries should be formatted as "KEYWORD=VALUE", e.g.,
+"SYSTEM=NORMAL:+ARCFOUR-128".
 
 Special keywords are "!", "-" and "+".
 "!" or "-" appended with an algorithm will remove this algorithm.

@@ -8,5 +8,5 @@
 @var{file}: The file holding the DLV keys.
 
 This function will set a file with trusted keys
-for DLV  (DNSSEC  Lookaside  Validation).
+for DLV (DNSSEC Lookaside Validation).
 @end deftypefun

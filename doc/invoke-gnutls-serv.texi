@@ -41,6 +41,8 @@ Usage:  gnutls-serv [ -<flag> [<val>] | --<name>[@{=| @}<val>] ]...
    -d, --debug=num            Enable debugging
                                 - it must be in the range:
                                   0 to 9999
+       --sni-hostname=str     Server's hostname for server name extension
+       --sni-hostname-fatal   Send fatal alert on sni-hostname mismatch
        --noticket             Don't accept session tickets
    -g, --generate             Generate Diffie-Hellman parameters
    -q, --quiet                Suppress some messages
@@ -107,6 +109,12 @@ Server program that listens to incoming TLS connections.
 This is the ``enable debugging'' option.
 This option takes a number argument.
 Specifies the debug level.
+@anchor{gnutls-serv sni-hostname}
+@subheading sni-hostname option
+
+This is the ``server's hostname for server name extension'' option.
+This option takes a string argument.
+Server name of type host_name that the server will recognise as its own. If the server receives client hello with different name, it will send a warning-level unrecognized_name alert.
 @anchor{gnutls-serv verify-client-cert}
 @subheading verify-client-cert option
 

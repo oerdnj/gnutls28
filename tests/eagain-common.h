@@ -24,7 +24,7 @@ extern const char *side;
     { \
       fprintf(stderr, "client[%d]: %s\n", cret, gnutls_strerror(cret)); \
       fprintf(stderr, "server[%d]: %s\n", sret, gnutls_strerror(sret)); \
-      fail("%s: Handshake failed\n", __func__); \
+      fail("%s:%d: Handshake failed\n", __func__, __LINE__); \
       exit(1); \
     }
 
@@ -32,7 +32,7 @@ extern const char *side;
   HANDSHAKE_EXPECT(c,s,0,0)
 
 #define HANDSHAKE_DTLS_EXPECT(c, s, clierr, serverr) \
-  sret = cret = GNUTLS_E_LARGE_PACKET; \
+  sret = cret = GNUTLS_E_AGAIN; \
   do \
     { \
       if (cret == GNUTLS_E_LARGE_PACKET) \
@@ -61,7 +61,7 @@ extern const char *side;
     { \
       fprintf(stderr, "client: %s\n", gnutls_strerror(cret)); \
       fprintf(stderr, "server: %s\n", gnutls_strerror(sret)); \
-      fail("Handshake failed\n"); \
+      fail("%s:%d: Handshake failed\n", __func__, __LINE__); \
       exit(1); \
     }
 
@@ -248,6 +248,11 @@ server_push(gnutls_transport_ptr_t tr, const void *data, size_t len)
 #ifdef EAGAIN_DEBUG
 	fprintf(stderr, "eagain: pushed %d bytes to client (avail: %d)\n",
 		(int) len, (int) to_client_len);
+#endif
+
+
+#ifdef SERVER_PUSH_ADD
+	SERVER_PUSH_ADD
 #endif
 
 	return len;

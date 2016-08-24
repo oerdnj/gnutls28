@@ -2,7 +2,7 @@
 
 
 
-@deftypefun {int} {gnutls_x509_crt_get_extension_oid} (gnutls_x509_crt_t @var{cert}, int @var{indx}, void * @var{oid}, size_t * @var{oid_size})
+@deftypefun {int} {gnutls_x509_crt_get_extension_oid} (gnutls_x509_crt_t @var{cert}, unsigned @var{indx}, void * @var{oid}, size_t * @var{oid_size})
 @var{cert}: should contain a @code{gnutls_x509_crt_t}  type
 
 @var{indx}: Specifies which extension OID to send. Use (0) to get the first one.

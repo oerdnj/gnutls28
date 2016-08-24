@@ -1,5 +1,5 @@
 dnl Process this file with autoconf to produce a configure script.
-# Copyright (C) 2000-2012 Free Software Foundation, Inc.
+# Copyright (C) 2000-2012, 2016 Free Software Foundation, Inc.
 #
 # Author: Nikos Mavrogiannopoulos, Simon Josefsson
 #
@@ -21,12 +21,12 @@ dnl Process this file with autoconf to produce a configure script.
 # USA
 
 AC_PREREQ(2.61)
-AC_INIT([GnuTLS], [3.4.14], [bugs@gnutls.org])
+AC_INIT([GnuTLS], [3.5.3], [bugs@gnutls.org])
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_MACRO_DIR([m4])
 AC_CANONICAL_HOST
 
-AM_INIT_AUTOMAKE([1.12.2 subdir-objects no-dist-gzip dist-xz -Wall -Wno-override])
+AM_INIT_AUTOMAKE([1.12.2 foreign subdir-objects no-dist-gzip dist-xz -Wall -Wno-override])
 m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
 AC_CONFIG_HEADERS([config.h])
 
@@ -48,10 +48,30 @@ AC_PROG_SED
 
 AC_USE_SYSTEM_EXTENSIONS
 
+#
+# Require C99 support
+#    
+AC_PROG_CC_C99
+if test "$ac_cv_prog_cc_c99" = "no"; then
+  AC_MSG_WARN([[Compiler does not support C99. It may not be able to compile the project.]])
+fi
+
+AX_CODE_COVERAGE
+
 AC_ARG_ENABLE(doc,
   AS_HELP_STRING([--disable-doc], [don't generate any documentation]),
     enable_doc=$enableval, enable_doc=yes)
 AM_CONDITIONAL(ENABLE_DOC, test "$enable_doc" != "no")
+
+AC_ARG_ENABLE(manpages,
+  AS_HELP_STRING([--enable-manpages], [install manpages even if disable-doc is given]),
+    enable_manpages=$enableval,enable_manpages=auto)
+
+if test "${enable_manpages}" = "auto";then
+  enable_manpages="${enable_doc}"
+fi
+
+AM_CONDITIONAL(ENABLE_MANPAGES, test "$enable_manpages" != "no")
 
 AC_ARG_ENABLE(tools,
   AS_HELP_STRING([--disable-tools], [don't compile any tools]),
@@ -59,9 +79,9 @@ AC_ARG_ENABLE(tools,
 AM_CONDITIONAL(ENABLE_TOOLS, test "$enable_tools" != "no")
 
 if test "$enable_tools" != "no" || test "$enable_doc" != "no"; then
-  AC_CHECK_PROG([AUTOGEN], [autogen], [autogen], [/bin/true])
+  AC_CHECK_PROG([AUTOGEN], [autogen], [autogen], [:])
 
-  if test x"$AUTOGEN" = "x/bin/true"; then
+  if test x"$AUTOGEN" = "x:"; then
     AC_MSG_WARN([[
 ***
 *** autogen not found. Will not link against libopts.
@@ -148,6 +168,25 @@ esac
 
 fi
 
+dnl Check for iovec type
+AC_CHECK_MEMBERS([struct iovec.iov_basea],
+      [
+        AC_SUBST([DEFINE_IOVEC_T], ["#include <sys/uio.h>
+typedef struct iovec giovec_t;"])
+      ],
+      [
+        AC_SUBST([DEFINE_IOVEC_T], ["typedef struct {
+    void *iov_base;
+    size_t iov_len;
+} giovec_t;"])
+      ],
+      [#include <sys/uio.h>
+      ])
+AM_SUBST_NOTMAKE([DEFINE_IOVEC_T])
+
+dnl Need netinet/tcp.h for TCP_FASTOPEN
+AC_CHECK_HEADERS([netinet/tcp.h])
+
 AC_ARG_ENABLE(padlock,
   AS_HELP_STRING([--disable-padlock], [unconditionally disable padlock acceleration]),
     use_padlock=$enableval)
@@ -177,13 +216,19 @@ AC_LINK_IFELSE([AC_LANG_PROGRAM([
 
 AC_MSG_CHECKING([for getentropy])
 AC_LINK_IFELSE([AC_LANG_PROGRAM([
-	   #include <unistd.h>],[
+	   #include <unistd.h>
+           #ifdef __linux__
+           #error 1
+           #endif
+	   ],[
 		   getentropy(0, 0);
 		  ])],
 		  [AC_MSG_RESULT(yes)
 		   AC_DEFINE([HAVE_GETENTROPY], 1, [Enable the OpenBSD getentropy function])
 		   enable_getrandom=getentropy],
 		  [AC_MSG_RESULT(no)])
+
+AM_CONDITIONAL(HAVE_GETENTROPY, test "$enable_getrandom" = "getentropy")
 
 dnl Try the hooks.m4
 LIBGNUTLS_HOOKS
@@ -205,7 +250,7 @@ AC_C_BIGENDIAN
 
 dnl No fork on MinGW, disable some self-tests until we fix them.
 dnl Check clock_gettime and pthread_mutex_lock in libc (avoid linking to other libs)
-AC_CHECK_FUNCS([fork inet_ntop inet_pton getrusage getpwuid_r nanosleep daemon getpid clock_gettime iconv localtime vasprintf],,)
+AC_CHECK_FUNCS([fork setitimer inet_ntop inet_pton getrusage getpwuid_r nanosleep daemon getpid clock_gettime iconv localtime fmemopen vasprintf mmap],,)
 if test "$ac_cv_func_vasprintf" != "yes";then
   AC_MSG_CHECKING([for va_copy])
   AC_LINK_IFELSE([AC_LANG_PROGRAM([
@@ -232,6 +277,22 @@ fi
 AM_CONDITIONAL(HAVE_FORK, test "$ac_cv_func_fork" != "no")
 
 AC_CHECK_FUNCS([__register_atfork secure_getenv],,)
+
+AC_ARG_ENABLE(seccomp-tests,
+  AS_HELP_STRING([--enable-seccomp-tests], [unconditionally enable tests with seccomp]),
+    seccomp_tests=$enableval, seccomp_tests=no)
+
+AM_CONDITIONAL(HAVE_SECCOMP_TESTS, test "$seccomp_tests" = "yes")
+
+# check for libseccomp - used in test programs
+AC_LIB_HAVE_LINKFLAGS(seccomp,, [#include <seccomp.h>  
+], [seccomp_init(0);])
+
+# check for libcrypto - used in test programs
+AC_LIB_HAVE_LINKFLAGS(crypto,, [#include <openssl/evp.h>  
+], [EVP_CIPHER_CTX_init(NULL);])
+
+AM_CONDITIONAL(HAVE_LIBCRYPTO, test "$HAVE_LIBCRYPTO" = "yes")
 
 AC_LIB_HAVE_LINKFLAGS(rt,, [#include <time.h>
 #include <signal.h>
@@ -310,7 +371,8 @@ AC_ARG_ENABLE([gcc-warnings],
 )
 
 if test "$gl_gcc_warnings" = yes; then
-  gl_WARN_ADD([-Wframe-larger-than=2048], [WSTACK_CFLAGS])
+  gl_WARN_ADD([-Wframe-larger-than=4096], [WSTACK_CFLAGS])
+  gl_WARN_ADD([-Wtype-limits], [WSTACK_CFLAGS])
 
   nw="$nw -Wsystem-headers"         # Don't let system headers trigger warnings
   nw="$nw -Wc++-compat"             # We don't care about C++ compilers
@@ -331,6 +393,7 @@ if test "$gl_gcc_warnings" = yes; then
   nw="$nw -Wsuggest-attribute=const" # Is it worth using attributes?
   nw="$nw -Wsuggest-attribute=noreturn" # Is it worth using attributes?
   nw="$nw -Wstack-protector"        # Some functions cannot be protected
+  nw="$nw -Wunsafe-loop-optimizations" # Warnings with no point
   nw="$nw -Wredundant-decls"        # Some files cannot be compiled with that (gl_fd_to_handle)
 
   gl_MANYWARN_ALL_GCC([ws])
@@ -338,14 +401,8 @@ if test "$gl_gcc_warnings" = yes; then
   for w in $ws; do
     gl_WARN_ADD([$w])
   done
-
   gl_WARN_ADD([-Wno-missing-field-initializers]) # We need this one
-  gl_WARN_ADD([-Wno-format-y2k])     # Too many warnings for now
-  gl_WARN_ADD([-Wno-unused-value]) # warnings for things we don't want to get
-  gl_WARN_ADD([-Wno-unused-result]) # warnings for things we don't want to get
   gl_WARN_ADD([-Wno-unused-parameter]) # Too many warnings for now
-  gl_WARN_ADD([-Wno-stack-protector])  # Some functions cannot be protected
-  gl_WARN_ADD([-Wno-int-to-pointer-cast])  # Some files cannot be compiled with that (gl_fd_to_handle)
   gl_WARN_ADD([-fdiagnostics-show-option])
 fi
 
@@ -363,18 +420,24 @@ AC_ARG_ENABLE(self-checks,
   AS_HELP_STRING([--enable-self-checks], [enable self checking functionality]),
     enable_self_checks=$enableval, enable_self_checks=no)
 
+AC_LIB_HAVE_LINKFLAGS(dl,, [#include <dlfcn.h>], [dladdr (0, 0);])
+
 AC_ARG_ENABLE(fips140-mode,
   AS_HELP_STRING([--enable-fips140-mode], [enable FIPS140-2 mode (implies self checks)]),
     enable_fips=$enableval, enable_fips=no)
 AM_CONDITIONAL(ENABLE_FIPS140, test "$enable_fips" = "yes")
 if [ test "$enable_fips" = "yes" ];then
-  AC_LIB_HAVE_LINKFLAGS(dl,, [#include <dlfcn.h>], [dladdr (0, 0);])
   if test "x$HAVE_LIBDL" = "xyes";then
     enable_self_checks=yes
 
     AC_DEFINE([ENABLE_FIPS140], 1, [Enable FIPS140-2 mode])
-
     AC_SUBST([FIPS140_LIBS], $LIBDL)
+    AC_ARG_WITH(fips140-key, AS_HELP_STRING([--with-fips140-key],
+                                 [specify the FIPS140 HMAC key for integrity]),
+            fips_key="$withval", 
+            fips_key="orboDeJITITejsirpADONivirpUkvarP")
+
+    AC_DEFINE_UNQUOTED([FIPS_KEY], ["$fips_key"], [The FIPS140-2 integrity key])
   else
     enable_fips=no
     AC_MSG_WARN([[
@@ -385,10 +448,19 @@ if [ test "$enable_fips" = "yes" ];then
   fi
 fi
 
+PKG_CHECK_MODULES(CMOCKA, cmocka, [with_cmocka=yes], [with_cmocka=no])
+AM_CONDITIONAL(HAVE_CMOCKA, test "$with_cmocka" != "no")
+
 AC_ARG_WITH(idn, AS_HELP_STRING([--without-idn],
                                  [disable support for libidn]),
             try_libidn="$withval", 
             try_libidn=yes)
+
+with_old_nettle=no
+if ! $PKG_CONFIG --atleast-version=3.3 nettle; then
+	with_old_nettle=yes
+fi
+AM_CONDITIONAL(WITH_OLD_NETTLE, test "$with_old_nettle" != "no")
 
 if test "$try_libidn" = yes;then
 PKG_CHECK_MODULES(LIBIDN, libidn >= 0.5.6, [with_libidn=yes], [with_libidn=no])
@@ -722,9 +794,14 @@ if test "$opt_guile_bindings" = "yes"; then
 
    AC_PATH_PROG([guile_snarf], [guile-snarf])
    if test "x$guile_snarf" = "x"; then
-      AC_MSG_WARN([`guile-snarf' from Guile 1.8 not found.  Guile bindings not built.])
+      AC_MSG_WARN([`guile-snarf' from Guile not found.  Guile bindings not built.])
       opt_guile_bindings=no
    else
+      dnl Check for 'guild', which can be used to compile Scheme code
+      dnl on Guile 2.x.
+      AC_PATH_PROG([GUILD], [guild])
+      AC_SUBST([GUILD])
+
       GUILE_PROGS
       GUILE_FLAGS
 
@@ -738,6 +815,10 @@ if test "$opt_guile_bindings" = "yes"; then
       CFLAGS="$save_CFLAGS"
       LIBS="$save_LIBS"
 
+      AC_MSG_CHECKING([the Guile effective version])
+      guile_effective_version="`$GUILE -c '(display (effective-version))'`"
+      AC_MSG_RESULT([$guile_effective_version])
+
       if test "$opt_guile_bindings" = "yes"; then
         AC_MSG_RESULT([yes])
 	case "x$with_guile_site_dir" in 
@@ -749,7 +830,7 @@ if test "$opt_guile_bindings" = "yes"; then
 		# Automatically derive $(GUILE_SITE) from $(pkgdatadir).  This
 		# hack is used to allow `distcheck' to work (see
 		# `DISTCHECK_CONFIGURE_FLAGS' in the top-level `Makefile.am').
-		GUILE_SITE="\$(datadir)/guile/site"
+		GUILE_SITE="\$(datadir)/guile/site/$guile_effective_version"
 		AC_SUBST(GUILE_SITE)
 		;;
 	     *)
@@ -776,11 +857,12 @@ if test "$opt_guile_bindings" = "yes"; then
 	LIBS="$save_LIBS"
 
 	# The place where guile-gnutls.la will go.
-	AC_MSG_CHECKING([the Guile effective version])
-	guile_effective_version="`$GUILE -c '(display (effective-version))'`"
-	AC_MSG_RESULT([$guile_effective_version])
 	guileextensiondir="$libdir/guile/$guile_effective_version"
 	AC_SUBST([guileextensiondir])
+
+	# The location of .go files.
+	guileobjectdir="$libdir/guile/$guile_effective_version/site-ccache"
+	AC_SUBST([guileobjectdir])
       else
         AC_MSG_RESULT([no])
         AC_MSG_WARN([A sufficiently recent GNU Guile not found.  Guile bindings not built.])
@@ -788,7 +870,9 @@ if test "$opt_guile_bindings" = "yes"; then
       fi
    fi
 fi
-AM_CONDITIONAL(HAVE_GUILE, test "$opt_guile_bindings" = "yes")
+
+AM_CONDITIONAL([HAVE_GUILE], [test "$opt_guile_bindings" = "yes"])
+AM_CONDITIONAL([HAVE_GUILD], [test "x$GUILD" != "x"])
 
 LIBGNUTLS_LIBS="-L${libdir} -lgnutls $LIBS"
 LIBGNUTLS_CFLAGS="-I${includedir}"
@@ -803,52 +887,6 @@ AC_DEFINE([GNUTLS_INTERNAL_BUILD], 1, [We allow temporarily usage of deprecated 
 AC_DEFINE([fread_file], [_gnutls_fread_file], [static lib rename])
 AC_DEFINE([read_file], [_gnutls_read_file], [static lib rename])
 AC_DEFINE([read_binary_file], [_gnutls_read_binary_file], [static lib rename])
-
-dnl Crywrap dependencies
-   AC_MSG_RESULT([***
-*** Checking dependencies for crywrap...
-])
-
-crywrap=no
-
-if test "$have_win" != "yes"; then
-
-AC_CHECK_HEADERS([arpa/inet.h netinet/in.h sys/select.h sys/types.h sys/wait.h])
-
-dnl **********************
-dnl * Typedefs & co
-dnl **********************
-AC_CACHE_CHECK([return type of signal handlers],[ac_cv_type_signal],[AC_COMPILE_IFELSE(
-[AC_LANG_PROGRAM([#include <sys/types.h>
-#include <signal.h>
-],
-		 [return *(signal (0, 0)) (0) == 1;])],
-		   [ac_cv_type_signal=int],
-		   [ac_cv_type_signal=void])])
-AC_DEFINE_UNQUOTED([RETSIGTYPE],[$ac_cv_type_signal],[Define as the return type of signal handlers
-		    (`int' or `void').])
-
-AC_FUNC_SELECT_ARGTYPES
-AC_CHECK_FUNCS([alarm atexit dup2 epoll_create kqueue memchr memset munmap \
-		putenv regcomp scandir select socket strcasecmp strchr \
-		strdup strerror strncasecmp strrchr strstr strtoul uname])
-
-AC_ARG_ENABLE(crywrap,
-	AS_HELP_STRING([--disable-crywrap], [unconditionally disable the crywrap TLS proxy service]))
-
-
- if test "x$enable_crywrap" != "xno" ; then
-   AC_CHECK_FUNCS([argp_usage],[ac_argp=yes],[ac_argp=no])
-   if test "$ac_cv_func_daemon" != "no" && test "$ac_argp" != "no" && test "$with_libidn" != "no";then
-     crywrap=yes
-   fi
- fi
-
-fi
-
-AM_CONDITIONAL(ENABLE_CRYWRAP, test "x$crywrap" != "xno")
-
-dnl end of crywrap requirements
 
 dnl Some variables needed in makefiles
 YEAR=`date +%Y`
@@ -878,9 +916,7 @@ AC_CONFIG_FILES([
   gl/Makefile
   gl/tests/Makefile
   guile/Makefile
-  guile/modules/Makefile
   guile/src/Makefile
-  guile/tests/Makefile
   lib/Makefile
   lib/accelerated/Makefile
   lib/accelerated/x86/Makefile
@@ -898,26 +934,17 @@ AC_CONFIG_FILES([
   lib/x509/Makefile
   po/Makefile.in
   src/Makefile
-  src/crywrap/Makefile
   src/gl/Makefile
   tests/Makefile
+  tests/windows/Makefile
   tests/cert-tests/Makefile
-  tests/dsa/Makefile
+  tests/ocsp-tests/Makefile
   tests/dtls/Makefile
-  tests/srp/Makefile
-  tests/ecdsa/Makefile
   tests/key-tests/Makefile
   tests/openpgp-certs/Makefile
-  tests/pkcs1-padding/Makefile
-  tests/pkcs12-decode/Makefile
-  tests/pkcs8-decode/Makefile
-  tests/rsa-md5-collision/Makefile
-  tests/safe-renegotiation/Makefile
   tests/scripts/Makefile
-  tests/sha2/Makefile
   tests/slow/Makefile
   tests/suite/Makefile
-  tests/userid/Makefile
 ])
 
 AC_OUTPUT
@@ -936,6 +963,7 @@ AC_MSG_NOTICE([summary of build options:
   Local libopts:        ${included_libopts}
   Local libtasn1:       ${included_libtasn1}
   Use nettle-mini:      ${mini_nettle}
+  Documentation:        ${enable_doc} (manpages: ${enable_manpages})
 ])
 
 AC_MSG_NOTICE([External hardware support:
@@ -957,6 +985,8 @@ AC_MSG_NOTICE([Optional features:
 (note that included applications might not compile properly
 if features are disabled)
 
+  SSL3.0 support:       $ac_enable_ssl3
+  SSL2.0 client hello:  $ac_enable_ssl2
   DTLS-SRTP support:    $ac_enable_srtp
   ALPN support:         $ac_enable_alpn
   OCSP support:         $ac_enable_ocsp
@@ -973,11 +1003,6 @@ if features are disabled)
   Self checks:          $enable_self_checks
   Non-SuiteB curves:    $enable_non_suiteb
   FIPS140 mode:         $enable_fips
-])
-
-AC_MSG_NOTICE([Optional applications:
-
-  crywrap app:          $crywrap
 ])
 
 AC_MSG_NOTICE([Optional libraries:

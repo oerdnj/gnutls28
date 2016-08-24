@@ -100,9 +100,9 @@ typedef enum {
 /** count of all options for danetool */
 #define OPTION_CT    30
 /** danetool version */
-#define DANETOOL_VERSION       "3.4.14"
+#define DANETOOL_VERSION       "3.5.3"
 /** Full danetool version text */
-#define DANETOOL_FULL_VERSION  "danetool 3.4.14"
+#define DANETOOL_FULL_VERSION  "danetool 3.5.3"
 
 /**
  *  Interface defines for all options.  Replace "n" with the UPPER_CASED
@@ -170,8 +170,6 @@ typedef enum {
 #define VALUE_OPT_HOST           0x100B
 #define VALUE_OPT_PROTO          0x100C
 #define VALUE_OPT_PORT           0x100D
-
-#define OPT_VALUE_PORT           (DESC(PORT).optArg.argInt)
 #define VALUE_OPT_APP_PROTO      0x100E
 #define VALUE_OPT_STARTTLS_PROTO 0x100F
 #define VALUE_OPT_CA             0x1010

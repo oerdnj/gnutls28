@@ -20,17 +20,17 @@
  *
  */
 
-#include <gnutls_int.h>
-#include <gnutls_errors.h>
+#include "gnutls_int.h"
+#include "errors.h"
 #include <libtasn1.h>
-#include <gnutls_global.h>
-#include <gnutls_num.h>		/* MAX */
-#include <gnutls_sig.h>
-#include <gnutls_str.h>
-#include <gnutls_datum.h>
+#include <global.h>
+#include <num.h>		/* MAX */
+#include <tls-sig.h>
+#include "str.h"
+#include <datum.h>
 #include "x509_int.h"
+#include <nettle/base64.h>
 #include <common.h>
-#include <base64.h>
 #include <gnutls/abstract.h>
 #include <system.h>
 #include <locks.h>
@@ -369,15 +369,16 @@ static int verify_pubkey(const char *file,
 static int raw_pubkey_to_base64(const gnutls_datum_t * raw,
 				gnutls_datum_t * b64)
 {
-	int ret;
-	char *out;
+	size_t size;
 
-	ret = base64_encode_alloc((void *) raw->data, raw->size, &out);
-	if (ret == 0 || out == NULL)
+	size = BASE64_ENCODE_RAW_LENGTH(raw->size);
+
+	b64->data = gnutls_malloc(size);
+	if (b64->data == NULL)
 		return gnutls_assert_val(GNUTLS_E_MEMORY_ERROR);
 
-	b64->data = (void *) out;
-	b64->size = ret;
+	base64_encode_raw(b64->data, raw->size, raw->data);
+	b64->size = size;
 
 	return 0;
 }

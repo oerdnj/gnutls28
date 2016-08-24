@@ -58,12 +58,10 @@ autoreconf:
 	for f in $(PODIR)/*.po.in; do \
 		cp $$f `echo $$f | sed 's/.in//'`; \
 	done
-	mv build-aux/config.rpath build-aux/config.rpath-
 	autopoint
 	rm -f m4/codeset.m4 m4/gettext.m4 m4/glibc21.m4 m4/glibc2.m4 m4/iconv.m4 m4/intdiv0.m4 m4/intldir.m4 m4/intl.m4 m4/intlmacosx.m4 m4/intmax.m4 m4/inttypes_h.m4 m4/inttypes-pri.m4 m4/lcmessage.m4 m4/lib-ld.m4 m4/lib-link.m4 m4/lib-prefix.m4 m4/lock.m4 m4/longlong.m4 m4/nls.m4 m4/po.m4 m4/printf-posix.m4 m4/progtest.m4 m4/size_max.m4 m4/stdint_h.m4 m4/uintmax_t.m4 m4/wchar_t.m4 m4/wint_t.m4 m4/visibility.m4 m4/xsize.m4
 	touch ChangeLog
 	test -f ./configure || AUTOPOINT=true autoreconf --install
-	mv build-aux/config.rpath- build-aux/config.rpath
 
 update-po: refresh-po
 	for f in `ls $(PODIR)/*.po | grep -v quot.po`; do \
@@ -125,7 +123,7 @@ clang-upload:
 # Release
 
 ChangeLog:
-	git log --pretty --numstat --summary --since="2012 November 07" -- | git2cl > ChangeLog
+	git log --pretty --numstat --summary --since="2014 November 07" -- | git2cl > ChangeLog
 	cat .clcopying >> ChangeLog
 
 tag = $(PACKAGE)_`echo $(VERSION) | sed 's/\./_/g'`
@@ -177,13 +175,12 @@ ASM_SOURCES_XXX := \
 	lib/accelerated/x86/XXX/ghash-x86_64.s \
 	lib/accelerated/x86/XXX/aesni-x86_64.s \
 	lib/accelerated/x86/XXX/aesni-x86.s \
-	lib/accelerated/x86/XXX/e_padlock-x86_64.s \
-	lib/accelerated/x86/XXX/e_padlock-x86.s \
 	lib/accelerated/x86/XXX/sha1-ssse3-x86.s \
 	lib/accelerated/x86/XXX/sha1-ssse3-x86_64.s \
 	lib/accelerated/x86/XXX/sha256-ssse3-x86.s \
 	lib/accelerated/x86/XXX/sha512-ssse3-x86.s \
 	lib/accelerated/x86/XXX/sha512-ssse3-x86_64.s \
+	lib/accelerated/x86/XXX/aesni-gcm-x86_64.s \
 	lib/accelerated/x86/XXX/aes-ssse3-x86.s \
 	lib/accelerated/x86/XXX/aes-ssse3-x86_64.s
 
@@ -200,7 +197,8 @@ X86_FILES=XXX/aesni-x86.s XXX/cpuid-x86.s XXX/sha1-ssse3-x86.s \
 	XXX/sha256-ssse3-x86.s XXX/sha512-ssse3-x86.s XXX/aes-ssse3-x86.s
 
 X86_64_FILES=XXX/aesni-x86_64.s XXX/cpuid-x86_64.s XXX/ghash-x86_64.s \
-	XXX/sha1-ssse3-x86_64.s XXX/sha512-ssse3-x86_64.s XXX/aes-ssse3-x86_64.s
+	XXX/sha1-ssse3-x86_64.s XXX/sha512-ssse3-x86_64.s XXX/aes-ssse3-x86_64.s \
+	XXX/aesni-gcm-x86_64.s
 
 X86_PADLOCK_FILES=XXX/e_padlock-x86.s
 X86_64_PADLOCK_FILES=XXX/e_padlock-x86_64.s
@@ -237,25 +235,25 @@ lib/accelerated/x86/files.mk: $(ASM_SOURCES_ELF)
 # Appro's code
 lib/accelerated/x86/elf/%.s: devel/perlasm/%.pl .submodule.stamp 
 	cat $<.license > $@
-	perl $< elf >> $@
+	CC=gcc perl $< elf >> $@
 	echo "" >> $@
 	echo ".section .note.GNU-stack,\"\",%progbits" >> $@
 	sed -i 's/OPENSSL_ia32cap_P/_gnutls_x86_cpuid_s/g' $@
 
 lib/accelerated/x86/coff/%-x86.s: devel/perlasm/%-x86.pl .submodule.stamp 
 	cat $<.license > $@
-	perl $< coff >> $@
+	CC=gcc perl $< coff >> $@
 	echo "" >> $@
 	sed -i 's/OPENSSL_ia32cap_P/_gnutls_x86_cpuid_s/g' $@
 
 lib/accelerated/x86/coff/%-x86_64.s: devel/perlasm/%-x86_64.pl .submodule.stamp 
 	cat $<.license > $@
-	perl $< mingw64 >> $@
+	CC=gcc perl $< mingw64 >> $@
 	echo "" >> $@
 	sed -i 's/OPENSSL_ia32cap_P/_gnutls_x86_cpuid_s/g' $@
 
 lib/accelerated/x86/macosx/%.s: devel/perlasm/%.pl .submodule.stamp 
 	cat $<.license > $@
-	perl $< macosx >> $@
+	CC=gcc perl $< macosx >> $@
 	echo "" >> $@
 	sed -i 's/OPENSSL_ia32cap_P/_gnutls_x86_cpuid_s/g' $@

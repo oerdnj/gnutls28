@@ -19,9 +19,9 @@
  */
 
 #include "gnutls_int.h"
-#include "gnutls_auth.h"
-#include "gnutls_errors.h"
-#include "gnutls_num.h"
+#include "auth.h"
+#include "errors.h"
+#include "num.h"
 #include <ext/dumbfw.h>
 
 /* This extension adds additional padding data in the TLS client hello.
@@ -35,8 +35,8 @@
 static int _gnutls_dumbfw_send_params(gnutls_session_t session,
 				    gnutls_buffer_st * extdata);
 
-extension_entry_st ext_mod_dumbfw = {
-	.name = "DUMBFW",
+const extension_entry_st ext_mod_dumbfw = {
+	.name = "ClientHello Padding",
 	.type = GNUTLS_EXTENSION_DUMBFW,
 	.parse_type = GNUTLS_EXT_APPLICATION,
 

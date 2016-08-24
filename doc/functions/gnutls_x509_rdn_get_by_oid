@@ -2,7 +2,7 @@
 
 
 
-@deftypefun {int} {gnutls_x509_rdn_get_by_oid} (const gnutls_datum_t * @var{idn}, const char * @var{oid}, int @var{indx}, unsigned int @var{raw_flag}, void * @var{buf}, size_t * @var{buf_size})
+@deftypefun {int} {gnutls_x509_rdn_get_by_oid} (const gnutls_datum_t * @var{idn}, const char * @var{oid}, unsigned @var{indx}, unsigned int @var{raw_flag}, void * @var{buf}, size_t * @var{buf_size})
 @var{idn}: should contain a DER encoded RDN sequence
 
 @var{oid}: an Object Identifier

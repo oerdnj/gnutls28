@@ -7,7 +7,7 @@
 
 @var{crq}: holds a certificate request
 
-This function will set extensions from the given request to the
+This function will set the extensions from the given request to the
 certificate.
 
 @strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (0) is returned, otherwise a

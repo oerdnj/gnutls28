@@ -2,7 +2,7 @@
 
 
 
-@deftypefun {int} {gnutls_pkcs7_get_crl_raw} (gnutls_pkcs7_t @var{pkcs7}, int @var{indx}, void * @var{crl}, size_t * @var{crl_size})
+@deftypefun {int} {gnutls_pkcs7_get_crl_raw} (gnutls_pkcs7_t @var{pkcs7}, unsigned @var{indx}, void * @var{crl}, size_t * @var{crl_size})
 @var{pkcs7}: The pkcs7 type
 
 @var{indx}: contains the index of the crl to extract

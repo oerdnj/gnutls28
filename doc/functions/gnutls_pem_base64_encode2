@@ -16,6 +16,12 @@ data.
 
 You should use @code{gnutls_free()}  to free the returned data.
 
+Note, that prior to GnuTLS 3.4.0 this function was available
+under the name @code{gnutls_pem_base64_encode_alloc()} . There is
+compatibility macro pointing to this function.
+
 @strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (0) is returned, otherwise
 an error code is returned.
+
+@strong{Since:} 3.4.0
 @end deftypefun

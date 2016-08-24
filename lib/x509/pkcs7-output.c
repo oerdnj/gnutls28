@@ -20,12 +20,12 @@
  *
  */
 
-#include <gnutls_int.h>
+#include "gnutls_int.h"
 #include <common.h>
-#include <gnutls_x509.h>
+#include <x509.h>
 #include <x509_int.h>
-#include <gnutls_num.h>
-#include <gnutls_errors.h>
+#include <num.h>
+#include "errors.h"
 #include <extras/randomart.h>
 #include <c-ctype.h>
 #include <gnutls-idna.h>
@@ -176,8 +176,7 @@ int gnutls_pkcs7_print(gnutls_pkcs7_t pkcs7,
 		       gnutls_certificate_print_formats_t format,
 		       gnutls_datum_t * out)
 {
-	unsigned i;
-	int count, ret;
+	int count, ret, i;
 	gnutls_pkcs7_signature_info_st info;
 	gnutls_buffer_st str;
 
@@ -192,6 +191,7 @@ int gnutls_pkcs7_print(gnutls_pkcs7_t pkcs7,
 			break;
 
 		print_pkcs7_info(&info, &str, format);
+		gnutls_pkcs7_signature_info_deinit(&info);
 	}
 
 	if (format == GNUTLS_CRT_PRINT_FULL) {

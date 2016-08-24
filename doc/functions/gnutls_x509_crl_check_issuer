@@ -2,7 +2,7 @@
 
 
 
-@deftypefun {int} {gnutls_x509_crl_check_issuer} (gnutls_x509_crl_t @var{crl}, gnutls_x509_crt_t @var{issuer})
+@deftypefun {unsigned} {gnutls_x509_crl_check_issuer} (gnutls_x509_crl_t @var{crl}, gnutls_x509_crt_t @var{issuer})
 @var{crl}: is the CRL to be checked
 
 @var{issuer}: is the certificate of a possible issuer

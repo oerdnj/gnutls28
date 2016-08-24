@@ -244,6 +244,12 @@
 </para>
 
 
+<!-- ##### MACRO DTLS_RECORD_WINDOW_SIZE ##### -->
+<para>
+
+</para>
+
+
 <!-- ##### MACRO ECC_A ##### -->
 <para>
 
@@ -382,6 +388,18 @@
 
 
 <!-- ##### MACRO SESSION_TICKET_IV_SIZE ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO SESSION_TICKET_KEY_NAME_SIZE ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO SESSION_TICKET_KEY_SIZE ##### -->
 <para>
 
 </para>
@@ -2461,6 +2479,98 @@
 @cred: 
 @func: 
 
+<!-- ##### FUNCTION gnutls_certificate_type_get_id ##### -->
+<para>
+
+</para>
+
+@name: 
+@Returns: 
+
+<!-- ##### FUNCTION gnutls_certificate_type_get_name ##### -->
+<para>
+
+</para>
+
+@type: 
+@Returns: 
+
+<!-- ##### FUNCTION gnutls_certificate_type_list ##### -->
+<para>
+
+</para>
+
+@void: 
+@Returns: 
+
+<!-- ##### FUNCTION gnutls_cipher_get_id ##### -->
+<para>
+
+</para>
+
+@name: 
+@Returns: 
+
+<!-- ##### FUNCTION gnutls_cipher_get_key_size ##### -->
+<para>
+
+</para>
+
+@algorithm: 
+@Returns: 
+
+<!-- ##### FUNCTION gnutls_cipher_list ##### -->
+<para>
+
+</para>
+
+@void: 
+@Returns: 
+
+<!-- ##### FUNCTION gnutls_cipher_suite_info ##### -->
+<para>
+
+</para>
+
+@idx: 
+@cs_id: 
+@kx: 
+@cipher: 
+@mac: 
+@min_version: 
+@Returns: 
+
+<!-- ##### FUNCTION gnutls_compression_get_id ##### -->
+<para>
+
+</para>
+
+@name: 
+@Returns: 
+
+<!-- ##### FUNCTION gnutls_compression_get_name ##### -->
+<para>
+
+</para>
+
+@algorithm: 
+@Returns: 
+
+<!-- ##### FUNCTION gnutls_compression_list ##### -->
+<para>
+
+</para>
+
+@void: 
+@Returns: 
+
+<!-- ##### FUNCTION gnutls_credentials_clear ##### -->
+<para>
+
+</para>
+
+@session: 
+
 <!-- ##### FUNCTION gnutls_crypto_cipher_register ##### -->
 <para>
 
@@ -2488,6 +2598,38 @@
 @s: 
 @Returns: 
 
+<!-- ##### FUNCTION gnutls_ecc_curve_get ##### -->
+<para>
+
+</para>
+
+@session: 
+@Returns: 
+
+<!-- ##### FUNCTION gnutls_ecc_curve_get_name ##### -->
+<para>
+
+</para>
+
+@curve: 
+@Returns: 
+
+<!-- ##### FUNCTION gnutls_ecc_curve_get_size ##### -->
+<para>
+
+</para>
+
+@curve: 
+@Returns: 
+
+<!-- ##### FUNCTION gnutls_ecc_curve_list ##### -->
+<para>
+
+</para>
+
+@void: 
+@Returns: 
+
 <!-- ##### STRUCT gnutls_ecdh_params_int ##### -->
 <para>
 
@@ -2499,6 +2641,15 @@
 
 </para>
 
+
+<!-- ##### FUNCTION gnutls_error_to_alert ##### -->
+<para>
+
+</para>
+
+@err: 
+@level: 
+@Returns: 
 
 <!-- ##### VARIABLE gnutls_free ##### -->
 <para>
@@ -2560,6 +2711,25 @@
 @Param2: 
 @Returns: 
 
+<!-- ##### FUNCTION gnutls_handshake_set_private_extensions ##### -->
+<para>
+
+</para>
+
+@session: 
+@allow: 
+
+<!-- ##### FUNCTION gnutls_hash_fast ##### -->
+<para>
+
+</para>
+
+@algorithm: 
+@text: 
+@textlen: 
+@digest: 
+@Returns: 
+
 <!-- ##### FUNCTION gnutls_heartbeat_timeout ##### -->
 <para>
 
@@ -2567,6 +2737,86 @@
 
 @session: 
 @check_only: 
+@Returns: 
+
+<!-- ##### FUNCTION gnutls_hmac_fast ##### -->
+<para>
+
+</para>
+
+@algorithm: 
+@key: 
+@keylen: 
+@text: 
+@textlen: 
+@digest: 
+@Returns: 
+
+<!-- ##### FUNCTION gnutls_hmac_init ##### -->
+<para>
+
+</para>
+
+@dig: 
+@algorithm: 
+@key: 
+@keylen: 
+@Returns: 
+
+<!-- ##### FUNCTION gnutls_kx_get_id ##### -->
+<para>
+
+</para>
+
+@name: 
+@Returns: 
+
+<!-- ##### FUNCTION gnutls_kx_get_name ##### -->
+<para>
+
+</para>
+
+@algorithm: 
+@Returns: 
+
+<!-- ##### FUNCTION gnutls_kx_list ##### -->
+<para>
+
+</para>
+
+@void: 
+@Returns: 
+
+<!-- ##### FUNCTION gnutls_mac_get_id ##### -->
+<para>
+
+</para>
+
+@name: 
+@Returns: 
+
+<!-- ##### FUNCTION gnutls_mac_get_key_size ##### -->
+<para>
+
+</para>
+
+@algorithm: 
+@Returns: 
+
+<!-- ##### FUNCTION gnutls_mac_get_name ##### -->
+<para>
+
+</para>
+
+@algorithm: 
+@Returns: 
+
+<!-- ##### FUNCTION gnutls_mac_list ##### -->
+<para>
+
+</para>
+
+@void: 
 @Returns: 
 
 <!-- ##### VARIABLE gnutls_malloc ##### -->
@@ -2580,6 +2830,39 @@
 
 </para>
 
+
+<!-- ##### FUNCTION gnutls_pk_get_id ##### -->
+<para>
+
+</para>
+
+@name: 
+@Returns: 
+
+<!-- ##### FUNCTION gnutls_pk_get_name ##### -->
+<para>
+
+</para>
+
+@algorithm: 
+@Returns: 
+
+<!-- ##### FUNCTION gnutls_pk_list ##### -->
+<para>
+
+</para>
+
+@void: 
+@Returns: 
+
+<!-- ##### FUNCTION gnutls_pk_to_sign ##### -->
+<para>
+
+</para>
+
+@pk: 
+@hash: 
+@Returns: 
 
 <!-- ##### USER_FUNCTION gnutls_process_client_certificate ##### -->
 <para>
@@ -2641,6 +2924,30 @@
 @Param3: 
 @Returns: 
 
+<!-- ##### FUNCTION gnutls_protocol_get_id ##### -->
+<para>
+
+</para>
+
+@name: 
+@Returns: 
+
+<!-- ##### FUNCTION gnutls_protocol_get_version ##### -->
+<para>
+
+</para>
+
+@session: 
+@Returns: 
+
+<!-- ##### FUNCTION gnutls_protocol_list ##### -->
+<para>
+
+</para>
+
+@void: 
+@Returns: 
+
 <!-- ##### FUNCTION gnutls_pubkey_get_verify_algorithm ##### -->
 <para>
 
@@ -2692,6 +2999,29 @@
 </para>
 
 
+<!-- ##### FUNCTION gnutls_session_enable_compatibility_mode ##### -->
+<para>
+
+</para>
+
+@session: 
+
+<!-- ##### FUNCTION gnutls_session_set_data ##### -->
+<para>
+
+</para>
+
+@session: 
+@session_data: 
+@session_data_size: 
+@Returns: 
+
+<!-- ##### MACRO gnutls_sign_algorithm_get_name ##### -->
+<para>
+
+</para>
+
+
 <!-- ##### FUNCTION gnutls_sign_algorithm_set ##### -->
 <para>
 
@@ -2708,6 +3038,54 @@
 @session: 
 @sign_func: 
 @userdata: 
+
+<!-- ##### FUNCTION gnutls_sign_get_hash_algorithm ##### -->
+<para>
+
+</para>
+
+@sign: 
+@Returns: 
+
+<!-- ##### FUNCTION gnutls_sign_get_id ##### -->
+<para>
+
+</para>
+
+@name: 
+@Returns: 
+
+<!-- ##### FUNCTION gnutls_sign_get_name ##### -->
+<para>
+
+</para>
+
+@algorithm: 
+@Returns: 
+
+<!-- ##### FUNCTION gnutls_sign_get_pk_algorithm ##### -->
+<para>
+
+</para>
+
+@sign: 
+@Returns: 
+
+<!-- ##### FUNCTION gnutls_sign_is_secure ##### -->
+<para>
+
+</para>
+
+@algorithm: 
+@Returns: 
+
+<!-- ##### FUNCTION gnutls_sign_list ##### -->
+<para>
+
+</para>
+
+@void: 
+@Returns: 
 
 <!-- ##### VARIABLE gnutls_srp_1024_group_generator ##### -->
 <para>
@@ -2775,6 +3153,14 @@
 </para>
 
 @Param1: 
+@Returns: 
+
+<!-- ##### FUNCTION gnutls_strerror_name ##### -->
+<para>
+
+</para>
+
+@error: 
 @Returns: 
 
 <!-- ##### FUNCTION gnutls_system_global_deinit ##### -->

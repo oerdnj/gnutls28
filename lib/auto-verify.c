@@ -21,7 +21,7 @@
  */
 
 #include "gnutls_int.h"
-#include "gnutls_errors.h"
+#include "errors.h"
 #include <auth/cert.h>
 #include <gnutls/gnutls.h>
 

@@ -20,9 +20,9 @@
  *
  */
 
-#include <gnutls_int.h>
+#include "gnutls_int.h"
 #include <ext/safe_renegotiation.h>
-#include <gnutls_errors.h>
+#include "errors.h"
 
 
 static int _gnutls_sr_recv_params(gnutls_session_t state,
@@ -31,8 +31,8 @@ static int _gnutls_sr_send_params(gnutls_session_t state,
 				  gnutls_buffer_st *);
 static void _gnutls_sr_deinit_data(extension_priv_data_t priv);
 
-extension_entry_st ext_mod_sr = {
-	.name = "SAFE RENEGOTIATION",
+const extension_entry_st ext_mod_sr = {
+	.name = "Safe Renegotiation",
 	.type = GNUTLS_EXTENSION_SAFE_RENEGOTIATION,
 	.parse_type = GNUTLS_EXT_MANDATORY,
 

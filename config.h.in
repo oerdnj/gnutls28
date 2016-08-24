@@ -105,6 +105,15 @@
 /* enable SRP authentication */
 #undef ENABLE_SRP
 
+/* enable SSL2.0 support for client hello */
+#undef ENABLE_SSL2
+
+/* enable SSL3.0 support */
+#undef ENABLE_SSL3
+
+/* The FIPS140-2 integrity key */
+#undef FIPS_KEY
+
 /* fopen(3) accepts a 'b' in the mode flag */
 #undef FOPEN_BINARY_FLAG
 
@@ -292,9 +301,6 @@
 /* Additional cast to bring void* to a type castable to int. */
 #undef GNUTLS_POINTER_TO_INT_CAST
 
-/* Define to 1 if you have the `alarm' function. */
-#undef HAVE_ALARM
-
 /* Define to 1 if you have 'alloca' after including <alloca.h>, a header that
    may be supplied by this distribution. */
 #undef HAVE_ALLOCA
@@ -303,14 +309,8 @@
    */
 #undef HAVE_ALLOCA_H
 
-/* Define to 1 if you have the `argp_usage' function. */
-#undef HAVE_ARGP_USAGE
-
 /* Define to 1 if you have the <arpa/inet.h> header file. */
 #undef HAVE_ARPA_INET_H
-
-/* Define to 1 if you have the `atexit' function. */
-#undef HAVE_ATEXIT
 
 /* Define to 1 if you have the <bp-sym.h> header file. */
 #undef HAVE_BP_SYM_H
@@ -321,11 +321,11 @@
 /* Define to 1 if you have the `canonicalize_file_name' function. */
 #undef HAVE_CANONICALIZE_FILE_NAME
 
-/* Define to 1 if you have the MacOS X function CFLocaleCopyCurrent in the
+/* Define to 1 if you have the Mac OS X function CFLocaleCopyCurrent in the
    CoreFoundation framework. */
 #undef HAVE_CFLOCALECOPYCURRENT
 
-/* Define to 1 if you have the MacOS X function CFPreferencesCopyAppValue in
+/* Define to 1 if you have the Mac OS X function CFPreferencesCopyAppValue in
    the CoreFoundation framework. */
 #undef HAVE_CFPREFERENCESCOPYAPPVALUE
 
@@ -511,14 +511,11 @@
 /* Define to 1 if you don't have `vprintf' but do have `_doprnt.' */
 #undef HAVE_DOPRNT
 
-/* Define to 1 if you have the `dup2' function. */
+/* Define to 1 if you have the 'dup2' function. */
 #undef HAVE_DUP2
 
 /* Define if you have the declaration of environ. */
 #undef HAVE_ENVIRON_DECL
-
-/* Define to 1 if you have the `epoll_create' function. */
-#undef HAVE_EPOLL_CREATE
 
 /* Define to 1 if you have the <errno.h> header file. */
 #undef HAVE_ERRNO_H
@@ -534,6 +531,9 @@
 
 /* Define to 1 if you have the `flockfile' function. */
 #undef HAVE_FLOCKFILE
+
+/* Define to 1 if you have the `fmemopen' function. */
+#undef HAVE_FMEMOPEN
 
 /* Define to 1 if you have the `fork' function. */
 #undef HAVE_FORK
@@ -620,8 +620,8 @@
 /* Define to 1 if you have the `issetugid' function. */
 #undef HAVE_ISSETUGID
 
-/* Define to 1 if you have the `kqueue' function. */
-#undef HAVE_KQUEUE
+/* Define if you have the libcrypto library. */
+#undef HAVE_LIBCRYPTO
 
 /* Define if you have the libdl library. */
 #undef HAVE_LIBDL
@@ -656,6 +656,9 @@
 /* Define if you have the librt library. */
 #undef HAVE_LIBRT
 
+/* Define if you have the libseccomp library. */
+#undef HAVE_LIBSECCOMP
+
 /* Define if you have the libz library. */
 #undef HAVE_LIBZ
 
@@ -671,7 +674,7 @@
 /* Define to 1 if you have the `localtime_r' function. */
 #undef HAVE_LOCALTIME_R
 
-/* Define to 1 if the system has the type `long long int'. */
+/* Define to 1 if the system has the type 'long long int'. */
 #undef HAVE_LONG_LONG_INT
 
 /* Define if the 'malloc' function is POSIX compliant. */
@@ -684,17 +687,11 @@
 /* Define to 1 if you have the `mbrtowc' function. */
 #undef HAVE_MBRTOWC
 
-/* Define to 1 if you have the `memchr' function. */
-#undef HAVE_MEMCHR
-
 /* Define to 1 if you have the `memmem' function. */
 #undef HAVE_MEMMEM
 
 /* Define to 1 if you have the <memory.h> header file. */
 #undef HAVE_MEMORY_H
-
-/* Define to 1 if you have the `memset' function. */
-#undef HAVE_MEMSET
 
 /* Define to 1 if <limits.h> defines the MIN and MAX macros. */
 #undef HAVE_MINMAX_IN_LIMITS_H
@@ -712,9 +709,6 @@
    concept. */
 #undef HAVE_MSVC_INVALID_PARAMETER_HANDLER
 
-/* Define to 1 if you have the `munmap' function. */
-#undef HAVE_MUNMAP
-
 /* Define to 1 if you have the `nanosleep' function. */
 #undef HAVE_NANOSLEEP
 
@@ -730,6 +724,9 @@
 /* Define to 1 if you have the <netinet/in.h> header file. */
 #undef HAVE_NETINET_IN_H
 
+/* Define to 1 if you have the <netinet/tcp.h> header file. */
+#undef HAVE_NETINET_TCP_H
+
 /* Define to 1 if you have the <OS.h> header file. */
 #undef HAVE_OS_H
 
@@ -744,9 +741,6 @@
 
 /* Define to 1 if the system has the type `ptrdiff_t'. */
 #undef HAVE_PTRDIFF_T
-
-/* Define to 1 if you have the `putenv' function. */
-#undef HAVE_PUTENV
 
 /* Define to 1 if accept is declared even after undefining macros. */
 #undef HAVE_RAW_DECL_ACCEPT
@@ -1370,17 +1364,11 @@
 /* Define this if we have a functional realpath(3C) */
 #undef HAVE_REALPATH
 
-/* Define to 1 if you have the `regcomp' function. */
-#undef HAVE_REGCOMP
-
 /* Define to 1 if you have the <runetype.h> header file. */
 #undef HAVE_RUNETYPE_H
 
 /* Define to 1 if the system has the type `sa_family_t'. */
 #undef HAVE_SA_FAMILY_T
-
-/* Define to 1 if you have the `scandir' function. */
-#undef HAVE_SCANDIR
 
 /* Define to 1 if you have the `scm_gc_malloc_pointerless' function. */
 #undef HAVE_SCM_GC_MALLOC_POINTERLESS
@@ -1391,14 +1379,14 @@
 /* Define to 1 if you have the `secure_getenv' function. */
 #undef HAVE_SECURE_GETENV
 
-/* Define to 1 if you have the `select' function. */
-#undef HAVE_SELECT
-
 /* Define to 1 if you have the `setdtablesize' function. */
 #undef HAVE_SETDTABLESIZE
 
 /* Define to 1 if you have the `setenv' function. */
 #undef HAVE_SETENV
+
+/* Define to 1 if you have the `setitimer' function. */
+#undef HAVE_SETITIMER
 
 /* Define to 1 if you have the <setjmp.h> header file. */
 #undef HAVE_SETJMP_H
@@ -1429,9 +1417,6 @@
    buffer had been large enough. */
 #undef HAVE_SNPRINTF_RETVAL_C99
 
-/* Define to 1 if you have the `socket' function. */
-#undef HAVE_SOCKET
-
 /* Define to 1 if you have the <stdarg.h> header file. */
 #undef HAVE_STDARG_H
 
@@ -1460,9 +1445,6 @@
 /* Define to 1 if you have the `strdup' function. */
 #undef HAVE_STRDUP
 
-/* Define to 1 if you have the `strerror' function. */
-#undef HAVE_STRERROR
-
 /* Define to 1 if you have the `strerror_r' function. */
 #undef HAVE_STRERROR_R
 
@@ -1490,17 +1472,14 @@
 /* Define to 1 if you have the `strsignal' function. */
 #undef HAVE_STRSIGNAL
 
-/* Define to 1 if you have the `strstr' function. */
-#undef HAVE_STRSTR
-
 /* Define to 1 if you have the `strtok_r' function. */
 #undef HAVE_STRTOK_R
 
-/* Define to 1 if you have the `strtoul' function. */
-#undef HAVE_STRTOUL
-
 /* Define to 1 if the system has the type `struct addrinfo'. */
 #undef HAVE_STRUCT_ADDRINFO
+
+/* Define to 1 if `iov_basea' is a member of `struct iovec'. */
+#undef HAVE_STRUCT_IOVEC_IOV_BASEA
 
 /* Define to 1 if `sa_len' is a member of `struct sockaddr'. */
 #undef HAVE_STRUCT_SOCKADDR_SA_LEN
@@ -1516,6 +1495,9 @@
 
 /* Define to 1 if you have the `strverscmp' function. */
 #undef HAVE_STRVERSCMP
+
+/* Define to 1 if you have the `symlink' function. */
+#undef HAVE_SYMLINK
 
 /* Define to 1 if you have the <sysexits.h> header file. */
 #undef HAVE_SYSEXITS_H
@@ -1620,16 +1602,13 @@
 /* Define to 1 if the system has the type `uint_t'. */
 #undef HAVE_UINT_T
 
-/* Define to 1 if you have the `uname' function. */
-#undef HAVE_UNAME
-
 /* Define to 1 if you have the <unistd.h> header file. */
 #undef HAVE_UNISTD_H
 
 /* Define to 1 if you have the `unsetenv' function. */
 #undef HAVE_UNSETENV
 
-/* Define to 1 if the system has the type `unsigned long long int'. */
+/* Define to 1 if the system has the type 'unsigned long long int'. */
 #undef HAVE_UNSIGNED_LONG_LONG_INT
 
 /* Define to 1 if you have the <utime.h> header file. */
@@ -1731,8 +1710,7 @@
 /* Define to 1 if lseek does not detect pipes. */
 #undef LSEEK_PIPE_BROKEN
 
-/* Define to the sub-directory in which libtool stores uninstalled libraries.
-   */
+/* Define to the sub-directory where libtool stores uninstalled libraries. */
 #undef LT_OBJDIR
 
 /* If malloc(0) is != NULL, define this to 1. Otherwise define this to 0. */
@@ -1786,18 +1764,6 @@
 
 /* Define if vasnprintf exists but is overridden by gnulib. */
 #undef REPLACE_VASNPRINTF
-
-/* Define as the return type of signal handlers (`int' or `void'). */
-#undef RETSIGTYPE
-
-/* Define to the type of arg 1 for `select'. */
-#undef SELECT_TYPE_ARG1
-
-/* Define to the type of args 2, 3 and 4 for `select'. */
-#undef SELECT_TYPE_ARG234
-
-/* Define to the type of arg 5 for `select'. */
-#undef SELECT_TYPE_ARG5
 
 /* Define to l, ll, u, ul, ull, etc., as suitable for constants of type
    'sig_atomic_t'. */
@@ -2004,28 +1970,13 @@
    'reference to static identifier "f" in extern inline function'.
    This bug was observed with Sun C 5.12 SunOS_i386 2011/11/16.
 
-   Suppress extern inline (with or without __attribute__ ((__gnu_inline__)))
-   on configurations that mistakenly use 'static inline' to implement
-   functions or macros in standard C headers like <ctype.h>.  For example,
-   if isdigit is mistakenly implemented via a static inline function,
-   a program containing an extern inline function that calls isdigit
-   may not work since the C standard prohibits extern inline functions
-   from calling static functions.  This bug is known to occur on:
-
-     OS X 10.8 and earlier; see:
-     http://lists.gnu.org/archive/html/bug-gnulib/2012-12/msg00023.html
-
-     DragonFly; see
-     http://muscles.dragonflybsd.org/bulk/bleeding-edge-potential/latest-per-pkg/ah-tty-0.3.12.log
-
-     FreeBSD; see:
-     http://lists.gnu.org/archive/html/bug-gnulib/2014-07/msg00104.html
-
+   Suppress the use of extern inline on problematic Apple configurations.
+   OS X 10.8 and earlier mishandle it; see, e.g.,
+   <http://lists.gnu.org/archive/html/bug-gnulib/2012-12/msg00023.html>.
    OS X 10.9 has a macro __header_inline indicating the bug is fixed for C and
    for clang but remains for g++; see <http://trac.macports.org/ticket/41033>.
-   Assume DragonFly and FreeBSD will be similar.  */
-#if (((defined __APPLE__ && defined __MACH__) \
-      || defined __DragonFly__ || defined __FreeBSD__) \
+   Perhaps Apple will fix this some day.  */
+#if (defined __APPLE__ \
      && (defined __header_inline \
          ? (defined __cplusplus && defined __GNUC_STDC_INLINE__ \
             && ! defined __clang__) \
@@ -2033,20 +1984,19 @@
              && (defined __GNUC__ || defined __cplusplus)) \
             || (defined _FORTIFY_SOURCE && 0 < _FORTIFY_SOURCE \
                 && defined __GNUC__ && ! defined __cplusplus))))
-# define _GL_EXTERN_INLINE_STDHEADER_BUG
+# define _GL_EXTERN_INLINE_APPLE_BUG
 #endif
 #if ((__GNUC__ \
       ? defined __GNUC_STDC_INLINE__ && __GNUC_STDC_INLINE__ \
       : (199901L <= __STDC_VERSION__ \
          && !defined __HP_cc \
-         && !defined __PGI \
          && !(defined __SUNPRO_C && __STDC__))) \
-     && !defined _GL_EXTERN_INLINE_STDHEADER_BUG)
+     && !defined _GL_EXTERN_INLINE_APPLE_BUG)
 # define _GL_INLINE inline
 # define _GL_EXTERN_INLINE extern inline
 # define _GL_EXTERN_INLINE_IN_USE
 #elif (2 < __GNUC__ + (7 <= __GNUC_MINOR__) && !defined __STRICT_ANSI__ \
-       && !defined _GL_EXTERN_INLINE_STDHEADER_BUG)
+       && !defined _GL_EXTERN_INLINE_APPLE_BUG)
 # if defined __GNUC_GNU_INLINE__ && __GNUC_GNU_INLINE__
    /* __gnu_inline__ suppresses a GCC 4.2 diagnostic.  */
 #  define _GL_INLINE extern inline __attribute__ ((__gnu_inline__))
@@ -2060,19 +2010,17 @@
 # define _GL_EXTERN_INLINE static _GL_UNUSED
 #endif
 
-/* In GCC 4.6 (inclusive) to 5.1 (exclusive),
-   suppress bogus "no previous prototype for 'FOO'"
-   and "no previous declaration for 'FOO'" diagnostics,
-   when FOO is an inline function in the header; see
-   <https://gcc.gnu.org/bugzilla/show_bug.cgi?id=54113> and
-   <https://gcc.gnu.org/bugzilla/show_bug.cgi?id=63877>.  */
-#if __GNUC__ == 4 && 6 <= __GNUC_MINOR__
+#if 4 < __GNUC__ + (6 <= __GNUC_MINOR__)
 # if defined __GNUC_STDC_INLINE__ && __GNUC_STDC_INLINE__
 #  define _GL_INLINE_HEADER_CONST_PRAGMA
 # else
 #  define _GL_INLINE_HEADER_CONST_PRAGMA \
      _Pragma ("GCC diagnostic ignored \"-Wsuggest-attribute=const\"")
 # endif
+  /* Suppress GCC's bogus "no previous prototype for 'FOO'"
+     and "no previous declaration for 'FOO'"  diagnostics,
+     when FOO is an inline function in the header; see
+     <http://gcc.gnu.org/bugzilla/show_bug.cgi?id=54113>.  */
 # define _GL_INLINE_HEADER_BEGIN \
     _Pragma ("GCC diagnostic push") \
     _Pragma ("GCC diagnostic ignored \"-Wmissing-prototypes\"") \

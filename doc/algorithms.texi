@@ -629,7 +629,9 @@
 @table @code
 @item RSA
 @item DSA
-@item EC
+@item EC/ECDSA
+@item DH
+@item ECDHX
 @end table
 
 @heading Public key signature algorithms
@@ -662,6 +664,7 @@
 @item SECP256R1
 @item SECP384R1
 @item SECP521R1
+@item X25519
 @end table
 
 @heading Compression methods

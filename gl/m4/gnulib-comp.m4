@@ -46,8 +46,6 @@ AC_DEFUN([gl_EARLY],
   # Code from module alloca:
   # Code from module alloca-opt:
   # Code from module alloca-opt-tests:
-  # Code from module base64:
-  # Code from module base64-tests:
   # Code from module binary-io:
   # Code from module binary-io-tests:
   # Code from module byteswap:
@@ -212,7 +210,6 @@ LTALLOCA=`echo "$ALLOCA" | sed -e 's/\.[^.]* /.lo /g;s/\.[^.]*$/.lo/'`
 changequote([, ])dnl
 AC_SUBST([LTALLOCA])
   gl_FUNC_ALLOCA
-  gl_FUNC_BASE64
   gl_BYTESWAP
   gl_HEADER_ERRNO_H
   AC_REQUIRE([gl_EXTERN_INLINE])
@@ -587,8 +584,6 @@ AC_DEFUN([gl_FILE_LIST], [
   lib/alloca.in.h
   lib/asnprintf.c
   lib/asprintf.c
-  lib/base64.c
-  lib/base64.h
   lib/byteswap.in.h
   lib/c-ctype.c
   lib/c-ctype.h
@@ -666,7 +661,6 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/00gnulib.m4
   m4/absolute-header.m4
   m4/alloca.m4
-  m4/base64.m4
   m4/byteswap.m4
   m4/ctype.m4
   m4/errno_h.m4
@@ -761,7 +755,6 @@ AC_DEFUN([gl_FILE_LIST], [
   tests/macros.h
   tests/signature.h
   tests/test-alloca-opt.c
-  tests/test-base64.c
   tests/test-binary-io.c
   tests/test-binary-io.sh
   tests/test-byteswap.c

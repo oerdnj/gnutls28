@@ -107,27 +107,30 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
-@ENABLE_CRYWRAP_TRUE@am__append_1 = crywrap
-@NEED_LIBOPTS_TRUE@am__append_2 = libopts
-@NEED_LIBOPTS_TRUE@am__append_3 = -I$(srcdir)/libopts
+@NEED_LIBOPTS_TRUE@am__append_1 = libopts
+@NEED_LIBOPTS_TRUE@am__append_2 = -I$(srcdir)/libopts
 bin_PROGRAMS = psktool$(EXEEXT) gnutls-cli-debug$(EXEEXT) \
 	certtool$(EXEEXT) $(am__EXEEXT_1) $(am__EXEEXT_2) \
 	$(am__EXEEXT_3) $(am__EXEEXT_4) $(am__EXEEXT_5) \
 	$(am__EXEEXT_6)
-@ENABLE_SRP_TRUE@am__append_4 = srptool
-@ENABLE_OCSP_TRUE@am__append_5 = ocsptool gnutls-serv 
-@ENABLE_ANON_TRUE@@ENABLE_OCSP_TRUE@am__append_6 = gnutls-cli
-@ENABLE_DANE_TRUE@am__append_7 = danetool
-@ENABLE_TROUSERS_TRUE@am__append_8 = tpmtool
+@ENABLE_SRP_TRUE@am__append_3 = srptool
+@ENABLE_OCSP_TRUE@am__append_4 = ocsptool gnutls-serv 
+@ENABLE_ANON_TRUE@@ENABLE_OCSP_TRUE@am__append_5 = gnutls-cli
+@ENABLE_DANE_TRUE@am__append_6 = danetool
 noinst_PROGRAMS = systemkey$(EXEEXT)
-@ENABLE_PKCS11_TRUE@am__append_9 = p11tool
-@ENABLE_SRP_TRUE@am__append_10 = libcmd-srp.la
-@ENABLE_OCSP_TRUE@am__append_11 = libcmd-ocsp.la libcmd-serv.la
-@ENABLE_ANON_TRUE@@ENABLE_DANE_TRUE@@ENABLE_OCSP_TRUE@am__append_12 = ../libdane/libgnutls-dane.la
-@ENABLE_ANON_TRUE@@ENABLE_OCSP_TRUE@am__append_13 = libcmd-cli.la
-@ENABLE_DANE_TRUE@am__append_14 = ../libdane/libgnutls-dane.la
-@ENABLE_PKCS11_TRUE@am__append_15 = libcmd-p11tool.la
-@ENABLE_TROUSERS_TRUE@am__append_16 = libcmd-tpmtool.la
+
+# TPM makes use of PKCS #11 callbacks
+@ENABLE_PKCS11_TRUE@@ENABLE_TROUSERS_TRUE@am__append_7 = tpmtool
+@ENABLE_PKCS11_TRUE@am__append_8 = p11tool
+@ENABLE_SRP_TRUE@am__append_9 = libcmd-srp.la
+@ENABLE_OCSP_TRUE@am__append_10 = libcmd-ocsp.la libcmd-serv.la
+@ENABLE_ANON_TRUE@@ENABLE_DANE_TRUE@@ENABLE_OCSP_TRUE@am__append_11 = ../libdane/libgnutls-dane.la
+@ENABLE_ANON_TRUE@@ENABLE_OCSP_TRUE@am__append_12 = libcmd-cli.la
+@ENABLE_MINITASN1_TRUE@am__append_13 = ../lib/minitasn1/libminitasn1.la ../gl/libgnu.la 
+@ENABLE_MINITASN1_FALSE@am__append_14 = $(LIBTASN1_LIBS)
+@ENABLE_DANE_TRUE@am__append_15 = ../libdane/libgnutls-dane.la
+@ENABLE_PKCS11_TRUE@am__append_16 = libcmd-p11tool.la
+@ENABLE_TROUSERS_TRUE@am__append_17 = libcmd-tpmtool.la
 subdir = src
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/src/gl/m4/arpa_inet_h.m4 \
@@ -165,12 +168,10 @@ am__aclocal_m4_deps = $(top_srcdir)/src/gl/m4/arpa_inet_h.m4 \
 	$(top_srcdir)/src/libopts/m4/stdnoreturn.m4 \
 	$(top_srcdir)/gl/m4/00gnulib.m4 \
 	$(top_srcdir)/gl/m4/absolute-header.m4 \
-	$(top_srcdir)/gl/m4/alloca.m4 $(top_srcdir)/gl/m4/base64.m4 \
-	$(top_srcdir)/gl/m4/byteswap.m4 $(top_srcdir)/gl/m4/ctype.m4 \
-	$(top_srcdir)/gl/m4/errno_h.m4 \
+	$(top_srcdir)/gl/m4/alloca.m4 $(top_srcdir)/gl/m4/byteswap.m4 \
+	$(top_srcdir)/gl/m4/ctype.m4 $(top_srcdir)/gl/m4/errno_h.m4 \
 	$(top_srcdir)/gl/m4/exponentd.m4 \
 	$(top_srcdir)/gl/m4/extensions.m4 \
-	$(top_srcdir)/gl/m4/extern-inline.m4 \
 	$(top_srcdir)/gl/m4/fcntl_h.m4 $(top_srcdir)/gl/m4/fdopen.m4 \
 	$(top_srcdir)/gl/m4/float_h.m4 $(top_srcdir)/gl/m4/fpieee.m4 \
 	$(top_srcdir)/gl/m4/fseeko.m4 $(top_srcdir)/gl/m4/fstat.m4 \
@@ -224,10 +225,11 @@ am__aclocal_m4_deps = $(top_srcdir)/src/gl/m4/arpa_inet_h.m4 \
 	$(top_srcdir)/gl/m4/vsnprintf.m4 \
 	$(top_srcdir)/gl/m4/warn-on-use.m4 \
 	$(top_srcdir)/gl/m4/warnings.m4 $(top_srcdir)/gl/m4/wchar_h.m4 \
-	$(top_srcdir)/m4/fcntl-o.m4 $(top_srcdir)/m4/gettext.m4 \
-	$(top_srcdir)/m4/gtk-doc.m4 $(top_srcdir)/m4/guile.m4 \
-	$(top_srcdir)/m4/hooks.m4 $(top_srcdir)/m4/iconv.m4 \
-	$(top_srcdir)/m4/intlmacosx.m4 \
+	$(top_srcdir)/m4/ax_code_coverage.m4 \
+	$(top_srcdir)/m4/extern-inline.m4 $(top_srcdir)/m4/fcntl-o.m4 \
+	$(top_srcdir)/m4/gettext.m4 $(top_srcdir)/m4/gtk-doc.m4 \
+	$(top_srcdir)/m4/guile.m4 $(top_srcdir)/m4/hooks.m4 \
+	$(top_srcdir)/m4/iconv.m4 $(top_srcdir)/m4/intlmacosx.m4 \
 	$(top_srcdir)/m4/inttypes-pri.m4 \
 	$(top_srcdir)/m4/inttypes_h.m4 $(top_srcdir)/m4/lib-ld.m4 \
 	$(top_srcdir)/m4/lib-link.m4 $(top_srcdir)/m4/lib-prefix.m4 \
@@ -250,9 +252,12 @@ LTLIBRARIES = $(noinst_LTLIBRARIES)
 am__DEPENDENCIES_1 =
 @NEED_LIBOPTS_FALSE@am__DEPENDENCIES_2 = $(am__DEPENDENCIES_1)
 @NEED_LIBOPTS_TRUE@am__DEPENDENCIES_2 = libopts/libopts.la
+@ENABLE_MINITASN1_FALSE@am__DEPENDENCIES_3 = $(am__DEPENDENCIES_1)
+am__DEPENDENCIES_4 = $(am__DEPENDENCIES_2) $(am__DEPENDENCIES_1) \
+	$(am__append_13) $(am__DEPENDENCIES_3)
 libcmd_certtool_la_DEPENDENCIES = ../lib/libgnutls.la gl/libgnu_gpl.la \
-	../gl/libgnu.la $(am__DEPENDENCIES_2) $(am__DEPENDENCIES_1) \
-	gl/libgnu_gpl.la $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
+	../gl/libgnu.la $(am__DEPENDENCIES_4) gl/libgnu_gpl.la \
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
 am_libcmd_certtool_la_OBJECTS = certtool-args.lo certtool-cfg.lo
 libcmd_certtool_la_OBJECTS = $(am_libcmd_certtool_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
@@ -269,8 +274,8 @@ am__libcmd_cli_la_SOURCES_DIST = cli-args.def cli-args.c cli-args.h
 libcmd_cli_la_OBJECTS = $(am_libcmd_cli_la_OBJECTS)
 @ENABLE_ANON_TRUE@@ENABLE_OCSP_TRUE@am_libcmd_cli_la_rpath =
 libcmd_danetool_la_DEPENDENCIES = ../lib/libgnutls.la gl/libgnu_gpl.la \
-	../gl/libgnu.la $(am__DEPENDENCIES_2) $(am__DEPENDENCIES_1) \
-	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
+	../gl/libgnu.la $(am__DEPENDENCIES_4) $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1)
 am_libcmd_danetool_la_OBJECTS = danetool-args.lo certtool-cfg.lo
 libcmd_danetool_la_OBJECTS = $(am_libcmd_danetool_la_OBJECTS)
 libcmd_ocsp_la_LIBADD =
@@ -325,7 +330,8 @@ libcmd_tpmtool_la_OBJECTS = $(am_libcmd_tpmtool_la_OBJECTS)
 @ENABLE_ANON_TRUE@@ENABLE_OCSP_TRUE@am__EXEEXT_3 =  \
 @ENABLE_ANON_TRUE@@ENABLE_OCSP_TRUE@	gnutls-cli$(EXEEXT)
 @ENABLE_DANE_TRUE@am__EXEEXT_4 = danetool$(EXEEXT)
-@ENABLE_TROUSERS_TRUE@am__EXEEXT_5 = tpmtool$(EXEEXT)
+@ENABLE_PKCS11_TRUE@@ENABLE_TROUSERS_TRUE@am__EXEEXT_5 =  \
+@ENABLE_PKCS11_TRUE@@ENABLE_TROUSERS_TRUE@	tpmtool$(EXEEXT)
 @ENABLE_PKCS11_TRUE@am__EXEEXT_6 = p11tool$(EXEEXT)
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS) $(noinst_PROGRAMS)
@@ -339,7 +345,7 @@ am_danetool_OBJECTS = danetool.$(OBJEXT) certtool-common.$(OBJEXT) \
 danetool_OBJECTS = $(am_danetool_OBJECTS)
 danetool_DEPENDENCIES = ../lib/libgnutls.la $(am__DEPENDENCIES_1) \
 	libcmd-danetool.la ../gl/libgnu.la gl/libgnu_gpl.la \
-	$(am__append_14)
+	$(am__append_15)
 am__gnutls_cli_SOURCES_DIST = cli.c common.h common.c socket.c \
 	socket.h ocsptool-common.c inline_cmds.h benchmark-cipher.c \
 	benchmark.c benchmark.h benchmark-tls.c
@@ -355,7 +361,7 @@ am__gnutls_cli_SOURCES_DIST = cli.c common.h common.c socket.c \
 gnutls_cli_OBJECTS = $(am_gnutls_cli_OBJECTS)
 @ENABLE_ANON_TRUE@@ENABLE_OCSP_TRUE@gnutls_cli_DEPENDENCIES =  \
 @ENABLE_ANON_TRUE@@ENABLE_OCSP_TRUE@	../lib/libgnutls.la \
-@ENABLE_ANON_TRUE@@ENABLE_OCSP_TRUE@	$(am__append_12) \
+@ENABLE_ANON_TRUE@@ENABLE_OCSP_TRUE@	$(am__append_11) \
 @ENABLE_ANON_TRUE@@ENABLE_OCSP_TRUE@	libcmd-cli.la \
 @ENABLE_ANON_TRUE@@ENABLE_OCSP_TRUE@	$(am__DEPENDENCIES_2) \
 @ENABLE_ANON_TRUE@@ENABLE_OCSP_TRUE@	../gl/libgnu.la \
@@ -374,10 +380,9 @@ gnutls_cli_debug_DEPENDENCIES = ../lib/libgnutls.la \
 	gl/libgnu_gpl.la $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
 am__gnutls_serv_SOURCES_DIST = list.h serv.c udp-serv.c udp-serv.h \
-	socket.c socket.h common.h common.c certtool-common.h
+	common.h common.c certtool-common.h
 @ENABLE_OCSP_TRUE@am_gnutls_serv_OBJECTS = serv.$(OBJEXT) \
-@ENABLE_OCSP_TRUE@	udp-serv.$(OBJEXT) socket.$(OBJEXT) \
-@ENABLE_OCSP_TRUE@	common.$(OBJEXT)
+@ENABLE_OCSP_TRUE@	udp-serv.$(OBJEXT) common.$(OBJEXT)
 gnutls_serv_OBJECTS = $(am_gnutls_serv_OBJECTS)
 @ENABLE_OCSP_TRUE@gnutls_serv_DEPENDENCIES = ../lib/libgnutls.la \
 @ENABLE_OCSP_TRUE@	libcmd-serv.la $(am__DEPENDENCIES_2) \
@@ -385,9 +390,10 @@ gnutls_serv_OBJECTS = $(am_gnutls_serv_OBJECTS)
 @ENABLE_OCSP_TRUE@	gl/libgnu_gpl.la $(am__DEPENDENCIES_1) \
 @ENABLE_OCSP_TRUE@	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
 am__ocsptool_SOURCES_DIST = ocsptool.c ocsptool-common.h \
-	ocsptool-common.c socket.c socket.h
+	ocsptool-common.c socket.c common.c common.h socket.h
 @ENABLE_OCSP_TRUE@am_ocsptool_OBJECTS = ocsptool.$(OBJEXT) \
-@ENABLE_OCSP_TRUE@	ocsptool-common.$(OBJEXT) socket.$(OBJEXT)
+@ENABLE_OCSP_TRUE@	ocsptool-common.$(OBJEXT) socket.$(OBJEXT) \
+@ENABLE_OCSP_TRUE@	common.$(OBJEXT)
 ocsptool_OBJECTS = $(am_ocsptool_OBJECTS)
 @ENABLE_OCSP_TRUE@ocsptool_DEPENDENCIES = ../lib/libgnutls.la \
 @ENABLE_OCSP_TRUE@	libcmd-ocsp.la $(am__DEPENDENCIES_2) \
@@ -401,9 +407,8 @@ am__p11tool_SOURCES_DIST = p11tool-args.def p11tool.c pkcs11.c \
 @ENABLE_PKCS11_TRUE@	certtool-extras.$(OBJEXT) common.$(OBJEXT)
 p11tool_OBJECTS = $(am_p11tool_OBJECTS)
 @ENABLE_PKCS11_TRUE@p11tool_DEPENDENCIES = ../lib/libgnutls.la \
-@ENABLE_PKCS11_TRUE@	libcmd-p11tool.la $(am__DEPENDENCIES_2) \
-@ENABLE_PKCS11_TRUE@	../gl/libgnu.la gl/libgnu_gpl.la \
-@ENABLE_PKCS11_TRUE@	$(am__DEPENDENCIES_1)
+@ENABLE_PKCS11_TRUE@	libcmd-p11tool.la ../gl/libgnu.la \
+@ENABLE_PKCS11_TRUE@	gl/libgnu_gpl.la $(am__DEPENDENCIES_4)
 am_psktool_OBJECTS = psk.$(OBJEXT)
 psktool_OBJECTS = $(am_psktool_OBJECTS)
 psktool_DEPENDENCIES = ../lib/libgnutls.la libcmd-psk.la \
@@ -416,11 +421,11 @@ srptool_OBJECTS = $(am_srptool_OBJECTS)
 @ENABLE_SRP_TRUE@	libcmd-srp.la $(am__DEPENDENCIES_2) \
 @ENABLE_SRP_TRUE@	../gl/libgnu.la $(am__DEPENDENCIES_1) \
 @ENABLE_SRP_TRUE@	gl/libgnu_gpl.la
-am_systemkey_OBJECTS = systemkey.$(OBJEXT) certtool-common.$(OBJEXT)
+am_systemkey_OBJECTS = systemkey.$(OBJEXT) certtool-common.$(OBJEXT) \
+	common.$(OBJEXT)
 systemkey_OBJECTS = $(am_systemkey_OBJECTS)
 systemkey_DEPENDENCIES = ../lib/libgnutls.la libcmd-systemkey.la \
-	$(am__DEPENDENCIES_2) ../gl/libgnu.la gl/libgnu_gpl.la \
-	$(am__DEPENDENCIES_1)
+	../gl/libgnu.la gl/libgnu_gpl.la $(am__DEPENDENCIES_4)
 am__tpmtool_SOURCES_DIST = tpmtool-args.def tpmtool.c \
 	certtool-common.c certtool-extras.c common.c
 @ENABLE_TROUSERS_TRUE@am_tpmtool_OBJECTS = tpmtool.$(OBJEXT) \
@@ -429,9 +434,8 @@ am__tpmtool_SOURCES_DIST = tpmtool-args.def tpmtool.c \
 @ENABLE_TROUSERS_TRUE@	common.$(OBJEXT)
 tpmtool_OBJECTS = $(am_tpmtool_OBJECTS)
 @ENABLE_TROUSERS_TRUE@tpmtool_DEPENDENCIES = ../lib/libgnutls.la \
-@ENABLE_TROUSERS_TRUE@	libcmd-tpmtool.la $(am__DEPENDENCIES_2) \
-@ENABLE_TROUSERS_TRUE@	../gl/libgnu.la gl/libgnu_gpl.la \
-@ENABLE_TROUSERS_TRUE@	$(am__DEPENDENCIES_1)
+@ENABLE_TROUSERS_TRUE@	libcmd-tpmtool.la ../gl/libgnu.la \
+@ENABLE_TROUSERS_TRUE@	gl/libgnu_gpl.la $(am__DEPENDENCIES_4)
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -531,7 +535,7 @@ am__define_uniq_tagged_files = \
   done | $(am__uniquify_input)`
 ETAGS = etags
 CTAGS = ctags
-DIST_SUBDIRS = crywrap libopts
+DIST_SUBDIRS = libopts
 am__DIST_COMMON = $(srcdir)/Makefile.in \
 	$(top_srcdir)/build-aux/depcomp
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
@@ -585,6 +589,13 @@ CCASDEPMODE = @CCASDEPMODE@
 CCASFLAGS = @CCASFLAGS@
 CCDEPMODE = @CCDEPMODE@
 CFLAGS = @CFLAGS@
+CMOCKA_CFLAGS = @CMOCKA_CFLAGS@
+CMOCKA_LIBS = @CMOCKA_LIBS@
+CODE_COVERAGE_CFLAGS = @CODE_COVERAGE_CFLAGS@
+CODE_COVERAGE_CPPFLAGS = @CODE_COVERAGE_CPPFLAGS@
+CODE_COVERAGE_CXXFLAGS = @CODE_COVERAGE_CXXFLAGS@
+CODE_COVERAGE_ENABLED = @CODE_COVERAGE_ENABLED@
+CODE_COVERAGE_LDFLAGS = @CODE_COVERAGE_LDFLAGS@
 CONFIG_INCLUDE = @CONFIG_INCLUDE@
 CPP = @CPP@
 CPPFLAGS = @CPPFLAGS@
@@ -620,6 +631,8 @@ EXEEXT = @EXEEXT@
 FGREP = @FGREP@
 FIPS140_LIBS = @FIPS140_LIBS@
 FLOAT_H = @FLOAT_H@
+GCOV = @GCOV@
+GENHTML = @GENHTML@
 GETADDRINFO_LIB = @GETADDRINFO_LIB@
 GETTEXT_MACRO_VERSION = @GETTEXT_MACRO_VERSION@
 GMP_CFLAGS = @GMP_CFLAGS@
@@ -896,6 +909,7 @@ GREP = @GREP@
 GTKDOC_CHECK = @GTKDOC_CHECK@
 GTKDOC_MKPDF = @GTKDOC_MKPDF@
 GTKDOC_REBASE = @GTKDOC_REBASE@
+GUILD = @GUILD@
 GUILE = @GUILE@
 GUILE_CFLAGS = @GUILE_CFLAGS@
 GUILE_CONFIG = @GUILE_CONFIG@
@@ -983,11 +997,13 @@ HAVE_INTTYPES_H = @HAVE_INTTYPES_H@
 HAVE_ISBLANK = @HAVE_ISBLANK@
 HAVE_LCHMOD = @HAVE_LCHMOD@
 HAVE_LCHOWN = @HAVE_LCHOWN@
+HAVE_LIBCRYPTO = @HAVE_LIBCRYPTO@
 HAVE_LIBDL = @HAVE_LIBDL@
 HAVE_LIBICONV = @HAVE_LIBICONV@
 HAVE_LIBNSL = @HAVE_LIBNSL@
 HAVE_LIBPTHREAD = @HAVE_LIBPTHREAD@
 HAVE_LIBRT = @HAVE_LIBRT@
+HAVE_LIBSECCOMP = @HAVE_LIBSECCOMP@
 HAVE_LIBZ = @HAVE_LIBZ@
 HAVE_LINK = @HAVE_LINK@
 HAVE_LINKAT = @HAVE_LINKAT@
@@ -1149,8 +1165,11 @@ INT32_MAX_LT_INTMAX_MAX = @INT32_MAX_LT_INTMAX_MAX@
 INT64_MAX_EQ_LONG_MAX = @INT64_MAX_EQ_LONG_MAX@
 INTLLIBS = @INTLLIBS@
 INTL_MACOSX_LIBS = @INTL_MACOSX_LIBS@
+LCOV = @LCOV@
 LD = @LD@
 LDFLAGS = @LDFLAGS@
+LIBCRYPTO = @LIBCRYPTO@
+LIBCRYPTO_PREFIX = @LIBCRYPTO_PREFIX@
 LIBDL = @LIBDL@
 LIBDL_PREFIX = @LIBDL_PREFIX@
 LIBGNUTLS_CFLAGS = @LIBGNUTLS_CFLAGS@
@@ -1171,6 +1190,8 @@ LIBPTHREAD_PREFIX = @LIBPTHREAD_PREFIX@
 LIBRT = @LIBRT@
 LIBRT_PREFIX = @LIBRT_PREFIX@
 LIBS = @LIBS@
+LIBSECCOMP = @LIBSECCOMP@
+LIBSECCOMP_PREFIX = @LIBSECCOMP_PREFIX@
 LIBSOCKET = @LIBSOCKET@
 LIBTASN1_CFLAGS = @LIBTASN1_CFLAGS@
 LIBTASN1_LIBS = @LIBTASN1_LIBS@
@@ -1183,6 +1204,7 @@ LIB_SELECT = @LIB_SELECT@
 LIPO = @LIPO@
 LN_S = @LN_S@
 LTALLOCA = @LTALLOCA@
+LTLIBCRYPTO = @LTLIBCRYPTO@
 LTLIBDL = @LTLIBDL@
 LTLIBICONV = @LTLIBICONV@
 LTLIBINTL = @LTLIBINTL@
@@ -1190,6 +1212,7 @@ LTLIBNSL = @LTLIBNSL@
 LTLIBOBJS = @LTLIBOBJS@
 LTLIBPTHREAD = @LTLIBPTHREAD@
 LTLIBRT = @LTLIBRT@
+LTLIBSECCOMP = @LTLIBSECCOMP@
 LTLIBZ = @LTLIBZ@
 LT_AGE = @LT_AGE@
 LT_CURRENT = @LT_CURRENT@
@@ -1200,6 +1223,7 @@ LT_REVISION = @LT_REVISION@
 LT_SSL_AGE = @LT_SSL_AGE@
 LT_SSL_CURRENT = @LT_SSL_CURRENT@
 LT_SSL_REVISION = @LT_SSL_REVISION@
+LT_SYS_LIBRARY_PATH = @LT_SYS_LIBRARY_PATH@
 LT_XSSL_AGE = @LT_XSSL_AGE@
 LT_XSSL_CURRENT = @LT_XSSL_CURRENT@
 LT_XSSL_REVISION = @LT_XSSL_REVISION@
@@ -1507,6 +1531,7 @@ gltests_LTLIBOBJS = @gltests_LTLIBOBJS@
 gltests_WITNESS = @gltests_WITNESS@
 guile_snarf = @guile_snarf@
 guileextensiondir = @guileextensiondir@
+guileobjectdir = @guileobjectdir@
 host = @host@
 host_alias = @host_alias@
 host_cpu = @host_cpu@
@@ -1538,25 +1563,25 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 
 # src/gl is being added by the top level makefile
-SUBDIRS = $(am__append_1) $(am__append_2)
+SUBDIRS = $(am__append_1)
 BUILT_SOURCES = srptool-args.c srptool-args.h \
 	psktool-args.c psktool-args.h ocsptool-args.h ocsptool-args.c \
 	serv-args.c serv-args.h cli-args.c cli-args.h \
 	cli-debug-args.c cli-debug-args.h certtool-args.c certtool-args.h \
 	danetool-args.c danetool-args.h p11tool-args.c p11tool-args.h \
-	tpmtool-args.c tpmtool-args.h
+	tpmtool-args.c tpmtool-args.h systemkey-args.c systemkey-args.h
 
 EXTRA_DIST = args-std.def
 AM_CFLAGS = $(WARN_CFLAGS) $(WERROR_CFLAGS)
 AM_CPPFLAGS = -I$(srcdir)/gl -I$(builddir)/gl \
 	-I$(builddir)/../lib/includes -I$(srcdir)/../lib/includes \
 	-I$(srcdir)/../libdane/includes -I$(srcdir)/../extra/includes \
-	$(LIBOPTS_CFLAGS) $(am__append_3)
+	$(LIBOPTS_CFLAGS) $(am__append_2)
 @NEED_LIBOPTS_FALSE@LIBOPTS = $(LIBOPTS_LDADD)
 @NEED_LIBOPTS_TRUE@LIBOPTS = libopts/libopts.la
-noinst_LTLIBRARIES = $(am__append_10) libcmd-psk.la $(am__append_11) \
-	$(am__append_13) libcmd-cli-debug.la libcmd-certtool.la \
-	libcmd-danetool.la $(am__append_15) $(am__append_16) \
+noinst_LTLIBRARIES = $(am__append_9) libcmd-psk.la $(am__append_10) \
+	$(am__append_12) libcmd-cli-debug.la libcmd-certtool.la \
+	libcmd-danetool.la $(am__append_16) $(am__append_17) \
 	libcmd-systemkey.la
 @ENABLE_SRP_TRUE@srptool_SOURCES = srptool.c
 @ENABLE_SRP_TRUE@srptool_LDADD = ../lib/libgnutls.la libcmd-srp.la \
@@ -1568,7 +1593,7 @@ psktool_LDADD = ../lib/libgnutls.la libcmd-psk.la $(LIBOPTS) \
 	../gl/libgnu.la $(LTLIBINTL) gl/libgnu_gpl.la
 libcmd_psk_la_SOURCES = psktool-args.def psktool-args.c psktool-args.h
 @ENABLE_OCSP_TRUE@ocsptool_SOURCES = ocsptool.c ocsptool-common.h ocsptool-common.c \
-@ENABLE_OCSP_TRUE@	socket.c socket.h
+@ENABLE_OCSP_TRUE@	socket.c common.c common.h socket.h
 
 @ENABLE_OCSP_TRUE@ocsptool_LDADD = ../lib/libgnutls.la libcmd-ocsp.la \
 @ENABLE_OCSP_TRUE@	$(LIBOPTS) ../gl/libgnu.la $(LTLIBINTL) \
@@ -1578,7 +1603,6 @@ libcmd_psk_la_SOURCES = psktool-args.def psktool-args.c psktool-args.h
 @ENABLE_OCSP_TRUE@gnutls_serv_SOURCES = \
 @ENABLE_OCSP_TRUE@  list.h serv.c			\
 @ENABLE_OCSP_TRUE@  udp-serv.c udp-serv.h		\
-@ENABLE_OCSP_TRUE@  socket.c socket.h		\
 @ENABLE_OCSP_TRUE@  common.h common.c		\
 @ENABLE_OCSP_TRUE@  certtool-common.h 
 
@@ -1594,7 +1618,7 @@ libcmd_psk_la_SOURCES = psktool-args.def psktool-args.c psktool-args.h
 
 @ENABLE_ANON_TRUE@@ENABLE_OCSP_TRUE@gnutls_cli_LDADD =  \
 @ENABLE_ANON_TRUE@@ENABLE_OCSP_TRUE@	../lib/libgnutls.la \
-@ENABLE_ANON_TRUE@@ENABLE_OCSP_TRUE@	$(am__append_12) \
+@ENABLE_ANON_TRUE@@ENABLE_OCSP_TRUE@	$(am__append_11) \
 @ENABLE_ANON_TRUE@@ENABLE_OCSP_TRUE@	libcmd-cli.la $(LIBOPTS) \
 @ENABLE_ANON_TRUE@@ENABLE_OCSP_TRUE@	../gl/libgnu.la \
 @ENABLE_ANON_TRUE@@ENABLE_OCSP_TRUE@	$(LTLIBINTL) \
@@ -1614,6 +1638,8 @@ gnutls_cli_debug_LDADD = ../lib/libgnutls.la libcmd-cli-debug.la \
 libcmd_cli_debug_la_SOURCES = cli-debug-args.def cli-debug-args.c cli-debug-args.h
 
 #certtool
+COMMON_LIBS = $(LIBOPTS) $(LTLIBINTL) $(am__append_13) \
+	$(am__append_14)
 certtool_SOURCES = certtool.c certtool-common.c certtool-extras.c common.c
 certtool_LDADD = ../lib/libgnutls.la libcmd-certtool.la \
 	../gl/libgnu.la gl/libgnu_gpl.la
@@ -1621,16 +1647,16 @@ libcmd_certtool_la_SOURCES = certtool-args.c certtool-args.def certtool-args.h	\
 	certtool-cfg.h certtool-cfg.c
 
 libcmd_certtool_la_LIBADD = ../lib/libgnutls.la gl/libgnu_gpl.la \
-	../gl/libgnu.la $(LIBOPTS) $(LTLIBINTL) $(LTLIBREADLINE) \
+	../gl/libgnu.la $(COMMON_LIBS) $(LTLIBREADLINE) \
 	gl/libgnu_gpl.la $(INET_PTON_LIB) $(LIB_CLOCK_GETTIME)
 danetool_SOURCES = danetool.c certtool-common.c certtool-extras.c common.c socket.c
 danetool_LDADD = ../lib/libgnutls.la $(LIBIDN_LIBS) libcmd-danetool.la \
-	../gl/libgnu.la gl/libgnu_gpl.la $(am__append_14)
+	../gl/libgnu.la gl/libgnu_gpl.la $(am__append_15)
 libcmd_danetool_la_SOURCES = danetool-args.c danetool-args.def danetool-args.h \
 	certtool-cfg.h certtool-cfg.c
 
 libcmd_danetool_la_LIBADD = ../lib/libgnutls.la gl/libgnu_gpl.la \
-	../gl/libgnu.la $(LIBOPTS) $(LTLIBINTL) $(LTLIBREADLINE) \
+	../gl/libgnu.la $(COMMON_LIBS) $(LTLIBREADLINE) \
 	$(INET_PTON_LIB) $(LIB_CLOCK_GETTIME)
 
 # p11 tool
@@ -1638,9 +1664,8 @@ libcmd_danetool_la_LIBADD = ../lib/libgnutls.la gl/libgnu_gpl.la \
 @ENABLE_PKCS11_TRUE@	certtool-extras.c p11tool.h common.c
 
 @ENABLE_PKCS11_TRUE@p11tool_LDADD = ../lib/libgnutls.la \
-@ENABLE_PKCS11_TRUE@	libcmd-p11tool.la $(LIBOPTS) \
-@ENABLE_PKCS11_TRUE@	../gl/libgnu.la gl/libgnu_gpl.la \
-@ENABLE_PKCS11_TRUE@	$(LTLIBINTL)
+@ENABLE_PKCS11_TRUE@	libcmd-p11tool.la ../gl/libgnu.la \
+@ENABLE_PKCS11_TRUE@	gl/libgnu_gpl.la $(COMMON_LIBS)
 @ENABLE_PKCS11_TRUE@libcmd_p11tool_la_SOURCES = p11tool-args.def p11tool-args.c p11tool-args.h \
 @ENABLE_PKCS11_TRUE@	certtool-cfg.h certtool-cfg.c
 
@@ -1650,9 +1675,8 @@ libcmd_danetool_la_LIBADD = ../lib/libgnutls.la gl/libgnu_gpl.la \
 @ENABLE_PKCS11_TRUE@	$(LIB_CLOCK_GETTIME)
 @ENABLE_TROUSERS_TRUE@tpmtool_SOURCES = tpmtool-args.def tpmtool.c certtool-common.c certtool-extras.c common.c
 @ENABLE_TROUSERS_TRUE@tpmtool_LDADD = ../lib/libgnutls.la \
-@ENABLE_TROUSERS_TRUE@	libcmd-tpmtool.la $(LIBOPTS) \
-@ENABLE_TROUSERS_TRUE@	../gl/libgnu.la gl/libgnu_gpl.la \
-@ENABLE_TROUSERS_TRUE@	$(LTLIBINTL)
+@ENABLE_TROUSERS_TRUE@	libcmd-tpmtool.la ../gl/libgnu.la \
+@ENABLE_TROUSERS_TRUE@	gl/libgnu_gpl.la $(COMMON_LIBS)
 @ENABLE_TROUSERS_TRUE@libcmd_tpmtool_la_SOURCES = tpmtool-args.def tpmtool-args.c tpmtool-args.h \
 @ENABLE_TROUSERS_TRUE@	certtool-cfg.h certtool-cfg.c
 
@@ -1660,9 +1684,9 @@ libcmd_danetool_la_LIBADD = ../lib/libgnutls.la gl/libgnu_gpl.la \
 @ENABLE_TROUSERS_TRUE@	gl/libgnu_gpl.la ../gl/libgnu.la \
 @ENABLE_TROUSERS_TRUE@	$(LTLIBREADLINE) $(INET_PTON_LIB) \
 @ENABLE_TROUSERS_TRUE@	$(LIB_CLOCK_GETTIME)
-systemkey_SOURCES = systemkey.c certtool-common.c
-systemkey_LDADD = ../lib/libgnutls.la libcmd-systemkey.la $(LIBOPTS) \
-	../gl/libgnu.la gl/libgnu_gpl.la $(LTLIBINTL)
+systemkey_SOURCES = systemkey.c certtool-common.c common.c
+systemkey_LDADD = ../lib/libgnutls.la libcmd-systemkey.la \
+	../gl/libgnu.la gl/libgnu_gpl.la $(COMMON_LIBS)
 libcmd_systemkey_la_SOURCES = systemkey-args.def systemkey-args.c systemkey-args.h \
 	certtool-cfg.h certtool-cfg.c
 
@@ -1683,9 +1707,9 @@ $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu src/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign src/Makefile'; \
 	$(am__cd) $(top_srcdir) && \
-	  $(AUTOMAKE) --gnu src/Makefile
+	  $(AUTOMAKE) --foreign src/Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
 	  *config.status*) \

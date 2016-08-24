@@ -1,0 +1,28 @@
+From dfbe6a74d8172fd69676987e2566b3f521101d3f Mon Sep 17 00:00:00 2001
+From: Nikos Mavrogiannopoulos <nmav@redhat.com>
+Date: Wed, 24 Aug 2016 10:49:13 +0200
+Subject: [PATCH] Ported openssl format fix from openconnect
+
+Patch by David Woodhouse
+---
+ lib/x509/privkey_openssl.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/lib/x509/privkey_openssl.c b/lib/x509/privkey_openssl.c
+index 3b143f8..563ab99 100644
+--- a/lib/x509/privkey_openssl.c
++++ b/lib/x509/privkey_openssl.c
+@@ -291,8 +291,8 @@ gnutls_x509_privkey_import_openssl(gnutls_x509_privkey_t key,
+ 			}
+ 			keylen += ofs;
+ 
+-			/* If there appears to be more padding than required, fail */
+-			if (key_data_size - keylen > blocksize) {
++			/* If there appears to be more or less padding than required, fail */
++			if (key_data_size - keylen > blocksize || key_data_size < keylen+1) {
+ 				gnutls_assert();
+ 				goto fail;
+ 			}
+-- 
+2.9.3
+

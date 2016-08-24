@@ -1977,6 +1977,8 @@ gnutls
 @GNUTLS_CERT_SIGNER_CONSTRAINTS_FAILURE: 
 @GNUTLS_CERT_MISMATCH: 
 @GNUTLS_CERT_PURPOSE_MISMATCH: 
+@GNUTLS_CERT_MISSING_OCSP_STATUS: 
+@GNUTLS_CERT_INVALID_OCSP_STATUS: 
 
 <!-- ##### FUNCTION gnutls_certificate_type_get ##### -->
 <para>
@@ -1984,33 +1986,6 @@ gnutls
 </para>
 
 @session: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_certificate_type_get_id ##### -->
-<para>
-
-</para>
-
-@name: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_certificate_type_get_name ##### -->
-<para>
-
-</para>
-
-@type: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_certificate_type_list ##### -->
-<para>
-
-</para>
-
-@void: 
 @Returns: 
 
 
@@ -2069,7 +2044,6 @@ gnutls
 
 </para>
 
-@req_version: 
 @Returns: 
 
 
@@ -2121,39 +2095,11 @@ gnutls
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_cipher_get_id ##### -->
-<para>
-
-</para>
-
-@name: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_cipher_get_key_size ##### -->
-<para>
-
-</para>
-
-@algorithm: 
-@Returns: 
-
-
 <!-- ##### FUNCTION gnutls_cipher_get_name ##### -->
 <para>
 
 </para>
 
-@algorithm: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_cipher_list ##### -->
-<para>
-
-</para>
-
-@void: 
 @Returns: 
 
 
@@ -2164,21 +2110,6 @@ gnutls
 
 @kx_algorithm: 
 @cipher_algorithm: 
-@mac_algorithm: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_cipher_suite_info ##### -->
-<para>
-
-</para>
-
-@idx: 
-@cs_id: 
-@kx: 
-@cipher: 
-@mac: 
-@min_version: 
 @Returns: 
 
 
@@ -2199,33 +2130,6 @@ gnutls
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_compression_get_id ##### -->
-<para>
-
-</para>
-
-@name: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_compression_get_name ##### -->
-<para>
-
-</para>
-
-@algorithm: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_compression_list ##### -->
-<para>
-
-</para>
-
-@void: 
-@Returns: 
-
-
 <!-- ##### ENUM gnutls_compression_method_t ##### -->
 <para>
 
@@ -2241,14 +2145,6 @@ gnutls
 
 </para>
 
-
-
-<!-- ##### FUNCTION gnutls_credentials_clear ##### -->
-<para>
-
-</para>
-
-@session: 
 
 
 <!-- ##### FUNCTION gnutls_credentials_set ##### -->
@@ -2562,42 +2458,10 @@ gnutls
 @GNUTLS_DIG_SHA384: 
 @GNUTLS_DIG_SHA512: 
 @GNUTLS_DIG_SHA224: 
-
-<!-- ##### FUNCTION gnutls_ecc_curve_get ##### -->
-<para>
-
-</para>
-
-@session: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_ecc_curve_get_name ##### -->
-<para>
-
-</para>
-
-@curve: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_ecc_curve_get_size ##### -->
-<para>
-
-</para>
-
-@curve: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_ecc_curve_list ##### -->
-<para>
-
-</para>
-
-@void: 
-@Returns: 
-
+@GNUTLS_DIG_SHA3_224: 
+@GNUTLS_DIG_SHA3_256: 
+@GNUTLS_DIG_SHA3_384: 
+@GNUTLS_DIG_SHA3_512: 
 
 <!-- ##### ENUM gnutls_ecc_curve_t ##### -->
 <para>
@@ -2610,6 +2474,7 @@ gnutls
 @GNUTLS_ECC_CURVE_SECP384R1: 
 @GNUTLS_ECC_CURVE_SECP521R1: 
 @GNUTLS_ECC_CURVE_SECP192R1: 
+@GNUTLS_ECC_CURVE_X25519: 
 
 <!-- ##### USER_FUNCTION gnutls_errno_func ##### -->
 <para>
@@ -2625,17 +2490,6 @@ gnutls
 
 </para>
 
-@error: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_error_to_alert ##### -->
-<para>
-
-</para>
-
-@err: 
-@level: 
 @Returns: 
 
 
@@ -2780,12 +2634,11 @@ gnutls
 @Returns: 
 
 
-<!-- ##### USER_FUNCTION gnutls_handshake_post_client_hello_func ##### -->
+<!-- ##### MACRO gnutls_handshake_post_client_hello_func ##### -->
 <para>
 
 </para>
 
-@Param1: 
 @Returns: 
 
 
@@ -2805,15 +2658,6 @@ gnutls
 
 @session: 
 @func: 
-
-
-<!-- ##### FUNCTION gnutls_handshake_set_private_extensions ##### -->
-<para>
-
-</para>
-
-@session: 
-@allow: 
 
 
 <!-- ##### FUNCTION gnutls_handshake_set_timeout ##### -->
@@ -2979,33 +2823,6 @@ gnutls
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_kx_get_id ##### -->
-<para>
-
-</para>
-
-@name: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_kx_get_name ##### -->
-<para>
-
-</para>
-
-@algorithm: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_kx_list ##### -->
-<para>
-
-</para>
-
-@void: 
-@Returns: 
-
-
 <!-- ##### FUNCTION gnutls_load_file ##### -->
 <para>
 
@@ -3040,6 +2857,10 @@ gnutls
 @GNUTLS_MAC_SHA384: 
 @GNUTLS_MAC_SHA512: 
 @GNUTLS_MAC_SHA224: 
+@GNUTLS_MAC_SHA3_224: 
+@GNUTLS_MAC_SHA3_256: 
+@GNUTLS_MAC_SHA3_384: 
+@GNUTLS_MAC_SHA3_512: 
 @GNUTLS_MAC_AEAD: 
 @GNUTLS_MAC_UMAC_96: 
 @GNUTLS_MAC_UMAC_128: 
@@ -3050,42 +2871,6 @@ gnutls
 </para>
 
 @session: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_mac_get_id ##### -->
-<para>
-
-</para>
-
-@name: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_mac_get_key_size ##### -->
-<para>
-
-</para>
-
-@algorithm: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_mac_get_name ##### -->
-<para>
-
-</para>
-
-@algorithm: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_mac_list ##### -->
-<para>
-
-</para>
-
-@void: 
 @Returns: 
 
 
@@ -3283,7 +3068,8 @@ gnutls
 @GNUTLS_PK_RSA: 
 @GNUTLS_PK_DSA: 
 @GNUTLS_PK_DH: 
-@GNUTLS_PK_EC: 
+@GNUTLS_PK_ECDSA: 
+@GNUTLS_PK_ECDHX: 
 
 <!-- ##### FUNCTION gnutls_pk_bits_to_sec_param ##### -->
 <para>
@@ -3292,43 +3078,6 @@ gnutls
 
 @algo: 
 @bits: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_pk_get_id ##### -->
-<para>
-
-</para>
-
-@name: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_pk_get_name ##### -->
-<para>
-
-</para>
-
-@algorithm: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_pk_list ##### -->
-<para>
-
-</para>
-
-@void: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_pk_to_sign ##### -->
-<para>
-
-</para>
-
-@pk: 
-@hash: 
 @Returns: 
 
 
@@ -3496,6 +3245,8 @@ gnutls
 @sr: 
 @min_record_version: 
 @server_precedence: 
+@allow_key_usage_violation: 
+@allow_server_key_usage_violation: 
 @allow_wrong_pms: 
 @no_tickets: 
 @no_etm: 
@@ -3522,39 +3273,11 @@ gnutls
 @GNUTLS_PRIVKEY_PKCS11: 
 @GNUTLS_PRIVKEY_EXT: 
 
-<!-- ##### FUNCTION gnutls_protocol_get_id ##### -->
-<para>
-
-</para>
-
-@name: 
-@Returns: 
-
-
 <!-- ##### FUNCTION gnutls_protocol_get_name ##### -->
 <para>
 
 </para>
 
-@version: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_protocol_get_version ##### -->
-<para>
-
-</para>
-
-@session: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_protocol_list ##### -->
-<para>
-
-</para>
-
-@void: 
 @Returns: 
 
 
@@ -3964,14 +3687,6 @@ gnutls
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_session_enable_compatibility_mode ##### -->
-<para>
-
-</para>
-
-@session: 
-
-
 <!-- ##### FUNCTION gnutls_session_get_data ##### -->
 <para>
 
@@ -4061,17 +3776,6 @@ gnutls
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_session_set_data ##### -->
-<para>
-
-</para>
-
-@session: 
-@session_data: 
-@session_data_size: 
-@Returns: 
-
-
 <!-- ##### FUNCTION gnutls_session_set_premaster ##### -->
 <para>
 
@@ -4150,13 +3854,6 @@ gnutls
 @Returns: 
 
 
-<!-- ##### MACRO gnutls_sign_algorithm_get_name ##### -->
-<para>
-
-</para>
-
-
-
 <!-- ##### FUNCTION gnutls_sign_algorithm_get_requested ##### -->
 <para>
 
@@ -4194,60 +3891,18 @@ gnutls
 @GNUTLS_SIGN_ECDSA_SHA512: 
 @GNUTLS_SIGN_DSA_SHA384: 
 @GNUTLS_SIGN_DSA_SHA512: 
-
-<!-- ##### FUNCTION gnutls_sign_get_hash_algorithm ##### -->
-<para>
-
-</para>
-
-@sign: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_sign_get_id ##### -->
-<para>
-
-</para>
-
-@name: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_sign_get_name ##### -->
-<para>
-
-</para>
-
-@algorithm: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_sign_get_pk_algorithm ##### -->
-<para>
-
-</para>
-
-@sign: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_sign_is_secure ##### -->
-<para>
-
-</para>
-
-@algorithm: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_sign_list ##### -->
-<para>
-
-</para>
-
-@void: 
-@Returns: 
-
+@GNUTLS_SIGN_ECDSA_SHA3_224: 
+@GNUTLS_SIGN_ECDSA_SHA3_256: 
+@GNUTLS_SIGN_ECDSA_SHA3_384: 
+@GNUTLS_SIGN_ECDSA_SHA3_512: 
+@GNUTLS_SIGN_DSA_SHA3_224: 
+@GNUTLS_SIGN_DSA_SHA3_256: 
+@GNUTLS_SIGN_DSA_SHA3_384: 
+@GNUTLS_SIGN_DSA_SHA3_512: 
+@GNUTLS_SIGN_RSA_SHA3_224: 
+@GNUTLS_SIGN_RSA_SHA3_256: 
+@GNUTLS_SIGN_RSA_SHA3_384: 
+@GNUTLS_SIGN_RSA_SHA3_512: 
 
 <!-- ##### FUNCTION gnutls_srp_allocate_client_credentials ##### -->
 <para>
@@ -4525,16 +4180,6 @@ gnutls
 
 </para>
 
-@error: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_strerror_name ##### -->
-<para>
-
-</para>
-
-@error: 
 @Returns: 
 
 
@@ -4834,12 +4479,11 @@ gnutls
 
 @cert: 
 @use_extensions: 
-@expanded: 
+@pin: 
 @raw_dn: 
 @raw_issuer_dn: 
 @raw_spki: 
 @der: 
-@pin: 
 @dn: 
 @idn: 
 
@@ -4876,7 +4520,9 @@ gnutls
 @GNUTLS_SAN_IPADDRESS: 
 @GNUTLS_SAN_OTHERNAME: 
 @GNUTLS_SAN_DN: 
+@GNUTLS_SAN_MAX: 
 @GNUTLS_SAN_OTHERNAME_XMPP: 
+@GNUTLS_SAN_OTHERNAME_KRB5PRINCIPAL: 
 
 <!-- ##### USER_FUNCTION mutex_deinit_func ##### -->
 <para>

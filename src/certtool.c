@@ -39,6 +39,9 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#ifndef _WIN32
+# include <signal.h>
+#endif
 
 /* Gnulib portability files. */
 #include <read-file.h>
@@ -50,7 +53,6 @@
 
 static FILE *stdlog = NULL;
 
-static void privkey_info_int(common_info_st *, gnutls_x509_privkey_t key);
 static void print_crl_info(gnutls_x509_crl_t crl, FILE * out);
 void pkcs7_info(common_info_st *);
 void pkcs7_sign(common_info_st *, unsigned embed);
@@ -103,6 +105,9 @@ static void tls_log_func(int level, const char *str)
 
 int main(int argc, char **argv)
 {
+#ifndef _WIN32
+	signal(SIGPIPE, SIG_IGN);
+#endif
 	cfg_init();
 	cmd_parser(argc, argv);
 
@@ -114,6 +119,8 @@ generate_private_key_int(common_info_st * cinfo)
 {
 	gnutls_x509_privkey_t key;
 	int ret, key_type, bits;
+	unsigned provable = cinfo->provable;
+	unsigned flags = 0;
 
 	key_type = req_key_type;
 
@@ -132,11 +139,45 @@ generate_private_key_int(common_info_st * cinfo)
 		fprintf(stderr,
 			"Note that ECDSA keys with size less than 256 are not widely supported.\n\n");
 
+	if (provable && (key_type != GNUTLS_PK_RSA && key_type != GNUTLS_PK_DSA)) {
+		fprintf(stderr,
+			"The --provable parameter cannot be used with ECDSA keys.\n");
+		exit(1);
+	}
+
 	if (bits > 1024 && key_type == GNUTLS_PK_DSA)
 		fprintf(stderr,
 			"Note that DSA keys with size over 1024 may cause incompatibility problems when used with earlier than TLS 1.2 versions.\n\n");
 
-	ret = gnutls_x509_privkey_generate(key, key_type, bits, 0);
+	if ((HAVE_OPT(SEED) || provable) && key_type == GNUTLS_PK_RSA) {
+		if (bits != 2048 && bits != 3072) {
+			fprintf(stderr, "Note that the FIPS 186-4 key generation restricts keys to 2048 and 3072 bits\n");
+		}
+	}
+
+	if (cinfo->seed_size > 0) {
+		gnutls_keygen_data_st data;
+
+		data.type = GNUTLS_KEYGEN_SEED;
+		data.data = (void*)cinfo->seed;
+		data.size = cinfo->seed_size;
+
+		if (key_type == GNUTLS_PK_RSA) {
+			if ((bits == 3072 && cinfo->seed_size != 32) || (bits == 2048 && cinfo->seed_size != 28)) {
+				fprintf(stderr, "The seed size (%d) doesn't match the size of the request security level; use -d 2 for more information.\n", (int)cinfo->seed_size);
+			}
+		} else if (key_type == GNUTLS_PK_DSA) {
+			if (cinfo->seed_size != 65) {
+				fprintf(stderr, "The seed size (%d) doesn't match the size of the request security level; use -d 2 for more information.\n", (int)cinfo->seed_size);
+			}
+		}
+
+		ret = gnutls_x509_privkey_generate2(key, key_type, bits, GNUTLS_PRIVKEY_FLAG_PROVABLE, &data, 1);
+	} else {
+		if (provable)
+			flags |= GNUTLS_PRIVKEY_FLAG_PROVABLE;
+		ret = gnutls_x509_privkey_generate(key, key_type, bits, flags);
+	}
 	if (ret < 0) {
 		fprintf(stderr, "privkey_generate: %s\n",
 			gnutls_strerror(ret));
@@ -153,80 +194,6 @@ generate_private_key_int(common_info_st * cinfo)
 	return key;
 }
 
-static int cipher_to_flags(const char *cipher)
-{
-	if (cipher == NULL) {
-#ifdef ENABLE_FIPS140
-		return GNUTLS_PKCS_USE_PBES2_AES_128;
-#else /* compatibility mode - most implementations don't support PBES2 with AES */
-		return GNUTLS_PKCS_USE_PKCS12_3DES;
-#endif
-	} else if (strcasecmp(cipher, "3des") == 0) {
-		return GNUTLS_PKCS_USE_PBES2_3DES;
-	} else if (strcasecmp(cipher, "3des-pkcs12") == 0) {
-		return GNUTLS_PKCS_USE_PKCS12_3DES;
-	} else if (strcasecmp(cipher, "arcfour") == 0) {
-		return GNUTLS_PKCS_USE_PKCS12_ARCFOUR;
-	} else if (strcasecmp(cipher, "aes-128") == 0) {
-		return GNUTLS_PKCS_USE_PBES2_AES_128;
-	} else if (strcasecmp(cipher, "aes-192") == 0) {
-		return GNUTLS_PKCS_USE_PBES2_AES_192;
-	} else if (strcasecmp(cipher, "aes-256") == 0) {
-		return GNUTLS_PKCS_USE_PBES2_AES_256;
-	} else if (strcasecmp(cipher, "rc2-40") == 0) {
-		return GNUTLS_PKCS_USE_PKCS12_RC2_40;
-	}
-
-	fprintf(stderr, "unknown cipher %s\n", cipher);
-	exit(1);
-}
-
-
-static void
-print_private_key(common_info_st * cinfo, gnutls_x509_privkey_t key)
-{
-	int ret;
-	size_t size;
-
-	if (!key)
-		return;
-
-
-	if (!cinfo->pkcs8) {
-		/* Only print private key parameters when an unencrypted
-		 * format is used */
-		if (outcert_format == GNUTLS_X509_FMT_PEM)
-			privkey_info_int(cinfo, key);
-
-		size = lbuffer_size;
-		ret = gnutls_x509_privkey_export(key, outcert_format,
-						 lbuffer, &size);
-		if (ret < 0) {
-			fprintf(stderr, "privkey_export: %s",
-				gnutls_strerror(ret));
-			exit(1);
-		}
-	} else {
-		unsigned int flags = 0;
-		const char *pass;
-
-		pass = get_password(cinfo, &flags, 0);
-		flags |= cipher_to_flags(cinfo->pkcs_cipher);
-
-		size = lbuffer_size;
-		ret =
-		    gnutls_x509_privkey_export_pkcs8(key, outcert_format,
-						     pass, flags, lbuffer,
-						     &size);
-		if (ret < 0) {
-			fprintf(stderr, "privkey_export_pkcs8: %s\n",
-				gnutls_strerror(ret));
-			exit(1);
-		}
-	}
-
-	fwrite(lbuffer, 1, size, outfile);
-}
 
 static void generate_private_key(common_info_st * cinfo)
 {
@@ -234,9 +201,33 @@ static void generate_private_key(common_info_st * cinfo)
 
 	key = generate_private_key_int(cinfo);
 
-	print_private_key(cinfo, key);
+	print_private_key(outfile, cinfo, key);
 
 	gnutls_x509_privkey_deinit(key);
+}
+
+static void verify_provable_privkey(common_info_st * cinfo)
+{
+	gnutls_privkey_t pkey;
+	int ret;
+
+	pkey = load_private_key(1, cinfo);
+
+	if (cinfo->seed_size > 0) {
+		ret = gnutls_privkey_verify_seed(pkey, 0, cinfo->seed, cinfo->seed_size);
+	} else {
+		ret = gnutls_privkey_verify_seed(pkey, 0, NULL, 0);
+	}
+
+	if (ret < 0) {
+		fprintf(stderr, "Error verifying private key: %s\n", gnutls_strerror(ret));
+		exit(1);
+	}
+
+	printf("Key was verified\n");
+	gnutls_privkey_deinit(pkey);
+
+	return;
 }
 
 
@@ -304,12 +295,15 @@ generate_certificate(gnutls_privkey_t * ret_key,
 
 			get_oid_crt_set(crt);
 			get_key_purpose_set(TYPE_CRT, crt);
+			get_extensions_crt_set(TYPE_CRT, crt);
 
 			if (!batch)
 				fprintf(stderr,
 					"This field should not be used in new certificates.\n");
 
 			get_pkcs9_email_crt_set(crt);
+
+			get_tlsfeatures_set(TYPE_CRT, crt);
 		}
 
 		result = gnutls_x509_crt_set_pubkey(crt, pubkey);
@@ -326,6 +320,8 @@ generate_certificate(gnutls_privkey_t * ret_key,
 				gnutls_strerror(result));
 			exit(1);
 		}
+
+		crq_extensions_set(crt, crq);
 	}
 
 
@@ -457,6 +453,7 @@ generate_certificate(gnutls_privkey_t * ret_key,
 		get_dns_name_set(TYPE_CRT, crt);
 		get_uri_set(TYPE_CRT, crt);
 		get_ip_addr_set(TYPE_CRT, crt);
+		get_other_name_set(TYPE_CRT, crt);
 		get_policy_set(crt);
 
 		if (server != 0) {
@@ -1048,7 +1045,6 @@ static void cmd_parser(int argc, char **argv)
 	} else
 		outfile = stdout;
 
-
 	if (HAVE_OPT(INFILE)) {
 		struct stat st;
 		if (stat(OPT_ARG(INFILE), &st) == 0) {
@@ -1098,11 +1094,22 @@ static void cmd_parser(int argc, char **argv)
 			default_dig = GNUTLS_DIG_SHA384;
 		else if (strcasecmp(OPT_ARG(HASH), "sha512") == 0)
 			default_dig = GNUTLS_DIG_SHA512;
+		else if (strcasecmp(OPT_ARG(HASH), "sha3-256") == 0)
+			default_dig = GNUTLS_DIG_SHA3_256;
+		else if (strcasecmp(OPT_ARG(HASH), "sha3-224") == 0)
+			default_dig = GNUTLS_DIG_SHA3_224;
+		else if (strcasecmp(OPT_ARG(HASH), "sha3-384") == 0)
+			default_dig = GNUTLS_DIG_SHA3_384;
+		else if (strcasecmp(OPT_ARG(HASH), "sha3-512") == 0)
+			default_dig = GNUTLS_DIG_SHA3_512;
 		else if (strcasecmp(OPT_ARG(HASH), "rmd160") == 0)
 			default_dig = GNUTLS_DIG_RMD160;
 		else {
-			fprintf(stderr, "invalid hash: %s\n", OPT_ARG(HASH));
-			exit(1);
+			default_dig = gnutls_digest_get_id(OPT_ARG(HASH));
+			if (default_dig == GNUTLS_DIG_UNKNOWN) {
+				fprintf(stderr, "invalid hash: %s\n", OPT_ARG(HASH));
+				exit(1);
+			}
 		}
 	}
 
@@ -1150,6 +1157,14 @@ static void cmd_parser(int argc, char **argv)
 
 	if (HAVE_OPT(VERBOSE))
 		cinfo.verbose = 1;
+
+	if (HAVE_OPT(SEED)) {
+		gnutls_datum_t seed;
+		decode_seed(&seed, OPT_ARG(SEED), strlen(OPT_ARG(SEED)));
+
+		cinfo.seed = seed.data;
+		cinfo.seed_size = seed.size;
+	}
 
 	cinfo.batch = batch;
 	cinfo.cprint = HAVE_OPT(CPRINT);
@@ -1215,6 +1230,9 @@ static void cmd_parser(int argc, char **argv)
 		cinfo.password = "";
 	}
 
+	if (HAVE_OPT(PROVABLE))
+		cinfo.provable = 1;
+
 	if (HAVE_OPT(EMPTY_PASSWORD)) {
 		cinfo.empty_password = 1;
 		cinfo.password = "";
@@ -1234,6 +1252,8 @@ static void cmd_parser(int argc, char **argv)
 		generate_private_key(&cinfo);
 	else if (HAVE_OPT(GENERATE_REQUEST))
 		generate_request(&cinfo);
+	else if (HAVE_OPT(VERIFY_PROVABLE_PRIVKEY))
+		verify_provable_privkey(&cinfo);
 	else if (HAVE_OPT(VERIFY_CHAIN))
 		verify_chain();
 	else if (HAVE_OPT(VERIFY))
@@ -1293,8 +1313,11 @@ static void cmd_parser(int argc, char **argv)
 	else
 		USAGE(1);
 
-	fclose(outfile);
+	if (outfile != stdout)
+		fclose(outfile);
 
+
+	free(cinfo.seed);
 #ifdef ENABLE_PKCS11
 	gnutls_pkcs11_deinit();
 #endif
@@ -1842,124 +1865,6 @@ void crq_info(void)
 	gnutls_x509_crq_deinit(crq);
 }
 
-static void privkey_info_int(common_info_st * cinfo,
-			     gnutls_x509_privkey_t key)
-{
-	int ret, key_type;
-	unsigned int bits = 0;
-	size_t size;
-	const char *cprint;
-
-	/* Public key algorithm
-	 */
-	fprintf(outfile, "Public Key Info:\n");
-	ret = gnutls_x509_privkey_get_pk_algorithm2(key, &bits);
-	fprintf(outfile, "\tPublic Key Algorithm: ");
-
-	key_type = ret;
-
-	cprint = gnutls_pk_algorithm_get_name(key_type);
-	fprintf(outfile, "%s\n", cprint ? cprint : "Unknown");
-	fprintf(outfile, "\tKey Security Level: %s (%u bits)\n\n",
-		gnutls_sec_param_get_name(gnutls_x509_privkey_sec_param
-					  (key)), bits);
-
-	/* Print the raw public and private keys
-	 */
-	if (key_type == GNUTLS_PK_RSA) {
-		gnutls_datum_t m, e, d, p, q, u, exp1, exp2;
-
-		ret =
-		    gnutls_x509_privkey_export_rsa_raw2(key, &m, &e, &d,
-							&p, &q, &u, &exp1,
-							&exp2);
-		if (ret < 0)
-			fprintf(stderr,
-				"Error in key RSA data export: %s\n",
-				gnutls_strerror(ret));
-		else {
-			print_rsa_pkey(outfile, &m, &e, &d, &p, &q, &u,
-				       &exp1, &exp2, HAVE_OPT(CPRINT));
-
-			gnutls_free(m.data);
-			gnutls_free(e.data);
-			gnutls_free(d.data);
-			gnutls_free(p.data);
-			gnutls_free(q.data);
-			gnutls_free(u.data);
-			gnutls_free(exp1.data);
-			gnutls_free(exp2.data);
-		}
-	} else if (key_type == GNUTLS_PK_DSA) {
-		gnutls_datum_t p, q, g, y, x;
-
-		ret =
-		    gnutls_x509_privkey_export_dsa_raw(key, &p, &q, &g, &y,
-						       &x);
-		if (ret < 0)
-			fprintf(stderr,
-				"Error in key DSA data export: %s\n",
-				gnutls_strerror(ret));
-		else {
-			print_dsa_pkey(outfile, &x, &y, &p, &q, &g,
-				       HAVE_OPT(CPRINT));
-
-			gnutls_free(x.data);
-			gnutls_free(y.data);
-			gnutls_free(p.data);
-			gnutls_free(q.data);
-			gnutls_free(g.data);
-		}
-	} else if (key_type == GNUTLS_PK_EC) {
-		gnutls_datum_t y, x, k;
-		gnutls_ecc_curve_t curve;
-
-		ret =
-		    gnutls_x509_privkey_export_ecc_raw(key, &curve, &x, &y,
-						       &k);
-		if (ret < 0)
-			fprintf(stderr,
-				"Error in key ECC data export: %s\n",
-				gnutls_strerror(ret));
-		else {
-			cprint = gnutls_ecc_curve_get_name(curve);
-			bits = 0;
-
-			print_ecc_pkey(outfile, curve, &k, &x, &y,
-				       HAVE_OPT(CPRINT));
-
-			gnutls_free(x.data);
-			gnutls_free(y.data);
-			gnutls_free(k.data);
-		}
-	}
-
-	fprintf(outfile, "\n");
-
-	size = lbuffer_size;
-	if ((ret =
-	     gnutls_x509_privkey_get_key_id(key, GNUTLS_KEYID_USE_SHA1, lbuffer, &size)) < 0) {
-		fprintf(stderr, "Error in key id calculation: %s\n",
-			gnutls_strerror(ret));
-	} else {
-		gnutls_datum_t art;
-
-		fprintf(outfile, "Public Key ID: %s\n",
-			raw_to_string(lbuffer, size));
-
-		ret =
-		    gnutls_random_art(GNUTLS_RANDOM_ART_OPENSSH, cprint,
-				      bits, lbuffer, size, &art);
-		if (ret >= 0) {
-			fprintf(outfile, "Public key's random art:\n%s\n",
-				art.data);
-			gnutls_free(art.data);
-		}
-	}
-	fprintf(outfile, "\n");
-
-}
-
 void privkey_info(common_info_st * cinfo)
 {
 	gnutls_x509_privkey_t key;
@@ -1996,24 +1901,16 @@ void privkey_info(common_info_st * cinfo)
 		fprintf(stderr, "import error: %s\n", gnutls_strerror(ret));
 		exit(1);
 	}
+	/* On this option we may import from PKCS #8 but we are always exporting
+	 * to our format. */
+	cinfo->pkcs8 = 0;
 
-	if (outcert_format == GNUTLS_X509_FMT_PEM)
-		privkey_info_int(cinfo, key);
+	print_private_key(outfile, cinfo, key);
 
 	ret = gnutls_x509_privkey_verify_params(key);
 	if (ret < 0)
 		fprintf(outfile,
 			"\n** Private key parameters validation failed **\n\n");
-
-	size = lbuffer_size;
-	ret =
-	    gnutls_x509_privkey_export(key, outcert_format, lbuffer, &size);
-	if (ret < 0) {
-		fprintf(stderr, "export error: %s\n", gnutls_strerror(ret));
-		exit(1);
-	}
-
-	fwrite(lbuffer, 1, size, outfile);
 
 	gnutls_x509_privkey_deinit(key);
 }
@@ -2053,7 +1950,7 @@ void generate_request(common_info_st * cinfo)
 
 		xkey = generate_private_key_int(cinfo);
 
-		print_private_key(cinfo, xkey);
+		print_private_key(outfile, cinfo, xkey);
 
 		ret =
 		    gnutls_privkey_import_x509(pkey, xkey,
@@ -2088,6 +1985,8 @@ void generate_request(common_info_st * cinfo)
 	get_uri_set(TYPE_CRQ, crq);
 	get_ip_addr_set(TYPE_CRQ, crq);
 	get_email_set(TYPE_CRQ, crq);
+	get_other_name_set(TYPE_CRQ, crq);
+	get_extensions_crt_set(TYPE_CRQ, crq);
 
 	pass = get_challenge_pass();
 
@@ -2219,6 +2118,8 @@ void generate_request(common_info_st * cinfo)
 		}
 
 		get_key_purpose_set(TYPE_CRQ, crq);
+
+		get_tlsfeatures_set(TYPE_CRQ, crq);
 	}
 
 	ret = gnutls_x509_crq_set_pubkey(crq, pubkey);
@@ -2270,9 +2171,14 @@ static int detailed_verification(gnutls_x509_crt_t cert,
 	name_size = sizeof(name);
 	ret = gnutls_x509_crt_get_dn(cert, name, &name_size);
 	if (ret < 0) {
-		fprintf(stderr, "gnutls_x509_crt_get_dn: %s\n",
-			gnutls_strerror(ret));
-		exit(1);
+		if (ret == GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE) {
+			name[0] = 0;
+			name_size = 0;
+		} else {
+			fprintf(stderr, "gnutls_x509_crt_get_dn: %s\n",
+				gnutls_strerror(ret));
+			exit(1);
+		}
 	}
 
 	fprintf(outfile, "\tSubject: %s\n", name);
@@ -2463,10 +2369,12 @@ _verify_x509_mem(const void *cert, int cert_size, const void *ca,
 	gnutls_datum_t tmp;
 	gnutls_x509_crt_t *x509_cert_list = NULL;
 	gnutls_x509_crt_t *x509_ca_list = NULL;
+	gnutls_x509_crt_t *pca_list = NULL;
 	gnutls_x509_crl_t *x509_crl_list = NULL;
 	unsigned int x509_ncerts, x509_ncrls = 0, x509_ncas = 0;
 	gnutls_x509_trust_list_t list;
 	unsigned int output;
+	unsigned vflags;
 
 	ret = gnutls_x509_trust_list_init(&list, 0);
 	if (ret < 0) {
@@ -2520,6 +2428,7 @@ _verify_x509_mem(const void *cert, int cert_size, const void *ca,
 				exit(1);
 			}
 		}
+		pca_list = x509_ca_list;
 
 		ret =
 		    gnutls_x509_crl_list_import2(&x509_crl_list,
@@ -2546,12 +2455,12 @@ _verify_x509_mem(const void *cert, int cert_size, const void *ca,
 		}
 
 		if (ca == NULL) {
-			x509_ca_list = &x509_cert_list[x509_ncerts - 1];
+			pca_list = &x509_cert_list[x509_ncerts - 1];
 			x509_ncas = 1;
 		}
 
 		ret =
-		    gnutls_x509_trust_list_add_cas(list, x509_ca_list,
+		    gnutls_x509_trust_list_add_cas(list, pca_list,
 						   x509_ncas, 0);
 		if (ret < 0) {
 			fprintf(stderr, "gnutls_x509_trust_add_cas: %s\n",
@@ -2572,6 +2481,12 @@ _verify_x509_mem(const void *cert, int cert_size, const void *ca,
 
 	fprintf(stdout, "Loaded %d certificates, %d CAs and %d CRLs\n\n",
 		x509_ncerts, x509_ncas, x509_ncrls);
+
+	vflags = GNUTLS_VERIFY_DO_NOT_ALLOW_SAME;
+
+	if (HAVE_OPT(VERIFY_ALLOW_BROKEN))
+		vflags |= GNUTLS_VERIFY_ALLOW_BROKEN;
+
 
 	if (purpose || hostname || email) {
 		gnutls_typed_vdata_st vdata[2];
@@ -2601,14 +2516,14 @@ _verify_x509_mem(const void *cert, int cert_size, const void *ca,
 						       x509_ncerts,
 						       vdata,
 						       vdata_size,
-						       GNUTLS_VERIFY_DO_NOT_ALLOW_SAME,
+						       vflags,
 						       &output,
 						       detailed_verification);
 	} else { 
 		ret =
 		    gnutls_x509_trust_list_verify_crt(list, x509_cert_list,
 						      x509_ncerts,
-						      GNUTLS_VERIFY_DO_NOT_ALLOW_SAME,
+						      vflags,
 						      &output,
 						      detailed_verification);
 	}
@@ -2627,6 +2542,11 @@ _verify_x509_mem(const void *cert, int cert_size, const void *ca,
 	for (i=0;i<x509_ncerts;i++)
 		gnutls_x509_crt_deinit(x509_cert_list[i]);
 	gnutls_free(x509_cert_list);
+	if (x509_ca_list != NULL) {
+		for (i=0;i<x509_ncas;i++)
+			gnutls_x509_crt_deinit(x509_ca_list[i]);
+		gnutls_free(x509_ca_list);
+	}
 	for (i=0;i<x509_ncrls;i++)
 		gnutls_x509_crl_deinit(x509_crl_list[i]);
 	gnutls_free(x509_crl_list);
@@ -2714,6 +2634,8 @@ static void verify_certificate(common_info_st * cinfo)
 	_verify_x509_mem(cert, cert_size, cas, ca_size,
 			 (cinfo->ca != NULL) ? 0 : 1, OPT_ARG(VERIFY_PURPOSE),
 			 OPT_ARG(VERIFY_HOSTNAME), OPT_ARG(VERIFY_EMAIL));
+	free(cert);
+	free(cas);
 
 
 }
@@ -2897,6 +2819,7 @@ void verify_pkcs7(common_info_st * cinfo, const char *purpose, unsigned display_
 	gnutls_typed_vdata_st vdata[2];
 	unsigned vdata_size = 0;
 	gnutls_x509_crt_t signer = NULL;
+	unsigned flags = 0;
 
 	ret = gnutls_pkcs7_init(&pkcs7);
 	if (ret < 0) {
@@ -2985,10 +2908,13 @@ void verify_pkcs7(common_info_st * cinfo, const char *purpose, unsigned display_
 
 		gnutls_pkcs7_signature_info_deinit(&info);
 
+		if (HAVE_OPT(VERIFY_ALLOW_BROKEN))
+			flags |= GNUTLS_VERIFY_ALLOW_BROKEN;
+
 		if (signer)
-			ret = gnutls_pkcs7_verify_direct(pkcs7, signer, i, detached.data!=NULL?&detached:NULL, 0);
+			ret = gnutls_pkcs7_verify_direct(pkcs7, signer, i, detached.data!=NULL?&detached:NULL, flags);
 		else
-			ret = gnutls_pkcs7_verify(pkcs7, tl, vdata, vdata_size, i, detached.data!=NULL?&detached:NULL, 0);
+			ret = gnutls_pkcs7_verify(pkcs7, tl, vdata, vdata_size, i, detached.data!=NULL?&detached:NULL, flags);
 		if (ret < 0) {
 			fprintf(stderr, "\tSignature status: verification failed: %s\n", gnutls_strerror(ret));
 			ecode = 1;
@@ -3019,7 +2945,7 @@ void pkcs7_sign(common_info_st * cinfo, unsigned embed)
 	unsigned flags = 0;
 	gnutls_x509_crt_t signer;
 
-	if (HAVE_OPT(P7_TIME))
+	if (ENABLED_OPT(P7_TIME))
 		flags |= GNUTLS_PKCS7_INCLUDE_TIME;
 
 	if (ENABLED_OPT(P7_INCLUDE_CERT))
@@ -3766,6 +3692,7 @@ void pkcs8_info(void)
 	}
 
 	pkcs8_info_int(&data, incert_format, 0, outfile, "");
+	free(data.data);
 }
 
 void pkcs7_info(common_info_st *cinfo)
@@ -3888,6 +3815,7 @@ gnutls_pubkey_t find_pubkey(gnutls_x509_crt_t crt, common_info_st * cinfo)
 				gnutls_strerror(ret));
 			exit(1);
 		}
+		gnutls_x509_crt_deinit(crt);
 	} else if (crq != NULL) {
 		ret = gnutls_pubkey_import_x509_crq(pubkey, crq, 0);
 		if (ret < 0) {
@@ -3895,6 +3823,7 @@ gnutls_pubkey_t find_pubkey(gnutls_x509_crt_t crt, common_info_st * cinfo)
 				gnutls_strerror(ret));
 			exit(1);
 		}
+		gnutls_x509_crq_deinit(crq);
 	} else {
 		privkey = load_private_key(0, cinfo);
 
@@ -3908,6 +3837,7 @@ gnutls_pubkey_t find_pubkey(gnutls_x509_crt_t crt, common_info_st * cinfo)
 					gnutls_strerror(ret));
 				exit(1);
 			}
+			gnutls_privkey_deinit(privkey);
 		} else {
 			gnutls_pubkey_deinit(pubkey);
 			pubkey = load_pubkey(0, cinfo);
@@ -3953,6 +3883,7 @@ gnutls_pubkey_t find_pubkey(gnutls_x509_crt_t crt, common_info_st * cinfo)
 						gnutls_strerror(ret));
 						exit(1);
 					}
+					gnutls_x509_crt_deinit(crt);
 				} else {
 					ret = gnutls_pubkey_import(pubkey, &pem, incert_format);
 					if (ret < 0) {
@@ -3962,6 +3893,7 @@ gnutls_pubkey_t find_pubkey(gnutls_x509_crt_t crt, common_info_st * cinfo)
 						exit(1);
 					}
 				}
+				free(pem.data);
 			}
 
 		}

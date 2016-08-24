@@ -13,9 +13,12 @@
  *  Please contact JWC s.r.o. at <info@pkcs11interop.net> for more details.
  */
 
-
 #include "pkcs11-mock.h"
+#include "pkcs11-mock-ext.h"
+#include <string.h>
 #include <stdlib.h>
+
+unsigned int pkcs11_mock_flags = 0;
 
 /* This is a very basic mock PKCS #11 module that will return a given fixed
  * certificate, and public key for all searches. It will also provide a
@@ -189,6 +192,25 @@ CK_FUNCTION_LIST pkcs11_mock_functions =
 	&C_WaitForSlotEvent
 };
 
+#if defined(HAVE___REGISTER_ATFORK)
+extern int __register_atfork(void (*)(void), void(*)(void), void (*)(void), void *);
+extern void *__dso_handle;
+static unsigned registered_fork_handler = 0;
+
+static void fork_handler(void)
+{
+	pkcs11_mock_initialized = CK_FALSE;
+	pkcs11_mock_session_opened = CK_FALSE;
+	if (mock_session) {
+		mock_session->state = CKS_RO_PUBLIC_SESSION;
+		mock_session->find_op.active_operation = PKCS11_MOCK_CK_OPERATION_NONE;
+		free(mock_session->find_label);
+	}
+	free(mock_session);
+	mock_session = NULL;
+}
+#endif
+
 
 CK_DEFINE_FUNCTION(CK_RV, C_Initialize)(CK_VOID_PTR pInitArgs)
 {
@@ -197,6 +219,12 @@ CK_DEFINE_FUNCTION(CK_RV, C_Initialize)(CK_VOID_PTR pInitArgs)
 
 	IGNORE(pInitArgs);
 
+#if defined(HAVE___REGISTER_ATFORK)
+	if (registered_fork_handler == 0) {
+		__register_atfork(NULL, NULL, fork_handler, __dso_handle);
+		registered_fork_handler = 1;
+	}
+#endif
 	pkcs11_mock_initialized = CK_TRUE;
 
 	return CKR_OK;
@@ -532,7 +560,6 @@ CK_DEFINE_FUNCTION(CK_RV, C_OpenSession)(CK_SLOT_ID slotID, CK_FLAGS flags, CK_V
 {
 	if (CK_FALSE == pkcs11_mock_initialized)
 		return CKR_CRYPTOKI_NOT_INITIALIZED;
-
 	if (CK_TRUE == pkcs11_mock_session_opened)
 		return CKR_SESSION_COUNT;
 
@@ -581,6 +608,7 @@ CK_DEFINE_FUNCTION(CK_RV, C_CloseSession)(CK_SESSION_HANDLE hSession)
 	mock_session->find_op.active_operation = PKCS11_MOCK_CK_OPERATION_NONE;
 	free(mock_session->find_label);
 	free(mock_session);
+	mock_session = NULL;
 
 	return CKR_OK;
 }
@@ -893,6 +921,15 @@ CK_DEFINE_FUNCTION(CK_RV, C_GetAttributeValue)(CK_SESSION_HANDLE hSession, CK_OB
 
 			pTemplate[i].ulValueLen = strlen(PKCS11_MOCK_CK_OBJECT_CKA_LABEL);
 		}
+		else if (CKA_KEY_TYPE == pTemplate[i].type)
+		{
+			CK_KEY_TYPE t;
+			if (pTemplate[i].ulValueLen != sizeof(CK_KEY_TYPE))
+				return CKR_ARGUMENTS_BAD;
+
+			t = CKK_RSA;
+			memcpy(pTemplate[i].pValue, &t, sizeof(CK_KEY_TYPE));
+		}
 		else if (CKA_ID == pTemplate[i].type)
 		{
 			if (NULL != pTemplate[i].pValue)
@@ -964,6 +1001,9 @@ CK_DEFINE_FUNCTION(CK_RV, C_GetAttributeValue)(CK_SESSION_HANDLE hSession, CK_OB
 			else if (PKCS11_MOCK_CK_OBJECT_HANDLE_PRIVATE_KEY == hObject)
 			{
 				pTemplate[i].ulValueLen = (CK_ULONG) -1;
+				if (!(pkcs11_mock_flags & MOCK_FLAG_BROKEN_GET_ATTRIBUTES)) {
+					return CKR_ATTRIBUTE_SENSITIVE;
+				}
 			}
 			else
 			{

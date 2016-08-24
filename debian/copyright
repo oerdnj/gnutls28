@@ -89,6 +89,9 @@ Upstream Authors:
        Martin Storjo *martin [at] martin.st*
        DTLS-SRTP support.
 
+       Alessandro Ghedini *alessandro [at] ghedini.me*
+       TLS Fallback SCSV support (RFC7507).
+
 
 License: The main library is licensed under GNU Lesser
 General Public License (LGPL) version 2.1+, Gnutls Extra (which is currently
@@ -177,6 +180,7 @@ the headers currently also list these authors/copyright holders::
 * Andrew McDonald <andrew@mcdonald.org.uk
 * Red Hat
 * Paul Sheer
+* Dyalog Ltd.
 --------------------
 
 
@@ -219,57 +223,6 @@ note that the range specifies every single year in that closed interval.
 ============================================
 
 Non FSF code
-
-============================================
-crywrap is shipped with GnuTLS.
-Upstream Authors: Gergely Nagy <algernon@bonehunter.rulez.org>
-                  Nikos Mavrogiannopoulos
-License: GPLv3+
-
-Copyright:
---------------------
- * Copyright (C) 2003, 2004 Gergely Nagy <algernon@bonehunter.rulez.org>
- * Copyright (C) 2011 Nikos Mavrogiannopoulos
- *
- * This file is part of CryWrap.
- *
- * CryWrap is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * CryWrap is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
---------------------
-
-crywrap documentation (manpage):
-Upstream Author: Gergely Nagy <algernon@bonehunter.rulez.org>
-License: nonstandard, see below
-Copyright:
---------------------
-.\" This manual is for CRYWrap
-.\"
-.\" Copyright (C) 2003 Gergely Nagy <algernon@@bonehunter.rulez.org>
-.\"
-.\" Permission is granted to make and distribute verbatim copies of this
-.\" manual provided the copyright notice and this permission notice are
-.\" preserved on all copies.
-.\"
-.\" Permission is granted to copy and distribute modified versions of this
-.\" manual under the conditions for verbatim copying, provided that the
-.\" entire resulting derived work is distributed under the terms of a
-.\" permission notice identical to this one.
-.\"
-.\" Permission is granted to copy and distribute translations of this
-.\" manual into another language, under the above conditions for modified
-.\" versions, except that this permission notice may be stated in a
-.\" translation approved by the Author.
---------------------
 
 ============================================
 
@@ -362,7 +315,7 @@ License:
 
 ============================================
 
-lib/inet_pton.c
+lib/system/inet_pton.c
 
 Upstream Authors: Internet Software Consortium
 
@@ -384,7 +337,7 @@ Copyright/License:
 
 ============================================
 
-lib/vasprintf.c
+lib/system/vasprintf.c
 Upstream Authors: David Woodhouse <dwmw2@infradead.org>
 Copyright: 2008-2014 Intel Corporation
 License: LGPL2.1
@@ -423,6 +376,29 @@ License: CC0 license
       Affirmer offers the Work as-is and makes no representations or warranties of any kind concerning the Work, express, implied, statutory or otherwise, including without limitation warranties of title, merchantability, fitness for a particular purpose, non infringement, or the absence of latent or other defects, accuracy, or the present or absence of errors, whether or not discoverable, all to the greatest extent permissible under applicable law.
       Affirmer disclaims responsibility for clearing rights of other persons that may apply to the Work or any use thereof, including without limitation any person's Copyright and Related Rights in the Work. Further, Affirmer disclaims responsibility for obtaining any necessary consents, permissions or other rights required for any use of the Work.
       Affirmer understands and acknowledges that Creative Commons is not a party to this document and has no duty or obligation with respect to this CC0 or use of the Work.
+
+============================================
+
+doc/examples/tlsproxy/
+Copyright: Copyright (c) 2016 Wrymouth Innovation Ltd
+License: The MIT License (MIT)
+ Permission is hereby granted, free of charge, to any person obtaining a
+ copy of this software and associated documentation files (the "Software"),
+ to deal in the Software without restriction, including without limitation
+ the rights to use, copy, modify, merge, publish, distribute, sublicense,
+ and/or sell copies of the Software, and to permit persons to whom the
+ Software is furnished to do so, subject to the following conditions:
+ 
+ The above copyright notice and this permission notice shall be included
+ in all copies or substantial portions of the Software.
+ 
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+ THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR
+ OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+ ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+ OTHER DEALINGS IN THE SOFTWARE.
 
 ============================================
 

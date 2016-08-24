@@ -1,3 +1,5 @@
 14_version_gettextcat.diff
 30_guile-snarf.diff
-40_src-added-systemkey-args-to-BUILT_SOURCES.patch
+35_gnutls-cli-print-Handshake-was-completed.patch
+36_gnutls-cli-fixed-the-behavior-when-starttls-or-start.patch
+37_openssl-format-fix-from-openconnect.patch

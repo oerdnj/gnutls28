@@ -319,6 +319,7 @@ crypto-backend
 </para>
 
 @GNUTLS_PK_FLAG_NONE: 
+@GNUTLS_PK_FLAG_PROVABLE: 
 
 <!-- ##### FUNCTION gnutls_pk_params_init ##### -->
 <para>

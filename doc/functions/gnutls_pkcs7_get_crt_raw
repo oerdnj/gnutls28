@@ -2,7 +2,7 @@
 
 
 
-@deftypefun {int} {gnutls_pkcs7_get_crt_raw} (gnutls_pkcs7_t @var{pkcs7}, int @var{indx}, void * @var{certificate}, size_t * @var{certificate_size})
+@deftypefun {int} {gnutls_pkcs7_get_crt_raw} (gnutls_pkcs7_t @var{pkcs7}, unsigned @var{indx}, void * @var{certificate}, size_t * @var{certificate_size})
 @var{pkcs7}: should contain a gnutls_pkcs7_t type
 
 @var{indx}: contains the index of the certificate to extract

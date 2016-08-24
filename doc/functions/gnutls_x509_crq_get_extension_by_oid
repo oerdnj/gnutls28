@@ -2,7 +2,7 @@
 
 
 
-@deftypefun {int} {gnutls_x509_crq_get_extension_by_oid} (gnutls_x509_crq_t @var{crq}, const char * @var{oid}, int @var{indx}, void * @var{buf}, size_t * @var{buf_size}, unsigned int * @var{critical})
+@deftypefun {int} {gnutls_x509_crq_get_extension_by_oid} (gnutls_x509_crq_t @var{crq}, const char * @var{oid}, unsigned @var{indx}, void * @var{buf}, size_t * @var{buf_size}, unsigned int * @var{critical})
 @var{crq}: should contain a @code{gnutls_x509_crq_t}  type
 
 @var{oid}: holds an Object Identifier in a null terminated string

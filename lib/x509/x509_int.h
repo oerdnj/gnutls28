@@ -41,6 +41,10 @@
 #define HASH_OID_SHA256 "2.16.840.1.101.3.4.2.1"
 #define HASH_OID_SHA384 "2.16.840.1.101.3.4.2.2"
 #define HASH_OID_SHA512 "2.16.840.1.101.3.4.2.3"
+#define HASH_OID_SHA3_224 "2.16.840.1.101.3.4.2.7"
+#define HASH_OID_SHA3_256 "2.16.840.1.101.3.4.2.8"
+#define HASH_OID_SHA3_384 "2.16.840.1.101.3.4.2.9"
+#define HASH_OID_SHA3_512 "2.16.840.1.101.3.4.2.10"
 
 struct gnutls_x509_crl_iter {
 	/* This is used to optimize reads by gnutls_x509_crl_iter_crt_serial() */
@@ -68,7 +72,10 @@ typedef struct gnutls_x509_dn_st {
 typedef struct gnutls_x509_crt_int {
 	ASN1_TYPE cert;
 	int use_extensions;
-	int expanded;		/* a certificate has been expanded */
+	unsigned expanded; /* a certificate has been expanded */
+	unsigned modified; /* the cached values below may no longer be valid */
+
+	struct pin_info_st pin;
 
 	/* These two cached values allow fast calls to
 	 * get_raw_*_dn(). */
@@ -77,13 +84,14 @@ typedef struct gnutls_x509_crt_int {
 	gnutls_datum_t raw_spki;
 
 	gnutls_datum_t der;
-	struct pin_info_st pin;
 
 	/* backwards compatibility for gnutls_x509_crt_get_subject()
 	 * and gnutls_x509_crt_get_issuer() */
 	gnutls_x509_dn_st dn;
 	gnutls_x509_dn_st idn;
 } gnutls_x509_crt_int;
+
+#define MODIFIED(crt) crt->modified=1
 
 typedef struct gnutls_x509_crq_int {
 	ASN1_TYPE crq;
@@ -116,6 +124,7 @@ typedef struct gnutls_x509_privkey_int {
 
 	gnutls_pk_algorithm_t pk_algorithm;
 	unsigned expanded;
+	unsigned flags;
 
 	ASN1_TYPE key;
 	struct pin_info_st pin;
@@ -172,6 +181,8 @@ int _gnutls_x509_get_dn_oid(ASN1_TYPE asn1_struct,
 			    const char *asn1_rdn_name,
 			    int indx, void *_oid, size_t * sizeof_oid);
 
+int _gnutls_encode_othername_data(unsigned flags, const void *data, unsigned data_size, gnutls_datum_t *output);
+
 int _gnutls_parse_general_name(ASN1_TYPE src, const char *src_name,
 			       int seq, void *name, size_t * name_size,
 			       unsigned int *ret_type, int othername_oid);
@@ -184,6 +195,11 @@ _gnutls_parse_general_name2(ASN1_TYPE src, const char *src_name,
 int
 _gnutls_write_new_general_name(ASN1_TYPE ext, const char *ext_name,
 		       gnutls_x509_subject_alt_name_t type,
+		       const void *data, unsigned int data_size);
+
+int
+_gnutls_write_new_othername(ASN1_TYPE ext, const char *ext_name,
+		       const char *oid,
 		       const void *data, unsigned int data_size);
 
 /* dsa.c */
@@ -220,7 +236,7 @@ _gnutls_x509_read_ecc_params(uint8_t * der, int dersize,
 			     unsigned int *curve);
 
 int _gnutls_asn1_encode_privkey(gnutls_pk_algorithm_t pk, ASN1_TYPE * c2,
-				gnutls_pk_params_st * params);
+				gnutls_pk_params_st * params, unsigned compat);
 
 /* extensions.c */
 int _gnutls_x509_crl_get_extension_oid(gnutls_x509_crl_t crl,
@@ -266,7 +282,9 @@ _gnutls_write_general_name(ASN1_TYPE ext, const char *ext_name,
 		       const void *data, unsigned int data_size);
 
 int _gnutls_x509_ext_gen_subject_alt_name(gnutls_x509_subject_alt_name_t
-					  type, const void *data,
+					  type,
+					  const char *othername_oid,
+					  const void *data,
 					  unsigned int data_size,
 					  const gnutls_datum_t * prev_der_ext,
 					  gnutls_datum_t * der_ext);
@@ -341,7 +359,7 @@ struct bag_element {
 
 typedef struct gnutls_pkcs12_bag_int {
 	struct bag_element element[MAX_BAG_ELEMENTS];
-	int bag_elements;
+	unsigned bag_elements;
 } gnutls_pkcs12_bag_int;
 
 #define BAG_PKCS8_KEY "1.2.840.113549.1.12.10.1.1"
@@ -460,7 +478,15 @@ typedef struct name_constraints_node_st {
 
 int _gnutls_extract_name_constraints(ASN1_TYPE c2, const char *vstr,
 				    name_constraints_node_st ** _nc);
+void _gnutls_name_constraints_node_free (name_constraints_node_st *node);
+int _gnutls_x509_name_constraints_merge(gnutls_x509_name_constraints_t nc,
+					gnutls_x509_name_constraints_t nc2);
 
 void _gnutls_x509_policies_erase(gnutls_x509_policies_t policies, unsigned int seq);
+
+struct gnutls_x509_tlsfeatures_st {
+	uint16_t feature[MAX_EXT_TYPES];
+	unsigned int size;
+};
 
 #endif

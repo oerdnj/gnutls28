@@ -34,7 +34,7 @@ generated output is strongly connected to some additional data
 
 The output is placed in  @code{out} , which must be pre-allocated.
 
-Note that, to provide the RFC5705 context, the  @code{contect} variable
+Note that, to provide the RFC5705 context, the  @code{context} variable
 must be non-null.
 
 @strong{Returns:} @code{GNUTLS_E_SUCCESS}  on success, or an error code.

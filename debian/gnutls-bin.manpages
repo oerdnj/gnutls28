@@ -1,3 +1,2 @@
 debian/tmp/usr/share/man/*/*.1
 debian/tmp/usr/share/man/*/*.8
-debian/crywrap.8

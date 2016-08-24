@@ -398,7 +398,7 @@ error.</p>
 <a name="gnutls-pkcs12-bag-get-data"></a><h3>gnutls_pkcs12_bag_get_data ()</h3>
 <pre class="programlisting"><span class="returnvalue">int</span>
 gnutls_pkcs12_bag_get_data (<em class="parameter"><code><a class="link" href="gnutls-pkcs12.html#gnutls-pkcs12-bag-t" title="gnutls_pkcs12_bag_t"><span class="type">gnutls_pkcs12_bag_t</span></a> bag</code></em>,
-                            <em class="parameter"><code><span class="type">int</span> indx</code></em>,
+                            <em class="parameter"><code><span class="type">unsigned </span> indx</code></em>,
                             <em class="parameter"><code><span class="type">gnutls_datum_t</span> *data</code></em>);</pre>
 <p>This function will return the bag's data. The data is a constant
 that is stored into the bag.  Should not be accessed after the bag
@@ -441,7 +441,7 @@ negative error value.</p>
 <a name="gnutls-pkcs12-bag-get-friendly-name"></a><h3>gnutls_pkcs12_bag_get_friendly_name ()</h3>
 <pre class="programlisting"><span class="returnvalue">int</span>
 gnutls_pkcs12_bag_get_friendly_name (<em class="parameter"><code><a class="link" href="gnutls-pkcs12.html#gnutls-pkcs12-bag-t" title="gnutls_pkcs12_bag_t"><span class="type">gnutls_pkcs12_bag_t</span></a> bag</code></em>,
-                                     <em class="parameter"><code><span class="type">int</span> indx</code></em>,
+                                     <em class="parameter"><code><span class="type">unsigned </span> indx</code></em>,
                                      <em class="parameter"><code><span class="type">char</span> **name</code></em>);</pre>
 <p>This function will return the friendly name, of the specified bag
 element.  The key ID is usually used to distinguish the local
@@ -484,7 +484,7 @@ negative error value. or a negative error code on error.</p>
 <a name="gnutls-pkcs12-bag-get-key-id"></a><h3>gnutls_pkcs12_bag_get_key_id ()</h3>
 <pre class="programlisting"><span class="returnvalue">int</span>
 gnutls_pkcs12_bag_get_key_id (<em class="parameter"><code><a class="link" href="gnutls-pkcs12.html#gnutls-pkcs12-bag-t" title="gnutls_pkcs12_bag_t"><span class="type">gnutls_pkcs12_bag_t</span></a> bag</code></em>,
-                              <em class="parameter"><code><span class="type">int</span> indx</code></em>,
+                              <em class="parameter"><code><span class="type">unsigned </span> indx</code></em>,
                               <em class="parameter"><code><span class="type">gnutls_datum_t</span> *id</code></em>);</pre>
 <p>This function will return the key ID, of the specified bag element.
 The key ID is usually used to distinguish the local private key and
@@ -670,7 +670,7 @@ value on error.</p>
 <a name="gnutls-pkcs12-bag-set-friendly-name"></a><h3>gnutls_pkcs12_bag_set_friendly_name ()</h3>
 <pre class="programlisting"><span class="returnvalue">int</span>
 gnutls_pkcs12_bag_set_friendly_name (<em class="parameter"><code><a class="link" href="gnutls-pkcs12.html#gnutls-pkcs12-bag-t" title="gnutls_pkcs12_bag_t"><span class="type">gnutls_pkcs12_bag_t</span></a> bag</code></em>,
-                                     <em class="parameter"><code><span class="type">int</span> indx</code></em>,
+                                     <em class="parameter"><code><span class="type">unsigned </span> indx</code></em>,
                                      <em class="parameter"><code>const <span class="type">char</span> *name</code></em>);</pre>
 <p>This function will add the given key friendly name, to the
 specified, by the index, bag element. The name will be encoded as
@@ -714,7 +714,7 @@ negative error value. or a negative error code on error.</p>
 <a name="gnutls-pkcs12-bag-set-key-id"></a><h3>gnutls_pkcs12_bag_set_key_id ()</h3>
 <pre class="programlisting"><span class="returnvalue">int</span>
 gnutls_pkcs12_bag_set_key_id (<em class="parameter"><code><a class="link" href="gnutls-pkcs12.html#gnutls-pkcs12-bag-t" title="gnutls_pkcs12_bag_t"><span class="type">gnutls_pkcs12_bag_t</span></a> bag</code></em>,
-                              <em class="parameter"><code><span class="type">int</span> indx</code></em>,
+                              <em class="parameter"><code><span class="type">unsigned </span> indx</code></em>,
                               <em class="parameter"><code>const <span class="type">gnutls_datum_t</span> *id</code></em>);</pre>
 <p>This function will add the given key ID, to the specified, by the
 index, bag element. The key ID will be encoded as a 'Local key
@@ -1219,7 +1219,7 @@ negative error value.</p>
 <a name="gnutls-pkcs12-bag-int"></a><h3>gnutls_pkcs12_bag_int</h3>
 <pre class="programlisting">typedef struct {
 	struct bag_element element[MAX_BAG_ELEMENTS];
-	int bag_elements;
+	unsigned bag_elements;
 } gnutls_pkcs12_bag_int;
 </pre>
 <p>

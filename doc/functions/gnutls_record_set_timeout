@@ -9,7 +9,8 @@
 
 This function sets the receive timeout for the record layer
 to the provided value. Use an  @code{ms} value of zero to disable
-timeout (the default).
+timeout (the default), or @code{GNUTLS_INDEFINITE_TIMEOUT} , to
+set an indefinite timeout.
 
 This function requires to set a pull timeout callback. See
 @code{gnutls_transport_set_pull_timeout_function()} .

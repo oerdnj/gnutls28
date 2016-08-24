@@ -26,12 +26,12 @@
  * and later rewritten by Nikos Mavrogiannopoulos.
  */
 
-#include <gnutls_errors.h>
-#include <gnutls_int.h>
-#include <gnutls_dtls.h>
-#include <gnutls_record.h>
+#include "errors.h"
+#include "gnutls_int.h"
+#include <dtls.h>
+#include <record.h>
 #include <ext/heartbeat.h>
-#include <gnutls_extensions.h>
+#include <extensions.h>
 #include <random.h>
 
 #ifdef ENABLE_HEARTBEAT
@@ -229,7 +229,7 @@ gnutls_heartbeat_ping(gnutls_session_t session, size_t data_size,
 
 	case SHB_RECV:
 		ret =
-		    _gnutls_recv_int(session, GNUTLS_HEARTBEAT, -1, NULL,
+		    _gnutls_recv_int(session, GNUTLS_HEARTBEAT,
 				     NULL, 0, NULL,
 				     session->internals.
 				     hb_actual_retrans_timeout_ms);
@@ -519,8 +519,8 @@ _gnutls_heartbeat_unpack(gnutls_buffer_st * ps,
 	return ret;
 }
 
-extension_entry_st ext_mod_heartbeat = {
-	.name = "HEARTBEAT",
+const extension_entry_st ext_mod_heartbeat = {
+	.name = "Heartbeat",
 	.type = GNUTLS_EXTENSION_HEARTBEAT,
 	.parse_type = GNUTLS_EXT_TLS,
 

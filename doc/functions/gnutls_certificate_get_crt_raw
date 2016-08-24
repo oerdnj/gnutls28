@@ -5,9 +5,9 @@
 @deftypefun {int} {gnutls_certificate_get_crt_raw} (gnutls_certificate_credentials_t @var{sc}, unsigned @var{idx1}, unsigned @var{idx2}, gnutls_datum_t * @var{cert})
 @var{sc}: is a @code{gnutls_certificate_credentials_t}  type.
 
-@var{idx1}: the index of the certificate if multiple are present
+@var{idx1}: the index of the certificate chain if multiple are present
 
-@var{idx2}: the index in the certificate list. Zero gives the server's certificate.
+@var{idx2}: the index of the certificate in the chain. Zero gives the server's certificate.
 
 @var{cert}: Will hold the DER encoded certificate.
 

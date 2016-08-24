@@ -24,13 +24,13 @@
 /* Functions that relate on PKCS12 packet parsing.
  */
 
-#include <gnutls_int.h>
+#include "gnutls_int.h"
 #include <libtasn1.h>
 
-#include <gnutls_datum.h>
-#include <gnutls_global.h>
-#include <gnutls_errors.h>
-#include <gnutls_num.h>
+#include <datum.h>
+#include <global.h>
+#include "errors.h"
+#include <num.h>
 #include <common.h>
 #include <x509_b64.h>
 #include "x509_int.h"
@@ -369,7 +369,8 @@ _pkcs12_decode_safe_contents(const gnutls_datum_t * content,
 	int bag_type;
 	gnutls_datum_t attr_val;
 	gnutls_datum_t t;
-	int count = 0, i, attributes, j;
+	int count = 0, attributes, j;
+	unsigned i;
 
 	/* Step 1. Extract the SEQUENCE.
 	 */
@@ -1234,7 +1235,7 @@ _pkcs12_encode_safe_contents(gnutls_pkcs12_bag_t bag, ASN1_TYPE * contents,
 {
 	ASN1_TYPE c2 = ASN1_TYPE_EMPTY;
 	int result;
-	int i;
+	unsigned i;
 	const char *oid;
 
 	if (bag->element[0].type == GNUTLS_BAG_ENCRYPTED && enc) {
@@ -1682,27 +1683,22 @@ gnutls_pkcs12_simple_parse(gnutls_pkcs12_t p12,
 				}
 
 				if (memcmp(cert_id, key_id, cert_id_size) != 0) {	/* they don't match - skip the certificate */
-					if (extra_certs) {
-						_extra_certs =
-						    gnutls_realloc_fast
-						    (_extra_certs,
-						     sizeof(_extra_certs
-							    [0]) *
-						     ++_extra_certs_len);
-						if (!_extra_certs) {
-							gnutls_assert();
-							ret =
-							    GNUTLS_E_MEMORY_ERROR;
-							goto done;
-						}
-						_extra_certs
-						    [_extra_certs_len -
-						     1] = this_cert;
-						this_cert = NULL;
-					} else {
-						gnutls_x509_crt_deinit
-						    (this_cert);
+					_extra_certs =
+						gnutls_realloc_fast
+						(_extra_certs,
+						 sizeof(_extra_certs
+							[0]) *
+						 ++_extra_certs_len);
+					if (!_extra_certs) {
+						gnutls_assert();
+						ret =
+							GNUTLS_E_MEMORY_ERROR;
+						goto done;
 					}
+					_extra_certs
+						[_extra_certs_len -
+						 1] = this_cert;
+					this_cert = NULL;
 				} else {
 					if (chain && _chain_len == 0) {
 						_chain =

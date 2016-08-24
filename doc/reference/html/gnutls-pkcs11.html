@@ -451,7 +451,7 @@ use the string 'trusted' as <em class="parameter"><code>params</code></em>
 </tr>
 <tr>
 <td class="parameter_name"><p>params</p></td>
-<td class="parameter_description"><p>should be NULL</p></td>
+<td class="parameter_description"><p>should be NULL or a known string (see description)</p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 </tbody>
@@ -860,7 +860,7 @@ returned, and <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SUCCESS:CAPS" ti
 gnutls_pkcs11_obj_export_url (<em class="parameter"><code><a class="link" href="gnutls-pkcs11.html#gnutls-pkcs11-obj-t" title="gnutls_pkcs11_obj_t"><span class="type">gnutls_pkcs11_obj_t</span></a> obj</code></em>,
                               <em class="parameter"><code><a class="link" href="gnutls-pkcs11.html#gnutls-pkcs11-url-type-t" title="enum gnutls_pkcs11_url_type_t"><span class="type">gnutls_pkcs11_url_type_t</span></a> detailed</code></em>,
                               <em class="parameter"><code><span class="type">char</span> **url</code></em>);</pre>
-<p>This function will export a URL identifying the given certificate.</p>
+<p>This function will export a URL identifying the given object.</p>
 <div class="refsect3">
 <a name="gnutls-pkcs11-obj-export-url.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">
@@ -952,6 +952,9 @@ gnutls_pkcs11_obj_import_url (<em class="parameter"><code><a class="link" href="
 to the <a class="link" href="gnutls-pkcs11.html#gnutls-pkcs11-obj-t" title="gnutls_pkcs11_obj_t"><span class="type">gnutls_pkcs11_obj_t</span></a> type. This does not involve any
 parsing (such as X.509 or OpenPGP) since the <a class="link" href="gnutls-pkcs11.html#gnutls-pkcs11-obj-t" title="gnutls_pkcs11_obj_t"><span class="type">gnutls_pkcs11_obj_t</span></a> is
 format agnostic. Only data are transferred.</p>
+<p>If the flag <code class="literal">GNUTLS_PKCS11_OBJ_FLAG_OVERWRITE_TRUSTMOD_EXT</code> is specified
+any certificate read, will have its extensions overwritten by any
+stapled extensions in the trust module.</p>
 <div class="refsect3">
 <a name="gnutls-pkcs11-obj-import-url.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">
