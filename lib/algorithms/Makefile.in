@@ -145,12 +145,10 @@ am__aclocal_m4_deps = $(top_srcdir)/src/gl/m4/arpa_inet_h.m4 \
 	$(top_srcdir)/src/libopts/m4/stdnoreturn.m4 \
 	$(top_srcdir)/gl/m4/00gnulib.m4 \
 	$(top_srcdir)/gl/m4/absolute-header.m4 \
-	$(top_srcdir)/gl/m4/alloca.m4 $(top_srcdir)/gl/m4/base64.m4 \
-	$(top_srcdir)/gl/m4/byteswap.m4 $(top_srcdir)/gl/m4/ctype.m4 \
-	$(top_srcdir)/gl/m4/errno_h.m4 \
+	$(top_srcdir)/gl/m4/alloca.m4 $(top_srcdir)/gl/m4/byteswap.m4 \
+	$(top_srcdir)/gl/m4/ctype.m4 $(top_srcdir)/gl/m4/errno_h.m4 \
 	$(top_srcdir)/gl/m4/exponentd.m4 \
 	$(top_srcdir)/gl/m4/extensions.m4 \
-	$(top_srcdir)/gl/m4/extern-inline.m4 \
 	$(top_srcdir)/gl/m4/fcntl_h.m4 $(top_srcdir)/gl/m4/fdopen.m4 \
 	$(top_srcdir)/gl/m4/float_h.m4 $(top_srcdir)/gl/m4/fpieee.m4 \
 	$(top_srcdir)/gl/m4/fseeko.m4 $(top_srcdir)/gl/m4/fstat.m4 \
@@ -204,10 +202,11 @@ am__aclocal_m4_deps = $(top_srcdir)/src/gl/m4/arpa_inet_h.m4 \
 	$(top_srcdir)/gl/m4/vsnprintf.m4 \
 	$(top_srcdir)/gl/m4/warn-on-use.m4 \
 	$(top_srcdir)/gl/m4/warnings.m4 $(top_srcdir)/gl/m4/wchar_h.m4 \
-	$(top_srcdir)/m4/fcntl-o.m4 $(top_srcdir)/m4/gettext.m4 \
-	$(top_srcdir)/m4/gtk-doc.m4 $(top_srcdir)/m4/guile.m4 \
-	$(top_srcdir)/m4/hooks.m4 $(top_srcdir)/m4/iconv.m4 \
-	$(top_srcdir)/m4/intlmacosx.m4 \
+	$(top_srcdir)/m4/ax_code_coverage.m4 \
+	$(top_srcdir)/m4/extern-inline.m4 $(top_srcdir)/m4/fcntl-o.m4 \
+	$(top_srcdir)/m4/gettext.m4 $(top_srcdir)/m4/gtk-doc.m4 \
+	$(top_srcdir)/m4/guile.m4 $(top_srcdir)/m4/hooks.m4 \
+	$(top_srcdir)/m4/iconv.m4 $(top_srcdir)/m4/intlmacosx.m4 \
 	$(top_srcdir)/m4/inttypes-pri.m4 \
 	$(top_srcdir)/m4/inttypes_h.m4 $(top_srcdir)/m4/lib-ld.m4 \
 	$(top_srcdir)/m4/lib-link.m4 $(top_srcdir)/m4/lib-prefix.m4 \
@@ -297,7 +296,7 @@ am__define_uniq_tagged_files = \
 ETAGS = etags
 CTAGS = ctags
 am__DIST_COMMON = $(srcdir)/Makefile.in \
-	$(top_srcdir)/build-aux/depcomp
+	$(top_srcdir)/build-aux/depcomp $(top_srcdir)/lib/common.mk
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 ACLOCAL = @ACLOCAL@
 ALLOCA = @ALLOCA@
@@ -324,6 +323,13 @@ CCASDEPMODE = @CCASDEPMODE@
 CCASFLAGS = @CCASFLAGS@
 CCDEPMODE = @CCDEPMODE@
 CFLAGS = @CFLAGS@
+CMOCKA_CFLAGS = @CMOCKA_CFLAGS@
+CMOCKA_LIBS = @CMOCKA_LIBS@
+CODE_COVERAGE_CFLAGS = @CODE_COVERAGE_CFLAGS@
+CODE_COVERAGE_CPPFLAGS = @CODE_COVERAGE_CPPFLAGS@
+CODE_COVERAGE_CXXFLAGS = @CODE_COVERAGE_CXXFLAGS@
+CODE_COVERAGE_ENABLED = @CODE_COVERAGE_ENABLED@
+CODE_COVERAGE_LDFLAGS = @CODE_COVERAGE_LDFLAGS@
 CONFIG_INCLUDE = @CONFIG_INCLUDE@
 CPP = @CPP@
 CPPFLAGS = @CPPFLAGS@
@@ -359,6 +365,8 @@ EXEEXT = @EXEEXT@
 FGREP = @FGREP@
 FIPS140_LIBS = @FIPS140_LIBS@
 FLOAT_H = @FLOAT_H@
+GCOV = @GCOV@
+GENHTML = @GENHTML@
 GETADDRINFO_LIB = @GETADDRINFO_LIB@
 GETTEXT_MACRO_VERSION = @GETTEXT_MACRO_VERSION@
 GMP_CFLAGS = @GMP_CFLAGS@
@@ -635,6 +643,7 @@ GREP = @GREP@
 GTKDOC_CHECK = @GTKDOC_CHECK@
 GTKDOC_MKPDF = @GTKDOC_MKPDF@
 GTKDOC_REBASE = @GTKDOC_REBASE@
+GUILD = @GUILD@
 GUILE = @GUILE@
 GUILE_CFLAGS = @GUILE_CFLAGS@
 GUILE_CONFIG = @GUILE_CONFIG@
@@ -722,11 +731,13 @@ HAVE_INTTYPES_H = @HAVE_INTTYPES_H@
 HAVE_ISBLANK = @HAVE_ISBLANK@
 HAVE_LCHMOD = @HAVE_LCHMOD@
 HAVE_LCHOWN = @HAVE_LCHOWN@
+HAVE_LIBCRYPTO = @HAVE_LIBCRYPTO@
 HAVE_LIBDL = @HAVE_LIBDL@
 HAVE_LIBICONV = @HAVE_LIBICONV@
 HAVE_LIBNSL = @HAVE_LIBNSL@
 HAVE_LIBPTHREAD = @HAVE_LIBPTHREAD@
 HAVE_LIBRT = @HAVE_LIBRT@
+HAVE_LIBSECCOMP = @HAVE_LIBSECCOMP@
 HAVE_LIBZ = @HAVE_LIBZ@
 HAVE_LINK = @HAVE_LINK@
 HAVE_LINKAT = @HAVE_LINKAT@
@@ -888,8 +899,11 @@ INT32_MAX_LT_INTMAX_MAX = @INT32_MAX_LT_INTMAX_MAX@
 INT64_MAX_EQ_LONG_MAX = @INT64_MAX_EQ_LONG_MAX@
 INTLLIBS = @INTLLIBS@
 INTL_MACOSX_LIBS = @INTL_MACOSX_LIBS@
+LCOV = @LCOV@
 LD = @LD@
 LDFLAGS = @LDFLAGS@
+LIBCRYPTO = @LIBCRYPTO@
+LIBCRYPTO_PREFIX = @LIBCRYPTO_PREFIX@
 LIBDL = @LIBDL@
 LIBDL_PREFIX = @LIBDL_PREFIX@
 LIBGNUTLS_CFLAGS = @LIBGNUTLS_CFLAGS@
@@ -910,6 +924,8 @@ LIBPTHREAD_PREFIX = @LIBPTHREAD_PREFIX@
 LIBRT = @LIBRT@
 LIBRT_PREFIX = @LIBRT_PREFIX@
 LIBS = @LIBS@
+LIBSECCOMP = @LIBSECCOMP@
+LIBSECCOMP_PREFIX = @LIBSECCOMP_PREFIX@
 LIBSOCKET = @LIBSOCKET@
 LIBTASN1_CFLAGS = @LIBTASN1_CFLAGS@
 LIBTASN1_LIBS = @LIBTASN1_LIBS@
@@ -922,6 +938,7 @@ LIB_SELECT = @LIB_SELECT@
 LIPO = @LIPO@
 LN_S = @LN_S@
 LTALLOCA = @LTALLOCA@
+LTLIBCRYPTO = @LTLIBCRYPTO@
 LTLIBDL = @LTLIBDL@
 LTLIBICONV = @LTLIBICONV@
 LTLIBINTL = @LTLIBINTL@
@@ -929,6 +946,7 @@ LTLIBNSL = @LTLIBNSL@
 LTLIBOBJS = @LTLIBOBJS@
 LTLIBPTHREAD = @LTLIBPTHREAD@
 LTLIBRT = @LTLIBRT@
+LTLIBSECCOMP = @LTLIBSECCOMP@
 LTLIBZ = @LTLIBZ@
 LT_AGE = @LT_AGE@
 LT_CURRENT = @LT_CURRENT@
@@ -939,6 +957,7 @@ LT_REVISION = @LT_REVISION@
 LT_SSL_AGE = @LT_SSL_AGE@
 LT_SSL_CURRENT = @LT_SSL_CURRENT@
 LT_SSL_REVISION = @LT_SSL_REVISION@
+LT_SYS_LIBRARY_PATH = @LT_SYS_LIBRARY_PATH@
 LT_XSSL_AGE = @LT_XSSL_AGE@
 LT_XSSL_CURRENT = @LT_XSSL_CURRENT@
 LT_XSSL_REVISION = @LT_XSSL_REVISION@
@@ -1246,6 +1265,7 @@ gltests_LTLIBOBJS = @gltests_LTLIBOBJS@
 gltests_WITNESS = @gltests_WITNESS@
 guile_snarf = @guile_snarf@
 guileextensiondir = @guileextensiondir@
+guileobjectdir = @guileobjectdir@
 host = @host@
 host_alias = @host_alias@
 host_cpu = @host_cpu@
@@ -1275,7 +1295,10 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-AM_CFLAGS = $(WERROR_CFLAGS) $(WSTACK_CFLAGS) $(WARN_CFLAGS) $(NETTLE_CFLAGS)
+AM_CFLAGS = $(WERROR_CFLAGS) $(WSTACK_CFLAGS) $(WARN_CFLAGS) $(NETTLE_CFLAGS) \
+  $(LIBTASN1_CFLAGS) $(LIBIDN_CFLAGS) $(P11_KIT_CFLAGS) $(CODE_COVERAGE_CFLAGS)
+
+COMMON_LINK_FLAGS = $(CODE_COVERAGE_LDFLAGS)
 AM_CPPFLAGS = -I$(srcdir)/../../gl -I$(builddir)/../../gl \
 	-I$(srcdir)/../includes -I$(builddir)/../includes \
 	-I$(builddir)/../../gl -I$(srcdir)/.. -I$(srcdir)/../opencdk \
@@ -1288,7 +1311,7 @@ all: all-am
 
 .SUFFIXES:
 .SUFFIXES: .c .lo .o .obj
-$(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
+$(srcdir)/Makefile.in:  $(srcdir)/Makefile.am $(top_srcdir)/lib/common.mk $(am__configure_deps)
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
 	    *$$dep*) \
@@ -1297,9 +1320,9 @@ $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu lib/algorithms/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign lib/algorithms/Makefile'; \
 	$(am__cd) $(top_srcdir) && \
-	  $(AUTOMAKE) --gnu lib/algorithms/Makefile
+	  $(AUTOMAKE) --foreign lib/algorithms/Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
 	  *config.status*) \
@@ -1308,6 +1331,7 @@ Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	    echo ' cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@ $(am__depfiles_maybe)'; \
 	    cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@ $(am__depfiles_maybe);; \
 	esac;
+$(top_srcdir)/lib/common.mk $(am__empty):
 
 $(top_builddir)/config.status: $(top_srcdir)/configure $(CONFIG_STATUS_DEPENDENCIES)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh

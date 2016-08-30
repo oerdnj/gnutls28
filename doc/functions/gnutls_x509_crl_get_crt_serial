@@ -2,7 +2,7 @@
 
 
 
-@deftypefun {int} {gnutls_x509_crl_get_crt_serial} (gnutls_x509_crl_t @var{crl}, int @var{indx}, unsigned char * @var{serial}, size_t * @var{serial_size}, time_t * @var{t})
+@deftypefun {int} {gnutls_x509_crl_get_crt_serial} (gnutls_x509_crl_t @var{crl}, unsigned @var{indx}, unsigned char * @var{serial}, size_t * @var{serial_size}, time_t * @var{t})
 @var{crl}: should contain a @code{gnutls_x509_crl_t}  type
 
 @var{indx}: the index of the certificate to extract (starting from 0)

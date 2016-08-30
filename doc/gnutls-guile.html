@@ -1,9 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- This manual is last updated 19 January 2015 for version
-3.4.14 of GnuTLS.
+<!-- This manual is last updated 16 March 2016 for version
+3.5.3 of GnuTLS.
 
-Copyright (C) 2001-2012, 2014 Free Software Foundation, Inc.
+Copyright (C) 2001-2012, 2014, 2016 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -13,10 +13,10 @@ copy of the license is included in the section entitled "GNU Free
 Documentation License". -->
 <!-- Created by GNU Texinfo 6.1, http://www.gnu.org/software/texinfo/ -->
 <head>
-<title>GnuTLS-Guile 3.4.14</title>
+<title>GnuTLS-Guile 3.5.3</title>
 
-<meta name="description" content="GnuTLS-Guile 3.4.14">
-<meta name="keywords" content="GnuTLS-Guile 3.4.14">
+<meta name="description" content="GnuTLS-Guile 3.5.3">
+<meta name="keywords" content="GnuTLS-Guile 3.5.3">
 <meta name="resource-type" content="document">
 <meta name="distribution" content="global">
 <meta name="Generator" content="makeinfo">
@@ -152,7 +152,7 @@ dl {
 </head>
 
 <body lang="en">
-<h1 class="settitle" align="center">GnuTLS-Guile 3.4.14</h1>
+<h1 class="settitle" align="center">GnuTLS-Guile 3.5.3</h1>
 
 
 
@@ -198,10 +198,10 @@ Next: <a href="#Preface" accesskey="n" rel="next">Preface</a>, Up: <a href="dir.
 <a name="GnuTLS_002dGuile"></a>
 <h1 class="top">GnuTLS-Guile</h1>
 
-<p>This manual is last updated 19 January 2015 for version
-3.4.14 of GnuTLS.
+<p>This manual is last updated 16 March 2016 for version
+3.5.3 of GnuTLS.
 </p>
-<p>Copyright &copy; 2001-2012, 2014 Free Software Foundation, Inc.
+<p>Copyright &copy; 2001-2012, 2014, 2016 Free Software Foundation, Inc.
 </p>
 <blockquote>
 <p>Permission is granted to copy, distribute and/or modify this document
@@ -261,8 +261,8 @@ Next: <a href="#Guile-API-Conventions" accesskey="n" rel="next">Guile API Conven
 <a name="Guile-Preparations-1"></a>
 <h2 class="chapter">2 Guile Preparations</h2>
 
-<p>The GnuTLS Guile bindings are available for both the 1.8 and 2.0 stable
-series of Guile.
+<p>The GnuTLS Guile bindings are available for Guile&rsquo;s 2.0 stable series,
+as well as the forthcoming 2.2 series and the legacy 1.8 series.
 </p>
 <p>By default they are installed under the GnuTLS installation directory,
 typically <samp>/usr/local/share/guile/site/</samp>).  Normally Guile
@@ -271,9 +271,9 @@ something like this:
 </p>
 <div class="example">
 <pre class="example">$ guile
-guile&gt; (use-modules (gnutls))
-&lt;unnamed port&gt;: no code for module (gnutls)
-guile&gt;
+&hellip;
+scheme@(guile-user)&gt; (use-modules (gnutls))
+ERROR: no code for module (gnutls)
 </pre></div>
 
 <p>There are two ways to solve this.  The first is to make sure that when
@@ -310,8 +310,8 @@ Either use the <code>GUILE_LOAD_PATH</code> environment variable as follows:
 </p>
 <div class="example">
 <pre class="example">$ GUILE_LOAD_PATH=&quot;/usr/local/share/guile/site:$GUILE_LOAD_PATH&quot; guile
-guile&gt; (use-modules (gnutls))
-guile&gt;
+scheme@(guile-user)&gt; (use-modules (gnutls))
+scheme@(guile-user)&gt;
 </pre></div>
 
 <p>Alternatively, you can modify Guile&rsquo;s <code>%load-path</code> variable
@@ -319,11 +319,11 @@ guile&gt;
 Reference Manual</cite>).
 </p>
 <p>At this point, you might get an error regarding
-<samp>libguile-gnutls-v-0</samp> similar to:
+<samp>guile-gnutls-v-2</samp> similar to:
 </p>
 <div class="example">
-<pre class="example">gnutls.scm:361:1: In procedure dynamic-link in expression (load-extension &quot;libguile-gnutls-v-0&quot; &quot;scm_init_gnutls&quot;):
-gnutls.scm:361:1: file: &quot;libguile-gnutls-v-0&quot;, message: &quot;libguile-gnutls-v-0.so: cannot open shared object file: No such file or directory&quot;
+<pre class="example">gnutls.scm:361:1: In procedure dynamic-link in expression (load-extension &quot;guile-gnutls-v-2&quot; &quot;scm_init_gnutls&quot;):
+gnutls.scm:361:1: file: &quot;guile-gnutls-v-2&quot;, message: &quot;guile-gnutls-v-2.so: cannot open shared object file: No such file or directory&quot;
 </pre></div>
 
 <p>In this case, you will need to modify the run-time linker path, for
@@ -331,8 +331,8 @@ example as follows:
 </p>
 <div class="example">
 <pre class="example">$ LD_LIBRARY_PATH=/usr/local/lib GUILE_LOAD_PATH=/usr/local/share/guile/site guile
-guile&gt; (use-modules (gnutls))
-guile&gt;
+scheme@(guile-user)&gt; (use-modules (gnutls))
+scheme@(guile-user)&gt;
 </pre></div>
 
 <p>To check that you got the intended GnuTLS library version, you may
@@ -340,10 +340,10 @@ print the version number of the loaded library as follows:
 </p>
 <div class="example">
 <pre class="example">$ guile
-guile&gt; (use-modules (gnutls))
-guile&gt; (gnutls-version)
-&quot;3.4.14&quot;
-guile&gt; 
+scheme@(guile-user)&gt; (use-modules (gnutls))
+scheme@(guile-user)&gt; (gnutls-version)
+&quot;3.5.3&quot;
+scheme@(guile-user)&gt;
 </pre></div>
 
 
@@ -492,13 +492,13 @@ Next: <a href="#Input-and-Output" accesskey="n" rel="next">Input and Output</a>,
 <p>Many procedures operate on binary data.  For instance,
 <code>pkcs3-import-dh-parameters</code> expects binary data as input.
 </p>
+<a name="index-bytevectors"></a>
 <a name="index-SRFI_002d4"></a>
 <a name="index-homogeneous-vector"></a>
-
-<p>Binary data is represented on the Scheme side using SRFI-4 homogeneous
-vectors (see <a href="http://www.gnu.org/software/guile/manual/guile.html#SRFI_002d4">SRFI-4</a> in <cite>The GNU Guile Reference Manual</cite>).
-Although any type of homogeneous vector may be used, <code>u8vector</code>s
-(i.e., vectors of bytes) are highly recommended.
+<p>Binary data is represented on the Scheme side using bytevectors
+(see <a href="http://www.gnu.org/software/guile/manual/guile.html#Bytevectors">Bytevectors</a> in <cite>The GNU Guile Reference Manual</cite>).
+Homogeneous vectors such as SRFI-4 <code>u8vector</code>s can also be
+used<a name="DOCF1" href="#FOOT1"><sup>1</sup></a>.
 </p>
 <p>As an example, generating and then exporting Diffie-Hellman parameters
 in the PEM format can be done as follows:
@@ -567,25 +567,35 @@ Manual</cite>).  This would work as follows:
 
   ;;
   ;; Initialize the various parameters of SESSION, set up
-  ;; a network connection, etc...
+  ;; a network connection, etc.
   ;;
 
   (let ((i/o (session-record-port session)))
-    (write &quot;Hello peer!&quot; i/o)
+    (display &quot;Hello peer!&quot; i/o)
     (let ((greetings (read i/o)))
 
-      ;; ...
+      ;; &hellip;
 
       (bye session close-request/rdwr))))
 </pre></div>
 
+<a name="index-buffering"></a>
+<p>Note that each write to the session record port leads to the
+transmission of an encrypted TLS &ldquo;Application Data&rdquo; packet.  In the
+above example, we create an Application Data packet for the 11 bytes for
+the string that we write.  This is not efficient both in terms of CPU
+usage and bandwidth (each packet adds at least 5 bytes of overhead and
+can lead to one <code>write</code> system call), so we recommend that
+applications do their own buffering.
+</p>
 <a name="index-record_002dsend"></a>
 <a name="index-record_002dreceive_0021"></a>
 
 <p>A lower-level I/O API is provided by <code>record-send</code> and
-<code>record-receive!</code> which take an SRFI-4 vector to represent the
-data sent or received.  While it might improve performance, it is much
-less convenient than the above and should rarely be needed.
+<code>record-receive!</code> which take a bytevector (or a SRFI-4 vector) to
+represent the data sent or received.  While it might improve
+performance, it is much less convenient than the session record port and
+should rarely be needed.
 </p>
 
 <hr>
@@ -2256,7 +2266,9 @@ Previous: <a href="#Procedure-Index" accesskey="p" rel="prev">Procedure Index</a
 <a name="Concept-Index-1"></a>
 <h2 class="unnumbered">Concept Index</h2>
 
-<table><tr><th valign="top">Jump to: &nbsp; </th><td><a class="summary-letter" href="#Concept-Index_cp_letter-C"><b>C</b></a>
+<table><tr><th valign="top">Jump to: &nbsp; </th><td><a class="summary-letter" href="#Concept-Index_cp_letter-B"><b>B</b></a>
+ &nbsp; 
+<a class="summary-letter" href="#Concept-Index_cp_letter-C"><b>C</b></a>
  &nbsp; 
 <a class="summary-letter" href="#Concept-Index_cp_letter-E"><b>E</b></a>
  &nbsp; 
@@ -2271,6 +2283,10 @@ Previous: <a href="#Procedure-Index" accesskey="p" rel="prev">Procedure Index</a
 </td></tr></table>
 <table class="index-cp" border="0">
 <tr><td></td><th align="left">Index Entry</th><td>&nbsp;</td><th align="left"> Section</th></tr>
+<tr><td colspan="4"> <hr></td></tr>
+<tr><th><a name="Concept-Index_cp_letter-B">B</a></th><td></td><td></td></tr>
+<tr><td></td><td valign="top"><a href="#index-buffering">buffering</a>:</td><td>&nbsp;</td><td valign="top"><a href="#Input-and-Output">Input and Output</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-bytevectors">bytevectors</a>:</td><td>&nbsp;</td><td valign="top"><a href="#Representation-of-Binary-Data">Representation of Binary Data</a></td></tr>
 <tr><td colspan="4"> <hr></td></tr>
 <tr><th><a name="Concept-Index_cp_letter-C">C</a></th><td></td><td></td></tr>
 <tr><td></td><td valign="top"><a href="#index-constant">constant</a>:</td><td>&nbsp;</td><td valign="top"><a href="#Enumerates-and-Constants">Enumerates and Constants</a></td></tr>
@@ -2293,7 +2309,9 @@ Previous: <a href="#Procedure-Index" accesskey="p" rel="prev">Procedure Index</a
 <tr><td></td><td valign="top"><a href="#index-SRFI_002d4">SRFI-4</a>:</td><td>&nbsp;</td><td valign="top"><a href="#Representation-of-Binary-Data">Representation of Binary Data</a></td></tr>
 <tr><td colspan="4"> <hr></td></tr>
 </table>
-<table><tr><th valign="top">Jump to: &nbsp; </th><td><a class="summary-letter" href="#Concept-Index_cp_letter-C"><b>C</b></a>
+<table><tr><th valign="top">Jump to: &nbsp; </th><td><a class="summary-letter" href="#Concept-Index_cp_letter-B"><b>B</b></a>
+ &nbsp; 
+<a class="summary-letter" href="#Concept-Index_cp_letter-C"><b>C</b></a>
  &nbsp; 
 <a class="summary-letter" href="#Concept-Index_cp_letter-E"><b>E</b></a>
  &nbsp; 
@@ -2307,6 +2325,14 @@ Previous: <a href="#Procedure-Index" accesskey="p" rel="prev">Procedure Index</a
  &nbsp; 
 </td></tr></table>
 
+<div class="footnote">
+<hr>
+<h4 class="footnotes-heading">Footnotes</h4>
+
+<h3><a name="FOOT1" href="#DOCF1">(1)</a></h3>
+<p>Historically, SRFI-4 <code>u8vector</code>s are the closest
+thing to bytevectors that Guile 1.8 and earlier supported.</p>
+</div>
 <hr>
 
 

@@ -2,7 +2,7 @@
 
 
 
-@deftypefun {int} {gnutls_x509_crl_get_issuer_dn_by_oid} (gnutls_x509_crl_t @var{crl}, const char * @var{oid}, int @var{indx}, unsigned int @var{raw_flag}, void * @var{buf}, size_t * @var{sizeof_buf})
+@deftypefun {int} {gnutls_x509_crl_get_issuer_dn_by_oid} (gnutls_x509_crl_t @var{crl}, const char * @var{oid}, unsigned @var{indx}, unsigned int @var{raw_flag}, void * @var{buf}, size_t * @var{sizeof_buf})
 @var{crl}: should contain a gnutls_x509_crl_t type
 
 @var{oid}: holds an Object Identified in null terminated string

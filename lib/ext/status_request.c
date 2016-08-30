@@ -1,5 +1,6 @@
 /*
- * Copyright (C) 2012 Free Software Foundation, Inc.
+ * Copyright (C) 2012-2016 Free Software Foundation, Inc.
+ * Copyright (C) 2016 Red Hat, Inc.
  *
  * Author: Simon Josefsson, Nikos Mavrogiannopoulos
  *
@@ -26,13 +27,13 @@
 */
 
 #include "gnutls_int.h"
-#include "gnutls_errors.h"
-#include <gnutls_extensions.h>
+#include "errors.h"
+#include <extensions.h>
 #include <ext/status_request.h>
-#include <gnutls_mbuffers.h>
-#include <gnutls_auth.h>
+#include <mbuffers.h>
+#include <auth.h>
 #include <auth/cert.h>
-#include <gnutls_handshake.h>
+#include <handshake.h>
 
 #ifdef ENABLE_OCSP
 
@@ -462,6 +463,7 @@ gnutls_certificate_set_ocsp_status_request_file
 {
 	sc->ocsp_func = file_ocsp_func;
 	sc->ocsp_func_ptr = sc;
+	gnutls_free(sc->ocsp_response_file);
 	sc->ocsp_response_file = gnutls_strdup(response_file);
 	if (sc->ocsp_response_file == NULL)
 		return gnutls_assert_val(GNUTLS_E_MEMORY_ERROR);
@@ -519,8 +521,8 @@ _gnutls_status_request_unpack(gnutls_buffer_st * ps,
 	return ret;
 }
 
-extension_entry_st ext_mod_status_request = {
-	.name = "STATUS REQUEST",
+const extension_entry_st ext_mod_status_request = {
+	.name = "OCSP Status Request",
 	.type = GNUTLS_EXTENSION_STATUS_REQUEST,
 	.parse_type = GNUTLS_EXT_TLS,
 	.recv_func = _gnutls_status_request_recv_params,
@@ -642,6 +644,48 @@ int _gnutls_recv_server_certificate_status(gnutls_session_t session)
 	_gnutls_buffer_clear(&buf);
 
 	return ret;
+}
+
+/**
+ * gnutls_ocsp_status_request_is_checked:
+ * @session: is a gnutls session
+ * @flags: should be zero or %GNUTLS_OCSP_SR_IS_AVAIL
+ *
+ * When flags are zero this function returns non-zero if a valid OCSP status
+ * response was included in the TLS handshake. That is, an OCSP status response
+ * which is not too old or superseded. It returns zero otherwise.
+ *
+ * When the flag %GNUTLS_OCSP_SR_IS_AVAIL is specified, the function
+ * returns non-zero if an OCSP status response was included in the handshake
+ * even if it was invalid. Otherwise, if no OCSP status response was included,
+ * it returns zero. The %GNUTLS_OCSP_SR_IS_AVAIL flag was introduced in GnuTLS 3.4.0.
+ *
+ * This is a helper function when needing to decide whether to perform an
+ * explicit OCSP validity check on the peer's certificate. Should be called after
+ * any of gnutls_certificate_verify_peers*() are called.
+ *
+ * Returns: non zero if the response was valid, or a zero if it wasn't sent,
+ * or sent and was invalid.
+ *
+ * Since: 3.1.4
+ **/
+int
+gnutls_ocsp_status_request_is_checked(gnutls_session_t session,
+				      unsigned int flags)
+{
+	int ret;
+	gnutls_datum_t data;
+
+	if (flags & GNUTLS_OCSP_SR_IS_AVAIL) {
+		ret = gnutls_ocsp_status_request_get(session, &data);
+		if (ret < 0)
+			return gnutls_assert_val(0);
+
+		if (data.data == NULL)
+			return gnutls_assert_val(0);
+		return 1;
+	}
+	return session->internals.ocsp_check_ok;
 }
 
 #endif

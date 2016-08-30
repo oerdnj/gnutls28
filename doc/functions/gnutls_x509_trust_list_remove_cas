@@ -2,7 +2,7 @@
 
 
 
-@deftypefun {int} {gnutls_x509_trust_list_remove_cas} (gnutls_x509_trust_list_t @var{list}, const gnutls_x509_crt_t * @var{clist}, int @var{clist_size})
+@deftypefun {int} {gnutls_x509_trust_list_remove_cas} (gnutls_x509_trust_list_t @var{list}, const gnutls_x509_crt_t * @var{clist}, unsigned @var{clist_size})
 @var{list}: The list
 
 @var{clist}: A list of CAs

@@ -18,18 +18,15 @@ In GnuTLS the approach is to handle all keys transparently by the high level API
 the API that loads a key or certificate from a file.
 The high-level API will accept URIs in addition to files that specify keys on an HSM or in TPM,
 and a callback function will be used to obtain any required keys. The URI format is defined in 
-@xcite{TPMURI} and the standardized @xcite{PKCS11URI}.
+@xcite{PKCS11URI}.
 
 More information on the API is provided in the next sections. Examples of a URI of a certificate 
 stored in an HSM, as well as a key stored in the TPM chip are shown below. To discover the URIs 
-of the objects the @code{p11tool} (see @ref{p11tool Invocation}),
-or @code{tpmtool} (see @ref{tpmtool Invocation}) may be used.
-
+of the objects the @code{p11tool} (see @ref{p11tool Invocation}).
 @example
 pkcs11:token=Nikos;serial=307521161601031;model=PKCS%2315; \
 manufacturer=EnterSafe;object=test1;type=cert
 
-tpmkey:uuid=42309df8-d101-11e1-a89a-97bb33c23ad1;storage=user
 @end example
 
 
@@ -183,6 +180,12 @@ In several systems there are keystores which allow to read, store and use certif
 and private keys. For these systems GnuTLS provides the system-key API in @code{gnutls/system-keys.h}.
 That API provides the ability to iterate through all stored keys, add and delete keys as well
 as use these keys using a URL which starts with "system:". The format of the URLs is system-specific.
+The @code{systemkey} tool is also provided to assist in listing keys and debugging.
+
+The systems supported via this API are the following.
+@itemize
+@item Windows Cryptography API (CNG)
+@end itemize
 
 @showfuncdesc{gnutls_system_key_iter_get_info}
 
@@ -278,6 +281,7 @@ storage module@footnote{@url{http://p11-glue.freedesktop.org/trust-module.html}}
 
 @menu
 * PKCS11 Initialization::
+* PKCS11 Manual Initialization::
 * Accessing objects that require a PIN::
 * Reading objects::
 * Writing objects::
@@ -289,8 +293,9 @@ storage module@footnote{@url{http://p11-glue.freedesktop.org/trust-module.html}}
 @subsection Initialization
 To allow all @acronym{GnuTLS} applications to transparently access smart cards
 and tokens, @acronym{PKCS} #11 is automatically initialized during the first
-call of a @acronym{PKCS} #11 related function. The initialization process, based
-on p11-kit configuration, loads any appropriate modules. The p11-kit configuration
+call of a @acronym{PKCS} #11 related function, in a thread safe way.
+The default initialization process, utilizes p11-kit configuration, and loads any
+appropriate @acronym{PKCS} #11 modules. The p11-kit configuration
 files@footnote{@url{http://p11-glue.freedesktop.org/}} are typically stored in @code{/etc/pkcs11/modules/}.
 For example a file that will instruct GnuTLS to load the @acronym{OpenSC} module,
 could be named @code{/etc/pkcs11/modules/opensc.module} and contain the following:
@@ -306,24 +311,42 @@ In several cases, however, it is desirable to limit badly behaving modules
 to single applications. That can be done using the ``enable-in:'' option
 followed by the base name of applications that this module should be used.
 
-It is also possible to manually initialize the PKCS #11 subsystem if the 
-default settings are not desirable. To completely disable PKCS #11 support you
-need to call @funcref{gnutls_pkcs11_init} with the flag @code{GNUTLS_PKCS11_FLAG_MANUAL}
-prior to @funcref{gnutls_global_init}.
-
-@showfuncdesc{gnutls_pkcs11_init}
+It is also possible to manually initialize or even disable the PKCS #11 subsystem if the 
+default settings are not desirable or not available (see @ref{PKCS11 Manual Initialization}
+for more information).
 
 Note that, PKCS #11 modules behave in a peculiar way after a fork; they
 require a reinitialization of all the used PKCS #11 resources.
 While GnuTLS automates that process, there are corner cases where
 it is not possible to handle it correctly in an automated way@footnote{For
 example when an open session is to be reinitialized, but the PIN is not available
-to GnuTLS (e.g., it was entered at a pinpad).}. For that reasons it is
+to GnuTLS (e.g., it was entered at a pinpad).}. For that, it is
 recommended not to mix fork() and PKCS #11 module usage. It is recommended
 to initialize and use any PKCS #11 resources in a single process.
 
 Older versions of @acronym{GnuTLS} required to call @funcref{gnutls_pkcs11_reinit}
 after a fork() call; since 3.3.0 this is no longer required.
+
+
+@node PKCS11 Manual Initialization
+@subsection Manual initialization of user-specific modules
+
+In systems where one cannot rely on a globally available p11-kit configuration
+to be available, it is still possible to utilize PKCS #11 objects. That
+can be done by loading directly the PKCS #11 shared module in the
+application using @funcref{gnutls_pkcs11_add_provider}, after having
+called @funcref{gnutls_pkcs11_init} specifying the @code{GNUTLS_PKCS11_FLAG_MANUAL}
+flag.
+
+@showfuncdesc{gnutls_pkcs11_add_provider}
+
+In that case, the application will only have access to the modules explictly
+loaded. If the @code{GNUTLS_PKCS11_FLAG_MANUAL} flag is specified and no calls
+to @funcref{gnutls_pkcs11_add_provider} are made, then the PKCS #11 functionality
+is effectively disabled.
+
+@showfuncdesc{gnutls_pkcs11_init}
+
 
 @node Accessing objects that require a PIN
 @subsection Accessing objects that require a PIN
@@ -386,13 +409,13 @@ while the smart card itself can be referenced as:
 pkcs11:token=Nikos;serial=307521161601031;model=PKCS%2315;manufacturer=EnterSafe
 @end example
 
-Objects stored in a @acronym{PKCS} #11 token can be extracted
+Objects stored in a @acronym{PKCS} #11 token can typically be extracted
 if they are not marked as sensitive. Usually only private keys are marked as
 sensitive and cannot be extracted, while certificates and other data can
-be retrieved. The functions that can be used to access objects
+be retrieved. The functions that can be used to enumerate and access objects
 are shown below.
 
-@showfuncB{gnutls_pkcs11_obj_import_url,gnutls_pkcs11_obj_export_url}
+@showfuncC{gnutls_pkcs11_obj_list_import_url4,gnutls_pkcs11_obj_import_url,gnutls_pkcs11_obj_export_url}
 
 @showfuncdesc{gnutls_pkcs11_obj_get_info}
 
@@ -465,7 +488,10 @@ certificates by specifying a PKCS #11 URL instead of a filename.
 @cindex TPM
 
 In this section we present the Trusted Platform Module (TPM) support 
-in @acronym{GnuTLS}. 
+in @acronym{GnuTLS}. Note that we recommend against using TPM with this
+API because it is restricted to TPM 1.2. We recommend instead
+to use PKCS#11 wrappers for TPM such as CHAPS@footnote{@url{https://github.com/google/chaps-linux}} or opencryptoki@footnote{@url{https://sourceforge.net/projects/opencryptoki/}}.
+These will allow using the standard smart card and HSM functionality (see @ref{Smart cards and HSMs}) for TPM keys.
 
 There was a big hype when the TPM chip was introduced into 
 computers. Briefly it is a co-processor in your PC that allows it to perform 
@@ -476,9 +502,12 @@ accessing them. That is very similar to the operation of a @acronym{PKCS} #11 sm
 The chip allows for storage and usage of RSA keys, but has quite some 
 operational differences from @acronym{PKCS} #11 module, and thus require different handling. 
 The basic TPM operations supported and used by GnuTLS, are key generation and signing. 
+That support is currently limited to TPM 1.2.
 
 The next sections assume that the TPM chip in the system is already initialized and
-in a operational state.
+in a operational state. If not, ensure that the TPM chip is enabled by your BIOS,
+that the @code{tcsd} daemon is running, and that TPM ownership is set
+(by running @code{tpm_takeownership}).
 
 In GnuTLS the TPM functionality is available in @code{gnutls/tpm.h}.
 

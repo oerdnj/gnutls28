@@ -196,7 +196,7 @@ int gnutls_pkcs11_get_raw_issuer_by_subject_key_id (const char *url,
 					gnutls_x509_crt_fmt_t fmt,
 					unsigned int flags);
 
-int gnutls_pkcs11_crt_is_known(const char *url, gnutls_x509_crt_t cert,
+unsigned gnutls_pkcs11_crt_is_known(const char *url, gnutls_x509_crt_t cert,
 			     unsigned int flags);
 
 #if 0
@@ -432,7 +432,7 @@ int gnutls_pkcs11_privkey_import_url(gnutls_pkcs11_privkey_t pkey,
 int gnutls_pkcs11_privkey_export_url(gnutls_pkcs11_privkey_t key,
 				     gnutls_pkcs11_url_type_t
 				     detailed, char **url);
-int gnutls_pkcs11_privkey_status(gnutls_pkcs11_privkey_t key);
+unsigned gnutls_pkcs11_privkey_status(gnutls_pkcs11_privkey_t key);
 
 #define gnutls_pkcs11_privkey_generate(url, pk, bits, label, flags) \
 	gnutls_pkcs11_privkey_generate3(url, pk, bits, label, NULL, 0, NULL, 0, flags)

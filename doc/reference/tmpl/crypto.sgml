@@ -94,7 +94,6 @@ crypto
 
 </para>
 
-@algorithm: 
 @Returns: 
 
 
@@ -157,24 +156,11 @@ crypto
 @digest: 
 
 
-<!-- ##### FUNCTION gnutls_hash_fast ##### -->
-<para>
-
-</para>
-
-@algorithm: 
-@text: 
-@textlen: 
-@digest: 
-@Returns: 
-
-
 <!-- ##### FUNCTION gnutls_hash_get_len ##### -->
 <para>
 
 </para>
 
-@algorithm: 
 @Returns: 
 
 
@@ -223,26 +209,11 @@ crypto
 @digest: 
 
 
-<!-- ##### FUNCTION gnutls_hmac_fast ##### -->
-<para>
-
-</para>
-
-@algorithm: 
-@key: 
-@keylen: 
-@text: 
-@textlen: 
-@digest: 
-@Returns: 
-
-
 <!-- ##### FUNCTION gnutls_hmac_get_len ##### -->
 <para>
 
 </para>
 
-@algorithm: 
 @Returns: 
 
 
@@ -250,18 +221,6 @@ crypto
 <para>
 
 </para>
-
-
-<!-- ##### FUNCTION gnutls_hmac_init ##### -->
-<para>
-
-</para>
-
-@dig: 
-@algorithm: 
-@key: 
-@keylen: 
-@Returns: 
 
 
 <!-- ##### FUNCTION gnutls_hmac_output ##### -->

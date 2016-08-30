@@ -69,6 +69,7 @@ Usage:  gnutls-cli [ -<flag> [<val>] | --<name>[@{=| @}<val>] ]... [hostname]
                                 - it must be in the range:
                                   0 to 17000
        --crlf                 Send CR LF instead of LF
+       --fastopen             Enable TCP Fast Open
        --x509fmtder           Use DER format for certificates to read from
    -f, --fingerprint          Send the openpgp fingerprint, instead of the key
        --print-cert           Print peer's certificate in PEM format
@@ -98,26 +99,26 @@ Usage:  gnutls-cli [ -<flag> [<val>] | --<name>[@{=| @}<val>] ]... [hostname]
        --insecure             Don't abort program if server certificate can't be validated
        --ranges               Use length-hiding padding to prevent traffic analysis
        --benchmark-ciphers    Benchmark individual ciphers
-       --benchmark-tls-kx     Benchmark TLS key exchange methods
-   -!, --benchmark-tls-ciphers  Benchmark TLS ciphers
+   -!, --benchmark-tls-kx     Benchmark TLS key exchange methods
+   -", --benchmark-tls-ciphers  Benchmark TLS ciphers
    -l, --list                 Print a list of the supported algorithms and modes
                                 - prohibits the option 'port'
-   -", --priority-list        Print a list of the supported priority strings
-   -#, --noticket             Don't allow session tickets
-   -$, --srtp-profiles=str    Offer SRTP profiles
-   -%, --alpn=str             Application layer protocol
+   -#, --priority-list        Print a list of the supported priority strings
+   -$, --noticket             Don't allow session tickets
+   -%, --srtp-profiles=str    Offer SRTP profiles
+   -&, --alpn=str             Application layer protocol
                                 - may appear multiple times
    -b, --heartbeat            Activate heartbeat support
-   -&, --recordsize=num       The maximum record size to advertize
+   -', --recordsize=num       The maximum record size to advertize
                                 - it must be in the range:
                                   0 to 4096
-   -', --disable-sni          Do not send a Server Name Indication (SNI)
-   -(, --disable-extensions   Disable all the TLS extensions
-   -), --inline-commands      Inline commands of the form ^<cmd>^
-   -*, --inline-commands-prefix=str Change the default delimiter for inline commands.
-   -+, --provider=file        Specify the PKCS #11 provider library
+   -(, --disable-sni          Do not send a Server Name Indication (SNI)
+   -), --disable-extensions   Disable all the TLS extensions
+   -*, --inline-commands      Inline commands of the form ^<cmd>^
+   -+, --inline-commands-prefix=str Change the default delimiter for inline commands.
+   -,, --provider=file        Specify the PKCS #11 provider library
                                 - file must pre-exist
-   -,, --fips140-mode         Reports the status of the FIPS140-2 mode in gnutls library
+   --, --fips140-mode         Reports the status of the FIPS140-2 mode in gnutls library
    -v, --version[=arg]        output version information and exit
    -h, --help                 display extended usage information and exit
    -!, --more-help            extended usage information passed thru pager

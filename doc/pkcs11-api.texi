@@ -4,7 +4,7 @@
 @deftypefun {int} {gnutls_pkcs11_add_provider} (const char * @var{name}, const char * @var{params})
 @var{name}: The filename of the module
 
-@var{params}: should be NULL
+@var{params}: should be NULL or a known string (see description)
 
 This function will load and add a PKCS 11 module to the module
 list used in gnutls. After this function is called the module will
@@ -187,7 +187,7 @@ negative error value.
 
 @subheading gnutls_pkcs11_crt_is_known
 @anchor{gnutls_pkcs11_crt_is_known}
-@deftypefun {int} {gnutls_pkcs11_crt_is_known} (const char * @var{url}, gnutls_x509_crt_t @var{cert}, unsigned int @var{flags})
+@deftypefun {unsigned} {gnutls_pkcs11_crt_is_known} (const char * @var{url}, gnutls_x509_crt_t @var{cert}, unsigned int @var{flags})
 @var{url}: A PKCS 11 url identifying a token
 
 @var{cert}: is the certificate to find issuer for
@@ -440,7 +440,7 @@ returned, and @code{GNUTLS_E_SUCCESS}  (0) on success.
 
 @var{url}: will contain an allocated url
 
-This function will export a URL identifying the given certificate.
+This function will export a URL identifying the given object.
 
 @strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (0) is returned, otherwise a
 negative error value.
@@ -467,15 +467,18 @@ needs to be deallocated using @code{gnutls_free()} .
 @deftypefun {int} {gnutls_pkcs11_obj_get_exts} (gnutls_pkcs11_obj_t @var{obj}, gnutls_x509_ext_st ** @var{exts}, unsigned int * @var{exts_size}, unsigned int @var{flags})
 @var{obj}: should contain a @code{gnutls_pkcs11_obj_t}  type
 
-@var{exts}: an allocated list of pointers to @code{gnutls_x509_ext_st} 
+@var{exts}: a pointer to a @code{gnutls_x509_ext_st}  pointer
 
-@var{exts_size}: the number of  @code{exts} 
+@var{exts_size}: will be updated with the number of  @code{exts} 
 
 @var{flags}: Or sequence of @code{GNUTLS_PKCS11_OBJ_} * flags 
 
 This function will return information about attached extensions
 that associate to the provided object (which should be a certificate).
 The extensions are the attached p11-kit trust module extensions.
+
+Each element of  @code{exts} must be deinitialized using @code{gnutls_x509_ext_deinit()} 
+while  @code{exts} should be deallocated using @code{gnutls_free()} .
 
 @strong{Returns:} @code{GNUTLS_E_SUCCESS}  (0) on success or a negative error code on error.
 
@@ -547,6 +550,10 @@ to the @code{gnutls_pkcs11_obj_t}  type. This does not involve any
 parsing (such as X.509 or OpenPGP) since the @code{gnutls_pkcs11_obj_t}  is
 format agnostic. Only data are transferred.
 
+If the flag @code{GNUTLS_PKCS11_OBJ_FLAG_OVERWRITE_TRUSTMOD_EXT}  is specified
+any certificate read, will have its extensions overwritten by any
+stapled extensions in the trust module.
+
 @strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (0) is returned, otherwise a
 negative error value.
 
@@ -569,9 +576,9 @@ negative error value.
 @subheading gnutls_pkcs11_obj_list_import_url3
 @anchor{gnutls_pkcs11_obj_list_import_url3}
 @deftypefun {int} {gnutls_pkcs11_obj_list_import_url3} (gnutls_pkcs11_obj_t * @var{p_list}, unsigned int * @var{n_list}, const char * @var{url}, unsigned int @var{flags})
-@var{p_list}: An uninitialized object list (may be NULL)
+@var{p_list}: An uninitialized object list (may be @code{NULL} )
 
-@var{n_list}: initially should hold the maximum size of the list. Will contain the actual size.
+@var{n_list}: Initially should hold the maximum size of the list. Will contain the actual size.
 
 @var{url}: A PKCS 11 url identifying a set of objects
 
@@ -580,11 +587,23 @@ negative error value.
 This function will initialize and set values to an object list
 by using all objects identified by a PKCS 11 URL.
 
+This function will enumerate all the objects specified by the PKCS@code{11}  URL
+provided. It expects an already allocated  @code{p_list} which has * @code{n_list} elements,
+and that value will be updated to the actual number of present objects. The
+ @code{p_list} objects will be initialized and set by this function.
+To obtain a list of all available objects use a  @code{url} of 'pkcs11:'.
+
+All returned objects must be deinitialized using @code{gnutls_pkcs11_obj_deinit()} .
+
 The supported in this function  @code{flags} are @code{GNUTLS_PKCS11_OBJ_FLAG_LOGIN} ,
 @code{GNUTLS_PKCS11_OBJ_FLAG_LOGIN_SO} , @code{GNUTLS_PKCS11_OBJ_FLAG_PRESENT_IN_TRUSTED_MODULE} ,
 @code{GNUTLS_PKCS11_OBJ_FLAG_CRT} , @code{GNUTLS_PKCS11_OBJ_FLAG_PUBKEY} , @code{GNUTLS_PKCS11_OBJ_FLAG_PRIVKEY} ,
 @code{GNUTLS_PKCS11_OBJ_FLAG_WITH_PRIVKEY} , @code{GNUTLS_PKCS11_OBJ_FLAG_MARK_CA} ,
-@code{GNUTLS_PKCS11_OBJ_FLAG_MARK_TRUSTED} .
+@code{GNUTLS_PKCS11_OBJ_FLAG_MARK_TRUSTED} , and since 3.5.1 the @code{GNUTLS_PKCS11_OBJ_FLAG_OVERWRITE_TRUSTMOD_EXT} .
+
+On versions of GnuTLS prior to 3.4.0 the equivalent function was
+@code{gnutls_pkcs11_obj_list_import_url()} . That is also available on this version
+as a macro which maps to this function.
 
 @strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (0) is returned, otherwise a
 negative error value.
@@ -603,18 +622,22 @@ negative error value.
 
 @var{flags}: Or sequence of GNUTLS_PKCS11_OBJ_* flags
 
-This function will initialize and set values to an object list
-by using all objects identified by the PKCS 11 URL. The output
-is stored in  @code{p_list} , which will be initialized.
+This function will enumerate all the objects specified by the PKCS@code{11}  URL
+provided. It will initialize and set values to the object pointer list ( @code{p_list} )
+provided. To obtain a list of all available objects use a  @code{url} of 'pkcs11:'.
 
 All returned objects must be deinitialized using @code{gnutls_pkcs11_obj_deinit()} ,
-and  @code{p_list} must be free'd using @code{gnutls_free()} .
+and  @code{p_list} must be deinitialized using @code{gnutls_free()} .
 
 The supported in this function  @code{flags} are @code{GNUTLS_PKCS11_OBJ_FLAG_LOGIN} ,
 @code{GNUTLS_PKCS11_OBJ_FLAG_LOGIN_SO} , @code{GNUTLS_PKCS11_OBJ_FLAG_PRESENT_IN_TRUSTED_MODULE} ,
 @code{GNUTLS_PKCS11_OBJ_FLAG_CRT} , @code{GNUTLS_PKCS11_OBJ_FLAG_PUBKEY} , @code{GNUTLS_PKCS11_OBJ_FLAG_PRIVKEY} ,
 @code{GNUTLS_PKCS11_OBJ_FLAG_WITH_PRIVKEY} , @code{GNUTLS_PKCS11_OBJ_FLAG_MARK_CA} ,
-@code{GNUTLS_PKCS11_OBJ_FLAG_MARK_TRUSTED} .
+@code{GNUTLS_PKCS11_OBJ_FLAG_MARK_TRUSTED} , and since 3.5.1 the @code{GNUTLS_PKCS11_OBJ_FLAG_OVERWRITE_TRUSTMOD_EXT} .
+
+On versions of GnuTLS prior to 3.4.0 the equivalent function was
+@code{gnutls_pkcs11_obj_list_import_url2()} . That is also available on this version
+as a macro which maps to this function.
 
 @strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (0) is returned, otherwise a
 negative error value.
@@ -894,7 +917,7 @@ set using @code{gnutls_pkcs11_set_pin_function()} .
 
 @subheading gnutls_pkcs11_privkey_status
 @anchor{gnutls_pkcs11_privkey_status}
-@deftypefun {int} {gnutls_pkcs11_privkey_status} (gnutls_pkcs11_privkey_t @var{key})
+@deftypefun {unsigned} {gnutls_pkcs11_privkey_status} (gnutls_pkcs11_privkey_t @var{key})
 @var{key}: Holds the key
 
 Checks the status of the private key token.

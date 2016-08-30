@@ -41,7 +41,7 @@ accessLocation is not of the "uniformResourceIdentifier" type.
 
 If  @code{what} is @code{GNUTLS_IA_OCSP_URI} ,  @code{data} will hold the OCSP URI.
 Requesting this  @code{what} value leads to an error if the accessMethod
-is not 1.3.6.1.5.5.7.48.1 aka OSCP, or if accessLocation is not of
+is not 1.3.6.1.5.5.7.48.1 aka OCSP, or if accessLocation is not of
 the "uniformResourceIdentifier" type. In that case @code{GNUTLS_E_UNKNOWN_ALGORITHM} 
 will be returned, and  @code{seq} should be increased and this function
 called again.

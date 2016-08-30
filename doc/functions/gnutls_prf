@@ -36,5 +36,8 @@ generated output is strongly connected to some additional data
 
 The output is placed in  @code{out} , which must be pre-allocated.
 
+@strong{Note:} This function produces identical output with @code{gnutls_prf_rfc5705()} 
+when  @code{server_random_first} is set to 0 and  @code{extra} is @code{NULL} .
+
 @strong{Returns:} @code{GNUTLS_E_SUCCESS}  on success, or an error code.
 @end deftypefun

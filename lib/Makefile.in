@@ -112,8 +112,8 @@ host_triplet = @host@
 @ENABLE_OPENPGP_TRUE@am__append_2 = opencdk openpgp
 @ENABLE_OPENPGP_TRUE@am__append_3 = -I$(srcdir)/opencdk
 @ENABLE_MINITASN1_TRUE@am__append_4 = -I$(srcdir)/minitasn1
-@WINDOWS_TRUE@am__append_5 = system-keys-win.c
-@WINDOWS_FALSE@am__append_6 = system-keys-dummy.c
+@WINDOWS_TRUE@am__append_5 = system/keys-win.c
+@WINDOWS_FALSE@am__append_6 = system/keys-dummy.c
 @ENABLE_SELF_CHECKS_TRUE@am__append_7 = crypto-selftests.c crypto-selftests-pk.c
 @ENABLE_PKCS11_TRUE@am__append_8 = pkcs11.c pkcs11x.c pkcs11_privkey.c pkcs11_write.c pkcs11_secret.c \
 @ENABLE_PKCS11_TRUE@	pkcs11_int.c
@@ -175,12 +175,10 @@ am__aclocal_m4_deps = $(top_srcdir)/src/gl/m4/arpa_inet_h.m4 \
 	$(top_srcdir)/src/libopts/m4/stdnoreturn.m4 \
 	$(top_srcdir)/gl/m4/00gnulib.m4 \
 	$(top_srcdir)/gl/m4/absolute-header.m4 \
-	$(top_srcdir)/gl/m4/alloca.m4 $(top_srcdir)/gl/m4/base64.m4 \
-	$(top_srcdir)/gl/m4/byteswap.m4 $(top_srcdir)/gl/m4/ctype.m4 \
-	$(top_srcdir)/gl/m4/errno_h.m4 \
+	$(top_srcdir)/gl/m4/alloca.m4 $(top_srcdir)/gl/m4/byteswap.m4 \
+	$(top_srcdir)/gl/m4/ctype.m4 $(top_srcdir)/gl/m4/errno_h.m4 \
 	$(top_srcdir)/gl/m4/exponentd.m4 \
 	$(top_srcdir)/gl/m4/extensions.m4 \
-	$(top_srcdir)/gl/m4/extern-inline.m4 \
 	$(top_srcdir)/gl/m4/fcntl_h.m4 $(top_srcdir)/gl/m4/fdopen.m4 \
 	$(top_srcdir)/gl/m4/float_h.m4 $(top_srcdir)/gl/m4/fpieee.m4 \
 	$(top_srcdir)/gl/m4/fseeko.m4 $(top_srcdir)/gl/m4/fstat.m4 \
@@ -234,10 +232,11 @@ am__aclocal_m4_deps = $(top_srcdir)/src/gl/m4/arpa_inet_h.m4 \
 	$(top_srcdir)/gl/m4/vsnprintf.m4 \
 	$(top_srcdir)/gl/m4/warn-on-use.m4 \
 	$(top_srcdir)/gl/m4/warnings.m4 $(top_srcdir)/gl/m4/wchar_h.m4 \
-	$(top_srcdir)/m4/fcntl-o.m4 $(top_srcdir)/m4/gettext.m4 \
-	$(top_srcdir)/m4/gtk-doc.m4 $(top_srcdir)/m4/guile.m4 \
-	$(top_srcdir)/m4/hooks.m4 $(top_srcdir)/m4/iconv.m4 \
-	$(top_srcdir)/m4/intlmacosx.m4 \
+	$(top_srcdir)/m4/ax_code_coverage.m4 \
+	$(top_srcdir)/m4/extern-inline.m4 $(top_srcdir)/m4/fcntl-o.m4 \
+	$(top_srcdir)/m4/gettext.m4 $(top_srcdir)/m4/gtk-doc.m4 \
+	$(top_srcdir)/m4/guile.m4 $(top_srcdir)/m4/hooks.m4 \
+	$(top_srcdir)/m4/iconv.m4 $(top_srcdir)/m4/intlmacosx.m4 \
 	$(top_srcdir)/m4/inttypes-pri.m4 \
 	$(top_srcdir)/m4/inttypes_h.m4 $(top_srcdir)/m4/lib-ld.m4 \
 	$(top_srcdir)/m4/lib-link.m4 $(top_srcdir)/m4/lib-prefix.m4 \
@@ -309,71 +308,63 @@ libgnutls_la_DEPENDENCIES = ../gl/libgnu.la x509/libgnutls_x509.la \
 	algorithms/libgnutls_alg.la extras/libgnutls_extras.la \
 	$(am__append_12) $(am__append_17) $(am__append_20) \
 	$(am__append_23) $(am__DEPENDENCIES_9)
-am__libgnutls_la_SOURCES_DIST = abstract_int.h debug.h \
-	gnutls_compress.h gnutls_cipher.h gnutls_buffers.h \
-	gnutls_errors.h gnutls_int.h gnutls_dtls.h gnutls_handshake.h \
-	gnutls_num.h algorithms.h gnutls_dh.h gnutls_kx.h \
-	gnutls_hash_int.h gnutls_cipher_int.h gnutls_db.h \
-	gnutls_auth.h gnutls_extensions.h x509_b64.h \
-	gnutls_v2_compat.h gnutls_datum.h gnutls_mpi.h gnutls_pk.h \
-	gnutls_record.h gnutls_constate.h gnutls_global.h gnutls_sig.h \
-	gnutls_mem.h gnutls_session_pack.h gnutls_str.h \
-	gnutls_str_array.h gnutls_state.h gnutls_x509.h \
-	crypto-backend.h gnutls_srp.h auth/srp.h auth/srp_passwd.h \
-	gnutls_helper.h gnutls_supplemental.h crypto.h random.h \
-	system.h locks.h gnutls_mbuffers.h gnutls_ecc.h pin.h fips.h \
-	priority_options.h pkcs11_int.h pkcs11x.h gnutls_range.c \
-	gnutls_record.c gnutls_compress.c debug.c gnutls_cipher.c \
-	gnutls_mbuffers.c gnutls_buffers.c gnutls_handshake.c \
-	gnutls_num.c gnutls_errors.c gnutls_dh.c gnutls_kx.c \
-	gnutls_priority.c gnutls_hash_int.c gnutls_cipher_int.c \
-	gnutls_session.c gnutls_db.c x509_b64.c gnutls_extensions.c \
-	gnutls_auth.c gnutls_v2_compat.c gnutls_datum.c \
-	gnutls_session_pack.c gnutls_mpi.c gnutls_pk.c gnutls_cert.c \
-	gnutls_global.c gnutls_constate.c gnutls_anon_cred.c \
-	pkix_asn1_tab.c gnutls_asn1_tab.c gnutls_mem.c gnutls_ui.c \
-	vasprintf.c vasprintf.h gnutls_sig.c gnutls_ecc.c \
-	gnutls_alert.c gnutls_privkey_raw.c system.c inet_ntop.c \
-	gnutls_str.c gnutls_state.c gnutls_x509.c gnutls_helper.c \
-	gnutls_supplemental.c random.c crypto-api.c gnutls_privkey.c \
-	gnutls_pcert.c gnutls_pubkey.c locks.c gnutls_dtls.c \
-	system_override.c crypto-backend.c verify-tofu.c pin.c tpm.c \
-	fips.c safe-memfuncs.c inet_pton.c atfork.c atfork.h \
-	system-keys.h urls.c urls.h auto-verify.c system-keys-win.c \
-	system-keys-dummy.c crypto-selftests.c crypto-selftests-pk.c \
-	pkcs11.c pkcs11x.c pkcs11_privkey.c pkcs11_write.c \
-	pkcs11_secret.c pkcs11_int.c gnutls_srp.c gnutls_psk.c \
+am__libgnutls_la_SOURCES_DIST = abstract_int.h debug.h compress.h \
+	cipher.h buffers.h errors.h gnutls_int.h dtls.h handshake.h \
+	num.h algorithms.h dh.h kx.h hash_int.h cipher_int.h db.h \
+	auth.h extensions.h x509_b64.h sslv2_compat.h datum.h mpi.h \
+	pk.h record.h constate.h global.h tls-sig.h mem.h \
+	session_pack.h str.h str_array.h state.h x509.h \
+	crypto-backend.h srp.h auth/srp_kx.h auth/srp_passwd.h file.h \
+	supplemental.h crypto.h random.h system.h locks.h mbuffers.h \
+	ecc.h pin.h fips.h priority_options.h pkcs11_int.h pkcs11x.h \
+	range.c record.c compress.c debug.c cipher.c mbuffers.c \
+	buffers.c handshake.c num.c errors.c dh.c kx.c priority.c \
+	hash_int.c cipher_int.c session.c db.c x509_b64.c extensions.c \
+	auth.c sslv2_compat.c datum.c session_pack.c mpi.c pk.c cert.c \
+	global.c constate.c anon_cred.c pkix_asn1_tab.c \
+	gnutls_asn1_tab.c mem.c fingerprint.c tls-sig.c ecc.c alert.c \
+	privkey_raw.c system/certs.c system/threads.c \
+	system/fastopen.c system/sockets.c system/inet_ntop.c \
+	system/iconv.c system/vasprintf.c vasprintf.h system.c str.c \
+	state.c x509.c file.c supplemental.c random.c crypto-api.c \
+	privkey.c pcert.c pubkey.c locks.c dtls.c system_override.c \
+	crypto-backend.c verify-tofu.c pin.c tpm.c fips.c \
+	safe-memfuncs.c system/inet_pton.c atfork.c atfork.h \
+	randomart.c system-keys.h urls.c urls.h prf.c auto-verify.c \
+	dh-session.c cert-session.c handshake-checks.c dtls-sw.c \
+	system/keys-win.c system/keys-dummy.c crypto-selftests.c \
+	crypto-selftests-pk.c pkcs11.c pkcs11x.c pkcs11_privkey.c \
+	pkcs11_write.c pkcs11_secret.c pkcs11_int.c srp.c psk.c \
 	gnutls.asn pkix.asn libgnutls.map
 am__objects_1 =
 am__objects_2 = $(am__objects_1)
-@WINDOWS_TRUE@am__objects_3 = system-keys-win.lo
-@WINDOWS_FALSE@am__objects_4 = system-keys-dummy.lo
+am__dirstamp = $(am__leading_dot)dirstamp
+@WINDOWS_TRUE@am__objects_3 = system/keys-win.lo
+@WINDOWS_FALSE@am__objects_4 = system/keys-dummy.lo
 @ENABLE_SELF_CHECKS_TRUE@am__objects_5 = crypto-selftests.lo \
 @ENABLE_SELF_CHECKS_TRUE@	crypto-selftests-pk.lo
 @ENABLE_PKCS11_TRUE@am__objects_6 = pkcs11.lo pkcs11x.lo \
 @ENABLE_PKCS11_TRUE@	pkcs11_privkey.lo pkcs11_write.lo \
 @ENABLE_PKCS11_TRUE@	pkcs11_secret.lo pkcs11_int.lo
-am__objects_7 = gnutls_range.lo gnutls_record.lo gnutls_compress.lo \
-	debug.lo gnutls_cipher.lo gnutls_mbuffers.lo gnutls_buffers.lo \
-	gnutls_handshake.lo gnutls_num.lo gnutls_errors.lo \
-	gnutls_dh.lo gnutls_kx.lo gnutls_priority.lo \
-	gnutls_hash_int.lo gnutls_cipher_int.lo gnutls_session.lo \
-	gnutls_db.lo x509_b64.lo gnutls_extensions.lo gnutls_auth.lo \
-	gnutls_v2_compat.lo gnutls_datum.lo gnutls_session_pack.lo \
-	gnutls_mpi.lo gnutls_pk.lo gnutls_cert.lo gnutls_global.lo \
-	gnutls_constate.lo gnutls_anon_cred.lo pkix_asn1_tab.lo \
-	gnutls_asn1_tab.lo gnutls_mem.lo gnutls_ui.lo vasprintf.lo \
-	gnutls_sig.lo gnutls_ecc.lo gnutls_alert.lo \
-	gnutls_privkey_raw.lo system.lo inet_ntop.lo gnutls_str.lo \
-	gnutls_state.lo gnutls_x509.lo gnutls_helper.lo \
-	gnutls_supplemental.lo random.lo crypto-api.lo \
-	gnutls_privkey.lo gnutls_pcert.lo gnutls_pubkey.lo locks.lo \
-	gnutls_dtls.lo system_override.lo crypto-backend.lo \
-	verify-tofu.lo pin.lo tpm.lo fips.lo safe-memfuncs.lo \
-	inet_pton.lo atfork.lo urls.lo auto-verify.lo $(am__objects_3) \
+am__objects_7 = range.lo record.lo compress.lo debug.lo cipher.lo \
+	mbuffers.lo buffers.lo handshake.lo num.lo errors.lo dh.lo \
+	kx.lo priority.lo hash_int.lo cipher_int.lo session.lo db.lo \
+	x509_b64.lo extensions.lo auth.lo sslv2_compat.lo datum.lo \
+	session_pack.lo mpi.lo pk.lo cert.lo global.lo constate.lo \
+	anon_cred.lo pkix_asn1_tab.lo gnutls_asn1_tab.lo mem.lo \
+	fingerprint.lo tls-sig.lo ecc.lo alert.lo privkey_raw.lo \
+	system/certs.lo system/threads.lo system/fastopen.lo \
+	system/sockets.lo system/inet_ntop.lo system/iconv.lo \
+	system/vasprintf.lo system.lo str.lo state.lo x509.lo file.lo \
+	supplemental.lo random.lo crypto-api.lo privkey.lo pcert.lo \
+	pubkey.lo locks.lo dtls.lo system_override.lo \
+	crypto-backend.lo verify-tofu.lo pin.lo tpm.lo fips.lo \
+	safe-memfuncs.lo system/inet_pton.lo atfork.lo randomart.lo \
+	urls.lo prf.lo auto-verify.lo dh-session.lo cert-session.lo \
+	handshake-checks.lo dtls-sw.lo $(am__objects_3) \
 	$(am__objects_4) $(am__objects_5) $(am__objects_6)
-am__objects_8 = gnutls_srp.lo
-am__objects_9 = gnutls_psk.lo
+am__objects_8 = srp.lo
+am__objects_9 = psk.lo
 am_libgnutls_la_OBJECTS = $(am__objects_2) $(am__objects_7) \
 	$(am__objects_8) $(am__objects_9)
 libgnutls_la_OBJECTS = $(am_libgnutls_la_OBJECTS)
@@ -493,7 +484,8 @@ CTAGS = ctags
 DIST_SUBDIRS = includes x509 auth ext algorithms extras accelerated \
 	minitasn1 opencdk openpgp nettle
 am__DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/gnutls.pc.in \
-	$(top_srcdir)/build-aux/depcomp README
+	$(top_srcdir)/build-aux/depcomp $(top_srcdir)/lib/common.mk \
+	README
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 am__relativize = \
   dir0=`pwd`; \
@@ -545,6 +537,13 @@ CCASDEPMODE = @CCASDEPMODE@
 CCASFLAGS = @CCASFLAGS@
 CCDEPMODE = @CCDEPMODE@
 CFLAGS = @CFLAGS@
+CMOCKA_CFLAGS = @CMOCKA_CFLAGS@
+CMOCKA_LIBS = @CMOCKA_LIBS@
+CODE_COVERAGE_CFLAGS = @CODE_COVERAGE_CFLAGS@
+CODE_COVERAGE_CPPFLAGS = @CODE_COVERAGE_CPPFLAGS@
+CODE_COVERAGE_CXXFLAGS = @CODE_COVERAGE_CXXFLAGS@
+CODE_COVERAGE_ENABLED = @CODE_COVERAGE_ENABLED@
+CODE_COVERAGE_LDFLAGS = @CODE_COVERAGE_LDFLAGS@
 CONFIG_INCLUDE = @CONFIG_INCLUDE@
 CPP = @CPP@
 CPPFLAGS = @CPPFLAGS@
@@ -580,6 +579,8 @@ EXEEXT = @EXEEXT@
 FGREP = @FGREP@
 FIPS140_LIBS = @FIPS140_LIBS@
 FLOAT_H = @FLOAT_H@
+GCOV = @GCOV@
+GENHTML = @GENHTML@
 GETADDRINFO_LIB = @GETADDRINFO_LIB@
 GETTEXT_MACRO_VERSION = @GETTEXT_MACRO_VERSION@
 GMP_CFLAGS = @GMP_CFLAGS@
@@ -856,6 +857,7 @@ GREP = @GREP@
 GTKDOC_CHECK = @GTKDOC_CHECK@
 GTKDOC_MKPDF = @GTKDOC_MKPDF@
 GTKDOC_REBASE = @GTKDOC_REBASE@
+GUILD = @GUILD@
 GUILE = @GUILE@
 GUILE_CFLAGS = @GUILE_CFLAGS@
 GUILE_CONFIG = @GUILE_CONFIG@
@@ -943,11 +945,13 @@ HAVE_INTTYPES_H = @HAVE_INTTYPES_H@
 HAVE_ISBLANK = @HAVE_ISBLANK@
 HAVE_LCHMOD = @HAVE_LCHMOD@
 HAVE_LCHOWN = @HAVE_LCHOWN@
+HAVE_LIBCRYPTO = @HAVE_LIBCRYPTO@
 HAVE_LIBDL = @HAVE_LIBDL@
 HAVE_LIBICONV = @HAVE_LIBICONV@
 HAVE_LIBNSL = @HAVE_LIBNSL@
 HAVE_LIBPTHREAD = @HAVE_LIBPTHREAD@
 HAVE_LIBRT = @HAVE_LIBRT@
+HAVE_LIBSECCOMP = @HAVE_LIBSECCOMP@
 HAVE_LIBZ = @HAVE_LIBZ@
 HAVE_LINK = @HAVE_LINK@
 HAVE_LINKAT = @HAVE_LINKAT@
@@ -1109,8 +1113,11 @@ INT32_MAX_LT_INTMAX_MAX = @INT32_MAX_LT_INTMAX_MAX@
 INT64_MAX_EQ_LONG_MAX = @INT64_MAX_EQ_LONG_MAX@
 INTLLIBS = @INTLLIBS@
 INTL_MACOSX_LIBS = @INTL_MACOSX_LIBS@
+LCOV = @LCOV@
 LD = @LD@
 LDFLAGS = @LDFLAGS@
+LIBCRYPTO = @LIBCRYPTO@
+LIBCRYPTO_PREFIX = @LIBCRYPTO_PREFIX@
 LIBDL = @LIBDL@
 LIBDL_PREFIX = @LIBDL_PREFIX@
 LIBGNUTLS_CFLAGS = @LIBGNUTLS_CFLAGS@
@@ -1131,6 +1138,8 @@ LIBPTHREAD_PREFIX = @LIBPTHREAD_PREFIX@
 LIBRT = @LIBRT@
 LIBRT_PREFIX = @LIBRT_PREFIX@
 LIBS = @LIBS@
+LIBSECCOMP = @LIBSECCOMP@
+LIBSECCOMP_PREFIX = @LIBSECCOMP_PREFIX@
 LIBSOCKET = @LIBSOCKET@
 LIBTASN1_CFLAGS = @LIBTASN1_CFLAGS@
 LIBTASN1_LIBS = @LIBTASN1_LIBS@
@@ -1143,6 +1152,7 @@ LIB_SELECT = @LIB_SELECT@
 LIPO = @LIPO@
 LN_S = @LN_S@
 LTALLOCA = @LTALLOCA@
+LTLIBCRYPTO = @LTLIBCRYPTO@
 LTLIBDL = @LTLIBDL@
 LTLIBICONV = @LTLIBICONV@
 LTLIBINTL = @LTLIBINTL@
@@ -1150,6 +1160,7 @@ LTLIBNSL = @LTLIBNSL@
 LTLIBOBJS = @LTLIBOBJS@
 LTLIBPTHREAD = @LTLIBPTHREAD@
 LTLIBRT = @LTLIBRT@
+LTLIBSECCOMP = @LTLIBSECCOMP@
 LTLIBZ = @LTLIBZ@
 LT_AGE = @LT_AGE@
 LT_CURRENT = @LT_CURRENT@
@@ -1160,6 +1171,7 @@ LT_REVISION = @LT_REVISION@
 LT_SSL_AGE = @LT_SSL_AGE@
 LT_SSL_CURRENT = @LT_SSL_CURRENT@
 LT_SSL_REVISION = @LT_SSL_REVISION@
+LT_SYS_LIBRARY_PATH = @LT_SYS_LIBRARY_PATH@
 LT_XSSL_AGE = @LT_XSSL_AGE@
 LT_XSSL_CURRENT = @LT_XSSL_CURRENT@
 LT_XSSL_REVISION = @LT_XSSL_REVISION@
@@ -1467,6 +1479,7 @@ gltests_LTLIBOBJS = @gltests_LTLIBOBJS@
 gltests_WITNESS = @gltests_WITNESS@
 guile_snarf = @guile_snarf@
 guileextensiondir = @guileextensiondir@
+guileobjectdir = @guileobjectdir@
 host = @host@
 host_alias = @host_alias@
 host_cpu = @host_cpu@
@@ -1497,11 +1510,14 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 ACLOCAL_AMFLAGS = -I ../m4 -I ../gl/m4
-EXTRA_DIST = priority_options.gperf
+EXTRA_DIST = priority_options.gperf common.mk
 BUILT_SOURCES = pkix_asn1_tab.c gnutls_asn1_tab.c priority_options.h
 SUBDIRS = includes x509 auth ext algorithms extras accelerated \
 	$(am__append_1) $(am__append_2) $(am__append_9)
-AM_CFLAGS = $(WERROR_CFLAGS) $(WSTACK_CFLAGS) $(WARN_CFLAGS) $(NETTLE_CFLAGS)
+AM_CFLAGS = $(WERROR_CFLAGS) $(WSTACK_CFLAGS) $(WARN_CFLAGS) $(NETTLE_CFLAGS) \
+  $(LIBTASN1_CFLAGS) $(LIBIDN_CFLAGS) $(P11_KIT_CFLAGS) $(CODE_COVERAGE_CFLAGS)
+
+COMMON_LINK_FLAGS = $(CODE_COVERAGE_LDFLAGS)
 AM_CPPFLAGS = -DLOCALEDIR=\"$(localedir)\" -I$(srcdir)/../gl \
 	-I$(builddir)/../gl -I$(builddir)/includes -I$(builddir)/x509 \
 	-I$(srcdir)/includes -I$(builddir)/includes -I$(srcdir)/x509 \
@@ -1513,49 +1529,41 @@ pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = gnutls.pc
 DISTCLEANFILES = $(pkgconfig_DATA) $(am__append_25)
 lib_LTLIBRARIES = libgnutls.la $(am__append_27)
-SRP_COBJECTS = gnutls_srp.c
-PSK_COBJECTS = gnutls_psk.c
-COBJECTS = gnutls_range.c gnutls_record.c gnutls_compress.c debug.c \
-	gnutls_cipher.c gnutls_mbuffers.c gnutls_buffers.c \
-	gnutls_handshake.c gnutls_num.c gnutls_errors.c gnutls_dh.c \
-	gnutls_kx.c gnutls_priority.c gnutls_hash_int.c \
-	gnutls_cipher_int.c gnutls_session.c gnutls_db.c x509_b64.c \
-	gnutls_extensions.c gnutls_auth.c gnutls_v2_compat.c \
-	gnutls_datum.c gnutls_session_pack.c gnutls_mpi.c gnutls_pk.c \
-	gnutls_cert.c gnutls_global.c gnutls_constate.c \
-	gnutls_anon_cred.c pkix_asn1_tab.c gnutls_asn1_tab.c \
-	gnutls_mem.c gnutls_ui.c vasprintf.c vasprintf.h gnutls_sig.c \
-	gnutls_ecc.c gnutls_alert.c gnutls_privkey_raw.c system.c \
-	inet_ntop.c gnutls_str.c gnutls_state.c gnutls_x509.c \
-	gnutls_helper.c gnutls_supplemental.c random.c crypto-api.c \
-	gnutls_privkey.c gnutls_pcert.c gnutls_pubkey.c locks.c \
-	gnutls_dtls.c system_override.c crypto-backend.c verify-tofu.c \
-	pin.c tpm.c fips.c safe-memfuncs.c inet_pton.c atfork.c \
-	atfork.h system-keys.h urls.c urls.h auto-verify.c \
+SRP_COBJECTS = srp.c
+PSK_COBJECTS = psk.c
+COBJECTS = range.c record.c compress.c debug.c cipher.c mbuffers.c \
+	buffers.c handshake.c num.c errors.c dh.c kx.c priority.c \
+	hash_int.c cipher_int.c session.c db.c x509_b64.c extensions.c \
+	auth.c sslv2_compat.c datum.c session_pack.c mpi.c pk.c cert.c \
+	global.c constate.c anon_cred.c pkix_asn1_tab.c \
+	gnutls_asn1_tab.c mem.c fingerprint.c tls-sig.c ecc.c alert.c \
+	privkey_raw.c system/certs.c system/threads.c \
+	system/fastopen.c system/sockets.c system/inet_ntop.c \
+	system/iconv.c system/vasprintf.c vasprintf.h system.c str.c \
+	state.c x509.c file.c supplemental.c random.c crypto-api.c \
+	privkey.c pcert.c pubkey.c locks.c dtls.c system_override.c \
+	crypto-backend.c verify-tofu.c pin.c tpm.c fips.c \
+	safe-memfuncs.c system/inet_pton.c atfork.c atfork.h \
+	randomart.c system-keys.h urls.c urls.h prf.c auto-verify.c \
+	dh-session.c cert-session.c handshake-checks.c dtls-sw.c \
 	$(am__append_5) $(am__append_6) $(am__append_7) \
 	$(am__append_8)
-HFILES = abstract_int.h debug.h gnutls_compress.h gnutls_cipher.h \
-	gnutls_buffers.h gnutls_errors.h gnutls_int.h gnutls_dtls.h \
-	gnutls_handshake.h gnutls_num.h algorithms.h gnutls_dh.h \
-	gnutls_kx.h gnutls_hash_int.h gnutls_cipher_int.h gnutls_db.h \
-	gnutls_auth.h gnutls_extensions.h x509_b64.h \
-	gnutls_v2_compat.h gnutls_datum.h gnutls_mpi.h gnutls_pk.h \
-	gnutls_record.h gnutls_constate.h gnutls_global.h gnutls_sig.h \
-	gnutls_mem.h gnutls_session_pack.h gnutls_str.h \
-	gnutls_str_array.h gnutls_state.h gnutls_x509.h \
-	crypto-backend.h gnutls_srp.h auth/srp.h auth/srp_passwd.h \
-	gnutls_helper.h gnutls_supplemental.h crypto.h random.h \
-	system.h locks.h gnutls_mbuffers.h gnutls_ecc.h pin.h fips.h \
-	priority_options.h $(am__append_10)
-
-# Separate so we can create the documentation
+HFILES = abstract_int.h debug.h compress.h cipher.h buffers.h errors.h \
+	gnutls_int.h dtls.h handshake.h num.h algorithms.h dh.h kx.h \
+	hash_int.h cipher_int.h db.h auth.h extensions.h x509_b64.h \
+	sslv2_compat.h datum.h mpi.h pk.h record.h constate.h global.h \
+	tls-sig.h mem.h session_pack.h str.h str_array.h state.h \
+	x509.h crypto-backend.h srp.h auth/srp_kx.h auth/srp_passwd.h \
+	file.h supplemental.h crypto.h random.h system.h locks.h \
+	mbuffers.h ecc.h pin.h fips.h priority_options.h \
+	$(am__append_10)
 libgnutls_la_SOURCES = $(HFILES) $(COBJECTS) $(SRP_COBJECTS)	\
 	$(PSK_COBJECTS) \
 	gnutls.asn pkix.asn libgnutls.map
 
 libgnutls_la_LDFLAGS = -no-undefined -version-info \
-	$(LT_CURRENT):$(LT_REVISION):$(LT_AGE) $(am__append_18) \
-	$(am__append_19) $(am__append_24)
+	$(LT_CURRENT):$(LT_REVISION):$(LT_AGE) $(COMMON_LINK_FLAGS) \
+	$(am__append_18) $(am__append_19) $(am__append_24)
 libgnutls_la_LIBADD = ../gl/libgnu.la x509/libgnutls_x509.la \
 	ext/libgnutls_ext.la auth/libgnutls_auth.la \
 	algorithms/libgnutls_alg.la extras/libgnutls_extras.la \
@@ -1585,7 +1593,7 @@ all: $(BUILT_SOURCES)
 
 .SUFFIXES:
 .SUFFIXES: .c .cpp .lo .o .obj
-$(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
+$(srcdir)/Makefile.in:  $(srcdir)/Makefile.am $(top_srcdir)/lib/common.mk $(am__configure_deps)
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
 	    *$$dep*) \
@@ -1594,9 +1602,9 @@ $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu lib/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign lib/Makefile'; \
 	$(am__cd) $(top_srcdir) && \
-	  $(AUTOMAKE) --gnu lib/Makefile
+	  $(AUTOMAKE) --foreign lib/Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
 	  *config.status*) \
@@ -1605,6 +1613,7 @@ Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	    echo ' cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@ $(am__depfiles_maybe)'; \
 	    cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@ $(am__depfiles_maybe);; \
 	esac;
+$(top_srcdir)/lib/common.mk $(am__empty):
 
 $(top_builddir)/config.status: $(top_srcdir)/configure $(CONFIG_STATUS_DEPENDENCIES)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
@@ -1651,6 +1660,32 @@ clean-libLTLIBRARIES:
 	  echo rm -f $${locs}; \
 	  rm -f $${locs}; \
 	}
+system/$(am__dirstamp):
+	@$(MKDIR_P) system
+	@: > system/$(am__dirstamp)
+system/$(DEPDIR)/$(am__dirstamp):
+	@$(MKDIR_P) system/$(DEPDIR)
+	@: > system/$(DEPDIR)/$(am__dirstamp)
+system/certs.lo: system/$(am__dirstamp) \
+	system/$(DEPDIR)/$(am__dirstamp)
+system/threads.lo: system/$(am__dirstamp) \
+	system/$(DEPDIR)/$(am__dirstamp)
+system/fastopen.lo: system/$(am__dirstamp) \
+	system/$(DEPDIR)/$(am__dirstamp)
+system/sockets.lo: system/$(am__dirstamp) \
+	system/$(DEPDIR)/$(am__dirstamp)
+system/inet_ntop.lo: system/$(am__dirstamp) \
+	system/$(DEPDIR)/$(am__dirstamp)
+system/iconv.lo: system/$(am__dirstamp) \
+	system/$(DEPDIR)/$(am__dirstamp)
+system/vasprintf.lo: system/$(am__dirstamp) \
+	system/$(DEPDIR)/$(am__dirstamp)
+system/inet_pton.lo: system/$(am__dirstamp) \
+	system/$(DEPDIR)/$(am__dirstamp)
+system/keys-win.lo: system/$(am__dirstamp) \
+	system/$(DEPDIR)/$(am__dirstamp)
+system/keys-dummy.lo: system/$(am__dirstamp) \
+	system/$(DEPDIR)/$(am__dirstamp)
 
 libgnutls.la: $(libgnutls_la_OBJECTS) $(libgnutls_la_DEPENDENCIES) $(EXTRA_libgnutls_la_DEPENDENCIES) 
 	$(AM_V_CCLD)$(libgnutls_la_LINK) -rpath $(libdir) $(libgnutls_la_OBJECTS) $(libgnutls_la_LIBADD) $(LIBS)
@@ -1660,68 +1695,56 @@ libgnutlsxx.la: $(libgnutlsxx_la_OBJECTS) $(libgnutlsxx_la_DEPENDENCIES) $(EXTRA
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
+	-rm -f system/*.$(OBJEXT)
+	-rm -f system/*.lo
 
 distclean-compile:
 	-rm -f *.tab.c
 
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/alert.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/anon_cred.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/atfork.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/auth.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/auto-verify.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/buffers.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/cert-session.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/cert.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/cipher.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/cipher_int.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/compress.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/constate.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/crypto-api.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/crypto-backend.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/crypto-selftests-pk.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/crypto-selftests.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/datum.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/db.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/debug.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dh-session.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dh.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dtls-sw.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dtls.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ecc.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/errors.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/extensions.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/file.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/fingerprint.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/fips.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gnutls_alert.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gnutls_anon_cred.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/global.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gnutls_asn1_tab.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gnutls_auth.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gnutls_buffers.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gnutls_cert.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gnutls_cipher.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gnutls_cipher_int.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gnutls_compress.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gnutls_constate.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gnutls_datum.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gnutls_db.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gnutls_dh.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gnutls_dtls.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gnutls_ecc.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gnutls_errors.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gnutls_extensions.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gnutls_global.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gnutls_handshake.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gnutls_hash_int.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gnutls_helper.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gnutls_kx.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gnutls_mbuffers.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gnutls_mem.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gnutls_mpi.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gnutls_num.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gnutls_pcert.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gnutls_pk.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gnutls_priority.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gnutls_privkey.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gnutls_privkey_raw.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gnutls_psk.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gnutls_pubkey.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gnutls_range.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gnutls_record.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gnutls_session.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gnutls_session_pack.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gnutls_sig.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gnutls_srp.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gnutls_state.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gnutls_str.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gnutls_supplemental.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gnutls_ui.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gnutls_v2_compat.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gnutls_x509.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/inet_ntop.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/inet_pton.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/handshake-checks.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/handshake.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/hash_int.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/kx.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgnutlsxx_la-gnutlsxx.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/locks.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/mbuffers.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/mem.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/mpi.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/num.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pcert.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pin.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pk.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pkcs11.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pkcs11_int.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pkcs11_privkey.Plo@am__quote@
@@ -1729,17 +1752,42 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pkcs11_write.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pkcs11x.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pkix_asn1_tab.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/prf.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/priority.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/privkey.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/privkey_raw.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/psk.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pubkey.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/random.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/randomart.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/range.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/record.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/safe-memfuncs.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/system-keys-dummy.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/system-keys-win.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/session.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/session_pack.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/srp.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/sslv2_compat.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/state.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/str.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/supplemental.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/system.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/system_override.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tls-sig.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tpm.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/urls.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/vasprintf.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/verify-tofu.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/x509.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/x509_b64.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@system/$(DEPDIR)/certs.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@system/$(DEPDIR)/fastopen.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@system/$(DEPDIR)/iconv.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@system/$(DEPDIR)/inet_ntop.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@system/$(DEPDIR)/inet_pton.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@system/$(DEPDIR)/keys-dummy.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@system/$(DEPDIR)/keys-win.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@system/$(DEPDIR)/sockets.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@system/$(DEPDIR)/threads.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@system/$(DEPDIR)/vasprintf.Plo@am__quote@
 
 .c.o:
 @am__fastdepCC_TRUE@	$(AM_V_CC)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.o$$||'`;\
@@ -1801,6 +1849,7 @@ mostlyclean-libtool:
 
 clean-libtool:
 	-rm -rf .libs _libs
+	-rm -rf system/.libs system/_libs
 install-defexecDATA: $(defexec_DATA)
 	@$(NORMAL_INSTALL)
 	@list='$(defexec_DATA)'; test -n "$(defexecdir)" || list=; \
@@ -2034,6 +2083,8 @@ clean-generic:
 distclean-generic:
 	-test -z "$(CONFIG_CLEAN_FILES)" || rm -f $(CONFIG_CLEAN_FILES)
 	-test . = "$(srcdir)" || test -z "$(CONFIG_CLEAN_VPATH_FILES)" || rm -f $(CONFIG_CLEAN_VPATH_FILES)
+	-rm -f system/$(DEPDIR)/$(am__dirstamp)
+	-rm -f system/$(am__dirstamp)
 	-test -z "$(DISTCLEANFILES)" || rm -f $(DISTCLEANFILES)
 
 maintainer-clean-generic:
@@ -2046,7 +2097,7 @@ clean-am: clean-generic clean-libLTLIBRARIES clean-libtool \
 	mostlyclean-am
 
 distclean: distclean-recursive
-	-rm -rf ./$(DEPDIR)
+	-rm -rf ./$(DEPDIR) system/$(DEPDIR)
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
 	distclean-tags
@@ -2092,7 +2143,7 @@ install-ps-am:
 installcheck-am:
 
 maintainer-clean: maintainer-clean-recursive
-	-rm -rf ./$(DEPDIR)
+	-rm -rf ./$(DEPDIR) system/$(DEPDIR)
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 

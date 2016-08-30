@@ -20,14 +20,14 @@
  *
  */
 
-#include <gnutls_int.h>
+#include "gnutls_int.h"
 #include <libtasn1.h>
-#include <gnutls_datum.h>
-#include <gnutls_global.h>
-#include <gnutls_errors.h>
-#include <gnutls_str.h>
+#include <datum.h>
+#include <global.h>
+#include "errors.h"
+#include <str.h>
 #include <common.h>
-#include <gnutls_num.h>
+#include <num.h>
 
 /* This file includes all the required to parse an X.509 Distriguished
  * Name (you need a parser just to read a name in the X.509 protocols!!!)
@@ -687,9 +687,13 @@ _gnutls_x509_set_dn_oid(ASN1_TYPE asn1_struct,
 		return _gnutls_asn2err(result);
 	}
 
-	_gnutls_str_cpy(asn1_rdn_name, sizeof(asn1_rdn_name), asn1_name);
-	_gnutls_str_cat(asn1_rdn_name, sizeof(asn1_rdn_name),
+	if (asn1_name[0] != 0) {
+		_gnutls_str_cpy(asn1_rdn_name, sizeof(asn1_rdn_name), asn1_name);
+		_gnutls_str_cat(asn1_rdn_name, sizeof(asn1_rdn_name),
 			".rdnSequence");
+	} else {
+		_gnutls_str_cpy(asn1_rdn_name, sizeof(asn1_rdn_name), "rdnSequence");
+	}
 
 	/* create a new element 
 	 */
@@ -737,86 +741,6 @@ _gnutls_x509_set_dn_oid(ASN1_TYPE asn1_struct,
 	return 0;
 }
 
-/**
- * gnutls_x509_dn_init:
- * @dn: the object to be initialized
- *
- * This function initializes a #gnutls_x509_dn_t type.
- *
- * The object returned must be deallocated using
- * gnutls_x509_dn_deinit().
- *
- * Returns: On success, %GNUTLS_E_SUCCESS (0) is returned, otherwise a
- *   negative error value.
- *
- * Since: 2.4.0
- **/
-int gnutls_x509_dn_init(gnutls_x509_dn_t * dn)
-{
-	int result;
-
-	*dn = gnutls_calloc(1, sizeof(gnutls_x509_dn_st));
-
-	if ((result =
-	     asn1_create_element(_gnutls_get_pkix(),
-				 "PKIX1.Name", &(*dn)->asn)) != ASN1_SUCCESS) {
-		gnutls_assert();
-		gnutls_free(*dn);
-		return _gnutls_asn2err(result);
-	}
-
-	return 0;
-}
-
-/**
- * gnutls_x509_dn_import:
- * @dn: the structure that will hold the imported DN
- * @data: should contain a DER encoded RDN sequence
- *
- * This function parses an RDN sequence and stores the result to a
- * #gnutls_x509_dn_t type. The data must have been initialized
- * with gnutls_x509_dn_init(). You may use gnutls_x509_dn_get_rdn_ava() to
- * decode the DN.
- *
- * Returns: On success, %GNUTLS_E_SUCCESS (0) is returned, otherwise a
- *   negative error value.
- *
- * Since: 2.4.0
- **/
-int gnutls_x509_dn_import(gnutls_x509_dn_t dn, const gnutls_datum_t * data)
-{
-	int result;
-	char err[ASN1_MAX_ERROR_DESCRIPTION_SIZE];
-
-	if (data->data == NULL || data->size == 0)
-		return gnutls_assert_val(GNUTLS_E_INVALID_REQUEST);
-
-	result = _asn1_strict_der_decode(&dn->asn,
-				   data->data, data->size, err);
-	if (result != ASN1_SUCCESS) {
-		/* couldn't decode DER */
-		_gnutls_debug_log("ASN.1 Decoding error: %s\n", err);
-		gnutls_assert();
-		return _gnutls_asn2err(result);
-	}
-
-	return 0;
-}
-
-/**
- * gnutls_x509_dn_deinit:
- * @dn: a DN uint8_t object pointer.
- *
- * This function deallocates the DN object as returned by
- * gnutls_x509_dn_import().
- *
- * Since: 2.4.0
- **/
-void gnutls_x509_dn_deinit(gnutls_x509_dn_t dn)
-{
-	asn1_delete_structure(&dn->asn);
-	gnutls_free(dn);
-}
 
 /**
  * gnutls_x509_rdn_get:
@@ -892,7 +816,7 @@ gnutls_x509_rdn_get(const gnutls_datum_t * idn,
  **/
 int
 gnutls_x509_rdn_get_by_oid(const gnutls_datum_t * idn, const char *oid,
-			   int indx, unsigned int raw_flag,
+			   unsigned indx, unsigned int raw_flag,
 			   void *buf, size_t * buf_size)
 {
 	int result;
@@ -948,7 +872,7 @@ gnutls_x509_rdn_get_by_oid(const gnutls_datum_t * idn, const char *oid,
  **/
 int
 gnutls_x509_rdn_get_oid(const gnutls_datum_t * idn,
-			int indx, void *buf, size_t * buf_size)
+			unsigned indx, void *buf, size_t * buf_size)
 {
 	int result;
 	ASN1_TYPE dn = ASN1_TYPE_EMPTY;
@@ -1000,71 +924,4 @@ _gnutls_x509_compare_raw_dn(const gnutls_datum_t * dn1,
 		return 0;
 	}
 	return 1;		/* they match */
-}
-
-/**
- * gnutls_x509_dn_export:
- * @dn: Holds the uint8_t DN object
- * @format: the format of output params. One of PEM or DER.
- * @output_data: will contain a DN PEM or DER encoded
- * @output_data_size: holds the size of output_data (and will be
- *   replaced by the actual size of parameters)
- *
- * This function will export the DN to DER or PEM format.
- *
- * If the buffer provided is not long enough to hold the output, then
- * *@output_data_size is updated and %GNUTLS_E_SHORT_MEMORY_BUFFER
- * will be returned.
- *
- * If the structure is PEM encoded, it will have a header
- * of "BEGIN NAME".
- *
- * Returns: On success, %GNUTLS_E_SUCCESS (0) is returned, otherwise a
- *   negative error value.
- **/
-int
-gnutls_x509_dn_export(gnutls_x509_dn_t dn,
-		      gnutls_x509_crt_fmt_t format, void *output_data,
-		      size_t * output_data_size)
-{
-	if (dn == NULL) {
-		gnutls_assert();
-		return GNUTLS_E_INVALID_REQUEST;
-	}
-
-	return _gnutls_x509_export_int_named(dn->asn, "rdnSequence",
-					     format, "NAME",
-					     output_data,
-					     output_data_size);
-}
-
-/**
- * gnutls_x509_dn_export2:
- * @dn: Holds the uint8_t DN object
- * @format: the format of output params. One of PEM or DER.
- * @out: will contain a DN PEM or DER encoded
- *
- * This function will export the DN to DER or PEM format.
- *
- * The output buffer is allocated using gnutls_malloc().
- *
- * If the structure is PEM encoded, it will have a header
- * of "BEGIN NAME".
- *
- * Returns: On success, %GNUTLS_E_SUCCESS (0) is returned, otherwise a
- *   negative error value.
- *
- * Since: 3.1.3
- **/
-int
-gnutls_x509_dn_export2(gnutls_x509_dn_t dn,
-		       gnutls_x509_crt_fmt_t format, gnutls_datum_t * out)
-{
-	if (dn == NULL) {
-		gnutls_assert();
-		return GNUTLS_E_INVALID_REQUEST;
-	}
-
-	return _gnutls_x509_export_int_named2(dn->asn, "rdnSequence",
-					      format, "NAME", out);
 }

@@ -20,7 +20,9 @@ The value of  @code{name} depends on the  @code{type} type.  In case of
 @code{GNUTLS_NAME_DNS} , a UTF-8 null-terminated domain name string,
 without the trailing dot, is expected.
 
-IPv4 or IPv6 addresses are not permitted.
+IPv4 or IPv6 addresses are not permitted to be set by this function.
+If the function is called with a name of  @code{name_length} zero it will clear
+all server names set.
 
 @strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (0) is returned,
 otherwise a negative error code is returned.

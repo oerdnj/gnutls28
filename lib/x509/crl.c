@@ -20,16 +20,16 @@
  *
  */
 
-#include <gnutls_int.h>
+#include "gnutls_int.h"
 #include <libtasn1.h>
 
-#include <gnutls_datum.h>
-#include <gnutls_global.h>
-#include <gnutls_errors.h>
+#include <datum.h>
+#include <global.h>
+#include "errors.h"
 #include <common.h>
 #include <x509_b64.h>
 #include <x509_int.h>
-#include <gnutls_x509.h>
+#include <x509.h>
 
 static int crl_reinit(gnutls_x509_crl_t crl)
 {
@@ -241,7 +241,7 @@ gnutls_x509_crl_get_issuer_dn(const gnutls_x509_crl_t crl, char *buf,
  **/
 int
 gnutls_x509_crl_get_issuer_dn_by_oid(gnutls_x509_crl_t crl,
-				     const char *oid, int indx,
+				     const char *oid, unsigned indx,
 				     unsigned int raw_flag, void *buf,
 				     size_t * sizeof_buf)
 {
@@ -281,7 +281,7 @@ gnutls_x509_crl_get_issuer_dn_by_oid(gnutls_x509_crl_t crl,
  **/
 int
 gnutls_x509_crl_get_dn_oid(gnutls_x509_crl_t crl,
-			   int indx, void *oid, size_t * sizeof_oid)
+			   unsigned indx, void *oid, size_t * sizeof_oid)
 {
 	if (crl == NULL) {
 		gnutls_assert();
@@ -358,6 +358,46 @@ int gnutls_x509_crl_get_signature_algorithm(gnutls_x509_crl_t crl)
 	_gnutls_free_datum(&sa);
 
 	return result;
+}
+
+/**
+ * gnutls_x509_crl_get_signature_oid:
+ * @crl: should contain a #gnutls_x509_crl_t type
+ * @oid: a pointer to a buffer to hold the OID (may be null)
+ * @oid_size: initially holds the size of @oid
+ *
+ * This function will return the OID of the signature algorithm
+ * that has been used to sign this CRL. This is function
+ * is useful in the case gnutls_x509_crl_get_signature_algorithm()
+ * returned %GNUTLS_SIGN_UNKNOWN.
+ *
+ * Returns: zero or a negative error code on error.
+ *
+ * Since: 3.5.0
+ **/
+int gnutls_x509_crl_get_signature_oid(gnutls_x509_crl_t crl, char *oid, size_t *oid_size)
+{
+	char str[MAX_OID_SIZE];
+	int len, result, ret;
+	gnutls_datum_t out;
+
+	len = sizeof(str);
+	result = asn1_read_value(crl->crl, "signatureAlgorithm.algorithm", str, &len);
+	if (result != ASN1_SUCCESS) {
+		gnutls_assert();
+		return _gnutls_asn2err(result);
+	}
+
+	out.data = (void*)str;
+	out.size = len;
+
+	ret = _gnutls_copy_string(&out, (void*)oid, oid_size);
+	if (ret < 0) {
+		gnutls_assert();
+		return ret;
+	}
+
+	return 0;
 }
 
 /**
@@ -533,7 +573,7 @@ int gnutls_x509_crl_get_crt_count(gnutls_x509_crl_t crl)
  *   negative error value.
  **/
 int
-gnutls_x509_crl_get_crt_serial(gnutls_x509_crl_t crl, int indx,
+gnutls_x509_crl_get_crt_serial(gnutls_x509_crl_t crl, unsigned indx,
 			       unsigned char *serial,
 			       size_t * serial_size, time_t * t)
 {
@@ -1038,7 +1078,7 @@ gnutls_x509_crl_get_number(gnutls_x509_crl_t crl, void *ret,
  * Since: 2.8.0
  **/
 int
-gnutls_x509_crl_get_extension_oid(gnutls_x509_crl_t crl, int indx,
+gnutls_x509_crl_get_extension_oid(gnutls_x509_crl_t crl, unsigned indx,
 				  void *oid, size_t * sizeof_oid)
 {
 	int result;
@@ -1084,7 +1124,7 @@ gnutls_x509_crl_get_extension_oid(gnutls_x509_crl_t crl, int indx,
  * Since: 2.8.0
  **/
 int
-gnutls_x509_crl_get_extension_info(gnutls_x509_crl_t crl, int indx,
+gnutls_x509_crl_get_extension_info(gnutls_x509_crl_t crl, unsigned indx,
 				   void *oid, size_t * sizeof_oid,
 				   unsigned int *critical)
 {
@@ -1156,7 +1196,7 @@ gnutls_x509_crl_get_extension_info(gnutls_x509_crl_t crl, int indx,
  * Since: 2.8.0
  **/
 int
-gnutls_x509_crl_get_extension_data(gnutls_x509_crl_t crl, int indx,
+gnutls_x509_crl_get_extension_data(gnutls_x509_crl_t crl, unsigned indx,
 				   void *data, size_t * sizeof_data)
 {
 	int result, len;
@@ -1221,7 +1261,7 @@ gnutls_x509_crl_list_import2(gnutls_x509_crl_t ** crls,
 
 	ret =
 	    gnutls_x509_crl_list_import(*crls, &init, data, format,
-					GNUTLS_X509_CRT_LIST_IMPORT_FAIL_IF_EXCEED);
+					flags | GNUTLS_X509_CRT_LIST_IMPORT_FAIL_IF_EXCEED);
 	if (ret == GNUTLS_E_SHORT_MEMORY_BUFFER) {
 		*crls =
 		    gnutls_realloc_fast(*crls,

@@ -20,10 +20,10 @@
  *
  */
 
-#include <gnutls_int.h>
-#include <gnutls_errors.h>
-#include <gnutls_cipher_int.h>
-#include <gnutls_datum.h>
+#include "gnutls_int.h"
+#include "errors.h"
+#include <cipher_int.h>
+#include <datum.h>
 #include <gnutls/crypto.h>
 #include <algorithms.h>
 #include <random.h>
@@ -419,7 +419,7 @@ void gnutls_hmac_deinit(gnutls_hmac_hd_t handle, void *digest)
  *
  * Since: 2.10.0
  **/
-int gnutls_hmac_get_len(gnutls_mac_algorithm_t algorithm)
+unsigned gnutls_hmac_get_len(gnutls_mac_algorithm_t algorithm)
 {
 	return _gnutls_mac_get_algo_len(mac_to_entry(algorithm));
 }
@@ -549,7 +549,7 @@ void gnutls_hash_deinit(gnutls_hash_hd_t handle, void *digest)
  *
  * Since: 2.10.0
  **/
-int gnutls_hash_get_len(gnutls_digest_algorithm_t algorithm)
+unsigned gnutls_hash_get_len(gnutls_digest_algorithm_t algorithm)
 {
 	return _gnutls_hash_get_algo_len(hash_to_entry(algorithm));
 }
@@ -713,7 +713,7 @@ gnutls_aead_cipher_decrypt(gnutls_aead_cipher_hd_t handle,
 		return gnutls_assert_val(ret);
 
 	/* That assumes that AEAD ciphers are stream */
-	*ptext_len = ctext_len;
+	*ptext_len = ctext_len - tag_size;
 
 	return 0;
 }
@@ -734,8 +734,7 @@ gnutls_aead_cipher_decrypt(gnutls_aead_cipher_hd_t handle,
  *
  * This function will encrypt the given data using the algorithm
  * specified by the context. The output data will contain the
- * authentication tag. This function requires that 
- * gnutls_aead_cipher_set_nonce() is called before it.
+ * authentication tag.
  *
  * Returns: Zero or a negative error code on error.
  *

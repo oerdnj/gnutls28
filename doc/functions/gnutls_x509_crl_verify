@@ -2,7 +2,7 @@
 
 
 
-@deftypefun {int} {gnutls_x509_crl_verify} (gnutls_x509_crl_t @var{crl}, const gnutls_x509_crt_t * @var{trusted_cas}, int @var{tcas_size}, unsigned int @var{flags}, unsigned int * @var{verify})
+@deftypefun {int} {gnutls_x509_crl_verify} (gnutls_x509_crl_t @var{crl}, const gnutls_x509_crt_t * @var{trusted_cas}, unsigned @var{tcas_size}, unsigned int @var{flags}, unsigned int * @var{verify})
 @var{crl}: is the crl to be verified
 
 @var{trusted_cas}: is a certificate list that is considered to be trusted one

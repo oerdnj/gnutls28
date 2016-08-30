@@ -69,25 +69,14 @@
     <keyword type="function" name="gnutls_certificate_set_x509_trust_file ()" link="gnutls-gnutls.html#gnutls-certificate-set-x509-trust-file"/>
     <keyword type="function" name="gnutls_certificate_set_x509_trust_mem ()" link="gnutls-gnutls.html#gnutls-certificate-set-x509-trust-mem"/>
     <keyword type="function" name="gnutls_certificate_type_get ()" link="gnutls-gnutls.html#gnutls-certificate-type-get"/>
-    <keyword type="function" name="gnutls_certificate_type_get_id ()" link="gnutls-gnutls.html#gnutls-certificate-type-get-id"/>
-    <keyword type="function" name="gnutls_certificate_type_get_name ()" link="gnutls-gnutls.html#gnutls-certificate-type-get-name"/>
-    <keyword type="function" name="gnutls_certificate_type_list ()" link="gnutls-gnutls.html#gnutls-certificate-type-list"/>
     <keyword type="function" name="gnutls_certificate_verification_status_print ()" link="gnutls-gnutls.html#gnutls-certificate-verification-status-print" since="3.1.4"/>
     <keyword type="function" name="gnutls_certificate_verify_peers2 ()" link="gnutls-gnutls.html#gnutls-certificate-verify-peers2"/>
     <keyword type="function" name="gnutls_certificate_verify_peers3 ()" link="gnutls-gnutls.html#gnutls-certificate-verify-peers3" since="3.1.4"/>
     <keyword type="function" name="gnutls_check_version ()" link="gnutls-gnutls.html#gnutls-check-version"/>
     <keyword type="function" name="gnutls_cipher_get ()" link="gnutls-gnutls.html#gnutls-cipher-get"/>
-    <keyword type="function" name="gnutls_cipher_get_id ()" link="gnutls-gnutls.html#gnutls-cipher-get-id"/>
-    <keyword type="function" name="gnutls_cipher_get_key_size ()" link="gnutls-gnutls.html#gnutls-cipher-get-key-size"/>
     <keyword type="function" name="gnutls_cipher_get_name ()" link="gnutls-gnutls.html#gnutls-cipher-get-name"/>
-    <keyword type="function" name="gnutls_cipher_list ()" link="gnutls-gnutls.html#gnutls-cipher-list"/>
     <keyword type="function" name="gnutls_cipher_suite_get_name ()" link="gnutls-gnutls.html#gnutls-cipher-suite-get-name"/>
-    <keyword type="function" name="gnutls_cipher_suite_info ()" link="gnutls-gnutls.html#gnutls-cipher-suite-info"/>
     <keyword type="function" name="gnutls_compression_get ()" link="gnutls-gnutls.html#gnutls-compression-get"/>
-    <keyword type="function" name="gnutls_compression_get_id ()" link="gnutls-gnutls.html#gnutls-compression-get-id"/>
-    <keyword type="function" name="gnutls_compression_get_name ()" link="gnutls-gnutls.html#gnutls-compression-get-name"/>
-    <keyword type="function" name="gnutls_compression_list ()" link="gnutls-gnutls.html#gnutls-compression-list"/>
-    <keyword type="function" name="gnutls_credentials_clear ()" link="gnutls-gnutls.html#gnutls-credentials-clear"/>
     <keyword type="function" name="gnutls_credentials_set ()" link="gnutls-gnutls.html#gnutls-credentials-set"/>
     <keyword type="function" name="gnutls_db_check_entry ()" link="gnutls-gnutls.html#gnutls-db-check-entry"/>
     <keyword type="function" name="gnutls_db_get_ptr ()" link="gnutls-gnutls.html#gnutls-db-get-ptr"/>
@@ -116,13 +105,8 @@
     <keyword type="function" name="gnutls_dh_params_import_raw ()" link="gnutls-gnutls.html#gnutls-dh-params-import-raw"/>
     <keyword type="function" name="gnutls_dh_params_init ()" link="gnutls-gnutls.html#gnutls-dh-params-init"/>
     <keyword type="function" name="gnutls_dh_set_prime_bits ()" link="gnutls-gnutls.html#gnutls-dh-set-prime-bits"/>
-    <keyword type="function" name="gnutls_ecc_curve_get ()" link="gnutls-gnutls.html#gnutls-ecc-curve-get" since="3.0"/>
-    <keyword type="function" name="gnutls_ecc_curve_get_name ()" link="gnutls-gnutls.html#gnutls-ecc-curve-get-name" since="3.0"/>
-    <keyword type="function" name="gnutls_ecc_curve_get_size ()" link="gnutls-gnutls.html#gnutls-ecc-curve-get-size" since="3.0"/>
-    <keyword type="function" name="gnutls_ecc_curve_list ()" link="gnutls-gnutls.html#gnutls-ecc-curve-list"/>
     <keyword type="function" name="gnutls_errno_func ()" link="gnutls-gnutls.html#gnutls-errno-func"/>
     <keyword type="function" name="gnutls_error_is_fatal ()" link="gnutls-gnutls.html#gnutls-error-is-fatal"/>
-    <keyword type="function" name="gnutls_error_to_alert ()" link="gnutls-gnutls.html#gnutls-error-to-alert"/>
     <keyword type="function" name="gnutls_fingerprint ()" link="gnutls-gnutls.html#gnutls-fingerprint"/>
     <keyword type="function" name="gnutls_free_function ()" link="gnutls-gnutls.html#gnutls-free-function"/>
     <keyword type="function" name="gnutls_global_deinit ()" link="gnutls-gnutls.html#gnutls-global-deinit"/>
@@ -136,10 +120,8 @@
     <keyword type="function" name="gnutls_handshake ()" link="gnutls-gnutls.html#gnutls-handshake"/>
     <keyword type="function" name="gnutls_handshake_get_last_in ()" link="gnutls-gnutls.html#gnutls-handshake-get-last-in"/>
     <keyword type="function" name="gnutls_handshake_get_last_out ()" link="gnutls-gnutls.html#gnutls-handshake-get-last-out"/>
-    <keyword type="function" name="gnutls_handshake_post_client_hello_func ()" link="gnutls-gnutls.html#gnutls-handshake-post-client-hello-func"/>
     <keyword type="function" name="gnutls_handshake_set_max_packet_length ()" link="gnutls-gnutls.html#gnutls-handshake-set-max-packet-length"/>
     <keyword type="function" name="gnutls_handshake_set_post_client_hello_function ()" link="gnutls-gnutls.html#gnutls-handshake-set-post-client-hello-function"/>
-    <keyword type="function" name="gnutls_handshake_set_private_extensions ()" link="gnutls-gnutls.html#gnutls-handshake-set-private-extensions"/>
     <keyword type="function" name="gnutls_handshake_set_timeout ()" link="gnutls-gnutls.html#gnutls-handshake-set-timeout" since="3.1.0"/>
     <keyword type="function" name="gnutls_heartbeat_allowed ()" link="gnutls-gnutls.html#gnutls-heartbeat-allowed" since="3.1.2"/>
     <keyword type="function" name="gnutls_heartbeat_enable ()" link="gnutls-gnutls.html#gnutls-heartbeat-enable" since="3.1.2"/>
@@ -154,19 +136,12 @@
     <keyword type="function" name="gnutls_is_secure_function ()" link="gnutls-gnutls.html#gnutls-is-secure-function"/>
     <keyword type="function" name="gnutls_key_generate ()" link="gnutls-gnutls.html#gnutls-key-generate" since="3.0"/>
     <keyword type="function" name="gnutls_kx_get ()" link="gnutls-gnutls.html#gnutls-kx-get"/>
-    <keyword type="function" name="gnutls_kx_get_id ()" link="gnutls-gnutls.html#gnutls-kx-get-id"/>
-    <keyword type="function" name="gnutls_kx_get_name ()" link="gnutls-gnutls.html#gnutls-kx-get-name"/>
-    <keyword type="function" name="gnutls_kx_list ()" link="gnutls-gnutls.html#gnutls-kx-list"/>
     <keyword type="function" name="gnutls_load_file ()" link="gnutls-gnutls.html#gnutls-load-file"/>
     <keyword type="function" name="gnutls_log_func ()" link="gnutls-gnutls.html#gnutls-log-func"/>
     <keyword type="function" name="gnutls_mac_get ()" link="gnutls-gnutls.html#gnutls-mac-get"/>
-    <keyword type="function" name="gnutls_mac_get_id ()" link="gnutls-gnutls.html#gnutls-mac-get-id"/>
-    <keyword type="function" name="gnutls_mac_get_key_size ()" link="gnutls-gnutls.html#gnutls-mac-get-key-size"/>
-    <keyword type="function" name="gnutls_mac_get_name ()" link="gnutls-gnutls.html#gnutls-mac-get-name"/>
-    <keyword type="function" name="gnutls_mac_list ()" link="gnutls-gnutls.html#gnutls-mac-list"/>
     <keyword type="function" name="gnutls_ocsp_status_request_enable_client ()" link="gnutls-gnutls.html#gnutls-ocsp-status-request-enable-client" since="3.1.3"/>
     <keyword type="function" name="gnutls_ocsp_status_request_get ()" link="gnutls-gnutls.html#gnutls-ocsp-status-request-get" since="3.1.3"/>
-    <keyword type="function" name="gnutls_ocsp_status_request_is_checked ()" link="gnutls-gnutls.html#gnutls-ocsp-status-request-is-checked"/>
+    <keyword type="function" name="gnutls_ocsp_status_request_is_checked ()" link="gnutls-gnutls.html#gnutls-ocsp-status-request-is-checked" since="3.1.4"/>
     <keyword type="function" name="gnutls_openpgp_send_cert ()" link="gnutls-gnutls.html#gnutls-openpgp-send-cert"/>
     <keyword type="function" name="gnutls_pem_base64_decode ()" link="gnutls-gnutls.html#gnutls-pem-base64-decode"/>
     <keyword type="function" name="gnutls_pem_base64_encode ()" link="gnutls-gnutls.html#gnutls-pem-base64-encode"/>
@@ -174,10 +149,6 @@
     <keyword type="function" name="gnutls_pin_callback_t ()" link="gnutls-gnutls.html#gnutls-pin-callback-t" since="2.12.0"/>
     <keyword type="function" name="gnutls_pk_algorithm_get_name ()" link="gnutls-gnutls.html#gnutls-pk-algorithm-get-name"/>
     <keyword type="function" name="gnutls_pk_bits_to_sec_param ()" link="gnutls-gnutls.html#gnutls-pk-bits-to-sec-param" since="2.12.0"/>
-    <keyword type="function" name="gnutls_pk_get_id ()" link="gnutls-gnutls.html#gnutls-pk-get-id" since="2.6.0"/>
-    <keyword type="function" name="gnutls_pk_get_name ()" link="gnutls-gnutls.html#gnutls-pk-get-name" since="2.6.0"/>
-    <keyword type="function" name="gnutls_pk_list ()" link="gnutls-gnutls.html#gnutls-pk-list" since="2.6.0"/>
-    <keyword type="function" name="gnutls_pk_to_sign ()" link="gnutls-gnutls.html#gnutls-pk-to-sign"/>
     <keyword type="function" name="gnutls_prf ()" link="gnutls-gnutls.html#gnutls-prf"/>
     <keyword type="function" name="gnutls_prf_raw ()" link="gnutls-gnutls.html#gnutls-prf-raw"/>
     <keyword type="function" name="gnutls_priority_certificate_type_list ()" link="gnutls-gnutls.html#gnutls-priority-certificate-type-list" since="3.0"/>
@@ -190,10 +161,7 @@
     <keyword type="function" name="gnutls_priority_set ()" link="gnutls-gnutls.html#gnutls-priority-set"/>
     <keyword type="function" name="gnutls_priority_set_direct ()" link="gnutls-gnutls.html#gnutls-priority-set-direct"/>
     <keyword type="function" name="gnutls_priority_sign_list ()" link="gnutls-gnutls.html#gnutls-priority-sign-list" since="3.0"/>
-    <keyword type="function" name="gnutls_protocol_get_id ()" link="gnutls-gnutls.html#gnutls-protocol-get-id"/>
     <keyword type="function" name="gnutls_protocol_get_name ()" link="gnutls-gnutls.html#gnutls-protocol-get-name"/>
-    <keyword type="function" name="gnutls_protocol_get_version ()" link="gnutls-gnutls.html#gnutls-protocol-get-version"/>
-    <keyword type="function" name="gnutls_protocol_list ()" link="gnutls-gnutls.html#gnutls-protocol-list"/>
     <keyword type="function" name="gnutls_psk_allocate_client_credentials ()" link="gnutls-gnutls.html#gnutls-psk-allocate-client-credentials"/>
     <keyword type="function" name="gnutls_psk_allocate_server_credentials ()" link="gnutls-gnutls.html#gnutls-psk-allocate-server-credentials"/>
     <keyword type="function" name="gnutls_psk_client_get_hint ()" link="gnutls-gnutls.html#gnutls-psk-client-get-hint" since="2.4.0"/>
@@ -228,7 +196,6 @@
     <keyword type="function" name="gnutls_server_name_get ()" link="gnutls-gnutls.html#gnutls-server-name-get"/>
     <keyword type="function" name="gnutls_server_name_set ()" link="gnutls-gnutls.html#gnutls-server-name-set"/>
     <keyword type="function" name="gnutls_session_channel_binding ()" link="gnutls-gnutls.html#gnutls-session-channel-binding" since="2.12.0"/>
-    <keyword type="function" name="gnutls_session_enable_compatibility_mode ()" link="gnutls-gnutls.html#gnutls-session-enable-compatibility-mode"/>
     <keyword type="function" name="gnutls_session_get_data ()" link="gnutls-gnutls.html#gnutls-session-get-data"/>
     <keyword type="function" name="gnutls_session_get_data2 ()" link="gnutls-gnutls.html#gnutls-session-get-data2"/>
     <keyword type="function" name="gnutls_session_get_id ()" link="gnutls-gnutls.html#gnutls-session-get-id"/>
@@ -237,7 +204,6 @@
     <keyword type="function" name="gnutls_session_get_random ()" link="gnutls-gnutls.html#gnutls-session-get-random" since="3.0"/>
     <keyword type="function" name="gnutls_session_is_resumed ()" link="gnutls-gnutls.html#gnutls-session-is-resumed"/>
     <keyword type="function" name="gnutls_session_resumption_requested ()" link="gnutls-gnutls.html#gnutls-session-resumption-requested"/>
-    <keyword type="function" name="gnutls_session_set_data ()" link="gnutls-gnutls.html#gnutls-session-set-data"/>
     <keyword type="function" name="gnutls_session_set_premaster ()" link="gnutls-gnutls.html#gnutls-session-set-premaster"/>
     <keyword type="function" name="gnutls_session_set_ptr ()" link="gnutls-gnutls.html#gnutls-session-set-ptr"/>
     <keyword type="function" name="gnutls_session_ticket_enable_client ()" link="gnutls-gnutls.html#gnutls-session-ticket-enable-client" since="2.10.0"/>
@@ -246,12 +212,6 @@
     <keyword type="function" name="gnutls_set_default_priority ()" link="gnutls-gnutls.html#gnutls-set-default-priority"/>
     <keyword type="function" name="gnutls_sign_algorithm_get ()" link="gnutls-gnutls.html#gnutls-sign-algorithm-get" since="3.1.1"/>
     <keyword type="function" name="gnutls_sign_algorithm_get_requested ()" link="gnutls-gnutls.html#gnutls-sign-algorithm-get-requested" since="2.10.0"/>
-    <keyword type="function" name="gnutls_sign_get_hash_algorithm ()" link="gnutls-gnutls.html#gnutls-sign-get-hash-algorithm" since="3.1.1"/>
-    <keyword type="function" name="gnutls_sign_get_id ()" link="gnutls-gnutls.html#gnutls-sign-get-id"/>
-    <keyword type="function" name="gnutls_sign_get_name ()" link="gnutls-gnutls.html#gnutls-sign-get-name"/>
-    <keyword type="function" name="gnutls_sign_get_pk_algorithm ()" link="gnutls-gnutls.html#gnutls-sign-get-pk-algorithm" since="3.1.1"/>
-    <keyword type="function" name="gnutls_sign_is_secure ()" link="gnutls-gnutls.html#gnutls-sign-is-secure"/>
-    <keyword type="function" name="gnutls_sign_list ()" link="gnutls-gnutls.html#gnutls-sign-list"/>
     <keyword type="function" name="gnutls_srp_allocate_client_credentials ()" link="gnutls-gnutls.html#gnutls-srp-allocate-client-credentials"/>
     <keyword type="function" name="gnutls_srp_allocate_server_credentials ()" link="gnutls-gnutls.html#gnutls-srp-allocate-server-credentials"/>
     <keyword type="function" name="gnutls_srp_base64_decode ()" link="gnutls-gnutls.html#gnutls-srp-base64-decode"/>
@@ -276,7 +236,6 @@
     <keyword type="function" name="gnutls_store_commitment ()" link="gnutls-gnutls.html#gnutls-store-commitment" since="3.0"/>
     <keyword type="function" name="gnutls_store_pubkey ()" link="gnutls-gnutls.html#gnutls-store-pubkey" since="3.0.13"/>
     <keyword type="function" name="gnutls_strerror ()" link="gnutls-gnutls.html#gnutls-strerror"/>
-    <keyword type="function" name="gnutls_strerror_name ()" link="gnutls-gnutls.html#gnutls-strerror-name" since="2.6.0"/>
     <keyword type="function" name="gnutls_tdb_deinit ()" link="gnutls-gnutls.html#gnutls-tdb-deinit"/>
     <keyword type="function" name="gnutls_tdb_init ()" link="gnutls-gnutls.html#gnutls-tdb-init"/>
     <keyword type="function" name="gnutls_tdb_set_store_commitment_func ()" link="gnutls-gnutls.html#gnutls-tdb-set-store-commitment-func"/>
@@ -516,6 +475,7 @@
     <keyword type="enum" name="enum gnutls_digest_algorithm_t" link="gnutls-gnutls.html#gnutls-digest-algorithm-t"/>
     <keyword type="enum" name="enum gnutls_ecc_curve_t" link="gnutls-gnutls.html#gnutls-ecc-curve-t"/>
     <keyword type="enum" name="enum gnutls_handshake_description_t" link="gnutls-gnutls.html#gnutls-handshake-description-t"/>
+    <keyword type="macro" name="gnutls_handshake_post_client_hello_func" link="gnutls-gnutls.html#gnutls-handshake-post-client-hello-func"/>
     <keyword type="enum" name="enum gnutls_kx_algorithm_t" link="gnutls-gnutls.html#gnutls-kx-algorithm-t"/>
     <keyword type="enum" name="enum gnutls_mac_algorithm_t" link="gnutls-gnutls.html#gnutls-mac-algorithm-t"/>
     <keyword type="struct" name="gnutls_openpgp_crt_int" link="gnutls-gnutls.html#gnutls-openpgp-crt-int"/>
@@ -544,7 +504,6 @@
     <keyword type="enum" name="enum gnutls_server_name_type_t" link="gnutls-gnutls.html#gnutls-server-name-type-t"/>
     <keyword type="struct" name="struct gnutls_session_int" link="gnutls-gnutls.html#gnutls-session-int"/>
     <keyword type="typedef" name="gnutls_session_t" link="gnutls-gnutls.html#gnutls-session-t"/>
-    <keyword type="macro" name="gnutls_sign_algorithm_get_name" link="gnutls-gnutls.html#gnutls-sign-algorithm-get-name"/>
     <keyword type="enum" name="enum gnutls_sign_algorithm_t" link="gnutls-gnutls.html#gnutls-sign-algorithm-t"/>
     <keyword type="macro" name="gnutls_srp_base64_decode_alloc" link="gnutls-gnutls.html#gnutls-srp-base64-decode-alloc"/>
     <keyword type="macro" name="gnutls_srp_base64_encode_alloc" link="gnutls-gnutls.html#gnutls-srp-base64-encode-alloc"/>
@@ -1008,15 +967,12 @@
     <keyword type="function" name="gnutls_cipher_tag ()" link="gnutls-crypto.html#gnutls-cipher-tag" since="3.0"/>
     <keyword type="function" name="gnutls_hash ()" link="gnutls-crypto.html#gnutls-hash" since="2.10.0"/>
     <keyword type="function" name="gnutls_hash_deinit ()" link="gnutls-crypto.html#gnutls-hash-deinit" since="2.10.0"/>
-    <keyword type="function" name="gnutls_hash_fast ()" link="gnutls-crypto.html#gnutls-hash-fast" since="2.10.0"/>
     <keyword type="function" name="gnutls_hash_get_len ()" link="gnutls-crypto.html#gnutls-hash-get-len" since="2.10.0"/>
     <keyword type="function" name="gnutls_hash_init ()" link="gnutls-crypto.html#gnutls-hash-init" since="2.10.0"/>
     <keyword type="function" name="gnutls_hash_output ()" link="gnutls-crypto.html#gnutls-hash-output" since="2.10.0"/>
     <keyword type="function" name="gnutls_hmac ()" link="gnutls-crypto.html#gnutls-hmac" since="2.10.0"/>
     <keyword type="function" name="gnutls_hmac_deinit ()" link="gnutls-crypto.html#gnutls-hmac-deinit" since="2.10.0"/>
-    <keyword type="function" name="gnutls_hmac_fast ()" link="gnutls-crypto.html#gnutls-hmac-fast" since="2.10.0"/>
     <keyword type="function" name="gnutls_hmac_get_len ()" link="gnutls-crypto.html#gnutls-hmac-get-len" since="2.10.0"/>
-    <keyword type="function" name="gnutls_hmac_init ()" link="gnutls-crypto.html#gnutls-hmac-init" since="2.10.0"/>
     <keyword type="function" name="gnutls_hmac_output ()" link="gnutls-crypto.html#gnutls-hmac-output" since="2.10.0"/>
     <keyword type="function" name="gnutls_rnd ()" link="gnutls-crypto.html#gnutls-rnd" since="2.12.0"/>
     <keyword type="typedef" name="gnutls_cipher_hd_t" link="gnutls-crypto.html#gnutls-cipher-hd-t"/>
@@ -1223,6 +1179,8 @@
     <keyword type="constant" name="GNUTLS_CERT_SIGNER_CONSTRAINTS_FAILURE" link="gnutls-gnutls.html#GNUTLS-CERT-SIGNER-CONSTRAINTS-FAILURE:CAPS"/>
     <keyword type="constant" name="GNUTLS_CERT_MISMATCH" link="gnutls-gnutls.html#GNUTLS-CERT-MISMATCH:CAPS"/>
     <keyword type="constant" name="GNUTLS_CERT_PURPOSE_MISMATCH" link="gnutls-gnutls.html#GNUTLS-CERT-PURPOSE-MISMATCH:CAPS"/>
+    <keyword type="constant" name="GNUTLS_CERT_MISSING_OCSP_STATUS" link="gnutls-gnutls.html#GNUTLS-CERT-MISSING-OCSP-STATUS:CAPS"/>
+    <keyword type="constant" name="GNUTLS_CERT_INVALID_OCSP_STATUS" link="gnutls-gnutls.html#GNUTLS-CERT-INVALID-OCSP-STATUS:CAPS"/>
     <keyword type="constant" name="GNUTLS_CRT_UNKNOWN" link="gnutls-gnutls.html#GNUTLS-CRT-UNKNOWN:CAPS"/>
     <keyword type="constant" name="GNUTLS_CRT_X509" link="gnutls-gnutls.html#GNUTLS-CRT-X509:CAPS"/>
     <keyword type="constant" name="GNUTLS_CRT_OPENPGP" link="gnutls-gnutls.html#GNUTLS-CRT-OPENPGP:CAPS"/>
@@ -1282,12 +1240,17 @@
     <keyword type="constant" name="GNUTLS_DIG_SHA384" link="gnutls-gnutls.html#GNUTLS-DIG-SHA384:CAPS"/>
     <keyword type="constant" name="GNUTLS_DIG_SHA512" link="gnutls-gnutls.html#GNUTLS-DIG-SHA512:CAPS"/>
     <keyword type="constant" name="GNUTLS_DIG_SHA224" link="gnutls-gnutls.html#GNUTLS-DIG-SHA224:CAPS"/>
+    <keyword type="constant" name="GNUTLS_DIG_SHA3_224" link="gnutls-gnutls.html#GNUTLS-DIG-SHA3-224:CAPS"/>
+    <keyword type="constant" name="GNUTLS_DIG_SHA3_256" link="gnutls-gnutls.html#GNUTLS-DIG-SHA3-256:CAPS"/>
+    <keyword type="constant" name="GNUTLS_DIG_SHA3_384" link="gnutls-gnutls.html#GNUTLS-DIG-SHA3-384:CAPS"/>
+    <keyword type="constant" name="GNUTLS_DIG_SHA3_512" link="gnutls-gnutls.html#GNUTLS-DIG-SHA3-512:CAPS"/>
     <keyword type="constant" name="GNUTLS_ECC_CURVE_INVALID" link="gnutls-gnutls.html#GNUTLS-ECC-CURVE-INVALID:CAPS"/>
     <keyword type="constant" name="GNUTLS_ECC_CURVE_SECP224R1" link="gnutls-gnutls.html#GNUTLS-ECC-CURVE-SECP224R1:CAPS"/>
     <keyword type="constant" name="GNUTLS_ECC_CURVE_SECP256R1" link="gnutls-gnutls.html#GNUTLS-ECC-CURVE-SECP256R1:CAPS"/>
     <keyword type="constant" name="GNUTLS_ECC_CURVE_SECP384R1" link="gnutls-gnutls.html#GNUTLS-ECC-CURVE-SECP384R1:CAPS"/>
     <keyword type="constant" name="GNUTLS_ECC_CURVE_SECP521R1" link="gnutls-gnutls.html#GNUTLS-ECC-CURVE-SECP521R1:CAPS"/>
     <keyword type="constant" name="GNUTLS_ECC_CURVE_SECP192R1" link="gnutls-gnutls.html#GNUTLS-ECC-CURVE-SECP192R1:CAPS"/>
+    <keyword type="constant" name="GNUTLS_ECC_CURVE_X25519" link="gnutls-gnutls.html#GNUTLS-ECC-CURVE-X25519:CAPS"/>
     <keyword type="constant" name="GNUTLS_HANDSHAKE_HELLO_REQUEST" link="gnutls-gnutls.html#GNUTLS-HANDSHAKE-HELLO-REQUEST:CAPS"/>
     <keyword type="constant" name="GNUTLS_HANDSHAKE_CLIENT_HELLO" link="gnutls-gnutls.html#GNUTLS-HANDSHAKE-CLIENT-HELLO:CAPS"/>
     <keyword type="constant" name="GNUTLS_HANDSHAKE_SERVER_HELLO" link="gnutls-gnutls.html#GNUTLS-HANDSHAKE-SERVER-HELLO:CAPS"/>
@@ -1330,6 +1293,10 @@
     <keyword type="constant" name="GNUTLS_MAC_SHA384" link="gnutls-gnutls.html#GNUTLS-MAC-SHA384:CAPS"/>
     <keyword type="constant" name="GNUTLS_MAC_SHA512" link="gnutls-gnutls.html#GNUTLS-MAC-SHA512:CAPS"/>
     <keyword type="constant" name="GNUTLS_MAC_SHA224" link="gnutls-gnutls.html#GNUTLS-MAC-SHA224:CAPS"/>
+    <keyword type="constant" name="GNUTLS_MAC_SHA3_224" link="gnutls-gnutls.html#GNUTLS-MAC-SHA3-224:CAPS"/>
+    <keyword type="constant" name="GNUTLS_MAC_SHA3_256" link="gnutls-gnutls.html#GNUTLS-MAC-SHA3-256:CAPS"/>
+    <keyword type="constant" name="GNUTLS_MAC_SHA3_384" link="gnutls-gnutls.html#GNUTLS-MAC-SHA3-384:CAPS"/>
+    <keyword type="constant" name="GNUTLS_MAC_SHA3_512" link="gnutls-gnutls.html#GNUTLS-MAC-SHA3-512:CAPS"/>
     <keyword type="constant" name="GNUTLS_MAC_AEAD" link="gnutls-gnutls.html#GNUTLS-MAC-AEAD:CAPS"/>
     <keyword type="constant" name="GNUTLS_MAC_UMAC_96" link="gnutls-gnutls.html#GNUTLS-MAC-UMAC-96:CAPS"/>
     <keyword type="constant" name="GNUTLS_MAC_UMAC_128" link="gnutls-gnutls.html#GNUTLS-MAC-UMAC-128:CAPS"/>
@@ -1348,7 +1315,8 @@
     <keyword type="constant" name="GNUTLS_PK_RSA" link="gnutls-gnutls.html#GNUTLS-PK-RSA:CAPS"/>
     <keyword type="constant" name="GNUTLS_PK_DSA" link="gnutls-gnutls.html#GNUTLS-PK-DSA:CAPS"/>
     <keyword type="constant" name="GNUTLS_PK_DH" link="gnutls-gnutls.html#GNUTLS-PK-DH:CAPS"/>
-    <keyword type="constant" name="GNUTLS_PK_EC" link="gnutls-gnutls.html#GNUTLS-PK-EC:CAPS"/>
+    <keyword type="constant" name="GNUTLS_PK_ECDSA" link="gnutls-gnutls.html#GNUTLS-PK-ECDSA:CAPS"/>
+    <keyword type="constant" name="GNUTLS_PK_ECDHX" link="gnutls-gnutls.html#GNUTLS-PK-ECDHX:CAPS"/>
     <keyword type="constant" name="GNUTLS_PRIVKEY_X509" link="gnutls-gnutls.html#GNUTLS-PRIVKEY-X509:CAPS"/>
     <keyword type="constant" name="GNUTLS_PRIVKEY_OPENPGP" link="gnutls-gnutls.html#GNUTLS-PRIVKEY-OPENPGP:CAPS"/>
     <keyword type="constant" name="GNUTLS_PRIVKEY_PKCS11" link="gnutls-gnutls.html#GNUTLS-PRIVKEY-PKCS11:CAPS"/>
@@ -1401,6 +1369,18 @@
     <keyword type="constant" name="GNUTLS_SIGN_ECDSA_SHA512" link="gnutls-gnutls.html#GNUTLS-SIGN-ECDSA-SHA512:CAPS"/>
     <keyword type="constant" name="GNUTLS_SIGN_DSA_SHA384" link="gnutls-gnutls.html#GNUTLS-SIGN-DSA-SHA384:CAPS"/>
     <keyword type="constant" name="GNUTLS_SIGN_DSA_SHA512" link="gnutls-gnutls.html#GNUTLS-SIGN-DSA-SHA512:CAPS"/>
+    <keyword type="constant" name="GNUTLS_SIGN_ECDSA_SHA3_224" link="gnutls-gnutls.html#GNUTLS-SIGN-ECDSA-SHA3-224:CAPS"/>
+    <keyword type="constant" name="GNUTLS_SIGN_ECDSA_SHA3_256" link="gnutls-gnutls.html#GNUTLS-SIGN-ECDSA-SHA3-256:CAPS"/>
+    <keyword type="constant" name="GNUTLS_SIGN_ECDSA_SHA3_384" link="gnutls-gnutls.html#GNUTLS-SIGN-ECDSA-SHA3-384:CAPS"/>
+    <keyword type="constant" name="GNUTLS_SIGN_ECDSA_SHA3_512" link="gnutls-gnutls.html#GNUTLS-SIGN-ECDSA-SHA3-512:CAPS"/>
+    <keyword type="constant" name="GNUTLS_SIGN_DSA_SHA3_224" link="gnutls-gnutls.html#GNUTLS-SIGN-DSA-SHA3-224:CAPS"/>
+    <keyword type="constant" name="GNUTLS_SIGN_DSA_SHA3_256" link="gnutls-gnutls.html#GNUTLS-SIGN-DSA-SHA3-256:CAPS"/>
+    <keyword type="constant" name="GNUTLS_SIGN_DSA_SHA3_384" link="gnutls-gnutls.html#GNUTLS-SIGN-DSA-SHA3-384:CAPS"/>
+    <keyword type="constant" name="GNUTLS_SIGN_DSA_SHA3_512" link="gnutls-gnutls.html#GNUTLS-SIGN-DSA-SHA3-512:CAPS"/>
+    <keyword type="constant" name="GNUTLS_SIGN_RSA_SHA3_224" link="gnutls-gnutls.html#GNUTLS-SIGN-RSA-SHA3-224:CAPS"/>
+    <keyword type="constant" name="GNUTLS_SIGN_RSA_SHA3_256" link="gnutls-gnutls.html#GNUTLS-SIGN-RSA-SHA3-256:CAPS"/>
+    <keyword type="constant" name="GNUTLS_SIGN_RSA_SHA3_384" link="gnutls-gnutls.html#GNUTLS-SIGN-RSA-SHA3-384:CAPS"/>
+    <keyword type="constant" name="GNUTLS_SIGN_RSA_SHA3_512" link="gnutls-gnutls.html#GNUTLS-SIGN-RSA-SHA3-512:CAPS"/>
     <keyword type="constant" name="GNUTLS_SRTP_AES128_CM_HMAC_SHA1_80" link="gnutls-gnutls.html#GNUTLS-SRTP-AES128-CM-HMAC-SHA1-80:CAPS"/>
     <keyword type="constant" name="GNUTLS_SRTP_AES128_CM_HMAC_SHA1_32" link="gnutls-gnutls.html#GNUTLS-SRTP-AES128-CM-HMAC-SHA1-32:CAPS"/>
     <keyword type="constant" name="GNUTLS_SRTP_NULL_HMAC_SHA1_80" link="gnutls-gnutls.html#GNUTLS-SRTP-NULL-HMAC-SHA1-80:CAPS"/>
@@ -1414,7 +1394,9 @@
     <keyword type="constant" name="GNUTLS_SAN_IPADDRESS" link="gnutls-gnutls.html#GNUTLS-SAN-IPADDRESS:CAPS"/>
     <keyword type="constant" name="GNUTLS_SAN_OTHERNAME" link="gnutls-gnutls.html#GNUTLS-SAN-OTHERNAME:CAPS"/>
     <keyword type="constant" name="GNUTLS_SAN_DN" link="gnutls-gnutls.html#GNUTLS-SAN-DN:CAPS"/>
+    <keyword type="constant" name="GNUTLS_SAN_MAX" link="gnutls-gnutls.html#GNUTLS-SAN-MAX:CAPS"/>
     <keyword type="constant" name="GNUTLS_SAN_OTHERNAME_XMPP" link="gnutls-gnutls.html#GNUTLS-SAN-OTHERNAME-XMPP:CAPS"/>
+    <keyword type="constant" name="GNUTLS_SAN_OTHERNAME_KRB5PRINCIPAL" link="gnutls-gnutls.html#GNUTLS-SAN-OTHERNAME-KRB5PRINCIPAL:CAPS"/>
     <keyword type="constant" name="GNUTLS_X509_CRT_LIST_IMPORT_FAIL_IF_EXCEED" link="gnutls-x509.html#GNUTLS-X509-CRT-LIST-IMPORT-FAIL-IF-EXCEED:CAPS"/>
     <keyword type="constant" name="GNUTLS_X509_CRT_LIST_FAIL_IF_UNSORTED" link="gnutls-x509.html#GNUTLS-X509-CRT-LIST-FAIL-IF-UNSORTED:CAPS"/>
     <keyword type="constant" name="GNUTLS_X509_CRT_LIST_SORT" link="gnutls-x509.html#GNUTLS-X509-CRT-LIST-SORT:CAPS"/>

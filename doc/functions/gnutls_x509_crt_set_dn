@@ -10,7 +10,8 @@
 @var{err}: indicates the error position (if any)
 
 This function will set the DN on the provided certificate.
-The input string should be plain ASCII or UTF-8 encoded.
+The input string should be plain ASCII or UTF-8 encoded. On
+DN parsing error @code{GNUTLS_E_PARSING_ERROR}  is returned.
 
 @strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (0) is returned, otherwise a
 negative error value.

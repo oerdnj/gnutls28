@@ -113,7 +113,6 @@ pkcs12
 </para>
 
 @element: 
-@bag_elements: 
 
 <!-- ##### FUNCTION gnutls_pkcs12_bag_set_crl ##### -->
 <para>

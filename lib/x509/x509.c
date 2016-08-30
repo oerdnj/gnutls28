@@ -1,5 +1,6 @@
 /*
- * Copyright (C) 2003-2014 Free Software Foundation, Inc.
+ * Copyright (C) 2003-2016 Free Software Foundation, Inc.
+ *
  * Authors: Nikos Mavrogiannopoulos, Simon Josefsson, Howard Chu
  *
  * This file is part of GnuTLS.
@@ -22,17 +23,17 @@
 /* Functions on X.509 Certificate parsing
  */
 
-#include <gnutls_int.h>
-#include <gnutls_datum.h>
-#include <gnutls_global.h>
-#include <gnutls_errors.h>
+#include "gnutls_int.h"
+#include <datum.h>
+#include <global.h>
+#include "errors.h"
 #include <common.h>
 #include <gnutls/x509-ext.h>
-#include <gnutls_x509.h>
+#include <x509.h>
 #include <x509_b64.h>
 #include <x509_int.h>
 #include <libtasn1.h>
-#include <gnutls_pk.h>
+#include <pk.h>
 #include <pkcs11_int.h>
 #include "urls.h"
 #include "system-keys.h"
@@ -41,8 +42,10 @@ static int crt_reinit(gnutls_x509_crt_t crt)
 {
 	int result;
 
+	_gnutls_free_datum(&crt->der);
 	crt->raw_dn.size = 0;
 	crt->raw_issuer_dn.size = 0;
+	crt->raw_spki.size = 0;
 
 	asn1_delete_structure(&crt->cert);
 
@@ -56,6 +59,112 @@ static int crt_reinit(gnutls_x509_crt_t crt)
 	}
 
 	return 0;
+}
+
+/**
+ * gnutls_x509_crt_equals - This function compares two gnutls_x509_crt_t certificates
+ * @cert1: The first certificate
+ * @cert2: The second certificate
+ *
+ * This function will compare two X.509 certificate structures.
+ *
+ * Returns: On equality non-zero is returned, otherwise zero.
+ *
+ * Since: 3.5.0
+ **/
+unsigned gnutls_x509_crt_equals(gnutls_x509_crt_t cert1,
+			        gnutls_x509_crt_t cert2)
+{
+	int ret;
+	bool result;
+
+	if (cert1->modified == 0 && cert2->modified == 0 &&
+	    cert1->raw_dn.size > 0 && cert2->raw_dn.size > 0) {
+		ret = _gnutls_is_same_dn(cert1, cert2);
+		if (ret == 0)
+			return 0;
+	}
+
+	if (cert1->der.size == 0 || cert2->der.size == 0 ||
+	    cert1->modified != 0 || cert2->modified != 0) {
+		gnutls_datum_t tmp1, tmp2;
+
+		/* on uninitialized or modified certificates, we have to re-encode */
+		ret =
+		    gnutls_x509_crt_export2(cert1, GNUTLS_X509_FMT_DER, &tmp1);
+		if (ret < 0)
+			return gnutls_assert_val(0);
+
+		ret =
+		    gnutls_x509_crt_export2(cert2, GNUTLS_X509_FMT_DER, &tmp2);
+		if (ret < 0) {
+			gnutls_free(tmp1.data);
+			return gnutls_assert_val(0);
+		}
+
+		if ((tmp1.size == tmp2.size) &&
+		    (memcmp(tmp1.data, tmp2.data, tmp1.size) == 0))
+			result = 1;
+		else
+			result = 0;
+
+		gnutls_free(tmp1.data);
+		gnutls_free(tmp2.data);
+	} else {
+		if ((cert1->der.size == cert2->der.size) &&
+		    (memcmp(cert1->der.data, cert2->der.data, cert1->der.size) == 0))
+			result = 1;
+		else
+			result = 0;
+	}
+
+	return result;
+}
+
+/**
+ * gnutls_x509_crt_equals2 - This function compares a gnutls_x509_crt_t cert with DER data
+ * @cert1: The first certificate
+ * @der: A DER encoded certificate
+ *
+ * This function will compare an X.509 certificate structures, with DER
+ * encoded certificate data.
+ *
+ * Returns: On equality non-zero is returned, otherwise zero.
+ *
+ * Since: 3.5.0
+ **/
+unsigned
+gnutls_x509_crt_equals2(gnutls_x509_crt_t cert1,
+			gnutls_datum_t * der)
+{
+	bool result;
+
+	if (cert1->der.size == 0 || cert1->modified) {
+		gnutls_datum_t tmp1;
+		int ret;
+
+		/* on uninitialized or modified certificates, we have to re-encode */
+		ret =
+		    gnutls_x509_crt_export2(cert1, GNUTLS_X509_FMT_DER, &tmp1);
+		if (ret < 0)
+			return gnutls_assert_val(0);
+
+		if ((tmp1.size == der->size) &&
+		    (memcmp(tmp1.data, der->data, tmp1.size) == 0))
+			result = 1;
+		else
+			result = 0;
+
+		gnutls_free(tmp1.data);
+	} else {
+		if ((cert1->der.size == der->size) &&
+		    (memcmp(cert1->der.data, der->data, cert1->der.size) == 0))
+			result = 1;
+		else
+			result = 0;
+	}
+
+	return result;
 }
 
 /**
@@ -100,6 +209,7 @@ int gnutls_x509_crt_init(gnutls_x509_crt_t * cert)
  * _gnutls_x509_crt_cpy - This function copies a gnutls_x509_crt_t type
  * @dest: The data where to copy
  * @src: The data to be copied
+ * @flags: zero or CRT_CPY_FAST
  *
  * This function will copy an X.509 certificate structure.
  *
@@ -109,43 +219,28 @@ int gnutls_x509_crt_init(gnutls_x509_crt_t * cert)
 int _gnutls_x509_crt_cpy(gnutls_x509_crt_t dest, gnutls_x509_crt_t src)
 {
 	int ret;
-	size_t der_size = 0;
-	uint8_t *der;
 	gnutls_datum_t tmp;
+	unsigned dealloc = 0;
 
-	ret =
-	    gnutls_x509_crt_export(src, GNUTLS_X509_FMT_DER, NULL,
-				   &der_size);
-	if (ret != GNUTLS_E_SHORT_MEMORY_BUFFER) {
-		gnutls_assert();
-		return ret;
+	if (src->der.size == 0 || src->modified) {
+		ret =
+		    gnutls_x509_crt_export2(src, GNUTLS_X509_FMT_DER, &tmp);
+		if (ret < 0)
+			return gnutls_assert_val(ret);
+		dealloc = 1;
+	} else {
+		tmp.data = src->der.data;
+		tmp.size = src->der.size;
 	}
 
-	der = gnutls_malloc(der_size);
-	if (der == NULL) {
-		gnutls_assert();
-		return GNUTLS_E_MEMORY_ERROR;
-	}
-
-	ret =
-	    gnutls_x509_crt_export(src, GNUTLS_X509_FMT_DER, der,
-				   &der_size);
-	if (ret < 0) {
-		gnutls_assert();
-		gnutls_free(der);
-		return ret;
-	}
-
-	tmp.data = der;
-	tmp.size = der_size;
 	ret = gnutls_x509_crt_import(dest, &tmp, GNUTLS_X509_FMT_DER);
 
-	gnutls_free(der);
-
-	if (ret < 0) {
-		gnutls_assert();
-		return ret;
+	if (dealloc) {
+		gnutls_free(tmp.data);
 	}
+
+	if (ret < 0)
+		return gnutls_assert_val(ret);
 
 	return 0;
 }
@@ -261,9 +356,15 @@ gnutls_x509_crt_import(gnutls_x509_crt_t cert,
 		return GNUTLS_E_INVALID_REQUEST;
 	}
 
-	if (cert->der.data) {
-		gnutls_free(cert->der.data);
-		cert->der.data = NULL;
+	if (cert->expanded) {
+		/* Any earlier _asn1_strict_der_decode will modify the ASN.1
+		   structure, so we need to replace it with a fresh
+		   structure. */
+		result = crt_reinit(cert);
+		if (result < 0) {
+			gnutls_assert();
+			goto cleanup;
+		}
 	}
 
 	/* If the Certificate is in PEM format then decode it
@@ -294,18 +395,8 @@ gnutls_x509_crt_import(gnutls_x509_crt_t cert,
 		}
 	}
 
-	if (cert->expanded) {
-		/* Any earlier _asn1_strict_der_decode will modify the ASN.1
-		   structure, so we need to replace it with a fresh
-		   structure. */
-		result = crt_reinit(cert);
-		if (result < 0) {
-			gnutls_assert();
-			goto cleanup;
-		}
-	}
-
 	cert->expanded = 1;
+	cert->modified = 0;
 
 	result =
 	    _asn1_strict_der_decode(&cert->cert, cert->der.data, cert->der.size, NULL);
@@ -321,7 +412,7 @@ gnutls_x509_crt_import(gnutls_x509_crt_t cert,
 		goto cleanup;
 	}
 
-
+	/* The following do not allocate but rather point to DER data */
 	result = _gnutls_x509_get_raw_field2(cert->cert, &cert->der,
 					  "tbsCertificate.issuer.rdnSequence",
 					  &cert->raw_issuer_dn);
@@ -391,9 +482,10 @@ gnutls_x509_crt_import(gnutls_x509_crt_t cert,
  *
  * If @buf is null then only the size will be filled. 
  *
- * Returns: GNUTLS_E_SHORT_MEMORY_BUFFER if the provided buffer is not
- * long enough, and in that case the @buf_size will be updated with
- * the required size.  On success 0 is returned.
+ * Returns: %GNUTLS_E_SHORT_MEMORY_BUFFER if the provided buffer is not
+ *   long enough, and in that case the @buf_size will be updated
+ *   with the required size. %GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE if
+ *   the DN does not exist, or another error value on error. On success 0 is returned.
  **/
 int
 gnutls_x509_crt_get_issuer_dn(gnutls_x509_crt_t cert, char *buf,
@@ -468,7 +560,7 @@ gnutls_x509_crt_get_issuer_dn2(gnutls_x509_crt_t cert, gnutls_datum_t * dn)
  **/
 int
 gnutls_x509_crt_get_issuer_dn_by_oid(gnutls_x509_crt_t cert,
-				     const char *oid, int indx,
+				     const char *oid, unsigned indx,
 				     unsigned int raw_flag, void *buf,
 				     size_t * buf_size)
 {
@@ -510,7 +602,7 @@ gnutls_x509_crt_get_issuer_dn_by_oid(gnutls_x509_crt_t cert,
  **/
 int
 gnutls_x509_crt_get_issuer_dn_oid(gnutls_x509_crt_t cert,
-				  int indx, void *oid, size_t * oid_size)
+				  unsigned indx, void *oid, size_t * oid_size)
 {
 	if (cert == NULL) {
 		gnutls_assert();
@@ -537,7 +629,8 @@ gnutls_x509_crt_get_issuer_dn_oid(gnutls_x509_crt_t cert,
  *
  * Returns: %GNUTLS_E_SHORT_MEMORY_BUFFER if the provided buffer is not
  *   long enough, and in that case the @buf_size will be updated
- *   with the required size.  On success 0 is returned.
+ *   with the required size. %GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE if
+ *   the DN does not exist, or another error value on error. On success 0 is returned.
  **/
 int
 gnutls_x509_crt_get_dn(gnutls_x509_crt_t cert, char *buf,
@@ -611,7 +704,7 @@ int gnutls_x509_crt_get_dn2(gnutls_x509_crt_t cert, gnutls_datum_t * dn)
  **/
 int
 gnutls_x509_crt_get_dn_by_oid(gnutls_x509_crt_t cert, const char *oid,
-			      int indx, unsigned int raw_flag,
+			      unsigned indx, unsigned int raw_flag,
 			      void *buf, size_t * buf_size)
 {
 	gnutls_datum_t td;
@@ -652,7 +745,7 @@ gnutls_x509_crt_get_dn_by_oid(gnutls_x509_crt_t cert, const char *oid,
  **/
 int
 gnutls_x509_crt_get_dn_oid(gnutls_x509_crt_t cert,
-			   int indx, void *oid, size_t * oid_size)
+			   unsigned indx, void *oid, size_t * oid_size)
 {
 	if (cert == NULL) {
 		gnutls_assert();
@@ -672,6 +765,8 @@ gnutls_x509_crt_get_dn_oid(gnutls_x509_crt_t cert,
  * enumeration that is the signature algorithm that has been used to
  * sign this certificate.
  *
+ * Unknown/unsupported signature algorithms are mapped to %GNUTLS_SIGN_UNKNOWN.
+ *
  * Returns: a #gnutls_sign_algorithm_t value, or a negative error code on
  *   error.
  **/
@@ -679,6 +774,86 @@ int gnutls_x509_crt_get_signature_algorithm(gnutls_x509_crt_t cert)
 {
 	return _gnutls_x509_get_signature_algorithm(cert->cert,
 						    "signatureAlgorithm.algorithm");
+}
+
+/**
+ * gnutls_x509_crt_get_signature_oid:
+ * @cert: should contain a #gnutls_x509_crt_t type
+ * @oid: a pointer to a buffer to hold the OID (may be null)
+ * @oid_size: initially holds the size of @oid
+ *
+ * This function will return the OID of the signature algorithm
+ * that has been used to sign this certificate. This is function
+ * is useful in the case gnutls_x509_crt_get_signature_algorithm()
+ * returned %GNUTLS_SIGN_UNKNOWN.
+ *
+ * Returns: zero or a negative error code on error.
+ *
+ * Since: 3.5.0
+ **/
+int gnutls_x509_crt_get_signature_oid(gnutls_x509_crt_t cert, char *oid, size_t *oid_size)
+{
+	char str[MAX_OID_SIZE];
+	int len, result, ret;
+	gnutls_datum_t out;
+
+	len = sizeof(str);
+	result = asn1_read_value(cert->cert, "signatureAlgorithm.algorithm", str, &len);
+	if (result != ASN1_SUCCESS) {
+		gnutls_assert();
+		return _gnutls_asn2err(result);
+	}
+
+	out.data = (void*)str;
+	out.size = len;
+
+	ret = _gnutls_copy_string(&out, (void*)oid, oid_size);
+	if (ret < 0) {
+		gnutls_assert();
+		return ret;
+	}
+
+	return 0;
+}
+
+/**
+ * gnutls_x509_crt_get_pk_oid:
+ * @cert: should contain a #gnutls_x509_crt_t type
+ * @oid: a pointer to a buffer to hold the OID (may be null)
+ * @oid_size: initially holds the size of @oid
+ *
+ * This function will return the OID of the public key algorithm
+ * on that certificate. This is function
+ * is useful in the case gnutls_x509_crt_get_pk_algorithm()
+ * returned %GNUTLS_PK_UNKNOWN.
+ *
+ * Returns: zero or a negative error code on error.
+ *
+ * Since: 3.5.0
+ **/
+int gnutls_x509_crt_get_pk_oid(gnutls_x509_crt_t cert, char *oid, size_t *oid_size)
+{
+	char str[MAX_OID_SIZE];
+	int len, result, ret;
+	gnutls_datum_t out;
+
+	len = sizeof(str);
+	result = asn1_read_value(cert->cert, "tbsCertificate.subjectPublicKeyInfo.algorithm.algorithm", str, &len);
+	if (result != ASN1_SUCCESS) {
+		gnutls_assert();
+		return _gnutls_asn2err(result);
+	}
+
+	out.data = (void*)str;
+	out.size = len;
+
+	ret = _gnutls_copy_string(&out, (void*)oid, oid_size);
+	if (ret < 0) {
+		gnutls_assert();
+		return ret;
+	}
+
+	return 0;
 }
 
 /**
@@ -1154,6 +1329,8 @@ gnutls_x509_crt_get_authority_key_id(gnutls_x509_crt_t cert, void *id,
  * size in bits. For RSA the bits returned is the modulus.
  * For DSA the bits returned are of the public
  * exponent.
+ *
+ * Unknown/unsupported algorithms are mapped to %GNUTLS_PK_UNKNOWN.
  *
  * Returns: a member of the #gnutls_pk_algorithm_t enumeration on
  * success, or a negative error code on error.
@@ -1875,6 +2052,7 @@ gnutls_x509_crt_get_proxy(gnutls_x509_crt_t cert,
 	return 0;
 }
 
+
 /**
  * gnutls_x509_policy_release:
  * @policy: a certificate policy
@@ -1913,7 +2091,7 @@ void gnutls_x509_policy_release(struct gnutls_x509_policy_st *policy)
  * Since: 3.1.5
  **/
 int
-gnutls_x509_crt_get_policy(gnutls_x509_crt_t crt, int indx,
+gnutls_x509_crt_get_policy(gnutls_x509_crt_t crt, unsigned indx,
 			   struct gnutls_x509_policy_st *policy,
 			   unsigned int *critical)
 {
@@ -1989,7 +2167,7 @@ gnutls_x509_crt_get_policy(gnutls_x509_crt_t crt, int indx,
  **/
 int
 gnutls_x509_crt_get_extension_by_oid(gnutls_x509_crt_t cert,
-				     const char *oid, int indx,
+				     const char *oid, unsigned indx,
 				     void *buf, size_t * buf_size,
 				     unsigned int *critical)
 {
@@ -2050,7 +2228,7 @@ gnutls_x509_crt_get_extension_by_oid(gnutls_x509_crt_t cert,
  **/
 int
 gnutls_x509_crt_get_extension_by_oid2(gnutls_x509_crt_t cert,
-				     const char *oid, int indx,
+				     const char *oid, unsigned indx,
 				     gnutls_datum_t *output,
 				     unsigned int *critical)
 {
@@ -2095,7 +2273,7 @@ gnutls_x509_crt_get_extension_by_oid2(gnutls_x509_crt_t cert,
  *   will be returned.
  **/
 int
-gnutls_x509_crt_get_extension_oid(gnutls_x509_crt_t cert, int indx,
+gnutls_x509_crt_get_extension_oid(gnutls_x509_crt_t cert, unsigned indx,
 				  void *oid, size_t * oid_size)
 {
 	int result;
@@ -2140,7 +2318,7 @@ gnutls_x509_crt_get_extension_oid(gnutls_x509_crt_t cert, int indx,
  *   will be returned.
  **/
 int
-gnutls_x509_crt_get_extension_info(gnutls_x509_crt_t cert, int indx,
+gnutls_x509_crt_get_extension_info(gnutls_x509_crt_t cert, unsigned indx,
 				   void *oid, size_t * oid_size,
 				   unsigned int *critical)
 {
@@ -2210,7 +2388,7 @@ gnutls_x509_crt_get_extension_info(gnutls_x509_crt_t cert, int indx,
  *   will be returned.
  **/
 int
-gnutls_x509_crt_get_extension_data(gnutls_x509_crt_t cert, int indx,
+gnutls_x509_crt_get_extension_data(gnutls_x509_crt_t cert, unsigned indx,
 				   void *data, size_t * sizeof_data)
 {
 	int result, len;
@@ -2259,7 +2437,7 @@ int
 gnutls_x509_crt_get_raw_issuer_dn(gnutls_x509_crt_t cert,
 				  gnutls_datum_t * dn)
 {
-	if (cert->raw_issuer_dn.size > 0) {
+	if (cert->raw_issuer_dn.size > 0 && cert->modified == 0) {
 		return _gnutls_set_datum(dn, cert->raw_issuer_dn.data,
 					 cert->raw_issuer_dn.size);
 	} else {
@@ -2281,7 +2459,7 @@ gnutls_x509_crt_get_raw_issuer_dn(gnutls_x509_crt_t cert,
  **/
 int gnutls_x509_crt_get_raw_dn(gnutls_x509_crt_t cert, gnutls_datum_t * dn)
 {
-	if (cert->raw_dn.size > 0) {
+	if (cert->raw_dn.size > 0 && cert->modified == 0) {
 		return _gnutls_set_datum(dn, cert->raw_dn.data, cert->raw_dn.size);
 	} else {
 		return _gnutls_x509_get_raw_field(cert->cert, "tbsCertificate.subject.rdnSequence", dn);
@@ -2345,149 +2523,6 @@ int
 gnutls_x509_crt_get_issuer(gnutls_x509_crt_t cert, gnutls_x509_dn_t * dn)
 {
 	return get_dn(cert, "tbsCertificate.issuer.rdnSequence", dn, 0);
-}
-
-/**
- * gnutls_x509_dn_get_rdn_ava:
- * @dn: a pointer to DN
- * @irdn: index of RDN
- * @iava: index of AVA.
- * @ava: Pointer to structure which will hold output information.
- *
- * Get pointers to data within the DN. The format of the @ava structure
- * is shown below.
- *
- *  struct gnutls_x509_ava_st {
- *    gnutls_datum_t oid;
- *    gnutls_datum_t value;
- *    unsigned long value_tag;
- *  };
- *
- * The X.509 distinguished name is a sequence of sequences of strings
- * and this is what the @irdn and @iava indexes model.
- *
- * Note that @ava will contain pointers into the @dn structure which
- * in turns points to the original certificate. Thus you should not
- * modify any data or deallocate any of those.
- *
- * This is a low-level function that requires the caller to do the
- * value conversions when necessary (e.g. from UCS-2).
- *
- * Returns: Returns 0 on success, or an error code.
- **/
-int
-gnutls_x509_dn_get_rdn_ava(gnutls_x509_dn_t dn,
-			   int irdn, int iava, gnutls_x509_ava_st * ava)
-{
-	ASN1_TYPE rdn, elem;
-	ASN1_DATA_NODE vnode;
-	long len;
-	int lenlen, remlen, ret;
-	char rbuf[ASN1_MAX_NAME_SIZE];
-	unsigned char cls;
-	const unsigned char *ptr;
-
-	iava++;
-	irdn++;			/* 0->1, 1->2 etc */
-
-	snprintf(rbuf, sizeof(rbuf), "rdnSequence.?%d.?%d", irdn, iava);
-	rdn = asn1_find_node(dn->asn, rbuf);
-	if (!rdn) {
-		gnutls_assert();
-		return GNUTLS_E_ASN1_ELEMENT_NOT_FOUND;
-	}
-
-	snprintf(rbuf, sizeof(rbuf), "?%d.type", iava);
-	elem = asn1_find_node(rdn, rbuf);
-	if (!elem) {
-		gnutls_assert();
-		return GNUTLS_E_ASN1_ELEMENT_NOT_FOUND;
-	}
-
-	ret = asn1_read_node_value(elem, &vnode);
-	if (ret != ASN1_SUCCESS) {
-		gnutls_assert();
-		return GNUTLS_E_ASN1_ELEMENT_NOT_FOUND;
-	}
-
-	ava->oid.data = (void *) vnode.value;
-	ava->oid.size = vnode.value_len;
-
-	snprintf(rbuf, sizeof(rbuf), "?%d.value", iava);
-	elem = asn1_find_node(rdn, rbuf);
-	if (!elem) {
-		gnutls_assert();
-		return GNUTLS_E_ASN1_ELEMENT_NOT_FOUND;
-	}
-
-	ret = asn1_read_node_value(elem, &vnode);
-	if (ret != ASN1_SUCCESS) {
-		gnutls_assert();
-		return GNUTLS_E_ASN1_ELEMENT_NOT_FOUND;
-	}
-	/* The value still has the previous tag's length bytes, plus the
-	 * current value's tag and length bytes. Decode them.
-	 */
-
-	ptr = vnode.value;
-	remlen = vnode.value_len;
-	len = asn1_get_length_der(ptr, remlen, &lenlen);
-	if (len < 0) {
-		gnutls_assert();
-		return GNUTLS_E_ASN1_DER_ERROR;
-	}
-
-	ptr += lenlen;
-	remlen -= lenlen;
-	ret =
-	    asn1_get_tag_der(ptr, remlen, &cls, &lenlen, &ava->value_tag);
-	if (ret) {
-		gnutls_assert();
-		return _gnutls_asn2err(ret);
-	}
-
-	ptr += lenlen;
-	remlen -= lenlen;
-
-	{
-		signed long tmp;
-
-		tmp = asn1_get_length_der(ptr, remlen, &lenlen);
-		if (tmp < 0) {
-			gnutls_assert();
-			return GNUTLS_E_ASN1_DER_ERROR;
-		}
-		ava->value.size = tmp;
-	}
-	ava->value.data = (void *) (ptr + lenlen);
-
-	return 0;
-}
-
-/**
- * gnutls_x509_dn_get_str:
- * @dn: a pointer to DN
- * @str: a datum that will hold the name
- *
- * This function will allocate buffer and copy the name in the provided DN.
- * The name will be in the form "C=xxxx,O=yyyy,CN=zzzz" as
- * described in RFC4514. The output string will be ASCII or UTF-8
- * encoded, depending on the certificate data.
- *
- * Returns: On success, %GNUTLS_E_SUCCESS (0) is returned, otherwise a
- *   negative error value.
- *
- * Since: 3.4.2
- **/
-int
-gnutls_x509_dn_get_str(gnutls_x509_dn_t dn, gnutls_datum_t *str)
-{
-	if (dn == NULL) {
-		gnutls_assert();
-		return GNUTLS_E_INVALID_REQUEST;
-	}
-
-	return _gnutls_x509_get_dn(dn->asn, "rdnSequence", str);
 }
 
 /**
@@ -2831,7 +2866,7 @@ _gnutls_x509_crt_check_revocation(gnutls_x509_crt_t cert,
 int
 gnutls_x509_crt_check_revocation(gnutls_x509_crt_t cert,
 				 const gnutls_x509_crl_t * crl_list,
-				 int crl_list_length)
+				 unsigned crl_list_length)
 {
 	return _gnutls_x509_crt_check_revocation(cert, crl_list,
 						 crl_list_length, NULL);
@@ -2999,7 +3034,7 @@ gnutls_x509_crt_get_crl_dist_points(gnutls_x509_crt_t cert,
  **/
 int
 gnutls_x509_crt_get_key_purpose_oid(gnutls_x509_crt_t cert,
-				    int indx, void *oid, size_t * oid_size,
+				    unsigned indx, void *oid, size_t * oid_size,
 				    unsigned int *critical)
 {
 	int ret;
@@ -3046,7 +3081,7 @@ gnutls_x509_crt_get_key_purpose_oid(gnutls_x509_crt_t cert,
 		goto cleanup;
 	}
 
-	ret = _gnutls_copy_data(&out, oid, oid_size);
+	ret = _gnutls_copy_string(&out, oid, oid_size);
 	if (ret < 0) {
 		gnutls_assert();
 		goto cleanup;
@@ -3243,7 +3278,7 @@ gnutls_x509_crt_list_import2(gnutls_x509_crt_t ** certs,
 
 	ret =
 	    gnutls_x509_crt_list_import(*certs, &init, data, format,
-					GNUTLS_X509_CRT_LIST_IMPORT_FAIL_IF_EXCEED);
+					flags | GNUTLS_X509_CRT_LIST_IMPORT_FAIL_IF_EXCEED);
 	if (ret == GNUTLS_E_SHORT_MEMORY_BUFFER) {
 		*certs =
 		    gnutls_realloc_fast(*certs,
@@ -3669,7 +3704,7 @@ legacy_parse_aia(ASN1_TYPE src,
  *
  * If @what is %GNUTLS_IA_OCSP_URI, @data will hold the OCSP URI.
  * Requesting this @what value leads to an error if the accessMethod
- * is not 1.3.6.1.5.5.7.48.1 aka OSCP, or if accessLocation is not of
+ * is not 1.3.6.1.5.5.7.48.1 aka OCSP, or if accessLocation is not of
  * the "uniformResourceIdentifier" type. In that case %GNUTLS_E_UNKNOWN_ALGORITHM
  * will be returned, and @seq should be increased and this function
  * called again.
@@ -3801,6 +3836,17 @@ gnutls_x509_crt_import_url(gnutls_x509_crt_t crt,
 				  const char *url, unsigned int flags)
 {
 	int ret;
+	unsigned i;
+
+	for (i=0;i<_gnutls_custom_urls_size;i++) {
+		if (strncmp(url, _gnutls_custom_urls[i].name, _gnutls_custom_urls[i].name_size) == 0) {
+			if (_gnutls_custom_urls[i].import_crt) {
+				ret = _gnutls_custom_urls[i].import_crt(crt, url, flags);
+				goto cleanup;
+			}
+			break;
+		}
+	}
 
 	if (strncmp(url, SYSTEM_URL, SYSTEM_URL_SIZE) == 0) {
 		ret = _gnutls_x509_crt_import_system_url(crt, url);
@@ -3809,15 +3855,6 @@ gnutls_x509_crt_import_url(gnutls_x509_crt_t crt,
 			ret = _gnutls_x509_crt_import_pkcs11_url(crt, url, flags);
 #endif
 	} else {
-		unsigned i;
-		for (i=0;i<_gnutls_custom_urls_size;i++) {
-			if (strncmp(url, _gnutls_custom_urls[i].name, _gnutls_custom_urls[i].name_size) == 0) {
-				if (_gnutls_custom_urls[i].import_crt) {
-					ret = _gnutls_custom_urls[i].import_crt(crt, url, flags);
-					goto cleanup;
-				}
-			}
-		}
 		ret = gnutls_assert_val(GNUTLS_E_INVALID_REQUEST);
 	}
 

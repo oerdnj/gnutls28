@@ -2,7 +2,7 @@
 
 
 
-@deftypefun {int} {gnutls_x509_crq_get_attribute_data} (gnutls_x509_crq_t @var{crq}, int @var{indx}, void * @var{data}, size_t * @var{sizeof_data})
+@deftypefun {int} {gnutls_x509_crq_get_attribute_data} (gnutls_x509_crq_t @var{crq}, unsigned @var{indx}, void * @var{data}, size_t * @var{sizeof_data})
 @var{crq}: should contain a @code{gnutls_x509_crq_t}  type
 
 @var{indx}: Specifies which attribute number to get. Use (0) to get the first one.

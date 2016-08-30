@@ -25,11 +25,7 @@ BUILT_SOURCES = srptool-args.c srptool-args.h \
 	serv-args.c serv-args.h cli-args.c cli-args.h \
 	cli-debug-args.c cli-debug-args.h certtool-args.c certtool-args.h \
 	danetool-args.c danetool-args.h p11tool-args.c p11tool-args.h \
-	tpmtool-args.c tpmtool-args.h
-
-if ENABLE_CRYWRAP
-SUBDIRS += crywrap
-endif
+	tpmtool-args.c tpmtool-args.h systemkey-args.c systemkey-args.h
 
 EXTRA_DIST = args-std.def
 
@@ -67,13 +63,15 @@ if ENABLE_DANE
 bin_PROGRAMS += danetool
 endif
 
+noinst_PROGRAMS = systemkey
+
+if ENABLE_PKCS11
+
+# TPM makes use of PKCS #11 callbacks
 if ENABLE_TROUSERS
 bin_PROGRAMS += tpmtool
 endif
 
-noinst_PROGRAMS = systemkey
-
-if ENABLE_PKCS11
 bin_PROGRAMS += p11tool
 endif
 
@@ -98,7 +96,7 @@ libcmd_psk_la_SOURCES = psktool-args.def psktool-args.c psktool-args.h
 if ENABLE_OCSP
 
 ocsptool_SOURCES = ocsptool.c ocsptool-common.h ocsptool-common.c \
-	socket.c socket.h
+	socket.c common.c common.h socket.h
 ocsptool_LDADD = ../lib/libgnutls.la libcmd-ocsp.la $(LIBOPTS) ../gl/libgnu.la 
 ocsptool_LDADD += $(LTLIBINTL) $(GETADDRINFO_LIB) gl/libgnu_gpl.la $(LIBIDN_LIBS)
 noinst_LTLIBRARIES += libcmd-ocsp.la
@@ -107,7 +105,6 @@ libcmd_ocsp_la_SOURCES = ocsptool-args.def ocsptool-args.h ocsptool-args.c
 gnutls_serv_SOURCES =		\
   list.h serv.c			\
   udp-serv.c udp-serv.h		\
-  socket.c socket.h		\
   common.h common.c		\
   certtool-common.h 
 gnutls_serv_LDADD = ../lib/libgnutls.la
@@ -146,6 +143,13 @@ noinst_LTLIBRARIES += libcmd-cli-debug.la
 libcmd_cli_debug_la_SOURCES = cli-debug-args.def cli-debug-args.c cli-debug-args.h
 
 #certtool
+COMMON_LIBS = $(LIBOPTS) $(LTLIBINTL)
+if ENABLE_MINITASN1
+COMMON_LIBS += ../lib/minitasn1/libminitasn1.la ../gl/libgnu.la 
+else
+COMMON_LIBS += $(LIBTASN1_LIBS)
+endif
+
 
 certtool_SOURCES = certtool.c certtool-common.c certtool-extras.c common.c
 certtool_LDADD = ../lib/libgnutls.la 
@@ -155,9 +159,10 @@ noinst_LTLIBRARIES += libcmd-certtool.la
 libcmd_certtool_la_SOURCES = certtool-args.c certtool-args.def certtool-args.h	\
 	certtool-cfg.h certtool-cfg.c
 libcmd_certtool_la_LIBADD = ../lib/libgnutls.la gl/libgnu_gpl.la ../gl/libgnu.la 
-libcmd_certtool_la_LIBADD += $(LIBOPTS) $(LTLIBINTL)
+libcmd_certtool_la_LIBADD += $(COMMON_LIBS)
 libcmd_certtool_la_LIBADD += $(LTLIBREADLINE) gl/libgnu_gpl.la
 libcmd_certtool_la_LIBADD += $(INET_PTON_LIB) $(LIB_CLOCK_GETTIME)
+
 
 danetool_SOURCES = danetool.c certtool-common.c certtool-extras.c common.c socket.c
 danetool_LDADD = ../lib/libgnutls.la  $(LIBIDN_LIBS)
@@ -170,8 +175,7 @@ noinst_LTLIBRARIES += libcmd-danetool.la
 libcmd_danetool_la_SOURCES = danetool-args.c danetool-args.def danetool-args.h \
 	certtool-cfg.h certtool-cfg.c
 libcmd_danetool_la_LIBADD = ../lib/libgnutls.la gl/libgnu_gpl.la ../gl/libgnu.la 
-libcmd_danetool_la_LIBADD += $(LIBOPTS)
-libcmd_danetool_la_LIBADD += $(LTLIBINTL)
+libcmd_danetool_la_LIBADD += $(COMMON_LIBS)
 libcmd_danetool_la_LIBADD += $(LTLIBREADLINE)
 libcmd_danetool_la_LIBADD += $(INET_PTON_LIB) $(LIB_CLOCK_GETTIME)
 
@@ -181,8 +185,8 @@ if ENABLE_PKCS11
 p11tool_SOURCES = p11tool-args.def p11tool.c pkcs11.c certtool-common.c \
 	certtool-extras.c p11tool.h common.c
 p11tool_LDADD = ../lib/libgnutls.la
-p11tool_LDADD += libcmd-p11tool.la $(LIBOPTS) ../gl/libgnu.la gl/libgnu_gpl.la
-p11tool_LDADD += $(LTLIBINTL)
+p11tool_LDADD += libcmd-p11tool.la ../gl/libgnu.la gl/libgnu_gpl.la
+p11tool_LDADD += $(COMMON_LIBS)
 
 noinst_LTLIBRARIES += libcmd-p11tool.la
 libcmd_p11tool_la_SOURCES = p11tool-args.def p11tool-args.c p11tool-args.h \
@@ -196,8 +200,8 @@ if ENABLE_TROUSERS
 
 tpmtool_SOURCES = tpmtool-args.def tpmtool.c certtool-common.c certtool-extras.c common.c
 tpmtool_LDADD = ../lib/libgnutls.la
-tpmtool_LDADD += libcmd-tpmtool.la $(LIBOPTS) ../gl/libgnu.la gl/libgnu_gpl.la
-tpmtool_LDADD += $(LTLIBINTL)
+tpmtool_LDADD += libcmd-tpmtool.la ../gl/libgnu.la gl/libgnu_gpl.la
+tpmtool_LDADD += $(COMMON_LIBS)
 
 noinst_LTLIBRARIES += libcmd-tpmtool.la
 libcmd_tpmtool_la_SOURCES = tpmtool-args.def tpmtool-args.c tpmtool-args.h \
@@ -207,10 +211,10 @@ libcmd_tpmtool_la_LIBADD += $(LTLIBREADLINE) $(INET_PTON_LIB) $(LIB_CLOCK_GETTIM
 
 endif # ENABLE_TROUSERS
 
-systemkey_SOURCES = systemkey.c certtool-common.c
+systemkey_SOURCES = systemkey.c certtool-common.c common.c
 systemkey_LDADD = ../lib/libgnutls.la
-systemkey_LDADD += libcmd-systemkey.la $(LIBOPTS) ../gl/libgnu.la gl/libgnu_gpl.la
-systemkey_LDADD += $(LTLIBINTL)
+systemkey_LDADD += libcmd-systemkey.la ../gl/libgnu.la gl/libgnu_gpl.la
+systemkey_LDADD += $(COMMON_LIBS)
 
 noinst_LTLIBRARIES += libcmd-systemkey.la
 libcmd_systemkey_la_SOURCES = systemkey-args.def systemkey-args.c systemkey-args.h \

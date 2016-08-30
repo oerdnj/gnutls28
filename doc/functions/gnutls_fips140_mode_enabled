@@ -2,7 +2,7 @@
 
 
 
-@deftypefun {int} {gnutls_fips140_mode_enabled} ( @var{void})
+@deftypefun {unsigned} {gnutls_fips140_mode_enabled} ( @var{void})
 
 Checks whether this library is in FIPS140 mode.
 

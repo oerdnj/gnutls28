@@ -21,7 +21,7 @@ the server.  For clients that wants to send more than its own end
 entity certificate (e.g., also an intermediate CA cert) then put
 the certificate chain in  @code{pcert_list} . 
 
-Note that the  @code{pcert_list} and  @code{key} will become part of the credentials 
+Note that the  @code{key} and the elements of  @code{pcert_list} will become part of the credentials 
 structure and must not be deallocated. They will be automatically deallocated 
 when the  @code{res} type is deinitialized.
 
@@ -422,16 +422,54 @@ negative error value.
 @subheading gnutls_privkey_generate
 @anchor{gnutls_privkey_generate}
 @deftypefun {int} {gnutls_privkey_generate} (gnutls_privkey_t @var{pkey}, gnutls_pk_algorithm_t @var{algo}, unsigned int @var{bits}, unsigned int @var{flags})
+@var{pkey}: An initialized private key
+
+@var{algo}: is one of the algorithms in @code{gnutls_pk_algorithm_t} .
+
+@var{bits}: the size of the parameters to generate
+
+@var{flags}: Must be zero or flags from @code{gnutls_privkey_flags_t} .
+
+This function will generate a random private key. Note that this
+function must be called on an empty private key. The flag @code{GNUTLS_PRIVKEY_FLAG_PROVABLE} 
+instructs the key generation process to use algorithms which generate
+provable parameters out of a seed.
+
+Note that when generating an elliptic curve key, the curve
+can be substituted in the place of the bits parameter using the
+@code{GNUTLS_CURVE_TO_BITS()}  macro. The input to the macro is any curve from
+@code{gnutls_ecc_curve_t} .
+
+For DSA keys, if the subgroup size needs to be specified check
+the @code{GNUTLS_SUBGROUP_TO_BITS()}  macro.
+
+It is recommended to do not set the number of  @code{bits} directly, use @code{gnutls_sec_param_to_pk_bits()}  instead .
+
+@strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (0) is returned, otherwise a
+negative error value.
+
+@strong{Since:} 3.3.0
+@end deftypefun
+
+@subheading gnutls_privkey_generate2
+@anchor{gnutls_privkey_generate2}
+@deftypefun {int} {gnutls_privkey_generate2} (gnutls_privkey_t @var{pkey}, gnutls_pk_algorithm_t @var{algo}, unsigned int @var{bits}, unsigned int @var{flags}, const gnutls_keygen_data_st * @var{data}, unsigned @var{data_size})
 @var{pkey}: The private key
 
 @var{algo}: is one of the algorithms in @code{gnutls_pk_algorithm_t} .
 
 @var{bits}: the size of the modulus
 
-@var{flags}: unused for now.  Must be 0.
+@var{flags}: Must be zero or flags from @code{gnutls_privkey_flags_t} .
+
+@var{data}: Allow specifying @code{gnutls_keygen_data_st}  types such as the seed to be used.
+
+@var{data_size}: The number of  @code{data} available.
 
 This function will generate a random private key. Note that this
-function must be called on an empty private key.
+function must be called on an empty private key. The flag @code{GNUTLS_PRIVKEY_FLAG_PROVABLE} 
+instructs the key generation process to use algorithms like Shawe-Taylor
+which generate provable parameters out of a seed.
 
 Note that when generating an elliptic curve key, the curve
 can be substituted in the place of the bits parameter using the
@@ -442,7 +480,7 @@ Do not set the number of bits directly, use @code{gnutls_sec_param_to_pk_bits()}
 @strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (0) is returned, otherwise a
 negative error value.
 
-@strong{Since:} 3.3.0
+@strong{Since:} 3.5.0
 @end deftypefun
 
 @subheading gnutls_privkey_get_pk_algorithm
@@ -460,6 +498,27 @@ the security parameter of the key.
 success, or a negative error code on error.
 
 @strong{Since:} 2.12.0
+@end deftypefun
+
+@subheading gnutls_privkey_get_seed
+@anchor{gnutls_privkey_get_seed}
+@deftypefun {int} {gnutls_privkey_get_seed} (gnutls_privkey_t @var{key}, gnutls_digest_algorithm_t * @var{digest}, void * @var{seed}, size_t * @var{seed_size})
+@var{key}: should contain a @code{gnutls_privkey_t}  type
+
+@var{digest}: if non-NULL it will contain the digest algorithm used for key generation (if applicable)
+
+@var{seed}: where seed will be copied to
+
+@var{seed_size}: originally holds the size of  @code{seed} , will be updated with actual size
+
+This function will return the seed that was used to generate the
+given private key. That function will succeed only if the key was generated
+as a provable key.
+
+@strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (0) is returned, otherwise a
+negative error value.
+
+@strong{Since:} 3.5.0
 @end deftypefun
 
 @subheading gnutls_privkey_get_type
@@ -540,6 +599,11 @@ negative error value.
 This function will associate the given callbacks with the
 @code{gnutls_privkey_t}  type. At least one of the two callbacks
 must be non-null.
+
+Note that the signing function is supposed to "raw" sign data, i.e.,
+without any hashing or preprocessing. In case of RSA the DigestInfo
+will be provided, and the signing function is expected to do the PKCS @code{1} 
+1.5 padding and the exponentiation.
 
 See also @code{gnutls_privkey_import_ext3()} .
 
@@ -874,6 +938,20 @@ negative error value.
 @strong{Since:} 2.12.0
 @end deftypefun
 
+@subheading gnutls_privkey_set_flags
+@anchor{gnutls_privkey_set_flags}
+@deftypefun {void} {gnutls_privkey_set_flags} (gnutls_privkey_t @var{key}, unsigned int @var{flags})
+@var{key}: A key of type @code{gnutls_privkey_t} 
+
+@var{flags}: flags from the @code{gnutls_privkey_flags} 
+
+This function will set flags for the specified private key, after
+it is generated. Currently this is useful for the @code{GNUTLS_PRIVKEY_FLAG_EXPORT_COMPAT} 
+to allow exporting a "provable" private key in backwards compatible way.
+
+@strong{Since:} 3.5.0
+@end deftypefun
+
 @subheading gnutls_privkey_set_pin_function
 @anchor{gnutls_privkey_set_pin_function}
 @deftypefun {void} {gnutls_privkey_set_pin_function} (gnutls_privkey_t @var{key}, gnutls_pin_callback_t @var{fn}, void * @var{userdata})
@@ -977,6 +1055,26 @@ This function will verify the private key parameters.
 negative error value.
 
 @strong{Since:} 3.3.0
+@end deftypefun
+
+@subheading gnutls_privkey_verify_seed
+@anchor{gnutls_privkey_verify_seed}
+@deftypefun {int} {gnutls_privkey_verify_seed} (gnutls_privkey_t @var{key}, gnutls_digest_algorithm_t @var{digest}, const void * @var{seed}, size_t @var{seed_size})
+@var{key}: should contain a @code{gnutls_privkey_t}  type
+
+@var{digest}: it contains the digest algorithm used for key generation (if applicable)
+
+@var{seed}: the seed of the key to be checked with
+
+@var{seed_size}: holds the size of  @code{seed} 
+
+This function will verify that the given private key was generated from
+the provided seed.
+
+@strong{Returns:} In case of a verification failure @code{GNUTLS_E_PRIVKEY_VERIFICATION_ERROR} 
+is returned, and zero or positive code on success.
+
+@strong{Since:} 3.5.0
 @end deftypefun
 
 @subheading gnutls_pubkey_deinit
@@ -1414,6 +1512,9 @@ negative error value.
 Imports the public key from a private.  This function will import
 the given public key to the abstract @code{gnutls_pubkey_t}  type.
 
+Note that in certain keys this operation may not be possible, e.g.,
+in other than RSA PKCS@code{11}  keys.
+
 @strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (0) is returned, otherwise a
 negative error value.
 
@@ -1708,7 +1809,8 @@ them, e.g., @code{gnutls_certificate_set_x509_key_file2()} .
 
 The provided structure and callback functions must be valid throughout
 the lifetime of the process. The registration of an existing URL type
-will fail with @code{GNUTLS_E_INVALID_REQUEST} .
+will fail with @code{GNUTLS_E_INVALID_REQUEST} . Since GnuTLS 3.5.0 this function
+can be used to override the builtin URLs.
 
 This function is not thread safe.
 

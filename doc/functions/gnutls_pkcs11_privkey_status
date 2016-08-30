@@ -2,7 +2,7 @@
 
 
 
-@deftypefun {int} {gnutls_pkcs11_privkey_status} (gnutls_pkcs11_privkey_t @var{key})
+@deftypefun {unsigned} {gnutls_pkcs11_privkey_status} (gnutls_pkcs11_privkey_t @var{key})
 @var{key}: Holds the key
 
 Checks the status of the private key token.

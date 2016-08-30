@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2010-2012 Free Software Foundation, Inc.
- * Copyright (C) 2013 Nikos Mavrogiannopoulos
+ * Copyright (C) 2013-2015 Nikos Mavrogiannopoulos
  *
  * Author: Nikos Mavrogiannopoulos
  *
@@ -25,33 +25,32 @@
  * encryption and signatures. 
  */
 
-#include <gnutls_int.h>
-#include <gnutls_mpi.h>
-#include <gnutls_pk.h>
-#include <gnutls_errors.h>
-#include <gnutls_datum.h>
-#include <gnutls_global.h>
-#include <gnutls_sig.h>
-#include <gnutls_num.h>
+#include "gnutls_int.h"
+#include <mpi.h>
+#include <pk.h>
+#include "errors.h"
+#include <datum.h>
+#include <global.h>
+#include <tls-sig.h>
+#include <num.h>
 #include <x509/x509_int.h>
 #include <x509/common.h>
 #include <random.h>
-#include <gnutls_pk.h>
+#include <pk.h>
 #include <nettle/dsa.h>
-#ifdef ENABLE_FIPS140
-# include <dsa-fips.h>
-# include <rsa-fips.h>
-#endif
+#include <dsa-fips.h>
+#include <rsa-fips.h>
 #include <nettle/rsa.h>
 #include <gnutls/crypto.h>
 #include <nettle/bignum.h>
 #include <nettle/ecc.h>
 #include <nettle/ecdsa.h>
 #include <nettle/ecc-curve.h>
+#include <nettle/curve25519.h>
 #include <gnettle.h>
 #include <fips.h>
 
-static inline const struct ecc_curve *get_supported_curve(int curve);
+static inline const struct ecc_curve *get_supported_nist_curve(int curve);
 
 static void rnd_func(void *_ctx, size_t length, uint8_t * data)
 {
@@ -99,18 +98,24 @@ _rsa_params_to_privkey(const gnutls_pk_params_st * pk_params,
 	memcpy(priv->c, pk_params->params[5], SIZEOF_MPZT);
 	memcpy(priv->a, pk_params->params[6], SIZEOF_MPZT);
 	memcpy(priv->b, pk_params->params[7], SIZEOF_MPZT);
+	/* we do not rsa_private_key_prepare() because it involves a multiplication.
+	 * we call it once when we import the parameters */
 	priv->size =
 	    nettle_mpz_sizeinbase_256_u(TOMPZ
 					(pk_params->params[RSA_MODULUS]));
 }
 
-static void
+/* returns a negative value on invalid pubkey */
+static int
 _rsa_params_to_pubkey(const gnutls_pk_params_st * pk_params,
 		      struct rsa_public_key *pub)
 {
 	memcpy(pub->n, pk_params->params[RSA_MODULUS], SIZEOF_MPZT);
 	memcpy(pub->e, pk_params->params[RSA_PUB], SIZEOF_MPZT);
-	pub->size = nettle_mpz_sizeinbase_256_u(pub->n);
+	if (rsa_public_key_prepare(pub) == 0)
+		return gnutls_assert_val(GNUTLS_E_INVALID_REQUEST);
+
+	return 0;
 }
 
 static int
@@ -247,7 +252,7 @@ dh_cleanup:
 
 			out->data = NULL;
 
-			curve = get_supported_curve(priv->flags);
+			curve = get_supported_nist_curve(priv->flags);
 			if (curve == NULL)
 				return
 				    gnutls_assert_val
@@ -284,6 +289,34 @@ dh_cleanup:
 				goto cleanup;
 			break;
 		}
+	case GNUTLS_PK_ECDHX:
+		{
+			unsigned size = gnutls_ecc_curve_get_size(priv->flags);
+
+			/* The point is in pub, while the private part (scalar) in priv. */
+
+			if (size == 0 || priv->raw_priv.size != size)
+				return gnutls_assert_val(GNUTLS_E_INVALID_REQUEST);
+
+			out->data = gnutls_malloc(size);
+			if (out->data == NULL) {
+				ret = gnutls_assert_val(GNUTLS_E_MEMORY_ERROR);
+				goto cleanup;
+			}
+
+			out->size = size;
+
+			curve25519_mul(out->data, priv->raw_priv.data, pub->raw_pub.data);
+
+			if (_gnutls_mem_is_zero(out->data, out->size)) {
+				gnutls_free(out->data);
+				out->data = NULL;
+				gnutls_assert();
+				ret = GNUTLS_E_RECEIVED_ILLEGAL_PARAMETER;
+				goto cleanup;
+			}
+			break;
+		}
 	default:
 		gnutls_assert();
 		ret = GNUTLS_E_INTERNAL_ERROR;
@@ -313,7 +346,13 @@ _wrap_nettle_pk_encrypt(gnutls_pk_algorithm_t algo,
 		{
 			struct rsa_public_key pub;
 
-			_rsa_params_to_pubkey(pk_params, &pub);
+			ret = _rsa_params_to_pubkey(pk_params, &pub);
+			if (ret < 0) {
+				ret =
+				    gnutls_assert_val
+				    (GNUTLS_E_ENCRYPTION_FAILED);
+				goto cleanup;
+			}
 
 			ret =
 			    rsa_encrypt(&pub, NULL, rnd_func,
@@ -371,7 +410,12 @@ _wrap_nettle_pk_decrypt(gnutls_pk_algorithm_t algo,
 			bigint_t c;
 
 			_rsa_params_to_privkey(pk_params, &priv);
-			_rsa_params_to_pubkey(pk_params, &pub);
+			ret = _rsa_params_to_pubkey(pk_params, &pub);
+			if (ret < 0)
+				return
+				    gnutls_assert_val
+				    (GNUTLS_E_DECRYPTION_FAILED);
+
 
 			if (ciphertext->size != pub.size)
 				return
@@ -448,7 +492,7 @@ _wrap_nettle_pk_sign(gnutls_pk_algorithm_t algo,
 			int curve_id = pk_params->flags;
 			const struct ecc_curve *curve;
 
-			curve = get_supported_curve(curve_id);
+			curve = get_supported_nist_curve(curve_id);
 			if (curve == NULL)
 				return
 				    gnutls_assert_val
@@ -543,7 +587,11 @@ _wrap_nettle_pk_sign(gnutls_pk_algorithm_t algo,
 			mpz_t s;
 
 			_rsa_params_to_privkey(pk_params, &priv);
-			_rsa_params_to_pubkey(pk_params, &pub);
+			ret = _rsa_params_to_pubkey(pk_params, &pub);
+			if (ret < 0)
+				return
+				    gnutls_assert_val
+				    (GNUTLS_E_PK_SIGN_FAILED);
 
 			mpz_init(s);
 
@@ -602,7 +650,7 @@ _wrap_nettle_pk_verify(gnutls_pk_algorithm_t algo,
 			int curve_id = pk_params->flags;
 			const struct ecc_curve *curve;
 
-			curve = get_supported_curve(curve_id);
+			curve = get_supported_nist_curve(curve_id);
 			if (curve == NULL)
 				return
 				    gnutls_assert_val
@@ -680,7 +728,11 @@ _wrap_nettle_pk_verify(gnutls_pk_algorithm_t algo,
 		{
 			struct rsa_public_key pub;
 
-			_rsa_params_to_pubkey(pk_params, &pub);
+			ret = _rsa_params_to_pubkey(pk_params, &pub);
+			if (ret < 0)
+				return
+				    gnutls_assert_val
+				    (GNUTLS_E_PK_SIG_VERIFY_FAILED);
 
 			if (signature->size != pub.size)
 				return
@@ -720,7 +772,7 @@ _wrap_nettle_pk_verify(gnutls_pk_algorithm_t algo,
 	return ret;
 }
 
-static inline const struct ecc_curve *get_supported_curve(int curve)
+static inline const struct ecc_curve *get_supported_nist_curve(int curve)
 {
 	switch (curve) {
 #ifdef ENABLE_NON_SUITEB_CURVES
@@ -742,7 +794,12 @@ static inline const struct ecc_curve *get_supported_curve(int curve)
 
 static int _wrap_nettle_pk_curve_exists(gnutls_ecc_curve_t curve)
 {
-	return ((get_supported_curve(curve)!=NULL)?1:0);
+	switch (curve) {
+		case GNUTLS_ECC_CURVE_X25519:
+			return 1;
+		default:
+			return ((get_supported_nist_curve(curve)!=NULL)?1:0);
+	}
 }
 
 /* Generates algorithm's parameters. That is:
@@ -765,10 +822,8 @@ wrap_nettle_pk_generate_params(gnutls_pk_algorithm_t algo,
 	case GNUTLS_PK_DH:
 		{
 			struct dsa_params pub;
-#ifdef ENABLE_FIPS140
 			struct dss_params_validation_seeds cert;
 			unsigned index;
-#endif
 
 			dsa_params_init(&pub);
 
@@ -782,23 +837,43 @@ wrap_nettle_pk_generate_params(gnutls_pk_algorithm_t algo,
 			if (q_bits == 0)
 				return gnutls_assert_val(GNUTLS_E_ILLEGAL_PARAMETER);
 
-#ifdef ENABLE_FIPS140
-			if (_gnutls_fips_mode_enabled() != 0) {
+			if (_gnutls_fips_mode_enabled() != 0 || params->flags & GNUTLS_PK_FLAG_PROVABLE) {
 				if (algo==GNUTLS_PK_DSA)
 					index = 1;
 				else
 					index = 2;
 
-				ret =
-				    dsa_generate_dss_pqg(&pub, &cert,
-			    			 index,
-						 NULL, rnd_func, 
-						 NULL, NULL,
-						 level, q_bits);
+				if (params->palgo != 0 && params->palgo != GNUTLS_DIG_SHA384) {
+					ret = GNUTLS_E_INVALID_REQUEST;
+					goto dsa_fail;
+				}
+
+				params->palgo = GNUTLS_DIG_SHA384;
+
+				if (params->seed_size) {
+					ret =
+					    _dsa_generate_dss_pqg(&pub, &cert,
+				    			 index,
+							 params->seed_size, params->seed, 
+							 NULL, NULL,
+							 level, q_bits);
+				} else {
+					ret =
+					    dsa_generate_dss_pqg(&pub, &cert,
+				    			 index,
+							 NULL, rnd_func, 
+							 NULL, NULL,
+							 level, q_bits);
+				}
 				if (ret != 1) {
 					gnutls_assert();
 					ret = GNUTLS_E_PK_GENERATION_ERROR;
 					goto dsa_fail;
+				}
+
+				if (cert.seed_length && cert.seed_length < sizeof(params->seed)) {
+					params->seed_size = cert.seed_length;
+					memcpy(params->seed, cert.seed, cert.seed_length);
 				}
 
 				/* verify the generated parameters */
@@ -808,9 +883,7 @@ wrap_nettle_pk_generate_params(gnutls_pk_algorithm_t algo,
 					ret = GNUTLS_E_PK_GENERATION_ERROR;
 					goto dsa_fail;
 				}
-			} else 
-#endif
-			{
+			} else {
 				if (q_bits < 160)
 					q_bits = 160;
 
@@ -934,6 +1007,8 @@ int _gnutls_dh_generate_key(gnutls_dh_params_t dh_params,
  	return ret;
 }
 
+/* Note that the value of Z will have the leading bytes stripped if they are zero -
+ * which follows the TLS approach. */
 int _gnutls_dh_compute_key(gnutls_dh_params_t dh_params,
 			   const gnutls_datum_t *priv_key, const gnutls_datum_t *pub_key,
 			   const gnutls_datum_t *peer_key, gnutls_datum_t *Z)
@@ -1118,7 +1193,7 @@ int _gnutls_ecdh_compute_key(gnutls_ecc_curve_t curve,
  */
 static int
 wrap_nettle_pk_generate_keys(gnutls_pk_algorithm_t algo,
-			       unsigned int level /*bits */ ,
+			       unsigned int level /*bits or curve */ ,
 			       gnutls_pk_params_st * params)
 {
 	int ret;
@@ -1252,15 +1327,28 @@ wrap_nettle_pk_generate_keys(gnutls_pk_algorithm_t algo,
 
 			mpz_set_ui(pub.e, 65537);
 
-#ifdef ENABLE_FIPS140
-			if (_gnutls_fips_mode_enabled() != 0) {
-				ret =
-				    rsa_generate_fips186_4_keypair(&pub, &priv, NULL,
-						 rnd_func, NULL, NULL,
-						 level);
-			} else
-#endif
-			{
+			if ((params->flags & GNUTLS_PK_FLAG_PROVABLE) || _gnutls_fips_mode_enabled() != 0) {
+				params->flags |= GNUTLS_PK_FLAG_PROVABLE;
+				if (params->palgo != 0 && params->palgo != GNUTLS_DIG_SHA384) {
+					ret = GNUTLS_E_INVALID_REQUEST;
+					goto rsa_fail;
+				}
+
+				params->palgo = GNUTLS_DIG_SHA384;
+
+				if (params->seed_size) {
+					ret = _rsa_generate_fips186_4_keypair(&pub, &priv,
+						params->seed_size, params->seed,
+						NULL, NULL, level);
+				} else {
+					params->seed_size = sizeof(params->seed);
+					ret =
+					    rsa_generate_fips186_4_keypair(&pub, &priv, NULL,
+							 rnd_func, NULL, NULL,
+							 &params->seed_size, params->seed,
+							 level);
+				}
+			} else {
 				ret =
 				    rsa_generate_keypair(&pub, &priv, NULL,
 						 rnd_func, NULL, NULL,
@@ -1303,12 +1391,15 @@ wrap_nettle_pk_generate_keys(gnutls_pk_algorithm_t algo,
 			break;
 		}
 	case GNUTLS_PK_EC:
+		if (params->flags & GNUTLS_PK_FLAG_PROVABLE)
+			return gnutls_assert_val(GNUTLS_E_INVALID_REQUEST);
+
 		{
 			struct ecc_scalar key;
 			struct ecc_point pub;
 			const struct ecc_curve *curve;
 
-			curve = get_supported_curve(level);
+			curve = get_supported_nist_curve(level);
 			if (curve == NULL)
 				return
 				    gnutls_assert_val
@@ -1344,6 +1435,36 @@ wrap_nettle_pk_generate_keys(gnutls_pk_algorithm_t algo,
 
 			break;
 		}
+	case GNUTLS_PK_ECDHX:
+		{
+			unsigned size = gnutls_ecc_curve_get_size(level);
+
+			if (size == 0)
+				return gnutls_assert_val(GNUTLS_E_INVALID_REQUEST);
+
+			params->flags = level;
+
+			params->raw_priv.data = gnutls_malloc(size);
+			if (params->raw_priv.data == NULL)
+				return gnutls_assert_val(GNUTLS_E_MEMORY_ERROR);
+
+			params->raw_pub.data = gnutls_malloc(size);
+			if (params->raw_pub.data == NULL) {
+				ret = gnutls_assert_val(GNUTLS_E_MEMORY_ERROR);
+				goto fail;
+			}
+
+			ret = _gnutls_rnd(GNUTLS_RND_RANDOM, params->raw_priv.data, size);
+			if (ret < 0) {
+				ret = gnutls_assert_val(GNUTLS_E_MEMORY_ERROR);
+				goto fail;
+			}
+			params->raw_pub.size = size;
+			params->raw_priv.size = size;
+
+			curve25519_mul_g(params->raw_pub.data, params->raw_priv.data);
+			break;
+		}
 	default:
 		gnutls_assert();
 		return GNUTLS_E_INVALID_REQUEST;
@@ -1358,6 +1479,10 @@ wrap_nettle_pk_generate_keys(gnutls_pk_algorithm_t algo,
 		_gnutls_mpi_release(&params->params[i]);
 	}
 	params->params_nr = 0;
+	gnutls_free(params->raw_priv.data);
+	gnutls_free(params->raw_pub.data);
+	params->raw_priv.data = NULL;
+	params->raw_pub.data = NULL;
 
 	FAIL_IF_LIB_ERROR;
 	return ret;
@@ -1500,7 +1625,7 @@ wrap_nettle_pk_verify_priv_params(gnutls_pk_algorithm_t algo,
 				    gnutls_assert_val
 				    (GNUTLS_E_INVALID_REQUEST);
 
-			curve = get_supported_curve(params->flags);
+			curve = get_supported_nist_curve(params->flags);
 			if (curve == NULL)
 				return
 				    gnutls_assert_val
@@ -1589,7 +1714,7 @@ wrap_nettle_pk_verify_pub_params(gnutls_pk_algorithm_t algo,
 				    gnutls_assert_val
 				    (GNUTLS_E_INVALID_REQUEST);
 
-			curve = get_supported_curve(params->flags);
+			curve = get_supported_nist_curve(params->flags);
 			if (curve == NULL)
 				return
 				    gnutls_assert_val
@@ -1674,7 +1799,12 @@ wrap_nettle_pk_fixup(gnutls_pk_algorithm_t algo,
 {
 	int ret;
 
-	if (direction == GNUTLS_IMPORT && algo == GNUTLS_PK_RSA) {
+	if (direction != GNUTLS_IMPORT)
+		return 0;
+
+	if (algo == GNUTLS_PK_RSA) {
+		struct rsa_private_key priv;
+
 		/* do not trust the generated values. Some old private keys
 		 * generated by us have mess on the values. Those were very
 		 * old but it seemed some of the shipped example private
@@ -1688,9 +1818,14 @@ wrap_nettle_pk_fixup(gnutls_pk_algorithm_t algo,
 			if (ret < 0)
 				return gnutls_assert_val(ret);
 		}
-		mpz_invert(TOMPZ(params->params[RSA_COEF]),
-			   TOMPZ(params->params[RSA_PRIME2]),
-			   TOMPZ(params->params[RSA_PRIME1]));
+
+		if (mpz_cmp_ui(TOMPZ(params->params[RSA_PRIME1]), 0) == 0)
+			return gnutls_assert_val(GNUTLS_E_ILLEGAL_PARAMETER);
+
+		if (mpz_invert(TOMPZ(params->params[RSA_COEF]),
+			       TOMPZ(params->params[RSA_PRIME2]),
+			       TOMPZ(params->params[RSA_PRIME1])) == 0)
+			return gnutls_assert_val(GNUTLS_E_ILLEGAL_PARAMETER);
 
 		/* calculate exp1 [6] and exp2 [7] */
 		zrelease_mpi_key(&params->params[RSA_E1]);
@@ -1701,6 +1836,13 @@ wrap_nettle_pk_fixup(gnutls_pk_algorithm_t algo,
 			return gnutls_assert_val(ret);
 
 		params->params_nr = RSA_PRIVATE_PARAMS;
+
+		/* perform nettle's internal checks */
+		_rsa_params_to_privkey(params, &priv);
+		ret = rsa_private_key_prepare(&priv);
+		if (ret == 0) {
+			return gnutls_assert_val(GNUTLS_E_ILLEGAL_PARAMETER);
+		}
 	}
 
 	return 0;

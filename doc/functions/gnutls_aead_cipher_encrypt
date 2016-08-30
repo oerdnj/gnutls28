@@ -25,8 +25,7 @@
 
 This function will encrypt the given data using the algorithm
 specified by the context. The output data will contain the
-authentication tag. This function requires that 
-@code{gnutls_aead_cipher_set_nonce()}  is called before it.
+authentication tag.
 
 @strong{Returns:} Zero or a negative error code on error.
 

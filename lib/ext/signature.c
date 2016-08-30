@@ -25,12 +25,12 @@
  */
 
 #include "gnutls_int.h"
-#include "gnutls_errors.h"
-#include "gnutls_num.h"
+#include "errors.h"
+#include "num.h"
 #include <gnutls/gnutls.h>
 #include <ext/signature.h>
-#include <gnutls_state.h>
-#include <gnutls_num.h>
+#include <state.h>
+#include <num.h>
 #include <algorithms.h>
 #include <abstract_int.h>
 
@@ -48,8 +48,8 @@ static int signature_algorithms_pack(extension_priv_data_t epriv,
 static int signature_algorithms_unpack(gnutls_buffer_st * ps,
 				       extension_priv_data_t * _priv);
 
-extension_entry_st ext_mod_sig = {
-	.name = "SIGNATURE ALGORITHMS",
+const extension_entry_st ext_mod_sig = {
+	.name = "Signature Algorithms",
 	.type = GNUTLS_EXTENSION_SIGNATURE_ALGORITHMS,
 	.parse_type = GNUTLS_EXT_TLS,
 
@@ -448,7 +448,8 @@ gnutls_sign_algorithm_get_requested(gnutls_session_t session,
  * @session: is a #gnutls_session_t type.
  *
  * Returns the signature algorithm that is (or will be) used in this 
- * session by the server to sign data.
+ * session by the server to sign data. This function should be
+ * used only with TLS 1.2 or later.
  *
  * Returns: The sign algorithm or %GNUTLS_SIGN_UNKNOWN.
  *
@@ -464,7 +465,8 @@ int gnutls_sign_algorithm_get(gnutls_session_t session)
  * @session: is a #gnutls_session_t type.
  *
  * Returns the signature algorithm that is (or will be) used in this 
- * session by the client to sign data.
+ * session by the client to sign data. This function should be
+ * used only with TLS 1.2 or later.
  *
  * Returns: The sign algorithm or %GNUTLS_SIGN_UNKNOWN.
  *

@@ -26,15 +26,11 @@ gnutls_pk
 </para>
 
 
-<!-- ##### FUNCTION decode_ber_digest_info ##### -->
+<!-- ##### MACRO decode_ber_digest_info ##### -->
 <para>
 
 </para>
 
-@info: 
-@hash: 
-@digest: 
-@digest_size: 
 @Returns: 
 
 

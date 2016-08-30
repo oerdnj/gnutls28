@@ -82,12 +82,15 @@ resumed one, and will share the same session ID with the previous one.
 @node Error handling
 @subsection Error handling
 
-In @acronym{GnuTLS} most functions return an integer type as a result.
-In almost all cases a zero or a positive number means success, and a
-negative number indicates failure, or a situation that some action has
-to be taken. Thus negative error codes may be fatal or not.
+There two types of @acronym{GnuTLS} functions. One type returns
+a boolean true (non-zero) or false (zero) value, which are set
+to return an unsigned integer type. The other type returns a
+signed integer type with zero indicating success and a negative
+value indicating failure. 
 
-Fatal errors terminate the connection immediately and further sends
+For certain operations such as TLS handshake and TLS packet receive
+there is the notion of fatal and non-fatal error codes.
+Fatal errors terminate the TLS session immediately and further sends
 and receives will be disallowed.  Such an example is
 @code{GNUTLS_@-E_@-DECRYPTION_@-FAILED}. Non-fatal errors may warn about
 something, i.e., a warning alert was received, or indicate the some
@@ -123,6 +126,12 @@ shown below.
     unsigned int size;
   } gnutls_datum_t;
 @end verbatim
+
+In functions where this structure is a returned type, if the function succeeds,
+it is expected from the caller to use @code{gnutls_free()} to deinitialize the
+data element after use, unless otherwise specified. If the function fails, the
+contents of the @code{gnutls_datum_t} should be considered undefined and must
+not be deinitialized.
 
 Other functions that require data for scattered read use a structure similar
 to @code{struct iovec} typically used by @funcintref{readv}. It is shown
@@ -173,6 +182,7 @@ CPU. The currently available options are:
 @item 0x2: Enable AES-NI
 @item 0x4: Enable SSSE3
 @item 0x8: Enable PCLMUL
+@item 0x10: Enable AVX
 @item 0x100000: Enable VIA padlock
 @item 0x200000: Enable VIA PHE
 @item 0x400000: Enable VIA PHE SHA512
@@ -263,10 +273,10 @@ operation.
 @item getpid
 @item send
 @item recv
-@item writev
+@item sendmsg
 @item read (to read from /dev/urandom)
 @item getrandom (this is Linux-kernel specific)
-@item select
+@item poll
 @end itemize
 
 As well as any calls needed for memory allocation to work. Note however, that GnuTLS
@@ -782,7 +792,9 @@ remaining until the next retransmission, or better the time until
 
 @menu
 * Asynchronous operation::
+* Reducing round-trips::
 * DTLS sessions::
+* DTLS and SCTP::
 @end menu
 
 @node Asynchronous operation
@@ -811,6 +823,9 @@ utilize @funcref{gnutls_record_check_pending},
 either before the @funcintref{poll} system call, or after a call to
 @funcref{gnutls_record_recv}. Data queued by @funcref{gnutls_record_send}
 (when interrupted) can be discarded using @funcref{gnutls_record_discard_queued}.
+
+An example of GnuTLS' usage with asynchronous operation can be found
+in @code{doc/examples/tlsproxy}.
 
 The following paragraphs describe the detailed requirements for non-blocking
 operation when using the TLS or DTLS protocols.
@@ -846,6 +861,31 @@ the function @funcref{gnutls_dtls_get_timeout}
 should be used to estimate when to call @funcref{gnutls_handshake} if
 no data have been received.
 
+@node Reducing round-trips
+@subsection Reducing round-trips
+
+The full TLS 1.2 handshake requires 2 round-trips to complete, and when
+combined with TCP's SYN and SYN-ACK negotiation it extends to 3 full
+round-trips. While, the abbreviated (resumed) TLS handshake drops that to 2.5
+round-trips, it still adds considerable latency, reducing its applicability
+to certain applications.
+
+In client side, it is possible to take advantage of the TCP fast open
+@xcite{RFC7413} mechanism on operating
+systems that support it. That can be done either by manually crafting the push and pull
+callbacks, or by utilizing @funcref{gnutls_transport_set_fastopen}. In that
+case the initial TCP handshake is eliminated, reducing the TLS handshake round-trip to 2.
+Note, that in that case any connection failures will be reported during the
+@funcref{gnutls_handshake} function call with error code
+@code{GNUTLS_E_PUSH_ERROR}.
+
+@showfuncdesc{gnutls_transport_set_fastopen}
+
+In non-resumed sessions it is possible to further reduce the round-trips to
+a single one by taking advantage of the @ref{False Start} TLS extension.
+This can be enabled by setting the @acronym{GNUTLS_ENABLE_FALSE_START} flag
+on @funcref{gnutls_init}.
+
 @node DTLS sessions
 @subsection DTLS sessions
 
@@ -875,6 +915,23 @@ a path MTU discovery mechanism @xcite{RFC4821}.
 
 @showfuncC{gnutls_dtls_set_mtu,gnutls_dtls_get_mtu,gnutls_dtls_get_data_mtu}
 
+@node DTLS and SCTP
+@subsection DTLS and SCTP
+
+Although DTLS can run under any reliable or unreliable layer, there are
+special requirements for SCTP according to @xcite{RFC6083}. We summarize the
+most important below, however for a full treatment we refer to @xcite{RFC6083}.
+
+@itemize
+@item The MTU set via @funcref{gnutls_dtls_set_mtu} must be 2^14.
+@item Replay detection must be disabled; use the flag @code{GNUTLS_NO_REPLAY_PROTECTION} with @funcref{gnutls_init}.
+@item Retransmission of messages must be disabled; use @funcref{gnutls_dtls_set_timeouts}
+   with a retransmission timeout larger than the total.
+@item Handshake, Alert and ChangeCipherSpec messages must be sent over stream 0 with unlimited reliability
+   and with the ordered delivery feature.
+@item During a rehandshake, the caching of messages with unknown epoch is
+   not handled by GnuTLS; this must be implemented in a special pull function.
+@end itemize
 
 @node TLS handshake
 @section TLS handshake
@@ -1005,6 +1062,9 @@ will be used to expand the provided keyword. That is used to impose system-speci
 It may be followed by additional options that will be appended to the
 system string (e.g., "@@SYSTEM:+SRP"). The system file should have the
 format 'KEYWORD=VALUE', e.g., 'SYSTEM=NORMAL:+ARCFOUR-128'.
+
+Since version 3.5.1 it is allowed to specify fallback keywords such
+as @@KEYWORD1,@@KEYWORD2, and the first valid keyword will be used.
 
 @item PERFORMANCE @tab
 All the known to be secure ciphersuites are enabled,
@@ -1138,16 +1198,20 @@ COMP-NULL, COMP-DEFLATE. Catch all is COMP-ALL.
 @item TLS versions @tab
 VERS-TLS1.0, VERS-TLS1.1, VERS-TLS1.2,
 VERS-DTLS1.0, VERS-DTLS1.2. 
-Catch all are VERS-ALL, VERS-TLS-ALL and VERS-DTLS-ALL.
+Catch all are VERS-ALL, VERS-TLS-ALL and VERS-DTLS-ALL, and will enable
+all protocols from NORMAL priority.
 
 @item Signature algorithms @tab
 SIGN-RSA-SHA1, SIGN-RSA-SHA224, 
 SIGN-RSA-SHA256, SIGN-RSA-SHA384, SIGN-RSA-SHA512, SIGN-DSA-SHA1, 
 SIGN-DSA-SHA224, SIGN-DSA-SHA256, SIGN-RSA-MD5. Catch all
-is SIGN-ALL. This is only valid for TLS 1.2 and later.
+which enables all algorithms from NORMAL priority is SIGN-ALL.
+This option is only considered for TLS 1.2 and later.
 
 @item Elliptic curves @tab
-CURVE-SECP192R1, CURVE-SECP224R1, CURVE-SECP256R1, CURVE-SECP384R1, CURVE-SECP521R1. Catch all is CURVE-ALL.
+CURVE-SECP192R1, CURVE-SECP224R1, CURVE-SECP256R1, CURVE-SECP384R1,
+CURVE-SECP521R1, and CURVE-X25519.
+Catch all which enables all curves from NORMAL priority is CURVE-ALL.
 
 @item Certificate type @tab
 CTYPE-OPENPGP, CTYPE-X509. Catch all is CTYPE-ALL.
@@ -1178,12 +1242,13 @@ problematic clients and servers is achieved. More specifically this
 string would disable TLS record random padding, tolerate packets
 over the maximum allowed TLS record, and add a padding to TLS Client
 Hello packet to prevent it being in the 256-512 range which is known
-to be causing issues with a commonly used firewall.
+to be causing issues with a commonly used firewall (see the %DUMBFW option).
 
 @item %DUMBFW @tab
 will add a private extension with bogus data that make the client
 hello exceed 512 bytes. This avoids a black hole behavior in some
-firewalls. This is a non-standard TLS extension, use with care.
+firewalls. This is the @xcite{rfc7685} client hello padding extension, also enabled
+with %COMPAT.
 
 @item %NO_EXTENSIONS @tab
 will prevent the sending of any TLS extensions in client side. Note
@@ -1204,7 +1269,9 @@ and not the client's.
 
 @item %SSL3_RECORD_VERSION @tab
 will use SSL3.0 record version in client hello.
-This is the default.
+By default GnuTLS will set the minimum supported version as the
+client hello record version (do not confuse that version with the
+proposed handshake version at the client hello).
 
 @item %LATEST_RECORD_VERSION @tab
 will use the latest TLS version record version in client hello.
@@ -1307,7 +1374,7 @@ Enabling the 128-bit secure ciphers, while disabling TLS 1.0 and enabling compre
 
 Enabling the 128-bit and 192-bit secure ciphers, while disabling all TLS versions 
 except TLS 1.2:
-    "SECURE128:+SECURE192:-VERS-TLS-ALL:+VERS-TLS1.2"
+    "SECURE128:+SECURE192:-VERS-ALL:+VERS-TLS1.2"
 @end example
 
 @node Selecting cryptographic key sizes
@@ -1553,7 +1620,9 @@ The high level functionality provided by the DANE library is shown below.
 
 Note that the @code{dane_state_t} structure that is accepted by both
 verification functions is optional. It is required when many queries
-are performed to facilitate caching.
+are performed to optimize against multiple re-initializations of the
+resolving back-end and loading of DNSSEC keys.
+
 The following flags are returned by the verify functions to
 indicate the status of the verification.
 
@@ -1572,8 +1641,15 @@ you may use danetool (see @ref{danetool Invocation}).
 In TLS there is no distinction between rekey, re-authentication, and re-negotiation.
 All of these use cases are handled by the TLS' rehandshake process. For that reason
 in GnuTLS rehandshake is not transparent to the application, and the application
-must take control of that process. The following paragraphs explain how to safely
-use the rehandshake process.
+must explicitly take control of that process. In addition GnuTLS since version 3.5.0 will not
+allow the peer to switch identities during a rehandshake.
+The threat addressed by that behavior depends on the application protocol,
+but primarily it protects applications from being misled
+by a rehandshake which switches the peer's identity. Applications can
+disable this protection by using the @code{GNUTLS_ALLOW_ID_CHANGE} flag in
+@funcref{gnutls_init}.
+
+The following paragraphs explain how to safely use the rehandshake process.
 
 @subsubsection Client side
 
@@ -1587,10 +1663,7 @@ of type GNUTLS_A_NO_RENEGOTIATION.
 
 Due to limitations of early protocol versions, it is required to check whether
 safe renegotiation is in place, i.e., using @funcref{gnutls_safe_renegotiation_status},
-which ensures that the server remains the same as the initial. For older servers,
-which do not support renegotiation, it is required on the second handshake
-to verify that their certificate/credentials remained the same as in the initial
-session.
+which ensures that the server remains the same as the initial.
 
 @showfuncdesc{gnutls_safe_renegotiation_status}
 
@@ -1746,7 +1819,7 @@ NORMAL:%COMPAT
 For very old broken peers that do not tolerate TLS version numbers over TLS 1.0
 another priority string is:
 @verbatim
-NORMAL:-VERS-TLS-ALL:+VERS-TLS1.0:+VERS-SSL3.0:%COMPAT
+NORMAL:-VERS-ALL:+VERS-TLS1.0:+VERS-SSL3.0:%COMPAT
 @end verbatim
 This priority string will in addition to above, only enable SSL 3.0 and 
 TLS 1.0 as protocols. 

@@ -20,15 +20,19 @@
  *
  */
 
-#include <gnutls_int.h>
+#include "gnutls_int.h"
 #include <algorithms.h>
-#include <gnutls_errors.h>
-#include <gnutls_dh.h>
-#include <gnutls_state.h>
+#include "errors.h"
+#include <dh.h>
+#include <state.h>
 #include <x509/common.h>
 #include <auth/cert.h>
 #include <auth/anon.h>
 #include <auth/psk.h>
+
+#ifndef ENABLE_SSL3
+# define GNUTLS_SSL3 GNUTLS_TLS1
+#endif
 
 /* Cipher SUITES */
 #define ENTRY( name, block_algorithm, kx_algorithm, mac_algorithm, min_version, dtls_version ) \

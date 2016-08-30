@@ -14,7 +14,10 @@ IP address SAN.
 OtherName SAN.
 @item GNUTLS_@-SAN_@-DN
 DN SAN.
+@item GNUTLS_@-SAN_@-MAX
+-- undescribed --
 @item GNUTLS_@-SAN_@-OTHERNAME_@-XMPP
-Virtual SAN, used by
-gnutls_x509_crt_get_subject_alt_othername_oid.
+Virtual SAN, used by certain functions for convenience.
+@item GNUTLS_@-SAN_@-OTHERNAME_@-KRB5PRINCIPAL
+Virtual SAN, used by certain functions for convenience.
 @end table

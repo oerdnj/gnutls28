@@ -90,18 +90,22 @@ nodist_check_SCRIPTS = testsrn.sh chain.sh invalid-cert.sh \
 	testrandom.sh
 
 if ENABLE_PKCS11
-check_PROGRAMS += pkcs11-chainverify pkcs11-get-issuer pkcs11-is-known pkcs11-combo pkcs11-privkey pkcs11-pubkey-import-rsa pkcs11-pubkey-import-ecdsa
-nodist_check_SCRIPTS += testpkcs11.sh pkcs11-chainverify pkcs11-get-issuer crl-test pkcs11-is-known pkcs11-combo pkcs11-privkey pkcs11-pubkey-import-ecdsa pkcs11-pubkey-import-rsa
+nodist_check_SCRIPTS += testpkcs11.sh crl-test
 endif
 
 TESTS_ENVIRONMENT = EXEEXT=$(EXEEXT) \
 	LC_ALL="C"					\
 	VALGRIND="$(VALGRIND)"				\
 	top_builddir="$(top_builddir)"			\
-	srcdir="$(srcdir)"
+	srcdir="$(srcdir)"				\
+	OPENSSL_ia32cap=0x00000000
 
 if ENABLE_NON_SUITEB_CURVES
 TESTS_ENVIRONMENT += ENABLE_NON_SUITEB_CURVES=1
+endif
+
+if ENABLE_SSL3
+TESTS_ENVIRONMENT += ENABLE_SSL3=1
 endif
 
 if ENABLE_DANE

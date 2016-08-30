@@ -22,4 +22,12 @@ SHA-384 algorithm.
 SHA-512 algorithm.
 @item GNUTLS_@-DIG_@-SHA224
 SHA-224 algorithm.
+@item GNUTLS_@-DIG_@-SHA3_@-224
+SHA3-224 algorithm.
+@item GNUTLS_@-DIG_@-SHA3_@-256
+SHA3-256 algorithm.
+@item GNUTLS_@-DIG_@-SHA3_@-384
+SHA3-384 algorithm.
+@item GNUTLS_@-DIG_@-SHA3_@-512
+SHA3-512 algorithm.
 @end table

@@ -1,5 +1,6 @@
 /*
- * Copyright (C) 2014 Free Software Foundation
+ * Copyright (C) 2014-2016 Free Software Foundation, Inc.
+ * Copyright (C) 2016 Red Hat, Inc.
  *
  * This file is part of GnuTLS.
  *
@@ -21,21 +22,16 @@
 /* This file contains functions to handle X.509 certificate extensions (the x509-ext API)
  */
 
-#include <gnutls_int.h>
-
-#include <gnutls_datum.h>
-#include <gnutls_errors.h>
+#include "gnutls_int.h"
+#include <datum.h>
+#include "errors.h"
 #include <common.h>
-#include <gnutls_x509.h>
+#include <x509.h>
 #include <x509_b64.h>
 #include <c-ctype.h>
+#include "x509_ext_int.h"
+#include "virt-san.h"
 #include <gnutls/x509-ext.h>
-
-struct name_st {
-	unsigned int type;
-	gnutls_datum_t san;
-	gnutls_datum_t othername_oid;
-};
 
 #define MAX_ENTRIES 64
 struct gnutls_subject_alt_names_st {
@@ -130,14 +126,16 @@ int gnutls_subject_alt_names_get(gnutls_subject_alt_names_t sans,
 }
 
 /* This is the same as gnutls_subject_alt_names_set() but will not
- * copy the strings */
+ * copy the strings. It expects all the provided input to be already
+ * allocated by gnutls. */
 static
 int subject_alt_names_set(struct name_st **names,
 			  unsigned int *size,
 			  unsigned int san_type,
-			  const gnutls_datum_t * san, char *othername_oid)
+			  gnutls_datum_t * san, char *othername_oid)
 {
 	void *tmp;
+	int ret;
 
 	tmp = gnutls_realloc(*names, (*size + 1) * sizeof((*names)[0]));
 	if (tmp == NULL) {
@@ -145,17 +143,9 @@ int subject_alt_names_set(struct name_st **names,
 	}
 	*names = tmp;
 
-	(*names)[*size].type = san_type;
-	(*names)[*size].san.data = san->data;
-	(*names)[*size].san.size = san->size;
-
-	if (othername_oid) {
-		(*names)[*size].othername_oid.data = (uint8_t *) othername_oid;
-		(*names)[*size].othername_oid.size = strlen(othername_oid);
-	} else {
-		(*names)[*size].othername_oid.data = NULL;
-		(*names)[*size].othername_oid.size = 0;
-	}
+	ret = _gnutls_alt_name_assign_virt_type(&(*names)[*size], san_type, san, othername_oid);
+	if (ret < 0)
+		return gnutls_assert_val(ret);
 
 	(*size)++;
 	return 0;
@@ -318,13 +308,15 @@ int gnutls_x509_ext_export_subject_alt_names(gnutls_subject_alt_names_t sans,
 
 	for (i = 0; i < sans->size; i++) {
 		if (sans->names[i].type == GNUTLS_SAN_OTHERNAME) {
-			ret = gnutls_assert_val(GNUTLS_E_UNIMPLEMENTED_FEATURE);
-			goto cleanup;
+			ret = _gnutls_write_new_othername(c2, "", (char*)sans->names[i].othername_oid.data,
+					      sans->names[i].san.data, sans->names[i].san.size);
+		} else {
+			ret =
+			    _gnutls_write_new_general_name(c2, "", sans->names[i].type,
+							   sans->names[i].san.data,
+							   sans->names[i].san.size);
 		}
-		ret =
-		    _gnutls_write_new_general_name(c2, "", sans->names[i].type,
-						   sans->names[i].san.data,
-						   sans->names[i].san.size);
+
 		if (ret < 0) {
 			gnutls_assert();
 			goto cleanup;
@@ -357,8 +349,10 @@ int gnutls_x509_ext_export_subject_alt_names(gnutls_subject_alt_names_t sans,
  *
  * When the @flags is set to %GNUTLS_NAME_CONSTRAINTS_FLAG_APPEND, then if 
  * the @nc type is empty this function will behave identically as if the flag was not set.
- * Otherwise if there are elements in the @nc type then only the
- * excluded constraints will be appended to the constraints.
+ * Otherwise if there are elements in the @nc structure then the
+ * constraints will be merged with the existing constraints following
+ * RFC5280 p6.1.4 (excluded constraints will be appended, permitted
+ * will be intersected).
  *
  * Note that @nc must be initialized prior to calling this function.
  *
@@ -373,6 +367,7 @@ int gnutls_x509_ext_import_name_constraints(const gnutls_datum_t * ext,
 {
 	int result, ret;
 	ASN1_TYPE c2 = ASN1_TYPE_EMPTY;
+	gnutls_x509_name_constraints_t nc2 = NULL;
 
 	result = asn1_create_element
 	    (_gnutls_get_pkix(), "PKIX1.NameConstraints", &c2);
@@ -388,8 +383,39 @@ int gnutls_x509_ext_import_name_constraints(const gnutls_datum_t * ext,
 		goto cleanup;
 	}
 
-	if (!(flags & GNUTLS_NAME_CONSTRAINTS_FLAG_APPEND)
-	    || (nc->permitted == NULL && nc->excluded == NULL)) {
+	if (flags & GNUTLS_NAME_CONSTRAINTS_FLAG_APPEND &&
+	    (nc->permitted != NULL || nc->excluded != NULL)) {
+		ret = gnutls_x509_name_constraints_init (&nc2);
+		if (ret < 0) {
+			gnutls_assert();
+			goto cleanup;
+		}
+
+		ret =
+		    _gnutls_extract_name_constraints(c2, "permittedSubtrees",
+						     &nc2->permitted);
+		if (ret < 0) {
+			gnutls_assert();
+			goto cleanup;
+		}
+
+		ret =
+		    _gnutls_extract_name_constraints(c2, "excludedSubtrees",
+						     &nc2->excluded);
+		if (ret < 0) {
+			gnutls_assert();
+			goto cleanup;
+		}
+
+		ret = _gnutls_x509_name_constraints_merge(nc, nc2);
+		if (ret < 0) {
+			gnutls_assert();
+			goto cleanup;
+		}
+	} else {
+		_gnutls_name_constraints_node_free(nc->permitted);
+		_gnutls_name_constraints_node_free(nc->excluded);
+
 		ret =
 		    _gnutls_extract_name_constraints(c2, "permittedSubtrees",
 						     &nc->permitted);
@@ -397,20 +423,22 @@ int gnutls_x509_ext_import_name_constraints(const gnutls_datum_t * ext,
 			gnutls_assert();
 			goto cleanup;
 		}
-	}
 
-	ret =
-	    _gnutls_extract_name_constraints(c2, "excludedSubtrees",
-					     &nc->excluded);
-	if (ret < 0) {
-		gnutls_assert();
-		goto cleanup;
+		ret =
+		    _gnutls_extract_name_constraints(c2, "excludedSubtrees",
+						     &nc->excluded);
+		if (ret < 0) {
+			gnutls_assert();
+			goto cleanup;
+		}
 	}
 
 	ret = 0;
 
  cleanup:
 	asn1_delete_structure(&c2);
+	if (nc2)
+		gnutls_x509_name_constraints_deinit (nc2);
 
 	return ret;
 }
@@ -1865,7 +1893,7 @@ int gnutls_x509_ext_import_policies(const gnutls_datum_t * ext,
 				policies->policy[j].qualifier[i].type =
 				    GNUTLS_X509_QUALIFIER_URI;
 			} else if (strcmp(tmpoid, "1.3.6.1.5.5.7.2.2") == 0) {
-				gnutls_datum_t txt;
+				gnutls_datum_t txt = {NULL, 0};
 
 				snprintf(tmpstr, sizeof(tmpstr),
 					 "?%u.policyQualifiers.?%u.qualifier",
@@ -3121,46 +3149,203 @@ int _gnutls_x509_decode_ext(const gnutls_datum_t *der, gnutls_x509_ext_st *out)
 	
 }
 
+/* flags can be zero or GNUTLS_EXT_FLAG_APPEND
+ */
+static int parse_tlsfeatures(ASN1_TYPE c2, gnutls_x509_tlsfeatures_t f, unsigned flags)
+{
+	char nptr[ASN1_MAX_NAME_SIZE];
+	int result;
+	unsigned i, indx, j;
+	unsigned int feature;
+
+	if (!(flags & GNUTLS_EXT_FLAG_APPEND))
+		f->size = 0;
+
+	for (i = 1;; i++) {
+		unsigned skip = 0;
+		snprintf(nptr, sizeof(nptr), "?%u", i);
+
+		result = _gnutls_x509_read_uint(c2, nptr, &feature);
+
+		if (result == GNUTLS_E_ASN1_ELEMENT_NOT_FOUND || result == GNUTLS_E_ASN1_VALUE_NOT_FOUND) {
+			break;
+		}
+		else if (result != GNUTLS_E_SUCCESS) {
+			gnutls_assert();
+			return _gnutls_asn2err(result);
+		}
+
+		if (feature > UINT16_MAX) {
+			gnutls_assert();
+			return GNUTLS_E_CERTIFICATE_ERROR;
+		}
+
+		/* skip duplicates */
+		for (j=0;j<f->size;j++) {
+			if (f->feature[j] == feature) {
+				skip = 1;
+				break;
+			}
+		}
+
+		if (!skip) {
+			if (f->size >= sizeof(f->feature)/sizeof(f->feature[0])) {
+				gnutls_assert();
+				return GNUTLS_E_INTERNAL_ERROR;
+			}
+
+			indx = f->size;
+			f->feature[indx] = feature;
+			f->size++;
+		}
+	}
+
+	return 0;
+}
+
 /**
- * gnutls_x509_othername_to_virtual:
- * @oid: The othername object identifier
- * @othername: The othername data
- * @virt_type: GNUTLS_SAN_OTHERNAME_XXX
- * @virt: allocated printable data
+ * gnutls_x509_ext_import_tlsfeatures:
+ * @ext: The DER-encoded extension data
+ * @f: The features structure
+ * @flags: zero or %GNUTLS_EXT_FLAG_APPEND
  *
- * This function will parse and convert the othername data to a virtual
- * type supported by gnutls.
+ * This function will export the features in the provided DER-encoded
+ * TLS Features PKIX extension, to a %gnutls_x509_tlsfeatures_t type. @f
+ * must be initialized.
+ *
+ * When the @flags is set to %GNUTLS_EXT_FLAG_APPEND,
+ * then if the @features structure is empty this function will behave
+ * identically as if the flag was not set. Otherwise if there are elements 
+ * in the @features structure then they will be merged with.
  *
  * Returns: On success, %GNUTLS_E_SUCCESS (0) is returned, otherwise a negative error value.
  *
- * Since: 3.3.8
+ * Since: 3.5.1
  **/
-int gnutls_x509_othername_to_virtual(const char *oid, 
-				     const gnutls_datum_t *othername,
-				     unsigned int *virt_type,
-				     gnutls_datum_t *virt)
+int gnutls_x509_ext_import_tlsfeatures(const gnutls_datum_t * ext,
+				       gnutls_x509_tlsfeatures_t f,
+				       unsigned int flags)
 {
 	int ret;
-	unsigned type;
+	ASN1_TYPE c2 = ASN1_TYPE_EMPTY;
 
-	type = _san_othername_to_virtual(oid, strlen(oid));
-	if (type == GNUTLS_SAN_OTHERNAME)
-		return gnutls_assert_val(GNUTLS_E_X509_UNKNOWN_SAN);
-
-	if (virt_type)
-		*virt_type = type;
-
-	switch(type) {
-		case GNUTLS_SAN_OTHERNAME_XMPP:
-			ret = _gnutls_x509_decode_string
-				    (ASN1_ETYPE_UTF8_STRING, othername->data,
-				     othername->size, virt, 0);
-			if (ret < 0) {
-				gnutls_assert();
-				return ret;
-			}
-			return 0;
-		default:
-			return gnutls_assert_val(GNUTLS_E_INTERNAL_ERROR);
+	if (ext->size == 0 || ext->data == NULL) {
+		gnutls_assert();
+		return GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE;
 	}
+
+	ret = asn1_create_element(_gnutls_get_pkix(),
+				  "PKIX1.TlsFeatures", &c2);
+	if (ret != ASN1_SUCCESS) {
+		gnutls_assert();
+		return _gnutls_asn2err(ret);
+	}
+
+	ret = _asn1_strict_der_decode(&c2, ext->data, ext->size, NULL);
+	if (ret != ASN1_SUCCESS) {
+		gnutls_assert();
+		ret = _gnutls_asn2err(ret);
+		goto cleanup;
+	}
+
+	ret = parse_tlsfeatures(c2, f, flags);
+	if (ret < 0) {
+		gnutls_assert();
+	}
+
+ cleanup:
+	asn1_delete_structure(&c2);
+
+	return ret;
+}
+
+/**
+ * gnutls_x509_ext_export_tlsfeatures:
+ * @f: The features structure
+ * @ext: The DER-encoded extension data; must be freed using gnutls_free().
+ *
+ * This function will convert the provided TLS features structure structure to a
+ * DER-encoded TLS features PKIX extension. The output data in @ext will be allocated using
+ * gnutls_malloc().
+ *
+ * Returns: On success, %GNUTLS_E_SUCCESS (0) is returned, otherwise a negative error value.
+ *
+ * Since: 3.5.1
+ **/
+int gnutls_x509_ext_export_tlsfeatures(gnutls_x509_tlsfeatures_t f,
+					  gnutls_datum_t * ext)
+{
+	if (f == NULL) {
+		gnutls_assert();
+		return GNUTLS_E_INVALID_REQUEST;
+	}
+
+	ASN1_TYPE c2 = ASN1_TYPE_EMPTY;
+	int ret;
+	unsigned i;
+
+	ret = asn1_create_element(_gnutls_get_pkix(), "PKIX1.TlsFeatures", &c2);
+	if (ret != ASN1_SUCCESS) {
+		gnutls_assert();
+		return _gnutls_asn2err(ret);
+	}
+
+	for (i = 0; i < f->size; ++i) {
+
+		ret = asn1_write_value(c2, "", "NEW", 1);
+		if (ret != ASN1_SUCCESS) {
+			gnutls_assert();
+			ret = _gnutls_asn2err(ret);
+			goto cleanup;
+		}
+
+		ret = _gnutls_x509_write_uint32(c2, "?LAST", f->feature[i]);
+		if (ret != GNUTLS_E_SUCCESS) {
+			gnutls_assert();
+			goto cleanup;
+		}
+	}
+
+	ret = _gnutls_x509_der_encode(c2, "", ext, 0);
+	if (ret < 0) {
+		gnutls_assert();
+		goto cleanup;
+	}
+
+	ret = 0;
+
+ cleanup:
+	asn1_delete_structure(&c2);
+	return ret;
+}
+
+/**
+ * gnutls_x509_tlsfeatures_add:
+ * @f: The TLS features
+ * @feature: The feature to add
+ *
+ * This function will append a feature to the X.509 TLS features
+ * extension structure.
+ *
+ * Returns: On success, %GNUTLS_E_SUCCESS (0) is returned,
+ *   otherwise a negative error value.
+ *
+ * Since: 3.5.1
+ **/
+int gnutls_x509_tlsfeatures_add(gnutls_x509_tlsfeatures_t f, unsigned int feature)
+{
+	if (f == NULL) {
+		gnutls_assert();
+		return GNUTLS_E_INVALID_REQUEST;
+	}
+
+	if (feature > UINT16_MAX)
+		return gnutls_assert_val(GNUTLS_E_INVALID_REQUEST);
+
+	if (f->size >= sizeof(f->feature)/sizeof(f->feature[0]))
+		return gnutls_assert_val(GNUTLS_E_INTERNAL_ERROR);
+
+	f->feature[f->size++] = feature;
+
+	return 0;
 }

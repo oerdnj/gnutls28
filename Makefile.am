@@ -42,17 +42,18 @@ if HAVE_GUILE
 SUBDIRS += guile
 endif
 
+if ENABLE_MANPAGES
+SUBDIRS += doc/manpages
+endif
+
 if ENABLE_DOC
 SUBDIRS += doc
 endif
 
 ACLOCAL_AMFLAGS = -I m4 -I gl/m4 -I src/libopts/m4 -I src/gl/m4
 
-EXTRA_DIST = cfg.mk maint.mk .clcopying
-
-README-alpha: README.md
-	cp $^ $@
-	chmod 444 $@
+EXTRA_DIST = cfg.mk maint.mk .clcopying CONTRIBUTING.md README.md LICENSE AUTHORS NEWS \
+	ChangeLog THANKS INSTALL.md
 
 TMPFILE="abi-temp.xml"
 
@@ -71,6 +72,11 @@ abi-check:
 	@echo "<libs>$(builddir)/libdane/.libs</libs>" >>$(TMPFILE)
 	test ! -f "$(srcdir)/devel/ABI-dane-$$(uname -m).dump" || abi-compliance-checker -abi -lib gnutls-dane -old "$(srcdir)/devel/ABI-dane-$$(uname -m).dump" -new $(TMPFILE)
 	@rm -f $(TMPFILE)
+
+@CODE_COVERAGE_RULES@
+
+local-code-coverage-output: code-coverage-capture
+	cat GnuTLS-$(VERSION)-coverage/index.html|grep headerCovTableEntryLo|head -1|sed 's/^.*>\([0-9]\+\.[0-9]\+\s*%\)<.*$$/ coverage lines: \1/'
 
 dist-hook: abi-check
 	make -C doc/ compare-makefile

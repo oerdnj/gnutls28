@@ -22,18 +22,19 @@
  *
  */
 
-#include <gnutls_int.h>
+#include "gnutls_int.h"
 
-#include <gnutls_datum.h>
-#include <gnutls_global.h>
-#include <gnutls_errors.h>
+#include <datum.h>
+#include <global.h>
+#include "errors.h"
 #include <common.h>
-#include <gnutls_x509.h>
+#include <x509.h>
 #include <x509_b64.h>
 #include "x509_int.h"
 #include <algorithms.h>
-#include <gnutls_num.h>
+#include <num.h>
 #include <random.h>
+#include <pk.h>
 #include <nettle/pbkdf2.h>
 
 static int _decode_pkcs8_ecc_key(ASN1_TYPE pkcs8_asn,
@@ -1320,7 +1321,7 @@ _decode_pkcs8_dsa_key(ASN1_TYPE pkcs8_asn, gnutls_x509_privkey_t pkey)
 
 	ret =
 	    _gnutls_asn1_encode_privkey(GNUTLS_PK_DSA, &pkey->key,
-					&pkey->params);
+					&pkey->params, pkey->flags&GNUTLS_PRIVKEY_FLAG_EXPORT_COMPAT);
 	if (ret < 0) {
 		gnutls_assert();
 		goto error;
@@ -1507,12 +1508,18 @@ gnutls_x509_privkey_import_pkcs8(gnutls_x509_privkey_t key,
 		goto cleanup;
 	}
 
+	result =
+	    _gnutls_pk_fixup(key->pk_algorithm, GNUTLS_IMPORT, &key->params);
+	if (result < 0) {
+		gnutls_assert();
+		goto cleanup;
+	}
+
 	if (need_free)
 		_gnutls_free_datum(&_data);
 
 	/* The key has now been decoded.
 	 */
-
 	return 0;
 
       cleanup:

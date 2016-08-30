@@ -57,7 +57,7 @@ Usage:  danetool [ -<flag> [<val>] | --<name>[@{=| @}<val>] ]...
                                 - requires the option 'host'
        --host=str             Specify the hostname to be used in the DANE RR
        --proto=str            The protocol set for DANE data (tcp, udp etc.)
-       --port=num             Specify the port number for the DANE data
+       --port=str             The port or service to connect to, for DANE data
        --app-proto=str        an alias for the 'starttls-proto' option
        --starttls-proto=str   The application protocol to be used to obtain the server's certificate
 (https, ftp, smtp, imap, ldap, xmpp)
@@ -173,7 +173,7 @@ This is an alias for the @code{starttls-proto} option,
 
 This is the ``the application protocol to be used to obtain the server's certificate (https, ftp, smtp, imap, ldap, xmpp)'' option.
 This option takes a string argument.
-When the server's certificate isn't provided danetool will connect to the server to obtain the certificate. In that case it is required to known the protocol to talk with the server prior to initiating the TLS handshake.
+When the server's certificate isn't provided danetool will connect to the server to obtain the certificate. In that case it is required to know the protocol to talk with the server prior to initiating the TLS handshake.
 @anchor{danetool ca}
 @subsubheading ca option
 
@@ -308,7 +308,12 @@ To read a server's DANE TLSA entry, use:
 $ danetool --check www.example.com --proto tcp --port 443
 @end example
 
-To verify a server's DANE TLSA entry, use:
+To verify an HTTPS server's DANE TLSA entry, use:
 @example
 $ danetool --check www.example.com --proto tcp --port 443 --load-certificate chain.pem
+@end example
+
+To verify an SMTP server's DANE TLSA entry, use:
+@example
+$ danetool --check www.example.com --proto tcp --starttls-proto=smtp --load-certificate chain.pem
 @end example

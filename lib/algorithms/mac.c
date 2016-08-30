@@ -20,9 +20,9 @@
  *
  */
 
-#include <gnutls_int.h>
+#include "gnutls_int.h"
 #include <algorithms.h>
-#include <gnutls_errors.h>
+#include "errors.h"
 #include <x509/common.h>
 
 static const mac_entry_st hash_algorithms[] = {
@@ -36,6 +36,14 @@ static const mac_entry_st hash_algorithms[] = {
 	 64},
 	{"SHA224", HASH_OID_SHA224, GNUTLS_MAC_SHA224, 28, 28, 0, 0, 1,
 	 64},
+	{"SHA3-256", HASH_OID_SHA3_256, GNUTLS_MAC_SHA3_256, 32, 32, 0, 0, 1,
+	 136},
+	{"SHA3-384", HASH_OID_SHA3_384, GNUTLS_MAC_SHA3_384, 48, 48, 0, 0, 1,
+	 104},
+	{"SHA3-512", HASH_OID_SHA3_512, GNUTLS_MAC_SHA3_512, 64, 64, 0, 0, 1,
+	 72},
+	{"SHA3-224", HASH_OID_SHA3_224, GNUTLS_MAC_SHA3_224, 28, 28, 0, 0, 1,
+	 144},
 	{"UMAC-96", NULL, GNUTLS_MAC_UMAC_96, 12, 16, 8, 0, 1, 0},
 	{"UMAC-128", NULL, GNUTLS_MAC_UMAC_128, 16, 16, 8, 0, 1, 0},
 	{"AEAD", NULL, GNUTLS_MAC_AEAD, 0, 0, 0, 1, 1, 0},
@@ -280,7 +288,9 @@ gnutls_digest_algorithm_t gnutls_oid_to_digest(const char *oid)
 
 	GNUTLS_HASH_LOOP(
 		if (p->oid && strcmp(oid, p->oid) == 0) {
-			ret = (gnutls_digest_algorithm_t) p->id; 
+			if (_gnutls_digest_exists((gnutls_digest_algorithm_t)p->id)) {
+				ret = (gnutls_digest_algorithm_t) p->id;
+			}
 			break;
 		}
 	);

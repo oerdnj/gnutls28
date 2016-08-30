@@ -112,6 +112,7 @@ host_triplet = @host@
 
 @ENABLE_SRP_TRUE@@ENABLE_TOOLS_TRUE@am__append_2 = srptool.1
 @ENABLE_DANE_TRUE@@ENABLE_TOOLS_TRUE@am__append_3 = danetool.1
+@ENABLE_DOC_TRUE@am__append_4 = $(APIMANS)
 subdir = doc/manpages
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/src/gl/m4/arpa_inet_h.m4 \
@@ -149,12 +150,10 @@ am__aclocal_m4_deps = $(top_srcdir)/src/gl/m4/arpa_inet_h.m4 \
 	$(top_srcdir)/src/libopts/m4/stdnoreturn.m4 \
 	$(top_srcdir)/gl/m4/00gnulib.m4 \
 	$(top_srcdir)/gl/m4/absolute-header.m4 \
-	$(top_srcdir)/gl/m4/alloca.m4 $(top_srcdir)/gl/m4/base64.m4 \
-	$(top_srcdir)/gl/m4/byteswap.m4 $(top_srcdir)/gl/m4/ctype.m4 \
-	$(top_srcdir)/gl/m4/errno_h.m4 \
+	$(top_srcdir)/gl/m4/alloca.m4 $(top_srcdir)/gl/m4/byteswap.m4 \
+	$(top_srcdir)/gl/m4/ctype.m4 $(top_srcdir)/gl/m4/errno_h.m4 \
 	$(top_srcdir)/gl/m4/exponentd.m4 \
 	$(top_srcdir)/gl/m4/extensions.m4 \
-	$(top_srcdir)/gl/m4/extern-inline.m4 \
 	$(top_srcdir)/gl/m4/fcntl_h.m4 $(top_srcdir)/gl/m4/fdopen.m4 \
 	$(top_srcdir)/gl/m4/float_h.m4 $(top_srcdir)/gl/m4/fpieee.m4 \
 	$(top_srcdir)/gl/m4/fseeko.m4 $(top_srcdir)/gl/m4/fstat.m4 \
@@ -208,10 +207,11 @@ am__aclocal_m4_deps = $(top_srcdir)/src/gl/m4/arpa_inet_h.m4 \
 	$(top_srcdir)/gl/m4/vsnprintf.m4 \
 	$(top_srcdir)/gl/m4/warn-on-use.m4 \
 	$(top_srcdir)/gl/m4/warnings.m4 $(top_srcdir)/gl/m4/wchar_h.m4 \
-	$(top_srcdir)/m4/fcntl-o.m4 $(top_srcdir)/m4/gettext.m4 \
-	$(top_srcdir)/m4/gtk-doc.m4 $(top_srcdir)/m4/guile.m4 \
-	$(top_srcdir)/m4/hooks.m4 $(top_srcdir)/m4/iconv.m4 \
-	$(top_srcdir)/m4/intlmacosx.m4 \
+	$(top_srcdir)/m4/ax_code_coverage.m4 \
+	$(top_srcdir)/m4/extern-inline.m4 $(top_srcdir)/m4/fcntl-o.m4 \
+	$(top_srcdir)/m4/gettext.m4 $(top_srcdir)/m4/gtk-doc.m4 \
+	$(top_srcdir)/m4/guile.m4 $(top_srcdir)/m4/hooks.m4 \
+	$(top_srcdir)/m4/iconv.m4 $(top_srcdir)/m4/intlmacosx.m4 \
 	$(top_srcdir)/m4/inttypes-pri.m4 \
 	$(top_srcdir)/m4/inttypes_h.m4 $(top_srcdir)/m4/lib-ld.m4 \
 	$(top_srcdir)/m4/lib-link.m4 $(top_srcdir)/m4/lib-prefix.m4 \
@@ -309,6 +309,13 @@ CCASDEPMODE = @CCASDEPMODE@
 CCASFLAGS = @CCASFLAGS@
 CCDEPMODE = @CCDEPMODE@
 CFLAGS = @CFLAGS@
+CMOCKA_CFLAGS = @CMOCKA_CFLAGS@
+CMOCKA_LIBS = @CMOCKA_LIBS@
+CODE_COVERAGE_CFLAGS = @CODE_COVERAGE_CFLAGS@
+CODE_COVERAGE_CPPFLAGS = @CODE_COVERAGE_CPPFLAGS@
+CODE_COVERAGE_CXXFLAGS = @CODE_COVERAGE_CXXFLAGS@
+CODE_COVERAGE_ENABLED = @CODE_COVERAGE_ENABLED@
+CODE_COVERAGE_LDFLAGS = @CODE_COVERAGE_LDFLAGS@
 CONFIG_INCLUDE = @CONFIG_INCLUDE@
 CPP = @CPP@
 CPPFLAGS = @CPPFLAGS@
@@ -344,6 +351,8 @@ EXEEXT = @EXEEXT@
 FGREP = @FGREP@
 FIPS140_LIBS = @FIPS140_LIBS@
 FLOAT_H = @FLOAT_H@
+GCOV = @GCOV@
+GENHTML = @GENHTML@
 GETADDRINFO_LIB = @GETADDRINFO_LIB@
 GETTEXT_MACRO_VERSION = @GETTEXT_MACRO_VERSION@
 GMP_CFLAGS = @GMP_CFLAGS@
@@ -620,6 +629,7 @@ GREP = @GREP@
 GTKDOC_CHECK = @GTKDOC_CHECK@
 GTKDOC_MKPDF = @GTKDOC_MKPDF@
 GTKDOC_REBASE = @GTKDOC_REBASE@
+GUILD = @GUILD@
 GUILE = @GUILE@
 GUILE_CFLAGS = @GUILE_CFLAGS@
 GUILE_CONFIG = @GUILE_CONFIG@
@@ -707,11 +717,13 @@ HAVE_INTTYPES_H = @HAVE_INTTYPES_H@
 HAVE_ISBLANK = @HAVE_ISBLANK@
 HAVE_LCHMOD = @HAVE_LCHMOD@
 HAVE_LCHOWN = @HAVE_LCHOWN@
+HAVE_LIBCRYPTO = @HAVE_LIBCRYPTO@
 HAVE_LIBDL = @HAVE_LIBDL@
 HAVE_LIBICONV = @HAVE_LIBICONV@
 HAVE_LIBNSL = @HAVE_LIBNSL@
 HAVE_LIBPTHREAD = @HAVE_LIBPTHREAD@
 HAVE_LIBRT = @HAVE_LIBRT@
+HAVE_LIBSECCOMP = @HAVE_LIBSECCOMP@
 HAVE_LIBZ = @HAVE_LIBZ@
 HAVE_LINK = @HAVE_LINK@
 HAVE_LINKAT = @HAVE_LINKAT@
@@ -873,8 +885,11 @@ INT32_MAX_LT_INTMAX_MAX = @INT32_MAX_LT_INTMAX_MAX@
 INT64_MAX_EQ_LONG_MAX = @INT64_MAX_EQ_LONG_MAX@
 INTLLIBS = @INTLLIBS@
 INTL_MACOSX_LIBS = @INTL_MACOSX_LIBS@
+LCOV = @LCOV@
 LD = @LD@
 LDFLAGS = @LDFLAGS@
+LIBCRYPTO = @LIBCRYPTO@
+LIBCRYPTO_PREFIX = @LIBCRYPTO_PREFIX@
 LIBDL = @LIBDL@
 LIBDL_PREFIX = @LIBDL_PREFIX@
 LIBGNUTLS_CFLAGS = @LIBGNUTLS_CFLAGS@
@@ -895,6 +910,8 @@ LIBPTHREAD_PREFIX = @LIBPTHREAD_PREFIX@
 LIBRT = @LIBRT@
 LIBRT_PREFIX = @LIBRT_PREFIX@
 LIBS = @LIBS@
+LIBSECCOMP = @LIBSECCOMP@
+LIBSECCOMP_PREFIX = @LIBSECCOMP_PREFIX@
 LIBSOCKET = @LIBSOCKET@
 LIBTASN1_CFLAGS = @LIBTASN1_CFLAGS@
 LIBTASN1_LIBS = @LIBTASN1_LIBS@
@@ -907,6 +924,7 @@ LIB_SELECT = @LIB_SELECT@
 LIPO = @LIPO@
 LN_S = @LN_S@
 LTALLOCA = @LTALLOCA@
+LTLIBCRYPTO = @LTLIBCRYPTO@
 LTLIBDL = @LTLIBDL@
 LTLIBICONV = @LTLIBICONV@
 LTLIBINTL = @LTLIBINTL@
@@ -914,6 +932,7 @@ LTLIBNSL = @LTLIBNSL@
 LTLIBOBJS = @LTLIBOBJS@
 LTLIBPTHREAD = @LTLIBPTHREAD@
 LTLIBRT = @LTLIBRT@
+LTLIBSECCOMP = @LTLIBSECCOMP@
 LTLIBZ = @LTLIBZ@
 LT_AGE = @LT_AGE@
 LT_CURRENT = @LT_CURRENT@
@@ -924,6 +943,7 @@ LT_REVISION = @LT_REVISION@
 LT_SSL_AGE = @LT_SSL_AGE@
 LT_SSL_CURRENT = @LT_SSL_CURRENT@
 LT_SSL_REVISION = @LT_SSL_REVISION@
+LT_SYS_LIBRARY_PATH = @LT_SYS_LIBRARY_PATH@
 LT_XSSL_AGE = @LT_XSSL_AGE@
 LT_XSSL_CURRENT = @LT_XSSL_CURRENT@
 LT_XSSL_REVISION = @LT_XSSL_REVISION@
@@ -1231,6 +1251,7 @@ gltests_LTLIBOBJS = @gltests_LTLIBOBJS@
 gltests_WITNESS = @gltests_WITNESS@
 guile_snarf = @guile_snarf@
 guileextensiondir = @guileextensiondir@
+guileobjectdir = @guileobjectdir@
 host = @host@
 host_alias = @host_alias@
 host_cpu = @host_cpu@
@@ -1262,7 +1283,7 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 EXTRA_DIST = stamp_mans
 dist_man_MANS = $(am__append_1) $(am__append_2) $(am__append_3) \
-	$(APIMANS)
+	$(am__append_4)
 APIMANS = dane_cert_type_name.3 dane_cert_usage_name.3 \
 	dane_match_type_name.3 dane_query_data.3 dane_query_deinit.3 \
 	dane_query_entries.3 dane_query_status.3 dane_query_tlsa.3 \
@@ -1368,27 +1389,30 @@ APIMANS = dane_cert_type_name.3 dane_cert_usage_name.3 \
 	gnutls_db_remove_session.3 gnutls_db_set_cache_expiration.3 \
 	gnutls_db_set_ptr.3 gnutls_db_set_remove_function.3 \
 	gnutls_db_set_retrieve_function.3 \
-	gnutls_db_set_store_function.3 gnutls_deinit.3 \
-	gnutls_dh_get_group.3 gnutls_dh_get_peers_public_bits.3 \
-	gnutls_dh_get_prime_bits.3 gnutls_dh_get_pubkey.3 \
-	gnutls_dh_get_secret_bits.3 gnutls_dh_params_cpy.3 \
-	gnutls_dh_params_deinit.3 gnutls_dh_params_export2_pkcs3.3 \
+	gnutls_db_set_store_function.3 gnutls_decode_ber_digest_info.3 \
+	gnutls_deinit.3 gnutls_dh_get_group.3 \
+	gnutls_dh_get_peers_public_bits.3 gnutls_dh_get_prime_bits.3 \
+	gnutls_dh_get_pubkey.3 gnutls_dh_get_secret_bits.3 \
+	gnutls_dh_params_cpy.3 gnutls_dh_params_deinit.3 \
+	gnutls_dh_params_export2_pkcs3.3 \
 	gnutls_dh_params_export_pkcs3.3 gnutls_dh_params_export_raw.3 \
-	gnutls_dh_params_generate2.3 gnutls_dh_params_import_pkcs3.3 \
-	gnutls_dh_params_import_raw.3 gnutls_dh_params_import_raw2.3 \
-	gnutls_dh_params_init.3 gnutls_dh_set_prime_bits.3 \
-	gnutls_digest_get_id.3 gnutls_digest_get_name.3 \
-	gnutls_digest_get_oid.3 gnutls_digest_list.3 \
-	gnutls_digest_self_test.3 gnutls_dtls_cookie_send.3 \
-	gnutls_dtls_cookie_verify.3 gnutls_dtls_get_data_mtu.3 \
-	gnutls_dtls_get_mtu.3 gnutls_dtls_get_timeout.3 \
-	gnutls_dtls_prestate_set.3 gnutls_dtls_set_data_mtu.3 \
-	gnutls_dtls_set_mtu.3 gnutls_dtls_set_timeouts.3 \
-	gnutls_ecc_curve_get.3 gnutls_ecc_curve_get_id.3 \
-	gnutls_ecc_curve_get_name.3 gnutls_ecc_curve_get_oid.3 \
+	gnutls_dh_params_generate2.3 gnutls_dh_params_import_dsa.3 \
+	gnutls_dh_params_import_pkcs3.3 gnutls_dh_params_import_raw.3 \
+	gnutls_dh_params_import_raw2.3 gnutls_dh_params_init.3 \
+	gnutls_dh_set_prime_bits.3 gnutls_digest_get_id.3 \
+	gnutls_digest_get_name.3 gnutls_digest_get_oid.3 \
+	gnutls_digest_list.3 gnutls_digest_self_test.3 \
+	gnutls_dtls_cookie_send.3 gnutls_dtls_cookie_verify.3 \
+	gnutls_dtls_get_data_mtu.3 gnutls_dtls_get_mtu.3 \
+	gnutls_dtls_get_timeout.3 gnutls_dtls_prestate_set.3 \
+	gnutls_dtls_set_data_mtu.3 gnutls_dtls_set_mtu.3 \
+	gnutls_dtls_set_timeouts.3 gnutls_ecc_curve_get.3 \
+	gnutls_ecc_curve_get_id.3 gnutls_ecc_curve_get_name.3 \
+	gnutls_ecc_curve_get_oid.3 gnutls_ecc_curve_get_pk.3 \
 	gnutls_ecc_curve_get_size.3 gnutls_ecc_curve_list.3 \
-	gnutls_error_is_fatal.3 gnutls_error_to_alert.3 \
-	gnutls_est_record_overhead_size.3 gnutls_ext_get_data.3 \
+	gnutls_encode_ber_digest_info.3 gnutls_error_is_fatal.3 \
+	gnutls_error_to_alert.3 gnutls_est_record_overhead_size.3 \
+	gnutls_ext_get_data.3 gnutls_ext_get_name.3 \
 	gnutls_ext_register.3 gnutls_ext_set_data.3 \
 	gnutls_fingerprint.3 gnutls_fips140_mode_enabled.3 \
 	gnutls_global_deinit.3 gnutls_global_init.3 \
@@ -1604,7 +1628,8 @@ APIMANS = dane_cert_type_name.3 dane_cert_usage_name.3 \
 	gnutls_privkey_export_ecc_raw.3 \
 	gnutls_privkey_export_openpgp.3 gnutls_privkey_export_pkcs11.3 \
 	gnutls_privkey_export_rsa_raw.3 gnutls_privkey_export_x509.3 \
-	gnutls_privkey_generate.3 gnutls_privkey_get_pk_algorithm.3 \
+	gnutls_privkey_generate.3 gnutls_privkey_generate2.3 \
+	gnutls_privkey_get_pk_algorithm.3 gnutls_privkey_get_seed.3 \
 	gnutls_privkey_get_type.3 gnutls_privkey_import_dsa_raw.3 \
 	gnutls_privkey_import_ecc_raw.3 gnutls_privkey_import_ext.3 \
 	gnutls_privkey_import_ext2.3 gnutls_privkey_import_ext3.3 \
@@ -1616,9 +1641,10 @@ APIMANS = dane_cert_type_name.3 dane_cert_usage_name.3 \
 	gnutls_privkey_import_tpm_raw.3 \
 	gnutls_privkey_import_tpm_url.3 gnutls_privkey_import_url.3 \
 	gnutls_privkey_import_x509.3 gnutls_privkey_import_x509_raw.3 \
-	gnutls_privkey_init.3 gnutls_privkey_set_pin_function.3 \
-	gnutls_privkey_sign_data.3 gnutls_privkey_sign_hash.3 \
-	gnutls_privkey_status.3 gnutls_privkey_verify_params.3 \
+	gnutls_privkey_init.3 gnutls_privkey_set_flags.3 \
+	gnutls_privkey_set_pin_function.3 gnutls_privkey_sign_data.3 \
+	gnutls_privkey_sign_hash.3 gnutls_privkey_status.3 \
+	gnutls_privkey_verify_params.3 gnutls_privkey_verify_seed.3 \
 	gnutls_protocol_get_id.3 gnutls_protocol_get_name.3 \
 	gnutls_protocol_get_version.3 gnutls_protocol_list.3 \
 	gnutls_psk_allocate_client_credentials.3 \
@@ -1677,7 +1703,8 @@ APIMANS = dane_cert_type_name.3 dane_cert_usage_name.3 \
 	gnutls_session_ext_master_secret_status.3 \
 	gnutls_session_force_valid.3 gnutls_session_get_data.3 \
 	gnutls_session_get_data2.3 gnutls_session_get_desc.3 \
-	gnutls_session_get_id.3 gnutls_session_get_id2.3 \
+	gnutls_session_get_flags.3 gnutls_session_get_id.3 \
+	gnutls_session_get_id2.3 gnutls_session_get_master_secret.3 \
 	gnutls_session_get_ptr.3 gnutls_session_get_random.3 \
 	gnutls_session_get_verify_cert_status.3 \
 	gnutls_session_is_resumed.3 \
@@ -1731,8 +1758,9 @@ APIMANS = dane_cert_type_name.3 dane_cert_usage_name.3 \
 	gnutls_transport_get_int2.3 gnutls_transport_get_ptr.3 \
 	gnutls_transport_get_ptr2.3 gnutls_transport_set_errno.3 \
 	gnutls_transport_set_errno_function.3 \
-	gnutls_transport_set_int.3 gnutls_transport_set_int2.3 \
-	gnutls_transport_set_ptr.3 gnutls_transport_set_ptr2.3 \
+	gnutls_transport_set_fastopen.3 gnutls_transport_set_int.3 \
+	gnutls_transport_set_int2.3 gnutls_transport_set_ptr.3 \
+	gnutls_transport_set_ptr2.3 \
 	gnutls_transport_set_pull_function.3 \
 	gnutls_transport_set_pull_timeout_function.3 \
 	gnutls_transport_set_push_function.3 \
@@ -1764,6 +1792,7 @@ APIMANS = dane_cert_type_name.3 dane_cert_usage_name.3 \
 	gnutls_x509_crl_get_raw_issuer_dn.3 \
 	gnutls_x509_crl_get_signature.3 \
 	gnutls_x509_crl_get_signature_algorithm.3 \
+	gnutls_x509_crl_get_signature_oid.3 \
 	gnutls_x509_crl_get_this_update.3 \
 	gnutls_x509_crl_get_version.3 gnutls_x509_crl_import.3 \
 	gnutls_x509_crl_init.3 gnutls_x509_crl_iter_crt_serial.3 \
@@ -1795,10 +1824,13 @@ APIMANS = dane_cert_type_name.3 dane_cert_usage_name.3 \
 	gnutls_x509_crq_get_key_rsa_raw.3 \
 	gnutls_x509_crq_get_key_usage.3 \
 	gnutls_x509_crq_get_pk_algorithm.3 \
+	gnutls_x509_crq_get_pk_oid.3 \
 	gnutls_x509_crq_get_private_key_usage_period.3 \
 	gnutls_x509_crq_get_signature_algorithm.3 \
+	gnutls_x509_crq_get_signature_oid.3 \
 	gnutls_x509_crq_get_subject_alt_name.3 \
 	gnutls_x509_crq_get_subject_alt_othername_oid.3 \
+	gnutls_x509_crq_get_tlsfeatures.3 \
 	gnutls_x509_crq_get_version.3 gnutls_x509_crq_import.3 \
 	gnutls_x509_crq_init.3 gnutls_x509_crq_print.3 \
 	gnutls_x509_crq_privkey_sign.3 \
@@ -1806,6 +1838,7 @@ APIMANS = dane_cert_type_name.3 dane_cert_usage_name.3 \
 	gnutls_x509_crq_set_basic_constraints.3 \
 	gnutls_x509_crq_set_challenge_password.3 \
 	gnutls_x509_crq_set_dn.3 gnutls_x509_crq_set_dn_by_oid.3 \
+	gnutls_x509_crq_set_extension_by_oid.3 \
 	gnutls_x509_crq_set_key.3 \
 	gnutls_x509_crq_set_key_purpose_oid.3 \
 	gnutls_x509_crq_set_key_rsa_raw.3 \
@@ -1813,6 +1846,8 @@ APIMANS = dane_cert_type_name.3 dane_cert_usage_name.3 \
 	gnutls_x509_crq_set_private_key_usage_period.3 \
 	gnutls_x509_crq_set_pubkey.3 \
 	gnutls_x509_crq_set_subject_alt_name.3 \
+	gnutls_x509_crq_set_subject_alt_othername.3 \
+	gnutls_x509_crq_set_tlsfeatures.3 \
 	gnutls_x509_crq_set_version.3 gnutls_x509_crq_sign.3 \
 	gnutls_x509_crq_sign2.3 gnutls_x509_crq_verify.3 \
 	gnutls_x509_crt_check_email.3 gnutls_x509_crt_check_hostname.3 \
@@ -1820,6 +1855,7 @@ APIMANS = dane_cert_type_name.3 dane_cert_usage_name.3 \
 	gnutls_x509_crt_check_issuer.3 \
 	gnutls_x509_crt_check_revocation.3 \
 	gnutls_x509_crt_cpy_crl_dist_points.3 gnutls_x509_crt_deinit.3 \
+	gnutls_x509_crt_equals.3 gnutls_x509_crt_equals2.3 \
 	gnutls_x509_crt_export.3 gnutls_x509_crt_export2.3 \
 	gnutls_x509_crt_get_activation_time.3 \
 	gnutls_x509_crt_get_authority_info_access.3 \
@@ -1852,7 +1888,7 @@ APIMANS = dane_cert_type_name.3 dane_cert_usage_name.3 \
 	gnutls_x509_crt_get_name_constraints.3 \
 	gnutls_x509_crt_get_pk_algorithm.3 \
 	gnutls_x509_crt_get_pk_dsa_raw.3 \
-	gnutls_x509_crt_get_pk_ecc_raw.3 \
+	gnutls_x509_crt_get_pk_ecc_raw.3 gnutls_x509_crt_get_pk_oid.3 \
 	gnutls_x509_crt_get_pk_rsa_raw.3 gnutls_x509_crt_get_policy.3 \
 	gnutls_x509_crt_get_preferred_hash_algorithm.3 \
 	gnutls_x509_crt_get_private_key_usage_period.3 \
@@ -1860,12 +1896,14 @@ APIMANS = dane_cert_type_name.3 dane_cert_usage_name.3 \
 	gnutls_x509_crt_get_raw_issuer_dn.3 \
 	gnutls_x509_crt_get_serial.3 gnutls_x509_crt_get_signature.3 \
 	gnutls_x509_crt_get_signature_algorithm.3 \
+	gnutls_x509_crt_get_signature_oid.3 \
 	gnutls_x509_crt_get_subject.3 \
 	gnutls_x509_crt_get_subject_alt_name.3 \
 	gnutls_x509_crt_get_subject_alt_name2.3 \
 	gnutls_x509_crt_get_subject_alt_othername_oid.3 \
 	gnutls_x509_crt_get_subject_key_id.3 \
 	gnutls_x509_crt_get_subject_unique_id.3 \
+	gnutls_x509_crt_get_tlsfeatures.3 \
 	gnutls_x509_crt_get_version.3 gnutls_x509_crt_import.3 \
 	gnutls_x509_crt_import_pkcs11.3 gnutls_x509_crt_import_url.3 \
 	gnutls_x509_crt_init.3 gnutls_x509_crt_list_import.3 \
@@ -1880,11 +1918,14 @@ APIMANS = dane_cert_type_name.3 dane_cert_usage_name.3 \
 	gnutls_x509_crt_set_ca_status.3 \
 	gnutls_x509_crt_set_crl_dist_points.3 \
 	gnutls_x509_crt_set_crl_dist_points2.3 \
-	gnutls_x509_crt_set_crq.3 gnutls_x509_crt_set_crq_extensions.3 \
-	gnutls_x509_crt_set_dn.3 gnutls_x509_crt_set_dn_by_oid.3 \
+	gnutls_x509_crt_set_crq.3 \
+	gnutls_x509_crt_set_crq_extension_by_oid.3 \
+	gnutls_x509_crt_set_crq_extensions.3 gnutls_x509_crt_set_dn.3 \
+	gnutls_x509_crt_set_dn_by_oid.3 \
 	gnutls_x509_crt_set_expiration_time.3 \
 	gnutls_x509_crt_set_extension_by_oid.3 \
 	gnutls_x509_crt_set_issuer_alt_name.3 \
+	gnutls_x509_crt_set_issuer_alt_othername.3 \
 	gnutls_x509_crt_set_issuer_dn.3 \
 	gnutls_x509_crt_set_issuer_dn_by_oid.3 \
 	gnutls_x509_crt_set_issuer_unique_id.3 \
@@ -1899,8 +1940,10 @@ APIMANS = dane_cert_type_name.3 dane_cert_usage_name.3 \
 	gnutls_x509_crt_set_pubkey.3 gnutls_x509_crt_set_serial.3 \
 	gnutls_x509_crt_set_subject_alternative_name.3 \
 	gnutls_x509_crt_set_subject_alt_name.3 \
+	gnutls_x509_crt_set_subject_alt_othername.3 \
 	gnutls_x509_crt_set_subject_key_id.3 \
 	gnutls_x509_crt_set_subject_unique_id.3 \
+	gnutls_x509_crt_set_tlsfeatures.3 \
 	gnutls_x509_crt_set_version.3 gnutls_x509_crt_sign.3 \
 	gnutls_x509_crt_sign2.3 gnutls_x509_crt_verify.3 \
 	gnutls_x509_crt_verify_data2.3 gnutls_x509_dn_deinit.3 \
@@ -1908,7 +1951,8 @@ APIMANS = dane_cert_type_name.3 dane_cert_usage_name.3 \
 	gnutls_x509_dn_get_rdn_ava.3 gnutls_x509_dn_get_str.3 \
 	gnutls_x509_dn_import.3 gnutls_x509_dn_init.3 \
 	gnutls_x509_dn_oid_known.3 gnutls_x509_dn_oid_name.3 \
-	gnutls_x509_ext_deinit.3 gnutls_x509_ext_export_aia.3 \
+	gnutls_x509_dn_set_str.3 gnutls_x509_ext_deinit.3 \
+	gnutls_x509_ext_export_aia.3 \
 	gnutls_x509_ext_export_authority_key_id.3 \
 	gnutls_x509_ext_export_basic_constraints.3 \
 	gnutls_x509_ext_export_crl_dist_points.3 \
@@ -1920,6 +1964,7 @@ APIMANS = dane_cert_type_name.3 dane_cert_usage_name.3 \
 	gnutls_x509_ext_export_proxy.3 \
 	gnutls_x509_ext_export_subject_alt_names.3 \
 	gnutls_x509_ext_export_subject_key_id.3 \
+	gnutls_x509_ext_export_tlsfeatures.3 \
 	gnutls_x509_ext_import_aia.3 \
 	gnutls_x509_ext_import_authority_key_id.3 \
 	gnutls_x509_ext_import_basic_constraints.3 \
@@ -1932,9 +1977,9 @@ APIMANS = dane_cert_type_name.3 dane_cert_usage_name.3 \
 	gnutls_x509_ext_import_proxy.3 \
 	gnutls_x509_ext_import_subject_alt_names.3 \
 	gnutls_x509_ext_import_subject_key_id.3 \
-	gnutls_x509_ext_print.3 gnutls_x509_key_purpose_deinit.3 \
-	gnutls_x509_key_purpose_get.3 gnutls_x509_key_purpose_init.3 \
-	gnutls_x509_key_purpose_set.3 \
+	gnutls_x509_ext_import_tlsfeatures.3 gnutls_x509_ext_print.3 \
+	gnutls_x509_key_purpose_deinit.3 gnutls_x509_key_purpose_get.3 \
+	gnutls_x509_key_purpose_init.3 gnutls_x509_key_purpose_set.3 \
 	gnutls_x509_name_constraints_add_excluded.3 \
 	gnutls_x509_name_constraints_add_permitted.3 \
 	gnutls_x509_name_constraints_check.3 \
@@ -1956,10 +2001,12 @@ APIMANS = dane_cert_type_name.3 dane_cert_usage_name.3 \
 	gnutls_x509_privkey_export_rsa_raw.3 \
 	gnutls_x509_privkey_export_rsa_raw2.3 \
 	gnutls_x509_privkey_fix.3 gnutls_x509_privkey_generate.3 \
+	gnutls_x509_privkey_generate2.3 \
 	gnutls_x509_privkey_get_key_id.3 \
 	gnutls_x509_privkey_get_pk_algorithm.3 \
 	gnutls_x509_privkey_get_pk_algorithm2.3 \
-	gnutls_x509_privkey_import.3 gnutls_x509_privkey_import2.3 \
+	gnutls_x509_privkey_get_seed.3 gnutls_x509_privkey_import.3 \
+	gnutls_x509_privkey_import2.3 \
 	gnutls_x509_privkey_import_dsa_raw.3 \
 	gnutls_x509_privkey_import_ecc_raw.3 \
 	gnutls_x509_privkey_import_openssl.3 \
@@ -1967,11 +2014,17 @@ APIMANS = dane_cert_type_name.3 dane_cert_usage_name.3 \
 	gnutls_x509_privkey_import_rsa_raw.3 \
 	gnutls_x509_privkey_import_rsa_raw2.3 \
 	gnutls_x509_privkey_init.3 gnutls_x509_privkey_sec_param.3 \
+	gnutls_x509_privkey_set_flags.3 \
 	gnutls_x509_privkey_set_pin_function.3 \
 	gnutls_x509_privkey_sign_data.3 \
 	gnutls_x509_privkey_sign_hash.3 \
-	gnutls_x509_privkey_verify_params.3 gnutls_x509_rdn_get.3 \
+	gnutls_x509_privkey_verify_params.3 \
+	gnutls_x509_privkey_verify_seed.3 gnutls_x509_rdn_get.3 \
 	gnutls_x509_rdn_get_by_oid.3 gnutls_x509_rdn_get_oid.3 \
+	gnutls_x509_tlsfeatures_add.3 \
+	gnutls_x509_tlsfeatures_check_crt.3 \
+	gnutls_x509_tlsfeatures_deinit.3 gnutls_x509_tlsfeatures_get.3 \
+	gnutls_x509_tlsfeatures_init.3 \
 	gnutls_x509_trust_list_add_cas.3 \
 	gnutls_x509_trust_list_add_crls.3 \
 	gnutls_x509_trust_list_add_named_crt.3 \
@@ -2004,9 +2057,9 @@ $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu doc/manpages/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign doc/manpages/Makefile'; \
 	$(am__cd) $(top_srcdir) && \
-	  $(AUTOMAKE) --gnu doc/manpages/Makefile
+	  $(AUTOMAKE) --foreign doc/manpages/Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
 	  *config.status*) \
@@ -2371,6 +2424,20 @@ stamp_mans: $(HEADER_FILES)
 			-bugsto $(PACKAGE_BUGREPORT) \
 			-pkg-site "http://www.gnutls.org" \
 			-include "gnutls/compat.h" \
+			-seeinfo $(PACKAGE) -verbatimcopying \
+			-copyright "2001-$(YEAR) Free Software Foundation, Inc., and others" \
+			-function $$i \
+			$(C_SOURCE_FILES) > $$i.3 2>/dev/null && \
+		echo $(ECHO_N) "."; \
+	done
+	@echo ""
+	@echo $(ECHO_N) "Creating man pages for socket.h..." && \
+	for i in `$(top_srcdir)/doc/scripts/getfuncs.pl <$(top_srcdir)/lib/includes/gnutls/socket.h`; do \
+		$(top_srcdir)/doc/scripts/gdoc -man \
+			-module $(PACKAGE) -sourceversion $(VERSION) \
+			-bugsto $(PACKAGE_BUGREPORT) \
+			-pkg-site "http://www.gnutls.org" \
+			-include "gnutls/socket.h" \
 			-seeinfo $(PACKAGE) -verbatimcopying \
 			-copyright "2001-$(YEAR) Free Software Foundation, Inc., and others" \
 			-function $$i \

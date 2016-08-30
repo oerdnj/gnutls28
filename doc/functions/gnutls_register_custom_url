@@ -13,7 +13,8 @@ them, e.g., @code{gnutls_certificate_set_x509_key_file2()} .
 
 The provided structure and callback functions must be valid throughout
 the lifetime of the process. The registration of an existing URL type
-will fail with @code{GNUTLS_E_INVALID_REQUEST} .
+will fail with @code{GNUTLS_E_INVALID_REQUEST} . Since GnuTLS 3.5.0 this function
+can be used to override the builtin URLs.
 
 This function is not thread safe.
 

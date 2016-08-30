@@ -2,7 +2,7 @@
 
 
 
-@deftypefun {int} {gnutls_x509_crq_get_extension_info} (gnutls_x509_crq_t @var{crq}, int @var{indx}, void * @var{oid}, size_t * @var{sizeof_oid}, unsigned int * @var{critical})
+@deftypefun {int} {gnutls_x509_crq_get_extension_info} (gnutls_x509_crq_t @var{crq}, unsigned @var{indx}, void * @var{oid}, size_t * @var{sizeof_oid}, unsigned int * @var{critical})
 @var{crq}: should contain a @code{gnutls_x509_crq_t}  type
 
 @var{indx}: Specifies which extension number to get. Use (0) to get the first one.

@@ -161,7 +161,7 @@
 </tr>
 <tr>
 <td class="function_type">
-<span class="returnvalue">int</span>
+<span class="returnvalue">unsigned</span>
 </td>
 <td class="function_name">
 <a class="link" href="gnutls-x509.html#gnutls-x509-crl-check-issuer" title="gnutls_x509_crl_check_issuer ()">gnutls_x509_crl_check_issuer</a> <span class="c_punctuation">()</span>
@@ -753,7 +753,7 @@
 </tr>
 <tr>
 <td class="function_type">
-<span class="returnvalue">int</span>
+<span class="returnvalue">unsigned</span>
 </td>
 <td class="function_name">
 <a class="link" href="gnutls-x509.html#gnutls-x509-crt-check-hostname" title="gnutls_x509_crt_check_hostname ()">gnutls_x509_crt_check_hostname</a> <span class="c_punctuation">()</span>
@@ -761,7 +761,7 @@
 </tr>
 <tr>
 <td class="function_type">
-<span class="returnvalue">int</span>
+<span class="returnvalue">unsigned</span>
 </td>
 <td class="function_name">
 <a class="link" href="gnutls-x509.html#gnutls-x509-crt-check-issuer" title="gnutls_x509_crt_check_issuer ()">gnutls_x509_crt_check_issuer</a> <span class="c_punctuation">()</span>
@@ -2312,7 +2312,7 @@ negative error value.</p>
 <a name="gnutls-pkcs7-get-crl-raw"></a><h3>gnutls_pkcs7_get_crl_raw ()</h3>
 <pre class="programlisting"><span class="returnvalue">int</span>
 gnutls_pkcs7_get_crl_raw (<em class="parameter"><code><a class="link" href="gnutls-x509.html#gnutls-pkcs7-t" title="gnutls_pkcs7_t"><span class="type">gnutls_pkcs7_t</span></a> pkcs7</code></em>,
-                          <em class="parameter"><code><span class="type">int</span> indx</code></em>,
+                          <em class="parameter"><code><span class="type">unsigned </span> indx</code></em>,
                           <em class="parameter"><code><span class="type">void</span> *crl</code></em>,
                           <em class="parameter"><code><span class="type">size_t</span> *crl_size</code></em>);</pre>
 <p>This function will return a crl of the PKCS7 or RFC2630 crl set.</p>
@@ -2391,7 +2391,7 @@ negative error value.</p>
 <a name="gnutls-pkcs7-get-crt-raw"></a><h3>gnutls_pkcs7_get_crt_raw ()</h3>
 <pre class="programlisting"><span class="returnvalue">int</span>
 gnutls_pkcs7_get_crt_raw (<em class="parameter"><code><a class="link" href="gnutls-x509.html#gnutls-pkcs7-t" title="gnutls_pkcs7_t"><span class="type">gnutls_pkcs7_t</span></a> pkcs7</code></em>,
-                          <em class="parameter"><code><span class="type">int</span> indx</code></em>,
+                          <em class="parameter"><code><span class="type">unsigned </span> indx</code></em>,
                           <em class="parameter"><code><span class="type">void</span> *certificate</code></em>,
                           <em class="parameter"><code><span class="type">size_t</span> *certificate_size</code></em>);</pre>
 <p>This function will return a certificate of the PKCS7 or RFC2630
@@ -2661,7 +2661,7 @@ negative error value.</p>
 <hr>
 <div class="refsect2">
 <a name="gnutls-x509-crl-check-issuer"></a><h3>gnutls_x509_crl_check_issuer ()</h3>
-<pre class="programlisting"><span class="returnvalue">int</span>
+<pre class="programlisting"><span class="returnvalue">unsigned</span>
 gnutls_x509_crl_check_issuer (<em class="parameter"><code><a class="link" href="gnutls-gnutls.html#gnutls-x509-crl-t" title="gnutls_x509_crl_t"><span class="type">gnutls_x509_crl_t</span></a> crl</code></em>,
                               <em class="parameter"><code><a class="link" href="gnutls-gnutls.html#gnutls-x509-crt-t" title="gnutls_x509_crt_t"><span class="type">gnutls_x509_crt_t</span></a> issuer</code></em>);</pre>
 <p>This function will check if the given CRL was issued by the given
@@ -2978,7 +2978,7 @@ given CRL.</p>
 <a name="gnutls-x509-crl-get-crt-serial"></a><h3>gnutls_x509_crl_get_crt_serial ()</h3>
 <pre class="programlisting"><span class="returnvalue">int</span>
 gnutls_x509_crl_get_crt_serial (<em class="parameter"><code><a class="link" href="gnutls-gnutls.html#gnutls-x509-crl-t" title="gnutls_x509_crl_t"><span class="type">gnutls_x509_crl_t</span></a> crl</code></em>,
-                                <em class="parameter"><code><span class="type">int</span> indx</code></em>,
+                                <em class="parameter"><code><span class="type">unsigned </span> indx</code></em>,
                                 <em class="parameter"><code>unsigned <span class="type">char</span> *serial</code></em>,
                                 <em class="parameter"><code><span class="type">size_t</span> *serial_size</code></em>,
                                 <em class="parameter"><code><span class="type">time_t</span> *t</code></em>);</pre>
@@ -3034,7 +3034,7 @@ negative error value.</p>
 <a name="gnutls-x509-crl-get-dn-oid"></a><h3>gnutls_x509_crl_get_dn_oid ()</h3>
 <pre class="programlisting"><span class="returnvalue">int</span>
 gnutls_x509_crl_get_dn_oid (<em class="parameter"><code><a class="link" href="gnutls-gnutls.html#gnutls-x509-crl-t" title="gnutls_x509_crl_t"><span class="type">gnutls_x509_crl_t</span></a> crl</code></em>,
-                            <em class="parameter"><code><span class="type">int</span> indx</code></em>,
+                            <em class="parameter"><code><span class="type">unsigned </span> indx</code></em>,
                             <em class="parameter"><code><span class="type">void</span> *oid</code></em>,
                             <em class="parameter"><code><span class="type">size_t</span> *sizeof_oid</code></em>);</pre>
 <p>This function will extract the requested OID of the name of the CRL
@@ -3084,7 +3084,7 @@ with the required size.  On success 0 is returned.</p>
 <a name="gnutls-x509-crl-get-extension-data"></a><h3>gnutls_x509_crl_get_extension_data ()</h3>
 <pre class="programlisting"><span class="returnvalue">int</span>
 gnutls_x509_crl_get_extension_data (<em class="parameter"><code><a class="link" href="gnutls-gnutls.html#gnutls-x509-crl-t" title="gnutls_x509_crl_t"><span class="type">gnutls_x509_crl_t</span></a> crl</code></em>,
-                                    <em class="parameter"><code><span class="type">int</span> indx</code></em>,
+                                    <em class="parameter"><code><span class="type">unsigned </span> indx</code></em>,
                                     <em class="parameter"><code><span class="type">void</span> *data</code></em>,
                                     <em class="parameter"><code><span class="type">size_t</span> *sizeof_data</code></em>);</pre>
 <p>This function will return the requested extension data in the CRL.
@@ -3141,7 +3141,7 @@ will be returned.</p>
 <a name="gnutls-x509-crl-get-extension-info"></a><h3>gnutls_x509_crl_get_extension_info ()</h3>
 <pre class="programlisting"><span class="returnvalue">int</span>
 gnutls_x509_crl_get_extension_info (<em class="parameter"><code><a class="link" href="gnutls-gnutls.html#gnutls-x509-crl-t" title="gnutls_x509_crl_t"><span class="type">gnutls_x509_crl_t</span></a> crl</code></em>,
-                                    <em class="parameter"><code><span class="type">int</span> indx</code></em>,
+                                    <em class="parameter"><code><span class="type">unsigned </span> indx</code></em>,
                                     <em class="parameter"><code><span class="type">void</span> *oid</code></em>,
                                     <em class="parameter"><code><span class="type">size_t</span> *sizeof_oid</code></em>,
                                     <em class="parameter"><code>unsigned <span class="type">int</span> *critical</code></em>);</pre>
@@ -3207,7 +3207,7 @@ will be returned.</p>
 <a name="gnutls-x509-crl-get-extension-oid"></a><h3>gnutls_x509_crl_get_extension_oid ()</h3>
 <pre class="programlisting"><span class="returnvalue">int</span>
 gnutls_x509_crl_get_extension_oid (<em class="parameter"><code><a class="link" href="gnutls-gnutls.html#gnutls-x509-crl-t" title="gnutls_x509_crl_t"><span class="type">gnutls_x509_crl_t</span></a> crl</code></em>,
-                                   <em class="parameter"><code><span class="type">int</span> indx</code></em>,
+                                   <em class="parameter"><code><span class="type">unsigned </span> indx</code></em>,
                                    <em class="parameter"><code><span class="type">void</span> *oid</code></em>,
                                    <em class="parameter"><code><span class="type">size_t</span> *sizeof_oid</code></em>);</pre>
 <p>This function will return the requested extension OID in the CRL.
@@ -3308,7 +3308,7 @@ with the required size, and 0 on success.</p>
 <pre class="programlisting"><span class="returnvalue">int</span>
 gnutls_x509_crl_get_issuer_dn_by_oid (<em class="parameter"><code><a class="link" href="gnutls-gnutls.html#gnutls-x509-crl-t" title="gnutls_x509_crl_t"><span class="type">gnutls_x509_crl_t</span></a> crl</code></em>,
                                       <em class="parameter"><code>const <span class="type">char</span> *oid</code></em>,
-                                      <em class="parameter"><code><span class="type">int</span> indx</code></em>,
+                                      <em class="parameter"><code><span class="type">unsigned </span> indx</code></em>,
                                       <em class="parameter"><code>unsigned <span class="type">int</span> raw_flag</code></em>,
                                       <em class="parameter"><code><span class="type">void</span> *buf</code></em>,
                                       <em class="parameter"><code><span class="type">size_t</span> *sizeof_buf</code></em>);</pre>
@@ -4188,7 +4188,7 @@ negative error value.</p>
 <pre class="programlisting"><span class="returnvalue">int</span>
 gnutls_x509_crl_verify (<em class="parameter"><code><a class="link" href="gnutls-gnutls.html#gnutls-x509-crl-t" title="gnutls_x509_crl_t"><span class="type">gnutls_x509_crl_t</span></a> crl</code></em>,
                         <em class="parameter"><code>const <a class="link" href="gnutls-gnutls.html#gnutls-x509-crt-t" title="gnutls_x509_crt_t"><span class="type">gnutls_x509_crt_t</span></a> *CA_list</code></em>,
-                        <em class="parameter"><code><span class="type">int</span> CA_list_length</code></em>,
+                        <em class="parameter"><code><span class="type">unsigned </span> CA_list_length</code></em>,
                         <em class="parameter"><code>unsigned <span class="type">int</span> flags</code></em>,
                         <em class="parameter"><code>unsigned <span class="type">int</span> *verify</code></em>);</pre>
 <p>This function will try to verify the given crl and return its verification status.
@@ -4362,7 +4362,7 @@ negative error value.</p>
 <pre class="programlisting"><span class="returnvalue">int</span>
 gnutls_x509_crq_get_attribute_by_oid (<em class="parameter"><code><a class="link" href="gnutls-gnutls.html#gnutls-x509-crq-t" title="gnutls_x509_crq_t"><span class="type">gnutls_x509_crq_t</span></a> crq</code></em>,
                                       <em class="parameter"><code>const <span class="type">char</span> *oid</code></em>,
-                                      <em class="parameter"><code><span class="type">int</span> indx</code></em>,
+                                      <em class="parameter"><code><span class="type">unsigned </span> indx</code></em>,
                                       <em class="parameter"><code><span class="type">void</span> *buf</code></em>,
                                       <em class="parameter"><code><span class="type">size_t</span> *sizeof_buf</code></em>);</pre>
 <p>This function will return the attribute in the certificate request
@@ -4414,7 +4414,7 @@ negative error value.</p>
 <a name="gnutls-x509-crq-get-attribute-data"></a><h3>gnutls_x509_crq_get_attribute_data ()</h3>
 <pre class="programlisting"><span class="returnvalue">int</span>
 gnutls_x509_crq_get_attribute_data (<em class="parameter"><code><a class="link" href="gnutls-gnutls.html#gnutls-x509-crq-t" title="gnutls_x509_crq_t"><span class="type">gnutls_x509_crq_t</span></a> crq</code></em>,
-                                    <em class="parameter"><code><span class="type">int</span> indx</code></em>,
+                                    <em class="parameter"><code><span class="type">unsigned </span> indx</code></em>,
                                     <em class="parameter"><code><span class="type">void</span> *data</code></em>,
                                     <em class="parameter"><code><span class="type">size_t</span> *sizeof_data</code></em>);</pre>
 <p>This function will return the requested attribute data in the
@@ -4471,7 +4471,7 @@ will be returned.</p>
 <a name="gnutls-x509-crq-get-attribute-info"></a><h3>gnutls_x509_crq_get_attribute_info ()</h3>
 <pre class="programlisting"><span class="returnvalue">int</span>
 gnutls_x509_crq_get_attribute_info (<em class="parameter"><code><a class="link" href="gnutls-gnutls.html#gnutls-x509-crq-t" title="gnutls_x509_crq_t"><span class="type">gnutls_x509_crq_t</span></a> crq</code></em>,
-                                    <em class="parameter"><code><span class="type">int</span> indx</code></em>,
+                                    <em class="parameter"><code><span class="type">unsigned </span> indx</code></em>,
                                     <em class="parameter"><code><span class="type">void</span> *oid</code></em>,
                                     <em class="parameter"><code><span class="type">size_t</span> *sizeof_oid</code></em>);</pre>
 <p>This function will return the requested attribute OID in the
@@ -4670,7 +4670,7 @@ the required size.  On success 0 is returned.</p>
 <pre class="programlisting"><span class="returnvalue">int</span>
 gnutls_x509_crq_get_dn_by_oid (<em class="parameter"><code><a class="link" href="gnutls-gnutls.html#gnutls-x509-crq-t" title="gnutls_x509_crq_t"><span class="type">gnutls_x509_crq_t</span></a> crq</code></em>,
                                <em class="parameter"><code>const <span class="type">char</span> *oid</code></em>,
-                               <em class="parameter"><code><span class="type">int</span> indx</code></em>,
+                               <em class="parameter"><code><span class="type">unsigned </span> indx</code></em>,
                                <em class="parameter"><code>unsigned <span class="type">int</span> raw_flag</code></em>,
                                <em class="parameter"><code><span class="type">void</span> *buf</code></em>,
                                <em class="parameter"><code><span class="type">size_t</span> *sizeof_buf</code></em>);</pre>
@@ -4734,7 +4734,7 @@ updated with the required size.  On success 0 is returned.</p>
 <a name="gnutls-x509-crq-get-dn-oid"></a><h3>gnutls_x509_crq_get_dn_oid ()</h3>
 <pre class="programlisting"><span class="returnvalue">int</span>
 gnutls_x509_crq_get_dn_oid (<em class="parameter"><code><a class="link" href="gnutls-gnutls.html#gnutls-x509-crq-t" title="gnutls_x509_crq_t"><span class="type">gnutls_x509_crq_t</span></a> crq</code></em>,
-                            <em class="parameter"><code><span class="type">int</span> indx</code></em>,
+                            <em class="parameter"><code><span class="type">unsigned </span> indx</code></em>,
                             <em class="parameter"><code><span class="type">void</span> *oid</code></em>,
                             <em class="parameter"><code><span class="type">size_t</span> *sizeof_oid</code></em>);</pre>
 <p>This function will extract the requested OID of the name of the
@@ -4786,7 +4786,7 @@ updated with the required size.  On success 0 is returned.</p>
 <pre class="programlisting"><span class="returnvalue">int</span>
 gnutls_x509_crq_get_extension_by_oid (<em class="parameter"><code><a class="link" href="gnutls-gnutls.html#gnutls-x509-crq-t" title="gnutls_x509_crq_t"><span class="type">gnutls_x509_crq_t</span></a> crq</code></em>,
                                       <em class="parameter"><code>const <span class="type">char</span> *oid</code></em>,
-                                      <em class="parameter"><code><span class="type">int</span> indx</code></em>,
+                                      <em class="parameter"><code><span class="type">unsigned </span> indx</code></em>,
                                       <em class="parameter"><code><span class="type">void</span> *buf</code></em>,
                                       <em class="parameter"><code><span class="type">size_t</span> *sizeof_buf</code></em>,
                                       <em class="parameter"><code>unsigned <span class="type">int</span> *critical</code></em>);</pre>
@@ -4845,7 +4845,7 @@ contain the specified extension
 <a name="gnutls-x509-crq-get-extension-data"></a><h3>gnutls_x509_crq_get_extension_data ()</h3>
 <pre class="programlisting"><span class="returnvalue">int</span>
 gnutls_x509_crq_get_extension_data (<em class="parameter"><code><a class="link" href="gnutls-gnutls.html#gnutls-x509-crq-t" title="gnutls_x509_crq_t"><span class="type">gnutls_x509_crq_t</span></a> crq</code></em>,
-                                    <em class="parameter"><code><span class="type">int</span> indx</code></em>,
+                                    <em class="parameter"><code><span class="type">unsigned </span> indx</code></em>,
                                     <em class="parameter"><code><span class="type">void</span> *data</code></em>,
                                     <em class="parameter"><code><span class="type">size_t</span> *sizeof_data</code></em>);</pre>
 <p>This function will return the requested extension data in the
@@ -4902,7 +4902,7 @@ will be returned.</p>
 <a name="gnutls-x509-crq-get-extension-info"></a><h3>gnutls_x509_crq_get_extension_info ()</h3>
 <pre class="programlisting"><span class="returnvalue">int</span>
 gnutls_x509_crq_get_extension_info (<em class="parameter"><code><a class="link" href="gnutls-gnutls.html#gnutls-x509-crq-t" title="gnutls_x509_crq_t"><span class="type">gnutls_x509_crq_t</span></a> crq</code></em>,
-                                    <em class="parameter"><code><span class="type">int</span> indx</code></em>,
+                                    <em class="parameter"><code><span class="type">unsigned </span> indx</code></em>,
                                     <em class="parameter"><code><span class="type">void</span> *oid</code></em>,
                                     <em class="parameter"><code><span class="type">size_t</span> *sizeof_oid</code></em>,
                                     <em class="parameter"><code>unsigned <span class="type">int</span> *critical</code></em>);</pre>
@@ -5024,7 +5024,7 @@ returned, and 0 on success.</p>
 <a name="gnutls-x509-crq-get-key-purpose-oid"></a><h3>gnutls_x509_crq_get_key_purpose_oid ()</h3>
 <pre class="programlisting"><span class="returnvalue">int</span>
 gnutls_x509_crq_get_key_purpose_oid (<em class="parameter"><code><a class="link" href="gnutls-gnutls.html#gnutls-x509-crq-t" title="gnutls_x509_crq_t"><span class="type">gnutls_x509_crq_t</span></a> crq</code></em>,
-                                     <em class="parameter"><code><span class="type">int</span> indx</code></em>,
+                                     <em class="parameter"><code><span class="type">unsigned </span> indx</code></em>,
                                      <em class="parameter"><code><span class="type">void</span> *oid</code></em>,
                                      <em class="parameter"><code><span class="type">size_t</span> *sizeof_oid</code></em>,
                                      <em class="parameter"><code>unsigned <span class="type">int</span> *critical</code></em>);</pre>
@@ -5947,7 +5947,7 @@ extension.  It can set the following types:</p>
 <p><a class="link" href="gnutls-gnutls.html#GNUTLS-SAN-RFC822NAME:CAPS"><code class="literal">GNUTLS_SAN_RFC822NAME</code></a>: as a text string</p>
 <p><a class="link" href="gnutls-gnutls.html#GNUTLS-SAN-URI:CAPS"><code class="literal">GNUTLS_SAN_URI</code></a>: as a text string</p>
 <p><a class="link" href="gnutls-gnutls.html#GNUTLS-SAN-IPADDRESS:CAPS"><code class="literal">GNUTLS_SAN_IPADDRESS</code></a>: as a binary IP address (4 or 16 bytes)</p>
-<p>Other values can be set as binary values with the proper DER encoding.</p>
+<p><a class="link" href="gnutls-gnutls.html#GNUTLS-SAN-OTHERNAME-XMPP:CAPS"><code class="literal">GNUTLS_SAN_OTHERNAME_XMPP</code></a>: as a UTF8 string</p>
 <div class="refsect3">
 <a name="gnutls-x509-crq-set-subject-alt-name.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">
@@ -6123,23 +6123,14 @@ is returned, and zero or positive code on success.</p>
 <hr>
 <div class="refsect2">
 <a name="gnutls-x509-crt-check-hostname"></a><h3>gnutls_x509_crt_check_hostname ()</h3>
-<pre class="programlisting"><span class="returnvalue">int</span>
+<pre class="programlisting"><span class="returnvalue">unsigned</span>
 gnutls_x509_crt_check_hostname (<em class="parameter"><code><a class="link" href="gnutls-gnutls.html#gnutls-x509-crt-t" title="gnutls_x509_crt_t"><span class="type">gnutls_x509_crt_t</span></a> cert</code></em>,
                                 <em class="parameter"><code>const <span class="type">char</span> *hostname</code></em>);</pre>
 <p>This function will check if the given certificate's subject matches
 the given hostname.  This is a basic implementation of the matching
 described in RFC6125, and takes into account wildcards,
 and the DNSName/IPAddress subject alternative name PKIX extension.</p>
-<p>IPv4 addresses are accepted by this function in the dotted-decimal
-format (e.g, ddd.ddd.ddd.ddd), and IPv6 addresses in the hexadecimal
-x:x:x:x:x:x:x:x format. For them the IPAddress subject alternative
-name extension is consulted, as well as the DNSNames in case of a non-match.
-The latter fallback exists due to misconfiguration of many servers
-which place an IPAddress inside the DNSName extension.</p>
-<p>When the flag <a class="link" href="gnutls-x509.html#GNUTLS-VERIFY-DO-NOT-ALLOW-WILDCARDS:CAPS"><code class="literal">GNUTLS_VERIFY_DO_NOT_ALLOW_WILDCARDS</code></a> is specified no
-wildcards are considered. Otherwise they are only considered if the
-domain name consists of three components or more, and the wildcard
-starts at the leftmost position.</p>
+<p>For details see also <code class="function">gnutls_x509_crt_check_hostname2()</code>.</p>
 <div class="refsect3">
 <a name="gnutls-x509-crt-check-hostname.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">
@@ -6170,7 +6161,7 @@ starts at the leftmost position.</p>
 <hr>
 <div class="refsect2">
 <a name="gnutls-x509-crt-check-issuer"></a><h3>gnutls_x509_crt_check_issuer ()</h3>
-<pre class="programlisting"><span class="returnvalue">int</span>
+<pre class="programlisting"><span class="returnvalue">unsigned</span>
 gnutls_x509_crt_check_issuer (<em class="parameter"><code><a class="link" href="gnutls-gnutls.html#gnutls-x509-crt-t" title="gnutls_x509_crt_t"><span class="type">gnutls_x509_crt_t</span></a> cert</code></em>,
                               <em class="parameter"><code><a class="link" href="gnutls-gnutls.html#gnutls-x509-crt-t" title="gnutls_x509_crt_t"><span class="type">gnutls_x509_crt_t</span></a> issuer</code></em>);</pre>
 <p>This function will check if the given certificate was issued by the
@@ -6214,7 +6205,7 @@ by the given issuer, and false (0) if not.  </p>
 <pre class="programlisting"><span class="returnvalue">int</span>
 gnutls_x509_crt_check_revocation (<em class="parameter"><code><a class="link" href="gnutls-gnutls.html#gnutls-x509-crt-t" title="gnutls_x509_crt_t"><span class="type">gnutls_x509_crt_t</span></a> cert</code></em>,
                                   <em class="parameter"><code>const <a class="link" href="gnutls-gnutls.html#gnutls-x509-crl-t" title="gnutls_x509_crl_t"><span class="type">gnutls_x509_crl_t</span></a> *crl_list</code></em>,
-                                  <em class="parameter"><code><span class="type">int</span> crl_list_length</code></em>);</pre>
+                                  <em class="parameter"><code><span class="type">unsigned </span> crl_list_length</code></em>);</pre>
 <p>This function will return check if the given certificate is
 revoked.  It is assumed that the CRLs have been verified before.</p>
 <div class="refsect3">
@@ -6479,7 +6470,7 @@ accessLocation is not of the "uniformResourceIdentifier" type. </p>
  will hold the OCSP URI.
 Requesting this <em class="parameter"><code>what</code></em>
  value leads to an error if the accessMethod
-is not 1.3.6.1.5.5.7.48.1 aka OSCP, or if accessLocation is not of
+is not 1.3.6.1.5.5.7.48.1 aka OCSP, or if accessLocation is not of
 the "uniformResourceIdentifier" type. In that case <a class="link" href="gnutls-gnutls.html#GNUTLS-E-UNKNOWN-ALGORITHM:CAPS" title="GNUTLS_E_UNKNOWN_ALGORITHM"><code class="literal">GNUTLS_E_UNKNOWN_ALGORITHM</code></a>
 will be returned, and <em class="parameter"><code>seq</code></em>
  should be increased and this function
@@ -6888,7 +6879,8 @@ encoded, depending on the certificate data.</p>
 <p> <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SHORT-MEMORY-BUFFER:CAPS" title="GNUTLS_E_SHORT_MEMORY_BUFFER"><code class="literal">GNUTLS_E_SHORT_MEMORY_BUFFER</code></a> if the provided buffer is not
 long enough, and in that case the <em class="parameter"><code>buf_size</code></em>
 will be updated
-with the required size.  On success 0 is returned.</p>
+with the required size. <a class="link" href="gnutls-gnutls.html#GNUTLS-E-REQUESTED-DATA-NOT-AVAILABLE:CAPS" title="GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE"><code class="literal">GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE</code></a> if
+the DN does not exist, or another error value on error. On success 0 is returned.</p>
 </div>
 </div>
 <hr>
@@ -6897,7 +6889,7 @@ with the required size.  On success 0 is returned.</p>
 <pre class="programlisting"><span class="returnvalue">int</span>
 gnutls_x509_crt_get_dn_by_oid (<em class="parameter"><code><a class="link" href="gnutls-gnutls.html#gnutls-x509-crt-t" title="gnutls_x509_crt_t"><span class="type">gnutls_x509_crt_t</span></a> cert</code></em>,
                                <em class="parameter"><code>const <span class="type">char</span> *oid</code></em>,
-                               <em class="parameter"><code><span class="type">int</span> indx</code></em>,
+                               <em class="parameter"><code><span class="type">unsigned </span> indx</code></em>,
                                <em class="parameter"><code>unsigned <span class="type">int</span> raw_flag</code></em>,
                                <em class="parameter"><code><span class="type">void</span> *buf</code></em>,
                                <em class="parameter"><code><span class="type">size_t</span> *buf_size</code></em>);</pre>
@@ -6973,7 +6965,7 @@ are no data in the current index. On success 0 is returned.</p>
 <a name="gnutls-x509-crt-get-dn-oid"></a><h3>gnutls_x509_crt_get_dn_oid ()</h3>
 <pre class="programlisting"><span class="returnvalue">int</span>
 gnutls_x509_crt_get_dn_oid (<em class="parameter"><code><a class="link" href="gnutls-gnutls.html#gnutls-x509-crt-t" title="gnutls_x509_crt_t"><span class="type">gnutls_x509_crt_t</span></a> cert</code></em>,
-                            <em class="parameter"><code><span class="type">int</span> indx</code></em>,
+                            <em class="parameter"><code><span class="type">unsigned </span> indx</code></em>,
                             <em class="parameter"><code><span class="type">void</span> *oid</code></em>,
                             <em class="parameter"><code><span class="type">size_t</span> *oid_size</code></em>);</pre>
 <p>This function will extract the OIDs of the name of the Certificate
@@ -7061,7 +7053,7 @@ expired.</p>
 <pre class="programlisting"><span class="returnvalue">int</span>
 gnutls_x509_crt_get_extension_by_oid (<em class="parameter"><code><a class="link" href="gnutls-gnutls.html#gnutls-x509-crt-t" title="gnutls_x509_crt_t"><span class="type">gnutls_x509_crt_t</span></a> cert</code></em>,
                                       <em class="parameter"><code>const <span class="type">char</span> *oid</code></em>,
-                                      <em class="parameter"><code><span class="type">int</span> indx</code></em>,
+                                      <em class="parameter"><code><span class="type">unsigned </span> indx</code></em>,
                                       <em class="parameter"><code><span class="type">void</span> *buf</code></em>,
                                       <em class="parameter"><code><span class="type">size_t</span> *buf_size</code></em>,
                                       <em class="parameter"><code>unsigned <span class="type">int</span> *critical</code></em>);</pre>
@@ -7124,7 +7116,7 @@ GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE will be returned.</p>
 <a name="gnutls-x509-crt-get-extension-data"></a><h3>gnutls_x509_crt_get_extension_data ()</h3>
 <pre class="programlisting"><span class="returnvalue">int</span>
 gnutls_x509_crt_get_extension_data (<em class="parameter"><code><a class="link" href="gnutls-gnutls.html#gnutls-x509-crt-t" title="gnutls_x509_crt_t"><span class="type">gnutls_x509_crt_t</span></a> cert</code></em>,
-                                    <em class="parameter"><code><span class="type">int</span> indx</code></em>,
+                                    <em class="parameter"><code><span class="type">unsigned </span> indx</code></em>,
                                     <em class="parameter"><code><span class="type">void</span> *data</code></em>,
                                     <em class="parameter"><code><span class="type">size_t</span> *sizeof_data</code></em>);</pre>
 <p>This function will return the requested extension data in the
@@ -7180,7 +7172,7 @@ will be returned.</p>
 <a name="gnutls-x509-crt-get-extension-info"></a><h3>gnutls_x509_crt_get_extension_info ()</h3>
 <pre class="programlisting"><span class="returnvalue">int</span>
 gnutls_x509_crt_get_extension_info (<em class="parameter"><code><a class="link" href="gnutls-gnutls.html#gnutls-x509-crt-t" title="gnutls_x509_crt_t"><span class="type">gnutls_x509_crt_t</span></a> cert</code></em>,
-                                    <em class="parameter"><code><span class="type">int</span> indx</code></em>,
+                                    <em class="parameter"><code><span class="type">unsigned </span> indx</code></em>,
                                     <em class="parameter"><code><span class="type">void</span> *oid</code></em>,
                                     <em class="parameter"><code><span class="type">size_t</span> *oid_size</code></em>,
                                     <em class="parameter"><code>unsigned <span class="type">int</span> *critical</code></em>);</pre>
@@ -7248,7 +7240,7 @@ will be returned.</p>
 <a name="gnutls-x509-crt-get-extension-oid"></a><h3>gnutls_x509_crt_get_extension_oid ()</h3>
 <pre class="programlisting"><span class="returnvalue">int</span>
 gnutls_x509_crt_get_extension_oid (<em class="parameter"><code><a class="link" href="gnutls-gnutls.html#gnutls-x509-crt-t" title="gnutls_x509_crt_t"><span class="type">gnutls_x509_crt_t</span></a> cert</code></em>,
-                                   <em class="parameter"><code><span class="type">int</span> indx</code></em>,
+                                   <em class="parameter"><code><span class="type">unsigned </span> indx</code></em>,
                                    <em class="parameter"><code><span class="type">void</span> *oid</code></em>,
                                    <em class="parameter"><code><span class="type">size_t</span> *oid_size</code></em>);</pre>
 <p>This function will return the requested extension OID in the certificate.
@@ -7650,10 +7642,11 @@ will be ASCII or UTF-8 encoded, depending on the certificate data.</p>
 </div>
 <div class="refsect3">
 <a name="gnutls-x509-crt-get-issuer-dn.returns"></a><h4>Returns</h4>
-<p> GNUTLS_E_SHORT_MEMORY_BUFFER if the provided buffer is not
+<p> <a class="link" href="gnutls-gnutls.html#GNUTLS-E-SHORT-MEMORY-BUFFER:CAPS" title="GNUTLS_E_SHORT_MEMORY_BUFFER"><code class="literal">GNUTLS_E_SHORT_MEMORY_BUFFER</code></a> if the provided buffer is not
 long enough, and in that case the <em class="parameter"><code>buf_size</code></em>
-will be updated with
-the required size.  On success 0 is returned.</p>
+will be updated
+with the required size. <a class="link" href="gnutls-gnutls.html#GNUTLS-E-REQUESTED-DATA-NOT-AVAILABLE:CAPS" title="GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE"><code class="literal">GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE</code></a> if
+the DN does not exist, or another error value on error. On success 0 is returned.</p>
 </div>
 </div>
 <hr>
@@ -7662,7 +7655,7 @@ the required size.  On success 0 is returned.</p>
 <pre class="programlisting"><span class="returnvalue">int</span>
 gnutls_x509_crt_get_issuer_dn_by_oid (<em class="parameter"><code><a class="link" href="gnutls-gnutls.html#gnutls-x509-crt-t" title="gnutls_x509_crt_t"><span class="type">gnutls_x509_crt_t</span></a> cert</code></em>,
                                       <em class="parameter"><code>const <span class="type">char</span> *oid</code></em>,
-                                      <em class="parameter"><code><span class="type">int</span> indx</code></em>,
+                                      <em class="parameter"><code><span class="type">unsigned </span> indx</code></em>,
                                       <em class="parameter"><code>unsigned <span class="type">int</span> raw_flag</code></em>,
                                       <em class="parameter"><code><span class="type">void</span> *buf</code></em>,
                                       <em class="parameter"><code><span class="type">size_t</span> *buf_size</code></em>);</pre>
@@ -7738,7 +7731,7 @@ are no data in the current index. On success 0 is returned.</p>
 <a name="gnutls-x509-crt-get-issuer-dn-oid"></a><h3>gnutls_x509_crt_get_issuer_dn_oid ()</h3>
 <pre class="programlisting"><span class="returnvalue">int</span>
 gnutls_x509_crt_get_issuer_dn_oid (<em class="parameter"><code><a class="link" href="gnutls-gnutls.html#gnutls-x509-crt-t" title="gnutls_x509_crt_t"><span class="type">gnutls_x509_crt_t</span></a> cert</code></em>,
-                                   <em class="parameter"><code><span class="type">int</span> indx</code></em>,
+                                   <em class="parameter"><code><span class="type">unsigned </span> indx</code></em>,
                                    <em class="parameter"><code><span class="type">void</span> *oid</code></em>,
                                    <em class="parameter"><code><span class="type">size_t</span> *oid_size</code></em>);</pre>
 <p>This function will extract the OIDs of the name of the Certificate
@@ -7904,7 +7897,7 @@ returned, and 0 on success.</p>
 <a name="gnutls-x509-crt-get-key-purpose-oid"></a><h3>gnutls_x509_crt_get_key_purpose_oid ()</h3>
 <pre class="programlisting"><span class="returnvalue">int</span>
 gnutls_x509_crt_get_key_purpose_oid (<em class="parameter"><code><a class="link" href="gnutls-gnutls.html#gnutls-x509-crt-t" title="gnutls_x509_crt_t"><span class="type">gnutls_x509_crt_t</span></a> cert</code></em>,
-                                     <em class="parameter"><code><span class="type">int</span> indx</code></em>,
+                                     <em class="parameter"><code><span class="type">unsigned </span> indx</code></em>,
                                      <em class="parameter"><code><span class="type">void</span> *oid</code></em>,
                                      <em class="parameter"><code><span class="type">size_t</span> *oid_size</code></em>,
                                      <em class="parameter"><code>unsigned <span class="type">int</span> *critical</code></em>);</pre>
@@ -8024,6 +8017,7 @@ certificate.</p>
 size in bits. For RSA the bits returned is the modulus.
 For DSA the bits returned are of the public
 exponent.</p>
+<p>Unknown/unsupported algorithms are mapped to <a class="link" href="gnutls-gnutls.html#GNUTLS-PK-UNKNOWN:CAPS"><code class="literal">GNUTLS_PK_UNKNOWN</code></a>.</p>
 <div class="refsect3">
 <a name="gnutls-x509-crt-get-pk-algorithm.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">
@@ -8153,7 +8147,7 @@ the given structure.  The new parameters will be allocated using
 <a name="gnutls-x509-crt-get-policy"></a><h3>gnutls_x509_crt_get_policy ()</h3>
 <pre class="programlisting"><span class="returnvalue">int</span>
 gnutls_x509_crt_get_policy (<em class="parameter"><code><a class="link" href="gnutls-gnutls.html#gnutls-x509-crt-t" title="gnutls_x509_crt_t"><span class="type">gnutls_x509_crt_t</span></a> crt</code></em>,
-                            <em class="parameter"><code><span class="type">int</span> indx</code></em>,
+                            <em class="parameter"><code><span class="type">unsigned </span> indx</code></em>,
                             <em class="parameter"><code><span class="type">struct gnutls_x509_policy_st</span> *policy</code></em>,
                             <em class="parameter"><code>unsigned <span class="type">int</span> *critical</code></em>);</pre>
 <p>This function will extract the certificate policy (extension 2.5.29.32) 
@@ -8458,6 +8452,7 @@ gnutls_x509_crt_get_signature_algorithm
 <p>This function will return a value of the <a class="link" href="gnutls-gnutls.html#gnutls-sign-algorithm-t" title="enum gnutls_sign_algorithm_t"><span class="type">gnutls_sign_algorithm_t</span></a>
 enumeration that is the signature algorithm that has been used to
 sign this certificate.</p>
+<p>Unknown/unsupported signature algorithms are mapped to <a class="link" href="gnutls-gnutls.html#GNUTLS-SIGN-UNKNOWN:CAPS"><code class="literal">GNUTLS_SIGN_UNKNOWN</code></a>.</p>
 <div class="refsect3">
 <a name="gnutls-x509-crt-get-signature-algorithm.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">
@@ -9061,11 +9056,11 @@ independently, and use <code class="function">gnutls_free()</code> at</p>
 <a name="gnutls-x509-crt-list-verify"></a><h3>gnutls_x509_crt_list_verify ()</h3>
 <pre class="programlisting"><span class="returnvalue">int</span>
 gnutls_x509_crt_list_verify (<em class="parameter"><code>const <a class="link" href="gnutls-gnutls.html#gnutls-x509-crt-t" title="gnutls_x509_crt_t"><span class="type">gnutls_x509_crt_t</span></a> *cert_list</code></em>,
-                             <em class="parameter"><code><span class="type">int</span> cert_list_length</code></em>,
+                             <em class="parameter"><code><span class="type">unsigned </span> cert_list_length</code></em>,
                              <em class="parameter"><code>const <a class="link" href="gnutls-gnutls.html#gnutls-x509-crt-t" title="gnutls_x509_crt_t"><span class="type">gnutls_x509_crt_t</span></a> *CA_list</code></em>,
-                             <em class="parameter"><code><span class="type">int</span> CA_list_length</code></em>,
+                             <em class="parameter"><code><span class="type">unsigned </span> CA_list_length</code></em>,
                              <em class="parameter"><code>const <a class="link" href="gnutls-gnutls.html#gnutls-x509-crl-t" title="gnutls_x509_crl_t"><span class="type">gnutls_x509_crl_t</span></a> *CRL_list</code></em>,
-                             <em class="parameter"><code><span class="type">int</span> CRL_list_length</code></em>,
+                             <em class="parameter"><code><span class="type">unsigned </span> CRL_list_length</code></em>,
                              <em class="parameter"><code>unsigned <span class="type">int</span> flags</code></em>,
                              <em class="parameter"><code>unsigned <span class="type">int</span> *verify</code></em>);</pre>
 <p>This function will try to verify the given certificate list and
@@ -9544,7 +9539,7 @@ negative error value.</p>
 <pre class="programlisting"><span class="returnvalue">int</span>
 gnutls_x509_crt_set_crq_extensions (<em class="parameter"><code><a class="link" href="gnutls-gnutls.html#gnutls-x509-crt-t" title="gnutls_x509_crt_t"><span class="type">gnutls_x509_crt_t</span></a> crt</code></em>,
                                     <em class="parameter"><code><a class="link" href="gnutls-gnutls.html#gnutls-x509-crq-t" title="gnutls_x509_crq_t"><span class="type">gnutls_x509_crq_t</span></a> crq</code></em>);</pre>
-<p>This function will set extensions from the given request to the
+<p>This function will set the extensions from the given request to the
 certificate.</p>
 <div class="refsect3">
 <a name="gnutls-x509-crt-set-crq-extensions.parameters"></a><h4>Parameters</h4>
@@ -9702,7 +9697,7 @@ encoded.</p>
 </tr>
 <tr>
 <td class="parameter_name"><p>oid</p></td>
-<td class="parameter_description"><p>holds an Object Identified in null terminated string</p></td>
+<td class="parameter_description"><p>holds an Object Identifier in null terminated string</p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 <tr>
@@ -10218,12 +10213,10 @@ gnutls_x509_crt_set_subject_alt_name (<em class="parameter"><code><a class="link
                                       <em class="parameter"><code>unsigned <span class="type">int</span> data_size</code></em>,
                                       <em class="parameter"><code>unsigned <span class="type">int</span> flags</code></em>);</pre>
 <p>This function will set the subject alternative name certificate
-extension. It can set the following types:</p>
-<p><a class="link" href="gnutls-gnutls.html#GNUTLS-SAN-DNSNAME:CAPS"><code class="literal">GNUTLS_SAN_DNSNAME</code></a>: as a text string</p>
-<p><a class="link" href="gnutls-gnutls.html#GNUTLS-SAN-RFC822NAME:CAPS"><code class="literal">GNUTLS_SAN_RFC822NAME</code></a>: as a text string</p>
-<p><a class="link" href="gnutls-gnutls.html#GNUTLS-SAN-URI:CAPS"><code class="literal">GNUTLS_SAN_URI</code></a>: as a text string</p>
-<p><a class="link" href="gnutls-gnutls.html#GNUTLS-SAN-IPADDRESS:CAPS"><code class="literal">GNUTLS_SAN_IPADDRESS</code></a>: as a binary IP address (4 or 16 bytes)</p>
-<p>Other values can be set as binary values with the proper DER encoding.</p>
+extension. It can set the following types: <a class="link" href="gnutls-gnutls.html#GNUTLS-SAN-DNSNAME:CAPS"><code class="literal">GNUTLS_SAN_DNSNAME</code></a> as a text string,
+<a class="link" href="gnutls-gnutls.html#GNUTLS-SAN-RFC822NAME:CAPS"><code class="literal">GNUTLS_SAN_RFC822NAME</code></a> as a text string, <a class="link" href="gnutls-gnutls.html#GNUTLS-SAN-URI:CAPS"><code class="literal">GNUTLS_SAN_URI</code></a> as a text string,
+<a class="link" href="gnutls-gnutls.html#GNUTLS-SAN-IPADDRESS:CAPS"><code class="literal">GNUTLS_SAN_IPADDRESS</code></a> as a binary IP address (4 or 16 bytes),
+<a class="link" href="gnutls-gnutls.html#GNUTLS-SAN-OTHERNAME-XMPP:CAPS"><code class="literal">GNUTLS_SAN_OTHERNAME_XMPP</code></a> as a UTF8 string (since 3.5.0).</p>
 <div class="refsect3">
 <a name="gnutls-x509-crt-set-subject-alt-name.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">
@@ -10501,7 +10494,7 @@ negative error value.</p>
 <pre class="programlisting"><span class="returnvalue">int</span>
 gnutls_x509_crt_verify (<em class="parameter"><code><a class="link" href="gnutls-gnutls.html#gnutls-x509-crt-t" title="gnutls_x509_crt_t"><span class="type">gnutls_x509_crt_t</span></a> cert</code></em>,
                         <em class="parameter"><code>const <a class="link" href="gnutls-gnutls.html#gnutls-x509-crt-t" title="gnutls_x509_crt_t"><span class="type">gnutls_x509_crt_t</span></a> *CA_list</code></em>,
-                        <em class="parameter"><code><span class="type">int</span> CA_list_length</code></em>,
+                        <em class="parameter"><code><span class="type">unsigned </span> CA_list_length</code></em>,
                         <em class="parameter"><code>unsigned <span class="type">int</span> flags</code></em>,
                         <em class="parameter"><code>unsigned <span class="type">int</span> *verify</code></em>);</pre>
 <p>This function will try to verify the given certificate and return
@@ -11502,13 +11495,17 @@ gnutls_x509_privkey_generate (<em class="parameter"><code><a class="link" href="
                               <em class="parameter"><code>unsigned <span class="type">int</span> bits</code></em>,
                               <em class="parameter"><code>unsigned <span class="type">int</span> flags</code></em>);</pre>
 <p>This function will generate a random private key. Note that this
-function must be called on an empty private key.</p>
+function must be called on an empty private key. The flag <code class="literal">GNUTLS_PRIVKEY_FLAG_PROVABLE</code>
+instructs the key generation process to use algorithms like Shawe-Taylor
+which generate provable parameters out of a seed.</p>
 <p>Note that when generating an elliptic curve key, the curve
 can be substituted in the place of the bits parameter using the
-<code class="function">GNUTLS_CURVE_TO_BITS()</code> macro.</p>
+<code class="function">GNUTLS_CURVE_TO_BITS()</code> macro. The input to the macro is any curve from
+<a class="link" href="gnutls-gnutls.html#gnutls-ecc-curve-t" title="enum gnutls_ecc_curve_t"><code class="literal">gnutls_ecc_curve_t</code></a>.</p>
 <p>For DSA keys, if the subgroup size needs to be specified check
 the <code class="function">GNUTLS_SUBGROUP_TO_BITS()</code> macro.</p>
-<p>Do not set the number of bits directly, use <a class="link" href="gnutls-gnutls.html#gnutls-sec-param-to-pk-bits" title="gnutls_sec_param_to_pk_bits ()"><code class="function">gnutls_sec_param_to_pk_bits()</code></a>.</p>
+<p>It is recommended to do not set the number of <em class="parameter"><code>bits</code></em>
+ directly, use <a class="link" href="gnutls-gnutls.html#gnutls-sec-param-to-pk-bits" title="gnutls_sec_param_to_pk_bits ()"><code class="function">gnutls_sec_param_to_pk_bits()</code></a> instead .</p>
 <div class="refsect3">
 <a name="gnutls-x509-privkey-generate.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">
@@ -11520,7 +11517,7 @@ the <code class="function">GNUTLS_SUBGROUP_TO_BITS()</code> macro.</p>
 <tbody>
 <tr>
 <td class="parameter_name"><p>key</p></td>
-<td class="parameter_description"><p>a key</p></td>
+<td class="parameter_description"><p>an initialized key</p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 <tr>
@@ -11530,12 +11527,12 @@ the <code class="function">GNUTLS_SUBGROUP_TO_BITS()</code> macro.</p>
 </tr>
 <tr>
 <td class="parameter_name"><p>bits</p></td>
-<td class="parameter_description"><p>the size of the modulus</p></td>
+<td class="parameter_description"><p>the size of the parameters to generate</p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 <tr>
 <td class="parameter_name"><p>flags</p></td>
-<td class="parameter_description"><p>unused for now.  Must be 0.</p></td>
+<td class="parameter_description"><p>Must be zero or flags from <span class="type">gnutls_privkey_flags_t</span>.</p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 </tbody>
@@ -12286,7 +12283,7 @@ negative error value.</p>
 <pre class="programlisting"><span class="returnvalue">int</span>
 gnutls_x509_rdn_get_by_oid (<em class="parameter"><code>const <span class="type">gnutls_datum_t</span> *idn</code></em>,
                             <em class="parameter"><code>const <span class="type">char</span> *oid</code></em>,
-                            <em class="parameter"><code><span class="type">int</span> indx</code></em>,
+                            <em class="parameter"><code><span class="type">unsigned </span> indx</code></em>,
                             <em class="parameter"><code>unsigned <span class="type">int</span> raw_flag</code></em>,
                             <em class="parameter"><code><span class="type">void</span> *buf</code></em>,
                             <em class="parameter"><code><span class="type">size_t</span> *sizeof_buf</code></em>);</pre>
@@ -12345,7 +12342,7 @@ negative error value.</p>
 <a name="gnutls-x509-rdn-get-oid"></a><h3>gnutls_x509_rdn_get_oid ()</h3>
 <pre class="programlisting"><span class="returnvalue">int</span>
 gnutls_x509_rdn_get_oid (<em class="parameter"><code>const <span class="type">gnutls_datum_t</span> *idn</code></em>,
-                         <em class="parameter"><code><span class="type">int</span> indx</code></em>,
+                         <em class="parameter"><code><span class="type">unsigned </span> indx</code></em>,
                          <em class="parameter"><code><span class="type">void</span> *buf</code></em>,
                          <em class="parameter"><code><span class="type">size_t</span> *sizeof_buf</code></em>);</pre>
 <p>This function will return the specified Object identifier, of the
@@ -12446,7 +12443,7 @@ added to the list and will be deinitialized.</p>
 <pre class="programlisting"><span class="returnvalue">int</span>
 gnutls_x509_trust_list_add_crls (<em class="parameter"><code><a class="link" href="gnutls-x509.html#gnutls-x509-trust-list-t" title="gnutls_x509_trust_list_t"><span class="type">gnutls_x509_trust_list_t</span></a> list</code></em>,
                                  <em class="parameter"><code>const <a class="link" href="gnutls-gnutls.html#gnutls-x509-crl-t" title="gnutls_x509_crl_t"><span class="type">gnutls_x509_crl_t</span></a> *crl_list</code></em>,
-                                 <em class="parameter"><code><span class="type">int</span> crl_size</code></em>,
+                                 <em class="parameter"><code><span class="type">unsigned </span> crl_size</code></em>,
                                  <em class="parameter"><code>unsigned <span class="type">int</span> flags</code></em>,
                                  <em class="parameter"><code>unsigned <span class="type">int</span> verification_flags</code></em>);</pre>
 <p>This function will add the given certificate revocation lists
@@ -12779,8 +12776,10 @@ gnutls_x509_trust_list_get_issuer (<em class="parameter"><code><a class="link" h
 <p>This function will find the issuer of the given certificate.
 If the flag <code class="literal">GNUTLS_TL_GET_COPY</code> is specified a copy of the issuer
 will be returned which must be freed using <a class="link" href="gnutls-x509.html#gnutls-x509-crt-deinit" title="gnutls_x509_crt_deinit ()"><code class="function">gnutls_x509_crt_deinit()</code></a>.
-Note that the flag <code class="literal">GNUTLS_TL_GET_COPY</code> is required for this function
-to work with PKCS <span class="type">11</span> trust lists in a thread-safe way.</p>
+In that case the provided <em class="parameter"><code>issuer</code></em>
+ must not be initialized.</p>
+<p>Note that the flag <code class="literal">GNUTLS_TL_GET_COPY</code> is required for this function
+to work with PKCS<span class="type">11</span> trust lists in a thread-safe way.</p>
 <div class="refsect3">
 <a name="gnutls-x509-trust-list-get-issuer.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">

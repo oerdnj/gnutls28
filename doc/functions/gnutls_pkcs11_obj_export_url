@@ -9,7 +9,7 @@
 
 @var{url}: will contain an allocated url
 
-This function will export a URL identifying the given certificate.
+This function will export a URL identifying the given object.
 
 @strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (0) is returned, otherwise a
 negative error value.

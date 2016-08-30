@@ -51,8 +51,8 @@ int main()
 
 static void terminate(void);
 
-/* This program tests whether MD5 is rejected by a client as a
- * signature algorithm for the ServerKeyExchange.
+/* This program tests the status request extension and that receiving the
+ * certificate status works.
  */
 
 static void server_log_func(int level, const char *str)
@@ -180,9 +180,8 @@ static void client(int fd)
 	}
 
 	if (ret < 0) {
-		terminate();
 		fail("client: Handshake failed: %s\n", gnutls_strerror(ret));
-		exit(1);
+		terminate();
 	} else {
 		if (debug)
 			success("client: Handshake was completed\n");
@@ -194,9 +193,8 @@ static void client(int fd)
 			(gnutls_protocol_get_version(session)));
 
 	if (received == 0) {
-		terminate();
 		fail("client: didn't receive status request\n");
-		exit(1);
+		terminate();
 	}
 
 	gnutls_bye(session, GNUTLS_SHUT_WR);

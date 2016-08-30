@@ -107,11 +107,15 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
-@HAVE_BUGGY_LIBIDN_FALSE@am__append_1 = certtool-utf8
-@ENABLE_NON_SUITEB_CURVES_TRUE@am__append_2 = crq
-@WINDOWS_FALSE@am__append_3 = template-test pem-decoding name-constraints
-@ENABLE_DANE_TRUE@am__append_4 = dane
-@WINDOWS_TRUE@am__append_5 = WINDOWS=1
+@ENABLE_FIPS140_FALSE@am__append_1 = pkcs12
+@HAVE_BUGGY_LIBIDN_FALSE@am__append_2 = certtool-utf8
+@ENABLE_NON_SUITEB_CURVES_TRUE@am__append_3 = crq
+@WINDOWS_FALSE@am__append_4 = template-test pem-decoding othername-test krb5-test sha3-test md5-test \
+@WINDOWS_FALSE@	tlsfeature-test template-exts-test pkcs1-pad
+
+@ENABLE_DANE_TRUE@am__append_5 = dane
+@ENABLE_FIPS140_TRUE@am__append_6 = FIPS140=1
+@WINDOWS_TRUE@am__append_7 = WINDOWS=1
 subdir = tests/cert-tests
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/src/gl/m4/arpa_inet_h.m4 \
@@ -149,12 +153,10 @@ am__aclocal_m4_deps = $(top_srcdir)/src/gl/m4/arpa_inet_h.m4 \
 	$(top_srcdir)/src/libopts/m4/stdnoreturn.m4 \
 	$(top_srcdir)/gl/m4/00gnulib.m4 \
 	$(top_srcdir)/gl/m4/absolute-header.m4 \
-	$(top_srcdir)/gl/m4/alloca.m4 $(top_srcdir)/gl/m4/base64.m4 \
-	$(top_srcdir)/gl/m4/byteswap.m4 $(top_srcdir)/gl/m4/ctype.m4 \
-	$(top_srcdir)/gl/m4/errno_h.m4 \
+	$(top_srcdir)/gl/m4/alloca.m4 $(top_srcdir)/gl/m4/byteswap.m4 \
+	$(top_srcdir)/gl/m4/ctype.m4 $(top_srcdir)/gl/m4/errno_h.m4 \
 	$(top_srcdir)/gl/m4/exponentd.m4 \
 	$(top_srcdir)/gl/m4/extensions.m4 \
-	$(top_srcdir)/gl/m4/extern-inline.m4 \
 	$(top_srcdir)/gl/m4/fcntl_h.m4 $(top_srcdir)/gl/m4/fdopen.m4 \
 	$(top_srcdir)/gl/m4/float_h.m4 $(top_srcdir)/gl/m4/fpieee.m4 \
 	$(top_srcdir)/gl/m4/fseeko.m4 $(top_srcdir)/gl/m4/fstat.m4 \
@@ -208,10 +210,11 @@ am__aclocal_m4_deps = $(top_srcdir)/src/gl/m4/arpa_inet_h.m4 \
 	$(top_srcdir)/gl/m4/vsnprintf.m4 \
 	$(top_srcdir)/gl/m4/warn-on-use.m4 \
 	$(top_srcdir)/gl/m4/warnings.m4 $(top_srcdir)/gl/m4/wchar_h.m4 \
-	$(top_srcdir)/m4/fcntl-o.m4 $(top_srcdir)/m4/gettext.m4 \
-	$(top_srcdir)/m4/gtk-doc.m4 $(top_srcdir)/m4/guile.m4 \
-	$(top_srcdir)/m4/hooks.m4 $(top_srcdir)/m4/iconv.m4 \
-	$(top_srcdir)/m4/intlmacosx.m4 \
+	$(top_srcdir)/m4/ax_code_coverage.m4 \
+	$(top_srcdir)/m4/extern-inline.m4 $(top_srcdir)/m4/fcntl-o.m4 \
+	$(top_srcdir)/m4/gettext.m4 $(top_srcdir)/m4/gtk-doc.m4 \
+	$(top_srcdir)/m4/guile.m4 $(top_srcdir)/m4/hooks.m4 \
+	$(top_srcdir)/m4/iconv.m4 $(top_srcdir)/m4/intlmacosx.m4 \
 	$(top_srcdir)/m4/inttypes-pri.m4 \
 	$(top_srcdir)/m4/inttypes_h.m4 $(top_srcdir)/m4/lib-ld.m4 \
 	$(top_srcdir)/m4/lib-link.m4 $(top_srcdir)/m4/lib-prefix.m4 \
@@ -232,8 +235,11 @@ CONFIG_HEADER = $(top_builddir)/config.h
 CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__dist_check_SCRIPTS_DIST = pathlen aki certtool invalid-sig email \
-	pkcs7 privkey-import certtool-long-cn crl certtool-utf8 crq \
-	template-test pem-decoding name-constraints dane
+	pkcs7 pkcs7-broken-sigs privkey-import name-constraints \
+	certtool-long-cn crl provable-privkey provable-dh userid \
+	sha2-test sha2-dsa-test pkcs12 certtool-utf8 crq template-test \
+	pem-decoding othername-test krb5-test sha3-test md5-test \
+	tlsfeature-test template-exts-test pkcs1-pad dane
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -486,6 +492,13 @@ CCASDEPMODE = @CCASDEPMODE@
 CCASFLAGS = @CCASFLAGS@
 CCDEPMODE = @CCDEPMODE@
 CFLAGS = @CFLAGS@
+CMOCKA_CFLAGS = @CMOCKA_CFLAGS@
+CMOCKA_LIBS = @CMOCKA_LIBS@
+CODE_COVERAGE_CFLAGS = @CODE_COVERAGE_CFLAGS@
+CODE_COVERAGE_CPPFLAGS = @CODE_COVERAGE_CPPFLAGS@
+CODE_COVERAGE_CXXFLAGS = @CODE_COVERAGE_CXXFLAGS@
+CODE_COVERAGE_ENABLED = @CODE_COVERAGE_ENABLED@
+CODE_COVERAGE_LDFLAGS = @CODE_COVERAGE_LDFLAGS@
 CONFIG_INCLUDE = @CONFIG_INCLUDE@
 CPP = @CPP@
 CPPFLAGS = @CPPFLAGS@
@@ -521,6 +534,8 @@ EXEEXT = @EXEEXT@
 FGREP = @FGREP@
 FIPS140_LIBS = @FIPS140_LIBS@
 FLOAT_H = @FLOAT_H@
+GCOV = @GCOV@
+GENHTML = @GENHTML@
 GETADDRINFO_LIB = @GETADDRINFO_LIB@
 GETTEXT_MACRO_VERSION = @GETTEXT_MACRO_VERSION@
 GMP_CFLAGS = @GMP_CFLAGS@
@@ -797,6 +812,7 @@ GREP = @GREP@
 GTKDOC_CHECK = @GTKDOC_CHECK@
 GTKDOC_MKPDF = @GTKDOC_MKPDF@
 GTKDOC_REBASE = @GTKDOC_REBASE@
+GUILD = @GUILD@
 GUILE = @GUILE@
 GUILE_CFLAGS = @GUILE_CFLAGS@
 GUILE_CONFIG = @GUILE_CONFIG@
@@ -884,11 +900,13 @@ HAVE_INTTYPES_H = @HAVE_INTTYPES_H@
 HAVE_ISBLANK = @HAVE_ISBLANK@
 HAVE_LCHMOD = @HAVE_LCHMOD@
 HAVE_LCHOWN = @HAVE_LCHOWN@
+HAVE_LIBCRYPTO = @HAVE_LIBCRYPTO@
 HAVE_LIBDL = @HAVE_LIBDL@
 HAVE_LIBICONV = @HAVE_LIBICONV@
 HAVE_LIBNSL = @HAVE_LIBNSL@
 HAVE_LIBPTHREAD = @HAVE_LIBPTHREAD@
 HAVE_LIBRT = @HAVE_LIBRT@
+HAVE_LIBSECCOMP = @HAVE_LIBSECCOMP@
 HAVE_LIBZ = @HAVE_LIBZ@
 HAVE_LINK = @HAVE_LINK@
 HAVE_LINKAT = @HAVE_LINKAT@
@@ -1050,8 +1068,11 @@ INT32_MAX_LT_INTMAX_MAX = @INT32_MAX_LT_INTMAX_MAX@
 INT64_MAX_EQ_LONG_MAX = @INT64_MAX_EQ_LONG_MAX@
 INTLLIBS = @INTLLIBS@
 INTL_MACOSX_LIBS = @INTL_MACOSX_LIBS@
+LCOV = @LCOV@
 LD = @LD@
 LDFLAGS = @LDFLAGS@
+LIBCRYPTO = @LIBCRYPTO@
+LIBCRYPTO_PREFIX = @LIBCRYPTO_PREFIX@
 LIBDL = @LIBDL@
 LIBDL_PREFIX = @LIBDL_PREFIX@
 LIBGNUTLS_CFLAGS = @LIBGNUTLS_CFLAGS@
@@ -1072,6 +1093,8 @@ LIBPTHREAD_PREFIX = @LIBPTHREAD_PREFIX@
 LIBRT = @LIBRT@
 LIBRT_PREFIX = @LIBRT_PREFIX@
 LIBS = @LIBS@
+LIBSECCOMP = @LIBSECCOMP@
+LIBSECCOMP_PREFIX = @LIBSECCOMP_PREFIX@
 LIBSOCKET = @LIBSOCKET@
 LIBTASN1_CFLAGS = @LIBTASN1_CFLAGS@
 LIBTASN1_LIBS = @LIBTASN1_LIBS@
@@ -1084,6 +1107,7 @@ LIB_SELECT = @LIB_SELECT@
 LIPO = @LIPO@
 LN_S = @LN_S@
 LTALLOCA = @LTALLOCA@
+LTLIBCRYPTO = @LTLIBCRYPTO@
 LTLIBDL = @LTLIBDL@
 LTLIBICONV = @LTLIBICONV@
 LTLIBINTL = @LTLIBINTL@
@@ -1091,6 +1115,7 @@ LTLIBNSL = @LTLIBNSL@
 LTLIBOBJS = @LTLIBOBJS@
 LTLIBPTHREAD = @LTLIBPTHREAD@
 LTLIBRT = @LTLIBRT@
+LTLIBSECCOMP = @LTLIBSECCOMP@
 LTLIBZ = @LTLIBZ@
 LT_AGE = @LT_AGE@
 LT_CURRENT = @LT_CURRENT@
@@ -1101,6 +1126,7 @@ LT_REVISION = @LT_REVISION@
 LT_SSL_AGE = @LT_SSL_AGE@
 LT_SSL_CURRENT = @LT_SSL_CURRENT@
 LT_SSL_REVISION = @LT_SSL_REVISION@
+LT_SYS_LIBRARY_PATH = @LT_SYS_LIBRARY_PATH@
 LT_XSSL_AGE = @LT_XSSL_AGE@
 LT_XSSL_CURRENT = @LT_XSSL_CURRENT@
 LT_XSSL_REVISION = @LT_XSSL_REVISION@
@@ -1408,6 +1434,7 @@ gltests_LTLIBOBJS = @gltests_LTLIBOBJS@
 gltests_WITNESS = @gltests_WITNESS@
 guile_snarf = @guile_snarf@
 guileextensiondir = @guileextensiondir@
+guileobjectdir = @guileobjectdir@
 host = @host@
 host_alias = @host_alias@
 host_cpu = @host_cpu@
@@ -1437,30 +1464,51 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-EXTRA_DIST = ca-no-pathlen.pem no-ca-or-pathlen.pem aki-cert.pem \
-	template-test.key template-test.pem template-test.tmpl \
-	funny-spacing.pem ca-certs.pem dane-test.rr cert-ecc256.pem \
-	bmpstring.pem template-utf8.pem template-utf8.tmpl \
-	template-dn.tmpl template-dn.pem complex-cert.pem template-overflow.pem \
-	template-overflow.tmpl template-overflow2.pem template-overflow2.tmpl \
-	template-date.tmpl template-date.pem template-dn-err.tmpl \
-	template-nc.tmpl template-nc.pem xmpp-othername.pem \
-	suppressions.valgrind csr-invalid.der invalid-sig2.pem invalid-sig3.pem \
-	invalid-sig.pem email-certs/chain.exclude.test.example.com email-certs/chain.test.example.com \
+EXTRA_DIST = data/ca-no-pathlen.pem data/no-ca-or-pathlen.pem data/aki-cert.pem \
+	data/template-test.key data/template-test.pem templates/template-test.tmpl \
+	data/funny-spacing.pem data/ca-certs.pem data/dane-test.rr data/cert-ecc256.pem \
+	data/bmpstring.pem data/template-utf8.pem templates/template-utf8.tmpl \
+	templates/template-dn.tmpl data/template-dn.pem data/complex-cert.pem \
+	data/template-overflow.pem templates/template-overflow.tmpl data/template-overflow2.pem \
+	templates/template-overflow2.tmpl data/template-crq.pem \
+	templates/template-date.tmpl data/template-date.pem templates/template-dn-err.tmpl \
+	templates/template-nc.tmpl data/template-nc.pem data/xmpp-othername.pem \
+	suppressions.valgrind data/csr-invalid.der data/invalid-sig2.pem data/invalid-sig3.pem \
+	data/invalid-sig.pem email-certs/chain.exclude.test.example.com email-certs/chain.test.example.com \
 	email-certs/chain.invalid.example.com email-certs/chain.test.example.com-2 \
-	single-ca.p7b single-ca.p7b.out full.p7b full.p7b.out detached.p7b \
-	pkcs7-detached.txt p7-combined.out template-generalized.pem \
-	template-generalized.tmpl privkey1.pem privkey2.pem privkey3.pem \
-	name-constraints-ip.pem cert-invalid-utf8.der very-long-dn.pem \
-	template-unique.tmpl template-unique.pem name-constraints-ip2.pem
+	data/single-ca.p7b data/single-ca.p7b.out data/full.p7b data/full.p7b.out data/detached.p7b \
+	data/pkcs7-detached.txt data/p7-combined.out data/template-generalized.pem \
+	templates/template-generalized.tmpl data/privkey1.pem data/privkey2.pem data/privkey3.pem \
+	data/name-constraints-ip.pem data/cert-invalid-utf8.der data/very-long-dn.pem \
+	data/provable3072.pem data/provable2048.pem data/provable-dsa2048.pem \
+	data/provable-dsa2048-fips.pem templates/template-crq.tmpl \
+	templates/template-unique.tmpl data/template-unique.pem \
+	templates/template-othername.tmpl data/template-othername.pem \
+	templates/template-othername-xmpp.tmpl data/template-othername-xmpp.pem \
+	templates/template-krb5name.tmpl \
+	data/template-krb5name.pem data/template-krb5name-full.pem data/template-test-ecc.key \
+	data/template-rsa-sha3-256.pem data/template-rsa-sha3-512.pem data/template-rsa-sha3-224.pem \
+	data/template-rsa-sha3-384.pem \
+	data/name-constraints-ip2.pem data/chain-md5.pem data/gost-cert.pem \
+	templates/template-tlsfeature.tmpl data/userid.pem \
+	data/template-tlsfeature.pem data/template-tlsfeature.csr \
+	templates/template-tlsfeature-crq.tmpl templates/arb-extensions.tmpl data/arb-extensions.pem \
+	data/arb-extensions.csr data/pkcs1-pad-ok.pem data/pkcs1-pad-broken.pem \
+	data/pkcs1-pad-ok2.pem data/pkcs1-pad-broken2.pem data/pkcs1-pad-broken3.pem \
+	data/client.p12 data/noclient.p12 data/unclient.p12 data/pkcs12_2certs.p12 \
+	data/pkcs12_5certs.p12 data/test-null.p12 data/cert-ca.p12 data/sha256.p12 \
+	data/key-ca.pem data/key-subca.pem data/key-subsubca.pem data/key-user.pem \
+	data/key-dsa.pem data/key-ca-dsa.pem data/key-subca-dsa.pem
 
 dist_check_SCRIPTS = pathlen aki certtool invalid-sig email pkcs7 \
-	privkey-import certtool-long-cn crl $(am__append_1) \
-	$(am__append_2) $(am__append_3) $(am__append_4)
+	pkcs7-broken-sigs privkey-import name-constraints \
+	certtool-long-cn crl provable-privkey provable-dh userid \
+	sha2-test sha2-dsa-test $(am__append_1) $(am__append_2) \
+	$(am__append_3) $(am__append_4) $(am__append_5)
 TESTS = $(dist_check_SCRIPTS)
 TESTS_ENVIRONMENT = EXEEXT=$(EXEEXT) LC_ALL="C" VALGRIND="$(VALGRIND)" \
 	LIBTOOL="$(LIBTOOL)" top_builddir="$(top_builddir)" \
-	srcdir="$(srcdir)" $(am__append_5)
+	srcdir="$(srcdir)" $(am__append_6) $(am__append_7)
 all: all-am
 
 .SUFFIXES:
@@ -1474,9 +1522,9 @@ $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu tests/cert-tests/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign tests/cert-tests/Makefile'; \
 	$(am__cd) $(top_srcdir) && \
-	  $(AUTOMAKE) --gnu tests/cert-tests/Makefile
+	  $(AUTOMAKE) --foreign tests/cert-tests/Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
 	  *config.status*) \
@@ -1690,9 +1738,23 @@ pkcs7.log: pkcs7
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
 	"$$tst" $(AM_TESTS_FD_REDIRECT)
+pkcs7-broken-sigs.log: pkcs7-broken-sigs
+	@p='pkcs7-broken-sigs'; \
+	b='pkcs7-broken-sigs'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
 privkey-import.log: privkey-import
 	@p='privkey-import'; \
 	b='privkey-import'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+name-constraints.log: name-constraints
+	@p='name-constraints'; \
+	b='name-constraints'; \
 	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
@@ -1707,6 +1769,48 @@ certtool-long-cn.log: certtool-long-cn
 crl.log: crl
 	@p='crl'; \
 	b='crl'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+provable-privkey.log: provable-privkey
+	@p='provable-privkey'; \
+	b='provable-privkey'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+provable-dh.log: provable-dh
+	@p='provable-dh'; \
+	b='provable-dh'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+userid.log: userid
+	@p='userid'; \
+	b='userid'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+sha2-test.log: sha2-test
+	@p='sha2-test'; \
+	b='sha2-test'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+sha2-dsa-test.log: sha2-dsa-test
+	@p='sha2-dsa-test'; \
+	b='sha2-dsa-test'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+pkcs12.log: pkcs12
+	@p='pkcs12'; \
+	b='pkcs12'; \
 	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
@@ -1739,9 +1843,51 @@ pem-decoding.log: pem-decoding
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
 	"$$tst" $(AM_TESTS_FD_REDIRECT)
-name-constraints.log: name-constraints
-	@p='name-constraints'; \
-	b='name-constraints'; \
+othername-test.log: othername-test
+	@p='othername-test'; \
+	b='othername-test'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+krb5-test.log: krb5-test
+	@p='krb5-test'; \
+	b='krb5-test'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+sha3-test.log: sha3-test
+	@p='sha3-test'; \
+	b='sha3-test'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+md5-test.log: md5-test
+	@p='md5-test'; \
+	b='md5-test'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+tlsfeature-test.log: tlsfeature-test
+	@p='tlsfeature-test'; \
+	b='tlsfeature-test'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+template-exts-test.log: template-exts-test
+	@p='template-exts-test'; \
+	b='template-exts-test'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+pkcs1-pad.log: pkcs1-pad
+	@p='pkcs1-pad'; \
+	b='pkcs1-pad'; \
 	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \

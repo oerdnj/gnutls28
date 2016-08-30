@@ -22,6 +22,14 @@ HMAC-SHA-384 algorithm.
 HMAC-SHA-512 algorithm.
 @item GNUTLS_@-MAC_@-SHA224
 HMAC-SHA-224 algorithm.
+@item GNUTLS_@-MAC_@-SHA3_@-224
+-- undescribed --
+@item GNUTLS_@-MAC_@-SHA3_@-256
+-- undescribed --
+@item GNUTLS_@-MAC_@-SHA3_@-384
+-- undescribed --
+@item GNUTLS_@-MAC_@-SHA3_@-512
+-- undescribed --
 @item GNUTLS_@-MAC_@-AEAD
 MAC implicit through AEAD cipher.
 @item GNUTLS_@-MAC_@-UMAC_@-96

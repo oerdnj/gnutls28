@@ -17,7 +17,7 @@
 This manual is last updated @value{UPDATED} for version
 @value{VERSION} of GnuTLS.
 
-Copyright @copyright{} 2001-2012, 2014 Free Software Foundation, Inc.
+Copyright @copyright{} 2001-2012, 2014, 2016 Free Software Foundation, Inc.
 
 @quotation
 Permission is granted to copy, distribute and/or modify this document
@@ -85,8 +85,8 @@ a large subset thereof is available.
 @node Guile Preparations
 @chapter Guile Preparations
 
-The GnuTLS Guile bindings are available for both the 1.8 and 2.0 stable
-series of Guile.
+The GnuTLS Guile bindings are available for Guile's 2.0 stable series,
+as well as the forthcoming 2.2 series and the legacy 1.8 series.
 
 By default they are installed under the GnuTLS installation directory,
 typically @file{/usr/local/share/guile/site/}).  Normally Guile
@@ -95,9 +95,9 @@ something like this:
 
 @example
 $ guile
-guile> (use-modules (gnutls))
-<unnamed port>: no code for module (gnutls)
-guile>
+@dots{}
+scheme@@(guile-user)> (use-modules (gnutls))
+ERROR: no code for module (gnutls)
 @end example
 
 There are two ways to solve this.  The first is to make sure that when
@@ -134,8 +134,8 @@ Either use the @code{GUILE_LOAD_PATH} environment variable as follows:
 
 @example
 $ GUILE_LOAD_PATH="/usr/local/share/guile/site:$GUILE_LOAD_PATH" guile
-guile> (use-modules (gnutls))
-guile>
+scheme@@(guile-user)> (use-modules (gnutls))
+scheme@@(guile-user)>
 @end example
 
 Alternatively, you can modify Guile's @code{%load-path} variable
@@ -143,11 +143,11 @@ Alternatively, you can modify Guile's @code{%load-path} variable
 Reference Manual}).
 
 At this point, you might get an error regarding
-@file{libguile-gnutls-v-0} similar to:
+@file{guile-gnutls-v-2} similar to:
 
 @example
-gnutls.scm:361:1: In procedure dynamic-link in expression (load-extension "libguile-gnutls-v-0" "scm_init_gnutls"):
-gnutls.scm:361:1: file: "libguile-gnutls-v-0", message: "libguile-gnutls-v-0.so: cannot open shared object file: No such file or directory"
+gnutls.scm:361:1: In procedure dynamic-link in expression (load-extension "guile-gnutls-v-2" "scm_init_gnutls"):
+gnutls.scm:361:1: file: "guile-gnutls-v-2", message: "guile-gnutls-v-2.so: cannot open shared object file: No such file or directory"
 @end example
 
 In this case, you will need to modify the run-time linker path, for
@@ -155,8 +155,8 @@ example as follows:
 
 @example
 $ LD_LIBRARY_PATH=/usr/local/lib GUILE_LOAD_PATH=/usr/local/share/guile/site guile
-guile> (use-modules (gnutls))
-guile>
+scheme@@(guile-user)> (use-modules (gnutls))
+scheme@@(guile-user)>
 @end example
 
 To check that you got the intended GnuTLS library version, you may
@@ -164,10 +164,10 @@ print the version number of the loaded library as follows:
 
 @example
 $ guile
-guile> (use-modules (gnutls))
-guile> (gnutls-version)
+scheme@@(guile-user)> (use-modules (gnutls))
+scheme@@(guile-user)> (gnutls-version)
 "@value{VERSION}"
-guile> 
+scheme@@(guile-user)>
 @end example
 
 
@@ -288,13 +288,14 @@ procedure applies to session.
 Many procedures operate on binary data.  For instance,
 @code{pkcs3-import-dh-parameters} expects binary data as input.
 
+@cindex bytevectors
 @cindex SRFI-4
 @cindex homogeneous vector
-
-Binary data is represented on the Scheme side using SRFI-4 homogeneous
-vectors (@pxref{SRFI-4,,, guile, The GNU Guile Reference Manual}).
-Although any type of homogeneous vector may be used, @code{u8vector}s
-(i.e., vectors of bytes) are highly recommended.
+Binary data is represented on the Scheme side using bytevectors
+(@pxref{Bytevectors,,, guile, The GNU Guile Reference Manual}).
+Homogeneous vectors such as SRFI-4 @code{u8vector}s can also be
+used@footnote{Historically, SRFI-4 @code{u8vector}s are the closest
+thing to bytevectors that Guile 1.8 and earlier supported.}.
 
 As an example, generating and then exporting Diffie-Hellman parameters
 in the PEM format can be done as follows:
@@ -359,25 +360,36 @@ Once a TLS session is established, data can be communicated through it
 
   ;;
   ;; Initialize the various parameters of SESSION, set up
-  ;; a network connection, etc...
+  ;; a network connection, etc.
   ;;
 
   (let ((i/o (session-record-port session)))
-    (write "Hello peer!" i/o)
+    (display "Hello peer!" i/o)
     (let ((greetings (read i/o)))
 
-      ;; ...
+      ;; @dots{}
 
       (bye session close-request/rdwr))))
 @end example
+
+@c See <http://bugs.gnu.org/22966> for details.
+@cindex buffering
+Note that each write to the session record port leads to the
+transmission of an encrypted TLS ``Application Data'' packet.  In the
+above example, we create an Application Data packet for the 11 bytes for
+the string that we write.  This is not efficient both in terms of CPU
+usage and bandwidth (each packet adds at least 5 bytes of overhead and
+can lead to one @code{write} system call), so we recommend that
+applications do their own buffering.
 
 @findex record-send
 @findex record-receive!
 
 A lower-level I/O API is provided by @code{record-send} and
-@code{record-receive!} which take an SRFI-4 vector to represent the
-data sent or received.  While it might improve performance, it is much
-less convenient than the above and should rarely be needed.
+@code{record-receive!} which take a bytevector (or a SRFI-4 vector) to
+represent the data sent or received.  While it might improve
+performance, it is much less convenient than the session record port and
+should rarely be needed.
 
 
 @node Exception Handling

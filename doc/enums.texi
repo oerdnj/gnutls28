@@ -152,6 +152,14 @@ HMAC-SHA-384 algorithm.
 HMAC-SHA-512 algorithm.
 @item GNUTLS_@-MAC_@-SHA224
 HMAC-SHA-224 algorithm.
+@item GNUTLS_@-MAC_@-SHA3_@-224
+-- undescribed --
+@item GNUTLS_@-MAC_@-SHA3_@-256
+-- undescribed --
+@item GNUTLS_@-MAC_@-SHA3_@-384
+-- undescribed --
+@item GNUTLS_@-MAC_@-SHA3_@-512
+-- undescribed --
 @item GNUTLS_@-MAC_@-AEAD
 MAC implicit through AEAD cipher.
 @item GNUTLS_@-MAC_@-UMAC_@-96
@@ -182,6 +190,14 @@ SHA-384 algorithm.
 SHA-512 algorithm.
 @item GNUTLS_@-DIG_@-SHA224
 SHA-224 algorithm.
+@item GNUTLS_@-DIG_@-SHA3_@-224
+SHA3-224 algorithm.
+@item GNUTLS_@-DIG_@-SHA3_@-256
+SHA3-256 algorithm.
+@item GNUTLS_@-DIG_@-SHA3_@-384
+SHA3-384 algorithm.
+@item GNUTLS_@-DIG_@-SHA3_@-512
+SHA3-512 algorithm.
 @end table
 
 @c gnutls_compression_method_t
@@ -194,6 +210,30 @@ The NULL compression method (no compression).
 The DEFLATE compression method from zlib.
 @item GNUTLS_@-COMP_@-ZLIB
 Same as @code{GNUTLS_COMP_DEFLATE} .
+@end table
+
+@c gnutls_init_flags_t
+@table @code
+@item GNUTLS_@-SERVER
+Connection end is a server.
+@item GNUTLS_@-CLIENT
+Connection end is a client.
+@item GNUTLS_@-DATAGRAM
+Connection is datagram oriented (DTLS). Since 3.0.0.
+@item GNUTLS_@-NONBLOCK
+Connection should not block. Since 3.0.0.
+@item GNUTLS_@-NO_@-EXTENSIONS
+Do not enable any TLS extensions by default (since 3.1.2).
+@item GNUTLS_@-NO_@-REPLAY_@-PROTECTION
+Disable any replay protection in DTLS. This must only be used if  replay protection is achieved using other means. Since 3.2.2.
+@item GNUTLS_@-NO_@-SIGNAL
+In systems where SIGPIPE is delivered on send, it will be disabled. That flag has effect in systems which support the MSG_NOSIGNAL sockets flag (since 3.4.2).
+@item GNUTLS_@-ALLOW_@-ID_@-CHANGE
+Allow the peer to replace its certificate, or change its ID during a rehandshake. This change is often used in attacks and thus prohibited by default. Since 3.5.0.
+@item GNUTLS_@-ENABLE_@-FALSE_@-START
+Enable the TLS false start on client side if the negotiated ciphersuites allow it. This will enable sending data prior to the handshake being complete, and may introduce a risk of crypto failure when combined with certain key exchanged; for that GnuTLS may not enable that option in ciphersuites that are known to be not safe for false start. Since 3.5.0.
+@item GNUTLS_@-FORCE_@-CLIENT_@-CERT
+When in client side and only a single cert is specified, send that certificate irrespective of the issuers expectated by the server. Since 3.5.0.
 @end table
 
 @c gnutls_alert_level_t
@@ -348,6 +388,10 @@ violated.
 The certificate presented isn't the expected one (TOFU)
 @item GNUTLS_@-CERT_@-PURPOSE_@-MISMATCH
 The certificate or an intermediate does not match the intended purpose (extended key usage).
+@item GNUTLS_@-CERT_@-MISSING_@-OCSP_@-STATUS
+The certificate requires the server to send the certifiate status, but no status was received.
+@item GNUTLS_@-CERT_@-INVALID_@-OCSP_@-STATUS
+The received OCSP status response is invalid.
 @end table
 
 @c gnutls_certificate_request_t
@@ -448,8 +492,10 @@ RSA public-key algorithm.
 DSA public-key algorithm.
 @item GNUTLS_@-PK_@-DH
 Diffie-Hellman algorithm. Used to generate parameters.
-@item GNUTLS_@-PK_@-EC
-Elliptic curve algorithm. Used to generate parameters.
+@item GNUTLS_@-PK_@-ECDSA
+Elliptic curve algorithm. These parameters are compatible with the ECDSA and ECDH algorithm.
+@item GNUTLS_@-PK_@-ECDHX
+Elliptic curve algorithm, restricted to ECDH as per rfc7748.
 @end table
 
 @c gnutls_sign_algorithm_t
@@ -496,6 +542,30 @@ Digital signature algorithm ECDSA with SHA-512.
 Digital signature algorithm DSA with SHA-384
 @item GNUTLS_@-SIGN_@-DSA_@-SHA512
 Digital signature algorithm DSA with SHA-512
+@item GNUTLS_@-SIGN_@-ECDSA_@-SHA3_@-224
+Digital signature algorithm ECDSA with SHA3-224.
+@item GNUTLS_@-SIGN_@-ECDSA_@-SHA3_@-256
+Digital signature algorithm ECDSA with SHA3-256.
+@item GNUTLS_@-SIGN_@-ECDSA_@-SHA3_@-384
+Digital signature algorithm ECDSA with SHA3-384.
+@item GNUTLS_@-SIGN_@-ECDSA_@-SHA3_@-512
+Digital signature algorithm ECDSA with SHA3-512.
+@item GNUTLS_@-SIGN_@-DSA_@-SHA3_@-224
+Digital signature algorithm DSA with SHA3-224.
+@item GNUTLS_@-SIGN_@-DSA_@-SHA3_@-256
+Digital signature algorithm DSA with SHA3-256.
+@item GNUTLS_@-SIGN_@-DSA_@-SHA3_@-384
+Digital signature algorithm DSA with SHA3-384.
+@item GNUTLS_@-SIGN_@-DSA_@-SHA3_@-512
+Digital signature algorithm DSA with SHA3-512.
+@item GNUTLS_@-SIGN_@-RSA_@-SHA3_@-224
+Digital signature algorithm RSA with SHA3-224.
+@item GNUTLS_@-SIGN_@-RSA_@-SHA3_@-256
+Digital signature algorithm RSA with SHA3-256.
+@item GNUTLS_@-SIGN_@-RSA_@-SHA3_@-384
+Digital signature algorithm RSA with SHA3-384.
+@item GNUTLS_@-SIGN_@-RSA_@-SHA3_@-512
+Digital signature algorithm RSA with SHA3-512.
 @end table
 
 @c gnutls_ecc_curve_t
@@ -512,6 +582,8 @@ the SECP384R1 curve
 the SECP521R1 curve
 @item GNUTLS_@-ECC_@-CURVE_@-SECP192R1
 the SECP192R1 curve
+@item GNUTLS_@-ECC_@-CURVE_@-X25519
+the X25519 curve (ECDH only)
 @end table
 
 @c gnutls_sec_param_t
@@ -552,6 +624,22 @@ Less than 42 bits of security
 Domain Name System name type.
 @end table
 
+@c gnutls_session_flags_t
+@table @code
+@item GNUTLS_@-SFLAGS_@-SAFE_@-RENEGOTIATION
+Safe renegotiation (RFC5746) was used
+@item GNUTLS_@-SFLAGS_@-EXT_@-MASTER_@-SECRET
+The extended master secret (RFC7627) extension was used
+@item GNUTLS_@-SFLAGS_@-ETM
+The encrypt then MAC (RFC7366) extension was used
+@item GNUTLS_@-SFLAGS_@-HB_@-LOCAL_@-SEND
+The heartbeat negotiation allows the local side to send heartbeat messages
+@item GNUTLS_@-SFLAGS_@-HB_@-PEER_@-SEND
+The heartbeat negotiation allows the peer to send heartbeat messages
+@item GNUTLS_@-SFLAGS_@-FALSE_@-START
+The appdata set with @code{gnutls_handshake_set_appdata()}  were sent during handshake (false start)
+@end table
+
 @c gnutls_supplemental_data_format_type_t
 @table @code
 @item GNUTLS_@-SUPPLEMENTAL_@-UNKNOWN
@@ -568,6 +656,16 @@ Unknown data format
 NULL cipher with a 80 bit HMAC-SHA1
 @item GNUTLS_@-SRTP_@-NULL_@-HMAC_@-SHA1_@-32
 NULL cipher with a 32 bit HMAC-SHA1
+@end table
+
+@c gnutls_alpn_flags_t
+@table @code
+@item GNUTLS_@-ALPN_@-MANDATORY
+Require ALPN negotiation. The connection will be
+aborted if no matching ALPN protocol is found.
+@item GNUTLS_@-ALPN_@-SERVER_@-PRECEDENCE
+The choices set by the server
+will take precedence over the client's.
 @end table
 
 @c gnutls_vdata_types_t
@@ -615,9 +713,12 @@ IP address SAN.
 OtherName SAN.
 @item GNUTLS_@-SAN_@-DN
 DN SAN.
+@item GNUTLS_@-SAN_@-MAX
+-- undescribed --
 @item GNUTLS_@-SAN_@-OTHERNAME_@-XMPP
-Virtual SAN, used by
-gnutls_x509_crt_get_subject_alt_othername_oid.
+Virtual SAN, used by certain functions for convenience.
+@item GNUTLS_@-SAN_@-OTHERNAME_@-KRB5PRINCIPAL
+Virtual SAN, used by certain functions for convenience.
 @end table
 
 @c gnutls_privkey_type_t
@@ -815,6 +916,14 @@ PBES2 AES-256.
 Some schemas distinguish between an empty and a NULL password.
 @item GNUTLS_@-PKCS_@-PBES2_@-DES
 PBES2 single DES.
+@end table
+
+@c gnutls_keygen_types_t
+@table @code
+@item GNUTLS_@-KEYGEN_@-SEED
+Specifies the seed to be used in key generation.
+@item GNUTLS_@-KEYGEN_@-DIGEST
+The size field specifies the hash algorithm to be used in key generation.
 @end table
 
 @c gnutls_openpgp_crt_fmt_t
@@ -1017,6 +1126,12 @@ The following flag disables call to PIN callbacks etc.
 Only relevant to TPM keys.
 @item GNUTLS_@-PRIVKEY_@-SIGN_@-FLAG_@-TLS1_@-RSA
 Make an RSA signature on the hashed data as in the TLS protocol.
+@item GNUTLS_@-PRIVKEY_@-FLAG_@-PROVABLE
+When generating a key involving prime numbers, use provable primes; a seed may be required.
+@item GNUTLS_@-PRIVKEY_@-FLAG_@-EXPORT_@-COMPAT
+Keys generated or imported as provable require an extended format which cannot be read by previous versions
+of gnutls or other applications. By setting this flag the key will be exported in a backwards compatible way,
+even if the information about the seed used will be lost.
 @end table
 
 @c gnutls_rnd_level_t

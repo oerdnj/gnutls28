@@ -108,9 +108,11 @@ POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
 @ENABLE_MINITASN1_TRUE@am__append_1 = -I$(srcdir)/../minitasn1
-@ENABLE_FIPS140_TRUE@am__append_2 = rnd-fips.c int/drbg-aes-self-test.c \
-@ENABLE_FIPS140_TRUE@	int/dsa-fips.h int/dsa-keygen-fips186.c int/dsa-validate.c int/provable-prime.c \
-@ENABLE_FIPS140_TRUE@	int/drbg-aes.c int/drbg-aes.h int/rsa-fips.h int/rsa-keygen-fips186.c
+@WINDOWS_TRUE@am__append_2 = rnd-windows.c
+@HAVE_GETENTROPY_TRUE@@WINDOWS_FALSE@am__append_3 = rnd-getentropy.c
+@HAVE_GETENTROPY_FALSE@@WINDOWS_FALSE@am__append_4 = rnd-linux.c
+@ENABLE_FIPS140_TRUE@am__append_5 = rnd-fips.c int/drbg-aes-self-test.c \
+@ENABLE_FIPS140_TRUE@	int/drbg-aes.c int/drbg-aes.h
 
 subdir = lib/nettle
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -149,12 +151,10 @@ am__aclocal_m4_deps = $(top_srcdir)/src/gl/m4/arpa_inet_h.m4 \
 	$(top_srcdir)/src/libopts/m4/stdnoreturn.m4 \
 	$(top_srcdir)/gl/m4/00gnulib.m4 \
 	$(top_srcdir)/gl/m4/absolute-header.m4 \
-	$(top_srcdir)/gl/m4/alloca.m4 $(top_srcdir)/gl/m4/base64.m4 \
-	$(top_srcdir)/gl/m4/byteswap.m4 $(top_srcdir)/gl/m4/ctype.m4 \
-	$(top_srcdir)/gl/m4/errno_h.m4 \
+	$(top_srcdir)/gl/m4/alloca.m4 $(top_srcdir)/gl/m4/byteswap.m4 \
+	$(top_srcdir)/gl/m4/ctype.m4 $(top_srcdir)/gl/m4/errno_h.m4 \
 	$(top_srcdir)/gl/m4/exponentd.m4 \
 	$(top_srcdir)/gl/m4/extensions.m4 \
-	$(top_srcdir)/gl/m4/extern-inline.m4 \
 	$(top_srcdir)/gl/m4/fcntl_h.m4 $(top_srcdir)/gl/m4/fdopen.m4 \
 	$(top_srcdir)/gl/m4/float_h.m4 $(top_srcdir)/gl/m4/fpieee.m4 \
 	$(top_srcdir)/gl/m4/fseeko.m4 $(top_srcdir)/gl/m4/fstat.m4 \
@@ -208,10 +208,11 @@ am__aclocal_m4_deps = $(top_srcdir)/src/gl/m4/arpa_inet_h.m4 \
 	$(top_srcdir)/gl/m4/vsnprintf.m4 \
 	$(top_srcdir)/gl/m4/warn-on-use.m4 \
 	$(top_srcdir)/gl/m4/warnings.m4 $(top_srcdir)/gl/m4/wchar_h.m4 \
-	$(top_srcdir)/m4/fcntl-o.m4 $(top_srcdir)/m4/gettext.m4 \
-	$(top_srcdir)/m4/gtk-doc.m4 $(top_srcdir)/m4/guile.m4 \
-	$(top_srcdir)/m4/hooks.m4 $(top_srcdir)/m4/iconv.m4 \
-	$(top_srcdir)/m4/intlmacosx.m4 \
+	$(top_srcdir)/m4/ax_code_coverage.m4 \
+	$(top_srcdir)/m4/extern-inline.m4 $(top_srcdir)/m4/fcntl-o.m4 \
+	$(top_srcdir)/m4/gettext.m4 $(top_srcdir)/m4/gtk-doc.m4 \
+	$(top_srcdir)/m4/guile.m4 $(top_srcdir)/m4/hooks.m4 \
+	$(top_srcdir)/m4/iconv.m4 $(top_srcdir)/m4/intlmacosx.m4 \
 	$(top_srcdir)/m4/inttypes-pri.m4 \
 	$(top_srcdir)/m4/inttypes_h.m4 $(top_srcdir)/m4/lib-ld.m4 \
 	$(top_srcdir)/m4/lib-link.m4 $(top_srcdir)/m4/lib-prefix.m4 \
@@ -232,20 +233,24 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 LTLIBRARIES = $(noinst_LTLIBRARIES)
 libcrypto_la_LIBADD =
-am__libcrypto_la_SOURCES_DIST = pk.c mpi.c mac.c cipher.c init.c egd.c \
-	egd.h gnettle.h rnd-common.h rnd-common.c rnd.c rnd-fips.c \
-	int/drbg-aes-self-test.c int/dsa-fips.h \
-	int/dsa-keygen-fips186.c int/dsa-validate.c \
-	int/provable-prime.c int/drbg-aes.c int/drbg-aes.h \
-	int/rsa-fips.h int/rsa-keygen-fips186.c
+am__libcrypto_la_SOURCES_DIST = pk.c mpi.c mac.c cipher.c init.c \
+	gnettle.h rnd-common.h rnd-common.c rnd.c int/rsa-fips.h \
+	int/rsa-keygen-fips186.c int/provable-prime.c int/dsa-fips.h \
+	int/dsa-keygen-fips186.c int/dsa-validate.c rnd-windows.c \
+	rnd-getentropy.c rnd-linux.c rnd-fips.c \
+	int/drbg-aes-self-test.c int/drbg-aes.c int/drbg-aes.h
 am__dirstamp = $(am__leading_dot)dirstamp
-@ENABLE_FIPS140_TRUE@am__objects_1 = rnd-fips.lo \
-@ENABLE_FIPS140_TRUE@	int/drbg-aes-self-test.lo \
-@ENABLE_FIPS140_TRUE@	int/dsa-keygen-fips186.lo \
-@ENABLE_FIPS140_TRUE@	int/dsa-validate.lo int/provable-prime.lo \
-@ENABLE_FIPS140_TRUE@	int/drbg-aes.lo int/rsa-keygen-fips186.lo
-am_libcrypto_la_OBJECTS = pk.lo mpi.lo mac.lo cipher.lo init.lo egd.lo \
-	rnd-common.lo rnd.lo $(am__objects_1)
+@WINDOWS_TRUE@am__objects_1 = rnd-windows.lo
+@HAVE_GETENTROPY_TRUE@@WINDOWS_FALSE@am__objects_2 =  \
+@HAVE_GETENTROPY_TRUE@@WINDOWS_FALSE@	rnd-getentropy.lo
+@HAVE_GETENTROPY_FALSE@@WINDOWS_FALSE@am__objects_3 = rnd-linux.lo
+@ENABLE_FIPS140_TRUE@am__objects_4 = rnd-fips.lo \
+@ENABLE_FIPS140_TRUE@	int/drbg-aes-self-test.lo int/drbg-aes.lo
+am_libcrypto_la_OBJECTS = pk.lo mpi.lo mac.lo cipher.lo init.lo \
+	rnd-common.lo rnd.lo int/rsa-keygen-fips186.lo \
+	int/provable-prime.lo int/dsa-keygen-fips186.lo \
+	int/dsa-validate.lo $(am__objects_1) $(am__objects_2) \
+	$(am__objects_3) $(am__objects_4)
 libcrypto_la_OBJECTS = $(am_libcrypto_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
@@ -312,7 +317,7 @@ am__define_uniq_tagged_files = \
 ETAGS = etags
 CTAGS = ctags
 am__DIST_COMMON = $(srcdir)/Makefile.in \
-	$(top_srcdir)/build-aux/depcomp
+	$(top_srcdir)/build-aux/depcomp $(top_srcdir)/lib/common.mk
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 ACLOCAL = @ACLOCAL@
 ALLOCA = @ALLOCA@
@@ -339,6 +344,13 @@ CCASDEPMODE = @CCASDEPMODE@
 CCASFLAGS = @CCASFLAGS@
 CCDEPMODE = @CCDEPMODE@
 CFLAGS = @CFLAGS@
+CMOCKA_CFLAGS = @CMOCKA_CFLAGS@
+CMOCKA_LIBS = @CMOCKA_LIBS@
+CODE_COVERAGE_CFLAGS = @CODE_COVERAGE_CFLAGS@
+CODE_COVERAGE_CPPFLAGS = @CODE_COVERAGE_CPPFLAGS@
+CODE_COVERAGE_CXXFLAGS = @CODE_COVERAGE_CXXFLAGS@
+CODE_COVERAGE_ENABLED = @CODE_COVERAGE_ENABLED@
+CODE_COVERAGE_LDFLAGS = @CODE_COVERAGE_LDFLAGS@
 CONFIG_INCLUDE = @CONFIG_INCLUDE@
 CPP = @CPP@
 CPPFLAGS = @CPPFLAGS@
@@ -374,6 +386,8 @@ EXEEXT = @EXEEXT@
 FGREP = @FGREP@
 FIPS140_LIBS = @FIPS140_LIBS@
 FLOAT_H = @FLOAT_H@
+GCOV = @GCOV@
+GENHTML = @GENHTML@
 GETADDRINFO_LIB = @GETADDRINFO_LIB@
 GETTEXT_MACRO_VERSION = @GETTEXT_MACRO_VERSION@
 GMP_CFLAGS = @GMP_CFLAGS@
@@ -650,6 +664,7 @@ GREP = @GREP@
 GTKDOC_CHECK = @GTKDOC_CHECK@
 GTKDOC_MKPDF = @GTKDOC_MKPDF@
 GTKDOC_REBASE = @GTKDOC_REBASE@
+GUILD = @GUILD@
 GUILE = @GUILE@
 GUILE_CFLAGS = @GUILE_CFLAGS@
 GUILE_CONFIG = @GUILE_CONFIG@
@@ -737,11 +752,13 @@ HAVE_INTTYPES_H = @HAVE_INTTYPES_H@
 HAVE_ISBLANK = @HAVE_ISBLANK@
 HAVE_LCHMOD = @HAVE_LCHMOD@
 HAVE_LCHOWN = @HAVE_LCHOWN@
+HAVE_LIBCRYPTO = @HAVE_LIBCRYPTO@
 HAVE_LIBDL = @HAVE_LIBDL@
 HAVE_LIBICONV = @HAVE_LIBICONV@
 HAVE_LIBNSL = @HAVE_LIBNSL@
 HAVE_LIBPTHREAD = @HAVE_LIBPTHREAD@
 HAVE_LIBRT = @HAVE_LIBRT@
+HAVE_LIBSECCOMP = @HAVE_LIBSECCOMP@
 HAVE_LIBZ = @HAVE_LIBZ@
 HAVE_LINK = @HAVE_LINK@
 HAVE_LINKAT = @HAVE_LINKAT@
@@ -903,8 +920,11 @@ INT32_MAX_LT_INTMAX_MAX = @INT32_MAX_LT_INTMAX_MAX@
 INT64_MAX_EQ_LONG_MAX = @INT64_MAX_EQ_LONG_MAX@
 INTLLIBS = @INTLLIBS@
 INTL_MACOSX_LIBS = @INTL_MACOSX_LIBS@
+LCOV = @LCOV@
 LD = @LD@
 LDFLAGS = @LDFLAGS@
+LIBCRYPTO = @LIBCRYPTO@
+LIBCRYPTO_PREFIX = @LIBCRYPTO_PREFIX@
 LIBDL = @LIBDL@
 LIBDL_PREFIX = @LIBDL_PREFIX@
 LIBGNUTLS_CFLAGS = @LIBGNUTLS_CFLAGS@
@@ -925,6 +945,8 @@ LIBPTHREAD_PREFIX = @LIBPTHREAD_PREFIX@
 LIBRT = @LIBRT@
 LIBRT_PREFIX = @LIBRT_PREFIX@
 LIBS = @LIBS@
+LIBSECCOMP = @LIBSECCOMP@
+LIBSECCOMP_PREFIX = @LIBSECCOMP_PREFIX@
 LIBSOCKET = @LIBSOCKET@
 LIBTASN1_CFLAGS = @LIBTASN1_CFLAGS@
 LIBTASN1_LIBS = @LIBTASN1_LIBS@
@@ -937,6 +959,7 @@ LIB_SELECT = @LIB_SELECT@
 LIPO = @LIPO@
 LN_S = @LN_S@
 LTALLOCA = @LTALLOCA@
+LTLIBCRYPTO = @LTLIBCRYPTO@
 LTLIBDL = @LTLIBDL@
 LTLIBICONV = @LTLIBICONV@
 LTLIBINTL = @LTLIBINTL@
@@ -944,6 +967,7 @@ LTLIBNSL = @LTLIBNSL@
 LTLIBOBJS = @LTLIBOBJS@
 LTLIBPTHREAD = @LTLIBPTHREAD@
 LTLIBRT = @LTLIBRT@
+LTLIBSECCOMP = @LTLIBSECCOMP@
 LTLIBZ = @LTLIBZ@
 LT_AGE = @LT_AGE@
 LT_CURRENT = @LT_CURRENT@
@@ -954,6 +978,7 @@ LT_REVISION = @LT_REVISION@
 LT_SSL_AGE = @LT_SSL_AGE@
 LT_SSL_CURRENT = @LT_SSL_CURRENT@
 LT_SSL_REVISION = @LT_SSL_REVISION@
+LT_SYS_LIBRARY_PATH = @LT_SYS_LIBRARY_PATH@
 LT_XSSL_AGE = @LT_XSSL_AGE@
 LT_XSSL_CURRENT = @LT_XSSL_CURRENT@
 LT_XSSL_REVISION = @LT_XSSL_REVISION@
@@ -1261,6 +1286,7 @@ gltests_LTLIBOBJS = @gltests_LTLIBOBJS@
 gltests_WITNESS = @gltests_WITNESS@
 guile_snarf = @guile_snarf@
 guileextensiondir = @guileextensiondir@
+guileobjectdir = @guileobjectdir@
 host = @host@
 host_alias = @host_alias@
 host_cpu = @host_cpu@
@@ -1291,22 +1317,25 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 AM_CFLAGS = $(WERROR_CFLAGS) $(WSTACK_CFLAGS) $(WARN_CFLAGS) \
-	$(NETTLE_CFLAGS)		\
-	$(HOGWEED_CFLAGS)		\
+	$(NETTLE_CFLAGS) $(LIBTASN1_CFLAGS) $(LIBIDN_CFLAGS) \
+	$(P11_KIT_CFLAGS) $(CODE_COVERAGE_CFLAGS) $(HOGWEED_CFLAGS) \
 	$(GMP_CFLAGS)
-
+COMMON_LINK_FLAGS = $(CODE_COVERAGE_LDFLAGS)
 AM_CPPFLAGS = -I$(srcdir)/int -I$(srcdir)/../../gl \
 	-I$(builddir)/../../gl -I$(srcdir)/../includes \
 	-I$(builddir)/../includes -I$(builddir)/../../gl \
 	-I$(srcdir)/.. $(am__append_1)
 noinst_LTLIBRARIES = libcrypto.la
-libcrypto_la_SOURCES = pk.c mpi.c mac.c cipher.c init.c egd.c egd.h \
-	gnettle.h rnd-common.h rnd-common.c rnd.c $(am__append_2)
+libcrypto_la_SOURCES = pk.c mpi.c mac.c cipher.c init.c gnettle.h \
+	rnd-common.h rnd-common.c rnd.c int/rsa-fips.h \
+	int/rsa-keygen-fips186.c int/provable-prime.c int/dsa-fips.h \
+	int/dsa-keygen-fips186.c int/dsa-validate.c $(am__append_2) \
+	$(am__append_3) $(am__append_4) $(am__append_5)
 all: all-am
 
 .SUFFIXES:
 .SUFFIXES: .c .lo .o .obj
-$(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
+$(srcdir)/Makefile.in:  $(srcdir)/Makefile.am $(top_srcdir)/lib/common.mk $(am__configure_deps)
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
 	    *$$dep*) \
@@ -1315,9 +1344,9 @@ $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu lib/nettle/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign lib/nettle/Makefile'; \
 	$(am__cd) $(top_srcdir) && \
-	  $(AUTOMAKE) --gnu lib/nettle/Makefile
+	  $(AUTOMAKE) --foreign lib/nettle/Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
 	  *config.status*) \
@@ -1326,6 +1355,7 @@ Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	    echo ' cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@ $(am__depfiles_maybe)'; \
 	    cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@ $(am__depfiles_maybe);; \
 	esac;
+$(top_srcdir)/lib/common.mk $(am__empty):
 
 $(top_builddir)/config.status: $(top_srcdir)/configure $(CONFIG_STATUS_DEPENDENCIES)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
@@ -1352,16 +1382,16 @@ int/$(am__dirstamp):
 int/$(DEPDIR)/$(am__dirstamp):
 	@$(MKDIR_P) int/$(DEPDIR)
 	@: > int/$(DEPDIR)/$(am__dirstamp)
-int/drbg-aes-self-test.lo: int/$(am__dirstamp) \
+int/rsa-keygen-fips186.lo: int/$(am__dirstamp) \
+	int/$(DEPDIR)/$(am__dirstamp)
+int/provable-prime.lo: int/$(am__dirstamp) \
 	int/$(DEPDIR)/$(am__dirstamp)
 int/dsa-keygen-fips186.lo: int/$(am__dirstamp) \
 	int/$(DEPDIR)/$(am__dirstamp)
 int/dsa-validate.lo: int/$(am__dirstamp) int/$(DEPDIR)/$(am__dirstamp)
-int/provable-prime.lo: int/$(am__dirstamp) \
+int/drbg-aes-self-test.lo: int/$(am__dirstamp) \
 	int/$(DEPDIR)/$(am__dirstamp)
 int/drbg-aes.lo: int/$(am__dirstamp) int/$(DEPDIR)/$(am__dirstamp)
-int/rsa-keygen-fips186.lo: int/$(am__dirstamp) \
-	int/$(DEPDIR)/$(am__dirstamp)
 
 libcrypto.la: $(libcrypto_la_OBJECTS) $(libcrypto_la_DEPENDENCIES) $(EXTRA_libcrypto_la_DEPENDENCIES) 
 	$(AM_V_CCLD)$(LINK)  $(libcrypto_la_OBJECTS) $(libcrypto_la_LIBADD) $(LIBS)
@@ -1375,13 +1405,15 @@ distclean-compile:
 	-rm -f *.tab.c
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/cipher.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/egd.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/init.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/mac.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/mpi.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pk.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/rnd-common.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/rnd-fips.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/rnd-getentropy.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/rnd-linux.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/rnd-windows.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/rnd.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@int/$(DEPDIR)/drbg-aes-self-test.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@int/$(DEPDIR)/drbg-aes.Plo@am__quote@

@@ -119,13 +119,6 @@ gnutls_int
 
 
 
-<!-- ##### MACRO DTLS_RECORD_WINDOW_SIZE ##### -->
-<para>
-
-</para>
-
-
-
 <!-- ##### MACRO ENABLE_COMPAT ##### -->
 <para>
 
@@ -394,20 +387,6 @@ gnutls_int
 
 
 
-<!-- ##### MACRO SESSION_TICKET_KEY_NAME_SIZE ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO SESSION_TICKET_KEY_SIZE ##### -->
-<para>
-
-</para>
-
-
-
 <!-- ##### MACRO TLS_HANDSHAKE_HEADER_SIZE ##### -->
 <para>
 
@@ -483,6 +462,7 @@ gnutls_int
 @ecdh_params: 
 @ecdh_x: 
 @ecdh_y: 
+@ecdhx: 
 @key: 
 @dh_params: 
 @client_Y: 
@@ -495,22 +475,12 @@ gnutls_int
 @b: 
 @a: 
 @x: 
-@rsa: 
 @auth_info: 
 @auth_info_type: 
 @auth_info_size: 
 @crypt_algo: 
 @cred: 
 @crt_requested: 
-
-<!-- ##### FUNCTION gnutls_protocol_get_version ##### -->
-<para>
-
-</para>
-
-@session: 
-@Returns: 
-
 
 <!-- ##### ENUM handshake_state_t ##### -->
 <para>
@@ -536,6 +506,7 @@ gnutls_int
 @STATE16: 
 @STATE17: 
 @STATE18: 
+@STATE19: 
 @STATE20: 
 @STATE21: 
 @STATE22: 
@@ -544,9 +515,6 @@ gnutls_int
 @STATE40: 
 @STATE41: 
 @STATE50: 
-@STATE60: 
-@STATE61: 
-@STATE62: 
 
 <!-- ##### ENUM heartbeat_state_t ##### -->
 <para>
@@ -591,6 +559,8 @@ gnutls_int
 
 @RECV_STATE_0: 
 @RECV_STATE_DTLS_RETRANSMIT: 
+@RECV_STATE_FALSE_START_HANDLING: 
+@RECV_STATE_FALSE_START: 
 
 <!-- ##### ENUM safe_renegotiation_t ##### -->
 <para>

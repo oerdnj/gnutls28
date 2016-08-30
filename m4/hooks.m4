@@ -39,9 +39,9 @@ AC_DEFUN([LIBGNUTLS_HOOKS],
   # Interfaces changed/added/removed:   CURRENT++       REVISION=0
   # Interfaces added:                             AGE++
   # Interfaces removed:                           AGE=0 (+bump all symbol versions in .map)
-  AC_SUBST(LT_CURRENT, 36)
-  AC_SUBST(LT_REVISION, 6)
-  AC_SUBST(LT_AGE, 6)
+  AC_SUBST(LT_CURRENT, 39)
+  AC_SUBST(LT_REVISION, 0)
+  AC_SUBST(LT_AGE, 9)
 
   AC_SUBST(LT_SSL_CURRENT, 27)
   AC_SUBST(LT_SSL_REVISION, 2)
@@ -139,6 +139,36 @@ LIBTASN1_MINIMUM=4.3
     AC_MSG_RESULT(no)
     AC_MSG_WARN([C99 macros not supported. This may affect compiling.])
   ])
+
+  ac_enable_ssl3=yes
+  AC_MSG_CHECKING([whether to disable the SSL 3.0 protocol])
+  AC_ARG_ENABLE(ssl3-support,
+    AS_HELP_STRING([--disable-ssl3-support],
+                   [disable support for the SSL 3.0 protocol]),
+    ac_enable_ssl3=$enableval)
+  if test x$ac_enable_ssl3 != xno; then
+   AC_MSG_RESULT(no)
+   AC_DEFINE([ENABLE_SSL3], 1, [enable SSL3.0 support])
+  else
+   ac_full=0
+   AC_MSG_RESULT(yes)
+  fi
+  AM_CONDITIONAL(ENABLE_SSL3, test "$ac_enable_ssl3" != "no")
+
+  ac_enable_ssl2=yes
+  AC_MSG_CHECKING([whether to disable the SSL 2.0 client hello])
+  AC_ARG_ENABLE(ssl2-support,
+    AS_HELP_STRING([--disable-ssl2-support],
+                   [disable support for the SSL 2.0 client hello]),
+    ac_enable_ssl2=$enableval)
+  if test x$ac_enable_ssl2 != xno; then
+   AC_MSG_RESULT(no)
+   AC_DEFINE([ENABLE_SSL2], 1, [enable SSL2.0 support for client hello])
+  else
+   ac_full=0
+   AC_MSG_RESULT(yes)
+  fi
+  AM_CONDITIONAL(ENABLE_SSL3, test "$ac_enable_ssl2" != "no")
 
   ac_enable_srtp=yes
   AC_MSG_CHECKING([whether to disable DTLS-SRTP extension])

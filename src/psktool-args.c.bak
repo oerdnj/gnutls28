@@ -53,7 +53,7 @@ extern "C" {
 #endif
 extern FILE * option_usage_fp;
 #define zCopyright      (psktool_opt_strs+0)
-#define zLicenseDescrip (psktool_opt_strs+283)
+#define zLicenseDescrip (psktool_opt_strs+282)
 
 
 #ifndef NULL
@@ -63,13 +63,13 @@ extern FILE * option_usage_fp;
 /**
  *  static const strings for psktool options
  */
-static char const psktool_opt_strs[1483] =
-/*     0 */ "psktool 3.4.14\n"
+static char const psktool_opt_strs[1481] =
+/*     0 */ "psktool 3.5.3\n"
             "Copyright (C) 2000-2016 Free Software Foundation, and others, all rights reserved.\n"
             "This is free software. It is licensed for use, modification and\n"
             "redistribution under the terms of the GNU General Public License,\n"
             "version 3 or later <http://gnu.org/licenses/gpl.html>\n\0"
-/*   283 */ "psktool is free software: you can redistribute it and/or modify it under\n"
+/*   282 */ "psktool is free software: you can redistribute it and/or modify it under\n"
             "the terms of the GNU General Public License as published by the Free\n"
             "Software Foundation, either version 3 of the License, or (at your option)\n"
             "any later version.\n\n"
@@ -79,44 +79,44 @@ static char const psktool_opt_strs[1483] =
             "details.\n\n"
             "You should have received a copy of the GNU General Public License along\n"
             "with this program.  If not, see <http://www.gnu.org/licenses/>.\n\0"
-/*   886 */ "Enable debugging\0"
-/*   903 */ "DEBUG\0"
-/*   909 */ "debug\0"
-/*   915 */ "specify the key size in bytes\0"
-/*   945 */ "KEYSIZE\0"
-/*   953 */ "keysize\0"
-/*   961 */ "specify a username\0"
-/*   980 */ "USERNAME\0"
-/*   989 */ "username\0"
-/*   998 */ "specify a password file\0"
-/*  1022 */ "PASSWD\0"
-/*  1029 */ "passwd\0"
-/*  1036 */ "display extended usage information and exit\0"
-/*  1080 */ "help\0"
-/*  1085 */ "extended usage information passed thru pager\0"
-/*  1130 */ "more-help\0"
-/*  1140 */ "output version information and exit\0"
-/*  1176 */ "version\0"
-/*  1184 */ "PSKTOOL\0"
-/*  1192 */ "psktool - GnuTLS PSK tool\n"
+/*   885 */ "Enable debugging\0"
+/*   902 */ "DEBUG\0"
+/*   908 */ "debug\0"
+/*   914 */ "specify the key size in bytes\0"
+/*   944 */ "KEYSIZE\0"
+/*   952 */ "keysize\0"
+/*   960 */ "specify a username\0"
+/*   979 */ "USERNAME\0"
+/*   988 */ "username\0"
+/*   997 */ "specify a password file\0"
+/*  1021 */ "PASSWD\0"
+/*  1028 */ "passwd\0"
+/*  1035 */ "display extended usage information and exit\0"
+/*  1079 */ "help\0"
+/*  1084 */ "extended usage information passed thru pager\0"
+/*  1129 */ "more-help\0"
+/*  1139 */ "output version information and exit\0"
+/*  1175 */ "version\0"
+/*  1183 */ "PSKTOOL\0"
+/*  1191 */ "psktool - GnuTLS PSK tool\n"
             "Usage:  %s [ -<flag> [<val>] | --<name>[{=| }<val>] ]...\n\0"
-/*  1276 */ "bugs@gnutls.org\0"
-/*  1292 */ "\n\0"
-/*  1294 */ "Program that generates random keys for use with TLS-PSK.  The keys are\n"
+/*  1275 */ "bugs@gnutls.org\0"
+/*  1291 */ "\n\0"
+/*  1293 */ "Program that generates random keys for use with TLS-PSK.  The keys are\n"
             "stored in hexadecimal format in a key file.\n\0"
-/*  1410 */ "psktool 3.4.14\0"
-/*  1425 */ "psktool [options]\n"
+/*  1409 */ "psktool 3.5.3\0"
+/*  1423 */ "psktool [options]\n"
             "psktool --help for usage instructions.\n";
 
 /**
  *  debug option description:
  */
 /** Descriptive text for the debug option */
-#define DEBUG_DESC      (psktool_opt_strs+886)
+#define DEBUG_DESC      (psktool_opt_strs+885)
 /** Upper-cased name for the debug option */
-#define DEBUG_NAME      (psktool_opt_strs+903)
+#define DEBUG_NAME      (psktool_opt_strs+902)
 /** Name string for the debug option */
-#define DEBUG_name      (psktool_opt_strs+909)
+#define DEBUG_name      (psktool_opt_strs+908)
 /** Compiled in flag settings for the debug option */
 #define DEBUG_FLAGS     (OPTST_DISABLED \
         | OPTST_SET_ARGTYPE(OPARG_TYPE_NUMERIC))
@@ -125,11 +125,11 @@ static char const psktool_opt_strs[1483] =
  *  keysize option description:
  */
 /** Descriptive text for the keysize option */
-#define KEYSIZE_DESC      (psktool_opt_strs+915)
+#define KEYSIZE_DESC      (psktool_opt_strs+914)
 /** Upper-cased name for the keysize option */
-#define KEYSIZE_NAME      (psktool_opt_strs+945)
+#define KEYSIZE_NAME      (psktool_opt_strs+944)
 /** Name string for the keysize option */
-#define KEYSIZE_name      (psktool_opt_strs+953)
+#define KEYSIZE_name      (psktool_opt_strs+952)
 /** Compiled in flag settings for the keysize option */
 #define KEYSIZE_FLAGS     (OPTST_DISABLED \
         | OPTST_SET_ARGTYPE(OPARG_TYPE_NUMERIC))
@@ -138,11 +138,11 @@ static char const psktool_opt_strs[1483] =
  *  username option description:
  */
 /** Descriptive text for the username option */
-#define USERNAME_DESC      (psktool_opt_strs+961)
+#define USERNAME_DESC      (psktool_opt_strs+960)
 /** Upper-cased name for the username option */
-#define USERNAME_NAME      (psktool_opt_strs+980)
+#define USERNAME_NAME      (psktool_opt_strs+979)
 /** Name string for the username option */
-#define USERNAME_name      (psktool_opt_strs+989)
+#define USERNAME_name      (psktool_opt_strs+988)
 /** Compiled in flag settings for the username option */
 #define USERNAME_FLAGS     (OPTST_DISABLED \
         | OPTST_SET_ARGTYPE(OPARG_TYPE_STRING))
@@ -151,11 +151,11 @@ static char const psktool_opt_strs[1483] =
  *  passwd option description:
  */
 /** Descriptive text for the passwd option */
-#define PASSWD_DESC      (psktool_opt_strs+998)
+#define PASSWD_DESC      (psktool_opt_strs+997)
 /** Upper-cased name for the passwd option */
-#define PASSWD_NAME      (psktool_opt_strs+1022)
+#define PASSWD_NAME      (psktool_opt_strs+1021)
 /** Name string for the passwd option */
-#define PASSWD_name      (psktool_opt_strs+1029)
+#define PASSWD_name      (psktool_opt_strs+1028)
 /** Compiled in flag settings for the passwd option */
 #define PASSWD_FLAGS     (OPTST_DISABLED \
         | OPTST_SET_ARGTYPE(OPARG_TYPE_STRING))
@@ -163,11 +163,11 @@ static char const psktool_opt_strs[1483] =
 /*
  *  Help/More_Help/Version option descriptions:
  */
-#define HELP_DESC       (psktool_opt_strs+1036)
-#define HELP_name       (psktool_opt_strs+1080)
+#define HELP_DESC       (psktool_opt_strs+1035)
+#define HELP_name       (psktool_opt_strs+1079)
 #ifdef HAVE_WORKING_FORK
-#define MORE_HELP_DESC  (psktool_opt_strs+1085)
-#define MORE_HELP_name  (psktool_opt_strs+1130)
+#define MORE_HELP_DESC  (psktool_opt_strs+1084)
+#define MORE_HELP_name  (psktool_opt_strs+1129)
 #define MORE_HELP_FLAGS (OPTST_IMM | OPTST_NO_INIT)
 #else
 #define MORE_HELP_DESC  HELP_DESC
@@ -180,8 +180,8 @@ static char const psktool_opt_strs[1483] =
 #  define VER_FLAGS     (OPTST_SET_ARGTYPE(OPARG_TYPE_STRING) | \
                          OPTST_ARG_OPTIONAL | OPTST_IMM | OPTST_NO_INIT)
 #endif
-#define VER_DESC        (psktool_opt_strs+1140)
-#define VER_name        (psktool_opt_strs+1176)
+#define VER_DESC        (psktool_opt_strs+1139)
+#define VER_name        (psktool_opt_strs+1175)
 /**
  *  Declare option callback procedures
  */
@@ -291,21 +291,21 @@ static tOptDesc optDesc[OPTION_CT] = {
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 /** Reference to the upper cased version of psktool. */
-#define zPROGNAME       (psktool_opt_strs+1184)
+#define zPROGNAME       (psktool_opt_strs+1183)
 /** Reference to the title line for psktool usage. */
-#define zUsageTitle     (psktool_opt_strs+1192)
+#define zUsageTitle     (psktool_opt_strs+1191)
 /** There is no psktool configuration file. */
 #define zRcName         NULL
 /** There are no directories to search for psktool config files. */
 #define apzHomeList     NULL
 /** The psktool program bug email address. */
-#define zBugsAddr       (psktool_opt_strs+1276)
+#define zBugsAddr       (psktool_opt_strs+1275)
 /** Clarification/explanation of what psktool does. */
-#define zExplain        (psktool_opt_strs+1292)
+#define zExplain        (psktool_opt_strs+1291)
 /** Extra detail explaining what psktool does. */
-#define zDetail         (psktool_opt_strs+1294)
+#define zDetail         (psktool_opt_strs+1293)
 /** The full version string for psktool. */
-#define zFullVersion    (psktool_opt_strs+1410)
+#define zFullVersion    (psktool_opt_strs+1409)
 /* extracted from optcode.tlib near line 364 */
 
 #if defined(ENABLE_NLS)
@@ -317,7 +317,7 @@ static tOptDesc optDesc[OPTION_CT] = {
 #endif /* ENABLE_NLS */
 
 #define psktool_full_usage (NULL)
-#define psktool_short_usage (psktool_opt_strs+1425)
+#define psktool_short_usage (psktool_opt_strs+1423)
 
 #endif /* not defined __doxygen__ */
 
@@ -611,7 +611,7 @@ static void bogus_function(void) {
      translate option names.
    */
   /* referenced via psktoolOptions.pzCopyright */
-  puts(_("psktool 3.4.14\n\
+  puts(_("psktool 3.5.3\n\
 Copyright (C) 2000-2016 Free Software Foundation, and others, all rights reserved.\n\
 This is free software. It is licensed for use, modification and\n\
 redistribution under the terms of the GNU General Public License,\n\
@@ -662,7 +662,7 @@ Usage:  %s [ -<flag> [<val>] | --<name>[{=| }<val>] ]...\n"));
 stored in hexadecimal format in a key file.\n"));
 
   /* referenced via psktoolOptions.pzFullVersion */
-  puts(_("psktool 3.4.14"));
+  puts(_("psktool 3.5.3"));
 
   /* referenced via psktoolOptions.pzFullUsage */
   puts(_("<<<NOT-FOUND>>>"));

@@ -7,17 +7,11 @@
 
 @var{flags}: indicate if this session is to be used for server or client.
 
-This function initializes the current session to null. Every
-session must be initialized before use, so internal structures can
-be allocated.  This function allocates structures which can only
-be free'd by calling @code{gnutls_deinit()} .  Returns @code{GNUTLS_E_SUCCESS}  (0) on success.
+This function initializes the provided session. Every
+session must be initialized before use, and must be deinitialized
+after used by calling @code{gnutls_deinit()} .
 
- @code{flags} can be one of @code{GNUTLS_CLIENT} , @code{GNUTLS_SERVER} , @code{GNUTLS_DATAGRAM} ,
-@code{GNUTLS_NONBLOCK}  or @code{GNUTLS_NOSIGNAL}  (since 3.4.2).
-
-The flag @code{GNUTLS_NO_REPLAY_PROTECTION}  will disable any 
-replay protection in DTLS mode. That must only used when 
-replay protection is achieved using other means.
+ @code{flags} can be any combination of flags from @code{gnutls_init_flags_t} .
 
 Note that since version 3.1.2 this function enables some common
 TLS extensions such as session tickets and OCSP certificate status

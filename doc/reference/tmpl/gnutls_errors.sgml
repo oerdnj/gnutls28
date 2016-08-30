@@ -66,6 +66,7 @@ gnutls_errors
 
 @val: 
 @file: 
+@func: 
 @Returns: 
 
 

@@ -14,6 +14,9 @@
 Imports the public key from a private.  This function will import
 the given public key to the abstract @code{gnutls_pubkey_t}  type.
 
+Note that in certain keys this operation may not be possible, e.g.,
+in other than RSA PKCS@code{11}  keys.
+
 @strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (0) is returned, otherwise a
 negative error value.
 

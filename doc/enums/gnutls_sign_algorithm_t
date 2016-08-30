@@ -44,4 +44,28 @@ Digital signature algorithm ECDSA with SHA-512.
 Digital signature algorithm DSA with SHA-384
 @item GNUTLS_@-SIGN_@-DSA_@-SHA512
 Digital signature algorithm DSA with SHA-512
+@item GNUTLS_@-SIGN_@-ECDSA_@-SHA3_@-224
+Digital signature algorithm ECDSA with SHA3-224.
+@item GNUTLS_@-SIGN_@-ECDSA_@-SHA3_@-256
+Digital signature algorithm ECDSA with SHA3-256.
+@item GNUTLS_@-SIGN_@-ECDSA_@-SHA3_@-384
+Digital signature algorithm ECDSA with SHA3-384.
+@item GNUTLS_@-SIGN_@-ECDSA_@-SHA3_@-512
+Digital signature algorithm ECDSA with SHA3-512.
+@item GNUTLS_@-SIGN_@-DSA_@-SHA3_@-224
+Digital signature algorithm DSA with SHA3-224.
+@item GNUTLS_@-SIGN_@-DSA_@-SHA3_@-256
+Digital signature algorithm DSA with SHA3-256.
+@item GNUTLS_@-SIGN_@-DSA_@-SHA3_@-384
+Digital signature algorithm DSA with SHA3-384.
+@item GNUTLS_@-SIGN_@-DSA_@-SHA3_@-512
+Digital signature algorithm DSA with SHA3-512.
+@item GNUTLS_@-SIGN_@-RSA_@-SHA3_@-224
+Digital signature algorithm RSA with SHA3-224.
+@item GNUTLS_@-SIGN_@-RSA_@-SHA3_@-256
+Digital signature algorithm RSA with SHA3-256.
+@item GNUTLS_@-SIGN_@-RSA_@-SHA3_@-384
+Digital signature algorithm RSA with SHA3-384.
+@item GNUTLS_@-SIGN_@-RSA_@-SHA3_@-512
+Digital signature algorithm RSA with SHA3-512.
 @end table

@@ -47,6 +47,16 @@ static void tls_log_func(int level, const char *str)
 	fprintf(stderr, "|<%d>| %s", level, str);
 }
 
+gnutls_session_t init_tls_session(const char *host)
+{
+	return NULL;
+}
+
+int do_handshake(socket_st * socket)
+{
+	return -1;
+}
+
 static void request_info(void)
 {
 	gnutls_ocsp_req_t req;
@@ -97,7 +107,7 @@ static void _response_info(const gnutls_datum_t * data)
 {
 	gnutls_ocsp_resp_t resp;
 	int ret;
-	gnutls_datum buf;
+	gnutls_datum_t buf;
 
 	ret = gnutls_ocsp_resp_init(&resp);
 	if (ret < 0) {
@@ -460,6 +470,10 @@ static void verify_response(gnutls_datum_t *nonce)
 	signer = load_signer();
 
 	v = _verify_response(&dat, nonce, signer);
+
+	gnutls_x509_crt_deinit(signer);
+	free(dat.data);
+
 	if (v && !HAVE_OPT(IGNORE_ERRORS))
 		exit(1);
 }

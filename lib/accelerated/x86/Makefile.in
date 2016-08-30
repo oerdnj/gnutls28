@@ -112,7 +112,7 @@ host_triplet = @host@
 @ENABLE_PADLOCK_TRUE@	aes-padlock.h sha-padlock.h
 
 @ASM_X86_64_TRUE@am__append_3 = -DASM_X86_64 -DASM_X86
-@ASM_X86_64_TRUE@am__append_4 = aes-gcm-x86-pclmul.c
+@ASM_X86_64_TRUE@am__append_4 = aes-gcm-x86-pclmul.c aes-gcm-x86-pclmul-avx.c
 @ASM_X86_64_TRUE@@WINDOWS_TRUE@am__append_5 = $(X86_64_FILES_COFF)
 @ASM_X86_64_TRUE@@ENABLE_PADLOCK_TRUE@@WINDOWS_TRUE@am__append_6 = $(X86_64_PADLOCK_FILES_COFF)
 @ASM_X86_64_TRUE@@MACOSX_TRUE@am__append_7 = $(X86_64_FILES_MACOSX)
@@ -163,12 +163,10 @@ am__aclocal_m4_deps = $(top_srcdir)/src/gl/m4/arpa_inet_h.m4 \
 	$(top_srcdir)/src/libopts/m4/stdnoreturn.m4 \
 	$(top_srcdir)/gl/m4/00gnulib.m4 \
 	$(top_srcdir)/gl/m4/absolute-header.m4 \
-	$(top_srcdir)/gl/m4/alloca.m4 $(top_srcdir)/gl/m4/base64.m4 \
-	$(top_srcdir)/gl/m4/byteswap.m4 $(top_srcdir)/gl/m4/ctype.m4 \
-	$(top_srcdir)/gl/m4/errno_h.m4 \
+	$(top_srcdir)/gl/m4/alloca.m4 $(top_srcdir)/gl/m4/byteswap.m4 \
+	$(top_srcdir)/gl/m4/ctype.m4 $(top_srcdir)/gl/m4/errno_h.m4 \
 	$(top_srcdir)/gl/m4/exponentd.m4 \
 	$(top_srcdir)/gl/m4/extensions.m4 \
-	$(top_srcdir)/gl/m4/extern-inline.m4 \
 	$(top_srcdir)/gl/m4/fcntl_h.m4 $(top_srcdir)/gl/m4/fdopen.m4 \
 	$(top_srcdir)/gl/m4/float_h.m4 $(top_srcdir)/gl/m4/fpieee.m4 \
 	$(top_srcdir)/gl/m4/fseeko.m4 $(top_srcdir)/gl/m4/fstat.m4 \
@@ -222,10 +220,11 @@ am__aclocal_m4_deps = $(top_srcdir)/src/gl/m4/arpa_inet_h.m4 \
 	$(top_srcdir)/gl/m4/vsnprintf.m4 \
 	$(top_srcdir)/gl/m4/warn-on-use.m4 \
 	$(top_srcdir)/gl/m4/warnings.m4 $(top_srcdir)/gl/m4/wchar_h.m4 \
-	$(top_srcdir)/m4/fcntl-o.m4 $(top_srcdir)/m4/gettext.m4 \
-	$(top_srcdir)/m4/gtk-doc.m4 $(top_srcdir)/m4/guile.m4 \
-	$(top_srcdir)/m4/hooks.m4 $(top_srcdir)/m4/iconv.m4 \
-	$(top_srcdir)/m4/intlmacosx.m4 \
+	$(top_srcdir)/m4/ax_code_coverage.m4 \
+	$(top_srcdir)/m4/extern-inline.m4 $(top_srcdir)/m4/fcntl-o.m4 \
+	$(top_srcdir)/m4/gettext.m4 $(top_srcdir)/m4/gtk-doc.m4 \
+	$(top_srcdir)/m4/guile.m4 $(top_srcdir)/m4/hooks.m4 \
+	$(top_srcdir)/m4/iconv.m4 $(top_srcdir)/m4/intlmacosx.m4 \
 	$(top_srcdir)/m4/inttypes-pri.m4 \
 	$(top_srcdir)/m4/inttypes_h.m4 $(top_srcdir)/m4/lib-ld.m4 \
 	$(top_srcdir)/m4/lib-link.m4 $(top_srcdir)/m4/lib-prefix.m4 \
@@ -251,18 +250,19 @@ am__libx86_la_SOURCES_DIST = x86-common.c aes-x86.h x86-common.h \
 	aes-gcm-x86-aesni.c aes-cbc-x86-ssse3.c aes-cbc-x86-aesni.c \
 	aes-gcm-aead.h aes-ccm-x86-aesni.c sha-padlock.c \
 	hmac-padlock.c aes-padlock.c aes-gcm-padlock.c aes-padlock.h \
-	sha-padlock.h aes-gcm-x86-pclmul.c coff/aesni-x86_64.s \
-	coff/cpuid-x86_64.s coff/ghash-x86_64.s \
+	sha-padlock.h aes-gcm-x86-pclmul.c aes-gcm-x86-pclmul-avx.c \
+	coff/aesni-x86_64.s coff/cpuid-x86_64.s coff/ghash-x86_64.s \
 	coff/sha1-ssse3-x86_64.s coff/sha512-ssse3-x86_64.s \
-	coff/aes-ssse3-x86_64.s coff/e_padlock-x86_64.s \
-	macosx/aesni-x86_64.s macosx/cpuid-x86_64.s \
-	macosx/ghash-x86_64.s macosx/sha1-ssse3-x86_64.s \
-	macosx/sha512-ssse3-x86_64.s macosx/aes-ssse3-x86_64.s \
+	coff/aes-ssse3-x86_64.s coff/aesni-gcm-x86_64.s \
+	coff/e_padlock-x86_64.s macosx/aesni-x86_64.s \
+	macosx/cpuid-x86_64.s macosx/ghash-x86_64.s \
+	macosx/sha1-ssse3-x86_64.s macosx/sha512-ssse3-x86_64.s \
+	macosx/aes-ssse3-x86_64.s macosx/aesni-gcm-x86_64.s \
 	macosx/e_padlock-x86_64.s elf/aesni-x86_64.s \
 	elf/cpuid-x86_64.s elf/ghash-x86_64.s elf/sha1-ssse3-x86_64.s \
 	elf/sha512-ssse3-x86_64.s elf/aes-ssse3-x86_64.s \
-	elf/e_padlock-x86_64.s coff/aesni-x86.s coff/cpuid-x86.s \
-	coff/sha1-ssse3-x86.s coff/sha256-ssse3-x86.s \
+	elf/aesni-gcm-x86_64.s elf/e_padlock-x86_64.s coff/aesni-x86.s \
+	coff/cpuid-x86.s coff/sha1-ssse3-x86.s coff/sha256-ssse3-x86.s \
 	coff/sha512-ssse3-x86.s coff/aes-ssse3-x86.s \
 	coff/e_padlock-x86.s macosx/aesni-x86.s macosx/cpuid-x86.s \
 	macosx/sha1-ssse3-x86.s macosx/sha256-ssse3-x86.s \
@@ -272,23 +272,27 @@ am__libx86_la_SOURCES_DIST = x86-common.c aes-x86.h x86-common.h \
 	elf/sha512-ssse3-x86.s elf/aes-ssse3-x86.s elf/e_padlock-x86.s
 @ENABLE_PADLOCK_TRUE@am__objects_1 = sha-padlock.lo hmac-padlock.lo \
 @ENABLE_PADLOCK_TRUE@	aes-padlock.lo aes-gcm-padlock.lo
-@ASM_X86_64_TRUE@am__objects_2 = aes-gcm-x86-pclmul.lo
+@ASM_X86_64_TRUE@am__objects_2 = aes-gcm-x86-pclmul.lo \
+@ASM_X86_64_TRUE@	aes-gcm-x86-pclmul-avx.lo
 am__dirstamp = $(am__leading_dot)dirstamp
 am__objects_3 = coff/aesni-x86_64.lo coff/cpuid-x86_64.lo \
 	coff/ghash-x86_64.lo coff/sha1-ssse3-x86_64.lo \
-	coff/sha512-ssse3-x86_64.lo coff/aes-ssse3-x86_64.lo
+	coff/sha512-ssse3-x86_64.lo coff/aes-ssse3-x86_64.lo \
+	coff/aesni-gcm-x86_64.lo
 @ASM_X86_64_TRUE@@WINDOWS_TRUE@am__objects_4 = $(am__objects_3)
 am__objects_5 = coff/e_padlock-x86_64.lo
 @ASM_X86_64_TRUE@@ENABLE_PADLOCK_TRUE@@WINDOWS_TRUE@am__objects_6 = $(am__objects_5)
 am__objects_7 = macosx/aesni-x86_64.lo macosx/cpuid-x86_64.lo \
 	macosx/ghash-x86_64.lo macosx/sha1-ssse3-x86_64.lo \
-	macosx/sha512-ssse3-x86_64.lo macosx/aes-ssse3-x86_64.lo
+	macosx/sha512-ssse3-x86_64.lo macosx/aes-ssse3-x86_64.lo \
+	macosx/aesni-gcm-x86_64.lo
 @ASM_X86_64_TRUE@@MACOSX_TRUE@am__objects_8 = $(am__objects_7)
 am__objects_9 = macosx/e_padlock-x86_64.lo
 @ASM_X86_64_TRUE@@ENABLE_PADLOCK_TRUE@@MACOSX_TRUE@am__objects_10 = $(am__objects_9)
 am__objects_11 = elf/aesni-x86_64.lo elf/cpuid-x86_64.lo \
 	elf/ghash-x86_64.lo elf/sha1-ssse3-x86_64.lo \
-	elf/sha512-ssse3-x86_64.lo elf/aes-ssse3-x86_64.lo
+	elf/sha512-ssse3-x86_64.lo elf/aes-ssse3-x86_64.lo \
+	elf/aesni-gcm-x86_64.lo
 @ASM_X86_64_TRUE@@ELF_TRUE@am__objects_12 = $(am__objects_11)
 am__objects_13 = elf/e_padlock-x86_64.lo
 @ASM_X86_64_TRUE@@ELF_TRUE@@ENABLE_PADLOCK_TRUE@am__objects_14 = $(am__objects_13)
@@ -392,7 +396,8 @@ am__define_uniq_tagged_files = \
 ETAGS = etags
 CTAGS = ctags
 am__DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/files.mk \
-	$(top_srcdir)/build-aux/depcomp README
+	$(top_srcdir)/build-aux/depcomp $(top_srcdir)/lib/common.mk \
+	README
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 ACLOCAL = @ACLOCAL@
 ALLOCA = @ALLOCA@
@@ -419,6 +424,13 @@ CCASDEPMODE = @CCASDEPMODE@
 CCASFLAGS = @CCASFLAGS@
 CCDEPMODE = @CCDEPMODE@
 CFLAGS = @CFLAGS@
+CMOCKA_CFLAGS = @CMOCKA_CFLAGS@
+CMOCKA_LIBS = @CMOCKA_LIBS@
+CODE_COVERAGE_CFLAGS = @CODE_COVERAGE_CFLAGS@
+CODE_COVERAGE_CPPFLAGS = @CODE_COVERAGE_CPPFLAGS@
+CODE_COVERAGE_CXXFLAGS = @CODE_COVERAGE_CXXFLAGS@
+CODE_COVERAGE_ENABLED = @CODE_COVERAGE_ENABLED@
+CODE_COVERAGE_LDFLAGS = @CODE_COVERAGE_LDFLAGS@
 CONFIG_INCLUDE = @CONFIG_INCLUDE@
 CPP = @CPP@
 CPPFLAGS = @CPPFLAGS@
@@ -454,6 +466,8 @@ EXEEXT = @EXEEXT@
 FGREP = @FGREP@
 FIPS140_LIBS = @FIPS140_LIBS@
 FLOAT_H = @FLOAT_H@
+GCOV = @GCOV@
+GENHTML = @GENHTML@
 GETADDRINFO_LIB = @GETADDRINFO_LIB@
 GETTEXT_MACRO_VERSION = @GETTEXT_MACRO_VERSION@
 GMP_CFLAGS = @GMP_CFLAGS@
@@ -730,6 +744,7 @@ GREP = @GREP@
 GTKDOC_CHECK = @GTKDOC_CHECK@
 GTKDOC_MKPDF = @GTKDOC_MKPDF@
 GTKDOC_REBASE = @GTKDOC_REBASE@
+GUILD = @GUILD@
 GUILE = @GUILE@
 GUILE_CFLAGS = @GUILE_CFLAGS@
 GUILE_CONFIG = @GUILE_CONFIG@
@@ -817,11 +832,13 @@ HAVE_INTTYPES_H = @HAVE_INTTYPES_H@
 HAVE_ISBLANK = @HAVE_ISBLANK@
 HAVE_LCHMOD = @HAVE_LCHMOD@
 HAVE_LCHOWN = @HAVE_LCHOWN@
+HAVE_LIBCRYPTO = @HAVE_LIBCRYPTO@
 HAVE_LIBDL = @HAVE_LIBDL@
 HAVE_LIBICONV = @HAVE_LIBICONV@
 HAVE_LIBNSL = @HAVE_LIBNSL@
 HAVE_LIBPTHREAD = @HAVE_LIBPTHREAD@
 HAVE_LIBRT = @HAVE_LIBRT@
+HAVE_LIBSECCOMP = @HAVE_LIBSECCOMP@
 HAVE_LIBZ = @HAVE_LIBZ@
 HAVE_LINK = @HAVE_LINK@
 HAVE_LINKAT = @HAVE_LINKAT@
@@ -983,8 +1000,11 @@ INT32_MAX_LT_INTMAX_MAX = @INT32_MAX_LT_INTMAX_MAX@
 INT64_MAX_EQ_LONG_MAX = @INT64_MAX_EQ_LONG_MAX@
 INTLLIBS = @INTLLIBS@
 INTL_MACOSX_LIBS = @INTL_MACOSX_LIBS@
+LCOV = @LCOV@
 LD = @LD@
 LDFLAGS = @LDFLAGS@
+LIBCRYPTO = @LIBCRYPTO@
+LIBCRYPTO_PREFIX = @LIBCRYPTO_PREFIX@
 LIBDL = @LIBDL@
 LIBDL_PREFIX = @LIBDL_PREFIX@
 LIBGNUTLS_CFLAGS = @LIBGNUTLS_CFLAGS@
@@ -1005,6 +1025,8 @@ LIBPTHREAD_PREFIX = @LIBPTHREAD_PREFIX@
 LIBRT = @LIBRT@
 LIBRT_PREFIX = @LIBRT_PREFIX@
 LIBS = @LIBS@
+LIBSECCOMP = @LIBSECCOMP@
+LIBSECCOMP_PREFIX = @LIBSECCOMP_PREFIX@
 LIBSOCKET = @LIBSOCKET@
 LIBTASN1_CFLAGS = @LIBTASN1_CFLAGS@
 LIBTASN1_LIBS = @LIBTASN1_LIBS@
@@ -1017,6 +1039,7 @@ LIB_SELECT = @LIB_SELECT@
 LIPO = @LIPO@
 LN_S = @LN_S@
 LTALLOCA = @LTALLOCA@
+LTLIBCRYPTO = @LTLIBCRYPTO@
 LTLIBDL = @LTLIBDL@
 LTLIBICONV = @LTLIBICONV@
 LTLIBINTL = @LTLIBINTL@
@@ -1024,6 +1047,7 @@ LTLIBNSL = @LTLIBNSL@
 LTLIBOBJS = @LTLIBOBJS@
 LTLIBPTHREAD = @LTLIBPTHREAD@
 LTLIBRT = @LTLIBRT@
+LTLIBSECCOMP = @LTLIBSECCOMP@
 LTLIBZ = @LTLIBZ@
 LT_AGE = @LT_AGE@
 LT_CURRENT = @LT_CURRENT@
@@ -1034,6 +1058,7 @@ LT_REVISION = @LT_REVISION@
 LT_SSL_AGE = @LT_SSL_AGE@
 LT_SSL_CURRENT = @LT_SSL_CURRENT@
 LT_SSL_REVISION = @LT_SSL_REVISION@
+LT_SYS_LIBRARY_PATH = @LT_SYS_LIBRARY_PATH@
 LT_XSSL_AGE = @LT_XSSL_AGE@
 LT_XSSL_CURRENT = @LT_XSSL_CURRENT@
 LT_XSSL_REVISION = @LT_XSSL_REVISION@
@@ -1341,6 +1366,7 @@ gltests_LTLIBOBJS = @gltests_LTLIBOBJS@
 gltests_WITNESS = @gltests_WITNESS@
 guile_snarf = @guile_snarf@
 guileextensiondir = @guileextensiondir@
+guileobjectdir = @guileobjectdir@
 host = @host@
 host_alias = @host_alias@
 host_cpu = @host_cpu@
@@ -1372,7 +1398,10 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 AM_LIBTOOLFLAGS = --tag=CC
 AM_CFLAGS = $(WERROR_CFLAGS) $(WSTACK_CFLAGS) $(WARN_CFLAGS) \
-	$(NETTLE_CFLAGS) $(am__append_3) $(am__append_11)
+	$(NETTLE_CFLAGS) $(LIBTASN1_CFLAGS) $(LIBIDN_CFLAGS) \
+	$(P11_KIT_CFLAGS) $(CODE_COVERAGE_CFLAGS) $(am__append_3) \
+	$(am__append_11)
+COMMON_LINK_FLAGS = $(CODE_COVERAGE_LDFLAGS)
 AM_CPPFLAGS = -I$(srcdir)/../../../gl -I$(builddir)/../../../gl \
 	-I$(srcdir)/../../includes -I$(builddir)/../../includes \
 	-I$(srcdir)/../../ -I$(srcdir)/../ $(am__append_1)
@@ -1390,9 +1419,9 @@ libx86_la_SOURCES = x86-common.c aes-x86.h x86-common.h \
 X86_FILES_ELF = elf/aesni-x86.s elf/cpuid-x86.s elf/sha1-ssse3-x86.s elf/sha256-ssse3-x86.s elf/sha512-ssse3-x86.s elf/aes-ssse3-x86.s
 X86_FILES_COFF = coff/aesni-x86.s coff/cpuid-x86.s coff/sha1-ssse3-x86.s coff/sha256-ssse3-x86.s coff/sha512-ssse3-x86.s coff/aes-ssse3-x86.s
 X86_FILES_MACOSX = macosx/aesni-x86.s macosx/cpuid-x86.s macosx/sha1-ssse3-x86.s macosx/sha256-ssse3-x86.s macosx/sha512-ssse3-x86.s macosx/aes-ssse3-x86.s
-X86_64_FILES_ELF = elf/aesni-x86_64.s elf/cpuid-x86_64.s elf/ghash-x86_64.s elf/sha1-ssse3-x86_64.s elf/sha512-ssse3-x86_64.s elf/aes-ssse3-x86_64.s
-X86_64_FILES_COFF = coff/aesni-x86_64.s coff/cpuid-x86_64.s coff/ghash-x86_64.s coff/sha1-ssse3-x86_64.s coff/sha512-ssse3-x86_64.s coff/aes-ssse3-x86_64.s
-X86_64_FILES_MACOSX = macosx/aesni-x86_64.s macosx/cpuid-x86_64.s macosx/ghash-x86_64.s macosx/sha1-ssse3-x86_64.s macosx/sha512-ssse3-x86_64.s macosx/aes-ssse3-x86_64.s
+X86_64_FILES_ELF = elf/aesni-x86_64.s elf/cpuid-x86_64.s elf/ghash-x86_64.s elf/sha1-ssse3-x86_64.s elf/sha512-ssse3-x86_64.s elf/aes-ssse3-x86_64.s elf/aesni-gcm-x86_64.s
+X86_64_FILES_COFF = coff/aesni-x86_64.s coff/cpuid-x86_64.s coff/ghash-x86_64.s coff/sha1-ssse3-x86_64.s coff/sha512-ssse3-x86_64.s coff/aes-ssse3-x86_64.s coff/aesni-gcm-x86_64.s
+X86_64_FILES_MACOSX = macosx/aesni-x86_64.s macosx/cpuid-x86_64.s macosx/ghash-x86_64.s macosx/sha1-ssse3-x86_64.s macosx/sha512-ssse3-x86_64.s macosx/aes-ssse3-x86_64.s macosx/aesni-gcm-x86_64.s
 X86_PADLOCK_FILES_ELF = elf/e_padlock-x86.s
 X86_PADLOCK_FILES_COFF = coff/e_padlock-x86.s
 X86_PADLOCK_FILES_MACOSX = macosx/e_padlock-x86.s
@@ -1403,7 +1432,7 @@ all: all-am
 
 .SUFFIXES:
 .SUFFIXES: .c .lo .o .obj .s
-$(srcdir)/Makefile.in:  $(srcdir)/Makefile.am $(srcdir)/files.mk $(am__configure_deps)
+$(srcdir)/Makefile.in:  $(srcdir)/Makefile.am $(top_srcdir)/lib/common.mk $(srcdir)/files.mk $(am__configure_deps)
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
 	    *$$dep*) \
@@ -1412,9 +1441,9 @@ $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am $(srcdir)/files.mk $(am__configure
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu lib/accelerated/x86/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign lib/accelerated/x86/Makefile'; \
 	$(am__cd) $(top_srcdir) && \
-	  $(AUTOMAKE) --gnu lib/accelerated/x86/Makefile
+	  $(AUTOMAKE) --foreign lib/accelerated/x86/Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
 	  *config.status*) \
@@ -1423,7 +1452,7 @@ Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	    echo ' cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@ $(am__depfiles_maybe)'; \
 	    cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@ $(am__depfiles_maybe);; \
 	esac;
-$(srcdir)/files.mk $(am__empty):
+$(top_srcdir)/lib/common.mk $(srcdir)/files.mk $(am__empty):
 
 $(top_builddir)/config.status: $(top_srcdir)/configure $(CONFIG_STATUS_DEPENDENCIES)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
@@ -1462,6 +1491,8 @@ coff/sha512-ssse3-x86_64.lo: coff/$(am__dirstamp) \
 	coff/$(DEPDIR)/$(am__dirstamp)
 coff/aes-ssse3-x86_64.lo: coff/$(am__dirstamp) \
 	coff/$(DEPDIR)/$(am__dirstamp)
+coff/aesni-gcm-x86_64.lo: coff/$(am__dirstamp) \
+	coff/$(DEPDIR)/$(am__dirstamp)
 coff/e_padlock-x86_64.lo: coff/$(am__dirstamp) \
 	coff/$(DEPDIR)/$(am__dirstamp)
 macosx/$(am__dirstamp):
@@ -1482,6 +1513,8 @@ macosx/sha512-ssse3-x86_64.lo: macosx/$(am__dirstamp) \
 	macosx/$(DEPDIR)/$(am__dirstamp)
 macosx/aes-ssse3-x86_64.lo: macosx/$(am__dirstamp) \
 	macosx/$(DEPDIR)/$(am__dirstamp)
+macosx/aesni-gcm-x86_64.lo: macosx/$(am__dirstamp) \
+	macosx/$(DEPDIR)/$(am__dirstamp)
 macosx/e_padlock-x86_64.lo: macosx/$(am__dirstamp) \
 	macosx/$(DEPDIR)/$(am__dirstamp)
 elf/$(am__dirstamp):
@@ -1498,6 +1531,8 @@ elf/sha1-ssse3-x86_64.lo: elf/$(am__dirstamp) \
 elf/sha512-ssse3-x86_64.lo: elf/$(am__dirstamp) \
 	elf/$(DEPDIR)/$(am__dirstamp)
 elf/aes-ssse3-x86_64.lo: elf/$(am__dirstamp) \
+	elf/$(DEPDIR)/$(am__dirstamp)
+elf/aesni-gcm-x86_64.lo: elf/$(am__dirstamp) \
 	elf/$(DEPDIR)/$(am__dirstamp)
 elf/e_padlock-x86_64.lo: elf/$(am__dirstamp) \
 	elf/$(DEPDIR)/$(am__dirstamp)
@@ -1560,6 +1595,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/aes-ccm-x86-aesni.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/aes-gcm-padlock.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/aes-gcm-x86-aesni.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/aes-gcm-x86-pclmul-avx.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/aes-gcm-x86-pclmul.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/aes-gcm-x86-ssse3.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/aes-padlock.Plo@am__quote@

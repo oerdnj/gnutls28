@@ -1,10 +1,9 @@
 This is gnutls-guile.info, produced by makeinfo version 6.1 from
 gnutls-guile.texi.
 
-This manual is last updated 19 January 2015 for version 3.4.14 of
-GnuTLS.
+This manual is last updated 16 March 2016 for version 3.5.3 of GnuTLS.
 
-Copyright (C) 2001-2012, 2014 Free Software Foundation, Inc.
+Copyright (C) 2001-2012, 2014, 2016 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -23,10 +22,9 @@ File: gnutls-guile.info,  Node: Top,  Next: Preface,  Up: (dir)
 GnuTLS-Guile
 ************
 
-This manual is last updated 19 January 2015 for version 3.4.14 of
-GnuTLS.
+This manual is last updated 16 March 2016 for version 3.5.3 of GnuTLS.
 
-Copyright (C) 2001-2012, 2014 Free Software Foundation, Inc.
+Copyright (C) 2001-2012, 2014, 2016 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -68,17 +66,17 @@ File: gnutls-guile.info,  Node: Guile Preparations,  Next: Guile API Conventions
 2 Guile Preparations
 ********************
 
-The GnuTLS Guile bindings are available for both the 1.8 and 2.0 stable
-series of Guile.
+The GnuTLS Guile bindings are available for Guile's 2.0 stable series,
+as well as the forthcoming 2.2 series and the legacy 1.8 series.
 
 By default they are installed under the GnuTLS installation directory,
 typically '/usr/local/share/guile/site/').  Normally Guile will not find
 the module there without help.  You may experience something like this:
 
      $ guile
-     guile> (use-modules (gnutls))
-     <unnamed port>: no code for module (gnutls)
-     guile>
+     ...
+     scheme@(guile-user)> (use-modules (gnutls))
+     ERROR: no code for module (gnutls)
 
 There are two ways to solve this.  The first is to make sure that when
 building GnuTLS, the Guile bindings will be installed in the same place
@@ -107,33 +105,33 @@ to instruct Guile so that it finds the GnuTLS Guile bindings.  Either
 use the 'GUILE_LOAD_PATH' environment variable as follows:
 
      $ GUILE_LOAD_PATH="/usr/local/share/guile/site:$GUILE_LOAD_PATH" guile
-     guile> (use-modules (gnutls))
-     guile>
+     scheme@(guile-user)> (use-modules (gnutls))
+     scheme@(guile-user)>
 
 Alternatively, you can modify Guile's '%load-path' variable (*note
 Guile's run-time options: (guile)Build Config.).
 
-At this point, you might get an error regarding 'libguile-gnutls-v-0'
+At this point, you might get an error regarding 'guile-gnutls-v-2'
 similar to:
 
-     gnutls.scm:361:1: In procedure dynamic-link in expression (load-extension "libguile-gnutls-v-0" "scm_init_gnutls"):
-     gnutls.scm:361:1: file: "libguile-gnutls-v-0", message: "libguile-gnutls-v-0.so: cannot open shared object file: No such file or directory"
+     gnutls.scm:361:1: In procedure dynamic-link in expression (load-extension "guile-gnutls-v-2" "scm_init_gnutls"):
+     gnutls.scm:361:1: file: "guile-gnutls-v-2", message: "guile-gnutls-v-2.so: cannot open shared object file: No such file or directory"
 
 In this case, you will need to modify the run-time linker path, for
 example as follows:
 
      $ LD_LIBRARY_PATH=/usr/local/lib GUILE_LOAD_PATH=/usr/local/share/guile/site guile
-     guile> (use-modules (gnutls))
-     guile>
+     scheme@(guile-user)> (use-modules (gnutls))
+     scheme@(guile-user)>
 
 To check that you got the intended GnuTLS library version, you may print
 the version number of the loaded library as follows:
 
      $ guile
-     guile> (use-modules (gnutls))
-     guile> (gnutls-version)
-     "3.4.14"
-     guile>
+     scheme@(guile-user)> (use-modules (gnutls))
+     scheme@(guile-user)> (gnutls-version)
+     "3.5.3"
+     scheme@(guile-user)>
 
 
 File: gnutls-guile.info,  Node: Guile API Conventions,  Next: Guile Examples,  Prev: Guile Preparations,  Up: Top
@@ -246,10 +244,9 @@ File: gnutls-guile.info,  Node: Representation of Binary Data,  Next: Input and 
 Many procedures operate on binary data.  For instance,
 'pkcs3-import-dh-parameters' expects binary data as input.
 
-Binary data is represented on the Scheme side using SRFI-4 homogeneous
-vectors (*note (guile)SRFI-4::).  Although any type of homogeneous
-vector may be used, 'u8vector's (i.e., vectors of bytes) are highly
-recommended.
+Binary data is represented on the Scheme side using bytevectors (*note
+(guile)Bytevectors::).  Homogeneous vectors such as SRFI-4 'u8vector's
+can also be used(1).
 
 As an example, generating and then exporting Diffie-Hellman parameters
 in the PEM format can be done as follows:
@@ -263,6 +260,11 @@ in the PEM format can be done as follows:
 
 For an example of OpenPGP key import from a file, see *note Importing
 OpenPGP Keys Guile Example::.
+
+   ---------- Footnotes ----------
+
+   (1) Historically, SRFI-4 'u8vector's are the closest thing to
+bytevectors that Guile 1.8 and earlier supported.
 
 
 File: gnutls-guile.info,  Node: Input and Output,  Next: Exception Handling,  Prev: Representation of Binary Data,  Up: Guile API Conventions
@@ -300,21 +302,29 @@ Once a TLS session is established, data can be communicated through it
 
        ;;
        ;; Initialize the various parameters of SESSION, set up
-       ;; a network connection, etc...
+       ;; a network connection, etc.
        ;;
 
        (let ((i/o (session-record-port session)))
-         (write "Hello peer!" i/o)
+         (display "Hello peer!" i/o)
          (let ((greetings (read i/o)))
 
            ;; ...
 
            (bye session close-request/rdwr))))
 
+Note that each write to the session record port leads to the
+transmission of an encrypted TLS "Application Data" packet.  In the
+above example, we create an Application Data packet for the 11 bytes for
+the string that we write.  This is not efficient both in terms of CPU
+usage and bandwidth (each packet adds at least 5 bytes of overhead and
+can lead to one 'write' system call), so we recommend that applications
+do their own buffering.
+
 A lower-level I/O API is provided by 'record-send' and 'record-receive!'
-which take an SRFI-4 vector to represent the data sent or received.
-While it might improve performance, it is much less convenient than the
-above and should rarely be needed.
+which take a bytevector (or a SRFI-4 vector) to represent the data sent
+or received.  While it might improve performance, it is much less
+convenient than the session record port and should rarely be needed.
 
 
 File: gnutls-guile.info,  Node: Exception Handling,  Prev: Input and Output,  Up: Guile API Conventions
@@ -1565,7 +1575,7 @@ Procedure Index
 * make-anonymous-server-credentials:     Guile Reference.     (line 225)
 * make-certificate-credentials:          Guile Reference.     (line 214)
 * make-dh-parameters:                    Representation of Binary Data.
-                                                              (line  17)
+                                                              (line  16)
 * make-dh-parameters <1>:                Guile Reference.     (line 241)
 * make-psk-client-credentials:           Guile Reference.     (line 146)
 * make-psk-server-credentials:           Guile Reference.     (line 152)
@@ -1588,7 +1598,7 @@ Procedure Index
 * peer-certificate-status:               Guile Reference.     (line 155)
 * pk-algorithm->string:                  Guile Reference.     (line 419)
 * pkcs3-export-dh-parameters:            Representation of Binary Data.
-                                                              (line  17)
+                                                              (line  16)
 * pkcs3-export-dh-parameters <1>:        Guile Reference.     (line 231)
 * pkcs3-import-dh-parameters:            Guile Reference.     (line 236)
 * pkcs8-import-x509-private-key:         Guile Reference.     (line 123)
@@ -1596,9 +1606,9 @@ Procedure Index
 * psk-client-credentials?:               Guile Reference.     (line 370)
 * psk-key-format->string:                Guile Reference.     (line 410)
 * psk-server-credentials?:               Guile Reference.     (line 373)
-* record-receive!:                       Input and Output.    (line  47)
+* record-receive!:                       Input and Output.    (line  55)
 * record-receive! <1>:                   Guile Reference.     (line 255)
-* record-send:                           Input and Output.    (line  47)
+* record-send:                           Input and Output.    (line  55)
 * record-send <1>:                       Guile Reference.     (line 259)
 * rehandshake:                           Guile Reference.     (line 338)
 * server-name-type->string:              Guile Reference.     (line 413)
@@ -1683,38 +1693,42 @@ Concept Index
  [index ]
 * Menu:
 
+* buffering:                             Input and Output.     (line 47)
+* bytevectors:                           Representation of Binary Data.
+                                                               (line  9)
 * constant:                              Enumerates and Constants.
-                                                                (line 6)
+                                                               (line  6)
 * enumerate:                             Enumerates and Constants.
-                                                                (line 6)
-* errors:                                Exception Handling.    (line 6)
-* exceptions:                            Exception Handling.    (line 6)
-* FDL, GNU Free Documentation License:   Copying Information.   (line 6)
-* gnutls-error:                          Exception Handling.    (line 6)
+                                                               (line  6)
+* errors:                                Exception Handling.   (line  6)
+* exceptions:                            Exception Handling.   (line  6)
+* FDL, GNU Free Documentation License:   Copying Information.  (line  6)
+* gnutls-error:                          Exception Handling.   (line  6)
 * homogeneous vector:                    Representation of Binary Data.
-                                                                (line 9)
+                                                               (line  9)
 * SRFI-4:                                Representation of Binary Data.
-                                                                (line 9)
+                                                               (line  9)
 
 
 
 Tag Table:
-Node: Top785
-Node: Preface1840
-Node: Guile Preparations2406
-Node: Guile API Conventions5045
-Node: Enumerates and Constants5619
-Node: Procedure Names7944
-Node: Representation of Binary Data8927
-Node: Input and Output9973
-Node: Exception Handling11846
-Node: Guile Examples13674
-Node: Anonymous Authentication Guile Example14128
-Node: OpenPGP Authentication Guile Example16690
-Node: Importing OpenPGP Keys Guile Example19176
-Node: Guile Reference20616
-Node: Copying Information39636
-Node: Procedure Index64822
-Node: Concept Index75490
+Node: Top788
+Node: Preface1846
+Node: Guile Preparations2412
+Node: Guile API Conventions5185
+Node: Enumerates and Constants5759
+Node: Procedure Names8084
+Node: Representation of Binary Data9067
+Ref: Representation of Binary Data-Footnote-110093
+Node: Input and Output10209
+Node: Exception Handling12554
+Node: Guile Examples14382
+Node: Anonymous Authentication Guile Example14836
+Node: OpenPGP Authentication Guile Example17398
+Node: Importing OpenPGP Keys Guile Example19884
+Node: Guile Reference21324
+Node: Copying Information40344
+Node: Procedure Index65530
+Node: Concept Index76198
 
 End Tag Table

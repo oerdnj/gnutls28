@@ -78,7 +78,7 @@ error.
 
 @subheading gnutls_pkcs12_bag_get_data
 @anchor{gnutls_pkcs12_bag_get_data}
-@deftypefun {int} {gnutls_pkcs12_bag_get_data} (gnutls_pkcs12_bag_t @var{bag}, int @var{indx}, gnutls_datum_t * @var{data})
+@deftypefun {int} {gnutls_pkcs12_bag_get_data} (gnutls_pkcs12_bag_t @var{bag}, unsigned @var{indx}, gnutls_datum_t * @var{data})
 @var{bag}: The bag
 
 @var{indx}: The element of the bag to get the data from
@@ -95,7 +95,7 @@ negative error value.
 
 @subheading gnutls_pkcs12_bag_get_friendly_name
 @anchor{gnutls_pkcs12_bag_get_friendly_name}
-@deftypefun {int} {gnutls_pkcs12_bag_get_friendly_name} (gnutls_pkcs12_bag_t @var{bag}, int @var{indx}, char ** @var{name})
+@deftypefun {int} {gnutls_pkcs12_bag_get_friendly_name} (gnutls_pkcs12_bag_t @var{bag}, unsigned @var{indx}, char ** @var{name})
 @var{bag}: The bag
 
 @var{indx}: The bag's element to add the id
@@ -112,7 +112,7 @@ negative error value. or a negative error code on error.
 
 @subheading gnutls_pkcs12_bag_get_key_id
 @anchor{gnutls_pkcs12_bag_get_key_id}
-@deftypefun {int} {gnutls_pkcs12_bag_get_key_id} (gnutls_pkcs12_bag_t @var{bag}, int @var{indx}, gnutls_datum_t * @var{id})
+@deftypefun {int} {gnutls_pkcs12_bag_get_key_id} (gnutls_pkcs12_bag_t @var{bag}, unsigned @var{indx}, gnutls_datum_t * @var{id})
 @var{bag}: The bag
 
 @var{indx}: The bag's element to add the id
@@ -129,14 +129,14 @@ negative error value. or a negative error code on error.
 
 @subheading gnutls_pkcs12_bag_get_type
 @anchor{gnutls_pkcs12_bag_get_type}
-@deftypefun {gnutls_pkcs12_bag_type_t} {gnutls_pkcs12_bag_get_type} (gnutls_pkcs12_bag_t @var{bag}, int @var{indx})
+@deftypefun {int} {gnutls_pkcs12_bag_get_type} (gnutls_pkcs12_bag_t @var{bag}, unsigned @var{indx})
 @var{bag}: The bag
 
 @var{indx}: The element of the bag to get the type
 
 This function will return the bag's type.
 
-@strong{Returns:} One of the @code{gnutls_pkcs12_bag_type_t}  enumerations.
+@strong{Returns:} On error a negative error value or one of the @code{gnutls_pkcs12_bag_type_t}  enumerations.
 @end deftypefun
 
 @subheading gnutls_pkcs12_bag_init
@@ -198,7 +198,7 @@ value on error.
 
 @subheading gnutls_pkcs12_bag_set_friendly_name
 @anchor{gnutls_pkcs12_bag_set_friendly_name}
-@deftypefun {int} {gnutls_pkcs12_bag_set_friendly_name} (gnutls_pkcs12_bag_t @var{bag}, int @var{indx}, const char * @var{name})
+@deftypefun {int} {gnutls_pkcs12_bag_set_friendly_name} (gnutls_pkcs12_bag_t @var{bag}, unsigned @var{indx}, const char * @var{name})
 @var{bag}: The bag
 
 @var{indx}: The bag's element to add the id
@@ -216,7 +216,7 @@ negative error value. or a negative error code on error.
 
 @subheading gnutls_pkcs12_bag_set_key_id
 @anchor{gnutls_pkcs12_bag_set_key_id}
-@deftypefun {int} {gnutls_pkcs12_bag_set_key_id} (gnutls_pkcs12_bag_t @var{bag}, int @var{indx}, const gnutls_datum_t * @var{id})
+@deftypefun {int} {gnutls_pkcs12_bag_set_key_id} (gnutls_pkcs12_bag_t @var{bag}, unsigned @var{indx}, const gnutls_datum_t * @var{id})
 @var{bag}: The bag
 
 @var{indx}: The bag's element to add the id

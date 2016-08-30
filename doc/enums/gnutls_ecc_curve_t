@@ -14,4 +14,6 @@ the SECP384R1 curve
 the SECP521R1 curve
 @item GNUTLS_@-ECC_@-CURVE_@-SECP192R1
 the SECP192R1 curve
+@item GNUTLS_@-ECC_@-CURVE_@-X25519
+the X25519 curve (ECDH only)
 @end table

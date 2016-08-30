@@ -1056,12 +1056,52 @@ GNUTLS_3_4
 	gnutls_session_set_verify_cert;
 	gnutls_session_set_verify_cert2;
 	gnutls_session_get_verify_cert_status;
+	gnutls_x509_privkey_generate2;
+	gnutls_x509_privkey_get_seed;
+	gnutls_x509_privkey_verify_seed;
+	gnutls_privkey_generate2;
+	gnutls_privkey_get_seed;
+	gnutls_privkey_verify_seed;
+	gnutls_x509_privkey_set_flags;
+	gnutls_privkey_set_flags;
 	gnutls_pkcs11_copy_pubkey;
 	gnutls_x509_crt_set_subject_unique_id;
 	gnutls_x509_crt_set_issuer_unique_id;
 	_gnutls_global_init_skip;
 	gnutls_certificate_set_flags;
+	gnutls_decode_ber_digest_info;
+	gnutls_encode_ber_digest_info;
 	gnutls_pkcs7_get_embedded_data;
+	gnutls_x509_crq_set_subject_alt_othername;
+	gnutls_x509_crt_set_subject_alt_othername;
+	gnutls_x509_crt_set_issuer_alt_othername;
+	gnutls_dh_params_import_dsa;
+	gnutls_session_get_flags;
+	gnutls_session_get_master_secret;
+	gnutls_x509_crt_get_signature_oid;
+	gnutls_x509_crt_get_pk_oid;
+	gnutls_x509_crq_get_signature_oid;
+	gnutls_x509_crq_get_pk_oid;
+	gnutls_x509_crl_get_signature_oid;
+	gnutls_ecc_curve_get_pk;
+	gnutls_x509_crt_equals;
+	gnutls_x509_crt_equals2;
+	gnutls_x509_ext_import_tlsfeatures;
+	gnutls_x509_ext_export_tlsfeatures;
+	gnutls_x509_tlsfeatures_add;
+	gnutls_x509_tlsfeatures_init;
+	gnutls_x509_tlsfeatures_deinit;
+	gnutls_x509_tlsfeatures_get;
+	gnutls_x509_crt_get_tlsfeatures;
+	gnutls_x509_crt_set_tlsfeatures;
+	gnutls_x509_crq_get_tlsfeatures;
+	gnutls_x509_crq_set_tlsfeatures;
+	gnutls_ext_get_name;
+	gnutls_x509_crt_set_crq_extension_by_oid;
+	gnutls_x509_tlsfeatures_check_crt;
+	gnutls_x509_crq_set_extension_by_oid;
+	gnutls_x509_dn_set_str;
+	gnutls_transport_set_fastopen;
  local:
 	*;
 };
@@ -1100,6 +1140,7 @@ GNUTLS_PRIVATE_3_4 {
 	_gnutls_lib_simulate_error;
 	#symbols needed for crypto-selftests
 	_gnutls_log_level;
+	_gnutls_digest_exists;
 	_gnutls_log;
 
 	# Internal symbols needed by gnutls-cli-debug:
@@ -1112,8 +1153,12 @@ GNUTLS_PRIVATE_3_4 {
 	_gnutls_mpi_ops;
 	_gnutls_mpi_log;
 	_gnutls_mpi_release;
-	# Internal symbols needed by tests/pkcs12_s2k:
+	# Internal symbols needed by tests/:
 	_gnutls_pkcs12_string_to_key;
 	_gnutls_bin2hex;
 	_gnutls_mac_to_entry;
+	_gnutls_resolve_priorities;
+	# Internal symbols needed by tests/name-constraints-merge:
+	_gnutls_x509_name_constraints_merge;
+	_gnutls_server_name_set_raw;
 };

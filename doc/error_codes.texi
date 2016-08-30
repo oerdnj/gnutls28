@@ -109,6 +109,7 @@
 @item -217 @tab GNUTLS_@-E_@-INSUFFICIENT_@-SECURITY @tab One of the involved algorithms has insufficient security level.
 @item -292 @tab GNUTLS_@-E_@-HEARTBEAT_@-PONG_@-RECEIVED @tab A heartbeat pong message was received.
 @item -293 @tab GNUTLS_@-E_@-HEARTBEAT_@-PING_@-RECEIVED @tab A heartbeat ping message was received.
+@item -294 @tab GNUTLS_@-E_@-UNRECOGNIZED_@-NAME @tab The SNI host name not recognised.
 @item -300 @tab GNUTLS_@-E_@-PKCS11_@-ERROR @tab PKCS #11 error.
 @item -301 @tab GNUTLS_@-E_@-PKCS11_@-LOAD_@-ERROR @tab PKCS #11 initialization error.
 @item -302 @tab GNUTLS_@-E_@-PARSING_@-ERROR @tab Error in parsing.
@@ -153,9 +154,15 @@
 @item -346 @tab GNUTLS_@-E_@-KEY_@-IMPORT_@-FAILED @tab Failed to import the key into store.
 @item -347 @tab GNUTLS_@-E_@-INAPPROPRIATE_@-FALLBACK @tab A connection with inappropriate fallback was attempted.
 @item -348 @tab GNUTLS_@-E_@-CERTIFICATE_@-VERIFICATION_@-ERROR @tab Error in the certificate verification.
+@item -349 @tab GNUTLS_@-E_@-PRIVKEY_@-VERIFICATION_@-ERROR @tab Error in the private key verification; seed doesn't match.
+@item -350 @tab GNUTLS_@-E_@-UNEXPECTED_@-EXTENSIONS_@-LENGTH @tab Invalid TLS extensions length field.
+@item -351 @tab GNUTLS_@-E_@-ASN1_@-EMBEDDED_@-NULL_@-IN_@-STRING @tab The provided string has an embedded null.
 @item -400 @tab GNUTLS_@-E_@-SELF_@-TEST_@-ERROR @tab Error while performing self checks.
 @item -401 @tab GNUTLS_@-E_@-NO_@-SELF_@-TEST @tab There is no self test for this algorithm.
 @item -402 @tab GNUTLS_@-E_@-LIB_@-IN_@-ERROR_@-STATE @tab An error has been detected in the library and cannot continue operations.
 @item -403 @tab GNUTLS_@-E_@-PK_@-GENERATION_@-ERROR @tab Error in public key generation.
 @item -404 @tab GNUTLS_@-E_@-IDNA_@-ERROR @tab There was an issue converting to or from UTF8.
+@item -406 @tab GNUTLS_@-E_@-SESSION_@-USER_@-ID_@-CHANGED @tab Peer's certificate or username has changed during a rehandshake.
+@item -407 @tab GNUTLS_@-E_@-HANDSHAKE_@-DURING_@-FALSE_@-START @tab Attempted handshake during false start.
+@item -408 @tab GNUTLS_@-E_@-UNAVAILABLE_@-DURING_@-HANDSHAKE @tab Cannot obtain resumption parameters while handshake is incomplete.
 @end multitable

@@ -9,6 +9,8 @@ This function will return a value of the @code{gnutls_sign_algorithm_t}
 enumeration that is the signature algorithm that has been used to
 sign this certificate.
 
+Unknown/unsupported signature algorithms are mapped to @code{GNUTLS_SIGN_UNKNOWN} .
+
 @strong{Returns:} a @code{gnutls_sign_algorithm_t}  value, or a negative error code on
 error.
 @end deftypefun

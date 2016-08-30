@@ -7,7 +7,9 @@
 
 @var{flags}: flags from the @code{dane_state_flags}  enumeration
 
-This function will initialize a DANE query structure.
+This function will initialize the backend resolver. It is
+intended to be used in scenarios where multiple resolvings
+occur, to optimize against multiple re-initializations.
 
 @strong{Returns:} On success, @code{DANE_E_SUCCESS}  (0) is returned, otherwise a
 negative error value.

@@ -2,7 +2,7 @@
 
 
 
-@deftypefun {int} {gnutls_x509_crt_verify} (gnutls_x509_crt_t @var{cert}, const gnutls_x509_crt_t * @var{CA_list}, int @var{CA_list_length}, unsigned int @var{flags}, unsigned int * @var{verify})
+@deftypefun {int} {gnutls_x509_crt_verify} (gnutls_x509_crt_t @var{cert}, const gnutls_x509_crt_t * @var{CA_list}, unsigned @var{CA_list_length}, unsigned int @var{flags}, unsigned int * @var{verify})
 @var{cert}: is the certificate to be verified
 
 @var{CA_list}: is one certificate that is considered to be trusted one
