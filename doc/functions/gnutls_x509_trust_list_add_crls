@@ -9,7 +9,7 @@
 
 @var{crl_size}: The length of the CRL list
 
-@var{flags}: if GNUTLS_TL_VERIFY_CRL is given the CRLs will be verified before being added.
+@var{flags}: flags from @code{gnutls_trust_list_flags_t} 
 
 @var{verification_flags}: gnutls_certificate_verify_flags if flags specifies GNUTLS_TL_VERIFY_CRL
 
@@ -22,6 +22,8 @@ to allow verifying the CRLs for validity. If the flag @code{GNUTLS_TL_NO_DUPLICA
 is given, then any provided CRLs that are a duplicate, will be deinitialized
 and not added to the list (that assumes that @code{gnutls_x509_trust_list_deinit()} 
 will be called with all=1).
+
+If GNUTLS_TL_VERIFY_CRL is given the CRLs will be verified before being added.
 
 @strong{Returns:} The number of added elements is returned.
 

@@ -73,7 +73,7 @@ static int crt_reinit(gnutls_x509_crt_t crt)
  * Since: 3.5.0
  **/
 unsigned gnutls_x509_crt_equals(gnutls_x509_crt_t cert1,
-			        gnutls_x509_crt_t cert2)
+				gnutls_x509_crt_t cert2)
 {
 	int ret;
 	bool result;
@@ -305,12 +305,12 @@ static int compare_sig_algorithm(gnutls_x509_crt_t cert)
 	/* handle equally empty parameters with missing parameters */
 	if (sp1.size == 2 && memcmp(sp1.data, "\x05\x00", 2) == 0) {
 		empty1 = 1;
-	 	_gnutls_free_datum(&sp1);
+		_gnutls_free_datum(&sp1);
 	}
 
 	if (sp2.size == 2 && memcmp(sp2.data, "\x05\x00", 2) == 0) {
 		empty2 = 1;
-	 	_gnutls_free_datum(&sp2);
+		_gnutls_free_datum(&sp2);
 	}
 
 	if (empty1 != empty2 || 
@@ -322,9 +322,9 @@ static int compare_sig_algorithm(gnutls_x509_crt_t cert)
 
 	ret = 0;
  cleanup:
- 	_gnutls_free_datum(&sp1);
- 	_gnutls_free_datum(&sp2);
- 	return ret;
+	_gnutls_free_datum(&sp1);
+	_gnutls_free_datum(&sp2);
+	return ret;
 }
 
 /**
@@ -482,6 +482,9 @@ gnutls_x509_crt_import(gnutls_x509_crt_t cert,
  *
  * If @buf is null then only the size will be filled. 
  *
+ * This function does not output a fully RFC4514 compliant string, if
+ * that is required see gnutls_x509_crt_get_issuer_dn3().
+ *
  * Returns: %GNUTLS_E_SHORT_MEMORY_BUFFER if the provided buffer is not
  *   long enough, and in that case the @buf_size will be updated
  *   with the required size. %GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE if
@@ -498,7 +501,7 @@ gnutls_x509_crt_get_issuer_dn(gnutls_x509_crt_t cert, char *buf,
 
 	return _gnutls_x509_parse_dn(cert->cert,
 				     "tbsCertificate.issuer.rdnSequence",
-				     buf, buf_size);
+				     buf, buf_size, GNUTLS_X509_DN_FLAG_COMPAT);
 }
 
 /**
@@ -510,6 +513,9 @@ gnutls_x509_crt_get_issuer_dn(gnutls_x509_crt_t cert, char *buf,
  * The name will be in the form "C=xxxx,O=yyyy,CN=zzzz" as
  * described in RFC4514. The output string will be ASCII or UTF-8
  * encoded, depending on the certificate data.
+ *
+ * This function does not output a fully RFC4514 compliant string, if
+ * that is required see gnutls_x509_crt_get_issuer_dn3().
  *
  * Returns: On success, %GNUTLS_E_SUCCESS (0) is returned, otherwise a
  *   negative error value.
@@ -526,7 +532,40 @@ gnutls_x509_crt_get_issuer_dn2(gnutls_x509_crt_t cert, gnutls_datum_t * dn)
 
 	return _gnutls_x509_get_dn(cert->cert,
 				   "tbsCertificate.issuer.rdnSequence",
-				   dn);
+				   dn, GNUTLS_X509_DN_FLAG_COMPAT);
+}
+
+/**
+ * gnutls_x509_crt_get_issuer_dn3:
+ * @cert: should contain a #gnutls_x509_crt_t type
+ * @dn: a pointer to a structure to hold the name
+ * @flags: zero or %GNUTLS_X509_DN_FLAG_COMPAT
+ *
+ * This function will allocate buffer and copy the name of issuer of the Certificate.
+ * The name will be in the form "C=xxxx,O=yyyy,CN=zzzz" as
+ * described in RFC4514. The output string will be ASCII or UTF-8
+ * encoded, depending on the certificate data.
+ *
+ * When the flag %GNUTLS_X509_DN_FLAG_COMPAT is specified, the output
+ * format will match the format output by previous to 3.5.6 versions of GnuTLS
+ * which was not not fully RFC4514-compliant.
+ *
+ * Returns: On success, %GNUTLS_E_SUCCESS (0) is returned, otherwise a
+ *   negative error value.
+ *
+ * Since: 3.5.7
+ **/
+int
+gnutls_x509_crt_get_issuer_dn3(gnutls_x509_crt_t cert, gnutls_datum_t *dn, unsigned flags)
+{
+	if (cert == NULL) {
+		gnutls_assert();
+		return GNUTLS_E_INVALID_REQUEST;
+	}
+
+	return _gnutls_x509_get_dn(cert->cert,
+				   "tbsCertificate.issuer.rdnSequence",
+				   dn, flags);
 }
 
 /**
@@ -627,6 +666,9 @@ gnutls_x509_crt_get_issuer_dn_oid(gnutls_x509_crt_t cert,
  *
  * If @buf is null then only the size will be filled. 
  *
+ * This function does not output a fully RFC4514 compliant string, if
+ * that is required see gnutls_x509_crt_get_dn3().
+ *
  * Returns: %GNUTLS_E_SHORT_MEMORY_BUFFER if the provided buffer is not
  *   long enough, and in that case the @buf_size will be updated
  *   with the required size. %GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE if
@@ -643,7 +685,7 @@ gnutls_x509_crt_get_dn(gnutls_x509_crt_t cert, char *buf,
 
 	return _gnutls_x509_parse_dn(cert->cert,
 				     "tbsCertificate.subject.rdnSequence",
-				     buf, buf_size);
+				     buf, buf_size, GNUTLS_X509_DN_FLAG_COMPAT);
 }
 
 /**
@@ -655,6 +697,9 @@ gnutls_x509_crt_get_dn(gnutls_x509_crt_t cert, char *buf,
  * The name will be in the form "C=xxxx,O=yyyy,CN=zzzz" as
  * described in RFC4514. The output string will be ASCII or UTF-8
  * encoded, depending on the certificate data.
+ *
+ * This function does not output a fully RFC4514 compliant string, if
+ * that is required see gnutls_x509_crt_get_dn3().
  *
  * Returns: On success, %GNUTLS_E_SUCCESS (0) is returned, otherwise a
  *   negative error value.
@@ -670,7 +715,39 @@ int gnutls_x509_crt_get_dn2(gnutls_x509_crt_t cert, gnutls_datum_t * dn)
 
 	return _gnutls_x509_get_dn(cert->cert,
 				   "tbsCertificate.subject.rdnSequence",
-				   dn);
+				   dn, GNUTLS_X509_DN_FLAG_COMPAT);
+}
+
+/**
+ * gnutls_x509_crt_get_dn3:
+ * @cert: should contain a #gnutls_x509_crt_t type
+ * @dn: a pointer to a structure to hold the name
+ * @flags: zero or %GNUTLS_X509_DN_FLAG_COMPAT
+ *
+ * This function will allocate buffer and copy the name of the Certificate.
+ * The name will be in the form "C=xxxx,O=yyyy,CN=zzzz" as
+ * described in RFC4514. The output string will be ASCII or UTF-8
+ * encoded, depending on the certificate data.
+ *
+ * When the flag %GNUTLS_X509_DN_FLAG_COMPAT is specified, the output
+ * format will match the format output by previous to 3.5.6 versions of GnuTLS
+ * which was not not fully RFC4514-compliant.
+ *
+ * Returns: On success, %GNUTLS_E_SUCCESS (0) is returned, otherwise a
+ *   negative error value.
+ *
+ * Since: 3.5.7
+ **/
+int gnutls_x509_crt_get_dn3(gnutls_x509_crt_t cert, gnutls_datum_t *dn, unsigned flags)
+{
+	if (cert == NULL) {
+		gnutls_assert();
+		return GNUTLS_E_INVALID_REQUEST;
+	}
+
+	return _gnutls_x509_get_dn(cert->cert,
+				   "tbsCertificate.subject.rdnSequence",
+				   dn, flags);
 }
 
 /**
@@ -889,8 +966,8 @@ gnutls_x509_crt_get_signature(gnutls_x509_crt_t cert,
 
 	ret = 0;
  cleanup:
- 	gnutls_free(dsig.data);
- 	return ret;
+	gnutls_free(dsig.data);
+	return ret;
 }
 
 /**
@@ -1225,10 +1302,10 @@ gnutls_x509_crt_get_authority_key_gn_serial(gnutls_x509_crt_t cert,
 
 	ret = 0;
  cleanup:
- 	if (aki != NULL)
- 		gnutls_x509_aki_deinit(aki);
- 	gnutls_free(der.data);
- 	return ret;
+	if (aki != NULL)
+		gnutls_x509_aki_deinit(aki);
+	gnutls_free(der.data);
+	return ret;
 }
 
 /**
@@ -1311,10 +1388,10 @@ gnutls_x509_crt_get_authority_key_id(gnutls_x509_crt_t cert, void *id,
 
 	ret = 0;
  cleanup:
- 	if (aki != NULL)
- 		gnutls_x509_aki_deinit(aki);
- 	gnutls_free(der.data);
- 	return ret;
+	if (aki != NULL)
+		gnutls_x509_aki_deinit(aki);
+	gnutls_free(der.data);
+	return ret;
 }
 
 /**
@@ -1461,7 +1538,7 @@ _gnutls_parse_general_name2(ASN1_TYPE src, const char *src_name,
 		}
 	} else if (type == GNUTLS_SAN_DN) {
 		_gnutls_str_cat(nptr, sizeof(nptr), ".directoryName");
-		ret = _gnutls_x509_get_dn(src, nptr, dname);
+		ret = _gnutls_x509_get_dn(src, nptr, dname, 0);
 		if (ret < 0) {
 			gnutls_assert();
 			goto cleanup;
@@ -2139,8 +2216,8 @@ gnutls_x509_crt_get_policy(gnutls_x509_crt_t crt, unsigned indx,
 	ret = 0;
 
  cleanup:
- 	if (policies != NULL)
- 		gnutls_x509_policies_deinit(policies);
+	if (policies != NULL)
+		gnutls_x509_policies_deinit(policies);
 	_gnutls_free_datum(&tmpd);
 
 	return ret;
@@ -2846,8 +2923,8 @@ _gnutls_x509_crt_check_revocation(gnutls_x509_crt_t cert,
 	return 0;		/* not revoked. */
 
  fail:
- 	gnutls_x509_crl_iter_deinit(iter);
- 	return ret;
+	gnutls_x509_crl_iter_deinit(iter);
+	return ret;
 }
 
 
@@ -2857,7 +2934,7 @@ _gnutls_x509_crt_check_revocation(gnutls_x509_crt_t cert,
  * @crl_list: should contain a list of gnutls_x509_crl_t types
  * @crl_list_length: the length of the crl_list
  *
- * This function will return check if the given certificate is
+ * This function will check if the given certificate is
  * revoked.  It is assumed that the CRLs have been verified before.
  *
  * Returns: 0 if the certificate is NOT revoked, and 1 if it is.  A
@@ -2870,6 +2947,28 @@ gnutls_x509_crt_check_revocation(gnutls_x509_crt_t cert,
 {
 	return _gnutls_x509_crt_check_revocation(cert, crl_list,
 						 crl_list_length, NULL);
+}
+
+/**
+ * gnutls_x509_crt_check_key_purpose:
+ * @cert: should contain a #gnutls_x509_crt_t type
+ * @purpose: a key purpose OID (e.g., %GNUTLS_KP_CODE_SIGNING)
+ * @flags: zero or %GNUTLS_KP_FLAG_DISALLOW_ANY
+ *
+ * This function will check whether the given certificate matches
+ * the provided key purpose. If @flags contains %GNUTLS_KP_FLAG_ALLOW_ANY then
+ * it a certificate marked for any purpose will not match.
+ *
+ * Returns: zero if the key purpose doesn't match, and non-zero otherwise.
+ *
+ * Since: 3.5.6
+ **/
+unsigned
+gnutls_x509_crt_check_key_purpose(gnutls_x509_crt_t cert,
+				 const char *purpose,
+				 unsigned flags)
+{
+	return _gnutls_check_key_purpose(cert, purpose, (flags&GNUTLS_KP_FLAG_DISALLOW_ANY)?1:0);
 }
 
 /**
@@ -2919,7 +3018,7 @@ gnutls_x509_crt_get_preferred_hash_algorithm(gnutls_x509_crt_t crt,
 	}
 
  cleanup:
- 	gnutls_pubkey_deinit(pubkey);
+	gnutls_pubkey_deinit(pubkey);
 	return ret;
 }
 
@@ -3090,9 +3189,9 @@ gnutls_x509_crt_get_key_purpose_oid(gnutls_x509_crt_t cert,
 	ret = 0;
 
  cleanup:
- 	gnutls_free(ext.data);
- 	if (p!=NULL)
- 		gnutls_x509_key_purpose_deinit(p);
+	gnutls_free(ext.data);
+	if (p!=NULL)
+		gnutls_x509_key_purpose_deinit(p);
 	return ret;
 }
 
@@ -3137,7 +3236,7 @@ gnutls_x509_crt_get_pk_rsa_raw(gnutls_x509_crt_t crt,
 	}
 
  cleanup:
- 	gnutls_pubkey_deinit(pubkey);
+	gnutls_pubkey_deinit(pubkey);
 	return ret;
 }
 
@@ -3186,7 +3285,7 @@ gnutls_x509_crt_get_pk_ecc_raw(gnutls_x509_crt_t crt,
 	}
 
  cleanup:
- 	gnutls_pubkey_deinit(pubkey);
+	gnutls_pubkey_deinit(pubkey);
 	return ret;
 }
 
@@ -3234,7 +3333,7 @@ gnutls_x509_crt_get_pk_dsa_raw(gnutls_x509_crt_t crt,
 	}
 
  cleanup:
- 	gnutls_pubkey_deinit(pubkey);
+	gnutls_pubkey_deinit(pubkey);
 	return ret;
 }
 
@@ -3862,8 +3961,8 @@ gnutls_x509_crt_import_url(gnutls_x509_crt_t crt,
 	return ret;
 }
 
-/**
- * gnutls_x509_crt_verify_data2:
+/*-
+ * gnutls_x509_crt_verify_data3:
  * @crt: Holds the certificate to verify with
  * @algo: The signature algorithm used
  * @flags: Zero or an OR list of #gnutls_certificate_verify_flags
@@ -3874,16 +3973,19 @@ gnutls_x509_crt_import_url(gnutls_x509_crt_t crt,
  * parameters from the certificate.
  *
  * Returns: In case of a verification failure %GNUTLS_E_PK_SIG_VERIFY_FAILED 
- * is returned, and zero or positive code on success.
+ * is returned, %GNUTLS_E_EXPIRED or %GNUTLS_E_NOT_YET_ACTIVATED on expired
+ * or not yet activated certificate and zero or positive code on success.
  *
- * Since: 3.4.0
- **/
+ * Since: 3.5.6
+ -*/
 int
-gnutls_x509_crt_verify_data2(gnutls_x509_crt_t crt,
-			   gnutls_sign_algorithm_t algo,
-			   unsigned int flags,
-			   const gnutls_datum_t * data,
-			   const gnutls_datum_t * signature)
+gnutls_x509_crt_verify_data3(gnutls_x509_crt_t crt,
+			     gnutls_sign_algorithm_t algo,
+			     gnutls_typed_vdata_st *vdata,
+			     unsigned int vdata_size,
+			     const gnutls_datum_t *data,
+			     const gnutls_datum_t *signature,
+			     unsigned int flags)
 {
 	int ret;
 	gnutls_pubkey_t pubkey;
@@ -3892,6 +3994,7 @@ gnutls_x509_crt_verify_data2(gnutls_x509_crt_t crt,
 		gnutls_assert();
 		return GNUTLS_E_INVALID_REQUEST;
 	}
+
 
 	ret = gnutls_pubkey_init(&pubkey);
 	if (ret < 0)
@@ -3904,5 +4007,70 @@ gnutls_x509_crt_verify_data2(gnutls_x509_crt_t crt,
 	ret = gnutls_pubkey_verify_data2(pubkey, algo, flags, data, signature);
 	gnutls_pubkey_deinit(pubkey);
 
+	if (ret >= 0) {
+		time_t now = gnutls_time(0);
+		int res;
+		unsigned usage, i;
+
+		if (!(flags & GNUTLS_VERIFY_DISABLE_TRUSTED_TIME_CHECKS) ||
+		    !(flags & GNUTLS_VERIFY_DISABLE_TIME_CHECKS)) {
+			if (now > gnutls_x509_crt_get_expiration_time(crt)) {
+				return gnutls_assert_val(GNUTLS_E_EXPIRED);
+			}
+
+			if (now < gnutls_x509_crt_get_activation_time(crt)) {
+				return gnutls_assert_val(GNUTLS_E_NOT_YET_ACTIVATED);
+			}
+		}
+
+		res = gnutls_x509_crt_get_key_usage(crt, &usage, NULL);
+		if (res >= 0) {
+			if (!(usage & GNUTLS_KEY_DIGITAL_SIGNATURE)) {
+				return gnutls_assert_val(GNUTLS_CERT_SIGNER_CONSTRAINTS_FAILURE);
+			}
+		}
+
+		for (i=0;i<vdata_size;i++) {
+			if (vdata[i].type == GNUTLS_DT_KEY_PURPOSE_OID) {
+				res = _gnutls_check_key_purpose(crt, (char *)vdata[i].data, 0);
+				if (res == 0)
+					return gnutls_assert_val(GNUTLS_CERT_SIGNER_CONSTRAINTS_FAILURE);
+				break;
+			}
+		}
+	}
+
 	return ret;
 }
+
+/**
+ * gnutls_x509_crt_verify_data2:
+ * @crt: Holds the certificate to verify with
+ * @algo: The signature algorithm used
+ * @flags: Zero or an OR list of #gnutls_certificate_verify_flags
+ * @data: holds the signed data
+ * @signature: contains the signature
+ *
+ * This function will verify the given signed data, using the
+ * parameters from the certificate.
+ *
+ * Returns: In case of a verification failure %GNUTLS_E_PK_SIG_VERIFY_FAILED 
+ * is returned, %GNUTLS_E_EXPIRED or %GNUTLS_E_NOT_YET_ACTIVATED on expired
+ * or not yet activated certificate and zero or positive code on success.
+ *
+ * Note that since GnuTLS 3.5.6 this function introduces checks in the
+ * end certificate (@crt), including time checks and key usage checks.
+ *
+ * Since: 3.4.0
+ **/
+int
+gnutls_x509_crt_verify_data2(gnutls_x509_crt_t crt,
+			   gnutls_sign_algorithm_t algo,
+			   unsigned int flags,
+			   const gnutls_datum_t *data,
+			   const gnutls_datum_t *signature)
+{
+	return gnutls_x509_crt_verify_data3(crt, algo, NULL, 0,
+				data, signature, flags);
+}
+

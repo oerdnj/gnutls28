@@ -360,6 +360,15 @@ void gnutls_privkey_deinit(gnutls_privkey_t key)
 	gnutls_free(key);
 }
 
+/* Will erase all private key information, except PIN */
+void _gnutls_privkey_cleanup(gnutls_privkey_t key)
+{
+	memset(&key->key, 0, sizeof(key->key));
+	key->type = 0;
+	key->pk_algorithm = 0;
+	key->flags = 0;
+}
+
 /* will fail if the private key contains an actual key.
  */
 static int check_if_clean(gnutls_privkey_t key)
@@ -495,7 +504,7 @@ int _gnutls_privkey_import_pkcs11_url(gnutls_privkey_t key, const char *url, uns
  */
 int
 gnutls_privkey_export_pkcs11(gnutls_privkey_t pkey,
-                             gnutls_pkcs11_privkey_t *key)
+			     gnutls_pkcs11_privkey_t *key)
 {
 	int ret;
 
@@ -756,7 +765,7 @@ gnutls_privkey_import_x509(gnutls_privkey_t pkey,
  */
 int
 gnutls_privkey_export_x509(gnutls_privkey_t pkey,
-                           gnutls_x509_privkey_t *key)
+			   gnutls_x509_privkey_t *key)
 {
 	int ret;
 
@@ -1011,7 +1020,7 @@ int gnutls_privkey_import_openpgp_raw(gnutls_privkey_t pkey,
  */
 int
 gnutls_privkey_export_openpgp(gnutls_privkey_t pkey,
-                              gnutls_openpgp_privkey_t *key)
+			      gnutls_openpgp_privkey_t *key)
 {
 	int ret;
 
@@ -1383,7 +1392,7 @@ gnutls_privkey_import_url(gnutls_privkey_t key, const char *url,
 
 	ret = gnutls_assert_val(GNUTLS_E_INVALID_REQUEST);
  cleanup:
- 	return ret;
+	return ret;
 }
 
 /**

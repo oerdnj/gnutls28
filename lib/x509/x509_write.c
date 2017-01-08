@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2003-2016 Free Software Foundation, Inc.
+ * Copyright (C) 2016 Red Hat, Inc.
  *
  * Author: Nikos Mavrogiannopoulos
  *
@@ -335,8 +336,8 @@ gnutls_x509_crt_set_crq_extensions(gnutls_x509_crt_t crt,
  **/
 int
 gnutls_x509_crt_set_crq_extension_by_oid(gnutls_x509_crt_t crt,
-				         gnutls_x509_crq_t crq, const char *oid,
-				         unsigned flags)
+					 gnutls_x509_crq_t crq, const char *oid,
+					 unsigned flags)
 {
 	size_t i;
 
@@ -571,8 +572,10 @@ gnutls_x509_crt_set_key_usage(gnutls_x509_crt_t crt, unsigned int usage)
  * extension. This function assumes that data can be expressed as a null
  * terminated string.
  *
- * The name of the function is unfortunate since it is incosistent with
+ * The name of the function is unfortunate since it is inconsistent with
  * gnutls_x509_crt_get_subject_alt_name().
+ *
+ * See gnutls_x509_crt_set_subject_alt_name() for more information.
  *
  * Returns: On success, %GNUTLS_E_SUCCESS (0) is returned, otherwise a
  *   negative error value.
@@ -612,6 +615,9 @@ gnutls_x509_crt_set_subject_alternative_name(gnutls_x509_crt_t crt,
  * %GNUTLS_SAN_RFC822NAME as a text string, %GNUTLS_SAN_URI as a text string,
  * %GNUTLS_SAN_IPADDRESS as a binary IP address (4 or 16 bytes),
  * %GNUTLS_SAN_OTHERNAME_XMPP as a UTF8 string (since 3.5.0).
+ *
+ * Since version 3.5.7 the %GNUTLS_SAN_RFC822NAME, %GNUTLS_SAN_DNSNAME, and
+ * %GNUTLS_SAN_OTHERNAME_XMPP are converted to ACE format when necessary.
  *
  * Returns: On success, %GNUTLS_E_SUCCESS (0) is returned, otherwise a
  *   negative error value.
@@ -690,6 +696,9 @@ gnutls_x509_crt_set_subject_alt_name(gnutls_x509_crt_t crt,
  *
  * This function will set the issuer alternative name certificate
  * extension. It can set the same types as gnutls_x509_crt_set_subject_alt_name().
+ *
+ * Since version 3.5.7 the %GNUTLS_SAN_RFC822NAME, %GNUTLS_SAN_DNSNAME, and
+ * %GNUTLS_SAN_OTHERNAME_XMPP are converted to ACE format when necessary.
  *
  * Returns: On success, %GNUTLS_E_SUCCESS (0) is returned, otherwise a
  *   negative error value.
@@ -835,10 +844,9 @@ gnutls_x509_crt_set_subject_alt_othername(gnutls_x509_crt_t crt,
 	/* generate the extension.
 	 */
 	result =
-	    _gnutls_x509_ext_gen_subject_alt_name(GNUTLS_SAN_OTHERNAME, oid,
-	    					  encoded_data.data, encoded_data.size,
-						  &prev_der_data,
-						  &der_data);
+		_gnutls_x509_ext_gen_subject_alt_name(GNUTLS_SAN_OTHERNAME, oid,
+						      encoded_data.data, encoded_data.size,
+						      &prev_der_data, &der_data);
 
 	if (result < 0) {
 		gnutls_assert();
@@ -926,11 +934,9 @@ gnutls_x509_crt_set_issuer_alt_othername(gnutls_x509_crt_t crt,
 	/* generate the extension.
 	 */
 	result =
-	    _gnutls_x509_ext_gen_subject_alt_name(GNUTLS_SAN_OTHERNAME, oid,
-	    					  encoded_data.data, encoded_data.size,
-						  &prev_der_data,
-						  &der_data);
-
+		_gnutls_x509_ext_gen_subject_alt_name(GNUTLS_SAN_OTHERNAME, oid,
+						      encoded_data.data, encoded_data.size,
+						      &prev_der_data, &der_data);
 	if (result < 0) {
 		gnutls_assert();
 		goto finish;
@@ -1052,7 +1058,7 @@ gnutls_x509_crt_set_private_key_usage_period(gnutls_x509_crt_t crt,
  * @crt: a certificate of type #gnutls_x509_crt_t
  * @issuer: is the certificate of the certificate issuer
  * @issuer_key: holds the issuer's private key
- * @dig: The message digest to use, %GNUTLS_DIG_SHA1 is a safe choice
+ * @dig: The message digest to use, %GNUTLS_DIG_SHA256 is a safe choice
  * @flags: must be 0
  *
  * This function will sign the certificate with the issuer's private key, and
@@ -1060,6 +1066,10 @@ gnutls_x509_crt_set_private_key_usage_period(gnutls_x509_crt_t crt,
  *
  * This must be the last step in a certificate generation since all
  * the previously set parameters are now signed.
+ *
+ * A known limitation of this function is, that a newly-signed certificate will not
+ * be fully functional (e.g., for signature verification), until it
+ * is exported an re-imported.
  *
  * Returns: On success, %GNUTLS_E_SUCCESS (0) is returned, otherwise a
  *   negative error value.
@@ -1700,7 +1710,7 @@ gnutls_x509_crt_set_key_purpose_oid(gnutls_x509_crt_t cert,
  * @crt: a certificate of type #gnutls_x509_crt_t
  * @issuer: is the certificate of the certificate issuer
  * @issuer_key: holds the issuer's private key
- * @dig: The message digest to use, %GNUTLS_DIG_SHA1 is a safe choice
+ * @dig: The message digest to use, %GNUTLS_DIG_SHA256 is a safe choice
  * @flags: must be 0
  *
  * This function will sign the certificate with the issuer's private key, and
@@ -1708,6 +1718,10 @@ gnutls_x509_crt_set_key_purpose_oid(gnutls_x509_crt_t cert,
  *
  * This must be the last step in a certificate generation since all
  * the previously set parameters are now signed.
+ *
+ * A known limitation of this function is, that a newly-signed certificate will not
+ * be fully functional (e.g., for signature verification), until it
+ * is exported an re-imported.
  *
  * Returns: On success, %GNUTLS_E_SUCCESS (0) is returned, otherwise a
  *   negative error value.
@@ -1818,9 +1832,9 @@ gnutls_x509_crt_set_authority_info_access(gnutls_x509_crt_t crt,
 		goto cleanup;
 	}
 
-      cleanup:
-      	if (aia_ctx != NULL)
-      		gnutls_x509_aia_deinit(aia_ctx);
+ cleanup:
+	if (aia_ctx != NULL)
+		gnutls_x509_aia_deinit(aia_ctx);
 	_gnutls_free_datum(&new_der);
 	_gnutls_free_datum(&der);
 
@@ -1899,8 +1913,8 @@ gnutls_x509_crt_set_policy(gnutls_x509_crt_t crt,
 						&der_data, 0);
 
  cleanup:
- 	if (policies != NULL)
-	 	gnutls_x509_policies_deinit(policies);
+	if (policies != NULL)
+		gnutls_x509_policies_deinit(policies);
 	_gnutls_free_datum(&prev_der_data);
 	_gnutls_free_datum(&der_data);
 

@@ -62,11 +62,17 @@ NO_X25519=$?
 ${SERV} version|grep -e '[1-9]\.[0-9]\.[0-9]' >/dev/null 2>&1
 NO_TLS1_2=$?
 
+${SERV} version|grep -e '[1-9]\.[1-9]\.[0-9]' >/dev/null 2>&1
+NO_DH_PARAMS=$?
+
 ${SERV} s_server -help 2>&1|grep -e -ssl3 >/dev/null 2>&1
 HAVE_SSL3=$?
 
 ${SERV} ciphers -v ALL 2>&1|grep -e CAMELLIA >/dev/null 2>&1
 NO_CAMELLIA=$?
+
+${SERV} ciphers -v ALL 2>&1|grep -e 3DES >/dev/null 2>&1
+NO_3DES=$?
 
 ${SERV} ciphers -v ALL 2>&1|grep -e DSS >/dev/null 2>&1
 NO_DSS=$?
@@ -76,7 +82,11 @@ NO_NULL=$?
 
 . "${srcdir}/testcompat-common"
 
-DH_PARAMS="-dhparam \"${srcdir}/params.dh\""
+if test "${NO_DH_PARAMS}" = 0;then
+	OPENSSL_DH_PARAMS_OPT=""
+else
+	OPENSSL_DH_PARAMS_OPT="-dhparam \"${DH_PARAMS}\""
+fi
 
 echo "#################################################"
 echo "# Client mode tests (gnutls cli-openssl server) #"
@@ -93,7 +103,7 @@ run_client_suite() {
 		# It seems debian disabled SSL 3.0 completely on openssl
 
 		eval "${GETPORT}"
-		launch_bare_server $$ s_server -cipher ALL -quiet -www -accept "${PORT}" -keyform pem -certform pem -ssl3 ${DH_PARAMS} -key "${RSA_KEY}" -cert "${RSA_CERT}" -dkey "${DSA_KEY}" -dcert "${DSA_CERT}" -Verify 1 -CAfile "${CA_CERT}"
+		launch_bare_server $$ s_server -cipher ALL -quiet -www -accept "${PORT}" -keyform pem -certform pem -ssl3 ${OPENSSL_DH_PARAMS_OPT} -key "${RSA_KEY}" -cert "${RSA_CERT}" -dkey "${DSA_KEY}" -dcert "${DSA_CERT}" -Verify 1 -CAfile "${CA_CERT}"
 		PID=$!
 		wait_server ${PID}
 
@@ -116,7 +126,7 @@ run_client_suite() {
 		wait
 
 		eval "${GETPORT}"
-		launch_bare_server $$ s_server -quiet -www -accept "${PORT}" -keyform pem -certform pem -ssl3 ${DH_PARAMS} -key "${RSA_KEY}" -cert "${RSA_CERT}" -cipher RC4-MD5
+		launch_bare_server $$ s_server -quiet -www -accept "${PORT}" -keyform pem -certform pem -ssl3 ${OPENSSL_DH_PARAMS_OPT} -key "${RSA_KEY}" -cert "${RSA_CERT}" -cipher RC4-MD5
 		PID=$!
 		wait_server ${PID}
 
@@ -131,7 +141,7 @@ run_client_suite() {
 	if test "${NO_NULL}" = 0; then
 		#-cipher RSA-NULL
 		eval "${GETPORT}"
-		launch_bare_server $$ s_server -cipher NULL-SHA -quiet -www -accept "${PORT}" -keyform pem -certform pem -tls1 ${DH_PARAMS} -key "${RSA_KEY}" -cert "${RSA_CERT}" -Verify 1 -CAfile "${CA_CERT}"
+		launch_bare_server $$ s_server -cipher NULL-SHA -quiet -www -accept "${PORT}" -keyform pem -certform pem -tls1 ${OPENSSL_DH_PARAMS_OPT} -key "${RSA_KEY}" -cert "${RSA_CERT}" -Verify 1 -CAfile "${CA_CERT}"
 		PID=$!
 		wait_server ${PID}
 
@@ -146,14 +156,16 @@ run_client_suite() {
 
 	#-cipher RSA-AES128-SHA:DHE-DSS-AES128-SHA:DHE-RSA-AES128-SHA:ECDHE-RSA-AES128-SHA
 	eval "${GETPORT}"
-	launch_bare_server $$ s_server -cipher "ALL" -quiet -www -accept "${PORT}" -keyform pem -certform pem -tls1 ${DH_PARAMS} -key "${RSA_KEY}" -cert "${RSA_CERT}" -dkey "${DSA_KEY}" -dcert "${DSA_CERT}" -Verify 1 -CAfile "${CA_CERT}"
+	launch_bare_server $$ s_server -cipher "ALL" -quiet -www -accept "${PORT}" -keyform pem -certform pem -tls1 ${OPENSSL_DH_PARAMS_OPT} -key "${RSA_KEY}" -cert "${RSA_CERT}" -dkey "${DSA_KEY}" -dcert "${DSA_CERT}" -Verify 1 -CAfile "${CA_CERT}"
 	PID=$!
 	wait_server ${PID}
 
 	# Test TLS 1.0 with RSA ciphersuite
-	echo "${PREFIX}Checking TLS 1.0 with RSA and 3DES-CBC..."
-	${VALGRIND} "${CLI}" ${DEBUG} -p "${PORT}" 127.0.0.1 --priority "NONE:+3DES-CBC:+SIGN-ALL:+COMP-NULL:+MAC-ALL:+VERS-TLS1.0:+RSA${ADD}" --insecure --x509certfile "${CLI_CERT}" --x509keyfile "${CLI_KEY}" </dev/null >/dev/null || \
-		fail ${PID} "Failed"
+	if test "${NO_3DES}" != 1; then
+		echo "${PREFIX}Checking TLS 1.0 with RSA and 3DES-CBC..."
+		${VALGRIND} "${CLI}" ${DEBUG} -p "${PORT}" 127.0.0.1 --priority "NONE:+3DES-CBC:+SIGN-ALL:+COMP-NULL:+MAC-ALL:+VERS-TLS1.0:+RSA${ADD}" --insecure --x509certfile "${CLI_CERT}" --x509keyfile "${CLI_KEY}" </dev/null >/dev/null || \
+			fail ${PID} "Failed"
+	fi
 
 	echo "${PREFIX}Checking TLS 1.0 with RSA and AES-128-CBC..."
 	${VALGRIND} "${CLI}" ${DEBUG} -p "${PORT}" 127.0.0.1 --priority "NONE:+AES-128-CBC:+SIGN-ALL:+COMP-NULL:+MAC-ALL:+VERS-TLS1.0:+RSA${ADD}" --insecure --x509certfile "${CLI_CERT}" --x509keyfile "${CLI_KEY}" </dev/null >/dev/null || \
@@ -252,7 +264,7 @@ run_client_suite() {
 
 	#-cipher PSK
 	eval "${GETPORT}"
-	launch_bare_server $$ s_server -quiet -www -accept "${PORT}" -tls1 -keyform pem -certform pem ${DH_PARAMS} -key "${RSA_KEY}" -cert "${RSA_CERT}" -cipher PSK -psk 9e32cf7786321a828ef7668f09fb35db
+	launch_bare_server $$ s_server -quiet -www -accept "${PORT}" -tls1 -keyform pem -certform pem ${OPENSSL_DH_PARAMS_OPT} -key "${RSA_KEY}" -cert "${RSA_CERT}" -cipher PSK -psk 9e32cf7786321a828ef7668f09fb35db
 	PID=$!
 	wait_server ${PID}
 
@@ -267,7 +279,7 @@ run_client_suite() {
 		# Tests requiring openssl 1.0.1 - TLS 1.2
 		#-cipher RSA-AES128-SHA:DHE-DSS-AES128-SHA:DHE-RSA-AES128-SHA:ECDHE-RSA-AES128-SHA
 		eval "${GETPORT}"
-		launch_bare_server $$ s_server -cipher ALL -quiet -www -accept "${PORT}" -keyform pem -certform pem -tls1_2 ${DH_PARAMS} -key "${RSA_KEY}" -cert "${RSA_CERT}" -dkey "${DSA_KEY}" -dcert "${DSA_CERT}" -Verify 1 -CAfile "${CA_CERT}"
+		launch_bare_server $$ s_server -cipher ALL -quiet -www -accept "${PORT}" -keyform pem -certform pem -tls1_2 ${OPENSSL_DH_PARAMS_OPT} -key "${RSA_KEY}" -cert "${RSA_CERT}" -dkey "${DSA_KEY}" -dcert "${DSA_CERT}" -Verify 1 -CAfile "${CA_CERT}"
 		PID=$!
 		wait_server ${PID}
 
@@ -356,7 +368,7 @@ run_client_suite() {
 
 	#-cipher PSK
 	eval "${GETPORT}"
-	launch_bare_server $$ s_server -quiet -www -accept "${PORT}" -tls1_2 -keyform pem -certform pem ${DH_PARAMS} -key "${RSA_KEY}" -cert "${RSA_CERT}" -cipher PSK -psk 9e32cf7786321a828ef7668f09fb35db
+	launch_bare_server $$ s_server -quiet -www -accept "${PORT}" -tls1_2 -keyform pem -certform pem ${OPENSSL_DH_PARAMS_OPT} -key "${RSA_KEY}" -cert "${RSA_CERT}" -cipher PSK -psk 9e32cf7786321a828ef7668f09fb35db
 	PID=$!
 	wait_server ${PID}
 
@@ -368,7 +380,7 @@ run_client_suite() {
 	wait
 
 	eval "${GETPORT}"
-	launch_bare_server $$ s_server -cipher ALL -quiet -accept "${PORT}" -keyform pem -certform pem -dtls1 -timeout ${DH_PARAMS} -key "${RSA_KEY}" -cert "${RSA_CERT}" -dkey "${DSA_KEY}" -dcert "${DSA_CERT}" -Verify 1 -CAfile "${CA_CERT}"
+	launch_bare_server $$ s_server -cipher ALL -quiet -accept "${PORT}" -keyform pem -certform pem -dtls1 -timeout ${OPENSSL_DH_PARAMS_OPT} -key "${RSA_KEY}" -cert "${RSA_CERT}" -dkey "${DSA_KEY}" -dcert "${DSA_CERT}" -Verify 1 -CAfile "${CA_CERT}"
 	PID=$!
 	wait_udp_server ${PID}
 
@@ -381,7 +393,7 @@ run_client_suite() {
 	wait
 
 	eval "${GETPORT}"
-	launch_bare_server $$ s_server -quiet -accept "${PORT}" -keyform pem -certform pem -dtls1 -timeout ${DH_PARAMS} -key "${RSA_KEY}" -cert "${RSA_CERT}" -dkey "${DSA_KEY}" -dcert "${DSA_CERT}" -Verify 1 -CAfile "${CA_CERT}"
+	launch_bare_server $$ s_server -quiet -accept "${PORT}" -keyform pem -certform pem -dtls1 -timeout ${OPENSSL_DH_PARAMS_OPT} -key "${RSA_KEY}" -cert "${RSA_CERT}" -dkey "${DSA_KEY}" -dcert "${DSA_CERT}" -Verify 1 -CAfile "${CA_CERT}"
 	PID=$!
 	wait_udp_server ${PID}
 
@@ -395,7 +407,7 @@ run_client_suite() {
 
 	if test "${NO_DSS}" != 1; then
 		eval "${GETPORT}"
-		launch_bare_server $$ s_server -cipher "ALL" -quiet -accept "${PORT}" -keyform pem -certform pem -dtls1 -timeout ${DH_PARAMS} -key "${RSA_KEY}" -cert "${RSA_CERT}" -dkey "${DSA_KEY}" -dcert "${DSA_CERT}" -Verify 1 -CAfile "${CA_CERT}"
+		launch_bare_server $$ s_server -cipher "ALL" -quiet -accept "${PORT}" -keyform pem -certform pem -dtls1 -timeout ${OPENSSL_DH_PARAMS_OPT} -key "${RSA_KEY}" -cert "${RSA_CERT}" -dkey "${DSA_KEY}" -dcert "${DSA_CERT}" -Verify 1 -CAfile "${CA_CERT}"
 		PID=$!
 		wait_udp_server ${PID}
 
@@ -409,10 +421,16 @@ run_client_suite() {
 	fi
 }
 
+WAITPID=""
 for mod in "" ":%COMPAT" ":%NO_ETM"; do #":%NO_TICKETS" ":%DISABLE_SAFE_RENEGOTIATION"
 	run_client_suite $mod &
+	WAITPID="$WAITPID $!"
 done
-wait
+
+for i in "$WAITPID";do
+	wait $i
+	test $? != 0 && exit 1
+done
 
 echo "${PREFIX}Client mode tests were successfully completed"
 echo "${PREFIX}"
@@ -434,7 +452,7 @@ run_server_suite() {
 
 		echo "${PREFIX}Check SSL 3.0 with RSA ciphersuite"
 		eval "${GETPORT}"
-		launch_server $$ --priority "NONE:+MD5:+ARCFOUR-128:+CIPHER-ALL:+SIGN-ALL:+COMP-NULL:+MAC-ALL:+VERS-SSL3.0:+RSA${ADD}" --x509certfile "${SERV_CERT}" --x509keyfile "${SERV_KEY}" --x509cafile "${CA_CERT}" --dhparams "${srcdir}/params.dh"
+		launch_server $$ --priority "NONE:+MD5:+ARCFOUR-128:+CIPHER-ALL:+SIGN-ALL:+COMP-NULL:+MAC-ALL:+VERS-SSL3.0:+RSA${ADD}" --x509certfile "${SERV_CERT}" --x509keyfile "${SERV_KEY}" --x509cafile "${CA_CERT}" --dhparams "${DH_PARAMS}"
 		PID=$!
 		wait_server ${PID}
 
@@ -450,7 +468,7 @@ run_server_suite() {
 
 		echo "${PREFIX}Check SSL 3.0 with DHE-RSA ciphersuite"
 		eval "${GETPORT}"
-		launch_server $$ --priority "NONE:+CIPHER-ALL:+SIGN-ALL:+COMP-NULL:+MAC-ALL:+VERS-SSL3.0:+DHE-RSA${ADD}" --x509certfile "${SERV_CERT}" --x509keyfile "${SERV_KEY}" --x509cafile "${CA_CERT}" --dhparams "${srcdir}/params.dh"
+		launch_server $$ --priority "NONE:+CIPHER-ALL:+SIGN-ALL:+COMP-NULL:+MAC-ALL:+VERS-SSL3.0:+DHE-RSA${ADD}" --x509certfile "${SERV_CERT}" --x509keyfile "${SERV_KEY}" --x509cafile "${CA_CERT}" --dhparams "${DH_PARAMS}"
 		PID=$!
 		wait_server ${PID}
 
@@ -462,7 +480,7 @@ run_server_suite() {
 
 		echo "${PREFIX}Check SSL 3.0 with DHE-DSS ciphersuite"
 		eval "${GETPORT}"
-		launch_server $$ --priority "NONE:+CIPHER-ALL:+SIGN-ALL:+COMP-NULL:+MAC-ALL:+VERS-SSL3.0:+DHE-DSS:+SIGN-DSA-SHA1:+SIGN-DSA-SHA256${ADD}" --x509certfile "${SERV_DSA_CERT}" --x509keyfile "${SERV_DSA_KEY}" --dhparams "${srcdir}/params.dh"
+		launch_server $$ --priority "NONE:+CIPHER-ALL:+SIGN-ALL:+COMP-NULL:+MAC-ALL:+VERS-SSL3.0:+DHE-DSS:+SIGN-DSA-SHA1:+SIGN-DSA-SHA256${ADD}" --x509certfile "${SERV_DSA_CERT}" --x509keyfile "${SERV_DSA_KEY}" --dhparams "${DH_PARAMS}"
 		PID=$!
 		wait_server ${PID}
 
@@ -478,7 +496,7 @@ run_server_suite() {
 
 	# This test was disabled because it doesn't work as expected with openssl 1.0.0d
 	#echo "${PREFIX}Check TLS 1.0 with RSA ciphersuite (SSLv2 hello)"
-	#launch_server $$ --priority "NONE:+CIPHER-ALL:+SIGN-ALL:+COMP-NULL:+MAC-ALL:+VERS-TLS1.0:+RSA" --x509certfile "${SERV_CERT}" --x509keyfile "${SERV_KEY}" --x509cafile "${CA_CERT}" --dhparams "${srcdir}/params.dh"
+	#launch_server $$ --priority "NONE:+CIPHER-ALL:+SIGN-ALL:+COMP-NULL:+MAC-ALL:+VERS-TLS1.0:+RSA" --x509certfile "${SERV_CERT}" --x509keyfile "${SERV_KEY}" --x509cafile "${CA_CERT}" --dhparams "${DH_PARAMS}"
 	#PID=$!
 	#wait_server ${PID}
 	#
@@ -491,7 +509,7 @@ run_server_suite() {
 	if test "${NO_NULL}" = 0; then
 		echo "${PREFIX}Check TLS 1.0 with RSA-NULL ciphersuite"
 		eval "${GETPORT}"
-		launch_server $$ --priority "NONE:+NULL:+SIGN-ALL:+COMP-NULL:+MAC-ALL:+VERS-TLS1.0:+RSA:+DHE-RSA${ADD}" --x509certfile "${SERV_CERT}" --x509keyfile "${SERV_KEY}" --x509cafile "${CA_CERT}" --dhparams "${srcdir}/params.dh"
+		launch_server $$ --priority "NONE:+NULL:+SIGN-ALL:+COMP-NULL:+MAC-ALL:+VERS-TLS1.0:+RSA:+DHE-RSA${ADD}" --x509certfile "${SERV_CERT}" --x509keyfile "${SERV_KEY}" --x509cafile "${CA_CERT}" --dhparams "${DH_PARAMS}"
 		PID=$!
 		wait_server ${PID}
 
@@ -504,7 +522,7 @@ run_server_suite() {
 
 	echo "${PREFIX}Check TLS 1.0 with DHE-RSA ciphersuite"
 	eval "${GETPORT}"
-	launch_server $$ --priority "NONE:+CIPHER-ALL:+SIGN-ALL:+COMP-NULL:+MAC-ALL:+VERS-TLS1.0:+DHE-RSA${ADD}" --x509certfile "${SERV_CERT}" --x509keyfile "${SERV_KEY}" --x509cafile "${CA_CERT}" --dhparams "${srcdir}/params.dh"
+	launch_server $$ --priority "NONE:+CIPHER-ALL:+SIGN-ALL:+COMP-NULL:+MAC-ALL:+VERS-TLS1.0:+DHE-RSA${ADD}" --x509certfile "${SERV_CERT}" --x509keyfile "${SERV_KEY}" --x509cafile "${CA_CERT}" --dhparams "${DH_PARAMS}"
 	PID=$!
 	wait_server ${PID}
 
@@ -517,11 +535,11 @@ run_server_suite() {
 	if test "${NO_DSS}" != 1; then
 		echo "${PREFIX}Check TLS 1.0 with DHE-DSS ciphersuite"
 		eval "${GETPORT}"
-		launch_server $$ --priority "NONE:+CIPHER-ALL:+SIGN-ALL:+COMP-NULL:+MAC-ALL:+VERS-TLS1.0:+DHE-DSS:+SIGN-DSA-SHA1:+SIGN-DSA-SHA256${ADD}" --x509certfile "${SERV_DSA_CERT}" --x509keyfile "${SERV_DSA_KEY}" --dhparams "${srcdir}/params.dh"
+		launch_server $$ --priority "NONE:+CIPHER-ALL:+SIGN-ALL:+COMP-NULL:+MAC-ALL:+VERS-TLS1.0:+DHE-DSS:+SIGN-DSA-SHA1:+SIGN-DSA-SHA256${ADD}" --x509certfile "${SERV_DSA_CERT}" --x509keyfile "${SERV_DSA_KEY}" --dhparams "${DH_PARAMS}"
 		PID=$!
 		wait_server ${PID}
 
-		${OPENSSL_CLI} s_client -host localhost -tls1 -port "${PORT}" -cert "${CLI_CERT}" -key "${CLI_KEY}" -CAfile "${CA_CERT}" </dev/null 2>&1 | grep "\:error\:" && \
+		${OPENSSL_CLI} s_client -host localhost -cipher ALL -tls1 -port "${PORT}" -cert "${CLI_CERT}" -key "${CLI_KEY}" -CAfile "${CA_CERT}" </dev/null 2>&1 | grep "\:error\:" && \
 			fail ${PID} "Failed"
 
 		kill ${PID}
@@ -614,7 +632,7 @@ run_server_suite() {
 
 		echo "${PREFIX}Check TLS 1.2 with DHE-RSA ciphersuite"
 		eval "${GETPORT}"
-		launch_server $$ --priority "NONE:+CIPHER-ALL:+SIGN-ALL:+COMP-NULL:+MAC-ALL:+VERS-TLS1.2:+DHE-RSA${ADD}" --x509certfile "${SERV_CERT}" --x509keyfile "${SERV_KEY}" --x509cafile "${CA_CERT}" --dhparams "${srcdir}/params.dh"
+		launch_server $$ --priority "NONE:+CIPHER-ALL:+SIGN-ALL:+COMP-NULL:+MAC-ALL:+VERS-TLS1.2:+DHE-RSA${ADD}" --x509certfile "${SERV_CERT}" --x509keyfile "${SERV_KEY}" --x509cafile "${CA_CERT}" --dhparams "${DH_PARAMS}"
 		PID=$!
 		wait_server ${PID}
 
@@ -627,11 +645,11 @@ run_server_suite() {
 		if test "${NO_DSS}" != 1; then
 			echo "${PREFIX}Check TLS 1.2 with DHE-DSS ciphersuite"
 			eval "${GETPORT}"
-			launch_server $$ --priority "NONE:+CIPHER-ALL:+SIGN-ALL:+COMP-NULL:+MAC-ALL:+VERS-TLS1.2:+DHE-DSS:+SIGN-DSA-SHA1:+SIGN-DSA-SHA256${ADD}" --x509certfile "${SERV_DSA_CERT}" --x509keyfile "${SERV_DSA_KEY}" --dhparams "${srcdir}/params.dh"
+			launch_server $$ --priority "NONE:+CIPHER-ALL:+SIGN-ALL:+COMP-NULL:+MAC-ALL:+VERS-TLS1.2:+DHE-DSS:+SIGN-DSA-SHA1:+SIGN-DSA-SHA256${ADD}" --x509certfile "${SERV_DSA_CERT}" --x509keyfile "${SERV_DSA_KEY}" --dhparams "${DH_PARAMS}"
 			PID=$!
 			wait_server ${PID}
 
-			${OPENSSL_CLI} s_client -host localhost -tls1_2 -port "${PORT}" -cert "${CLI_CERT}" -key "${CLI_KEY}" -CAfile "${CA_CERT}" </dev/null 2>&1 | grep "\:error\:" && \
+			${OPENSSL_CLI} s_client -host localhost -cipher ALL -tls1_2 -port "${PORT}" -cert "${CLI_CERT}" -key "${CLI_KEY}" -CAfile "${CA_CERT}" </dev/null 2>&1 | grep "\:error\:" && \
 				fail ${PID} "Failed"
 
 			kill ${PID}
@@ -739,7 +757,7 @@ run_server_suite() {
 	# DTLS
 	echo "${PREFIX}Check DTLS 1.0 with RSA ciphersuite"
 	eval "${GETPORT}"
-	launch_server $$ --priority "NONE:+CIPHER-ALL:+SIGN-ALL:+COMP-NULL:+MAC-ALL:+VERS-DTLS1.0:+RSA${ADD}" --udp --x509certfile "${SERV_CERT}" --x509keyfile "${SERV_KEY}" --x509cafile "${CA_CERT}" --dhparams "${srcdir}/params.dh"
+	launch_server $$ --priority "NONE:+CIPHER-ALL:+SIGN-ALL:+COMP-NULL:+MAC-ALL:+VERS-DTLS1.0:+RSA${ADD}" --udp --x509certfile "${SERV_CERT}" --x509keyfile "${SERV_KEY}" --x509cafile "${CA_CERT}" --dhparams "${DH_PARAMS}"
 	PID=$!
 	wait_udp_server ${PID}
 
@@ -753,7 +771,7 @@ run_server_suite() {
 
 	echo "${PREFIX}Check DTLS 1.0 with DHE-RSA ciphersuite"
 	eval "${GETPORT}"
-	launch_server $$ --priority "NONE:+CIPHER-ALL:+SIGN-ALL:+COMP-NULL:+MAC-ALL:+VERS-DTLS1.0:+DHE-RSA${ADD}" --udp --x509certfile "${SERV_CERT}" --x509keyfile "${SERV_KEY}" --x509cafile "${CA_CERT}" --dhparams "${srcdir}/params.dh"
+	launch_server $$ --priority "NONE:+CIPHER-ALL:+SIGN-ALL:+COMP-NULL:+MAC-ALL:+VERS-DTLS1.0:+DHE-RSA${ADD}" --udp --x509certfile "${SERV_CERT}" --x509keyfile "${SERV_KEY}" --x509cafile "${CA_CERT}" --dhparams "${DH_PARAMS}"
 	PID=$!
 	wait_udp_server ${PID}
 
@@ -767,20 +785,27 @@ run_server_suite() {
 
 	echo "${PREFIX}Check DTLS 1.0 with DHE-DSS ciphersuite"
 	eval "${GETPORT}"
-	launch_server $$ --priority "NONE:+CIPHER-ALL:+SIGN-ALL:+COMP-NULL:+MAC-ALL:+VERS-DTLS1.0:+DHE-DSS:+SIGN-DSA-SHA1:+SIGN-DSA-SHA256${ADD}" --udp --x509certfile "${SERV_DSA_CERT}" --x509keyfile "${SERV_DSA_KEY}" --dhparams "${srcdir}/params.dh"
+	launch_server $$ --priority "NONE:+CIPHER-ALL:+SIGN-ALL:+COMP-NULL:+MAC-ALL:+VERS-DTLS1.0:+DHE-DSS:+SIGN-DSA-SHA1:+SIGN-DSA-SHA256${ADD}" --udp --x509certfile "${SERV_DSA_CERT}" --x509keyfile "${SERV_DSA_KEY}" --dhparams "${DH_PARAMS}"
 	PID=$!
 	wait_udp_server ${PID}
 
 
-	${OPENSSL_CLI} s_client -host localhost -port "${PORT}" -dtls1 -cert "${CLI_CERT}" -key "${CLI_KEY}" -CAfile "${CA_CERT}" </dev/null 2>&1 | grep "\:error\:" && \
+	${OPENSSL_CLI} s_client -host localhost -port "${PORT}" -cipher ALL -dtls1 -cert "${CLI_CERT}" -key "${CLI_KEY}" -CAfile "${CA_CERT}" </dev/null 2>&1 | grep "\:error\:" && \
 		fail ${PID} "Failed"
 
 	kill ${PID}
 	wait
 }
+
+WAITPID=""
 for mod in "" ":%COMPAT" ":%NO_ETM" ":%NO_TICKETS" ":%DISABLE_SAFE_RENEGOTIATION"; do
 	run_server_suite $mod &
+	WAITPID="$WAITPID $!"
 done
-wait
+
+for i in "$WAITPID";do
+	wait $i
+	test $? != 0 && exit 1
+done
 
 exit 0

@@ -372,8 +372,8 @@ static void dane_check(const char *host, const char *proto,
 
 			cstr = dane_match_type_name(match);
 			if (cstr == NULL) cstr= "Unknown";
-			fprintf(outfile, "Contents:          %s (%.2x)\n", cstr, match);
-			fprintf(outfile, "Data:              %s\n", lbuffer);
+			fprintf(outfile, "Contents:	  %s (%.2x)\n", cstr, match);
+			fprintf(outfile, "Data:	      %s\n", lbuffer);
 		}
 
 		/* Verify the DANE data */
@@ -715,7 +715,7 @@ static const char *obtain_cert(const char *hostname, const char *proto, const ch
 	if (priv->found == 0)
 		ret = -1;
 
-	socket_bye(&hd);
+	socket_bye(&hd, 1);
 	gnutls_certificate_free_credentials(xcred);
 
 	if (ret == -1)

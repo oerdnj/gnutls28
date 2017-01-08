@@ -18,6 +18,10 @@ will return zero and the  @code{dn} elements will be set to @code{NULL} .
 The caller needs to deallocate memory by calling @code{gnutls_free()}  on
  @code{dn} ->data.
 
+This function does not output a fully RFC4514 compliant string, if
+that is required see @code{gnutls_ocsp_resp_get_responder2()} .
+
 @strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (0) is returned, otherwise a
-negative error code is returned.
+negative error code is returned. When no data exist it will
+return success and set  @code{dn} elements to zero.
 @end deftypefun

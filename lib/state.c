@@ -126,7 +126,12 @@ gnutls_certificate_type_get(gnutls_session_t session)
  **/
 gnutls_kx_algorithm_t gnutls_kx_get(gnutls_session_t session)
 {
-	return session->security_parameters.kx_algorithm;
+	if (session->internals.handshake_in_progress) {
+		/* This allows early call during handshake */
+		return _gnutls_cipher_suite_get_kx_algo(session->security_parameters.cipher_suite);
+	} else {
+		return session->security_parameters.kx_algorithm;
+	}
 }
 
 /**
@@ -287,7 +292,7 @@ static void _gnutls_handshake_internal_state_init(gnutls_session_t session)
 
 	session->internals.resumable = RESUME_TRUE;
 
-	session->internals.handshake_large_loops = 0;
+	session->internals.handshake_suspicious_loops = 0;
 	session->internals.dtls.hsk_read_seq = 0;
 	session->internals.dtls.hsk_write_seq = 0;
 }
@@ -429,7 +434,8 @@ int gnutls_init(gnutls_session_t * session, unsigned int flags)
 	/* Enable useful extensions */
 	if ((flags & GNUTLS_CLIENT) && !(flags & GNUTLS_NO_EXTENSIONS)) {
 #ifdef ENABLE_SESSION_TICKETS
-		gnutls_session_ticket_enable_client(*session);
+		if (!(flags & GNUTLS_NO_TICKETS))
+			gnutls_session_ticket_enable_client(*session);
 #endif
 #ifdef ENABLE_OCSP
 		gnutls_ocsp_status_request_enable_client(*session, NULL, 0,
@@ -489,6 +495,10 @@ void gnutls_deinit(gnutls_session_t session)
 	_mbuffer_head_clear(&session->internals.record_send_buffer);
 
 	_gnutls_free_datum(&session->internals.resumption_data);
+
+	gnutls_free(session->internals.rexts);
+
+	gnutls_free(session->internals.rsup);
 
 	gnutls_credentials_clear(session);
 	_gnutls_selected_certs_deinit(session);

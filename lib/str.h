@@ -25,7 +25,10 @@
 
 #include <config.h>
 #include "gnutls_int.h"
+#include "errors.h"
 #include <datum.h>
+#include <c-ctype.h>
+#include "errors.h"
 
 #ifdef HAVE_DCGETTEXT
 # include "gettext.h"
@@ -35,6 +38,46 @@
 # define _(String) String
 # define N_(String) String
 #endif
+
+int gnutls_utf8_password_normalize(const uint8_t *password, unsigned password_len,
+				   gnutls_datum_t *out, unsigned flags);
+
+#define _gnutls_utf8_password_normalize(p, plen, out, ignore_errs) \
+	gnutls_utf8_password_normalize((unsigned char*)p, plen, out, \
+		ignore_errs?(GNUTLS_UTF8_IGNORE_ERRS):0)
+
+int _gnutls_idna_email_map(const char *input, unsigned ilen, gnutls_datum_t *output);
+
+#ifndef HAVE_LIBIDN
+inline static
+int __gnutls_idna_map(const char *input, unsigned ilen, gnutls_datum_t *out, unsigned flags)
+{
+	/* no call to gnutls_assert() due to header dependency issues */
+	out->data = gnutls_malloc(ilen+1);
+	if (out->data == NULL)
+		return GNUTLS_E_MEMORY_ERROR;
+	out->size = ilen;
+	memcpy(out->data, input, ilen);
+	out->data[ilen] = 0;
+	return 0;
+}
+# define gnutls_idna_map __gnutls_idna_map
+#else
+# define gnutls_idna_map _gnutls_idna_map
+int _gnutls_idna_map(const char * input, unsigned ilen, gnutls_datum_t *out, unsigned flags);
+#endif
+
+int _gnutls_idna_reverse_map(const char * input, unsigned ilen, gnutls_datum_t *out, unsigned flags);
+
+inline static unsigned _gnutls_str_is_print(const char *str, unsigned size)
+{
+	unsigned i;
+	for (i=0;i<size;i++) {
+		if (!c_isprint(str[i]))
+			return 0;
+	}
+	return 1;
+}
 
 void _gnutls_str_cpy(char *dest, size_t dest_tot_size, const char *src);
 void _gnutls_mem_cpy(char *dest, size_t dest_tot_size, const char *src,
@@ -129,93 +172,93 @@ int _gnutls_hostname_compare(const char *certname, size_t certnamesize,
 #define MAX_DN 1024
 
 #define BUFFER_APPEND(b, x, s) { \
-        ret = _gnutls_buffer_append_data(b, x, s); \
-        if (ret < 0) { \
-            gnutls_assert(); \
-            return ret; \
-        } \
+	ret = _gnutls_buffer_append_data(b, x, s); \
+	if (ret < 0) { \
+	    gnutls_assert(); \
+	    return ret; \
+	} \
     }
 
 /* append data prefixed with 4-bytes length field*/
 #define BUFFER_APPEND_PFX4(b, x, s) { \
-        ret = _gnutls_buffer_append_data_prefix(b, 32, x, s); \
-        if (ret < 0) { \
-            gnutls_assert(); \
-            return ret; \
-        } \
+	ret = _gnutls_buffer_append_data_prefix(b, 32, x, s); \
+	if (ret < 0) { \
+	    gnutls_assert(); \
+	    return ret; \
+	} \
     }
 
 #define BUFFER_APPEND_PFX3(b, x, s) { \
-        ret = _gnutls_buffer_append_data_prefix(b, 24, x, s); \
-        if (ret < 0) { \
-            gnutls_assert(); \
-            return ret; \
-        } \
+	ret = _gnutls_buffer_append_data_prefix(b, 24, x, s); \
+	if (ret < 0) { \
+	    gnutls_assert(); \
+	    return ret; \
+	} \
     }
 
 #define BUFFER_APPEND_PFX2(b, x, s) { \
-        ret = _gnutls_buffer_append_data_prefix(b, 16, x, s); \
-        if (ret < 0) { \
-            gnutls_assert(); \
-            return ret; \
-        } \
+	ret = _gnutls_buffer_append_data_prefix(b, 16, x, s); \
+	if (ret < 0) { \
+	    gnutls_assert(); \
+	    return ret; \
+	} \
     }
 
 #define BUFFER_APPEND_PFX1(b, x, s) { \
-        ret = _gnutls_buffer_append_data_prefix(b, 8, x, s); \
-        if (ret < 0) { \
-            gnutls_assert(); \
-            return ret; \
-        } \
+	ret = _gnutls_buffer_append_data_prefix(b, 8, x, s); \
+	if (ret < 0) { \
+	    gnutls_assert(); \
+	    return ret; \
+	} \
     }
 
 #define BUFFER_APPEND_NUM(b, s) { \
-        ret = _gnutls_buffer_append_prefix(b, 32, s); \
-        if (ret < 0) { \
-            gnutls_assert(); \
-            return ret; \
-        } \
+	ret = _gnutls_buffer_append_prefix(b, 32, s); \
+	if (ret < 0) { \
+	    gnutls_assert(); \
+	    return ret; \
+	} \
     }
 
 #define BUFFER_POP(b, x, s) { \
-        size_t is = s; \
-        _gnutls_buffer_pop_data(b, x, &is); \
-        if (is != s) { \
-            ret = GNUTLS_E_PARSING_ERROR; \
-            gnutls_assert(); \
-            goto error; \
-        } \
+	size_t is = s; \
+	_gnutls_buffer_pop_data(b, x, &is); \
+	if (is != s) { \
+	    ret = GNUTLS_E_PARSING_ERROR; \
+	    gnutls_assert(); \
+	    goto error; \
+	} \
     }
 
 #define BUFFER_POP_DATUM(b, o) { \
-        gnutls_datum_t d; \
-        ret = _gnutls_buffer_pop_datum_prefix(b, &d); \
-        if (ret >= 0) \
-            ret = _gnutls_set_datum (o, d.data, d.size); \
-        if (ret < 0) { \
-            gnutls_assert(); \
-            goto error; \
-        } \
+	gnutls_datum_t d; \
+	ret = _gnutls_buffer_pop_datum_prefix(b, &d); \
+	if (ret >= 0) \
+	    ret = _gnutls_set_datum (o, d.data, d.size); \
+	if (ret < 0) { \
+	    gnutls_assert(); \
+	    goto error; \
+	} \
     }
 
 #define BUFFER_POP_NUM(b, o) { \
-        size_t s; \
-        ret = _gnutls_buffer_pop_prefix(b, &s, 0); \
-        if (ret < 0) { \
-            gnutls_assert(); \
-            goto error; \
-        } \
-        o = s; \
+	size_t s; \
+	ret = _gnutls_buffer_pop_prefix(b, &s, 0); \
+	if (ret < 0) { \
+	    gnutls_assert(); \
+	    goto error; \
+	} \
+	o = s; \
     }
 
 #define BUFFER_POP_CAST_NUM(b, o) { \
-        size_t s; \
-        ret = _gnutls_buffer_pop_prefix(b, &s, 0); \
-        if (ret < 0) { \
-            gnutls_assert(); \
-            goto error; \
-        } \
-        o = (void *) (intptr_t)(s); \
+	size_t s; \
+	ret = _gnutls_buffer_pop_prefix(b, &s, 0); \
+	if (ret < 0) { \
+	    gnutls_assert(); \
+	    goto error; \
+	} \
+	o = (void *) (intptr_t)(s); \
     }
 
 #endif

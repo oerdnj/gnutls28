@@ -213,7 +213,7 @@ pwd_read_conf(const char *pconf_file, SRP_PWD_ENTRY * entry, int idx)
 		/* move to first ':' */
 		i = 0;
 		while ((i < line_size) && (line[i] != ':')
-                       && (line[i] != '\0')) {
+		       && (line[i] != '\0')) {
 			i++;
 		}
 
@@ -400,7 +400,7 @@ static int _randomize_pwd_entry(SRP_PWD_ENTRY * entry,
 		return GNUTLS_E_MEMORY_ERROR;
 	}
 
-	ret = _gnutls_rnd(GNUTLS_RND_RANDOM, entry->v.data, 20);
+	ret = gnutls_rnd(GNUTLS_RND_RANDOM, entry->v.data, 20);
 	if (ret < 0) {
 		gnutls_assert();
 		return ret;

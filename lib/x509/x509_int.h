@@ -105,6 +105,10 @@ typedef struct gnutls_pkcs7_attrs_st {
 
 typedef struct gnutls_pkcs7_int {
 	ASN1_TYPE pkcs7;
+
+	char encap_data_oid[MAX_OID_SIZE];
+
+	gnutls_datum_t der_signed_data;
 	ASN1_TYPE signed_data;
 	unsigned expanded;
 } gnutls_pkcs7_int;
@@ -112,8 +116,9 @@ typedef struct gnutls_pkcs7_int {
 struct pbkdf2_params {
 	uint8_t salt[32];
 	int salt_size;
-	unsigned int iter_count;
-	unsigned int key_size;
+	unsigned iter_count;
+	unsigned key_size;
+	gnutls_mac_algorithm_t mac;
 };
 
 typedef struct gnutls_x509_privkey_int {
@@ -160,11 +165,13 @@ int _gnutls_x509_pkix_sign(ASN1_TYPE src, const char *src_name,
 
 int _gnutls_x509_parse_dn(ASN1_TYPE asn1_struct,
 			  const char *asn1_rdn_name, char *buf,
-			  size_t * sizeof_buf);
+			  size_t * sizeof_buf,
+			  unsigned flags);
 
 int
 _gnutls_x509_get_dn(ASN1_TYPE asn1_struct,
-		    const char *asn1_rdn_name, gnutls_datum_t * dn);
+		    const char *asn1_rdn_name, gnutls_datum_t * dn,
+		    unsigned flags);
 
 int
 _gnutls_x509_parse_dn_oid(ASN1_TYPE asn1_struct,
@@ -368,11 +375,6 @@ typedef struct gnutls_pkcs12_bag_int {
 #define BAG_CRL "1.2.840.113549.1.12.10.1.4"
 #define BAG_SECRET "1.2.840.113549.1.12.10.1.5"
 
-/* PKCS #7
- */
-#define DATA_OID "1.2.840.113549.1.7.1"
-#define ENC_DATA_OID "1.2.840.113549.1.7.6"
-
 /* Bag attributes
  */
 #define FRIENDLY_NAME_OID "1.2.840.113549.1.9.20"
@@ -385,40 +387,6 @@ _gnutls_pkcs12_string_to_key(const mac_entry_st * me,
 			     const char *pw, unsigned int req_keylen,
 			     uint8_t * keybuf);
 
-int _gnutls_pkcs7_decrypt_data(const gnutls_datum_t * data,
-			       const char *password, gnutls_datum_t * dec);
-
-typedef enum schema_id {
-	PBES2_GENERIC=1,		/* when the algorithm is unknown, temporal use when reading only */
-	PBES2_DES,		/* the stuff in PKCS #5 */
-	PBES2_3DES,
-	PBES2_AES_128,
-	PBES2_AES_192,
-	PBES2_AES_256,
-	PKCS12_3DES_SHA1,	/* the stuff in PKCS #12 */
-	PKCS12_ARCFOUR_SHA1,
-	PKCS12_RC2_40_SHA1
-} schema_id;
-
-
-struct pbes2_schema_st {
-	unsigned int schema;
-	const char *name;
-	unsigned int flag;
-	unsigned int cipher;
-	unsigned pbes2;
-	const char *oid;
-	const char *desc;
-};
-
-int _gnutls_pkcs_flags_to_schema(unsigned int flags);
-int _gnutls_pkcs7_encrypt_data(schema_id schema,
-			       const gnutls_datum_t * data,
-			       const char *password, gnutls_datum_t * enc);
-
-int
-_gnutls_pkcs7_data_enc_info(const gnutls_datum_t * data, const struct pbes2_schema_st **p,
-	struct pbkdf2_params *kdf_params, char **oid);
 
 int _pkcs12_decode_safe_contents(const gnutls_datum_t * content,
 				 gnutls_pkcs12_bag_t bag);
@@ -439,6 +407,15 @@ int _gnutls_x509_crq_set_extension(gnutls_x509_crq_t crq,
 				   const char *ext_id,
 				   const gnutls_datum_t * ext_data,
 				   unsigned int critical);
+
+int
+gnutls_x509_crt_verify_data3(gnutls_x509_crt_t crt,
+			     gnutls_sign_algorithm_t algo,
+			     gnutls_typed_vdata_st *vdata,
+			     unsigned int vdata_size,
+			     const gnutls_datum_t *data,
+			     const gnutls_datum_t *signature,
+			     unsigned int flags);
 
 unsigned int
 _gnutls_verify_crt_status(const gnutls_x509_crt_t * certificate_list,

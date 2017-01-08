@@ -21,11 +21,11 @@ hashed using  @code{digest} ) and serial number  @code{serial_number} .
 The information needed corresponds to the CertID structure:
 
 <informalexample><programlisting>
-CertID          ::=     SEQUENCE @{
+CertID	  ::=     SEQUENCE @{
 hashAlgorithm       AlgorithmIdentifier,
 issuerNameHash      OCTET STRING, -- Hash of Issuer's DN
 issuerKeyHash       OCTET STRING, -- Hash of Issuers public key
-serialNumber        CertificateSerialNumber @}
+serialNumber	CertificateSerialNumber @}
 </programlisting></informalexample>
 
 @strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (0) is returned, otherwise a

@@ -21,10 +21,6 @@
 
 SUBDIRS = . cert-tests ocsp-tests key-tests scripts slow dtls windows
 
-if ENABLE_OPENPGP
-SUBDIRS += openpgp-certs
-endif
-
 if WANT_TEST_SUITE
 SUBDIRS += suite
 endif
@@ -35,9 +31,12 @@ EXTRA_DIST = suppressions.valgrind eagain-common.h cert-common.h test-chains.h \
 	certs/ca-ecc.pem certs/cert-ecc384.pem certs/cert-ecc.pem certs/ecc256.pem \
 	certs/ecc521.pem certs/rsa-2432.pem x509cert-dir/ca.pem psk.passwd \
 	system.prio pkcs11/softhsm.h pkcs11/pkcs11-pubkey-import.c gnutls-asan.supp \
-	rsa-md5-collision/MD5CollisionCA.cer rsa-md5-collision/TargetCollidingCertificate1.cer \
-	rsa-md5-collision/TargetCollidingCertificate2.cer rsa-md5-collision/README \
-	safe-renegotiation/README 
+	rsa-md5-collision/README safe-renegotiation/README starttls-smtp.txt starttls-ftp.txt \
+	rsa-md5-collision/colliding-chain-md5-2.pem rsa-md5-collision/colliding-chain-md5-1.pem \
+	certs-interesting/README.md certs-interesting/cert1.der certs-interesting/cert1.der.err \
+	certs-interesting/cert2.der certs-interesting/cert2.der.err certs-interesting/cert3.der \
+	certs-interesting/cert3.der.err certs-interesting/cert4.der certs-interesting/cert5.der \
+	certs-interesting/cert6.der certs-interesting/cert7.der certs-interesting/cert8.der
 
 AM_CFLAGS = $(WARN_CFLAGS) $(WERROR_CFLAGS)
 AM_CPPFLAGS = \
@@ -52,9 +51,11 @@ AM_CPPFLAGS = \
 	-I$(top_srcdir)/doc/examples
 
 AM_LDFLAGS = -no-install
-LDADD = ../lib/libgnutls.la \
-	libutils.la \
+COMMON_LDADD = ../lib/libgnutls.la \
 	$(LIBSOCKET) $(INET_NTOP_LIB) $(INET_PTON_LIB) $(LIBSECCOMP)
+
+LDADD = $(COMMON_LDADD) \
+	libutils.la
 
 dane_LDADD = $(LDADD) ../libdane/libgnutls-dane.la
 
@@ -66,7 +67,7 @@ noinst_LTLIBRARIES = libutils.la
 libutils_la_SOURCES = utils.h utils.c seccomp.c utils-adv.c
 libutils_la_LIBADD = ../lib/libgnutls.la
 
-ctests = mini-record-2 simple gc set_pkcs12_cred certder certuniqueid	\
+ctests = mini-record-2 simple gc set_pkcs12_cred cert certuniqueid	\
 	 mpi certificate_set_x509_crl dn parse_ca x509-dn x509-dn-decode record-sizes \
 	 hostname-check cve-2008-4989 pkcs12_s2k chainverify record-sizes-range \
 	 crq_key_id x509sign-verify cve-2009-1415 cve-2009-1416		\
@@ -88,13 +89,13 @@ ctests = mini-record-2 simple gc set_pkcs12_cred certder certuniqueid	\
 	 mini-chain-unsorted x509-verify-with-crl mini-dtls-mtu \
 	 mini-dtls-record-asym openpgp-callback key-import-export \
 	 mini-dtls-fork mini-dtls-pthread mini-key-material x509cert-invalid \
-	 strict-der mini-extension mini-supplementaldata mini-dtls0-9 \
-	 mini-record-retvals mini-server-name mini-etm x509-cert-callback \
-	 sign-md5-rep keygen mini-tls-nonblock no-signal pkcs7-gen \
+	 strict-der tls-ext-register tls-supplemental mini-dtls0-9 \
+	 mini-record-retvals mini-server-name tls-etm x509-cert-callback \
+	 sign-md5-rep keygen mini-tls-nonblock no-signal pkcs7-gen dtls-etm \
 	 x509sign-verify2 mini-alignment oids atfork prf psk-file \
 	 status-request status-request-ok status-request-missing \
 	 fallback-scsv pkcs8-key-decode urls dtls-rehandshake-cert \
-	 key-usage mini-session-verify-function auto-verify \
+	 key-usage-rsa key-usage-ecdhe-rsa mini-session-verify-function auto-verify \
 	 record-timeouts mini-dtls-hello-verify-48 mini-x509-default-prio \
 	 mini-x509-dual global-init-override tlsext-decoding \
 	 rehandshake-switch-cert rehandshake-switch-cert-allow rehandshake-switch-cert-client \
@@ -110,21 +111,37 @@ ctests = mini-record-2 simple gc set_pkcs12_cred certder certuniqueid	\
 	 dtls1.2-cert-key-exchange dtls1.0-cert-key-exchange x509-cert-callback-legacy \
 	 keylog-env ssl2-hello tlsfeature-ext dtls-rehandshake-cert-2 \
 	 tlsfeature-crt dtls-rehandshake-cert-3 resume-with-false-start \
-	 set_x509_key_file_ocsp client-fastopen rng-sigint srp \
+	 set_x509_key_file_ocsp client-fastopen rng-sigint srp rng-pthread \
 	 safe-renegotiation/srn0 safe-renegotiation/srn1 safe-renegotiation/srn2 \
 	 safe-renegotiation/srn3 safe-renegotiation/srn4 safe-renegotiation/srn5 \
-	 rsa-illegal-import
+	 rsa-illegal-import set_x509_key_file_ocsp_multi set_key set_x509_key_file_ocsp_multi2 \
+	 set_key_utf8 set_x509_key_utf8 insecure_key handshake-large-packet \
+	 client_dsa_key server_ecdsa_key tls-session-ext-register tls-session-supplemental \
+	 multi-alerts naked-alerts pkcs7-cat-parse set_known_dh_params_x509 \
+	 set_known_dh_params_anon set_known_dh_params_psk session-tickets-ok \
+	 session-tickets-missing set_x509_key_file_legacy status-request-ext \
+	 rng-no-onload dtls1-2-mtu-check crl_apis cert_verify_inv_utf8 \
+	 hostname-check-utf8 pkcs8-key-decode-encrypted priority-mix
 
 if HAVE_SECCOMP_TESTS
 ctests += dtls-with-seccomp tls-with-seccomp dtls-client-with-seccomp tls-client-with-seccomp
 endif
 
 if HAVE_CMOCKA
-LDADD += $(CMOCKA_LIBS)
-ctests += dtls-sliding-window
+CMOCKA_LDADD = $(COMMON_LDADD) $(CMOCKA_LIBS)
+ctests += dtls-sliding-window ip-utils name-constraints-ip conv-utf8 str-unicode str-idna
+
+dtls_sliding_window_LDADD = $(CMOCKA_LDADD)
+ip_utils_LDADD = $(CMOCKA_LDADD)
+name_constraints_ip_LDADD = $(CMOCKA_LDADD)
+conv_utf8_LDADD = $(CMOCKA_LDADD)
+str_unicode_LDADD = $(CMOCKA_LDADD)
+str_idna_LDADD = $(CMOCKA_LDADD)
+
 endif
 
 mini_dtls_pthread_LDADD = $(LDADD) -lpthread
+rng_pthread_LDADD = $(LDADD) -lpthread
 
 # These tests need gnulib for memmem()
 resume_psk_CFLAGS = -DUSE_PSK
@@ -173,10 +190,19 @@ pkcs11_privkey_fork_SOURCES = pkcs11/pkcs11-privkey-fork.c
 pkcs11_privkey_fork_DEPENDENCIES = libpkcs11mock1.la libutils.la
 pkcs11_privkey_fork_LDADD = $(LDADD) $(LIBDL)
 
+pkcs11_privkey_export_SOURCES = pkcs11/pkcs11-privkey-export.c
+pkcs11_privkey_export_DEPENDENCIES = libpkcs11mock1.la libutils.la
+pkcs11_privkey_export_LDADD = $(LDADD) $(LIBDL)
+
+pkcs11_privkey_always_auth_SOURCES = pkcs11/pkcs11-privkey-always-auth.c
+pkcs11_privkey_always_auth_DEPENDENCIES = libpkcs11mock1.la libutils.la
+pkcs11_privkey_always_auth_LDADD = $(LDADD) $(LIBDL)
+
 ctests += pkcs11-cert-import-url-exts pkcs11-get-exts pkcs11-get-raw-issuer-exts \
 	pkcs11-cert-import-url4-exts pkcs11/pkcs11-chainverify pkcs11/pkcs11-get-issuer pkcs11/pkcs11-is-known \
 	pkcs11/pkcs11-combo pkcs11/pkcs11-privkey pkcs11/pkcs11-pubkey-import-rsa pkcs11/pkcs11-pubkey-import-ecdsa \
-	pkcs11-import-url-privkey pkcs11-privkey-fork
+	pkcs11-import-url-privkey pkcs11-privkey-fork pkcs11/pkcs11-ec-privkey-test \
+	pkcs11-privkey-always-auth pkcs11-privkey-export
 
 
 endif
@@ -190,6 +216,9 @@ if ENABLE_DANE
 ctests += dane
 endif
 
+rsa_illegal_import_CPPFLAGS = $(AM_CPPFLAGS) $(NETTLE_CFLAGS)
+
+mini_alignment_CPPFLAGS = $(AM_CPPFLAGS) $(NETTLE_CFLAGS)
 mini_alignment_LDADD = $(LDADD) $(NETTLE_LIBS)
 
 if ENABLE_OPENSSL
@@ -214,6 +243,7 @@ endif
 endif
 
 gc_CPPFLAGS = $(CPPFLAGS) \
+	$(NETTLE_CFLAGS)			\
 	-I$(top_srcdir)/lib/includes		\
 	-I$(top_builddir)/lib/includes		\
 	-I$(top_srcdir)/lib/minitasn1		\
@@ -222,6 +252,7 @@ gc_CPPFLAGS = $(CPPFLAGS) \
 	-I$(top_builddir)/gl
 
 mpi_CPPFLAGS = $(CPPFLAGS) \
+	$(NETTLE_CFLAGS)			\
 	-I$(top_srcdir)/lib/includes		\
 	-I$(top_builddir)/lib/includes		\
 	-I$(top_srcdir)/lib/minitasn1		\
@@ -230,6 +261,7 @@ mpi_CPPFLAGS = $(CPPFLAGS) \
 	-I$(top_builddir)/gl
 
 atfork_CPPFLAGS = $(CPPFLAGS) \
+	$(NETTLE_CFLAGS)			\
 	-I$(top_srcdir)/lib/includes		\
 	-I$(top_builddir)/lib/includes		\
 	-I$(top_srcdir)/lib/minitasn1		\
@@ -238,6 +270,7 @@ atfork_CPPFLAGS = $(CPPFLAGS) \
 	-I$(top_builddir)/gl
 
 pkcs12_s2k_CPPFLAGS = $(CPPFLAGS) \
+	$(NETTLE_CFLAGS)			\
 	-I$(top_srcdir)/lib/includes		\
 	-I$(top_builddir)/lib/includes		\
 	-I$(top_srcdir)/lib/minitasn1		\
@@ -246,6 +279,7 @@ pkcs12_s2k_CPPFLAGS = $(CPPFLAGS) \
 	-I$(top_builddir)/gl
 
 name_constraints_merge_CPPFLAGS = $(CPPFLAGS) \
+	$(NETTLE_CFLAGS)			\
 	-I$(top_srcdir)/lib/includes		\
 	-I$(top_builddir)/lib/includes		\
 	-I$(top_srcdir)/lib/minitasn1		\
@@ -257,14 +291,17 @@ check_PROGRAMS = $(ctests)
 dist_check_SCRIPTS = rfc2253-escape-test rsa-md5-collision/rsa-md5-collision.sh
 
 if !WINDOWS
-dist_check_SCRIPTS += danetool.sh fastopen.sh
+dist_check_SCRIPTS += fastopen.sh starttls.sh
+if ENABLE_DANE
+dist_check_SCRIPTS += danetool.sh
+endif
 endif
 
 TESTS = $(ctests) $(dist_check_SCRIPTS)
 
 TESTS_ENVIRONMENT =						\
 	LC_ALL="C"						\
-	ASAN_OPTIONS=suppressions=gnutls-asan.supp		\
+	LSAN_OPTIONS=suppressions=gnutls-asan.supp		\
 	CAFILE=$(srcdir)/cert-tests/data/ca-certs.pem		\
 	P11MOCKLIB1=$(abs_builddir)/.libs/libpkcs11mock1.so	\
 	PKCS12_MANY_CERTS_FILE=$(srcdir)/cert-tests/data/pkcs12_5certs.p12	\

@@ -20,13 +20,6 @@ abstract
 <!-- ##### SECTION Image ##### -->
 
 
-<!-- ##### MACRO GNUTLS_PCERT_NO_CERT ##### -->
-<para>
-
-</para>
-
-
-
 <!-- ##### MACRO GNUTLS_PUBKEY_VERIFY_FLAG_TLS_RSA ##### -->
 <para>
 
@@ -34,106 +27,30 @@ abstract
 
 
 
-<!-- ##### FUNCTION gnutls_certificate_set_key ##### -->
+<!-- ##### ENUM gnutls_pubkey_flags_t ##### -->
 <para>
 
 </para>
 
-@res: 
-@names: 
-@names_size: 
-@pcert_list: 
-@pcert_list_size: 
-@key: 
-@Returns: 
+@GNUTLS_PUBKEY_DISABLE_CALLBACKS: 
+@GNUTLS_PUBKEY_GET_OPENPGP_FINGERPRINT: 
 
-
-<!-- ##### FUNCTION gnutls_certificate_set_retrieve_function2 ##### -->
+<!-- ##### MACRO GNUTLS_PUBKEY_VERIFY_FLAG_TLS1_RSA ##### -->
 <para>
 
 </para>
 
-@cred: 
-@func: 
 
 
-<!-- ##### FUNCTION gnutls_pcert_deinit ##### -->
-<para>
-
-</para>
-
-@pcert: 
-
-
-<!-- ##### FUNCTION gnutls_pcert_import_openpgp ##### -->
-<para>
-
-</para>
-
-@pcert: 
-@crt: 
-@flags: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_pcert_import_openpgp_raw ##### -->
-<para>
-
-</para>
-
-@pcert: 
-@cert: 
-@format: 
-@keyid: 
-@flags: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_pcert_import_x509 ##### -->
-<para>
-
-</para>
-
-@pcert: 
-@crt: 
-@flags: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_pcert_import_x509_raw ##### -->
-<para>
-
-</para>
-
-@pcert: 
-@cert: 
-@format: 
-@flags: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_pcert_list_import_x509_raw ##### -->
-<para>
-
-</para>
-
-@pcerts: 
-@pcert_max: 
-@data: 
-@format: 
-@flags: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_privkey_decrypt_data ##### -->
+<!-- ##### USER_FUNCTION gnutls_privkey_sign_func ##### -->
 <para>
 
 </para>
 
 @key: 
-@flags: 
-@ciphertext: 
-@plaintext: 
+@userdata: 
+@raw_data: 
+@signature: 
 @Returns: 
 
 
@@ -149,6 +66,492 @@ abstract
 @Returns: 
 
 
+<!-- ##### USER_FUNCTION gnutls_privkey_deinit_func ##### -->
+<para>
+
+</para>
+
+@key: 
+@userdata: 
+
+
+<!-- ##### MACRO GNUTLS_PRIVKEY_INFO_PK_ALGO ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNUTLS_PRIVKEY_INFO_SIGN_ALGO ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### USER_FUNCTION gnutls_privkey_info_func ##### -->
+<para>
+
+</para>
+
+@key: 
+@flags: 
+@userdata: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_pubkey_init ##### -->
+<para>
+
+</para>
+
+@key: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_pubkey_deinit ##### -->
+<para>
+
+</para>
+
+@key: 
+
+
+<!-- ##### FUNCTION gnutls_pubkey_verify_params ##### -->
+<para>
+
+</para>
+
+@key: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_pubkey_set_pin_function ##### -->
+<para>
+
+</para>
+
+@key: 
+@fn: 
+@userdata: 
+
+
+<!-- ##### FUNCTION gnutls_pubkey_get_pk_algorithm ##### -->
+<para>
+
+</para>
+
+@key: 
+@bits: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_pubkey_import_x509 ##### -->
+<para>
+
+</para>
+
+@key: 
+@crt: 
+@flags: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_pubkey_import_x509_crq ##### -->
+<para>
+
+</para>
+
+@key: 
+@crq: 
+@flags: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_pubkey_import_pkcs11 ##### -->
+<para>
+
+</para>
+
+@key: 
+@obj: 
+@flags: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_pubkey_import_openpgp ##### -->
+<para>
+
+</para>
+
+@key: 
+@crt: 
+@flags: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_pubkey_import_openpgp_raw ##### -->
+<para>
+
+</para>
+
+@pkey: 
+@data: 
+@format: 
+@keyid: 
+@flags: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_pubkey_import_x509_raw ##### -->
+<para>
+
+</para>
+
+@pkey: 
+@data: 
+@format: 
+@flags: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_pubkey_import_privkey ##### -->
+<para>
+
+</para>
+
+@key: 
+@pkey: 
+@usage: 
+@flags: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_pubkey_import_tpm_url ##### -->
+<para>
+
+</para>
+
+@pkey: 
+@url: 
+@srk_password: 
+@flags: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_pubkey_import_url ##### -->
+<para>
+
+</para>
+
+@key: 
+@url: 
+@flags: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_pubkey_import_tpm_raw ##### -->
+<para>
+
+</para>
+
+@pkey: 
+@fdata: 
+@format: 
+@srk_password: 
+@flags: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_pubkey_get_preferred_hash_algorithm ##### -->
+<para>
+
+</para>
+
+@key: 
+@hash: 
+@mand: 
+@Returns: 
+
+
+<!-- ##### MACRO gnutls_pubkey_get_pk_rsa_raw ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION gnutls_pubkey_export_rsa_raw ##### -->
+<para>
+
+</para>
+
+@key: 
+@m: 
+@e: 
+@Returns: 
+
+
+<!-- ##### MACRO gnutls_pubkey_get_pk_dsa_raw ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION gnutls_pubkey_export_dsa_raw ##### -->
+<para>
+
+</para>
+
+@key: 
+@p: 
+@q: 
+@g: 
+@y: 
+@Returns: 
+
+
+<!-- ##### MACRO gnutls_pubkey_get_pk_ecc_raw ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION gnutls_pubkey_export_ecc_raw ##### -->
+<para>
+
+</para>
+
+@key: 
+@curve: 
+@x: 
+@y: 
+@Returns: 
+
+
+<!-- ##### MACRO gnutls_pubkey_get_pk_ecc_x962 ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION gnutls_pubkey_export_ecc_x962 ##### -->
+<para>
+
+</para>
+
+@key: 
+@parameters: 
+@ecpoint: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_pubkey_export ##### -->
+<para>
+
+</para>
+
+@key: 
+@format: 
+@output_data: 
+@output_data_size: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_pubkey_export2 ##### -->
+<para>
+
+</para>
+
+@key: 
+@format: 
+@out: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_pubkey_get_key_id ##### -->
+<para>
+
+</para>
+
+@key: 
+@flags: 
+@output_data: 
+@output_data_size: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_pubkey_get_openpgp_key_id ##### -->
+<para>
+
+</para>
+
+@key: 
+@flags: 
+@output_data: 
+@output_data_size: 
+@subkey: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_pubkey_get_key_usage ##### -->
+<para>
+
+</para>
+
+@key: 
+@usage: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_pubkey_set_key_usage ##### -->
+<para>
+
+</para>
+
+@key: 
+@usage: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_pubkey_import ##### -->
+<para>
+
+</para>
+
+@key: 
+@data: 
+@format: 
+@Returns: 
+
+
+<!-- ##### MACRO gnutls_pubkey_import_pkcs11_url ##### -->
+<para>
+
+</para>
+
+@key: 
+@url: 
+@flags: 
+
+
+<!-- ##### FUNCTION gnutls_pubkey_import_dsa_raw ##### -->
+<para>
+
+</para>
+
+@key: 
+@p: 
+@q: 
+@g: 
+@y: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_pubkey_import_rsa_raw ##### -->
+<para>
+
+</para>
+
+@key: 
+@m: 
+@e: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_pubkey_import_ecc_x962 ##### -->
+<para>
+
+</para>
+
+@key: 
+@parameters: 
+@ecpoint: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_pubkey_import_ecc_raw ##### -->
+<para>
+
+</para>
+
+@key: 
+@curve: 
+@x: 
+@y: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_pubkey_encrypt_data ##### -->
+<para>
+
+</para>
+
+@key: 
+@flags: 
+@plaintext: 
+@ciphertext: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crt_set_pubkey ##### -->
+<para>
+
+</para>
+
+@crt: 
+@key: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crq_set_pubkey ##### -->
+<para>
+
+</para>
+
+@crq: 
+@key: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_pubkey_verify_hash2 ##### -->
+<para>
+
+</para>
+
+@key: 
+@algo: 
+@flags: 
+@hash: 
+@signature: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_pubkey_verify_data2 ##### -->
+<para>
+
+</para>
+
+@pubkey: 
+@algo: 
+@flags: 
+@data: 
+@signature: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_privkey_init ##### -->
+<para>
+
+</para>
+
+@key: 
+@Returns: 
+
+
 <!-- ##### FUNCTION gnutls_privkey_deinit ##### -->
 <para>
 
@@ -157,12 +560,114 @@ abstract
 @key: 
 
 
-<!-- ##### USER_FUNCTION gnutls_privkey_deinit_func ##### -->
+<!-- ##### MACRO GNUTLS_SUBGROUP_TO_BITS ##### -->
+<para>
+
+</para>
+
+@group: 
+@subgroup: 
+
+
+<!-- ##### MACRO GNUTLS_BITS_TO_SUBGROUP ##### -->
+<para>
+
+</para>
+
+@bits: 
+
+
+<!-- ##### MACRO GNUTLS_BITS_TO_GROUP ##### -->
+<para>
+
+</para>
+
+@bits: 
+
+
+<!-- ##### MACRO GNUTLS_BITS_HAVE_SUBGROUP ##### -->
+<para>
+
+</para>
+
+@bits: 
+
+
+<!-- ##### FUNCTION gnutls_privkey_generate ##### -->
 <para>
 
 </para>
 
 @key: 
+@algo: 
+@bits: 
+@flags: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_privkey_generate2 ##### -->
+<para>
+
+</para>
+
+@pkey: 
+@algo: 
+@bits: 
+@flags: 
+@data: 
+@data_size: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_privkey_verify_seed ##### -->
+<para>
+
+</para>
+
+@key: 
+@Param2: 
+@seed: 
+@seed_size: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_privkey_get_seed ##### -->
+<para>
+
+</para>
+
+@key: 
+@Param2: 
+@seed: 
+@seed_size: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_privkey_verify_params ##### -->
+<para>
+
+</para>
+
+@key: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_privkey_set_flags ##### -->
+<para>
+
+</para>
+
+@key: 
+@flags: 
+
+
+<!-- ##### FUNCTION gnutls_privkey_set_pin_function ##### -->
+<para>
+
+</para>
+
+@key: 
+@fn: 
 @userdata: 
 
 
@@ -176,31 +681,45 @@ abstract
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_privkey_import_ext ##### -->
+<!-- ##### FUNCTION gnutls_privkey_status ##### -->
+<para>
+
+</para>
+
+@key: 
+@Returns: 
+
+
+<!-- ##### ENUM gnutls_privkey_flags_t ##### -->
+<para>
+
+</para>
+
+@GNUTLS_PRIVKEY_IMPORT_AUTO_RELEASE: 
+@GNUTLS_PRIVKEY_IMPORT_COPY: 
+@GNUTLS_PRIVKEY_DISABLE_CALLBACKS: 
+@GNUTLS_PRIVKEY_SIGN_FLAG_TLS1_RSA: 
+@GNUTLS_PRIVKEY_FLAG_PROVABLE: 
+@GNUTLS_PRIVKEY_FLAG_EXPORT_COMPAT: 
+
+<!-- ##### FUNCTION gnutls_privkey_import_pkcs11 ##### -->
 <para>
 
 </para>
 
 @pkey: 
-@pk: 
-@userdata: 
-@sign_func: 
-@decrypt_func: 
+@key: 
 @flags: 
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_privkey_import_ext2 ##### -->
+<!-- ##### FUNCTION gnutls_privkey_import_x509 ##### -->
 <para>
 
 </para>
 
 @pkey: 
-@pk: 
-@userdata: 
-@sign_func: 
-@decrypt_func: 
-@deinit_func: 
+@key: 
 @flags: 
 @Returns: 
 
@@ -213,6 +732,36 @@ abstract
 @pkey: 
 @key: 
 @flags: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_privkey_export_x509 ##### -->
+<para>
+
+</para>
+
+@pkey: 
+@key: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_privkey_export_openpgp ##### -->
+<para>
+
+</para>
+
+@pkey: 
+@key: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_privkey_export_pkcs11 ##### -->
+<para>
+
+</para>
+
+@pkey: 
+@key: 
 @Returns: 
 
 
@@ -229,24 +778,16 @@ abstract
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_privkey_import_pkcs11 ##### -->
+<!-- ##### FUNCTION gnutls_privkey_import_x509_raw ##### -->
 <para>
 
 </para>
 
 @pkey: 
-@key: 
+@data: 
+@format: 
+@password: 
 @flags: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_privkey_import_pkcs11_url ##### -->
-<para>
-
-</para>
-
-@key: 
-@url: 
 @Returns: 
 
 
@@ -288,47 +829,102 @@ abstract
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_privkey_import_x509 ##### -->
+<!-- ##### FUNCTION gnutls_privkey_import_pkcs11_url ##### -->
+<para>
+
+</para>
+
+@key: 
+@url: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_privkey_import_ext ##### -->
 <para>
 
 </para>
 
 @pkey: 
-@key: 
-@flags: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_privkey_import_x509_raw ##### -->
-<para>
-
-</para>
-
-@pkey: 
-@data: 
-@format: 
-@password: 
-@flags: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_privkey_init ##### -->
-<para>
-
-</para>
-
-@key: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_privkey_set_pin_function ##### -->
-<para>
-
-</para>
-
-@key: 
-@fn: 
+@pk: 
 @userdata: 
+@sign_func: 
+@decrypt_func: 
+@flags: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_privkey_import_ext2 ##### -->
+<para>
+
+</para>
+
+@pkey: 
+@pk: 
+@userdata: 
+@sign_func: 
+@decrypt_func: 
+@deinit_func: 
+@flags: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_privkey_import_ext3 ##### -->
+<para>
+
+</para>
+
+@pkey: 
+@userdata: 
+@sign_func: 
+@decrypt_func: 
+@deinit_func: 
+@info_func: 
+@flags: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_privkey_import_dsa_raw ##### -->
+<para>
+
+</para>
+
+@key: 
+@p: 
+@q: 
+@g: 
+@y: 
+@x: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_privkey_import_rsa_raw ##### -->
+<para>
+
+</para>
+
+@key: 
+@m: 
+@e: 
+@d: 
+@p: 
+@q: 
+@u: 
+@e1: 
+@e2: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_privkey_import_ecc_raw ##### -->
+<para>
+
+</para>
+
+@key: 
+@curve: 
+@x: 
+@y: 
+@k: 
+@Returns: 
 
 
 <!-- ##### FUNCTION gnutls_privkey_sign_data ##### -->
@@ -344,16 +940,15 @@ abstract
 @Returns: 
 
 
-<!-- ##### USER_FUNCTION gnutls_privkey_sign_func ##### -->
+<!-- ##### MACRO gnutls_privkey_sign_raw_data ##### -->
 <para>
 
 </para>
 
 @key: 
-@userdata: 
-@raw_data: 
-@signature: 
-@Returns: 
+@flags: 
+@data: 
+@sig: 
 
 
 <!-- ##### FUNCTION gnutls_privkey_sign_hash ##### -->
@@ -369,163 +964,36 @@ abstract
 @Returns: 
 
 
-<!-- ##### STRUCT gnutls_privkey_st ##### -->
-<para>
-
-</para>
-
-@type: 
-@pk_algorithm: 
-
-<!-- ##### TYPEDEF gnutls_privkey_t ##### -->
-<para>
-
-</para>
-
-
-<!-- ##### FUNCTION gnutls_pubkey_deinit ##### -->
-<para>
-
-</para>
-
-@key: 
-
-
-<!-- ##### FUNCTION gnutls_pubkey_encrypt_data ##### -->
+<!-- ##### FUNCTION gnutls_privkey_decrypt_data ##### -->
 <para>
 
 </para>
 
 @key: 
 @flags: 
-@plaintext: 
 @ciphertext: 
+@plaintext: 
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_pubkey_export ##### -->
+<!-- ##### FUNCTION gnutls_privkey_export_rsa_raw ##### -->
 <para>
 
 </para>
 
 @key: 
-@format: 
-@output_data: 
-@output_data_size: 
+@m: 
+@e: 
+@d: 
+@p: 
+@q: 
+@u: 
+@e1: 
+@e2: 
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_pubkey_export2 ##### -->
-<para>
-
-</para>
-
-@key: 
-@format: 
-@out: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_pubkey_get_key_id ##### -->
-<para>
-
-</para>
-
-@key: 
-@flags: 
-@output_data: 
-@output_data_size: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_pubkey_get_key_usage ##### -->
-<para>
-
-</para>
-
-@key: 
-@usage: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_pubkey_get_openpgp_key_id ##### -->
-<para>
-
-</para>
-
-@key: 
-@flags: 
-@output_data: 
-@output_data_size: 
-@subkey: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_pubkey_get_pk_algorithm ##### -->
-<para>
-
-</para>
-
-@key: 
-@bits: 
-@Returns: 
-
-
-<!-- ##### MACRO gnutls_pubkey_get_pk_dsa_raw ##### -->
-<para>
-
-</para>
-
-@Returns: 
-
-
-<!-- ##### MACRO gnutls_pubkey_get_pk_ecc_raw ##### -->
-<para>
-
-</para>
-
-@Returns: 
-
-
-<!-- ##### MACRO gnutls_pubkey_get_pk_ecc_x962 ##### -->
-<para>
-
-</para>
-
-@Returns: 
-
-
-<!-- ##### MACRO gnutls_pubkey_get_pk_rsa_raw ##### -->
-<para>
-
-</para>
-
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_pubkey_get_preferred_hash_algorithm ##### -->
-<para>
-
-</para>
-
-@key: 
-@hash: 
-@mand: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_pubkey_import ##### -->
-<para>
-
-</para>
-
-@key: 
-@data: 
-@format: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_pubkey_import_dsa_raw ##### -->
+<!-- ##### FUNCTION gnutls_privkey_export_dsa_raw ##### -->
 <para>
 
 </para>
@@ -535,10 +1003,11 @@ abstract
 @q: 
 @g: 
 @y: 
+@x: 
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_pubkey_import_ecc_raw ##### -->
+<!-- ##### FUNCTION gnutls_privkey_export_ecc_raw ##### -->
 <para>
 
 </para>
@@ -547,232 +1016,20 @@ abstract
 @curve: 
 @x: 
 @y: 
+@k: 
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_pubkey_import_ecc_x962 ##### -->
+<!-- ##### FUNCTION gnutls_x509_crt_privkey_sign ##### -->
 <para>
 
 </para>
 
-@key: 
-@parameters: 
-@ecpoint: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_pubkey_import_openpgp ##### -->
-<para>
-
-</para>
-
-@key: 
 @crt: 
+@issuer: 
+@issuer_key: 
+@dig: 
 @flags: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_pubkey_import_openpgp_raw ##### -->
-<para>
-
-</para>
-
-@pkey: 
-@data: 
-@format: 
-@keyid: 
-@flags: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_pubkey_import_pkcs11 ##### -->
-<para>
-
-</para>
-
-@key: 
-@obj: 
-@flags: 
-@Returns: 
-
-
-<!-- ##### MACRO gnutls_pubkey_import_pkcs11_url ##### -->
-<para>
-
-</para>
-
-@key: 
-@url: 
-@flags: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_pubkey_import_privkey ##### -->
-<para>
-
-</para>
-
-@key: 
-@pkey: 
-@usage: 
-@flags: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_pubkey_import_rsa_raw ##### -->
-<para>
-
-</para>
-
-@key: 
-@m: 
-@e: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_pubkey_import_tpm_raw ##### -->
-<para>
-
-</para>
-
-@pkey: 
-@fdata: 
-@format: 
-@srk_password: 
-@flags: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_pubkey_import_tpm_url ##### -->
-<para>
-
-</para>
-
-@pkey: 
-@url: 
-@srk_password: 
-@flags: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_pubkey_import_url ##### -->
-<para>
-
-</para>
-
-@key: 
-@url: 
-@flags: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_pubkey_import_x509 ##### -->
-<para>
-
-</para>
-
-@key: 
-@crt: 
-@flags: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_pubkey_import_x509_crq ##### -->
-<para>
-
-</para>
-
-@key: 
-@crq: 
-@flags: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_pubkey_import_x509_raw ##### -->
-<para>
-
-</para>
-
-@pkey: 
-@data: 
-@format: 
-@flags: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_pubkey_init ##### -->
-<para>
-
-</para>
-
-@key: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_pubkey_set_key_usage ##### -->
-<para>
-
-</para>
-
-@key: 
-@usage: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_pubkey_set_pin_function ##### -->
-<para>
-
-</para>
-
-@key: 
-@fn: 
-@userdata: 
-
-
-<!-- ##### STRUCT gnutls_pubkey_st ##### -->
-<para>
-
-</para>
-
-@pk_algorithm: 
-@bits: 
-@params: 
-@openpgp_key_id: 
-@openpgp_key_id_set: 
-@openpgp_key_fpr: 
-@openpgp_key_fpr_set: 
-@key_usage: 
-@pin: 
-
-<!-- ##### TYPEDEF gnutls_pubkey_t ##### -->
-<para>
-
-</para>
-
-
-<!-- ##### FUNCTION gnutls_pubkey_verify_data2 ##### -->
-<para>
-
-</para>
-
-@pubkey: 
-@algo: 
-@flags: 
-@data: 
-@signature: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_pubkey_verify_hash2 ##### -->
-<para>
-
-</para>
-
-@key: 
-@algo: 
-@flags: 
-@hash: 
-@signature: 
 @Returns: 
 
 
@@ -801,36 +1058,153 @@ abstract
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_x509_crq_set_pubkey ##### -->
+<!-- ##### STRUCT gnutls_pcert_st ##### -->
 <para>
 
 </para>
 
-@crq: 
-@key: 
-@Returns: 
+@pubkey: 
+@cert: 
+@type: 
 
-
-<!-- ##### FUNCTION gnutls_x509_crt_privkey_sign ##### -->
+<!-- ##### MACRO GNUTLS_PCERT_NO_CERT ##### -->
 <para>
 
 </para>
 
+
+
+<!-- ##### FUNCTION gnutls_pcert_import_x509 ##### -->
+<para>
+
+</para>
+
+@pcert: 
 @crt: 
-@issuer: 
-@issuer_key: 
-@dig: 
 @flags: 
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_x509_crt_set_pubkey ##### -->
+<!-- ##### FUNCTION gnutls_pcert_import_x509_list ##### -->
 <para>
 
 </para>
 
+@pcert: 
 @crt: 
+@ncrt: 
+@flags: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_pcert_export_x509 ##### -->
+<para>
+
+</para>
+
+@pcert: 
+@crt: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_pcert_list_import_x509_raw ##### -->
+<para>
+
+</para>
+
+@pcerts: 
+@pcert_max: 
+@data: 
+@format: 
+@flags: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_pcert_import_x509_raw ##### -->
+<para>
+
+</para>
+
+@pcert: 
+@cert: 
+@format: 
+@flags: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_pcert_import_openpgp_raw ##### -->
+<para>
+
+</para>
+
+@pcert: 
+@cert: 
+@format: 
+@keyid: 
+@flags: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_pcert_import_openpgp ##### -->
+<para>
+
+</para>
+
+@pcert: 
+@crt: 
+@flags: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_pcert_export_openpgp ##### -->
+<para>
+
+</para>
+
+@pcert: 
+@crt: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_pcert_deinit ##### -->
+<para>
+
+</para>
+
+@pcert: 
+
+
+<!-- ##### FUNCTION gnutls_certificate_set_retrieve_function2 ##### -->
+<para>
+
+</para>
+
+@cred: 
+@func: 
+
+
+<!-- ##### FUNCTION gnutls_certificate_set_key ##### -->
+<para>
+
+</para>
+
+@res: 
+@names: 
+@names_size: 
+@pcert_list: 
+@pcert_list_size: 
 @key: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_pubkey_print ##### -->
+<para>
+
+</para>
+
+@pubkey: 
+@format: 
+@out: 
 @Returns: 
 
 

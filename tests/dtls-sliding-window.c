@@ -36,13 +36,13 @@
 
 struct record_parameters_st {
 	uint64_t dtls_sw_bits;
-	uint64_t dtls_sw_start;
+	uint64_t dtls_sw_next;
 	unsigned dtls_sw_have_recv;
 	unsigned epoch;
 };
 
 typedef struct {
-        unsigned char i[8];
+	unsigned char i[8];
 } uint64;
 #define gnutls_assert_val(x) x
 
@@ -75,8 +75,8 @@ static void uint64_set(uint64* t, uint64_t v)
 #define RESET_WINDOW \
 	memset(&state, 0, sizeof(state))
 
-#define SET_WINDOW_START(x) \
-	state.dtls_sw_start = ((x)&DTLS_SEQ_NUM_MASK)
+#define SET_WINDOW_NEXT(x) \
+	state.dtls_sw_next = (((x)&DTLS_SEQ_NUM_MASK))
 
 #define SET_WINDOW_LAST_RECV(x) \
 	uint64_set(&t, BSWAP64(x)); \
@@ -88,7 +88,7 @@ static void check_dtls_window_uninit_0(void **glob_state)
 	uint64 t;
 
 	RESET_WINDOW;
-	SET_WINDOW_START(0);
+	SET_WINDOW_NEXT(0);
 
 	uint64_set(&t, 0);
 
@@ -125,7 +125,7 @@ static void check_dtls_window_12(void **glob_state)
 	uint64 t;
 
 	RESET_WINDOW;
-	SET_WINDOW_START(0);
+	SET_WINDOW_NEXT(0);
 	SET_WINDOW_LAST_RECV(1);
 
 	uint64_set(&t, BSWAP64(2));
@@ -139,12 +139,44 @@ static void check_dtls_window_19(void **glob_state)
 	uint64 t;
 
 	RESET_WINDOW;
-	SET_WINDOW_START(0);
+	SET_WINDOW_NEXT(0);
 	SET_WINDOW_LAST_RECV(1);
 
 	uint64_set(&t, BSWAP64(9));
 
 	assert_int_equal(_dtls_record_check(&state, &t), 0);
+}
+
+static void check_dtls_window_skip1(void **glob_state)
+{
+	struct record_parameters_st state;
+	uint64 t;
+	unsigned i;
+
+	RESET_WINDOW;
+	SET_WINDOW_NEXT(0);
+	SET_WINDOW_LAST_RECV(1);
+
+	for (i=2;i<256;i+=2) {
+		uint64_set(&t, BSWAP64(i));
+		assert_int_equal(_dtls_record_check(&state, &t), 0);
+	}
+}
+
+static void check_dtls_window_skip3(void **glob_state)
+{
+	struct record_parameters_st state;
+	uint64 t;
+	unsigned i;
+
+	RESET_WINDOW;
+	SET_WINDOW_NEXT(0);
+	SET_WINDOW_LAST_RECV(1);
+
+	for (i=5;i<256;i+=2) {
+		uint64_set(&t, BSWAP64(i));
+		assert_int_equal(_dtls_record_check(&state, &t), 0);
+	}
 }
 
 static void check_dtls_window_21(void **glob_state)
@@ -153,7 +185,7 @@ static void check_dtls_window_21(void **glob_state)
 	uint64 t;
 
 	RESET_WINDOW;
-	SET_WINDOW_START(0);
+	SET_WINDOW_NEXT(0);
 	SET_WINDOW_LAST_RECV(2);
 
 	uint64_set(&t, BSWAP64(1));
@@ -167,7 +199,7 @@ static void check_dtls_window_91(void **glob_state)
 	uint64 t;
 
 	RESET_WINDOW;
-	SET_WINDOW_START(0);
+	SET_WINDOW_NEXT(0);
 	SET_WINDOW_LAST_RECV(9);
 
 	uint64_set(&t, BSWAP64(1));
@@ -181,7 +213,7 @@ static void check_dtls_window_large_21(void **glob_state)
 	uint64 t;
 
 	RESET_WINDOW;
-	SET_WINDOW_START(LARGE_INT);
+	SET_WINDOW_NEXT(LARGE_INT);
 	SET_WINDOW_LAST_RECV(LARGE_INT+2);
 
 	uint64_set(&t, BSWAP64(LARGE_INT+1));
@@ -195,7 +227,7 @@ static void check_dtls_window_large_12(void **glob_state)
 	uint64 t;
 
 	RESET_WINDOW;
-	SET_WINDOW_START(LARGE_INT);
+	SET_WINDOW_NEXT(LARGE_INT);
 	SET_WINDOW_LAST_RECV(LARGE_INT+1);
 
 	uint64_set(&t, BSWAP64(LARGE_INT+2));
@@ -209,7 +241,7 @@ static void check_dtls_window_large_91(void **glob_state)
 	uint64 t;
 
 	RESET_WINDOW;
-	SET_WINDOW_START(LARGE_INT);
+	SET_WINDOW_NEXT(LARGE_INT);
 	SET_WINDOW_LAST_RECV(LARGE_INT+9);
 
 	uint64_set(&t, BSWAP64(LARGE_INT+1));
@@ -223,7 +255,7 @@ static void check_dtls_window_large_19(void **glob_state)
 	uint64 t;
 
 	RESET_WINDOW;
-	SET_WINDOW_START(LARGE_INT);
+	SET_WINDOW_NEXT(LARGE_INT);
 	SET_WINDOW_LAST_RECV(LARGE_INT+1);
 
 	uint64_set(&t, BSWAP64(LARGE_INT+9));
@@ -237,7 +269,7 @@ static void check_dtls_window_very_large_12(void **glob_state)
 	uint64 t;
 
 	RESET_WINDOW;
-	SET_WINDOW_START(INT_OVER_32_BITS);
+	SET_WINDOW_NEXT(INT_OVER_32_BITS);
 	SET_WINDOW_LAST_RECV(INT_OVER_32_BITS+1);
 
 	uint64_set(&t, BSWAP64(INT_OVER_32_BITS+2));
@@ -251,7 +283,7 @@ static void check_dtls_window_very_large_91(void **glob_state)
 	uint64 t;
 
 	RESET_WINDOW;
-	SET_WINDOW_START(INT_OVER_32_BITS);
+	SET_WINDOW_NEXT(INT_OVER_32_BITS);
 	SET_WINDOW_LAST_RECV(INT_OVER_32_BITS+9);
 
 	uint64_set(&t, BSWAP64(INT_OVER_32_BITS+1));
@@ -265,7 +297,7 @@ static void check_dtls_window_very_large_19(void **glob_state)
 	uint64 t;
 
 	RESET_WINDOW;
-	SET_WINDOW_START(INT_OVER_32_BITS);
+	SET_WINDOW_NEXT(INT_OVER_32_BITS);
 	SET_WINDOW_LAST_RECV(INT_OVER_32_BITS+1);
 
 	uint64_set(&t, BSWAP64(INT_OVER_32_BITS+9));
@@ -279,12 +311,12 @@ static void check_dtls_window_outside(void **glob_state)
 	uint64 t;
 
 	RESET_WINDOW;
-	SET_WINDOW_START(0);
+	SET_WINDOW_NEXT(0);
 	SET_WINDOW_LAST_RECV(1);
 
 	uint64_set(&t, BSWAP64(1+64));
 
-	assert_int_equal(_dtls_record_check(&state, &t), -2);
+	assert_int_equal(_dtls_record_check(&state, &t), 0);
 }
 
 static void check_dtls_window_large_outside(void **glob_state)
@@ -293,12 +325,12 @@ static void check_dtls_window_large_outside(void **glob_state)
 	uint64 t;
 
 	RESET_WINDOW;
-	SET_WINDOW_START(LARGE_INT);
+	SET_WINDOW_NEXT(LARGE_INT);
 	SET_WINDOW_LAST_RECV(LARGE_INT+1);
 
 	uint64_set(&t, BSWAP64(LARGE_INT+1+64));
 
-	assert_int_equal(_dtls_record_check(&state, &t), -2);
+	assert_int_equal(_dtls_record_check(&state, &t), 0);
 }
 
 static void check_dtls_window_very_large_outside(void **glob_state)
@@ -307,12 +339,12 @@ static void check_dtls_window_very_large_outside(void **glob_state)
 	uint64 t;
 
 	RESET_WINDOW;
-	SET_WINDOW_START(INT_OVER_32_BITS);
+	SET_WINDOW_NEXT(INT_OVER_32_BITS);
 	SET_WINDOW_LAST_RECV(INT_OVER_32_BITS+1);
 
 	uint64_set(&t, BSWAP64(INT_OVER_32_BITS+1+64));
 
-	assert_int_equal(_dtls_record_check(&state, &t), -2);
+	assert_int_equal(_dtls_record_check(&state, &t), 0);
 }
 
 static void check_dtls_window_dup1(void **glob_state)
@@ -321,7 +353,7 @@ static void check_dtls_window_dup1(void **glob_state)
 	uint64 t;
 
 	RESET_WINDOW;
-	SET_WINDOW_START(LARGE_INT-1);
+	SET_WINDOW_NEXT(LARGE_INT-1);
 	SET_WINDOW_LAST_RECV(LARGE_INT);
 
 	uint64_set(&t, BSWAP64(LARGE_INT));
@@ -334,7 +366,7 @@ static void check_dtls_window_dup1(void **glob_state)
 	assert_int_equal(_dtls_record_check(&state, &t), 0);
 
 	uint64_set(&t, BSWAP64(LARGE_INT+1));
-	assert_int_equal(_dtls_record_check(&state, &t), -2);
+	assert_int_equal(_dtls_record_check(&state, &t), -3);
 }
 
 static void check_dtls_window_dup2(void **glob_state)
@@ -343,7 +375,7 @@ static void check_dtls_window_dup2(void **glob_state)
 	uint64 t;
 
 	RESET_WINDOW;
-	SET_WINDOW_START(LARGE_INT-1);
+	SET_WINDOW_NEXT(LARGE_INT-1);
 	SET_WINDOW_LAST_RECV(LARGE_INT);
 
 	uint64_set(&t, BSWAP64(LARGE_INT));
@@ -365,7 +397,7 @@ static void check_dtls_window_dup3(void **glob_state)
 	uint64 t;
 
 	RESET_WINDOW;
-	SET_WINDOW_START(LARGE_INT-1);
+	SET_WINDOW_NEXT(LARGE_INT-1);
 	SET_WINDOW_LAST_RECV(LARGE_INT);
 
 	uint64_set(&t, BSWAP64(LARGE_INT));
@@ -393,7 +425,7 @@ static void check_dtls_window_out_of_order(void **glob_state)
 	uint64 t;
 
 	RESET_WINDOW;
-	SET_WINDOW_START(LARGE_INT-1);
+	SET_WINDOW_NEXT(LARGE_INT-1);
 	SET_WINDOW_LAST_RECV(LARGE_INT);
 
 	uint64_set(&t, BSWAP64(LARGE_INT));
@@ -433,7 +465,7 @@ static void check_dtls_window_epoch_higher(void **glob_state)
 	uint64 t;
 
 	RESET_WINDOW;
-	SET_WINDOW_START(LARGE_INT-1);
+	SET_WINDOW_NEXT(LARGE_INT-1);
 	SET_WINDOW_LAST_RECV(LARGE_INT);
 
 	uint64_set(&t, BSWAP64(LARGE_INT));
@@ -452,7 +484,7 @@ static void check_dtls_window_epoch_lower(void **glob_state)
 	uint64_set(&t, BSWAP64(0x1000000000000LL));
 
 	state.epoch = 1;
-	SET_WINDOW_START(0x1000000000000LL);
+	SET_WINDOW_NEXT(0x1000000000000LL);
 	SET_WINDOW_LAST_RECV((0x1000000000000LL) + 1);
 
 	uint64_set(&t, BSWAP64(2 | 0x1000000000000LL));
@@ -491,7 +523,9 @@ int main(void)
 		cmocka_unit_test(check_dtls_window_very_large_12),
 		cmocka_unit_test(check_dtls_window_very_large_19),
 		cmocka_unit_test(check_dtls_window_very_large_91),
-		cmocka_unit_test(check_dtls_window_very_large_outside)
+		cmocka_unit_test(check_dtls_window_very_large_outside),
+		cmocka_unit_test(check_dtls_window_skip3),
+		cmocka_unit_test(check_dtls_window_skip1)
 	};
 	return cmocka_run_group_tests(tests, NULL, NULL);
 }

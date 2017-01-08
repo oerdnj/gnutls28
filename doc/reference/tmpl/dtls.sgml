@@ -9,10 +9,12 @@ dtls
 
 </para>
 
+
 <!-- ##### SECTION See_Also ##### -->
 <para>
 
 </para>
+
 
 <!-- ##### SECTION Stability_Level ##### -->
 
@@ -26,6 +28,71 @@ dtls
 </para>
 
 
+
+<!-- ##### FUNCTION gnutls_dtls_set_timeouts ##### -->
+<para>
+
+</para>
+
+@session: 
+@retrans_timeout: 
+@total_timeout: 
+
+
+<!-- ##### FUNCTION gnutls_dtls_get_mtu ##### -->
+<para>
+
+</para>
+
+@session: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_dtls_get_data_mtu ##### -->
+<para>
+
+</para>
+
+@session: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_dtls_set_mtu ##### -->
+<para>
+
+</para>
+
+@session: 
+@mtu: 
+
+
+<!-- ##### FUNCTION gnutls_dtls_set_data_mtu ##### -->
+<para>
+
+</para>
+
+@session: 
+@mtu: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_dtls_get_timeout ##### -->
+<para>
+
+</para>
+
+@session: 
+@Returns: 
+
+
+<!-- ##### STRUCT gnutls_dtls_prestate_st ##### -->
+<para>
+
+</para>
+
+@record_seq: 
+@hsk_read_seq: 
+@hsk_write_seq: 
 
 <!-- ##### FUNCTION gnutls_dtls_cookie_send ##### -->
 <para>
@@ -55,33 +122,6 @@ dtls
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_dtls_get_data_mtu ##### -->
-<para>
-
-</para>
-
-@session: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_dtls_get_mtu ##### -->
-<para>
-
-</para>
-
-@session: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_dtls_get_timeout ##### -->
-<para>
-
-</para>
-
-@session: 
-@Returns: 
-
-
 <!-- ##### FUNCTION gnutls_dtls_prestate_set ##### -->
 <para>
 
@@ -89,35 +129,6 @@ dtls
 
 @session: 
 @prestate: 
-
-
-<!-- ##### FUNCTION gnutls_dtls_set_data_mtu ##### -->
-<para>
-
-</para>
-
-@session: 
-@mtu: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_dtls_set_mtu ##### -->
-<para>
-
-</para>
-
-@session: 
-@mtu: 
-
-
-<!-- ##### FUNCTION gnutls_dtls_set_timeouts ##### -->
-<para>
-
-</para>
-
-@session: 
-@retrans_timeout: 
-@total_timeout: 
 
 
 <!-- ##### FUNCTION gnutls_record_get_discarded ##### -->

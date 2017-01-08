@@ -60,7 +60,7 @@ and only  @code{oid} , will be set. That is,  @code{oid} will be set on encrypte
 structures whether supported or not. It must be deinitialized using @code{gnutls_free()} .
 The other variables are only set on supported structures.
 
-@strong{Returns:} @code{GNUTLS_E_INVALID_REQUEST}  if the provided structure isn't encrypted,
+@strong{Returns:} @code{GNUTLS_E_INVALID_REQUEST}  if the provided structure isn't an encrypted key,
 @code{GNUTLS_E_UNKNOWN_CIPHER_TYPE}  if the structure's encryption isn't supported, or
 another negative error code in case of a failure. Zero on success.
 @end deftypefun
@@ -150,6 +150,9 @@ This function will initialize an alternative names structure.
 This function will store the specified alternative name in
 the  @code{sans} .
 
+Since version 3.5.7 the @code{GNUTLS_SAN_RFC822NAME} , @code{GNUTLS_SAN_DNSNAME} , and
+@code{GNUTLS_SAN_OTHERNAME_XMPP}  are converted to ACE format when necessary.
+
 @strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (0), otherwise a negative error value.
 
 @strong{Since:} 3.3.0
@@ -220,6 +223,9 @@ the  @code{aia} type.
 
 Typically the value for  @code{oid} should be @code{GNUTLS_OID_AD_OCSP} , or
 @code{GNUTLS_OID_AD_CAISSUERS} .
+
+Since version 3.5.7 the @code{GNUTLS_SAN_RFC822NAME} , and @code{GNUTLS_SAN_DNSNAME} ,
+are converted to ACE format when necessary.
 
 @strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (0), otherwise a negative error value.
 
@@ -306,6 +312,9 @@ This function will set the authorityCertIssuer name and the authorityCertSerialN
 to be stored in the  @code{aki} type. When storing multiple names, the serial
 should be set on the first call, and subsequent calls should use a @code{NULL}  serial.
 
+Since version 3.5.7 the @code{GNUTLS_SAN_RFC822NAME} , @code{GNUTLS_SAN_DNSNAME} , and
+@code{GNUTLS_SAN_OTHERNAME_XMPP}  are converted to ACE format when necessary.
+
 @strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (0) is returned, otherwise a negative error value.
 
 @strong{Since:} 3.3.0
@@ -323,6 +332,28 @@ This function will set the keyIdentifier to be stored in the  @code{aki} type.
 @strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (0) is returned, otherwise a negative error value.
 
 @strong{Since:} 3.3.0
+@end deftypefun
+
+@subheading gnutls_x509_cidr_to_rfc5280
+@anchor{gnutls_x509_cidr_to_rfc5280}
+@deftypefun {int} {gnutls_x509_cidr_to_rfc5280} (const char * @var{cidr}, gnutls_datum_t * @var{cidr_rfc5280})
+@var{cidr}: CIDR in RFC4632 format (IP/prefix), null-terminated
+
+@var{cidr_rfc5280}: CIDR range converted to RFC5280 format
+
+This function will convert text CIDR range with prefix (such as '10.0.0.0/8')
+to RFC5280 (IP address in network byte order followed by its network mask).
+Works for both IPv4 and IPv6.
+
+The resulting object is directly usable for IP name constraints usage,
+for example in functions @code{gnutls_x509_name_constraints_add_permitted} 
+or @code{gnutls_x509_name_constraints_add_excluded} .
+
+The data in datum needs to be deallocated using @code{gnutls_free()} .
+
+@strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (0) is returned, otherwise a negative error value.
+
+@strong{Since:} 3.5.4
 @end deftypefun
 
 @subheading gnutls_x509_crl_check_issuer
@@ -686,6 +717,9 @@ encoded, depending on the certificate data.
 
 If buf is @code{NULL}  then only the size will be filled.
 
+This function does not output a fully RFC4514 compliant string, if
+that is required see @code{gnutls_x509_crl_get_issuer_dn3()} .
+
 @strong{Returns:} @code{GNUTLS_E_SHORT_MEMORY_BUFFER}  if the provided buffer is
 not long enough, and in that case the sizeof_buf will be updated
 with the required size, and 0 on success.
@@ -703,10 +737,37 @@ The name will be in the form "C=xxxx,O=yyyy,CN=zzzz" as
 described in RFC4514. The output string will be ASCII or UTF-8
 encoded, depending on the certificate data.
 
+This function does not output a fully RFC4514 compliant string, if
+that is required see @code{gnutls_x509_crl_get_issuer_dn3()} .
+
 @strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (0) is returned, otherwise a
 negative error value.
 
 @strong{Since:} 3.1.10
+@end deftypefun
+
+@subheading gnutls_x509_crl_get_issuer_dn3
+@anchor{gnutls_x509_crl_get_issuer_dn3}
+@deftypefun {int} {gnutls_x509_crl_get_issuer_dn3} (gnutls_x509_crl_t @var{crl}, gnutls_datum_t * @var{dn}, unsigned @var{flags})
+@var{crl}: should contain a @code{gnutls_x509_crl_t}  type
+
+@var{dn}: a pointer to a structure to hold the name
+
+@var{flags}: zero or @code{GNUTLS_X509_DN_FLAG_COMPAT} 
+
+This function will allocate buffer and copy the name of the CRL issuer.
+The name will be in the form "C=xxxx,O=yyyy,CN=zzzz" as
+described in RFC4514. The output string will be ASCII or UTF-8
+encoded, depending on the certificate data.
+
+When the flag @code{GNUTLS_X509_DN_FLAG_COMPAT}  is specified, the output
+format will match the format output by previous to 3.5.6 versions of GnuTLS
+which was not not fully RFC4514-compliant.
+
+@strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (0) is returned, otherwise a
+negative error value.
+
+@strong{Since:} 3.5.7
 @end deftypefun
 
 @subheading gnutls_x509_crl_get_issuer_dn_by_oid
@@ -1051,6 +1112,11 @@ negative error value.
 @var{exp_time}: The actual time
 
 This function will set the time this CRL will be updated.
+This is an optional value to be set on a CRL and this call
+can be omitted when generating a CRL.
+
+Prior to GnuTLS 3.5.7, setting a nextUpdate field was required
+in order to generate a CRL.
 
 @strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (0) is returned, otherwise a
 negative error value.
@@ -1112,7 +1178,7 @@ negative error value.
 
 @var{issuer_key}: holds the issuer's private key
 
-@var{dig}: The message digest to use. GNUTLS_DIG_SHA1 is the safe choice unless you know what you're doing.
+@var{dig}: The message digest to use. GNUTLS_DIG_SHA256 is the safe choice unless you know what you're doing.
 
 @var{flags}: must be 0
 
@@ -1121,6 +1187,10 @@ will copy the issuer's information into the CRL.
 
 This must be the last step in a certificate CRL since all
 the previously set parameters are now signed.
+
+A known limitation of this function is, that a newly-signed CRL will not
+be fully functional (e.g., for signature verification), until it
+is exported an re-imported.
 
 @strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (0) is returned, otherwise a
 negative error value.
@@ -1148,7 +1218,10 @@ Note that value in  @code{verify} is set only when the return value of this
 function is success (i.e, failure to trust a CRL a certificate does not imply 
 a negative return value).
 
-@strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (0) is returned, otherwise a
+Before GnuTLS 3.5.7 this function would return zero or a positive
+number on success.
+
+@strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (0), otherwise a
 negative error value.
 @end deftypefun
 
@@ -1351,6 +1424,9 @@ to the provided buffer.  The name will be in the form
  @code{buf} will be ASCII or UTF-8 encoded, depending on the certificate
 data.
 
+This function does not output a fully RFC4514 compliant string, if
+that is required see @code{gnutls_x509_crq_get_dn3()} .
+
 @strong{Returns:} @code{GNUTLS_E_SHORT_MEMORY_BUFFER}  if the provided buffer is not
 long enough, and in that case the * @code{buf_size} will be updated with
 the required size.  On success 0 is returned.
@@ -1368,10 +1444,37 @@ request. The name will be in the form "C=xxxx,O=yyyy,CN=zzzz" as
 described in RFC4514. The output string will be ASCII or UTF-8
 encoded, depending on the certificate data.
 
+This function does not output a fully RFC4514 compliant string, if
+that is required see @code{gnutls_x509_crq_get_dn3()} .
+
 @strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (0) is returned, otherwise a
 negative error value. and a negative error code on error.
 
 @strong{Since:} 3.1.10
+@end deftypefun
+
+@subheading gnutls_x509_crq_get_dn3
+@anchor{gnutls_x509_crq_get_dn3}
+@deftypefun {int} {gnutls_x509_crq_get_dn3} (gnutls_x509_crq_t @var{crq}, gnutls_datum_t * @var{dn}, unsigned @var{flags})
+@var{crq}: should contain a @code{gnutls_x509_crq_t}  type
+
+@var{dn}: a pointer to a structure to hold the name
+
+@var{flags}: zero or @code{GNUTLS_X509_DN_FLAG_COMPAT} 
+
+This function will allocate buffer and copy the name of the Certificate 
+request. The name will be in the form "C=xxxx,O=yyyy,CN=zzzz" as
+described in RFC4514. The output string will be ASCII or UTF-8
+encoded, depending on the certificate data.
+
+When the flag @code{GNUTLS_X509_DN_FLAG_COMPAT}  is specified, the output
+format will match the format output by previous to 3.5.6 versions of GnuTLS
+which was not not fully RFC4514-compliant.
+
+@strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (0) is returned, otherwise a
+negative error value. and a negative error code on error.
+
+@strong{Since:} 3.5.7
 @end deftypefun
 
 @subheading gnutls_x509_crq_get_dn_by_oid
@@ -2234,7 +2337,7 @@ Since 2.12.0
 
 @subheading gnutls_x509_crt_check_email
 @anchor{gnutls_x509_crt_check_email}
-@deftypefun {int} {gnutls_x509_crt_check_email} (gnutls_x509_crt_t @var{cert}, const char * @var{email}, unsigned int @var{flags})
+@deftypefun {unsigned} {gnutls_x509_crt_check_email} (gnutls_x509_crt_t @var{cert}, const char * @var{email}, unsigned int @var{flags})
 @var{cert}: should contain an gnutls_x509_crt_t type
 
 @var{email}: A null terminated string that contains an email address (RFC822)
@@ -2311,6 +2414,24 @@ it will check whether the certificate is self-signed.
 by the given issuer, and false (0) if not.  
 @end deftypefun
 
+@subheading gnutls_x509_crt_check_key_purpose
+@anchor{gnutls_x509_crt_check_key_purpose}
+@deftypefun {unsigned} {gnutls_x509_crt_check_key_purpose} (gnutls_x509_crt_t @var{cert}, const char * @var{purpose}, unsigned @var{flags})
+@var{cert}: should contain a @code{gnutls_x509_crt_t}  type
+
+@var{purpose}: a key purpose OID (e.g., @code{GNUTLS_KP_CODE_SIGNING} )
+
+@var{flags}: zero or @code{GNUTLS_KP_FLAG_DISALLOW_ANY} 
+
+This function will check whether the given certificate matches
+the provided key purpose. If  @code{flags} contains @code{GNUTLS_KP_FLAG_ALLOW_ANY}  then
+it a certificate marked for any purpose will not match.
+
+@strong{Returns:} zero if the key purpose doesn't match, and non-zero otherwise.
+
+@strong{Since:} 3.5.6
+@end deftypefun
+
 @subheading gnutls_x509_crt_check_revocation
 @anchor{gnutls_x509_crt_check_revocation}
 @deftypefun {int} {gnutls_x509_crt_check_revocation} (gnutls_x509_crt_t @var{cert}, const gnutls_x509_crl_t * @var{crl_list}, unsigned @var{crl_list_length})
@@ -2320,7 +2441,7 @@ by the given issuer, and false (0) if not.
 
 @var{crl_list_length}: the length of the crl_list
 
-This function will return check if the given certificate is
+This function will check if the given certificate is
 revoked.  It is assumed that the CRLs have been verified before.
 
 @strong{Returns:} 0 if the certificate is NOT revoked, and 1 if it is.  A
@@ -2655,6 +2776,9 @@ encoded, depending on the certificate data.
 
 If  @code{buf} is null then only the size will be filled. 
 
+This function does not output a fully RFC4514 compliant string, if
+that is required see @code{gnutls_x509_crt_get_dn3()} .
+
 @strong{Returns:} @code{GNUTLS_E_SHORT_MEMORY_BUFFER}  if the provided buffer is not
 long enough, and in that case the  @code{buf_size} will be updated
 with the required size. @code{GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE}  if
@@ -2673,10 +2797,37 @@ The name will be in the form "C=xxxx,O=yyyy,CN=zzzz" as
 described in RFC4514. The output string will be ASCII or UTF-8
 encoded, depending on the certificate data.
 
+This function does not output a fully RFC4514 compliant string, if
+that is required see @code{gnutls_x509_crt_get_dn3()} .
+
 @strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (0) is returned, otherwise a
 negative error value.
 
 @strong{Since:} 3.1.10
+@end deftypefun
+
+@subheading gnutls_x509_crt_get_dn3
+@anchor{gnutls_x509_crt_get_dn3}
+@deftypefun {int} {gnutls_x509_crt_get_dn3} (gnutls_x509_crt_t @var{cert}, gnutls_datum_t * @var{dn}, unsigned @var{flags})
+@var{cert}: should contain a @code{gnutls_x509_crt_t}  type
+
+@var{dn}: a pointer to a structure to hold the name
+
+@var{flags}: zero or @code{GNUTLS_X509_DN_FLAG_COMPAT} 
+
+This function will allocate buffer and copy the name of the Certificate.
+The name will be in the form "C=xxxx,O=yyyy,CN=zzzz" as
+described in RFC4514. The output string will be ASCII or UTF-8
+encoded, depending on the certificate data.
+
+When the flag @code{GNUTLS_X509_DN_FLAG_COMPAT}  is specified, the output
+format will match the format output by previous to 3.5.6 versions of GnuTLS
+which was not not fully RFC4514-compliant.
+
+@strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (0) is returned, otherwise a
+negative error value.
+
+@strong{Since:} 3.5.7
 @end deftypefun
 
 @subheading gnutls_x509_crt_get_dn_by_oid
@@ -3064,6 +3215,9 @@ will be ASCII or UTF-8 encoded, depending on the certificate data.
 
 If  @code{buf} is null then only the size will be filled. 
 
+This function does not output a fully RFC4514 compliant string, if
+that is required see @code{gnutls_x509_crt_get_issuer_dn3()} .
+
 @strong{Returns:} @code{GNUTLS_E_SHORT_MEMORY_BUFFER}  if the provided buffer is not
 long enough, and in that case the  @code{buf_size} will be updated
 with the required size. @code{GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE}  if
@@ -3082,10 +3236,37 @@ The name will be in the form "C=xxxx,O=yyyy,CN=zzzz" as
 described in RFC4514. The output string will be ASCII or UTF-8
 encoded, depending on the certificate data.
 
+This function does not output a fully RFC4514 compliant string, if
+that is required see @code{gnutls_x509_crt_get_issuer_dn3()} .
+
 @strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (0) is returned, otherwise a
 negative error value.
 
 @strong{Since:} 3.1.10
+@end deftypefun
+
+@subheading gnutls_x509_crt_get_issuer_dn3
+@anchor{gnutls_x509_crt_get_issuer_dn3}
+@deftypefun {int} {gnutls_x509_crt_get_issuer_dn3} (gnutls_x509_crt_t @var{cert}, gnutls_datum_t * @var{dn}, unsigned @var{flags})
+@var{cert}: should contain a @code{gnutls_x509_crt_t}  type
+
+@var{dn}: a pointer to a structure to hold the name
+
+@var{flags}: zero or @code{GNUTLS_X509_DN_FLAG_COMPAT} 
+
+This function will allocate buffer and copy the name of issuer of the Certificate.
+The name will be in the form "C=xxxx,O=yyyy,CN=zzzz" as
+described in RFC4514. The output string will be ASCII or UTF-8
+encoded, depending on the certificate data.
+
+When the flag @code{GNUTLS_X509_DN_FLAG_COMPAT}  is specified, the output
+format will match the format output by previous to 3.5.6 versions of GnuTLS
+which was not not fully RFC4514-compliant.
+
+@strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (0) is returned, otherwise a
+negative error value.
+
+@strong{Since:} 3.5.7
 @end deftypefun
 
 @subheading gnutls_x509_crt_get_issuer_dn_by_oid
@@ -4099,6 +4280,11 @@ This function will set the DN on the provided certificate.
 The input string should be plain ASCII or UTF-8 encoded. On
 DN parsing error @code{GNUTLS_E_PARSING_ERROR}  is returned.
 
+Note that DNs are not expected to hold DNS information, and thus
+no automatic IDNA convertions are attempted when using this function.
+If that is required (e.g., store a domain in CN), process the corresponding
+input with @code{gnutls_idna_map()} .
+
 @strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (0) is returned, otherwise a
 negative error value.
 @end deftypefun
@@ -4181,6 +4367,9 @@ negative error value.
 
 This function will set the issuer alternative name certificate
 extension. It can set the same types as @code{gnutls_x509_crt_set_subject_alt_name()} .
+
+Since version 3.5.7 the @code{GNUTLS_SAN_RFC822NAME} , @code{GNUTLS_SAN_DNSNAME} , and
+@code{GNUTLS_SAN_OTHERNAME_XMPP}  are converted to ACE format when necessary.
 
 @strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (0) is returned, otherwise a
 negative error value.
@@ -4484,6 +4673,9 @@ extension. It can set the following types: @code{GNUTLS_SAN_DNSNAME}  as a text 
 @code{GNUTLS_SAN_IPADDRESS}  as a binary IP address (4 or 16 bytes),
 @code{GNUTLS_SAN_OTHERNAME_XMPP}  as a UTF8 string (since 3.5.0).
 
+Since version 3.5.7 the @code{GNUTLS_SAN_RFC822NAME} , @code{GNUTLS_SAN_DNSNAME} , and
+@code{GNUTLS_SAN_OTHERNAME_XMPP}  are converted to ACE format when necessary.
+
 @strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (0) is returned, otherwise a
 negative error value.
 
@@ -4529,8 +4721,10 @@ This function will set the subject alternative name certificate
 extension. This function assumes that data can be expressed as a null
 terminated string.
 
-The name of the function is unfortunate since it is incosistent with
+The name of the function is unfortunate since it is inconsistent with
 @code{gnutls_x509_crt_get_subject_alt_name()} .
+
+See @code{gnutls_x509_crt_set_subject_alt_name()}  for more information.
 
 @strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (0) is returned, otherwise a
 negative error value.
@@ -4631,7 +4825,7 @@ negative error value.
 
 @var{issuer_key}: holds the issuer's private key
 
-@var{dig}: The message digest to use, @code{GNUTLS_DIG_SHA1}  is a safe choice
+@var{dig}: The message digest to use, @code{GNUTLS_DIG_SHA256}  is a safe choice
 
 @var{flags}: must be 0
 
@@ -4640,6 +4834,10 @@ will copy the issuer's information into the certificate.
 
 This must be the last step in a certificate generation since all
 the previously set parameters are now signed.
+
+A known limitation of this function is, that a newly-signed certificate will not
+be fully functional (e.g., for signature verification), until it
+is exported an re-imported.
 
 @strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (0) is returned, otherwise a
 negative error value.
@@ -4686,7 +4884,11 @@ This function will verify the given signed data, using the
 parameters from the certificate.
 
 @strong{Returns:} In case of a verification failure @code{GNUTLS_E_PK_SIG_VERIFY_FAILED}  
-is returned, and zero or positive code on success.
+is returned, @code{GNUTLS_E_EXPIRED}  or @code{GNUTLS_E_NOT_YET_ACTIVATED}  on expired
+or not yet activated certificate and zero or positive code on success.
+
+Note that since GnuTLS 3.5.6 this function introduces checks in the
+end certificate ( @code{crt} ), including time checks and key usage checks.
 
 @strong{Since:} 3.4.0
 @end deftypefun
@@ -4798,6 +5000,30 @@ encoded, depending on the certificate data.
 negative error value.
 
 @strong{Since:} 3.4.2
+@end deftypefun
+
+@subheading gnutls_x509_dn_get_str2
+@anchor{gnutls_x509_dn_get_str2}
+@deftypefun {int} {gnutls_x509_dn_get_str2} (gnutls_x509_dn_t @var{dn}, gnutls_datum_t * @var{str}, unsigned @var{flags})
+@var{dn}: a pointer to DN
+
+@var{str}: a datum that will hold the name
+
+@var{flags}: zero or @code{GNUTLS_X509_DN_FLAG_COMPAT} 
+
+This function will allocate buffer and copy the name in the provided DN.
+The name will be in the form "C=xxxx,O=yyyy,CN=zzzz" as
+described in RFC4514. The output string will be ASCII or UTF-8
+encoded, depending on the certificate data.
+
+When the flag @code{GNUTLS_X509_DN_FLAG_COMPAT}  is specified, the output
+format will match the format output by previous to 3.5.6 versions of GnuTLS
+which was not not fully RFC4514-compliant.
+
+@strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (0) is returned, otherwise a
+negative error value.
+
+@strong{Since:} 3.5.7
 @end deftypefun
 
 @subheading gnutls_x509_dn_import
@@ -5317,7 +5543,7 @@ field and the actual value, -1 indicate that the field is absent.
 
 @var{policy}: output variable with policy data
 
-@var{sizeof_policy}: output variable size of policy data
+@var{sizeof_policy}: output variable with size of policy data
 
 This function will return the information from a proxy certificate
 extension. It reads the ProxyCertInfo X.509 extension (1.3.6.1.5.5.7.1.14).
@@ -5515,7 +5741,8 @@ in network byte order is expected, followed by its network mask.
 
 This function will check the provided name against the constraints in
  @code{nc} using the RFC5280 rules. Currently this function is limited to DNS
-names and emails (of type @code{GNUTLS_SAN_DNSNAME}  and @code{GNUTLS_SAN_RFC822NAME} ).
+names, emails and IP addresses (of type @code{GNUTLS_SAN_DNSNAME} ,
+@code{GNUTLS_SAN_RFC822NAME}  and @code{GNUTLS_SAN_IPADDRESS} ).
 
 @strong{Returns:} zero if the provided name is not acceptable, and non-zero otherwise.
 
@@ -6430,6 +6657,32 @@ This function will return the name of the given RDN sequence.  The
 name will be in the form "C=xxxx,O=yyyy,CN=zzzz" as described in
 RFC4514.
 
+This function does not output a fully RFC4514 compliant string, if
+that is required see @code{gnutls_x509_rdn_get2()} .
+
+@strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (0) is returned, or
+@code{GNUTLS_E_SHORT_MEMORY_BUFFER}  is returned and * @code{buf_size} is
+updated if the provided buffer is not long enough, otherwise a
+negative error value.
+@end deftypefun
+
+@subheading gnutls_x509_rdn_get2
+@anchor{gnutls_x509_rdn_get2}
+@deftypefun {int} {gnutls_x509_rdn_get2} (const gnutls_datum_t * @var{idn}, gnutls_datum_t * @var{str}, unsigned @var{flags})
+@var{idn}: should contain a DER encoded RDN sequence
+
+@var{str}: -- undescribed --
+
+@var{flags}: -- undescribed --
+
+This function will return the name of the given RDN sequence.  The
+name will be in the form "C=xxxx,O=yyyy,CN=zzzz" as described in
+RFC4514.
+
+When the flag @code{GNUTLS_X509_DN_FLAG_COMPAT}  is specified, the output
+format will match the format output by previous to 3.5.6 versions of GnuTLS
+which was not not fully RFC4514-compliant.
+
 @strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (0) is returned, or
 @code{GNUTLS_E_SHORT_MEMORY_BUFFER}  is returned and * @code{buf_size} is
 updated if the provided buffer is not long enough, otherwise a
@@ -6566,7 +6819,7 @@ otherwise a negative error value.
 
 @var{clist_size}: The length of the CA list
 
-@var{flags}: should be 0 or an or'ed sequence of @code{GNUTLS_TL}  options.
+@var{flags}: flags from @code{gnutls_trust_list_flags_t} 
 
 This function will add the given certificate authorities
 to the trusted list. The list of CAs must not be deinitialized
@@ -6590,7 +6843,7 @@ added to the list and will be deinitialized.
 
 @var{crl_size}: The length of the CRL list
 
-@var{flags}: if GNUTLS_TL_VERIFY_CRL is given the CRLs will be verified before being added.
+@var{flags}: flags from @code{gnutls_trust_list_flags_t} 
 
 @var{verification_flags}: gnutls_certificate_verify_flags if flags specifies GNUTLS_TL_VERIFY_CRL
 
@@ -6603,6 +6856,8 @@ to allow verifying the CRLs for validity. If the flag @code{GNUTLS_TL_NO_DUPLICA
 is given, then any provided CRLs that are a duplicate, will be deinitialized
 and not added to the list (that assumes that @code{gnutls_x509_trust_list_deinit()} 
 will be called with all=1).
+
+If GNUTLS_TL_VERIFY_CRL is given the CRLs will be verified before being added.
 
 @strong{Returns:} The number of added elements is returned.
 
@@ -6673,7 +6928,7 @@ This function implies the flag @code{GNUTLS_TL_NO_DUPLICATES} .
 
 @var{type}: The format of the certificates
 
-@var{tl_flags}: GNUTLS_TL_*
+@var{tl_flags}: flags from @code{gnutls_trust_list_flags_t} 
 
 @var{tl_vflags}: gnutls_certificate_verify_flags if flags specifies GNUTLS_TL_VERIFY_CRL
 
@@ -6697,7 +6952,7 @@ this function.
 
 @var{type}: The format of the certificates
 
-@var{tl_flags}: GNUTLS_TL_*
+@var{tl_flags}: flags from @code{gnutls_trust_list_flags_t} 
 
 @var{tl_vflags}: gnutls_certificate_verify_flags if flags specifies GNUTLS_TL_VERIFY_CRL
 
@@ -6724,7 +6979,7 @@ trust databases can be set; they cannot be stacked with multiple calls.
 
 @var{type}: The format of the certificates
 
-@var{tl_flags}: GNUTLS_TL_*
+@var{tl_flags}: flags from @code{gnutls_trust_list_flags_t} 
 
 @var{tl_vflags}: gnutls_certificate_verify_flags if flags specifies GNUTLS_TL_VERIFY_CRL
 
@@ -6760,7 +7015,7 @@ want to prevent them from being deinitialized by this function.
 
 @var{issuer}: Will hold the issuer if any. Should be treated as constant.
 
-@var{flags}: Use zero or @code{GNUTLS_TL_GET_COPY} 
+@var{flags}: flags from @code{gnutls_trust_list_flags_t}  (@code{GNUTLS_TL_GET_COPY}  is applicable)
 
 This function will find the issuer of the given certificate.
 If the flag @code{GNUTLS_TL_GET_COPY}  is specified a copy of the issuer
@@ -6977,24 +7232,27 @@ negative error value.
 
 @var{func}: If non-null will be called on each chain element verification with the output.
 
-This function will attempt to verify the given certificate and return
+This function will attempt to verify the given certificate chain and return
 its status. The  @code{voutput} parameter will hold an OR'ed sequence of
-@code{gnutls_certificate_status_t}  flags. When a chain of  @code{cert_list_size} with 
-more than one certificates is provided, the verification status will apply
-to the first certificate in the chain that failed verification. The
-verification process starts from the end of the chain (from CA to end
-certificate).
+@code{gnutls_certificate_status_t}  flags.
+
+When a certificate chain of  @code{cert_list_size} with more than one certificates is
+provided, the verification status will apply to the first certificate in the chain
+that failed verification. The verification process starts from the end of the chain
+(from CA to end certificate). The first certificate in the chain must be the end-certificate
+while the rest of the members may be sorted or not.
 
 Additionally a certificate verification profile can be specified
 from the ones in @code{gnutls_certificate_verification_profiles_t}  by
 ORing the result of @code{GNUTLS_PROFILE_TO_VFLAGS()}  to the verification
 flags.
 
-The acceptable  @code{data} types are @code{GNUTLS_DT_DNS_HOSTNAME}  and @code{GNUTLS_DT_KEY_PURPOSE_OID} .
+Additional verification parameters are possible via the  @code{data} types; the
+acceptable types are @code{GNUTLS_DT_DNS_HOSTNAME}  and @code{GNUTLS_DT_KEY_PURPOSE_OID} .
 The former accepts as data a null-terminated hostname, and the latter a null-terminated
 object identifier (e.g., @code{GNUTLS_KP_TLS_WWW_SERVER} ).
 If a DNS hostname is provided then this function will compare
-the hostname in the certificate against the given. If names do not match the 
+the hostname in the end certificate against the given. If names do not match the
 @code{GNUTLS_CERT_UNEXPECTED_OWNER}  status flag will be set. In addition it
 will consider certificates provided with @code{gnutls_x509_trust_list_add_named_crt()} .
 

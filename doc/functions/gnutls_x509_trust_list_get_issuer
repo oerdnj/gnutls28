@@ -9,7 +9,7 @@
 
 @var{issuer}: Will hold the issuer if any. Should be treated as constant.
 
-@var{flags}: Use zero or @code{GNUTLS_TL_GET_COPY} 
+@var{flags}: flags from @code{gnutls_trust_list_flags_t}  (@code{GNUTLS_TL_GET_COPY}  is applicable)
 
 This function will find the issuer of the given certificate.
 If the flag @code{GNUTLS_TL_GET_COPY}  is specified a copy of the issuer

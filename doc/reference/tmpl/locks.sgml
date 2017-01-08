@@ -20,13 +20,13 @@ locks
 <!-- ##### SECTION Image ##### -->
 
 
-<!-- ##### VARIABLE gnutls_mutex_deinit ##### -->
+<!-- ##### VARIABLE gnutls_mutex_init ##### -->
 <para>
 
 </para>
 
 
-<!-- ##### VARIABLE gnutls_mutex_init ##### -->
+<!-- ##### VARIABLE gnutls_mutex_deinit ##### -->
 <para>
 
 </para>
@@ -42,5 +42,29 @@ locks
 <para>
 
 </para>
+
+
+<!-- ##### MACRO GNUTLS_STATIC_MUTEX ##### -->
+<para>
+
+</para>
+
+@mutex: 
+
+
+<!-- ##### MACRO GNUTLS_STATIC_MUTEX_LOCK ##### -->
+<para>
+
+</para>
+
+@mutex: 
+
+
+<!-- ##### MACRO GNUTLS_STATIC_MUTEX_UNLOCK ##### -->
+<para>
+
+</para>
+
+@mutex: 
 
 

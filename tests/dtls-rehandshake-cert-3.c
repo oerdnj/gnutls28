@@ -322,7 +322,7 @@ static void server(int fd)
 			do {
 				ret =
 				    gnutls_record_send(session, buffer,
-						       strlen(buffer));
+							strlen(buffer));
 			} while (ret == GNUTLS_E_AGAIN
 				 || ret == GNUTLS_E_INTERRUPTED);
 		}
@@ -373,9 +373,7 @@ void doit(void)
 		server_fd = fd[0];
 		server(fd[0]);
 		wait(&status);
-		if (WEXITSTATUS(status) != 0)
-			fail("Child died with status %d\n",
-			     WEXITSTATUS(status));
+		check_wait_status(status);
 	} else {
 		close(fd[0]);
 		client(fd[1]);

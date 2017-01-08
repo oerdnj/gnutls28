@@ -9,7 +9,7 @@
 
 @var{issuer_key}: holds the issuer's private key
 
-@var{dig}: The message digest to use. GNUTLS_DIG_SHA1 is the safe choice unless you know what you're doing.
+@var{dig}: The message digest to use. GNUTLS_DIG_SHA256 is the safe choice unless you know what you're doing.
 
 @var{flags}: must be 0
 
@@ -18,6 +18,10 @@ will copy the issuer's information into the CRL.
 
 This must be the last step in a certificate CRL since all
 the previously set parameters are now signed.
+
+A known limitation of this function is, that a newly-signed CRL will not
+be fully functional (e.g., for signature verification), until it
+is exported an re-imported.
 
 @strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (0) is returned, otherwise a
 negative error value.

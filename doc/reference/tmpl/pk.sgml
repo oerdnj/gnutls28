@@ -1,0 +1,70 @@
+<!-- ##### SECTION Title ##### -->
+pk
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### SECTION Image ##### -->
+
+
+<!-- ##### VARIABLE crypto_pk_prio ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION encode_ber_digest_info ##### -->
+<para>
+
+</para>
+
+@e: 
+@digest: 
+@output: 
+@Returns: 
+
+
+<!-- ##### MACRO decode_ber_digest_info ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION pk_prepare_hash ##### -->
+<para>
+
+</para>
+
+@pk: 
+@hash: 
+@output: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pk_hash_data ##### -->
+<para>
+
+</para>
+
+@pk: 
+@hash: 
+@params: 
+@data: 
+@digest: 
+@Returns: 
+
+

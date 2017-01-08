@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnutls-3.2.1\n"
 "Report-Msgid-Bugs-To: bug-gnutls@gnu.org\n"
-"POT-Creation-Date: 2016-08-07 11:36+0200\n"
+"POT-Creation-Date: 2017-01-08 11:17+0000\n"
 "PO-Revision-Date: 2013-06-13 19:56+0200\n"
 "Last-Translator: Benno Schulenberg <benno@vertaalt.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -222,7 +222,7 @@ msgstr ""
 msgid "An error was encountered at the TLS Finished packet calculation."
 msgstr "Er is een fout opgetreden tijdens de TLS-pakketeinde-berekening."
 
-#: lib/errors.c:90
+#: lib/errors.c:90 libdane/errors.c:67
 msgid "No certificate was found."
 msgstr "Geen certificaat gevonden."
 
@@ -308,420 +308,444 @@ msgid "Wrong padding in PKCS1 packet."
 msgstr "Onjuiste opvulbytes in PKCS1-pakket."
 
 #: lib/errors.c:137
-msgid "The requested session has expired."
+#, fuzzy
+msgid "The session or certificate has expired."
 msgstr "De gevraagde sessie is verlopen."
 
 #: lib/errors.c:139
+#, fuzzy
+msgid "The certificate is not yet activated."
+msgstr "Het certificaat heeft niet-ondersteunde eigenschappen."
+
+#: lib/errors.c:141
 msgid "Hashing has failed."
 msgstr "Hashen is mislukt."
 
-#: lib/errors.c:140
+#: lib/errors.c:142
 msgid "Base64 decoding error."
 msgstr "Base64-decoderingsfout."
 
-#: lib/errors.c:142
+#: lib/errors.c:144
 msgid "Base64 unexpected header error."
 msgstr "Onverwachte fout in base64-kopregel."
 
-#: lib/errors.c:144
+#: lib/errors.c:146
 msgid "Base64 encoding error."
 msgstr "Base64-coderingsfout."
 
-#: lib/errors.c:146
+#: lib/errors.c:148
 msgid "Parsing error in password file."
 msgstr "Fout in de indeling van wachtwoordenbestand."
 
-#: lib/errors.c:148
+#: lib/errors.c:150
 msgid "The requested data were not available."
 msgstr "De gevraagde gegevens zijn niet beschikbaar."
 
-#: lib/errors.c:150
+#: lib/errors.c:152
+msgid "There are no embedded data in the structure."
+msgstr ""
+
+#: lib/errors.c:154
 msgid "Error in the pull function."
 msgstr "Fout in de 'pull'-functie."
 
-#: lib/errors.c:151
+#: lib/errors.c:155
 msgid "Error in the push function."
 msgstr "Fout in de 'push'-functie."
 
-#: lib/errors.c:153
+#: lib/errors.c:157
 msgid ""
 "The upper limit of record packet sequence numbers has been reached. Wow!"
 msgstr "Het hoogste volgnummer voor datapakketten is bereikt.  Wauw!"
 
-#: lib/errors.c:155
+#: lib/errors.c:159
 msgid "Error in the certificate."
 msgstr "Fout in het certificaat."
 
-#: lib/errors.c:157
+#: lib/errors.c:161
 #, fuzzy
 msgid "Error in the certificate verification."
 msgstr "Fout in het certificaat."
 
-#: lib/errors.c:159
+#: lib/errors.c:163
 msgid "Error in the private key verification; seed doesn't match."
 msgstr ""
 
-#: lib/errors.c:161
+#: lib/errors.c:165
 msgid "Could not authenticate peer."
 msgstr "Kan andere computer niet authenticeren."
 
-#: lib/errors.c:164
+#: lib/errors.c:168
 msgid "Unknown Subject Alternative name in X.509 certificate."
 msgstr "Onbekende naam van toegevoegd onderwerp in X.509-certificaat."
 
-#: lib/errors.c:168
+#: lib/errors.c:171
+msgid "CIDR name constraint is malformed in size or structure."
+msgstr ""
+
+#: lib/errors.c:175
 msgid "Unsupported critical extension in X.509 certificate."
 msgstr "Niet-ondersteunde kritieke uitbreiding in X.509-certificaat."
 
-#: lib/errors.c:170
+#: lib/errors.c:177
 msgid "Unsupported extension in X.509 certificate."
 msgstr "Niet-ondersteunde uitbreiding in X.509-certificaat."
 
-#: lib/errors.c:173
+#: lib/errors.c:180
 msgid "Key usage violation in certificate has been detected."
 msgstr ""
 "Er is een overtreding van het sleutelgebruik in het certificaat "
 "geconstateerd."
 
-#: lib/errors.c:175 lib/errors.c:406
+#: lib/errors.c:182 lib/errors.c:423
 msgid "Function was interrupted."
 msgstr "Functie werd onderbroken."
 
-#: lib/errors.c:177
+#: lib/errors.c:184
 msgid "TLS Application data were received, while expecting handshake data."
 msgstr ""
 "Er werd TLS-toepassingsdata ontvangen, terwijl handshake-gegevens verwacht "
 "werden."
 
-#: lib/errors.c:179
+#: lib/errors.c:186
 msgid "Error in Database backend."
 msgstr "Fout in databank-backend."
 
-#: lib/errors.c:180
+#: lib/errors.c:187
 msgid "The certificate type is not supported."
 msgstr "Het certificaattype wordt niet ondersteund."
 
-#: lib/errors.c:183
+#: lib/errors.c:190
 msgid "The given memory buffer is too short to hold parameters."
 msgstr "Beschikbare buffer is te klein voor de gegeven parameters."
 
-#: lib/errors.c:185
+#: lib/errors.c:192 libdane/errors.c:61
 msgid "The request is invalid."
 msgstr "Het verzoek is ongeldig."
 
-#: lib/errors.c:187
+#: lib/errors.c:194
 msgid "The cookie was bad."
 msgstr "De cookie is ongeldig."
 
-#: lib/errors.c:188
+#: lib/errors.c:195
 msgid "An illegal parameter has been received."
 msgstr "Er werd een ongeoorloofde parameter ontvangen."
 
-#: lib/errors.c:190
+#: lib/errors.c:197
 msgid "An illegal parameter was found."
 msgstr "Er is een ongeoorloofde parameter gevonden."
 
-#: lib/errors.c:192
+#: lib/errors.c:199
 msgid "Error while reading file."
 msgstr "Fout tijdens lezen van bestand."
 
-#: lib/errors.c:194
+#: lib/errors.c:201
 msgid "ASN1 parser: Element was not found."
 msgstr "ASN1-parser: Element niet gevonden."
 
-#: lib/errors.c:196
+#: lib/errors.c:203
 msgid "ASN1 parser: Identifier was not found"
 msgstr "ASN1-parser: Naam niet gevonden."
 
-#: lib/errors.c:198
+#: lib/errors.c:205
 msgid "ASN1 parser: Error in DER parsing."
 msgstr "ASN1-parser: Fout in ontleden van DER."
 
-#: lib/errors.c:200
+#: lib/errors.c:207
 msgid "ASN1 parser: Value was not found."
 msgstr "ASN1-parser: Waarde niet gevonden."
 
-#: lib/errors.c:202
+#: lib/errors.c:209
 msgid "ASN1 parser: Generic parsing error."
 msgstr "ASN1-parser: Algemene ontledingsfout."
 
-#: lib/errors.c:204
+#: lib/errors.c:211
 msgid "ASN1 parser: Value is not valid."
 msgstr "ASN1-parser: Waarde is ongeldig."
 
-#: lib/errors.c:206
+#: lib/errors.c:213
 msgid "ASN1 parser: Error in TAG."
 msgstr "ASN1-parser: Fout in TAG."
 
-#: lib/errors.c:208
+#: lib/errors.c:215
 msgid "ASN1 parser: error in implicit tag"
 msgstr "ASN1-parser: Fout in impliete tag."
 
-#: lib/errors.c:210
+#: lib/errors.c:217
 msgid "ASN1 parser: Error in type 'ANY'."
 msgstr "ASN1-parser: Fout in type 'ANY'."
 
-#: lib/errors.c:212
+#: lib/errors.c:219
 msgid "ASN1 parser: Syntax error."
 msgstr "ASN1-parser: Syntaxfout."
 
-#: lib/errors.c:214
+#: lib/errors.c:221
 msgid "ASN1 parser: Overflow in DER parsing."
 msgstr "ASN1-parser: Overloop in DER-ontleding."
 
-#: lib/errors.c:218
+#: lib/errors.c:225
 msgid "Too many empty record packets have been received."
 msgstr "Er zijn te veel lege datapakketten ontvangen."
 
-#: lib/errors.c:220
+#: lib/errors.c:227
 msgid "Too many handshake packets have been received."
 msgstr "Er zijn te veel handshake-pakketten ontvangen."
 
-#: lib/errors.c:222
+#: lib/errors.c:229
 msgid "The crypto library version is too old."
 msgstr "De versie van de crypto-bibliotheek is te oud."
 
-#: lib/errors.c:225
+#: lib/errors.c:232
 msgid "The tasn1 library version is too old."
 msgstr "De versie van de tasn1-bibliotheek is te oud."
 
-#: lib/errors.c:227
+#: lib/errors.c:234
 msgid "The OpenPGP User ID is revoked."
 msgstr "Het OpenPGP-gebruikers-ID is ingetrokken."
 
-#: lib/errors.c:229
+#: lib/errors.c:236
 msgid "The OpenPGP key has not a preferred key set."
 msgstr "De OpenPGP-sleutel heeft geen voorkeurssleutelset."
 
-#: lib/errors.c:231
+#: lib/errors.c:238
 msgid "Error loading the keyring."
 msgstr "Fout tijdens laden van de sleutelring."
 
-#: lib/errors.c:233
+#: lib/errors.c:240
 msgid "The initialization of crypto backend has failed."
 msgstr "Het initialiseren van de cryptografische routines is mislukt."
 
-#: lib/errors.c:236
+#: lib/errors.c:243
 msgid "No supported compression algorithms have been found."
 msgstr "Er is geen ondersteund compressie-algoritme gevonden."
 
-#: lib/errors.c:238
+#: lib/errors.c:245
 msgid "No supported cipher suites have been found."
 msgstr "Er is geen ondersteund encryptie-algoritme gevonden."
 
-#: lib/errors.c:240
+#: lib/errors.c:247
 msgid "Could not get OpenPGP key."
 msgstr "Kan OpenPGP-sleutel niet verkrijgen."
 
-#: lib/errors.c:242
+#: lib/errors.c:249
 msgid "Could not find OpenPGP subkey."
 msgstr "Kan OpenPGP-subsleutel niet vinden."
 
-#: lib/errors.c:244
+#: lib/errors.c:251
 msgid "Safe renegotiation failed."
 msgstr "Beveiligde heronderhandeling is mislukt."
 
-#: lib/errors.c:246
+#: lib/errors.c:253
 msgid "Unsafe renegotiation denied."
 msgstr "Onbeveiligde heronderhandeling is geweigerd."
 
-#: lib/errors.c:249
+#: lib/errors.c:256
 msgid "The SRP username supplied is illegal."
 msgstr "De gegeven SRP-gebruikersnaam is ongeldig."
 
-#: lib/errors.c:251
+#: lib/errors.c:258
 msgid "The SRP username supplied is unknown."
 msgstr "De gegeven SRP-gebruikersnaam is onbekend."
 
-#: lib/errors.c:254
+#: lib/errors.c:261
 msgid "The OpenPGP fingerprint is not supported."
 msgstr "De OpenPGP-vingerafdruk wordt niet ondersteund."
 
-#: lib/errors.c:256
+#: lib/errors.c:263
 msgid "The signature algorithm is not supported."
 msgstr "Het ondertekeningsalgoritme wordt niet ondersteund."
 
-#: lib/errors.c:258
+#: lib/errors.c:265
 msgid "The certificate has unsupported attributes."
 msgstr "Het certificaat heeft niet-ondersteunde eigenschappen."
 
-#: lib/errors.c:260
+#: lib/errors.c:267
 msgid "The OID is not supported."
 msgstr "Het OID wordt niet ondersteund."
 
-#: lib/errors.c:262
+#: lib/errors.c:269
 msgid "The hash algorithm is unknown."
 msgstr "Onbekend hash-algoritme."
 
-#: lib/errors.c:264
+#: lib/errors.c:271
 msgid "The PKCS structure's content type is unknown."
 msgstr "Onbekend inhoudstype van PKCS-structuur."
 
-#: lib/errors.c:266
+#: lib/errors.c:273
 msgid "The PKCS structure's bag type is unknown."
 msgstr "Onbekend buideltype van PKCS-structuur."
 
-#: lib/errors.c:268
+#: lib/errors.c:275 lib/errors.c:281
 msgid "The given password contains invalid characters."
 msgstr "Het opgegeven wachtwoord bevat ongeldige tekens."
 
-#: lib/errors.c:271
+#: lib/errors.c:277
+#, fuzzy
+msgid "The given string contains invalid UTF-8 characters."
+msgstr "Het opgegeven wachtwoord bevat ongeldige tekens."
+
+#: lib/errors.c:279
+#, fuzzy
+msgid "The given email string contains non-ASCII characters before '@'."
+msgstr "Het opgegeven wachtwoord bevat ongeldige tekens."
+
+#: lib/errors.c:284
 msgid "The Message Authentication Code verification failed."
 msgstr "Verificatie van berichtauthenticatiecode is mislukt."
 
-#: lib/errors.c:273
+#: lib/errors.c:286
 msgid "Some constraint limits were reached."
 msgstr "Sommige beperkingsgrenzen werden bereikt."
 
-#: lib/errors.c:275
+#: lib/errors.c:288
 msgid "Failed to acquire random data."
 msgstr "Kan geen willekeurige bits verkrijgen."
 
-#: lib/errors.c:277
+#: lib/errors.c:290
 msgid "Verifying TLS/IA phase checksum failed"
 msgstr "Verificatie van TLS/IA-fasecontrolesom is mislukt"
 
-#: lib/errors.c:280
+#: lib/errors.c:293
 msgid "The specified algorithm or protocol is unknown."
 msgstr "Het opgegeven algoritme of protocol is onbekend."
 
-#: lib/errors.c:283
+#: lib/errors.c:296
 msgid "The handshake data size is too large."
 msgstr "De handshake-gegevens zijn te groot."
 
-#: lib/errors.c:286
+#: lib/errors.c:299
 msgid "Error opening /dev/crypto"
 msgstr "Fout bij openen van /dev/crypto"
 
-#: lib/errors.c:289
+#: lib/errors.c:302
 msgid "Error interfacing with /dev/crypto"
 msgstr "Fout bij interactie met /dev/crypto"
 
-#: lib/errors.c:291
+#: lib/errors.c:304
 msgid "Peer has terminated the connection"
 msgstr "Andere computer heeft de verbinding verbroken"
 
-#: lib/errors.c:293
+#: lib/errors.c:306
 msgid "Channel binding data not available"
 msgstr "Kanaalbindingsgegevens zijn niet beschikbaar."
 
-#: lib/errors.c:296
+#: lib/errors.c:309
 msgid "TPM error."
 msgstr "TPM-fout."
 
-#: lib/errors.c:298
+#: lib/errors.c:311
 msgid "The TPM library (trousers) cannot be found."
 msgstr ""
 
-#: lib/errors.c:300
+#: lib/errors.c:313
 msgid "TPM is not initialized."
 msgstr "TPM is niet geïnitialiseerd."
 
-#: lib/errors.c:302
+#: lib/errors.c:315
 msgid "TPM key was not found in persistent storage."
 msgstr "TPM-sleutel is niet gevonden in permanente opslag."
 
-#: lib/errors.c:304
+#: lib/errors.c:317
 msgid "Cannot initialize a session with the TPM."
 msgstr "Kan geen sessie met de TPM initialiseren."
 
-#: lib/errors.c:306
+#: lib/errors.c:319
 msgid "PKCS #11 error."
 msgstr "PKCS #11 -- fout."
 
-#: lib/errors.c:308
+#: lib/errors.c:321
 msgid "PKCS #11 initialization error."
 msgstr "PKCS #11 -- initialisatiefout."
 
-#: lib/errors.c:310
+#: lib/errors.c:323
 msgid "Error in parsing."
 msgstr "Fout bij ontleden."
 
-#: lib/errors.c:312
+#: lib/errors.c:325
 msgid "Error in provided PIN."
 msgstr "Fout in de gegeven PIN."
 
-#: lib/errors.c:314
+#: lib/errors.c:327
 msgid "Error in provided SRK password for TPM."
 msgstr "Fout in het gegeven SRK-wachtwoord voor TPM."
 
-#: lib/errors.c:317
+#: lib/errors.c:330
 msgid "Error in provided password for key to be loaded in TPM."
 msgstr "Fout in het gegeven wachtwoord voor de in TPM te laden sleutel."
 
-#: lib/errors.c:319
+#: lib/errors.c:332
 msgid "PKCS #11 error in slot"
 msgstr "PKCS #11 -- fout in plaats"
 
-#: lib/errors.c:321
+#: lib/errors.c:334
 msgid "Thread locking error"
 msgstr "Thread-vergrendelingsfout"
 
-#: lib/errors.c:323
+#: lib/errors.c:336
 msgid "PKCS #11 error in attribute"
 msgstr "PKCS #11 -- fout in eigenschap"
 
-#: lib/errors.c:325
+#: lib/errors.c:338
 msgid "PKCS #11 error in device"
 msgstr "PKCS #11 -- fout in apparaat"
 
-#: lib/errors.c:327
+#: lib/errors.c:340
 msgid "PKCS #11 error in data"
 msgstr "PKCS #11 -- fout in gegevens"
 
-#: lib/errors.c:329
+#: lib/errors.c:342
 msgid "PKCS #11 unsupported feature"
 msgstr "PKCS #11 -- niet-ondersteunde functie"
 
-#: lib/errors.c:331
+#: lib/errors.c:344
 msgid "PKCS #11 error in key"
 msgstr "PKCS #11 -- fout in sleutel"
 
-#: lib/errors.c:333
+#: lib/errors.c:346
 msgid "PKCS #11 PIN expired"
 msgstr "PKCS #11 -- PIN is verlopen"
 
-#: lib/errors.c:335
+#: lib/errors.c:348
 msgid "PKCS #11 PIN locked"
 msgstr "PKCS #11 -- PIN is vergrendeld"
 
-#: lib/errors.c:337
+#: lib/errors.c:350
 msgid "PKCS #11 error in session"
 msgstr "PKCS #11 -- fout in sessie"
 
-#: lib/errors.c:339
+#: lib/errors.c:352
 msgid "PKCS #11 error in signature"
 msgstr "PKCS #11 -- fout in ondertekening"
 
-#: lib/errors.c:341
+#: lib/errors.c:354
 msgid "PKCS #11 error in token"
 msgstr "PKCS #11 -- fout in token"
 
-#: lib/errors.c:343
+#: lib/errors.c:356
 msgid "PKCS #11 user error"
 msgstr "PKCS #11 -- gebruikersfout"
 
-#: lib/errors.c:345
+#: lib/errors.c:358
 msgid "The operation timed out"
 msgstr "De bewerking duurde te lang"
 
-#: lib/errors.c:347
+#: lib/errors.c:360
 msgid "The operation was cancelled due to user error"
 msgstr "De bewerking is geannuleerd vanwege een gebruikersfout"
 
-#: lib/errors.c:349
+#: lib/errors.c:362
 msgid "No supported ECC curves were found"
 msgstr "Er zijn geen ondersteunde ECC-krommes gevonden"
 
-#: lib/errors.c:351
+#: lib/errors.c:364
 msgid "The curve is unsupported"
 msgstr "De kromme wordt niet ondersteund"
 
-#: lib/errors.c:353
+#: lib/errors.c:366
 msgid "The requested PKCS #11 object is not available"
 msgstr "Het gevraagde PKCS #11-object is niet beschikbaar"
 
-#: lib/errors.c:356
+#: lib/errors.c:369
 msgid ""
 "The provided X.509 certificate list is not sorted (in subject to issuer "
 "order)"
@@ -729,109 +753,119 @@ msgstr ""
 "De gegeven lijst van X.509-certificaten is niet gesorteerd (van onderwerp "
 "tot uitgever)"
 
-#: lib/errors.c:358
+#: lib/errors.c:371
 msgid "The OCSP response is invalid"
 msgstr "Het OCSP-antwoord is ongeldig."
 
-#: lib/errors.c:360
+#: lib/errors.c:373
 msgid "There is no certificate status (OCSP)."
 msgstr "Er is geen certificaat-status (OCSP)."
 
-#: lib/errors.c:362
+#: lib/errors.c:375
 msgid "Error in the system's randomness device."
 msgstr "Fout in het willekeurigheidsapparaat van het systeem."
 
-#: lib/errors.c:365
+#: lib/errors.c:378
 msgid "No common application protocol could be negotiated."
 msgstr "Kan geen gemeenschappelijk applicatieprotocol overeenkomen."
 
-#: lib/errors.c:367
+#: lib/errors.c:380
 #, fuzzy
 msgid "Error while performing self checks."
 msgstr "Fout tijdens lezen van bestand."
 
-#: lib/errors.c:369
+#: lib/errors.c:382
 msgid "There is no self test for this algorithm."
 msgstr ""
 
-#: lib/errors.c:371
+#: lib/errors.c:384
 msgid ""
 "An error has been detected in the library and cannot continue operations."
 msgstr ""
 
-#: lib/errors.c:373
+#: lib/errors.c:386
 #, fuzzy
 msgid "Error in sockets initialization."
 msgstr "Fout in de 'push'-functie."
 
-#: lib/errors.c:375
+#: lib/errors.c:388
 #, fuzzy
 msgid "Error in public key generation."
 msgstr "Fout in de 'pull'-functie."
 
-#: lib/errors.c:377
+#: lib/errors.c:390
 #, fuzzy
 msgid "Invalid TLS extensions length field."
 msgstr "Er werd een ongeldige TLS-uitbreiding ontvangen."
 
-#: lib/errors.c:379
+#: lib/errors.c:392
 msgid "Peer's certificate or username has changed during a rehandshake."
 msgstr ""
 
-#: lib/errors.c:381
+#: lib/errors.c:394
 msgid "The provided string has an embedded null."
 msgstr ""
 
-#: lib/errors.c:383
+#: lib/errors.c:396
 msgid "Attempted handshake during false start."
 msgstr ""
 
-#: lib/errors.c:385
+#: lib/errors.c:398
 #, fuzzy
 msgid "The SNI host name not recognised."
 msgstr "De toegezonden servernaam werd niet herkend"
 
-#: lib/errors.c:387
+#: lib/errors.c:400
 msgid "There was an issue converting to or from UTF8."
 msgstr ""
 
-#: lib/errors.c:389
+#: lib/errors.c:402
 msgid "Cannot obtain resumption parameters while handshake is incomplete."
 msgstr ""
 
-#: lib/errors.c:395
+#: lib/errors.c:404
+#, fuzzy
+msgid "The obtained public key is invalid."
+msgstr "Het verzoek is ongeldig."
+
+#: lib/errors.c:406
+#, fuzzy
+msgid "The private key is invalid."
+msgstr "Het verzoek is ongeldig."
+
+#: lib/errors.c:412 libdane/errors.c:42
 msgid "Success."
 msgstr "Gelukt."
 
-#: lib/errors.c:396
+#: lib/errors.c:413
 msgid "A TLS warning alert has been received."
 msgstr "Er is een TLS-waarschuwing ontvangen."
 
-#: lib/errors.c:398
+#: lib/errors.c:415
 msgid "A heartbeat pong message was received."
 msgstr "Er werd een hartslag-pong-bericht ontvangen."
 
-#: lib/errors.c:400
+#: lib/errors.c:417
 msgid "A heartbeat ping message was received."
 msgstr "Er werd een hartslag-ping-bericht ontvangen."
 
-#: lib/errors.c:402
+#: lib/errors.c:419
 msgid "Resource temporarily unavailable, try again."
 msgstr "Bron is tijdelijk niet beschikbaar; probeer het later nogmaals."
 
-#: lib/errors.c:404
+#: lib/errors.c:421
 msgid "The transmitted packet is too large (EMSGSIZE)."
 msgstr "Het verzonden pakket is te groot (EMSGSIZE)."
 
-#: lib/errors.c:407
+#: lib/errors.c:424
 msgid "Rehandshake was requested by the peer."
 msgstr "De andere computer heeft om een hernieuwde handshake gevraagd."
 
-#: lib/errors.c:409
+#: lib/errors.c:426
 msgid "One of the involved algorithms has insufficient security level."
 msgstr ""
 
-#: lib/errors.c:500
+#: lib/errors.c:517 libdane/errors.c:100
 msgid "(unknown error code)"
 msgstr "(onbekende foutcode)"
 
@@ -902,10 +936,10 @@ msgstr "\t\tVervaldatum: Nooit\n"
 msgid "\t\tExpiration: %s\n"
 msgstr "\t\tVervaldatum: %s\n"
 
-#: lib/openpgp/output.c:230 lib/x509/ocsp_output.c:530 lib/x509/output.c:1261
-#: lib/x509/output.c:1458 lib/x509/output.c:1638 lib/x509/output.c:1852
-#: lib/x509/output.c:1865 lib/x509/output.c:2297 lib/x509/output.c:2395
-#: lib/x509/output.c:2464
+#: lib/openpgp/output.c:230 lib/x509/ocsp_output.c:527 lib/x509/output.c:1178
+#: lib/x509/output.c:1375 lib/x509/output.c:1519 lib/x509/output.c:1744
+#: lib/x509/output.c:1757 lib/x509/output.c:2174 lib/x509/output.c:2272
+#: lib/x509/output.c:2323
 msgid "unknown"
 msgstr "onbekend"
 
@@ -919,7 +953,7 @@ msgstr "\tAlgoritme van publieke sleutel: %s\n"
 msgid "\tKey Security Level: %s\n"
 msgstr "\tSleutelveiligheidsniveau: %s\n"
 
-#: lib/openpgp/output.c:257 lib/x509/output.c:1297
+#: lib/openpgp/output.c:257 lib/x509/output.c:1214
 #, c-format
 msgid "\t\tModulus (bits %d):\n"
 msgstr "\t\tModulus (bits %d):\n"
@@ -928,30 +962,30 @@ msgstr "\t\tModulus (bits %d):\n"
 msgid "\t\tExponent:\n"
 msgstr "\t\tExponent:\n"
 
-#: lib/openpgp/output.c:293 lib/x509/output.c:1400
+#: lib/openpgp/output.c:293 lib/x509/output.c:1317
 #, c-format
 msgid "\t\tPublic key (bits %d):\n"
 msgstr "\t\tPublieke sleutel (bits %d):\n"
 
-#: lib/openpgp/output.c:295 lib/x509/output.c:1349
+#: lib/openpgp/output.c:295 lib/x509/output.c:1266
 msgid "\t\tY:\n"
 msgstr "\t\tY:\n"
 
-#: lib/openpgp/output.c:299 lib/x509/output.c:1405
+#: lib/openpgp/output.c:299 lib/x509/output.c:1322
 msgid "\t\tP:\n"
 msgstr "\t\tP:\n"
 
-#: lib/openpgp/output.c:303 lib/x509/output.c:1409
+#: lib/openpgp/output.c:303 lib/x509/output.c:1326
 msgid "\t\tQ:\n"
 msgstr "\t\tQ:\n"
 
-#: lib/openpgp/output.c:307 lib/x509/output.c:1413
+#: lib/openpgp/output.c:307 lib/x509/output.c:1330
 msgid "\t\tG:\n"
 msgstr "\t\tG:\n"
 
 #: lib/openpgp/output.c:341 lib/x509/ocsp_output.c:50
-#: lib/x509/ocsp_output.c:276 lib/x509/output.c:1481 lib/x509/output.c:2032
-#: lib/x509/output.c:2418
+#: lib/x509/ocsp_output.c:276 lib/x509/output.c:1398 lib/x509/output.c:1927
+#: lib/x509/output.c:2295
 #, c-format
 msgid "\tVersion: %d\n"
 msgstr "\tVersie: %d\n"
@@ -1013,17 +1047,17 @@ msgstr "versleutelingsalgoritme %s (%d bits)"
 msgid "unknown key algorithm (%d)"
 msgstr "onbekend versleutelingsalgoritme (%d)"
 
-#: lib/openpgp/output.c:580
+#: lib/openpgp/output.c:584
 msgid "OpenPGP Certificate Information:\n"
 msgstr "Informatie over OpenPGP-certificaten:\n"
 
-#: lib/x509/ocsp_output.c:136 lib/x509/ocsp_output.c:503 lib/x509/output.c:2218
-#: lib/x509/output.c:2598
+#: lib/x509/ocsp_output.c:136 lib/x509/ocsp_output.c:500 lib/x509/output.c:2095
+#: lib/x509/output.c:2457
 msgid "\t\t\tASCII: "
 msgstr "\t\t\tASCII: "
 
-#: lib/x509/ocsp_output.c:141 lib/x509/ocsp_output.c:508 lib/x509/output.c:2222
-#: lib/x509/output.c:2603
+#: lib/x509/ocsp_output.c:141 lib/x509/ocsp_output.c:505 lib/x509/output.c:2099
+#: lib/x509/output.c:2462
 msgid "\t\t\tHexdump: "
 msgstr "\t\t\tHexdump: "
 
@@ -1036,112 +1070,108 @@ msgstr "Informatie over OCSP-verzoek:\n"
 msgid "\tResponder Key ID: "
 msgstr "\tID van antwoorder: %.*s\n"
 
-#: lib/x509/ocsp_output.c:300
-#, c-format
-msgid "\tResponder ID: %.*s\n"
+#: lib/x509/ocsp_output.c:299
+#, fuzzy, c-format
+msgid "\tResponder ID: %s\n"
 msgstr "\tID van antwoorder: %.*s\n"
 
-#: lib/x509/ocsp_output.c:323
+#: lib/x509/ocsp_output.c:320
 #, c-format
 msgid "\tProduced At: %s\n"
 msgstr "\tGeproduceerd in: %s\n"
 
-#: lib/x509/ocsp_output.c:417
+#: lib/x509/ocsp_output.c:414
 #, c-format
 msgid "\t\tRevocation time: %s\n"
 msgstr "\t\tTijdstip van intrekken: %s\n"
 
-#: lib/x509/ocsp_output.c:437
+#: lib/x509/ocsp_output.c:434
 #, c-format
 msgid "\t\tThis Update: %s\n"
 msgstr "\t\tDeze update: %s\n"
 
-#: lib/x509/ocsp_output.c:455
+#: lib/x509/ocsp_output.c:452
 #, c-format
 msgid "\t\tNext Update: %s\n"
 msgstr "\t\tVolgende update: %s\n"
 
-#: lib/x509/ocsp_output.c:531 lib/x509/output.c:1642 lib/x509/output.c:2301
-#: lib/x509/output.c:2468
+#: lib/x509/ocsp_output.c:528 lib/x509/output.c:1523 lib/x509/output.c:2178
+#: lib/x509/output.c:2327
 #, c-format
 msgid "\tSignature Algorithm: %s\n"
 msgstr "\tOndertekeningsalgoritme: %s\n"
 
-#: lib/x509/ocsp_output.c:535 lib/x509/output.c:1647 lib/x509/output.c:2306
+#: lib/x509/ocsp_output.c:532 lib/x509/output.c:1528 lib/x509/output.c:2183
 msgid ""
 "warning: signed using a broken signature algorithm that can be forged.\n"
 msgstr "Waarschuwing: ondertekend met een algoritme dat vervalst kan worden.\n"
 
-#: lib/x509/ocsp_output.c:544 lib/x509/output.c:1673 lib/x509/output.c:2332
+#: lib/x509/ocsp_output.c:541 lib/x509/output.c:1554 lib/x509/output.c:2209
 msgid "\tSignature:\n"
 msgstr "\tOndertekening:\n"
 
-#: lib/x509/ocsp_output.c:652
+#: lib/x509/ocsp_output.c:649
 msgid "OCSP Response Information:\n"
 msgstr "Informatie over OCSP-antwoord:\n"
 
-#: lib/x509/output.c:147
+#: lib/x509/output.c:59
 #, fuzzy
-msgid "warning: generalName contains an embedded NUL, replacing with '!'\n"
+msgid "warning: SAN contains an embedded NUL, replacing with '!'\n"
 msgstr ""
 "Waarschuwing: alternatieve naam bevat een NUL-waarde, wordt vervangen door "
 "'!'\n"
 
-#: lib/x509/output.c:170
+#: lib/x509/output.c:76 lib/x509/output.c:84
 #, c-format
 msgid "%sDNSname: %.*s (%s)\n"
 msgstr ""
 
-#: lib/x509/output.c:173
-msgid "note: DNSname is not in UTF-8.\n"
-msgstr ""
-
-#: lib/x509/output.c:174 lib/x509/output.c:177
+#: lib/x509/output.c:92
 #, fuzzy, c-format
 msgid "%sDNSname: %.*s\n"
 msgstr "%s\t\t\tAndere naam (OID): %.*s\n"
 
-#: lib/x509/output.c:182
+#: lib/x509/output.c:97
 #, c-format
 msgid "%sRFC822Name: %.*s\n"
 msgstr ""
 
-#: lib/x509/output.c:186
+#: lib/x509/output.c:101
 #, c-format
 msgid "%sURI: %.*s\n"
 msgstr ""
 
-#: lib/x509/output.c:200
+#: lib/x509/output.c:115
 #, fuzzy, c-format
 msgid "%sdirectoryName: %.*s\n"
 msgstr "%s\t\t\tAndere naam (OID): %.*s\n"
 
-#: lib/x509/output.c:204
+#: lib/x509/output.c:119
 #, fuzzy, c-format
 msgid "%sXMPP Address: %.*s\n"
 msgstr "%s\t\t\tXMPP-adres: %.*s\n"
 
-#: lib/x509/output.c:208
+#: lib/x509/output.c:123
 #, c-format
 msgid "%sKRB5Principal: %.*s\n"
 msgstr ""
 
-#: lib/x509/output.c:212
+#: lib/x509/output.c:127
 #, c-format
 msgid "%sUnknown name: "
 msgstr ""
 
-#: lib/x509/output.c:354
+#: lib/x509/output.c:269
 #, c-format
 msgid "\t\t\tPath Length Constraint: %d\n"
 msgstr "\t\t\tPadlengtebeperking: %d\n"
 
-#: lib/x509/output.c:356
+#: lib/x509/output.c:271
 #, c-format
 msgid "\t\t\tPolicy Language: %s"
 msgstr "\t\t\tBeleidstaal: %s"
 
-#: lib/x509/output.c:364
+#: lib/x509/output.c:279
 msgid ""
 "\t\t\tPolicy:\n"
 "\t\t\t\tASCII: "
@@ -1149,7 +1179,7 @@ msgstr ""
 "\t\t\tBeleid:\n"
 "\t\t\t\tASCII: "
 
-#: lib/x509/output.c:366
+#: lib/x509/output.c:281
 msgid ""
 "\n"
 "\t\t\t\tHexdump: "
@@ -1157,142 +1187,142 @@ msgstr ""
 "\n"
 "\t\t\t\tHexdump: "
 
-#: lib/x509/output.c:399
+#: lib/x509/output.c:314
 #, c-format
 msgid "%s\t\t\tPermitted:\n"
 msgstr ""
 
-#: lib/x509/output.c:411
+#: lib/x509/output.c:326
 #, c-format
 msgid "%s\t\t\tExcluded:\n"
 msgstr ""
 
-#: lib/x509/output.c:451 lib/x509/output.c:453 lib/x509/output.c:455
+#: lib/x509/output.c:366 lib/x509/output.c:368 lib/x509/output.c:370
 #, fuzzy, c-format
 msgid "\t\t\tAccess Method: %s (%s)\n"
 msgstr "\t\t\tToegangsmethode: %.*s"
 
-#: lib/x509/output.c:560
+#: lib/x509/output.c:474
 #, c-format
 msgid "%sDigital signature.\n"
 msgstr "%sDigitale ondertekening.\n"
 
-#: lib/x509/output.c:562
+#: lib/x509/output.c:476
 #, c-format
 msgid "%sNon repudiation.\n"
 msgstr "%sNiet-herroeping.\n"
 
-#: lib/x509/output.c:564
+#: lib/x509/output.c:478
 #, c-format
 msgid "%sKey encipherment.\n"
 msgstr "%sSleutel-encryptie.\n"
 
-#: lib/x509/output.c:566
+#: lib/x509/output.c:480
 #, c-format
 msgid "%sData encipherment.\n"
 msgstr "%sData-encryptie.\n"
 
-#: lib/x509/output.c:568
+#: lib/x509/output.c:482
 #, c-format
 msgid "%sKey agreement.\n"
 msgstr "%sSleutelovereenstemming.\n"
 
-#: lib/x509/output.c:570
+#: lib/x509/output.c:484
 #, c-format
 msgid "%sCertificate signing.\n"
 msgstr "%sCertificaatondertekening.\n"
 
-#: lib/x509/output.c:572
+#: lib/x509/output.c:486
 #, c-format
 msgid "%sCRL signing.\n"
 msgstr "%sCRL-ondertekening.\n"
 
-#: lib/x509/output.c:574
+#: lib/x509/output.c:488
 #, c-format
 msgid "%sKey encipher only.\n"
 msgstr "%sAlleen sleutel-encryptie.\n"
 
-#: lib/x509/output.c:576
+#: lib/x509/output.c:490
 #, c-format
 msgid "%sKey decipher only.\n"
 msgstr "%sAlleen sleutel-decryptie.\n"
 
-#: lib/x509/output.c:620
+#: lib/x509/output.c:534
 #, c-format
 msgid "\t\t\tNot Before: %s\n"
 msgstr "\t\t\tNiet vóór: %s\n"
 
-#: lib/x509/output.c:629
+#: lib/x509/output.c:543
 #, c-format
 msgid "\t\t\tNot After: %s\n"
 msgstr "\t\t\tNiet na: %s\n"
 
-#: lib/x509/output.c:707
+#: lib/x509/output.c:621
 #, c-format
 msgid "%s\t\t\tTLS WWW Server.\n"
 msgstr "%s\t\t\tTLS WWW-server.\n"
 
-#: lib/x509/output.c:709
+#: lib/x509/output.c:623
 #, c-format
 msgid "%s\t\t\tTLS WWW Client.\n"
 msgstr "%s\t\t\tTLS WWW-cliënt.\n"
 
-#: lib/x509/output.c:711
+#: lib/x509/output.c:625
 #, c-format
 msgid "%s\t\t\tCode signing.\n"
 msgstr "%s\t\t\tCode-ondertekening.\n"
 
-#: lib/x509/output.c:713
+#: lib/x509/output.c:627
 #, c-format
 msgid "%s\t\t\tEmail protection.\n"
 msgstr "%s\t\t\tE-mailbescherming.\n"
 
-#: lib/x509/output.c:716
+#: lib/x509/output.c:630
 #, c-format
 msgid "%s\t\t\tTime stamping.\n"
 msgstr "%s\t\t\tTijdsstempels.\n"
 
-#: lib/x509/output.c:718
+#: lib/x509/output.c:632
 #, c-format
 msgid "%s\t\t\tOCSP signing.\n"
 msgstr "%s\t\t\tOCSP-ondertekening.\n"
 
-#: lib/x509/output.c:720
+#: lib/x509/output.c:634
 #, c-format
 msgid "%s\t\t\tIpsec IKE.\n"
 msgstr "%s\t\t\tIpsec IKE.\n"
 
-#: lib/x509/output.c:722
+#: lib/x509/output.c:636
 #, c-format
 msgid "%s\t\t\tAny purpose.\n"
 msgstr "%s\t\t\tElk doel.\n"
 
-#: lib/x509/output.c:745
+#: lib/x509/output.c:659
 #, c-format
 msgid "%s\t\t\tCertificate Authority (CA): FALSE\n"
 msgstr "%s\t\t\tCertificaatautoriteit (CA): ONWAAR\n"
 
-#: lib/x509/output.c:748
+#: lib/x509/output.c:662
 #, c-format
 msgid "%s\t\t\tCertificate Authority (CA): TRUE\n"
 msgstr "%s\t\t\tCertificaatautoriteit (CA): WAAR\n"
 
-#: lib/x509/output.c:752
+#: lib/x509/output.c:666
 #, c-format
 msgid "%s\t\t\tPath Length Constraint: %d\n"
 msgstr "%s\t\t\tPadlengtebeperking: %d\n"
 
-#: lib/x509/output.c:808
+#: lib/x509/output.c:722
 #, c-format
 msgid "%s\t\t\totherName OID: %.*s\n"
 msgstr "%s\t\t\tAndere naam (OID): %.*s\n"
 
-#: lib/x509/output.c:810
+#: lib/x509/output.c:724
 #, c-format
 msgid "%s\t\t\totherName DER: "
 msgstr "%s\t\t\tAndere naam (DER): "
 
-#: lib/x509/output.c:813
+#: lib/x509/output.c:727
 #, c-format
 msgid ""
 "\n"
@@ -1301,347 +1331,423 @@ msgstr ""
 "\n"
 "%s\t\t\tAndere naam (ASCII): "
 
-#: lib/x509/output.c:951
+#: lib/x509/output.c:867
 #, c-format
 msgid "%s\t\tBasic Constraints (%s):\n"
 msgstr "%s\t\tFundamentele beperkingen (%s):\n"
 
-#: lib/x509/output.c:953 lib/x509/output.c:967 lib/x509/output.c:1011
-#: lib/x509/output.c:1041 lib/x509/output.c:1053 lib/x509/output.c:1068
-#: lib/x509/output.c:1080 lib/x509/output.c:1093 lib/x509/output.c:1105
-#: lib/x509/output.c:1119 lib/x509/output.c:1133 lib/x509/output.c:1141
-#: lib/x509/output.c:1152 lib/x509/output.c:1163 lib/x509/output.c:1171
-#: lib/x509/output.c:2159 lib/x509/output.c:2184 lib/x509/output.c:2204
+#: lib/x509/output.c:869 lib/x509/output.c:883 lib/x509/output.c:928
+#: lib/x509/output.c:958 lib/x509/output.c:970 lib/x509/output.c:985
+#: lib/x509/output.c:997 lib/x509/output.c:1010 lib/x509/output.c:1022
+#: lib/x509/output.c:1036 lib/x509/output.c:1050 lib/x509/output.c:1058
+#: lib/x509/output.c:1069 lib/x509/output.c:1080 lib/x509/output.c:1088
+#: lib/x509/output.c:2036 lib/x509/output.c:2061 lib/x509/output.c:2081
 msgid "critical"
 msgstr "kritiek"
 
-#: lib/x509/output.c:953 lib/x509/output.c:967 lib/x509/output.c:1012
-#: lib/x509/output.c:1041 lib/x509/output.c:1053 lib/x509/output.c:1068
-#: lib/x509/output.c:1080 lib/x509/output.c:1093 lib/x509/output.c:1105
-#: lib/x509/output.c:1119 lib/x509/output.c:1133 lib/x509/output.c:1141
-#: lib/x509/output.c:1152 lib/x509/output.c:1163 lib/x509/output.c:1171
-#: lib/x509/output.c:2160 lib/x509/output.c:2185 lib/x509/output.c:2205
+#: lib/x509/output.c:869 lib/x509/output.c:883 lib/x509/output.c:929
+#: lib/x509/output.c:958 lib/x509/output.c:970 lib/x509/output.c:985
+#: lib/x509/output.c:997 lib/x509/output.c:1010 lib/x509/output.c:1022
+#: lib/x509/output.c:1036 lib/x509/output.c:1050 lib/x509/output.c:1058
+#: lib/x509/output.c:1069 lib/x509/output.c:1080 lib/x509/output.c:1088
+#: lib/x509/output.c:2037 lib/x509/output.c:2062 lib/x509/output.c:2082
 msgid "not critical"
 msgstr "niet kritiek"
 
-#: lib/x509/output.c:965
+#: lib/x509/output.c:881
 #, c-format
 msgid "%s\t\tSubject Key Identifier (%s):\n"
 msgstr "%s\t\tOnderwerps-ID van sleutel (%s):\n"
 
-#: lib/x509/output.c:1039
+#: lib/x509/output.c:956
 #, c-format
 msgid "%s\t\tAuthority Key Identifier (%s):\n"
 msgstr "%s\t\tAutoriteits-ID van sleutel (%s):\n"
 
-#: lib/x509/output.c:1052
+#: lib/x509/output.c:969
 #, c-format
 msgid "%s\t\tKey Usage (%s):\n"
 msgstr "%s\t\tGebruik van sleutel (%s):\n"
 
-#: lib/x509/output.c:1066
+#: lib/x509/output.c:983
 #, c-format
 msgid "%s\t\tPrivate Key Usage Period (%s):\n"
 msgstr "%s\t\tGebruiksperiode van privésleutel (%s):\n"
 
-#: lib/x509/output.c:1079
+#: lib/x509/output.c:996
 #, c-format
 msgid "%s\t\tKey Purpose (%s):\n"
 msgstr "%s\t\tDoel van sleutel (%s):\n"
 
-#: lib/x509/output.c:1091
+#: lib/x509/output.c:1008
 #, c-format
 msgid "%s\t\tSubject Alternative Name (%s):\n"
 msgstr "%s\t\tToegevoegde onderwerpen (%s):\n"
 
-#: lib/x509/output.c:1103
+#: lib/x509/output.c:1020
 #, c-format
 msgid "%s\t\tIssuer Alternative Name (%s):\n"
 msgstr "%s\t\tAlternatieve uitgevernaam (%s):\n"
 
-#: lib/x509/output.c:1117
+#: lib/x509/output.c:1034
 #, c-format
 msgid "%s\t\tCRL Distribution points (%s):\n"
 msgstr "%s\t\tCRL-distributiepunten (%s):\n"
 
-#: lib/x509/output.c:1131
+#: lib/x509/output.c:1048
 #, c-format
 msgid "%s\t\tProxy Certificate Information (%s):\n"
 msgstr "%s\t\tInformatie over proxy-certificaat (%s):\n"
 
-#: lib/x509/output.c:1139
+#: lib/x509/output.c:1056
 #, c-format
 msgid "%s\t\tAuthority Information Access (%s):\n"
 msgstr "%s\t\tToegang tot autoriteitsinformatie (%s):\n"
 
-#: lib/x509/output.c:1151
+#: lib/x509/output.c:1068
 #, fuzzy, c-format
 msgid "%s\t\tName Constraints (%s):\n"
 msgstr "%s\t\tFundamentele beperkingen (%s):\n"
 
-#: lib/x509/output.c:1161
+#: lib/x509/output.c:1078
 #, fuzzy, c-format
 msgid "%s\t\tTLS Features (%s):\n"
 msgstr "%s\t\tDoel van sleutel (%s):\n"
 
-#: lib/x509/output.c:1169
+#: lib/x509/output.c:1086
 #, c-format
 msgid "%s\t\tUnknown extension %s (%s):\n"
 msgstr "%s\t\tOnbekende uitbreiding %s (%s):\n"
 
-#: lib/x509/output.c:1173
+#: lib/x509/output.c:1090
 #, c-format
 msgid "%s\t\t\tASCII: "
 msgstr "%s\t\t\tASCII: "
 
-#: lib/x509/output.c:1177
+#: lib/x509/output.c:1094
 #, c-format
 msgid "%s\t\t\tHexdump: "
 msgstr "%s\t\t\tHexdump: "
 
-#: lib/x509/output.c:1226
+#: lib/x509/output.c:1143
 #, c-format
 msgid "%s\tExtensions:\n"
 msgstr "%s\tUitbreidingen:\n"
 
-#: lib/x509/output.c:1265
+#: lib/x509/output.c:1182
 #, c-format
 msgid "\t%sPublic Key Algorithm: %s\n"
 msgstr "\t%sAlgoritme van publieke sleutel: %s\n"
 
-#: lib/x509/output.c:1266
+#: lib/x509/output.c:1183
 #, c-format
 msgid "\tAlgorithm Security Level: %s (%d bits)\n"
 msgstr "\tAlgortimeveiligheidsniveau: %s (%d bits)\n"
 
-#: lib/x509/output.c:1282
+#: lib/x509/output.c:1199
 #, c-format
 msgid "\t\tModulus (bits %d): "
 msgstr "\t\tModulus (bits %d): "
 
-#: lib/x509/output.c:1289
+#: lib/x509/output.c:1206
 #, c-format
 msgid "\t\tExponent (bits %d): "
 msgstr "\t\tExponent (bits %d): "
 
-#: lib/x509/output.c:1304
+#: lib/x509/output.c:1221
 #, c-format
 msgid "\t\tExponent (bits %d):\n"
 msgstr "\t\tExponent (bits %d):\n"
 
-#: lib/x509/output.c:1330
+#: lib/x509/output.c:1247
 #, c-format
 msgid "\t\tCurve:\t%s\n"
 msgstr "\t\tKromme: %s\n"
 
-#: lib/x509/output.c:1334
+#: lib/x509/output.c:1251
 msgid "\t\tX: "
 msgstr "\t\tX: "
 
-#: lib/x509/output.c:1339
+#: lib/x509/output.c:1256
 msgid "\t\tY: "
 msgstr "\t\tY: "
 
-#: lib/x509/output.c:1345
+#: lib/x509/output.c:1262
 msgid "\t\tX:\n"
 msgstr "\t\tX:\n"
 
-#: lib/x509/output.c:1376
+#: lib/x509/output.c:1293
 #, c-format
 msgid "\t\tPublic key (bits %d): "
 msgstr "\t\tPublieke sleutel (bits %d):"
 
-#: lib/x509/output.c:1382
+#: lib/x509/output.c:1299
 msgid "\t\tP: "
 msgstr "\t\tP: "
 
-#: lib/x509/output.c:1387
+#: lib/x509/output.c:1304
 msgid "\t\tQ: "
 msgstr "\t\tQ: "
 
-#: lib/x509/output.c:1392
+#: lib/x509/output.c:1309
 msgid "\t\tG: "
 msgstr "\t\tG: "
 
-#: lib/x509/output.c:1448 lib/x509/output.c:2385
+#: lib/x509/output.c:1365 lib/x509/output.c:2262
 msgid "Subject "
 msgstr "Onderwerp "
 
-#: lib/x509/output.c:1496
+#: lib/x509/output.c:1413
 msgid "\tSerial Number (hex): "
 msgstr "\tSerienummer (hex): "
 
-#: lib/x509/output.c:1511 lib/x509/output.c:2044
+#: lib/x509/output.c:1426 lib/x509/output.c:1937
 #, fuzzy
 msgid "\tIssuer:\n"
 msgstr "\tUitgever: %s\n"
 
-#: lib/x509/output.c:1531 lib/x509/output.c:2064
+#: lib/x509/output.c:1431 lib/x509/output.c:1942
 #, c-format
 msgid "\tIssuer: %s\n"
 msgstr "\tUitgever: %s\n"
 
-#: lib/x509/output.c:1541
+#: lib/x509/output.c:1440
 msgid "\tValidity:\n"
 msgstr "\tGeldigheid:\n"
 
-#: lib/x509/output.c:1558
+#: lib/x509/output.c:1457
 #, c-format
 msgid "\t\tNot Before: %s\n"
 msgstr "\t\tNiet vóór: %s\n"
 
-#: lib/x509/output.c:1576
+#: lib/x509/output.c:1475
 #, c-format
 msgid "\t\tNot After: %s\n"
 msgstr "\t\tNiet na: %s\n"
 
-#: lib/x509/output.c:1589 lib/x509/output.c:2430
+#: lib/x509/output.c:1486 lib/x509/output.c:2305
 #, fuzzy
 msgid "\tSubject:\n"
 msgstr "\tOnderwerp: %s\n"
 
-#: lib/x509/output.c:1608 lib/x509/output.c:2449
+#: lib/x509/output.c:1491 lib/x509/output.c:2310
 #, c-format
 msgid "\tSubject: %s\n"
 msgstr "\tOnderwerp: %s\n"
 
-#: lib/x509/output.c:1695
+#: lib/x509/output.c:1568
+#, fuzzy
+msgid "\tFingerprint:\n"
+msgstr "vingerafdruk: "
+
+#: lib/x509/output.c:1577
+msgid "\t\tsha1:"
+msgstr ""
+
+#: lib/x509/output.c:1588
+msgid "\t\tsha256:"
+msgstr ""
+
+#: lib/x509/output.c:1622
 #, fuzzy, c-format
 msgid ""
-"\t%s fingerprint:\n"
-"\t\t"
-msgstr ""
-"\tMD5-vingerafdruk:\n"
-"\t\t"
+"%sPublic Key ID:\n"
+"%s\tsha1:"
+msgstr "ID van publieke sleutel: "
 
-#: lib/x509/output.c:1719 lib/x509/output.c:2641
-#, fuzzy
-msgid ""
-"\tPublic Key ID:\n"
-"\t\t"
-msgstr ""
-"\tID van publieke sleutel:\n"
-"\t\t"
-
-#: lib/x509/output.c:1747
+#: lib/x509/output.c:1672
 msgid "\tPublic key's random art:\n"
 msgstr "\tWillekeur in publieke sleutel:\n"
 
-#: lib/x509/output.c:1777
+#: lib/x509/output.c:1699
 #, fuzzy
 msgid "no subject,"
 msgstr "Onderwerp "
 
-#: lib/x509/output.c:1809
+#: lib/x509/output.c:1715
 msgid "no issuer,"
 msgstr ""
 
-#: lib/x509/output.c:1870
+#: lib/x509/output.c:1762
 #, c-format
 msgid "signed using %s (broken!), "
 msgstr "ondertekend met %s (beschadigd!), "
 
-#: lib/x509/output.c:1872
+#: lib/x509/output.c:1764
 #, c-format
 msgid "signed using %s, "
 msgstr "ondertekend met %s, "
 
-#: lib/x509/output.c:2008
+#: lib/x509/output.c:1903
 msgid "X.509 Certificate Information:\n"
 msgstr "Informatie over X.509-certificaten:\n"
 
-#: lib/x509/output.c:2012 lib/x509/output.c:2678
+#: lib/x509/output.c:1907 lib/x509/output.c:2508
 msgid "Other Information:\n"
 msgstr "Andere informatie:\n"
 
-#: lib/x509/output.c:2027
+#: lib/x509/output.c:1922
 msgid "\tVersion: 1 (default)\n"
 msgstr "\tVersie: 1 (standaard)\n"
 
-#: lib/x509/output.c:2074
+#: lib/x509/output.c:1951
 msgid "\tUpdate dates:\n"
 msgstr "\tUpdate-datums:\n"
 
-#: lib/x509/output.c:2091
+#: lib/x509/output.c:1968
 #, c-format
 msgid "\t\tIssued: %s\n"
 msgstr "\t\tUitgegeven: %s\n"
 
-#: lib/x509/output.c:2111
+#: lib/x509/output.c:1988
 #, c-format
 msgid "\t\tNext at: %s\n"
 msgstr "\t\tVolgende op: %s\n"
 
-#: lib/x509/output.c:2142
+#: lib/x509/output.c:2019
 msgid "\tExtensions:\n"
 msgstr "\tUitbreidingen:\n"
 
-#: lib/x509/output.c:2158
+#: lib/x509/output.c:2035
 #, c-format
 msgid "\t\tCRL Number (%s): "
 msgstr "\t\tCRL-nummer (%s): "
 
-#: lib/x509/output.c:2183
+#: lib/x509/output.c:2060
 #, c-format
 msgid "\t\tAuthority Key Identifier (%s):\n"
 msgstr "\t\tAutoriteits-ID van sleutel (%s):\n"
 
-#: lib/x509/output.c:2202
+#: lib/x509/output.c:2079
 #, c-format
 msgid "\t\tUnknown extension %s (%s):\n"
 msgstr "\t\tOnbekende uitbreiding %s (%s):\n"
 
-#: lib/x509/output.c:2239
+#: lib/x509/output.c:2116
 #, c-format
 msgid "\tRevoked certificates (%d):\n"
 msgstr "\tIngetrokken certificaten (%d):\n"
 
-#: lib/x509/output.c:2242
+#: lib/x509/output.c:2119
 msgid "\tNo revoked certificates.\n"
 msgstr "\tGeen ingetrokken certificaten.\n"
 
-#: lib/x509/output.c:2263
+#: lib/x509/output.c:2140
 msgid "\t\tSerial Number (hex): "
 msgstr "\t\tSerienummer (hex): "
 
-#: lib/x509/output.c:2281
+#: lib/x509/output.c:2158
 #, c-format
 msgid "\t\tRevoked at: %s\n"
 msgstr "\t\tIngetrokken op: %s\n"
 
-#: lib/x509/output.c:2363
+#: lib/x509/output.c:2240
 msgid "X.509 Certificate Revocation List Information:\n"
 msgstr "Informatie over ingetrokken X.509-certificaten:\n"
 
-#: lib/x509/output.c:2499
+#: lib/x509/output.c:2358
 msgid "\tAttributes:\n"
 msgstr "\tEigenschappen:\n"
 
-#: lib/x509/output.c:2556
+#: lib/x509/output.c:2415
 #, c-format
 msgid "\t\tChallenge password: %s\n"
 msgstr "\t\tTest-wachtwoord: %s\n"
 
-#: lib/x509/output.c:2566
+#: lib/x509/output.c:2425
 #, c-format
 msgid "\t\tUnknown attribute %s:\n"
 msgstr "\t\tOnbekende eigenschap %s:\n"
 
-#: lib/x509/output.c:2674
+#: lib/x509/output.c:2504
 msgid "PKCS #10 Certificate Request Information:\n"
 msgstr "Informatie over PKCS #10-certificaatverzoek:\n"
 
-#: lib/x509/output.c:2702
+#: lib/x509/output.c:2530
 msgid "Public Key Usage:\n"
 msgstr "Gebruik van publieke sleutel:\n"
 
-#: lib/x509/output.c:2712
-msgid "Public Key ID: "
-msgstr "ID van publieke sleutel: "
-
-#: lib/x509/output.c:2745
+#: lib/x509/output.c:2564
 msgid "Public Key Information:\n"
 msgstr "Informatie over publieke sleutel:\n"
+
+#: libdane/dane.c:1040
+#, fuzzy
+msgid "Certificate matches. "
+msgstr "Certificaat is ongeldig"
+
+#: libdane/dane.c:1043
+#, fuzzy
+msgid "Verification failed. "
+msgstr "Ontsleuteling is mislukt"
+
+#: libdane/dane.c:1048
+#, fuzzy
+msgid "CA constrains were violated. "
+msgstr "Sommige beperkingsgrenzen werden bereikt."
+
+#: libdane/dane.c:1052
+#, fuzzy
+msgid "The certificate differs. "
+msgstr "Certificaat is ongeldig"
+
+#: libdane/dane.c:1057
+msgid "There were no DANE information. "
+msgstr ""
+
+#: libdane/errors.c:43
+msgid "There was error initializing the DNS query."
+msgstr ""
+
+#: libdane/errors.c:45
+msgid "There was an error while resolving."
+msgstr ""
+
+#: libdane/errors.c:47
+#, fuzzy
+msgid "No DANE data were found."
+msgstr "Er zijn geen tijdelijke DH-parameters gevonden."
+
+#: libdane/errors.c:49
+msgid "Unknown DANE data were found."
+msgstr ""
+
+#: libdane/errors.c:51
+#, fuzzy
+msgid "No DNSSEC signature was found."
+msgstr "Geen certificaat gevonden."
+
+#: libdane/errors.c:53
+msgid "Received corrupt data."
+msgstr ""
+
+#: libdane/errors.c:55
+#, fuzzy
+msgid "The DNSSEC signature is invalid."
+msgstr "Het OCSP-antwoord is ongeldig."
+
+#: libdane/errors.c:57
+msgid "There was a memory error."
+msgstr ""
+
+#: libdane/errors.c:59
+#, fuzzy
+msgid "The requested data are not available."
+msgstr "De gevraagde gegevens zijn niet beschikbaar."
+
+#: libdane/errors.c:63
+#, fuzzy
+msgid "There was an error in the certificate."
+msgstr "Fout in het certificaat."
+
+#: libdane/errors.c:65
+msgid "There was an error in the public key."
+msgstr ""
+
+#: libdane/errors.c:69
+#, fuzzy
+msgid "Error in file."
+msgstr "Fout in wachtwoordenbestand."
 
 #~ msgid "Received a TLS/IA Intermediate Phase Finished message"
 #~ msgstr "TLS/IA-tussenfasebeëindigingsbericht ontvangen"
@@ -1656,10 +1762,24 @@ msgstr "Informatie over publieke sleutel:\n"
 #~ "'!'\n"
 
 #~ msgid ""
+#~ "\tMD5 fingerprint:\n"
+#~ "\t\t"
+#~ msgstr ""
+#~ "\tMD5-vingerafdruk:\n"
+#~ "\t\t"
+
+#~ msgid ""
 #~ "\tSHA-1 fingerprint:\n"
 #~ "\t\t"
 #~ msgstr ""
 #~ "\tSHA-1-vingerafdruk:\n"
+#~ "\t\t"
+
+#~ msgid ""
+#~ "\tPublic Key Id:\n"
+#~ "\t\t"
+#~ msgstr ""
+#~ "\tID van publieke sleutel:\n"
 #~ "\t\t"
 
 #~ msgid "PKCS #11 error in PIN."

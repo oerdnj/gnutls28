@@ -20,6 +20,15 @@ gstr
 <!-- ##### SECTION Image ##### -->
 
 
+<!-- ##### MACRO Estrcpy ##### -->
+<para>
+
+</para>
+
+@x: 
+@y: 
+
+
 <!-- ##### MACRO Estrcat ##### -->
 <para>
 
@@ -29,12 +38,12 @@ gstr
 @y: 
 
 
-<!-- ##### MACRO Estrcpy ##### -->
+<!-- ##### FUNCTION safe_memset ##### -->
 <para>
 
 </para>
 
-@x: 
-@y: 
+@data: 
+@c: 
 
 

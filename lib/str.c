@@ -60,7 +60,7 @@ void _gnutls_str_cpy(char *dest, size_t dest_tot_size, const char *src)
 		strcpy(dest, src);
 	} else {
 		if (dest_tot_size > 0) {
-			strncpy(dest, src, (dest_tot_size) - 1);
+			memcpy(dest, src, (dest_tot_size) - 1);
 			dest[dest_tot_size - 1] = 0;
 		}
 	}
@@ -254,14 +254,15 @@ int _gnutls_buffer_to_datum(gnutls_buffer_st * str, gnutls_datum_t * data, unsig
 	if (str->length == 0) {
 		data->data = NULL;
 		data->size = 0;
-		_gnutls_buffer_clear(str);
-		return 0;
+		ret = 0;
+		goto fail;
 	}
 
 	if (is_str) {
 		ret = _gnutls_buffer_append_data(str, "\x00", 1);
 		if (ret < 0) {
-			return gnutls_assert_val(ret);
+			gnutls_assert();
+			goto fail;
 		}
 	}
 
@@ -269,8 +270,8 @@ int _gnutls_buffer_to_datum(gnutls_buffer_st * str, gnutls_datum_t * data, unsig
 		data->data = gnutls_malloc(str->length);
 		if (data->data == NULL) {
 			gnutls_assert();
-			_gnutls_buffer_clear(str);
-			return GNUTLS_E_MEMORY_ERROR;
+			ret = GNUTLS_E_MEMORY_ERROR;
+			goto fail;
 		}
 		memcpy(data->data, str->data, str->length);
 		data->size = str->length;
@@ -286,6 +287,9 @@ int _gnutls_buffer_to_datum(gnutls_buffer_st * str, gnutls_datum_t * data, unsig
 	}
 
 	return 0;
+ fail:
+	_gnutls_buffer_clear(str);
+	return ret;
 }
 
 /* returns data from a string in a constant buffer.
@@ -475,7 +479,7 @@ char *_gnutls_bin2hex(const void *_old, size_t oldlen,
  * @hex_size: size of hex data
  * @bin_data: output array with binary data
  * @bin_size: when calling should hold maximum size of @bin_data,
- *            on return will hold actual length of @bin_data.
+ *	    on return will hold actual length of @bin_data.
  *
  * Convert a buffer with hex data to binary data. This function
  * unlike gnutls_hex_decode() can parse hex data with separators
@@ -718,7 +722,7 @@ _gnutls_hostname_compare(const char *certname,
 	unsigned i;
 
 	for (i=0;i<certnamesize;i++) {
-		if (c_isascii(certname[i]) == 0)
+		if (c_isprint(certname[i]) == 0)
 			return hostname_compare_raw(certname, certnamesize, hostname);
 	}
 

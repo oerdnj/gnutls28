@@ -23,60 +23,20 @@
 srcdir="${srcdir:-.}"
 CERTTOOL="${CERTTOOL:-../../src/certtool${EXEEXT}}"
 DIFF="${DIFF:-diff}"
-OUTFILE=provable-privkey.tmp
+OUTFILE=provable-privkey$$.tmp
 
 if ! test -z "${VALGRIND}"; then
 	VALGRIND="${LIBTOOL:-libtool} --mode=execute ${VALGRIND}"
 fi
 
 #RSA keys
-${VALGRIND} "${CERTTOOL}" --verify-provable-privkey --load-privkey "${srcdir}/data/provable2048.pem"
-rc=$?
+${VALGRIND} "${CERTTOOL}" --verify-provable-privkey --load-privkey "${srcdir}/data/provable2048.pem" &
+PID1=$!
 
-if test "${rc}" != "0"; then
-	echo "Could not verify the 2048-bit key"
-	exit 1
-fi
 
-${VALGRIND} "${CERTTOOL}" --verify-provable-privkey --load-privkey "${srcdir}/data/provable3072.pem"
-rc=$?
+${VALGRIND} "${CERTTOOL}" --verify-provable-privkey --load-privkey "${srcdir}/data/provable3072.pem" &
+PID2=$!
 
-if test "${rc}" != "0"; then
-	echo "Could not verify the 3072-bit key"
-	exit 1
-fi
-
-${VALGRIND} "${CERTTOOL}" --generate-privkey --provable --bits 2048 --seed "AF:BF:D6:96:BA:5D:05:E3:78:A9:4B:BF:E2:95:BA:F9:94:AC:B8:7F:BC:C8:ED:FF:7A:48:EE:4F" --outfile $OUTFILE
-rc=$?
-
-if test "${rc}" != "0"; then
-	echo "Could not generate a 2048-bit key"
-	exit 1
-fi
-
-${VALGRIND} "${CERTTOOL}" --verify-provable-privkey --load-privkey "$OUTFILE"
-rc=$?
-
-if test "${rc}" != "0"; then
-	echo "Could not verify the generated key 1"
-	exit 1
-fi
-
-${VALGRIND} "${CERTTOOL}" --verify-provable-privkey --load-privkey "$OUTFILE" --seed "AF:BF:D6:96:BA:5D:05:E3:78:A9:4B:BF:E2:95:BA:F9:94:AC:B8:7F:BC:C8:ED:FF:7A:48:EE:4F"
-rc=$?
-
-if test "${rc}" != "0"; then
-	echo "Could not verify the generated key 2"
-	exit 1
-fi
-
-${VALGRIND} "${CERTTOOL}" --generate-privkey --provable --seed "A3:54:5C:B3:1D:70:56:1C:A0:BD:2C:C8:78:C1:9C:56:CD:69:75:50:0C:3A:FD:BF:E8:96:83:FA:52:BC:98:C5" --outfile $OUTFILE
-rc=$?
-
-if test "${rc}" != "0"; then
-	echo "Could not generate a default key"
-	exit 1
-fi
 
 if test "${FIPS140}" = 1;then
 SEED="30:EC:33:4F:97:DB:C0:BA:9C:86:52:A7:B5:D3:F7:B2:DB:BB:48:A4:84:2E:19:0D:21:0E:01:DA:BD:53:59:81:50:37:55:EE:96:A2:70:A5:98:E9:D9:1B:22:54:66:91:69:EB:DF:45:99:D9:F7:2A:CA"
@@ -87,35 +47,30 @@ DSAFILE=provable-dsa2048.pem
 fi
 
 #DSA keys
-${VALGRIND} "${CERTTOOL}" --verify-provable-privkey --load-privkey "${srcdir}/data/${DSAFILE}"
-rc=$?
+${VALGRIND} "${CERTTOOL}" --verify-provable-privkey --load-privkey "${srcdir}/data/${DSAFILE}" &
+PID3=$!
 
-if test "${rc}" != "0"; then
+wait $PID1
+rc1=$?
+
+wait $PID2
+rc2=$?
+
+wait $PID3
+rc3=$?
+
+if test "${rc1}" != "0"; then
+	echo "Could not verify the 2048-bit key"
+	exit 1
+fi
+
+if test "${rc2}" != "0"; then
+	echo "Could not verify the 3072-bit key"
+	exit 1
+fi
+
+if test "${rc3}" != "0"; then
 	echo "Could not verify the 2048-bit DSA key"
-	exit 1
-fi
-
-${VALGRIND} "${CERTTOOL}" --generate-privkey --provable --bits 2048 --dsa --seed "$SEED" --outfile "$OUTFILE"
-rc=$?
-
-if test "${rc}" != "0"; then
-	echo "Could not generate a 2048-bit DSA key"
-	exit 1
-fi
-
-${VALGRIND} "${CERTTOOL}" --verify-provable-privkey --load-privkey "$OUTFILE"
-rc=$?
-
-if test "${rc}" != "0"; then
-	echo "Could not verify the generated key 1"
-	exit 1
-fi
-
-${VALGRIND} "${CERTTOOL}" --verify-provable-privkey --load-privkey "$OUTFILE" --seed "$SEED"
-rc=$?
-
-if test "${rc}" != "0"; then
-	echo "Could not verify the generated key 2"
 	exit 1
 fi
 

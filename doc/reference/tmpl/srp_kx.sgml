@@ -1,0 +1,42 @@
+<!-- ##### SECTION Title ##### -->
+srp_kx
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### SECTION Image ##### -->
+
+
+<!-- ##### STRUCT srp_client_credentials_st ##### -->
+<para>
+
+</para>
+
+@username: 
+@password: 
+@get_function: 
+
+<!-- ##### STRUCT srp_server_cred_st ##### -->
+<para>
+
+</para>
+
+@password_file: 
+@password_conf_file: 
+@pwd_callback: 
+@fake_salt_seed: 
+@fake_salt_length: 
+

@@ -35,14 +35,18 @@ LDADD = ../libutils.la \
 	$(top_builddir)/lib/libgnutls.la $(LIBSOCKET)
 
 if !ENABLE_SELF_CHECKS
-cipher_test_CPPFLAGS = $(AM_CPPFLAGS) -I$(top_builddir)/lib/
+cipher_test_CPPFLAGS = $(AM_CPPFLAGS) $(NETTLE_CFLAGS) -I$(top_builddir)/lib/
+cipher_override2_CPPFLAGS = $(AM_CPPFLAGS) $(NETTLE_CFLAGS) -I$(top_builddir)/lib/
 else
 cipher_test_CPPFLAGS = $(AM_CPPFLAGS)
+cipher_override2_CPPFLAGS = $(AM_CPPFLAGS)
 endif
 
 ctests = gendh
 
 if ENABLE_NETTLE
+cipher_override_CPPFLAGS = $(AM_CPPFLAGS) $(NETTLE_CFLAGS) $(HOGWEED_CFLAGS)
+mac_override_CPPFLAGS = $(AM_CPPFLAGS) $(NETTLE_CFLAGS) $(HOGWEED_CFLAGS)
 cipher_override_LDFLAGS = $(NETTLE_LIBS) $(HOGWEED_LIBS) $(GMP_LIBS) $(LDADD)
 mac_override_LDFLAGS = $(NETTLE_LIBS) $(HOGWEED_LIBS) $(GMP_LIBS) $(LDADD)
 endif
@@ -64,7 +68,7 @@ EXTRA_DIST = README gnutls-asan.supp
 
 TESTS_ENVIRONMENT = EXEEXT=$(EXEEXT) \
 	LC_ALL="C"						\
-	ASAN_OPTIONS=suppressions=gnutls-asan.supp		\
+	LSAN_OPTIONS=suppressions=gnutls-asan.supp		\
 	OPENSSL_ia32cap=0x00000000				\
 	top_builddir="$(top_builddir)"				\
 	srcdir="$(srcdir)"

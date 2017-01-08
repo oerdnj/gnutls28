@@ -20,21 +20,56 @@ main
 <!-- ##### SECTION Image ##### -->
 
 
+<!-- ##### MACRO cdk_malloc ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO cdk_free ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO cdk_calloc ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO cdk_realloc ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO cdk_strdup ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO cdk_salloc ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO map_gnutls_error ##### -->
+<para>
+
+</para>
+
+
+
 <!-- ##### MACRO BUFSIZE ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO DEBUG_PKT ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO DEF_BLOCKBITS ##### -->
 <para>
 
 </para>
@@ -48,54 +83,14 @@ main
 
 
 
-<!-- ##### MACRO IS_UID_REV ##### -->
+<!-- ##### MACRO DEF_BLOCKBITS ##### -->
 <para>
 
 </para>
 
-@s: 
-
-
-<!-- ##### MACRO IS_UID_SIG ##### -->
-<para>
-
-</para>
-
-@s: 
-
-
-<!-- ##### MACRO KEY_CAN_AUTH ##### -->
-<para>
-
-</para>
-
-@a: 
-
-
-<!-- ##### MACRO KEY_CAN_ENCRYPT ##### -->
-<para>
-
-</para>
-
-@a: 
-
-
-<!-- ##### MACRO KEY_CAN_SIGN ##### -->
-<para>
-
-</para>
-
-@a: 
 
 
 <!-- ##### MACRO KEY_FPR_LEN ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO MAX_DIGEST_LEN ##### -->
 <para>
 
 </para>
@@ -116,49 +111,54 @@ main
 
 
 
-<!-- ##### MACRO cdk_calloc ##### -->
+<!-- ##### MACRO MAX_DIGEST_LEN ##### -->
 <para>
 
 </para>
 
 
 
-<!-- ##### MACRO cdk_free ##### -->
+<!-- ##### MACRO IS_UID_SIG ##### -->
 <para>
 
 </para>
 
+@s: 
 
 
-<!-- ##### MACRO cdk_malloc ##### -->
+<!-- ##### MACRO IS_UID_REV ##### -->
 <para>
 
 </para>
 
+@s: 
 
 
-<!-- ##### MACRO cdk_realloc ##### -->
+<!-- ##### MACRO KEY_CAN_ENCRYPT ##### -->
 <para>
 
 </para>
 
+@a: 
 
 
-<!-- ##### MACRO cdk_salloc ##### -->
+<!-- ##### MACRO KEY_CAN_SIGN ##### -->
 <para>
 
 </para>
 
+@a: 
 
 
-<!-- ##### MACRO cdk_strdup ##### -->
+<!-- ##### MACRO KEY_CAN_AUTH ##### -->
 <para>
 
 </para>
 
+@a: 
 
 
-<!-- ##### MACRO map_gnutls_error ##### -->
+<!-- ##### MACRO DEBUG_PKT ##### -->
 <para>
 
 </para>

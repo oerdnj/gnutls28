@@ -45,6 +45,12 @@ SUBDIRS += x86
 AM_CFLAGS += -DASM_X86
 libaccelerated_la_LIBADD += x86/libx86.la
 endif
+
+if ASM_AARCH64
+SUBDIRS += aarch64
+AM_CFLAGS += -DASM_AARCH64
+libaccelerated_la_LIBADD += aarch64/libaarch64.la
+endif
 endif
 
 if ASM_X86_32

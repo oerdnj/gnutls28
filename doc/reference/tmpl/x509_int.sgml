@@ -20,63 +20,28 @@ x509_int
 <!-- ##### SECTION Image ##### -->
 
 
-<!-- ##### MACRO BAG_CERTIFICATE ##### -->
+<!-- ##### MACRO MAX_CRQ_EXTENSIONS_SIZE ##### -->
 <para>
 
 </para>
 
 
 
-<!-- ##### MACRO BAG_CRL ##### -->
+<!-- ##### MACRO MAX_OID_SIZE ##### -->
 <para>
 
 </para>
 
 
 
-<!-- ##### MACRO BAG_PKCS8_ENCRYPTED_KEY ##### -->
+<!-- ##### MACRO MAX_KEY_ID_SIZE ##### -->
 <para>
 
 </para>
 
 
 
-<!-- ##### MACRO BAG_PKCS8_KEY ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO BAG_SECRET ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO DATA_OID ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO ENC_DATA_OID ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO FRIENDLY_NAME_OID ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO HASH_OID_MD2 ##### -->
+<!-- ##### MACRO HASH_OID_SHA1 ##### -->
 <para>
 
 </para>
@@ -90,14 +55,14 @@ x509_int
 
 
 
-<!-- ##### MACRO HASH_OID_RMD160 ##### -->
+<!-- ##### MACRO HASH_OID_MD2 ##### -->
 <para>
 
 </para>
 
 
 
-<!-- ##### MACRO HASH_OID_SHA1 ##### -->
+<!-- ##### MACRO HASH_OID_RMD160 ##### -->
 <para>
 
 </para>
@@ -132,28 +97,163 @@ x509_int
 
 
 
-<!-- ##### MACRO KEY_ID_OID ##### -->
+<!-- ##### MACRO HASH_OID_SHA3_224 ##### -->
 <para>
 
 </para>
 
 
 
-<!-- ##### MACRO MAX_BAG_ELEMENTS ##### -->
+<!-- ##### MACRO HASH_OID_SHA3_256 ##### -->
 <para>
 
 </para>
 
 
 
-<!-- ##### MACRO MAX_CRQ_EXTENSIONS_SIZE ##### -->
+<!-- ##### MACRO HASH_OID_SHA3_384 ##### -->
 <para>
 
 </para>
 
 
 
-<!-- ##### MACRO MAX_OID_SIZE ##### -->
+<!-- ##### MACRO HASH_OID_SHA3_512 ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### STRUCT gnutls_x509_crl_iter ##### -->
+<para>
+
+</para>
+
+@rcache: 
+
+<!-- ##### STRUCT gnutls_x509_crl_int ##### -->
+<para>
+
+</para>
+
+@crl: 
+@rcache: 
+@use_extensions: 
+@der: 
+@raw_issuer_dn: 
+
+<!-- ##### STRUCT gnutls_x509_dn_st ##### -->
+<para>
+
+</para>
+
+@asn: 
+
+<!-- ##### STRUCT gnutls_x509_crt_int ##### -->
+<para>
+
+</para>
+
+@cert: 
+@use_extensions: 
+@pin: 
+@raw_dn: 
+@raw_issuer_dn: 
+@raw_spki: 
+@der: 
+@dn: 
+@idn: 
+
+<!-- ##### MACRO MODIFIED ##### -->
+<para>
+
+</para>
+
+@crt: 
+
+
+<!-- ##### STRUCT gnutls_x509_crq_int ##### -->
+<para>
+
+</para>
+
+@crq: 
+
+<!-- ##### STRUCT gnutls_pkcs7_attrs_st ##### -->
+<para>
+
+</para>
+
+@oid: 
+@data: 
+@next: 
+
+<!-- ##### STRUCT gnutls_pkcs7_int ##### -->
+<para>
+
+</para>
+
+@pkcs7: 
+@encap_data_oid: 
+@der_signed_data: 
+@signed_data: 
+
+<!-- ##### STRUCT pbkdf2_params ##### -->
+<para>
+
+</para>
+
+@salt: 
+@salt_size: 
+@mac: 
+
+<!-- ##### STRUCT gnutls_x509_privkey_int ##### -->
+<para>
+
+</para>
+
+@params: 
+@pk_algorithm: 
+@key: 
+@pin: 
+
+<!-- ##### MACRO OID_X520_COUNTRY_NAME ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO OID_X520_ORGANIZATION_NAME ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO OID_X520_ORGANIZATIONAL_UNIT_NAME ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO OID_X520_COMMON_NAME ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO OID_X520_LOCALITY_NAME ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO OID_X520_STATE_OR_PROVINCE_NAME ##### -->
 <para>
 
 </para>
@@ -181,48 +281,6 @@ x509_int
 
 
 
-<!-- ##### MACRO OID_X520_COMMON_NAME ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO OID_X520_COUNTRY_NAME ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO OID_X520_LOCALITY_NAME ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO OID_X520_ORGANIZATIONAL_UNIT_NAME ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO OID_X520_ORGANIZATION_NAME ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO OID_X520_STATE_OR_PROVINCE_NAME ##### -->
-<para>
-
-</para>
-
-
-
 <!-- ##### FUNCTION gnutls_x509_crt_is_issuer ##### -->
 <para>
 
@@ -233,18 +291,122 @@ x509_int
 @Returns: 
 
 
-<!-- ##### ENUM schema_id ##### -->
+<!-- ##### STRUCT gnutls_pkcs12_int ##### -->
 <para>
 
 </para>
 
-@PBES2_GENERIC: 
-@PBES2_DES: 
-@PBES2_3DES: 
-@PBES2_AES_128: 
-@PBES2_AES_192: 
-@PBES2_AES_256: 
-@PKCS12_3DES_SHA1: 
-@PKCS12_ARCFOUR_SHA1: 
-@PKCS12_RC2_40_SHA1: 
+@pkcs12: 
+
+<!-- ##### MACRO MAX_BAG_ELEMENTS ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### STRUCT bag_element ##### -->
+<para>
+
+</para>
+
+@data: 
+@type: 
+@local_key_id: 
+@friendly_name: 
+
+<!-- ##### STRUCT gnutls_pkcs12_bag_int ##### -->
+<para>
+
+</para>
+
+@element: 
+
+<!-- ##### MACRO BAG_PKCS8_KEY ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO BAG_PKCS8_ENCRYPTED_KEY ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO BAG_CERTIFICATE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO BAG_CRL ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO BAG_SECRET ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO FRIENDLY_NAME_OID ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO KEY_ID_OID ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION gnutls_x509_crt_verify_data3 ##### -->
+<para>
+
+</para>
+
+@crt: 
+@algo: 
+@vdata: 
+@vdata_size: 
+@data: 
+@signature: 
+@flags: 
+@Returns: 
+
+
+<!-- ##### STRUCT gnutls_name_constraints_st ##### -->
+<para>
+
+</para>
+
+@permitted: 
+@excluded: 
+
+<!-- ##### STRUCT name_constraints_node_st ##### -->
+<para>
+
+</para>
+
+@name: 
+@next: 
+
+<!-- ##### STRUCT gnutls_x509_tlsfeatures_st ##### -->
+<para>
+
+</para>
+
+@feature: 
+@size: 
 

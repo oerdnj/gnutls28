@@ -20,6 +20,22 @@ aes-x86
 <!-- ##### SECTION Image ##### -->
 
 
+<!-- ##### FUNCTION register_x86_crypto ##### -->
+<para>
+
+</para>
+
+@void: 
+
+
+<!-- ##### MACRO ALIGN16 ##### -->
+<para>
+
+</para>
+
+@x: 
+
+
 <!-- ##### MACRO AES_KEY_ALIGN_SIZE ##### -->
 <para>
 
@@ -34,12 +50,24 @@ aes-x86
 
 
 
-<!-- ##### MACRO ALIGN16 ##### -->
+<!-- ##### STRUCT AES_KEY ##### -->
 <para>
 
 </para>
 
-@x: 
+@rd_key: 
+@rounds: 
+
+<!-- ##### FUNCTION aesni_ecb_encrypt ##### -->
+<para>
+
+</para>
+
+@in: 
+@out: 
+@len: 
+@key: 
+@enc: 
 
 
 <!-- ##### FUNCTION aesni_cbc_encrypt ##### -->
@@ -52,30 +80,6 @@ aes-x86
 @len: 
 @key: 
 @ivec: 
-@enc: 
-
-
-<!-- ##### FUNCTION aesni_ctr32_encrypt_blocks ##### -->
-<para>
-
-</para>
-
-@in: 
-@out: 
-@blocks: 
-@key: 
-@ivec: 
-
-
-<!-- ##### FUNCTION aesni_ecb_encrypt ##### -->
-<para>
-
-</para>
-
-@in: 
-@out: 
-@len: 
-@key: 
 @enc: 
 
 
@@ -101,11 +105,98 @@ aes-x86
 @Returns: 
 
 
-<!-- ##### FUNCTION register_x86_crypto ##### -->
+<!-- ##### FUNCTION aesni_ctr32_encrypt_blocks ##### -->
 <para>
 
 </para>
 
-@void: 
+@in: 
+@out: 
+@blocks: 
+@key: 
+@ivec: 
+
+
+<!-- ##### FUNCTION aesni_gcm_encrypt ##### -->
+<para>
+
+</para>
+
+@inp: 
+@out: 
+@len: 
+@key: 
+@iv: 
+@Xi: 
+@Returns: 
+
+
+<!-- ##### FUNCTION aesni_gcm_decrypt ##### -->
+<para>
+
+</para>
+
+@inp: 
+@out: 
+@len: 
+@key: 
+@iv: 
+@Xi: 
+@Returns: 
+
+
+<!-- ##### FUNCTION vpaes_set_encrypt_key ##### -->
+<para>
+
+</para>
+
+@userKey: 
+@bits: 
+@key: 
+@Returns: 
+
+
+<!-- ##### FUNCTION vpaes_set_decrypt_key ##### -->
+<para>
+
+</para>
+
+@userKey: 
+@bits: 
+@key: 
+@Returns: 
+
+
+<!-- ##### FUNCTION vpaes_cbc_encrypt ##### -->
+<para>
+
+</para>
+
+@in: 
+@out: 
+@length: 
+@key: 
+@ivec: 
+@enc: 
+
+
+<!-- ##### FUNCTION vpaes_encrypt ##### -->
+<para>
+
+</para>
+
+@in: 
+@out: 
+@key: 
+
+
+<!-- ##### FUNCTION vpaes_decrypt ##### -->
+<para>
+
+</para>
+
+@in: 
+@out: 
+@key: 
 
 

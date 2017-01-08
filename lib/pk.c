@@ -45,7 +45,8 @@ _gnutls_encode_ber_rs_raw(gnutls_datum_t * sig_value,
 			  const gnutls_datum_t * s)
 {
 	ASN1_TYPE sig;
-	int result;
+	int result, ret;
+	uint8_t *tmp = NULL;
 
 	if ((result =
 	     asn1_create_element(_gnutls_get_gnutls_asn(),
@@ -55,27 +56,54 @@ _gnutls_encode_ber_rs_raw(gnutls_datum_t * sig_value,
 		return _gnutls_asn2err(result);
 	}
 
-	result = asn1_write_value(sig, "r", r->data, r->size);
-	if (result != ASN1_SUCCESS) {
-		gnutls_assert();
-		asn1_delete_structure(&sig);
-		return _gnutls_asn2err(result);
+	if (s->data[0] >= 0x80 || r->data[0] >= 0x80) {
+		tmp = gnutls_malloc(MAX(r->size, s->size)+1);
+		if (tmp == NULL) {
+			ret = gnutls_assert_val(GNUTLS_E_MEMORY_ERROR);
+			goto cleanup;
+		}
 	}
 
-	result = asn1_write_value(sig, "s", s->data, s->size);
-	if (result != ASN1_SUCCESS) {
-		gnutls_assert();
-		asn1_delete_structure(&sig);
-		return _gnutls_asn2err(result);
+	if (r->data[0] >= 0x80) {
+		tmp[0] = 0;
+		memcpy(&tmp[1], r->data, r->size);
+		result = asn1_write_value(sig, "r", tmp, 1+r->size);
+	} else {
+		result = asn1_write_value(sig, "r", r->data, r->size);
 	}
 
-	result = _gnutls_x509_der_encode(sig, "", sig_value, 0);
+	if (result != ASN1_SUCCESS) {
+		gnutls_assert();
+		ret = _gnutls_asn2err(result);
+		goto cleanup;
+	}
+
+
+	if (s->data[0] >= 0x80) {
+		tmp[0] = 0;
+		memcpy(&tmp[1], s->data, s->size);
+		result = asn1_write_value(sig, "s", tmp, 1+s->size);
+	} else {
+		result = asn1_write_value(sig, "s", s->data, s->size);
+	}
+
+	if (result != ASN1_SUCCESS) {
+		gnutls_assert();
+		ret = _gnutls_asn2err(result);
+		goto cleanup;
+	}
+
+	ret = _gnutls_x509_der_encode(sig, "", sig_value, 0);
+	if (ret < 0) {
+		gnutls_assert();
+		goto cleanup;
+	}
+
+	ret = 0;
+ cleanup:
+	gnutls_free(tmp);
 	asn1_delete_structure(&sig);
-
-	if (result < 0)
-		return gnutls_assert_val(result);
-
-	return 0;
+	return ret;
 }
 
 int
@@ -153,6 +181,50 @@ _gnutls_decode_ber_rs(const gnutls_datum_t * sig_value, bigint_t * r,
 	if (result < 0) {
 		gnutls_assert();
 		_gnutls_mpi_release(s);
+		asn1_delete_structure(&sig);
+		return result;
+	}
+
+	asn1_delete_structure(&sig);
+
+	return 0;
+}
+
+int
+_gnutls_decode_ber_rs_raw(const gnutls_datum_t * sig_value, gnutls_datum_t *r,
+			  gnutls_datum_t *s)
+{
+	ASN1_TYPE sig;
+	int result;
+
+	if ((result =
+	     asn1_create_element(_gnutls_get_gnutls_asn(),
+				 "GNUTLS.DSASignatureValue",
+				 &sig)) != ASN1_SUCCESS) {
+		gnutls_assert();
+		return _gnutls_asn2err(result);
+	}
+
+	result =
+	    asn1_der_decoding(&sig, sig_value->data, sig_value->size,
+			      NULL);
+	if (result != ASN1_SUCCESS) {
+		gnutls_assert();
+		asn1_delete_structure(&sig);
+		return _gnutls_asn2err(result);
+	}
+
+	result = _gnutls_x509_read_value(sig, "r", r);
+	if (result < 0) {
+		gnutls_assert();
+		asn1_delete_structure(&sig);
+		return result;
+	}
+
+	result = _gnutls_x509_read_value(sig, "s", s);
+	if (result < 0) {
+		gnutls_assert();
+		gnutls_free(r->data);
 		asn1_delete_structure(&sig);
 		return result;
 	}
@@ -249,8 +321,8 @@ void gnutls_pk_params_clear(gnutls_pk_params_st * p)
  */
 int
 encode_ber_digest_info(const mac_entry_st * e,
-		        const gnutls_datum_t * digest,
-		        gnutls_datum_t * output)
+			const gnutls_datum_t * digest,
+			gnutls_datum_t * output)
 {
 	ASN1_TYPE dinfo = ASN1_TYPE_EMPTY;
 	int result;

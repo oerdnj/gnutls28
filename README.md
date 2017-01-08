@@ -1,6 +1,10 @@
-Master [![build status](https://gitlab.com/gnutls/gnutls/badges/master/build.svg)](https://gitlab.com/gnutls/gnutls/commits/master)
-  3.4.x [![build status](https://gitlab.com/gnutls/gnutls/badges/gnutls_3_4_x/build.svg)](https://gitlab.com/gnutls/gnutls/commits/gnutls_3_4_x)
-  3.3.x [![build status](https://gitlab.com/gnutls/gnutls/badges/gnutls_3_3_x/build.svg)](https://gitlab.com/gnutls/gnutls/commits/gnutls_3_3_x)
+|Branch|CI system|Status|Coverage|
+|:----:|:-------:|-----:|:------:|
+|Master|Gitlab|[![build status](https://gitlab.com/gnutls/gnutls/badges/master/build.svg)](https://gitlab.com/gnutls/gnutls/commits/master)|[![coverage report](https://gitlab.com/gnutls/gnutls/badges/master/coverage.svg)](https://gitlab.com/gnutls/gnutls/commits/master)|
+|Master|Travis|[![build status](https://travis-ci.org/gnutls/gnutls.svg?branch=master)](https://travis-ci.org/gnutls/gnutls)|N/A|
+|3.4.x|Gitlab|[![build status](https://gitlab.com/gnutls/gnutls/badges/gnutls_3_4_x/build.svg)](https://gitlab.com/gnutls/gnutls/commits/gnutls_3_4_x)|N/A|
+|3.3.x|Gitlab|[![build status](https://gitlab.com/gnutls/gnutls/badges/gnutls_3_3_x/build.svg)](https://gitlab.com/gnutls/gnutls/commits/gnutls_3_3_x)|N/A|
+
 
 # GnuTLS -- Information for developers
 
@@ -33,6 +37,7 @@ We require several tools to check out and build the software, including:
 * [gperf](http://www.gnu.org/software/gperf/)
 * [libtasn1](https://www.gnu.org/software/libtasn1/) (optional)
 * [Libidn](http://www.gnu.org/software/libidn/) (optional, for internationalization of DNS)
+* [Libunistring](http://www.gnu.org/software/libunistring/) (optional, for internationalization)
 * [AWK](http://www.gnu.org/software/awk/) (for make dist, pmccabe2html)
 * [git2cl](http://savannah.nongnu.org/projects/git2cl/) (for make dist, ChangeLog)
 * [bison](http://www.gnu.org/software/bison) (for datetime parser in certtool)
@@ -46,7 +51,7 @@ some hints:
 Debian/Ubuntu:
 ```
 apt-get install -y git-core autoconf libtool gettext autopoint
-apt-get install -y automake autogen nettle-dev libp11-kit-dev libtspi-dev
+apt-get install -y automake autogen nettle-dev libp11-kit-dev libtspi-dev libunistring-dev
 apt-get install -y guile-2.0-dev libtasn1-6-dev libidn11-dev gawk gperf git2cl
 apt-get install -y libunbound-dev dns-root-data bison help2man gtk-doc-tools
 apt-get install -y texinfo texlive texlive-generic-recommended texlive-extra-utils
@@ -55,7 +60,7 @@ apt-get install -y texinfo texlive texlive-generic-recommended texlive-extra-uti
 Fedora/RHEL:
 ```
 yum install -y git autoconf libtool gettext-devel automake autogen
-yum install -y nettle-devel p11-kit-devel autogen-libopts-devel
+yum install -y nettle-devel p11-kit-devel autogen-libopts-devel libunistring-devel
 yum install -y trousers-devel guile-devel libtasn1-devel libidn-devel gawk gperf git2cl
 yum install -y libtasn1-tools unbound-devel bison help2man gtk-doc texinfo texlive
 ```
@@ -77,14 +82,14 @@ and polarssl.
 
 Debian/Ubuntu:
 ```
-apt-get install -y valgrind libasan1 libubsan0 nodejs softhsm datefudge lcov libssl-dev libcmocka-dev
-apt-get install -y dieharder libpolarssl-runtime openssl abi-compliance-checker
+apt-get install -y valgrind libasan1 libubsan0 nodejs softhsm2 datefudge lcov libssl-dev libcmocka-dev
+apt-get install -y dieharder libpolarssl-runtime openssl abi-compliance-checker socat net-tools ppp
 ```
 
 Fedora/RHEL:
 ```
 yum install -y valgrind libasan libasan-static libubsan nodejs softhsm datefudge lcov openssl-devel
-yum install -y dieharder mbedtls-utils openssl abi-compliance-checker libcmocka-devel
+yum install -y dieharder mbedtls-utils openssl abi-compliance-checker libcmocka-devel socat
 ```
 
 
@@ -140,6 +145,18 @@ mingw32-configure --enable-local-libopts --disable-non-suiteb-curves --disable-d
 mingw32-make
 mingw32-make check
 ```
+
+# Continuous Integration (CI)
+
+We utilize two continuous integration systems, the gitlab-ci and travis.
+Gitlab-CI is used to test most of the Linux systems (see .gitlab-ci.yml),
+and is split in two phases, build image creation and compilation/test. The
+build image creation is done at the gnutls/build-images subproject and
+uploads the image at the gitlab.com container registry. The compilation/test
+phase is on every commit to gnutls project.
+
+The Travis based CI, is used to test compilation on MacOSX based systems.
+
 
 # Contributing
 

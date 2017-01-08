@@ -22,4 +22,6 @@ Allow the peer to replace its certificate, or change its ID during a rehandshake
 Enable the TLS false start on client side if the negotiated ciphersuites allow it. This will enable sending data prior to the handshake being complete, and may introduce a risk of crypto failure when combined with certain key exchanged; for that GnuTLS may not enable that option in ciphersuites that are known to be not safe for false start. Since 3.5.0.
 @item GNUTLS_@-FORCE_@-CLIENT_@-CERT
 When in client side and only a single cert is specified, send that certificate irrespective of the issuers expectated by the server. Since 3.5.0.
+@item GNUTLS_@-NO_@-TICKETS
+Flag to indicate that the session should not use resumption with session tickets.
 @end table

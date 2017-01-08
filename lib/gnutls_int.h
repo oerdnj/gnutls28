@@ -105,7 +105,7 @@ typedef struct {
 /* The size of a handshake message should not
  * be larger than this value.
  */
-#define MAX_HANDSHAKE_PACKET_SIZE 48*1024
+#define MAX_HANDSHAKE_PACKET_SIZE 128*1024
 
 /* The maximum digest size of hash algorithms. 
  */
@@ -130,6 +130,11 @@ typedef struct {
 /* we can receive up to MAX_EXT_TYPES extensions.
  */
 #define MAX_EXT_TYPES 32
+
+/* TLS-internal extension (will be parsed after a ciphersuite is selected).
+ * This amends the gnutls_ext_parse_type_t. Not exported yet to allow more refining
+ * prior to finalizing an API. */
+#define _GNUTLS_EXT_TLS_POST_CS 177
 
 /* expire time for resuming sessions */
 #define DEFAULT_EXPIRE_TIME 3600
@@ -469,6 +474,7 @@ typedef struct gnutls_cipher_suite_entry_st {
 typedef struct mac_entry_st {
 	const char *name;
 	const char *oid;	/* OID of the hash - if it is a hash */
+	const char *mac_oid;    /* OID of the MAC algorithm - if it is a MAC */
 	gnutls_mac_algorithm_t id;
 	unsigned output_size;
 	unsigned key_size;
@@ -608,7 +614,7 @@ struct record_state_st {
    0x0000-0xffff. */
 #define EPOCH_READ_CURRENT  70000
 #define EPOCH_WRITE_CURRENT 70001
-#define EPOCH_NEXT          70002
+#define EPOCH_NEXT	  70002
 
 struct record_parameters_st {
 	uint16_t epoch;
@@ -621,8 +627,8 @@ struct record_parameters_st {
 	const mac_entry_st *mac;
 
 	/* for DTLS sliding window */
+	uint64_t dtls_sw_next; /* The end point (next expected packet) of the sliding window without epoch */
 	uint64_t dtls_sw_bits;
-	uint64_t dtls_sw_start; /* The starting point of the sliding window without epoch */
 	unsigned dtls_sw_have_recv; /* whether at least a packet has been received */
 
 	record_state_st read;
@@ -693,12 +699,12 @@ struct gnutls_priority_st {
 #define DEFAULT_MAX_EMPTY_RECORDS 200
 
 #define ENABLE_COMPAT(x) \
-              (x)->allow_large_records = 1; \
-              (x)->no_etm = 1; \
-              (x)->no_ext_master_secret = 1; \
-              (x)->allow_key_usage_violation = 1; \
-              (x)->allow_wrong_pms = 1; \
-              (x)->dumbfw = 1
+	      (x)->allow_large_records = 1; \
+	      (x)->no_etm = 1; \
+	      (x)->no_ext_master_secret = 1; \
+	      (x)->allow_key_usage_violation = 1; \
+	      (x)->allow_wrong_pms = 1; \
+	      (x)->dumbfw = 1
 
 /* DH and RSA parameters types.
  */
@@ -888,6 +894,8 @@ typedef struct {
 	int16_t selected_cert_list_length;
 	struct gnutls_privkey_st *selected_key;
 	bool selected_need_free;
+	gnutls_status_request_ocsp_func selected_ocsp_func;
+	void *selected_ocsp_func_ptr;
 
 	/* In case of a client holds the extensions we sent to the peer;
 	 * otherwise the extensions we received from the client.
@@ -973,9 +981,9 @@ typedef struct {
 
 	/* DTLS session state */
 	dtls_st dtls;
-	/* In case of clients that don't handle GNUTLS_E_LARGE_PACKET, don't
-	 * force them into an infinite loop */
-	unsigned handshake_large_loops;
+	/* Protect from infinite loops due to GNUTLS_E_LARGE_PACKET non-handling
+	 * or due to multiple alerts being received. */
+	unsigned handshake_suspicious_loops;
 	/* should be non-zero when a handshake is in progress */
 	bool handshake_in_progress;
 
@@ -1021,6 +1029,16 @@ typedef struct {
 	unsigned vc_status;
 	unsigned int additional_verify_flags; /* may be set by priorities or the vc functions */
 
+	/* we append the verify flags because these can be set,
+	 * either by this function or by gnutls_session_set_verify_cert().
+	 * However, we ensure that a single profile is set. */
+#define ADD_PROFILE_VFLAGS(session, vflags) do { \
+	if ((session->internals.additional_verify_flags & GNUTLS_VFLAGS_PROFILE_MASK) && \
+	    (vflags & GNUTLS_VFLAGS_PROFILE_MASK)) \
+		session->internals.additional_verify_flags &= ~GNUTLS_VFLAGS_PROFILE_MASK; \
+	session->internals.additional_verify_flags |= vflags; \
+	} while(0)
+
 	/* the SHA256 hash of the peer's certificate */
 	uint8_t cert_hash[32];
 	bool cert_hash_set;
@@ -1034,6 +1052,11 @@ typedef struct {
 	/* Needed for TCP Fast Open (TFO), set by gnutls_transport_set_fastopen() */
 	tfo_st tfo;
 
+	struct gnutls_supplemental_entry_st *rsup;
+	unsigned rsup_size;
+
+	struct extension_entry_st *rexts;
+	unsigned rexts_size;
 	/* If you add anything here, check _gnutls_handshake_internal_state_clear().
 	 */
 } internals_st;

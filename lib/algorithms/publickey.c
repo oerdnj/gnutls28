@@ -57,18 +57,18 @@ static const gnutls_pk_map pk_mappings[] = {
 };
 
 #define GNUTLS_PK_MAP_LOOP(b) \
-        const gnutls_pk_map *p; \
-                for(p = pk_mappings; p->kx_algorithm != 0; p++) { b }
+	const gnutls_pk_map *p; \
+		for(p = pk_mappings; p->kx_algorithm != 0; p++) { b }
 
 #define GNUTLS_PK_MAP_ALG_LOOP(a) \
-                        GNUTLS_PK_MAP_LOOP( if(p->kx_algorithm == kx_algorithm) { a; break; })
+			GNUTLS_PK_MAP_LOOP( if(p->kx_algorithm == kx_algorithm) { a; break; })
 
 
 /* returns the gnutls_pk_algorithm_t which is compatible with
  * the given gnutls_kx_algorithm_t.
  */
 gnutls_pk_algorithm_t
-_gnutls_map_pk_get_pk(gnutls_kx_algorithm_t kx_algorithm)
+_gnutls_map_kx_get_pk(gnutls_kx_algorithm_t kx_algorithm)
 {
 	gnutls_pk_algorithm_t ret = -1;
 
@@ -104,7 +104,7 @@ static const gnutls_pk_entry pk_algorithms[] = {
 
 #define GNUTLS_PK_LOOP(b) \
 	{ const gnutls_pk_entry *p; \
-                for(p = pk_algorithms; p->name != NULL; p++) { b ; } }
+		for(p = pk_algorithms; p->name != NULL; p++) { b ; } }
 
 
 /**

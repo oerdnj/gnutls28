@@ -36,7 +36,6 @@ libgnutls_x509_la_SOURCES =	\
 	common.c key_encode.c	\
 	common.h key_decode.c	\
 	time.c			\
-	gnutls-idna.h		\
 	crl.c			\
 	crl_write.c		\
 	crq.c			\
@@ -49,8 +48,10 @@ libgnutls_x509_la_SOURCES =	\
 	pkcs12_encr.c		\
 	pkcs7.c			\
 	pkcs7-attrs.c		\
+	pkcs7-crypt.c pkcs7_int.h \
 	privkey.c		\
 	privkey_pkcs8.c		\
+	privkey_pkcs8_pbes1.c	\
 	privkey_openssl.c	\
 	hostname-verify.c	\
 	sign.c			\
@@ -69,7 +70,8 @@ libgnutls_x509_la_SOURCES =	\
 	virt-san.h		\
 	x509_ext_int.h		\
 	tls_features.c		\
-	krb5.c krb5.h
+	krb5.c krb5.h		\
+	ip.c ip.h ip-in-cidr.h
 
 if ENABLE_OCSP
 libgnutls_x509_la_SOURCES += ocsp.c ocsp_output.c

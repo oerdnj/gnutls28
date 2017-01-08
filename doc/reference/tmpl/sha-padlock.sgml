@@ -20,16 +20,6 @@ sha-padlock
 <!-- ##### SECTION Image ##### -->
 
 
-<!-- ##### FUNCTION padlock_sha1_blocks ##### -->
-<para>
-
-</para>
-
-@ctx: 
-@inp: 
-@blocks: 
-
-
 <!-- ##### FUNCTION padlock_sha1_oneshot ##### -->
 <para>
 
@@ -38,26 +28,6 @@ sha-padlock
 @ctx: 
 @inp: 
 @len: 
-
-
-<!-- ##### FUNCTION padlock_sha1_update ##### -->
-<para>
-
-</para>
-
-@ctx: 
-@length: 
-@data: 
-
-
-<!-- ##### FUNCTION padlock_sha256_blocks ##### -->
-<para>
-
-</para>
-
-@ctx: 
-@inp: 
-@blocks: 
 
 
 <!-- ##### FUNCTION padlock_sha256_oneshot ##### -->
@@ -70,14 +40,24 @@ sha-padlock
 @len: 
 
 
-<!-- ##### FUNCTION padlock_sha256_update ##### -->
+<!-- ##### FUNCTION padlock_sha1_blocks ##### -->
 <para>
 
 </para>
 
 @ctx: 
-@length: 
-@data: 
+@inp: 
+@blocks: 
+
+
+<!-- ##### FUNCTION padlock_sha256_blocks ##### -->
+<para>
+
+</para>
+
+@ctx: 
+@inp: 
+@blocks: 
 
 
 <!-- ##### FUNCTION padlock_sha512_blocks ##### -->
@@ -90,16 +70,6 @@ sha-padlock
 @blocks: 
 
 
-<!-- ##### FUNCTION padlock_sha512_update ##### -->
-<para>
-
-</para>
-
-@ctx: 
-@length: 
-@data: 
-
-
 <!-- ##### FUNCTION wrap_padlock_hash_fast ##### -->
 <para>
 
@@ -110,5 +80,35 @@ sha-padlock
 @text_size: 
 @digest: 
 @Returns: 
+
+
+<!-- ##### FUNCTION padlock_sha1_update ##### -->
+<para>
+
+</para>
+
+@ctx: 
+@length: 
+@data: 
+
+
+<!-- ##### FUNCTION padlock_sha256_update ##### -->
+<para>
+
+</para>
+
+@ctx: 
+@length: 
+@data: 
+
+
+<!-- ##### FUNCTION padlock_sha512_update ##### -->
+<para>
+
+</para>
+
+@ctx: 
+@length: 
+@data: 
 
 

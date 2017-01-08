@@ -20,6 +20,21 @@ safe_renegotiation
 <!-- ##### SECTION Image ##### -->
 
 
+<!-- ##### STRUCT sr_ext_st ##### -->
+<para>
+
+</para>
+
+@client_verify_data: 
+@client_verify_data_len: 
+@server_verify_data: 
+@server_verify_data_len: 
+@ri_extension_data: 
+@ri_extension_data_len: 
+@safe_renegotiation_received: 
+@initial_negotiation_completed: 
+@connection_using_safe_renegotiation: 
+
 <!-- ##### VARIABLE ext_mod_sr ##### -->
 <para>
 

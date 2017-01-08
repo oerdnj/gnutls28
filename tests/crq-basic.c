@@ -98,7 +98,7 @@ static struct
     .pk_oid = "1.2.840.113549.1.1.1",
     .version = 1,
   },
-  { NULL, NULL, NULL, 0}
+  { NULL, NULL, 0, 0}
 };
 
 static void tls_log_func(int level, const char *str)
@@ -130,7 +130,7 @@ void doit(void)
 
 		if (debug)
 			printf("Chain '%s' (%d)...\n", crq_list[i].name,
-			       (int) i);
+				(int) i);
 
 		if (debug > 2)
 			printf("\tAdding CRL...");
@@ -165,7 +165,7 @@ void doit(void)
 				      &tmp);
 		if (debug)
 			printf("\tCRL: %.*s\n", 
-			       tmp.size, tmp.data);
+				tmp.size, tmp.data);
 		gnutls_free(tmp.data);
 
 		ret = gnutls_x509_crq_get_signature_algorithm(crq);

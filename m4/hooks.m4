@@ -39,9 +39,9 @@ AC_DEFUN([LIBGNUTLS_HOOKS],
   # Interfaces changed/added/removed:   CURRENT++       REVISION=0
   # Interfaces added:                             AGE++
   # Interfaces removed:                           AGE=0 (+bump all symbol versions in .map)
-  AC_SUBST(LT_CURRENT, 39)
+  AC_SUBST(LT_CURRENT, 43)
   AC_SUBST(LT_REVISION, 0)
-  AC_SUBST(LT_AGE, 9)
+  AC_SUBST(LT_AGE, 13)
 
   AC_SUBST(LT_SSL_CURRENT, 27)
   AC_SUBST(LT_SSL_REVISION, 2)
@@ -64,6 +64,8 @@ AC_DEFUN([LIBGNUTLS_HOOKS],
   # Used when creating the Windows libgnutls-XX.def files.
   DLL_VERSION=`expr ${LT_CURRENT} - ${LT_AGE}`
   AC_SUBST(DLL_VERSION)
+  DLL_SSL_VERSION=`expr ${LT_SSL_CURRENT} - ${LT_SSL_AGE}`
+  AC_SUBST(DLL_SSL_VERSION)
 
   PKG_CHECK_MODULES(NETTLE, [nettle >= 3.1], [cryptolib="nettle"], [
 AC_MSG_ERROR([[
@@ -94,7 +96,7 @@ AC_MSG_ERROR([[
     GMP_LIBS=""
   else
     if test x$GMP_LIBS = x; then
-    	AC_CHECK_LIB(gmp, __gmpz_cmp, [GMP_LIBS="-lgmp"], [AC_MSG_ERROR([[
+	AC_CHECK_LIB(gmp, __gmpz_cmp, [GMP_LIBS="-lgmp"], [AC_MSG_ERROR([[
 ***
 *** gmp was not found.
 ]])])
@@ -103,7 +105,7 @@ AC_MSG_ERROR([[
   AC_SUBST(GMP_CFLAGS)
   AC_SUBST(GMP_LIBS)
 
-LIBTASN1_MINIMUM=4.3
+LIBTASN1_MINIMUM=4.9
   AC_ARG_WITH(included-libtasn1,
     AS_HELP_STRING([--with-included-libtasn1], [use the included libtasn1]),
       included_libtasn1=$withval,
@@ -113,7 +115,7 @@ LIBTASN1_MINIMUM=4.3
     if test "$included_libtasn1" = yes; then
       AC_MSG_ERROR([[
   *** 
-  *** Libtasn1 $LIBTASN1_MINIMUM was not found. To use the included on use --with-included-libtasn1
+  *** Libtasn1 $LIBTASN1_MINIMUM was not found. To use the included one, use --with-included-libtasn1
   ]])
     fi
   fi

@@ -20,6 +20,19 @@ compat
 <!-- ##### SECTION Image ##### -->
 
 
+<!-- ##### TYPEDEF _GNUTLS_GCC_ATTR_DEPRECATED ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO GNUTLS_VERIFY_ALLOW_X509_V1_CA_CRT ##### -->
+<para>
+
+</para>
+
+
+
 <!-- ##### MACRO GNUTLS_A_MISSING_SRP_USERNAME ##### -->
 <para>
 
@@ -48,6 +61,111 @@ compat
 
 
 
+<!-- ##### MACRO gnutls_openpgp_send_key ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO gnutls_openpgp_key_init ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO gnutls_openpgp_key_deinit ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO gnutls_openpgp_key_import ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO gnutls_openpgp_key_export ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO gnutls_openpgp_key_get_key_usage ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO gnutls_openpgp_key_get_fingerprint ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO gnutls_openpgp_key_get_pk_algorithm ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO gnutls_openpgp_key_get_name ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO gnutls_openpgp_key_get_version ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO gnutls_openpgp_key_get_creation_time ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO gnutls_openpgp_key_get_expiration_time ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO gnutls_openpgp_key_get_id ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO gnutls_openpgp_key_check_hostname ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO gnutls_openpgp_crt_get_id ##### -->
+<para>
+
+</para>
+
+
+
 <!-- ##### MACRO GNUTLS_X509_CRT_FULL ##### -->
 <para>
 
@@ -63,13 +181,6 @@ compat
 
 
 <!-- ##### MACRO GNUTLS_X509_CRT_UNSIGNED_FULL ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO LIBGNUTLS_EXTRA_VERSION ##### -->
 <para>
 
 </para>
@@ -97,13 +208,6 @@ compat
 
 
 
-<!-- ##### MACRO LIBGNUTLS_VERSION_NUMBER ##### -->
-<para>
-
-</para>
-
-
-
 <!-- ##### MACRO LIBGNUTLS_VERSION_PATCH ##### -->
 <para>
 
@@ -111,111 +215,87 @@ compat
 
 
 
-<!-- ##### TYPEDEF _GNUTLS_GCC_ATTR_DEPRECATED ##### -->
-<para>
-
-</para>
-
-
-<!-- ##### MACRO gnutls_openpgp_crt_get_id ##### -->
+<!-- ##### MACRO LIBGNUTLS_VERSION_NUMBER ##### -->
 <para>
 
 </para>
 
 
 
-<!-- ##### MACRO gnutls_openpgp_key_check_hostname ##### -->
+<!-- ##### MACRO LIBGNUTLS_EXTRA_VERSION ##### -->
 <para>
 
 </para>
 
 
 
-<!-- ##### MACRO gnutls_openpgp_key_deinit ##### -->
+<!-- ##### FUNCTION gnutls_x509_privkey_sign_hash ##### -->
 <para>
 
 </para>
 
+@key: 
+@hash: 
+@signature: 
+@Returns: 
 
 
-<!-- ##### MACRO gnutls_openpgp_key_export ##### -->
+<!-- ##### FUNCTION gnutls_openpgp_privkey_sign_hash ##### -->
 <para>
 
 </para>
 
+@key: 
+@hash: 
+@signature: 
+@Returns: 
 
 
-<!-- ##### MACRO gnutls_openpgp_key_get_creation_time ##### -->
+<!-- ##### FUNCTION gnutls_x509_crt_get_preferred_hash_algorithm ##### -->
 <para>
 
 </para>
 
+@crt: 
+@hash: 
+@mand: 
+@Returns: 
 
 
-<!-- ##### MACRO gnutls_openpgp_key_get_expiration_time ##### -->
+<!-- ##### FUNCTION gnutls_x509_crq_sign ##### -->
 <para>
 
 </para>
 
+@crq: 
+@key: 
+@Returns: 
 
 
-<!-- ##### MACRO gnutls_openpgp_key_get_fingerprint ##### -->
+<!-- ##### FUNCTION gnutls_x509_crl_sign ##### -->
 <para>
 
 </para>
 
+@crl: 
+@issuer: 
+@issuer_key: 
+@Returns: 
 
 
-<!-- ##### MACRO gnutls_openpgp_key_get_id ##### -->
+<!-- ##### FUNCTION gnutls_global_set_mem_functions ##### -->
 <para>
 
 </para>
 
+@alloc_func: 
+@secure_alloc_func: 
+@is_secure_func: 
+@realloc_func: 
+@free_func: 
 
 
-<!-- ##### MACRO gnutls_openpgp_key_get_key_usage ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO gnutls_openpgp_key_get_name ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO gnutls_openpgp_key_get_pk_algorithm ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO gnutls_openpgp_key_get_version ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO gnutls_openpgp_key_import ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO gnutls_openpgp_key_init ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO gnutls_openpgp_send_key ##### -->
+<!-- ##### MACRO GNUTLS_SUPPLEMENTAL_USER_MAPPING_DATA ##### -->
 <para>
 
 </para>

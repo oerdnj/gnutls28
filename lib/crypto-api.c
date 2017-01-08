@@ -1,5 +1,6 @@
 /*
- * Copyright (C) 2000-2012 Free Software Foundation, Inc.
+ * Copyright (C) 2000-2016 Free Software Foundation, Inc.
+ * Copyright (C) 2016 Red Hat, Inc.
  *
  * Author: Nikos Mavrogiannopoulos
  *
@@ -592,6 +593,8 @@ int gnutls_key_generate(gnutls_datum_t * key, unsigned int key_size)
 {
 	int ret;
 
+	FAIL_IF_LIB_ERROR;
+
 #ifdef ENABLE_FIPS140
 	/* The FIPS140 approved RNGs are not allowed to be used
 	 * to extract key sizes longer than their original seed.
@@ -608,7 +611,7 @@ int gnutls_key_generate(gnutls_datum_t * key, unsigned int key_size)
 		return GNUTLS_E_MEMORY_ERROR;
 	}
 
-	ret = _gnutls_rnd(GNUTLS_RND_RANDOM, key->data, key->size);
+	ret = gnutls_rnd(GNUTLS_RND_RANDOM, key->data, key->size);
 	if (ret < 0) {
 		gnutls_assert();
 		_gnutls_free_datum(key);
@@ -760,11 +763,11 @@ gnutls_aead_cipher_encrypt(gnutls_aead_cipher_hd_t handle,
 		return gnutls_assert_val(GNUTLS_E_SHORT_MEMORY_BUFFER);
 
 	ret = _gnutls_aead_cipher_encrypt(&h->ctx_enc,
-				     	  nonce, nonce_len,
-				     	  auth, auth_len,
-				     	  tag_size,
-				     	  ptext, ptext_len,
-				     	  ctext, *ctext_len);
+					  nonce, nonce_len,
+					  auth, auth_len,
+					  tag_size,
+					  ptext, ptext_len,
+					  ctext, *ctext_len);
 	if (unlikely(ret < 0))
 		return gnutls_assert_val(ret);
 

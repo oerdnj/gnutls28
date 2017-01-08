@@ -103,12 +103,14 @@ i.e. LGPLv2.1+ for the main library and GPLv3+ for Gnutls extra.
 However to be able to use and link against libgnutls a program needs to be
 available under a license compatible with LGPLv3+ or GPLv2+ since GnuTLS
 requires nettle which requires GMP. GMP (>= 6.0.0) is dual licensed
-LGPLv3+ or GPLv2+.
+LGPLv3+ or GPLv2+. Starting with 3.5.7 libunistring is needed, too. It also
+is dual licensed LGPLv3+ or GPLv2+ (libunistring 0.9.7 and above, earlier
+version were LGPLv3+ only.)
 
 Copyright:
 --------------------
 /* -*- c -*-
- * Copyright (C) 2000-2016 Free Software Foundation, Inc.
+ * Copyright (C) 2000-2017 Free Software Foundation, Inc.
  *
  * Author: Nikos Mavrogiannopoulos
  *
@@ -153,8 +155,8 @@ Copyright:
 The documentation is distributed under the terms of the GNU Free
 Documentation License (FDL):
 --------------------
-Copyright (C) 2001-2015 Free Software Foundation, Inc.
-Copyright (C) 2001-2015 Nikos Mavrogiannopoulos
+Copyright (C) 2001-2017 Free Software Foundation, Inc.
+Copyright (C) 2001-2017 Nikos Mavrogiannopoulos
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -231,7 +233,7 @@ copyright is not assigned to the FSF. The code is licensed under the
 CRYPTOGAMS license.
 
 --------------------
-# Copyright (c) 2011-2013, Andy Polyakov by <appro@openssl.org>
+# Copyright (c) 2011-2016, Andy Polyakov by <appro@openssl.org>
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -416,3 +418,33 @@ License
  *  Please contact JWC s.r.o. at <info@pkcs11interop.net> for more details.
  On Debian systems the complete text of the license can be found in
  /usr/share/doc/libgnutls30/AGPLv3.license
+
+============================================
+
+lib/unistring/*
+Author: Bruno Haible <bruno@clisp.org>
+Copyright (C) 2009-2016 Free Software Foundation, Inc.
+License
+ This program is free software: you can redistribute it and/or modify it
+ under the terms of either:
+
+  * the GNU Lesser General Public License as published
+ by the Free Software Foundation; either version 3 of the License, or
+ (at your option) any later version.
+
+ or
+
+ * the GNU General Public License as published by the Free
+ Software Foundation; either version 2 of the License, or
+ (at your option) any later version.
+
+ or both in parallel, as here.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ Lesser General Public License for more details.
+
+ You should have received a copy of the GNU Lesser General Public License
+ along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
+

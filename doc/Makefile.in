@@ -117,17 +117,24 @@ EXTRA_PROGRAMS = errcodes$(EXEEXT) printlist$(EXEEXT) \
 	alert-printlist$(EXEEXT)
 subdir = doc
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
-am__aclocal_m4_deps = $(top_srcdir)/src/gl/m4/arpa_inet_h.m4 \
+am__aclocal_m4_deps = $(top_srcdir)/lib/unistring/m4/gnulib-comp.m4 \
+	$(top_srcdir)/lib/unistring/m4/inline.m4 \
+	$(top_srcdir)/lib/unistring/m4/libunistring-base.m4 \
+	$(top_srcdir)/src/gl/m4/arpa_inet_h.m4 \
 	$(top_srcdir)/src/gl/m4/bison.m4 \
 	$(top_srcdir)/src/gl/m4/clock_time.m4 \
 	$(top_srcdir)/src/gl/m4/close.m4 \
+	$(top_srcdir)/src/gl/m4/dirname.m4 \
+	$(top_srcdir)/src/gl/m4/double-slash-root.m4 \
 	$(top_srcdir)/src/gl/m4/dup2.m4 \
 	$(top_srcdir)/src/gl/m4/eealloc.m4 \
 	$(top_srcdir)/src/gl/m4/environ.m4 \
 	$(top_srcdir)/src/gl/m4/error.m4 \
+	$(top_srcdir)/src/gl/m4/flexmember.m4 \
 	$(top_srcdir)/src/gl/m4/fseek.m4 \
 	$(top_srcdir)/src/gl/m4/getaddrinfo.m4 \
 	$(top_srcdir)/src/gl/m4/getpass.m4 \
+	$(top_srcdir)/src/gl/m4/getprogname.m4 \
 	$(top_srcdir)/src/gl/m4/gettime.m4 \
 	$(top_srcdir)/src/gl/m4/gnulib-comp.m4 \
 	$(top_srcdir)/src/gl/m4/hostent.m4 \
@@ -144,7 +151,10 @@ am__aclocal_m4_deps = $(top_srcdir)/src/gl/m4/arpa_inet_h.m4 \
 	$(top_srcdir)/src/gl/m4/sockets.m4 \
 	$(top_srcdir)/src/gl/m4/strdup.m4 \
 	$(top_srcdir)/src/gl/m4/strerror.m4 \
+	$(top_srcdir)/src/gl/m4/strftime.m4 \
 	$(top_srcdir)/src/gl/m4/sys_select_h.m4 \
+	$(top_srcdir)/src/gl/m4/time_rz.m4 \
+	$(top_srcdir)/src/gl/m4/timegm.m4 \
 	$(top_srcdir)/src/gl/m4/timespec.m4 \
 	$(top_srcdir)/src/gl/m4/tm_gmtoff.m4 \
 	$(top_srcdir)/src/gl/m4/xalloc.m4 \
@@ -168,11 +178,17 @@ am__aclocal_m4_deps = $(top_srcdir)/src/gl/m4/arpa_inet_h.m4 \
 	$(top_srcdir)/gl/m4/gnulib-comp.m4 \
 	$(top_srcdir)/gl/m4/include_next.m4 \
 	$(top_srcdir)/gl/m4/intmax_t.m4 \
+	$(top_srcdir)/gl/m4/inttypes-pri.m4 \
 	$(top_srcdir)/gl/m4/inttypes.m4 \
+	$(top_srcdir)/gl/m4/inttypes_h.m4 \
 	$(top_srcdir)/gl/m4/largefile.m4 \
 	$(top_srcdir)/gl/m4/ld-output-def.m4 \
 	$(top_srcdir)/gl/m4/ld-version-script.m4 \
-	$(top_srcdir)/gl/m4/lseek.m4 $(top_srcdir)/gl/m4/malloc.m4 \
+	$(top_srcdir)/gl/m4/lib-ld.m4 $(top_srcdir)/gl/m4/lib-link.m4 \
+	$(top_srcdir)/gl/m4/lib-prefix.m4 \
+	$(top_srcdir)/gl/m4/limits-h.m4 \
+	$(top_srcdir)/gl/m4/longlong.m4 $(top_srcdir)/gl/m4/lseek.m4 \
+	$(top_srcdir)/gl/m4/malloc.m4 \
 	$(top_srcdir)/gl/m4/manywarnings.m4 \
 	$(top_srcdir)/gl/m4/memchr.m4 $(top_srcdir)/gl/m4/memmem.m4 \
 	$(top_srcdir)/gl/m4/minmax.m4 $(top_srcdir)/gl/m4/mmap-anon.m4 \
@@ -186,12 +202,14 @@ am__aclocal_m4_deps = $(top_srcdir)/src/gl/m4/arpa_inet_h.m4 \
 	$(top_srcdir)/gl/m4/printf.m4 $(top_srcdir)/gl/m4/read-file.m4 \
 	$(top_srcdir)/gl/m4/realloc.m4 \
 	$(top_srcdir)/gl/m4/secure_getenv.m4 \
+	$(top_srcdir)/gl/m4/size_max.m4 \
 	$(top_srcdir)/gl/m4/snprintf.m4 $(top_srcdir)/gl/m4/socklen.m4 \
 	$(top_srcdir)/gl/m4/sockpfaf.m4 $(top_srcdir)/gl/m4/ssize_t.m4 \
 	$(top_srcdir)/gl/m4/stdalign.m4 $(top_srcdir)/gl/m4/stdbool.m4 \
 	$(top_srcdir)/gl/m4/stddef_h.m4 $(top_srcdir)/gl/m4/stdint.m4 \
-	$(top_srcdir)/gl/m4/stdio_h.m4 $(top_srcdir)/gl/m4/stdlib_h.m4 \
-	$(top_srcdir)/gl/m4/strcase.m4 $(top_srcdir)/gl/m4/string_h.m4 \
+	$(top_srcdir)/gl/m4/stdint_h.m4 $(top_srcdir)/gl/m4/stdio_h.m4 \
+	$(top_srcdir)/gl/m4/stdlib_h.m4 $(top_srcdir)/gl/m4/strcase.m4 \
+	$(top_srcdir)/gl/m4/string_h.m4 \
 	$(top_srcdir)/gl/m4/strings_h.m4 \
 	$(top_srcdir)/gl/m4/strndup.m4 $(top_srcdir)/gl/m4/strnlen.m4 \
 	$(top_srcdir)/gl/m4/strtok_r.m4 \
@@ -209,22 +227,15 @@ am__aclocal_m4_deps = $(top_srcdir)/src/gl/m4/arpa_inet_h.m4 \
 	$(top_srcdir)/gl/m4/vsnprintf.m4 \
 	$(top_srcdir)/gl/m4/warn-on-use.m4 \
 	$(top_srcdir)/gl/m4/warnings.m4 $(top_srcdir)/gl/m4/wchar_h.m4 \
+	$(top_srcdir)/gl/m4/wchar_t.m4 $(top_srcdir)/gl/m4/wint_t.m4 \
+	$(top_srcdir)/gl/m4/xsize.m4 \
 	$(top_srcdir)/m4/ax_code_coverage.m4 \
 	$(top_srcdir)/m4/extern-inline.m4 $(top_srcdir)/m4/fcntl-o.m4 \
-	$(top_srcdir)/m4/gettext.m4 $(top_srcdir)/m4/gtk-doc.m4 \
-	$(top_srcdir)/m4/guile.m4 $(top_srcdir)/m4/hooks.m4 \
-	$(top_srcdir)/m4/iconv.m4 $(top_srcdir)/m4/intlmacosx.m4 \
-	$(top_srcdir)/m4/inttypes-pri.m4 \
-	$(top_srcdir)/m4/inttypes_h.m4 $(top_srcdir)/m4/lib-ld.m4 \
-	$(top_srcdir)/m4/lib-link.m4 $(top_srcdir)/m4/lib-prefix.m4 \
-	$(top_srcdir)/m4/libtool.m4 $(top_srcdir)/m4/longlong.m4 \
+	$(top_srcdir)/m4/gtk-doc.m4 $(top_srcdir)/m4/guile.m4 \
+	$(top_srcdir)/m4/hooks.m4 $(top_srcdir)/m4/libtool.m4 \
 	$(top_srcdir)/m4/ltoptions.m4 $(top_srcdir)/m4/ltsugar.m4 \
 	$(top_srcdir)/m4/ltversion.m4 $(top_srcdir)/m4/lt~obsolete.m4 \
-	$(top_srcdir)/m4/nls.m4 $(top_srcdir)/m4/pkg.m4 \
-	$(top_srcdir)/m4/po.m4 $(top_srcdir)/m4/progtest.m4 \
-	$(top_srcdir)/m4/size_max.m4 $(top_srcdir)/m4/stdint_h.m4 \
-	$(top_srcdir)/m4/wchar_t.m4 $(top_srcdir)/m4/wint_t.m4 \
-	$(top_srcdir)/m4/xsize.m4 $(top_srcdir)/configure.ac
+	$(top_srcdir)/m4/pkg.m4 $(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/version.texi \
@@ -474,6 +485,7 @@ DEFINE_SSIZE_T = @DEFINE_SSIZE_T@
 DEFS = @DEFS@
 DEPDIR = @DEPDIR@
 DLLTOOL = @DLLTOOL@
+DLL_SSL_VERSION = @DLL_SSL_VERSION@
 DLL_VERSION = @DLL_VERSION@
 DSYMUTIL = @DSYMUTIL@
 DUMPBIN = @DUMPBIN@
@@ -782,6 +794,7 @@ HAVE_ACCEPT4 = @HAVE_ACCEPT4@
 HAVE_ARPA_INET_H = @HAVE_ARPA_INET_H@
 HAVE_ATOLL = @HAVE_ATOLL@
 HAVE_BTOWC = @HAVE_BTOWC@
+HAVE_C99_STDINT_H = @HAVE_C99_STDINT_H@
 HAVE_CANONICALIZE_FILE_NAME = @HAVE_CANONICALIZE_FILE_NAME@
 HAVE_CHOWN = @HAVE_CHOWN@
 HAVE_DECL_ENVIRON = @HAVE_DECL_ENVIRON@
@@ -861,11 +874,11 @@ HAVE_LCHMOD = @HAVE_LCHMOD@
 HAVE_LCHOWN = @HAVE_LCHOWN@
 HAVE_LIBCRYPTO = @HAVE_LIBCRYPTO@
 HAVE_LIBDL = @HAVE_LIBDL@
-HAVE_LIBICONV = @HAVE_LIBICONV@
 HAVE_LIBNSL = @HAVE_LIBNSL@
 HAVE_LIBPTHREAD = @HAVE_LIBPTHREAD@
 HAVE_LIBRT = @HAVE_LIBRT@
 HAVE_LIBSECCOMP = @HAVE_LIBSECCOMP@
+HAVE_LIBUNISTRING = @HAVE_LIBUNISTRING@
 HAVE_LIBZ = @HAVE_LIBZ@
 HAVE_LINK = @HAVE_LINK@
 HAVE_LINKAT = @HAVE_LINKAT@
@@ -908,6 +921,7 @@ HAVE_PTHREAD_SIGMASK = @HAVE_PTHREAD_SIGMASK@
 HAVE_PTSNAME = @HAVE_PTSNAME@
 HAVE_PTSNAME_R = @HAVE_PTSNAME_R@
 HAVE_PWRITE = @HAVE_PWRITE@
+HAVE_QSORT_R = @HAVE_QSORT_R@
 HAVE_RAISE = @HAVE_RAISE@
 HAVE_RANDOM = @HAVE_RANDOM@
 HAVE_RANDOM_H = @HAVE_RANDOM_H@
@@ -1037,7 +1051,6 @@ LIBDL_PREFIX = @LIBDL_PREFIX@
 LIBGNUTLS_CFLAGS = @LIBGNUTLS_CFLAGS@
 LIBGNUTLS_LIBS = @LIBGNUTLS_LIBS@
 LIBICONV = @LIBICONV@
-LIBICONV_PREFIX = @LIBICONV_PREFIX@
 LIBIDN_CFLAGS = @LIBIDN_CFLAGS@
 LIBIDN_LIBS = @LIBIDN_LIBS@
 LIBINTL = @LIBINTL@
@@ -1059,10 +1072,17 @@ LIBTASN1_CFLAGS = @LIBTASN1_CFLAGS@
 LIBTASN1_LIBS = @LIBTASN1_LIBS@
 LIBTESTS_LIBDEPS = @LIBTESTS_LIBDEPS@
 LIBTOOL = @LIBTOOL@
+LIBUNISTRING = @LIBUNISTRING@
+LIBUNISTRING_PREFIX = @LIBUNISTRING_PREFIX@
+LIBUNISTRING_UNICTYPE_H = @LIBUNISTRING_UNICTYPE_H@
+LIBUNISTRING_UNINORM_H = @LIBUNISTRING_UNINORM_H@
+LIBUNISTRING_UNISTR_H = @LIBUNISTRING_UNISTR_H@
+LIBUNISTRING_UNITYPES_H = @LIBUNISTRING_UNITYPES_H@
 LIBZ = @LIBZ@
 LIBZ_PREFIX = @LIBZ_PREFIX@
 LIB_CLOCK_GETTIME = @LIB_CLOCK_GETTIME@
 LIB_SELECT = @LIB_SELECT@
+LIMITS_H = @LIMITS_H@
 LIPO = @LIPO@
 LN_S = @LN_S@
 LTALLOCA = @LTALLOCA@
@@ -1075,6 +1095,7 @@ LTLIBOBJS = @LTLIBOBJS@
 LTLIBPTHREAD = @LTLIBPTHREAD@
 LTLIBRT = @LTLIBRT@
 LTLIBSECCOMP = @LTLIBSECCOMP@
+LTLIBUNISTRING = @LTLIBUNISTRING@
 LTLIBZ = @LTLIBZ@
 LT_AGE = @LT_AGE@
 LT_CURRENT = @LT_CURRENT@
@@ -1089,6 +1110,7 @@ LT_SYS_LIBRARY_PATH = @LT_SYS_LIBRARY_PATH@
 LT_XSSL_AGE = @LT_XSSL_AGE@
 LT_XSSL_CURRENT = @LT_XSSL_CURRENT@
 LT_XSSL_REVISION = @LT_XSSL_REVISION@
+MAINT = @MAINT@
 MAJOR_VERSION = @MAJOR_VERSION@
 MAKEINFO = @MAKEINFO@
 MANIFEST_TOOL = @MANIFEST_TOOL@
@@ -1107,6 +1129,7 @@ NEXT_AS_FIRST_DIRECTIVE_ERRNO_H = @NEXT_AS_FIRST_DIRECTIVE_ERRNO_H@
 NEXT_AS_FIRST_DIRECTIVE_FCNTL_H = @NEXT_AS_FIRST_DIRECTIVE_FCNTL_H@
 NEXT_AS_FIRST_DIRECTIVE_FLOAT_H = @NEXT_AS_FIRST_DIRECTIVE_FLOAT_H@
 NEXT_AS_FIRST_DIRECTIVE_INTTYPES_H = @NEXT_AS_FIRST_DIRECTIVE_INTTYPES_H@
+NEXT_AS_FIRST_DIRECTIVE_LIMITS_H = @NEXT_AS_FIRST_DIRECTIVE_LIMITS_H@
 NEXT_AS_FIRST_DIRECTIVE_NETDB_H = @NEXT_AS_FIRST_DIRECTIVE_NETDB_H@
 NEXT_AS_FIRST_DIRECTIVE_NETINET_IN_H = @NEXT_AS_FIRST_DIRECTIVE_NETINET_IN_H@
 NEXT_AS_FIRST_DIRECTIVE_SIGNAL_H = @NEXT_AS_FIRST_DIRECTIVE_SIGNAL_H@
@@ -1130,6 +1153,7 @@ NEXT_ERRNO_H = @NEXT_ERRNO_H@
 NEXT_FCNTL_H = @NEXT_FCNTL_H@
 NEXT_FLOAT_H = @NEXT_FLOAT_H@
 NEXT_INTTYPES_H = @NEXT_INTTYPES_H@
+NEXT_LIMITS_H = @NEXT_LIMITS_H@
 NEXT_NETDB_H = @NEXT_NETDB_H@
 NEXT_NETINET_IN_H = @NEXT_NETINET_IN_H@
 NEXT_SIGNAL_H = @NEXT_SIGNAL_H@
@@ -1423,6 +1447,11 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
+unistring_LIBOBJS = @unistring_LIBOBJS@
+unistring_LTLIBOBJS = @unistring_LTLIBOBJS@
+unistringtests_LIBOBJS = @unistringtests_LIBOBJS@
+unistringtests_LTLIBOBJS = @unistringtests_LTLIBOBJS@
+unistringtests_WITNESS = @unistringtests_WITNESS@
 EXTRA_DIST = TODO certtool.cfg gnutls.pdf gnutls.html \
 	doxygen/Doxyfile.in doxygen/Doxyfile.orig texinfo.css \
 	gnutls-guile.pdf gnutls-guile.html stamp_enums stamp_functions \
@@ -1622,6 +1651,8 @@ FUNCS = functions/dane_cert_type_name \
 	functions/gnutls_anon_set_params_function.short \
 	functions/gnutls_anon_set_server_dh_params \
 	functions/gnutls_anon_set_server_dh_params.short \
+	functions/gnutls_anon_set_server_known_dh_params \
+	functions/gnutls_anon_set_server_known_dh_params.short \
 	functions/gnutls_anon_set_server_params_function \
 	functions/gnutls_anon_set_server_params_function.short \
 	functions/gnutls_auth_client_get_type \
@@ -1683,10 +1714,14 @@ FUNCS = functions/dane_cert_type_name \
 	functions/gnutls_certificate_set_flags.short \
 	functions/gnutls_certificate_set_key \
 	functions/gnutls_certificate_set_key.short \
+	functions/gnutls_certificate_set_known_dh_params \
+	functions/gnutls_certificate_set_known_dh_params.short \
 	functions/gnutls_certificate_set_ocsp_status_request_file \
 	functions/gnutls_certificate_set_ocsp_status_request_file.short \
 	functions/gnutls_certificate_set_ocsp_status_request_function \
 	functions/gnutls_certificate_set_ocsp_status_request_function.short \
+	functions/gnutls_certificate_set_ocsp_status_request_function2 \
+	functions/gnutls_certificate_set_ocsp_status_request_function2.short \
 	functions/gnutls_certificate_set_openpgp_key \
 	functions/gnutls_certificate_set_openpgp_key.short \
 	functions/gnutls_certificate_set_openpgp_key_file \
@@ -2068,6 +2103,8 @@ FUNCS = functions/dane_cert_type_name \
 	functions/gnutls_ocsp_resp_get_produced.short \
 	functions/gnutls_ocsp_resp_get_responder \
 	functions/gnutls_ocsp_resp_get_responder.short \
+	functions/gnutls_ocsp_resp_get_responder2 \
+	functions/gnutls_ocsp_resp_get_responder2.short \
 	functions/gnutls_ocsp_resp_get_responder_raw_id \
 	functions/gnutls_ocsp_resp_get_responder_raw_id.short \
 	functions/gnutls_ocsp_resp_get_response \
@@ -2102,6 +2139,7 @@ FUNCS = functions/dane_cert_type_name \
 	functions/gnutls_oid_to_digest.short \
 	functions/gnutls_oid_to_ecc_curve \
 	functions/gnutls_oid_to_ecc_curve.short \
+	functions/gnutls_oid_to_mac functions/gnutls_oid_to_mac.short \
 	functions/gnutls_oid_to_pk functions/gnutls_oid_to_pk.short \
 	functions/gnutls_oid_to_sign \
 	functions/gnutls_oid_to_sign.short \
@@ -2475,6 +2513,8 @@ FUNCS = functions/dane_cert_type_name \
 	functions/gnutls_pkcs7_get_crt_raw2.short \
 	functions/gnutls_pkcs7_get_embedded_data \
 	functions/gnutls_pkcs7_get_embedded_data.short \
+	functions/gnutls_pkcs7_get_embedded_data_oid \
+	functions/gnutls_pkcs7_get_embedded_data_oid.short \
 	functions/gnutls_pkcs7_get_signature_count \
 	functions/gnutls_pkcs7_get_signature_count.short \
 	functions/gnutls_pkcs7_get_signature_info \
@@ -2647,6 +2687,8 @@ FUNCS = functions/dane_cert_type_name \
 	functions/gnutls_psk_set_server_credentials_hint.short \
 	functions/gnutls_psk_set_server_dh_params \
 	functions/gnutls_psk_set_server_dh_params.short \
+	functions/gnutls_psk_set_server_known_dh_params \
+	functions/gnutls_psk_set_server_known_dh_params.short \
 	functions/gnutls_psk_set_server_params_function \
 	functions/gnutls_psk_set_server_params_function.short \
 	functions/gnutls_pubkey_deinit \
@@ -2788,6 +2830,8 @@ FUNCS = functions/dane_cert_type_name \
 	functions/gnutls_session_etm_status.short \
 	functions/gnutls_session_ext_master_secret_status \
 	functions/gnutls_session_ext_master_secret_status.short \
+	functions/gnutls_session_ext_register \
+	functions/gnutls_session_ext_register.short \
 	functions/gnutls_session_force_valid \
 	functions/gnutls_session_force_valid.short \
 	functions/gnutls_session_get_data \
@@ -2828,6 +2872,8 @@ FUNCS = functions/dane_cert_type_name \
 	functions/gnutls_session_set_verify_cert2.short \
 	functions/gnutls_session_set_verify_function \
 	functions/gnutls_session_set_verify_function.short \
+	functions/gnutls_session_supplemental_register \
+	functions/gnutls_session_supplemental_register.short \
 	functions/gnutls_session_ticket_enable_client \
 	functions/gnutls_session_ticket_enable_client.short \
 	functions/gnutls_session_ticket_enable_server \
@@ -2985,6 +3031,8 @@ FUNCS = functions/dane_cert_type_name \
 	functions/gnutls_transport_set_vec_push_function.short \
 	functions/gnutls_url_is_supported \
 	functions/gnutls_url_is_supported.short \
+	functions/gnutls_utf8_password_normalize \
+	functions/gnutls_utf8_password_normalize.short \
 	functions/gnutls_verify_stored_pubkey \
 	functions/gnutls_verify_stored_pubkey.short \
 	functions/gnutls_x509_aia_deinit \
@@ -3007,6 +3055,8 @@ FUNCS = functions/dane_cert_type_name \
 	functions/gnutls_x509_aki_set_cert_issuer.short \
 	functions/gnutls_x509_aki_set_id \
 	functions/gnutls_x509_aki_set_id.short \
+	functions/gnutls_x509_cidr_to_rfc5280 \
+	functions/gnutls_x509_cidr_to_rfc5280.short \
 	functions/gnutls_x509_crl_check_issuer \
 	functions/gnutls_x509_crl_check_issuer.short \
 	functions/gnutls_x509_crl_deinit \
@@ -3045,6 +3095,8 @@ FUNCS = functions/dane_cert_type_name \
 	functions/gnutls_x509_crl_get_issuer_dn.short \
 	functions/gnutls_x509_crl_get_issuer_dn2 \
 	functions/gnutls_x509_crl_get_issuer_dn2.short \
+	functions/gnutls_x509_crl_get_issuer_dn3 \
+	functions/gnutls_x509_crl_get_issuer_dn3.short \
 	functions/gnutls_x509_crl_get_issuer_dn_by_oid \
 	functions/gnutls_x509_crl_get_issuer_dn_by_oid.short \
 	functions/gnutls_x509_crl_get_next_update \
@@ -3119,6 +3171,8 @@ FUNCS = functions/dane_cert_type_name \
 	functions/gnutls_x509_crq_get_dn.short \
 	functions/gnutls_x509_crq_get_dn2 \
 	functions/gnutls_x509_crq_get_dn2.short \
+	functions/gnutls_x509_crq_get_dn3 \
+	functions/gnutls_x509_crq_get_dn3.short \
 	functions/gnutls_x509_crq_get_dn_by_oid \
 	functions/gnutls_x509_crq_get_dn_by_oid.short \
 	functions/gnutls_x509_crq_get_dn_oid \
@@ -3213,6 +3267,8 @@ FUNCS = functions/dane_cert_type_name \
 	functions/gnutls_x509_crt_check_hostname2.short \
 	functions/gnutls_x509_crt_check_issuer \
 	functions/gnutls_x509_crt_check_issuer.short \
+	functions/gnutls_x509_crt_check_key_purpose \
+	functions/gnutls_x509_crt_check_key_purpose.short \
 	functions/gnutls_x509_crt_check_revocation \
 	functions/gnutls_x509_crt_check_revocation.short \
 	functions/gnutls_x509_crt_cpy_crl_dist_points \
@@ -3245,6 +3301,8 @@ FUNCS = functions/dane_cert_type_name \
 	functions/gnutls_x509_crt_get_dn.short \
 	functions/gnutls_x509_crt_get_dn2 \
 	functions/gnutls_x509_crt_get_dn2.short \
+	functions/gnutls_x509_crt_get_dn3 \
+	functions/gnutls_x509_crt_get_dn3.short \
 	functions/gnutls_x509_crt_get_dn_by_oid \
 	functions/gnutls_x509_crt_get_dn_by_oid.short \
 	functions/gnutls_x509_crt_get_dn_oid \
@@ -3277,6 +3335,8 @@ FUNCS = functions/dane_cert_type_name \
 	functions/gnutls_x509_crt_get_issuer_dn.short \
 	functions/gnutls_x509_crt_get_issuer_dn2 \
 	functions/gnutls_x509_crt_get_issuer_dn2.short \
+	functions/gnutls_x509_crt_get_issuer_dn3 \
+	functions/gnutls_x509_crt_get_issuer_dn3.short \
 	functions/gnutls_x509_crt_get_issuer_dn_by_oid \
 	functions/gnutls_x509_crt_get_issuer_dn_by_oid.short \
 	functions/gnutls_x509_crt_get_issuer_dn_oid \
@@ -3449,6 +3509,8 @@ FUNCS = functions/dane_cert_type_name \
 	functions/gnutls_x509_dn_get_rdn_ava.short \
 	functions/gnutls_x509_dn_get_str \
 	functions/gnutls_x509_dn_get_str.short \
+	functions/gnutls_x509_dn_get_str2 \
+	functions/gnutls_x509_dn_get_str2.short \
 	functions/gnutls_x509_dn_import \
 	functions/gnutls_x509_dn_import.short \
 	functions/gnutls_x509_dn_init \
@@ -3619,6 +3681,8 @@ FUNCS = functions/dane_cert_type_name \
 	functions/gnutls_x509_privkey_verify_seed.short \
 	functions/gnutls_x509_rdn_get \
 	functions/gnutls_x509_rdn_get.short \
+	functions/gnutls_x509_rdn_get2 \
+	functions/gnutls_x509_rdn_get2.short \
 	functions/gnutls_x509_rdn_get_by_oid \
 	functions/gnutls_x509_rdn_get_by_oid.short \
 	functions/gnutls_x509_rdn_get_oid \
@@ -3678,7 +3742,7 @@ all: $(BUILT_SOURCES)
 
 .SUFFIXES:
 .SUFFIXES: .c .dvi .html .info .lo .o .obj .pdf .ps .texi
-$(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
+$(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am  $(am__configure_deps)
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
 	    *$$dep*) \
@@ -3702,9 +3766,9 @@ Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 $(top_builddir)/config.status: $(top_srcdir)/configure $(CONFIG_STATUS_DEPENDENCIES)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
 
-$(top_srcdir)/configure:  $(am__configure_deps)
+$(top_srcdir)/configure: @MAINTAINER_MODE_TRUE@ $(am__configure_deps)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
-$(ACLOCAL_M4):  $(am__aclocal_m4_deps)
+$(ACLOCAL_M4): @MAINTAINER_MODE_TRUE@ $(am__aclocal_m4_deps)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
 $(am__aclocal_m4_deps):
 
@@ -3808,7 +3872,7 @@ $(srcdir)/gnutls.info: gnutls.texi $(srcdir)/version.texi $(gnutls_TEXINFOS)
 gnutls.dvi: gnutls.texi $(srcdir)/version.texi $(gnutls_TEXINFOS)
 gnutls.pdf: gnutls.texi $(srcdir)/version.texi $(gnutls_TEXINFOS)
 gnutls.html: gnutls.texi $(srcdir)/version.texi $(gnutls_TEXINFOS)
-$(srcdir)/version.texi:  $(srcdir)/stamp-vti
+$(srcdir)/version.texi: @MAINTAINER_MODE_TRUE@ $(srcdir)/stamp-vti
 $(srcdir)/stamp-vti: gnutls.texi $(top_srcdir)/configure
 	@(dir=.; test -f ./gnutls.texi || dir=$(srcdir); \
 	set `$(SHELL) $(top_srcdir)/build-aux/mdate-sh $$dir/gnutls.texi`; \
@@ -3827,12 +3891,12 @@ mostlyclean-vti:
 	-rm -f vti.tmp* $(srcdir)/version.texi.tmp*
 
 maintainer-clean-vti:
-	-rm -f $(srcdir)/stamp-vti $(srcdir)/version.texi
+@MAINTAINER_MODE_TRUE@	-rm -f $(srcdir)/stamp-vti $(srcdir)/version.texi
 $(srcdir)/gnutls-guile.info: gnutls-guile.texi $(srcdir)/version-guile.texi
 gnutls-guile.dvi: gnutls-guile.texi $(srcdir)/version-guile.texi
 gnutls-guile.pdf: gnutls-guile.texi $(srcdir)/version-guile.texi
 gnutls-guile.html: gnutls-guile.texi $(srcdir)/version-guile.texi
-$(srcdir)/version-guile.texi:  $(srcdir)/stamp-1
+$(srcdir)/version-guile.texi: @MAINTAINER_MODE_TRUE@ $(srcdir)/stamp-1
 $(srcdir)/stamp-1: gnutls-guile.texi $(top_srcdir)/configure
 	@(dir=.; test -f ./gnutls-guile.texi || dir=$(srcdir); \
 	set `$(SHELL) $(top_srcdir)/build-aux/mdate-sh $$dir/gnutls-guile.texi`; \
@@ -3851,7 +3915,7 @@ mostlyclean-1:
 	-rm -f 1.tmp* $(srcdir)/version-guile.texi.tmp*
 
 maintainer-clean-1:
-	-rm -f $(srcdir)/stamp-1 $(srcdir)/version-guile.texi
+@MAINTAINER_MODE_TRUE@	-rm -f $(srcdir)/stamp-1 $(srcdir)/version-guile.texi
 .dvi.ps:
 	$(AM_V_DVIPS)TEXINPUTS="$(am__TEXINFO_TEX_DIR)$(PATH_SEPARATOR)$$TEXINPUTS" \
 	$(DVIPS) $(AM_V_texinfo) -o $@ $<
@@ -4362,7 +4426,7 @@ uninstall-am: uninstall-dvi-am uninstall-html-am uninstall-imagesDATA \
 -include $(top_srcdir)/doc/doc.mk
 
 invoke-gnutls-cli.texi: $(top_srcdir)/src/cli-args.def
-	PATH="$(top_builddir)/src/:$${PATH}:" $(AUTOGEN) -L$(top_srcdir)/src -Tagtexi-cmd.tpl $<; \
+	PATH="$(top_builddir)/src/$(PATH_SEPARATOR)$${PATH}$(PATH_SEPARATOR)" $(AUTOGEN) -L$(top_srcdir)/src -Tagtexi-cmd.tpl $<; \
 	if [ ! -e $@ ]; then \
 		cp $(srcdir)/$@ .; \
 	fi; \
@@ -4370,7 +4434,7 @@ invoke-gnutls-cli.texi: $(top_srcdir)/src/cli-args.def
 	mv -f $@.tmp $@
 
 invoke-gnutls-cli-debug.texi: $(top_srcdir)/src/cli-debug-args.def invoke-gnutls-cli.texi
-	PATH="$(top_builddir)/src/:$${PATH}:" $(AUTOGEN) -Tagtexi-cmd.tpl $<; \
+	PATH="$(top_builddir)/src/$(PATH_SEPARATOR)$${PATH}$(PATH_SEPARATOR)" $(AUTOGEN) -Tagtexi-cmd.tpl $<; \
 	if [ ! -e $@ ]; then \
 		cp $(srcdir)/$@ .; \
 	fi; \
@@ -4378,7 +4442,7 @@ invoke-gnutls-cli-debug.texi: $(top_srcdir)/src/cli-debug-args.def invoke-gnutls
 	mv -f $@.tmp $@
 
 invoke-gnutls-serv.texi: $(top_srcdir)/src/serv-args.def invoke-gnutls-cli-debug.texi
-	PATH="$(top_builddir)/src/:$${PATH}:" $(AUTOGEN) -Tagtexi-cmd.tpl $<; \
+	PATH="$(top_builddir)/src/$(PATH_SEPARATOR)$${PATH}$(PATH_SEPARATOR)" $(AUTOGEN) -Tagtexi-cmd.tpl $<; \
 	if [ ! -e $@ ]; then \
 		cp $(srcdir)/$@ .; \
 	fi; \
@@ -4386,7 +4450,7 @@ invoke-gnutls-serv.texi: $(top_srcdir)/src/serv-args.def invoke-gnutls-cli-debug
 	mv -f $@.tmp $@
 
 invoke-certtool.texi: $(top_srcdir)/src/certtool-args.def invoke-gnutls-serv.texi
-	PATH="$(top_builddir)/src/:$${PATH}:" $(AUTOGEN) -Tagtexi-cmd.tpl $<; \
+	PATH="$(top_builddir)/src/$(PATH_SEPARATOR)$${PATH}$(PATH_SEPARATOR)" $(AUTOGEN) -Tagtexi-cmd.tpl $<; \
 	if [ ! -e $@ ]; then \
 		cp $(srcdir)/$@ .; \
 	fi; \
@@ -4397,7 +4461,7 @@ invoke-certtool.texi: $(top_srcdir)/src/certtool-args.def invoke-gnutls-serv.tex
 	rm -f $@.tmp
 
 invoke-ocsptool.texi: $(top_srcdir)/src/ocsptool-args.def invoke-certtool.texi
-	PATH="$(top_builddir)/src/:$${PATH}:" $(AUTOGEN) -Tagtexi-cmd.tpl $<; \
+	PATH="$(top_builddir)/src/$(PATH_SEPARATOR)$${PATH}$(PATH_SEPARATOR)" $(AUTOGEN) -Tagtexi-cmd.tpl $<; \
 	if [ ! -e $@ ]; then \
 		cp $(srcdir)/$@ .; \
 	fi; \
@@ -4408,7 +4472,7 @@ invoke-ocsptool.texi: $(top_srcdir)/src/ocsptool-args.def invoke-certtool.texi
 	rm -f $@.tmp
 
 invoke-danetool.texi: $(top_srcdir)/src/danetool-args.def invoke-ocsptool.texi
-	PATH="$(top_builddir)/src/:$${PATH}:" $(AUTOGEN) -Tagtexi-cmd.tpl $<; \
+	PATH="$(top_builddir)/src/$(PATH_SEPARATOR)$${PATH}$(PATH_SEPARATOR)" $(AUTOGEN) -Tagtexi-cmd.tpl $<; \
 	if [ ! -e $@ ]; then \
 		cp $(srcdir)/$@ .; \
 	fi; \
@@ -4419,7 +4483,7 @@ invoke-danetool.texi: $(top_srcdir)/src/danetool-args.def invoke-ocsptool.texi
 	rm -f $@.tmp
 
 invoke-srptool.texi: $(top_srcdir)/src/srptool-args.def invoke-danetool.texi
-	PATH="$(top_builddir)/src/:$${PATH}:" $(AUTOGEN) -Tagtexi-cmd.tpl $<; \
+	PATH="$(top_builddir)/src/$(PATH_SEPARATOR)$${PATH}$(PATH_SEPARATOR)" $(AUTOGEN) -Tagtexi-cmd.tpl $<; \
 	if [ ! -e $@ ]; then \
 		cp $(srcdir)/$@ .; \
 	fi; \
@@ -4430,7 +4494,7 @@ invoke-srptool.texi: $(top_srcdir)/src/srptool-args.def invoke-danetool.texi
 	rm -f $@.tmp
 
 invoke-psktool.texi: $(top_srcdir)/src/psktool-args.def invoke-srptool.texi
-	PATH="$(top_builddir)/src/:$${PATH}:" $(AUTOGEN) -Tagtexi-cmd.tpl $<; \
+	PATH="$(top_builddir)/src/$(PATH_SEPARATOR)$${PATH}$(PATH_SEPARATOR)" $(AUTOGEN) -Tagtexi-cmd.tpl $<; \
 	if [ ! -e $@ ]; then \
 		cp $(srcdir)/$@ .; \
 	fi; \
@@ -4441,7 +4505,7 @@ invoke-psktool.texi: $(top_srcdir)/src/psktool-args.def invoke-srptool.texi
 	rm -f $@.tmp
 
 invoke-p11tool.texi: $(top_srcdir)/src/p11tool-args.def invoke-psktool.texi
-	PATH="$(top_builddir)/src/:$${PATH}:" $(AUTOGEN) -Tagtexi-cmd.tpl $<; \
+	PATH="$(top_builddir)/src/$(PATH_SEPARATOR)$${PATH}$(PATH_SEPARATOR)" $(AUTOGEN) -Tagtexi-cmd.tpl $<; \
 	if [ ! -e $@ ]; then \
 		cp $(srcdir)/$@ .; \
 	fi; \
@@ -4452,7 +4516,7 @@ invoke-p11tool.texi: $(top_srcdir)/src/p11tool-args.def invoke-psktool.texi
 	rm -f $@.tmp
 
 invoke-tpmtool.texi: $(top_srcdir)/src/tpmtool-args.def invoke-p11tool.texi
-	PATH="$(top_builddir)/src/:$${PATH}:" $(AUTOGEN) -Tagtexi-cmd.tpl $<; \
+	PATH="$(top_builddir)/src/$(PATH_SEPARATOR)$${PATH}$(PATH_SEPARATOR)" $(AUTOGEN) -Tagtexi-cmd.tpl $<; \
 	if [ ! -e $@ ]; then \
 		cp $(srcdir)/$@ .; \
 	fi; \
@@ -4686,7 +4750,7 @@ compare-exported:
 
 compare-makefile: enums.texi
 	@echo "******************************************************************************"
-	@echo "If the following step fails copy $(srcdir)/doc/tmp-compare-makefile to doc/Makefile.am"
+	@echo "If the following step fails use 'make files-update'"
 	@echo "******************************************************************************"
 	ENUMS=`grep '^@c ' $< | $(SED) 's/@c //g' | sort -d`; \
 	STR=""; \
@@ -4705,7 +4769,7 @@ compare-makefile: enums.texi
 	grep -v -e '^FUNCS += ' $(srcdir)/Makefile.am > tmp-$@; \
 	echo "\"s,^FUNCS =,FUNCS =$$MANS,\" -i tmp-$@"|xargs $(SED)
 	@echo "******************************************************************************"
-	@echo "If the following step fails copy $(srcdir)/doc/tmp-compare-makefile to doc/Makefile.am"
+	@echo "If the following step fails use 'make files-update'"
 	@echo "******************************************************************************"
 	diff -u $(srcdir)/Makefile.am tmp-$@ >/dev/null
 	rm -f tmp-$@
@@ -4728,7 +4792,7 @@ gnutls.xml: epub.texi
 
 gnutls.epub: gnutls.xml
 	dbtoepub $<
-	epub-fix --delete-unmanifested gnutls.epub
+	-epub-fix --delete-unmanifested gnutls.epub
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

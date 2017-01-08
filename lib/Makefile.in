@@ -111,46 +111,57 @@ host_triplet = @host@
 @ENABLE_MINITASN1_TRUE@am__append_1 = minitasn1
 @ENABLE_OPENPGP_TRUE@am__append_2 = opencdk openpgp
 @ENABLE_OPENPGP_TRUE@am__append_3 = -I$(srcdir)/opencdk
-@ENABLE_MINITASN1_TRUE@am__append_4 = -I$(srcdir)/minitasn1
-@WINDOWS_TRUE@am__append_5 = system/keys-win.c
-@WINDOWS_FALSE@am__append_6 = system/keys-dummy.c
-@ENABLE_SELF_CHECKS_TRUE@am__append_7 = crypto-selftests.c crypto-selftests-pk.c
-@ENABLE_PKCS11_TRUE@am__append_8 = pkcs11.c pkcs11x.c pkcs11_privkey.c pkcs11_write.c pkcs11_secret.c \
+@HAVE_LIBUNISTRING_FALSE@am__append_4 = unistring
+@HAVE_LIBUNISTRING_FALSE@am__append_5 = -I$(srcdir)/unistring/ -I$(builddir)/unistring/
+@ENABLE_MINITASN1_TRUE@am__append_6 = -I$(srcdir)/minitasn1
+@WINDOWS_TRUE@am__append_7 = system/keys-win.c
+@WINDOWS_FALSE@am__append_8 = system/keys-dummy.c
+@ENABLE_SELF_CHECKS_TRUE@am__append_9 = crypto-selftests.c crypto-selftests-pk.c
+@ENABLE_PKCS11_TRUE@am__append_10 = pkcs11.c pkcs11x.c pkcs11_privkey.c pkcs11_write.c pkcs11_secret.c \
 @ENABLE_PKCS11_TRUE@	pkcs11_int.c
 
-@ENABLE_NETTLE_TRUE@am__append_9 = nettle
-@ENABLE_PKCS11_TRUE@am__append_10 = pkcs11_int.h pkcs11x.h
-@HAVE_LIBIDN_TRUE@am__append_11 = $(LIBIDN_LIBS)
-@ENABLE_NETTLE_TRUE@am__append_12 = accelerated/libaccelerated.la
-@WINDOWS_FALSE@am__append_13 = $(LTLIBPTHREAD)
-@NEEDS_LIBRT_TRUE@am__append_14 = $(LTLIBRT)
-@ENABLE_FIPS140_TRUE@am__append_15 = $(FIPS140_LIBS)
-@ENABLE_TROUSERS_TRUE@am__append_16 = $(LIBDL)
-@ENABLE_OPENPGP_TRUE@am__append_17 = openpgp/libgnutls_openpgp.la \
+@ENABLE_NETTLE_TRUE@am__append_11 = nettle
+@ENABLE_PKCS11_TRUE@am__append_12 = pkcs11_int.h pkcs11x.h
+@HAVE_LIBIDN_TRUE@am__append_13 = $(LIBIDN_LIBS)
+@HAVE_LIBUNISTRING_TRUE@am__append_14 = $(LTLIBUNISTRING)
+@HAVE_LIBUNISTRING_FALSE@am__append_15 = unistring/libunistring.la
+@ENABLE_NETTLE_TRUE@am__append_16 = accelerated/libaccelerated.la
+@WINDOWS_FALSE@am__append_17 = $(LTLIBPTHREAD)
+@NEEDS_LIBRT_TRUE@am__append_18 = $(LTLIBRT)
+@ENABLE_FIPS140_TRUE@am__append_19 = $(FIPS140_LIBS) $(LTLIBDL)
+@ENABLE_TROUSERS_TRUE@am__append_20 = $(LTLIBDL)
+@ENABLE_OPENPGP_TRUE@am__append_21 = openpgp/libgnutls_openpgp.la \
 @ENABLE_OPENPGP_TRUE@	opencdk/libminiopencdk.la
-@HAVE_LD_VERSION_SCRIPT_TRUE@am__append_18 = -Wl,--version-script=$(srcdir)/libgnutls.map
-@HAVE_LD_VERSION_SCRIPT_FALSE@am__append_19 = -export-symbols-regex '^(gnutls|_gnutls).*'
-@ENABLE_MINITASN1_TRUE@am__append_20 = minitasn1/libminitasn1.la
-@ENABLE_MINITASN1_FALSE@am__append_21 = $(LIBTASN1_LIBS)
-@ENABLE_NETTLE_TRUE@am__append_22 = $(NETTLE_LIBS) $(HOGWEED_LIBS) $(GMP_LIBS)
-@ENABLE_NETTLE_TRUE@am__append_23 = nettle/libcrypto.la
-@HAVE_LD_OUTPUT_DEF_TRUE@am__append_24 = -Wl,--output-def,libgnutls-$(DLL_VERSION).def
-@HAVE_LD_OUTPUT_DEF_TRUE@am__append_25 = $(defexec_DATA)
-@WINDOWS_TRUE@am__append_26 = -lcrypt32
-@ENABLE_CXX_TRUE@am__append_27 = libgnutlsxx.la
+@HAVE_LD_VERSION_SCRIPT_TRUE@am__append_22 = -Wl,--version-script=$(srcdir)/libgnutls.map
+@HAVE_LD_VERSION_SCRIPT_FALSE@am__append_23 = -export-symbols-regex '^(gnutls|_gnutls).*'
+@ENABLE_MINITASN1_TRUE@am__append_24 = minitasn1/libminitasn1.la
+@ENABLE_MINITASN1_FALSE@am__append_25 = $(LIBTASN1_LIBS)
+@ENABLE_NETTLE_TRUE@am__append_26 = $(NETTLE_LIBS) $(HOGWEED_LIBS) $(GMP_LIBS)
+@ENABLE_NETTLE_TRUE@am__append_27 = nettle/libcrypto.la
+@HAVE_LD_OUTPUT_DEF_TRUE@am__append_28 = -Wl,--output-def,libgnutls-$(DLL_VERSION).def
+@HAVE_LD_OUTPUT_DEF_TRUE@am__append_29 = $(defexec_DATA)
+@WINDOWS_TRUE@am__append_30 = -lcrypt32
+@ENABLE_CXX_TRUE@am__append_31 = libgnutlsxx.la
 subdir = lib
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
-am__aclocal_m4_deps = $(top_srcdir)/src/gl/m4/arpa_inet_h.m4 \
+am__aclocal_m4_deps = $(top_srcdir)/lib/unistring/m4/gnulib-comp.m4 \
+	$(top_srcdir)/lib/unistring/m4/inline.m4 \
+	$(top_srcdir)/lib/unistring/m4/libunistring-base.m4 \
+	$(top_srcdir)/src/gl/m4/arpa_inet_h.m4 \
 	$(top_srcdir)/src/gl/m4/bison.m4 \
 	$(top_srcdir)/src/gl/m4/clock_time.m4 \
 	$(top_srcdir)/src/gl/m4/close.m4 \
+	$(top_srcdir)/src/gl/m4/dirname.m4 \
+	$(top_srcdir)/src/gl/m4/double-slash-root.m4 \
 	$(top_srcdir)/src/gl/m4/dup2.m4 \
 	$(top_srcdir)/src/gl/m4/eealloc.m4 \
 	$(top_srcdir)/src/gl/m4/environ.m4 \
 	$(top_srcdir)/src/gl/m4/error.m4 \
+	$(top_srcdir)/src/gl/m4/flexmember.m4 \
 	$(top_srcdir)/src/gl/m4/fseek.m4 \
 	$(top_srcdir)/src/gl/m4/getaddrinfo.m4 \
 	$(top_srcdir)/src/gl/m4/getpass.m4 \
+	$(top_srcdir)/src/gl/m4/getprogname.m4 \
 	$(top_srcdir)/src/gl/m4/gettime.m4 \
 	$(top_srcdir)/src/gl/m4/gnulib-comp.m4 \
 	$(top_srcdir)/src/gl/m4/hostent.m4 \
@@ -167,7 +178,10 @@ am__aclocal_m4_deps = $(top_srcdir)/src/gl/m4/arpa_inet_h.m4 \
 	$(top_srcdir)/src/gl/m4/sockets.m4 \
 	$(top_srcdir)/src/gl/m4/strdup.m4 \
 	$(top_srcdir)/src/gl/m4/strerror.m4 \
+	$(top_srcdir)/src/gl/m4/strftime.m4 \
 	$(top_srcdir)/src/gl/m4/sys_select_h.m4 \
+	$(top_srcdir)/src/gl/m4/time_rz.m4 \
+	$(top_srcdir)/src/gl/m4/timegm.m4 \
 	$(top_srcdir)/src/gl/m4/timespec.m4 \
 	$(top_srcdir)/src/gl/m4/tm_gmtoff.m4 \
 	$(top_srcdir)/src/gl/m4/xalloc.m4 \
@@ -191,11 +205,17 @@ am__aclocal_m4_deps = $(top_srcdir)/src/gl/m4/arpa_inet_h.m4 \
 	$(top_srcdir)/gl/m4/gnulib-comp.m4 \
 	$(top_srcdir)/gl/m4/include_next.m4 \
 	$(top_srcdir)/gl/m4/intmax_t.m4 \
+	$(top_srcdir)/gl/m4/inttypes-pri.m4 \
 	$(top_srcdir)/gl/m4/inttypes.m4 \
+	$(top_srcdir)/gl/m4/inttypes_h.m4 \
 	$(top_srcdir)/gl/m4/largefile.m4 \
 	$(top_srcdir)/gl/m4/ld-output-def.m4 \
 	$(top_srcdir)/gl/m4/ld-version-script.m4 \
-	$(top_srcdir)/gl/m4/lseek.m4 $(top_srcdir)/gl/m4/malloc.m4 \
+	$(top_srcdir)/gl/m4/lib-ld.m4 $(top_srcdir)/gl/m4/lib-link.m4 \
+	$(top_srcdir)/gl/m4/lib-prefix.m4 \
+	$(top_srcdir)/gl/m4/limits-h.m4 \
+	$(top_srcdir)/gl/m4/longlong.m4 $(top_srcdir)/gl/m4/lseek.m4 \
+	$(top_srcdir)/gl/m4/malloc.m4 \
 	$(top_srcdir)/gl/m4/manywarnings.m4 \
 	$(top_srcdir)/gl/m4/memchr.m4 $(top_srcdir)/gl/m4/memmem.m4 \
 	$(top_srcdir)/gl/m4/minmax.m4 $(top_srcdir)/gl/m4/mmap-anon.m4 \
@@ -209,12 +229,14 @@ am__aclocal_m4_deps = $(top_srcdir)/src/gl/m4/arpa_inet_h.m4 \
 	$(top_srcdir)/gl/m4/printf.m4 $(top_srcdir)/gl/m4/read-file.m4 \
 	$(top_srcdir)/gl/m4/realloc.m4 \
 	$(top_srcdir)/gl/m4/secure_getenv.m4 \
+	$(top_srcdir)/gl/m4/size_max.m4 \
 	$(top_srcdir)/gl/m4/snprintf.m4 $(top_srcdir)/gl/m4/socklen.m4 \
 	$(top_srcdir)/gl/m4/sockpfaf.m4 $(top_srcdir)/gl/m4/ssize_t.m4 \
 	$(top_srcdir)/gl/m4/stdalign.m4 $(top_srcdir)/gl/m4/stdbool.m4 \
 	$(top_srcdir)/gl/m4/stddef_h.m4 $(top_srcdir)/gl/m4/stdint.m4 \
-	$(top_srcdir)/gl/m4/stdio_h.m4 $(top_srcdir)/gl/m4/stdlib_h.m4 \
-	$(top_srcdir)/gl/m4/strcase.m4 $(top_srcdir)/gl/m4/string_h.m4 \
+	$(top_srcdir)/gl/m4/stdint_h.m4 $(top_srcdir)/gl/m4/stdio_h.m4 \
+	$(top_srcdir)/gl/m4/stdlib_h.m4 $(top_srcdir)/gl/m4/strcase.m4 \
+	$(top_srcdir)/gl/m4/string_h.m4 \
 	$(top_srcdir)/gl/m4/strings_h.m4 \
 	$(top_srcdir)/gl/m4/strndup.m4 $(top_srcdir)/gl/m4/strnlen.m4 \
 	$(top_srcdir)/gl/m4/strtok_r.m4 \
@@ -232,22 +254,15 @@ am__aclocal_m4_deps = $(top_srcdir)/src/gl/m4/arpa_inet_h.m4 \
 	$(top_srcdir)/gl/m4/vsnprintf.m4 \
 	$(top_srcdir)/gl/m4/warn-on-use.m4 \
 	$(top_srcdir)/gl/m4/warnings.m4 $(top_srcdir)/gl/m4/wchar_h.m4 \
+	$(top_srcdir)/gl/m4/wchar_t.m4 $(top_srcdir)/gl/m4/wint_t.m4 \
+	$(top_srcdir)/gl/m4/xsize.m4 \
 	$(top_srcdir)/m4/ax_code_coverage.m4 \
 	$(top_srcdir)/m4/extern-inline.m4 $(top_srcdir)/m4/fcntl-o.m4 \
-	$(top_srcdir)/m4/gettext.m4 $(top_srcdir)/m4/gtk-doc.m4 \
-	$(top_srcdir)/m4/guile.m4 $(top_srcdir)/m4/hooks.m4 \
-	$(top_srcdir)/m4/iconv.m4 $(top_srcdir)/m4/intlmacosx.m4 \
-	$(top_srcdir)/m4/inttypes-pri.m4 \
-	$(top_srcdir)/m4/inttypes_h.m4 $(top_srcdir)/m4/lib-ld.m4 \
-	$(top_srcdir)/m4/lib-link.m4 $(top_srcdir)/m4/lib-prefix.m4 \
-	$(top_srcdir)/m4/libtool.m4 $(top_srcdir)/m4/longlong.m4 \
+	$(top_srcdir)/m4/gtk-doc.m4 $(top_srcdir)/m4/guile.m4 \
+	$(top_srcdir)/m4/hooks.m4 $(top_srcdir)/m4/libtool.m4 \
 	$(top_srcdir)/m4/ltoptions.m4 $(top_srcdir)/m4/ltsugar.m4 \
 	$(top_srcdir)/m4/ltversion.m4 $(top_srcdir)/m4/lt~obsolete.m4 \
-	$(top_srcdir)/m4/nls.m4 $(top_srcdir)/m4/pkg.m4 \
-	$(top_srcdir)/m4/po.m4 $(top_srcdir)/m4/progtest.m4 \
-	$(top_srcdir)/m4/size_max.m4 $(top_srcdir)/m4/stdint_h.m4 \
-	$(top_srcdir)/m4/wchar_t.m4 $(top_srcdir)/m4/wint_t.m4 \
-	$(top_srcdir)/m4/xsize.m4 $(top_srcdir)/configure.ac
+	$(top_srcdir)/m4/pkg.m4 $(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 DIST_COMMON = $(srcdir)/Makefile.am $(am__DIST_COMMON)
@@ -287,27 +302,29 @@ am__installdirs = "$(DESTDIR)$(libdir)" "$(DESTDIR)$(defexecdir)" \
 LTLIBRARIES = $(lib_LTLIBRARIES)
 am__DEPENDENCIES_1 =
 @HAVE_LIBIDN_TRUE@am__DEPENDENCIES_2 = $(am__DEPENDENCIES_1)
-@WINDOWS_FALSE@am__DEPENDENCIES_3 = $(am__DEPENDENCIES_1)
-@NEEDS_LIBRT_TRUE@am__DEPENDENCIES_4 = $(am__DEPENDENCIES_1)
-@ENABLE_FIPS140_TRUE@am__DEPENDENCIES_5 = $(am__DEPENDENCIES_1)
-@ENABLE_TROUSERS_TRUE@am__DEPENDENCIES_6 = $(am__DEPENDENCIES_1)
-@ENABLE_MINITASN1_FALSE@am__DEPENDENCIES_7 = $(am__DEPENDENCIES_1)
-@ENABLE_NETTLE_TRUE@am__DEPENDENCIES_8 = $(am__DEPENDENCIES_1) \
+@HAVE_LIBUNISTRING_TRUE@am__DEPENDENCIES_3 = $(am__DEPENDENCIES_1)
+@WINDOWS_FALSE@am__DEPENDENCIES_4 = $(am__DEPENDENCIES_1)
+@NEEDS_LIBRT_TRUE@am__DEPENDENCIES_5 = $(am__DEPENDENCIES_1)
+@ENABLE_FIPS140_TRUE@am__DEPENDENCIES_6 = $(am__DEPENDENCIES_1) \
+@ENABLE_FIPS140_TRUE@	$(am__DEPENDENCIES_1)
+@ENABLE_TROUSERS_TRUE@am__DEPENDENCIES_7 = $(am__DEPENDENCIES_1)
+@ENABLE_MINITASN1_FALSE@am__DEPENDENCIES_8 = $(am__DEPENDENCIES_1)
+@ENABLE_NETTLE_TRUE@am__DEPENDENCIES_9 = $(am__DEPENDENCIES_1) \
 @ENABLE_NETTLE_TRUE@	$(am__DEPENDENCIES_1) \
 @ENABLE_NETTLE_TRUE@	$(am__DEPENDENCIES_1)
-am__DEPENDENCIES_9 = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
+am__DEPENDENCIES_10 = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
-	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_2) \
-	$(am__DEPENDENCIES_3) $(am__DEPENDENCIES_4) \
-	$(am__DEPENDENCIES_5) $(am__DEPENDENCIES_6) \
-	$(am__DEPENDENCIES_7) $(am__DEPENDENCIES_8) \
+	$(am__DEPENDENCIES_2) $(am__DEPENDENCIES_3) \
+	$(am__DEPENDENCIES_4) $(am__DEPENDENCIES_5) \
+	$(am__DEPENDENCIES_6) $(am__DEPENDENCIES_7) \
+	$(am__DEPENDENCIES_8) $(am__DEPENDENCIES_9) \
 	$(am__DEPENDENCIES_1)
 libgnutls_la_DEPENDENCIES = ../gl/libgnu.la x509/libgnutls_x509.la \
 	ext/libgnutls_ext.la auth/libgnutls_auth.la \
 	algorithms/libgnutls_alg.la extras/libgnutls_extras.la \
-	$(am__append_12) $(am__append_17) $(am__append_20) \
-	$(am__append_23) $(am__DEPENDENCIES_9)
+	$(am__append_15) $(am__append_16) $(am__append_21) \
+	$(am__append_24) $(am__append_27) $(am__DEPENDENCIES_10)
 am__libgnutls_la_SOURCES_DIST = abstract_int.h debug.h compress.h \
 	cipher.h buffers.h errors.h gnutls_int.h dtls.h handshake.h \
 	num.h algorithms.h dh.h kx.h hash_int.h cipher_int.h db.h \
@@ -325,17 +342,17 @@ am__libgnutls_la_SOURCES_DIST = abstract_int.h debug.h compress.h \
 	gnutls_asn1_tab.c mem.c fingerprint.c tls-sig.c ecc.c alert.c \
 	privkey_raw.c system/certs.c system/threads.c \
 	system/fastopen.c system/sockets.c system/inet_ntop.c \
-	system/iconv.c system/vasprintf.c vasprintf.h system.c str.c \
-	state.c x509.c file.c supplemental.c random.c crypto-api.c \
-	privkey.c pcert.c pubkey.c locks.c dtls.c system_override.c \
-	crypto-backend.c verify-tofu.c pin.c tpm.c fips.c \
-	safe-memfuncs.c system/inet_pton.c atfork.c atfork.h \
+	str-iconv.c system/vasprintf.c vasprintf.h system.c str.c \
+	str-unicode.c state.c x509.c file.c supplemental.c random.c \
+	crypto-api.c privkey.c pcert.c pubkey.c locks.c dtls.c \
+	system_override.c crypto-backend.c verify-tofu.c pin.c tpm.c \
+	fips.c safe-memfuncs.c system/inet_pton.c atfork.c atfork.h \
 	randomart.c system-keys.h urls.c urls.h prf.c auto-verify.c \
 	dh-session.c cert-session.c handshake-checks.c dtls-sw.c \
-	system/keys-win.c system/keys-dummy.c crypto-selftests.c \
-	crypto-selftests-pk.c pkcs11.c pkcs11x.c pkcs11_privkey.c \
-	pkcs11_write.c pkcs11_secret.c pkcs11_int.c srp.c psk.c \
-	gnutls.asn pkix.asn libgnutls.map
+	dh-primes.c system/keys-win.c system/keys-dummy.c \
+	crypto-selftests.c crypto-selftests-pk.c pkcs11.c pkcs11x.c \
+	pkcs11_privkey.c pkcs11_write.c pkcs11_secret.c pkcs11_int.c \
+	srp.c psk.c gnutls.asn pkix.asn libgnutls.map
 am__objects_1 =
 am__objects_2 = $(am__objects_1)
 am__dirstamp = $(am__leading_dot)dirstamp
@@ -354,15 +371,16 @@ am__objects_7 = range.lo record.lo compress.lo debug.lo cipher.lo \
 	anon_cred.lo pkix_asn1_tab.lo gnutls_asn1_tab.lo mem.lo \
 	fingerprint.lo tls-sig.lo ecc.lo alert.lo privkey_raw.lo \
 	system/certs.lo system/threads.lo system/fastopen.lo \
-	system/sockets.lo system/inet_ntop.lo system/iconv.lo \
-	system/vasprintf.lo system.lo str.lo state.lo x509.lo file.lo \
-	supplemental.lo random.lo crypto-api.lo privkey.lo pcert.lo \
-	pubkey.lo locks.lo dtls.lo system_override.lo \
-	crypto-backend.lo verify-tofu.lo pin.lo tpm.lo fips.lo \
-	safe-memfuncs.lo system/inet_pton.lo atfork.lo randomart.lo \
-	urls.lo prf.lo auto-verify.lo dh-session.lo cert-session.lo \
-	handshake-checks.lo dtls-sw.lo $(am__objects_3) \
-	$(am__objects_4) $(am__objects_5) $(am__objects_6)
+	system/sockets.lo system/inet_ntop.lo str-iconv.lo \
+	system/vasprintf.lo system.lo str.lo str-unicode.lo state.lo \
+	x509.lo file.lo supplemental.lo random.lo crypto-api.lo \
+	privkey.lo pcert.lo pubkey.lo locks.lo dtls.lo \
+	system_override.lo crypto-backend.lo verify-tofu.lo pin.lo \
+	tpm.lo fips.lo safe-memfuncs.lo system/inet_pton.lo atfork.lo \
+	randomart.lo urls.lo prf.lo auto-verify.lo dh-session.lo \
+	cert-session.lo handshake-checks.lo dtls-sw.lo dh-primes.lo \
+	$(am__objects_3) $(am__objects_4) $(am__objects_5) \
+	$(am__objects_6)
 am__objects_8 = srp.lo
 am__objects_9 = psk.lo
 am_libgnutls_la_OBJECTS = $(am__objects_2) $(am__objects_7) \
@@ -482,7 +500,7 @@ am__define_uniq_tagged_files = \
 ETAGS = etags
 CTAGS = ctags
 DIST_SUBDIRS = includes x509 auth ext algorithms extras accelerated \
-	minitasn1 opencdk openpgp nettle
+	minitasn1 opencdk openpgp unistring nettle
 am__DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/gnutls.pc.in \
 	$(top_srcdir)/build-aux/depcomp $(top_srcdir)/lib/common.mk \
 	README
@@ -560,6 +578,7 @@ DEFINE_SSIZE_T = @DEFINE_SSIZE_T@
 DEFS = @DEFS@
 DEPDIR = @DEPDIR@
 DLLTOOL = @DLLTOOL@
+DLL_SSL_VERSION = @DLL_SSL_VERSION@
 DLL_VERSION = @DLL_VERSION@
 DSYMUTIL = @DSYMUTIL@
 DUMPBIN = @DUMPBIN@
@@ -868,6 +887,7 @@ HAVE_ACCEPT4 = @HAVE_ACCEPT4@
 HAVE_ARPA_INET_H = @HAVE_ARPA_INET_H@
 HAVE_ATOLL = @HAVE_ATOLL@
 HAVE_BTOWC = @HAVE_BTOWC@
+HAVE_C99_STDINT_H = @HAVE_C99_STDINT_H@
 HAVE_CANONICALIZE_FILE_NAME = @HAVE_CANONICALIZE_FILE_NAME@
 HAVE_CHOWN = @HAVE_CHOWN@
 HAVE_DECL_ENVIRON = @HAVE_DECL_ENVIRON@
@@ -947,11 +967,11 @@ HAVE_LCHMOD = @HAVE_LCHMOD@
 HAVE_LCHOWN = @HAVE_LCHOWN@
 HAVE_LIBCRYPTO = @HAVE_LIBCRYPTO@
 HAVE_LIBDL = @HAVE_LIBDL@
-HAVE_LIBICONV = @HAVE_LIBICONV@
 HAVE_LIBNSL = @HAVE_LIBNSL@
 HAVE_LIBPTHREAD = @HAVE_LIBPTHREAD@
 HAVE_LIBRT = @HAVE_LIBRT@
 HAVE_LIBSECCOMP = @HAVE_LIBSECCOMP@
+HAVE_LIBUNISTRING = @HAVE_LIBUNISTRING@
 HAVE_LIBZ = @HAVE_LIBZ@
 HAVE_LINK = @HAVE_LINK@
 HAVE_LINKAT = @HAVE_LINKAT@
@@ -994,6 +1014,7 @@ HAVE_PTHREAD_SIGMASK = @HAVE_PTHREAD_SIGMASK@
 HAVE_PTSNAME = @HAVE_PTSNAME@
 HAVE_PTSNAME_R = @HAVE_PTSNAME_R@
 HAVE_PWRITE = @HAVE_PWRITE@
+HAVE_QSORT_R = @HAVE_QSORT_R@
 HAVE_RAISE = @HAVE_RAISE@
 HAVE_RANDOM = @HAVE_RANDOM@
 HAVE_RANDOM_H = @HAVE_RANDOM_H@
@@ -1123,7 +1144,6 @@ LIBDL_PREFIX = @LIBDL_PREFIX@
 LIBGNUTLS_CFLAGS = @LIBGNUTLS_CFLAGS@
 LIBGNUTLS_LIBS = @LIBGNUTLS_LIBS@
 LIBICONV = @LIBICONV@
-LIBICONV_PREFIX = @LIBICONV_PREFIX@
 LIBIDN_CFLAGS = @LIBIDN_CFLAGS@
 LIBIDN_LIBS = @LIBIDN_LIBS@
 LIBINTL = @LIBINTL@
@@ -1145,10 +1165,17 @@ LIBTASN1_CFLAGS = @LIBTASN1_CFLAGS@
 LIBTASN1_LIBS = @LIBTASN1_LIBS@
 LIBTESTS_LIBDEPS = @LIBTESTS_LIBDEPS@
 LIBTOOL = @LIBTOOL@
+LIBUNISTRING = @LIBUNISTRING@
+LIBUNISTRING_PREFIX = @LIBUNISTRING_PREFIX@
+LIBUNISTRING_UNICTYPE_H = @LIBUNISTRING_UNICTYPE_H@
+LIBUNISTRING_UNINORM_H = @LIBUNISTRING_UNINORM_H@
+LIBUNISTRING_UNISTR_H = @LIBUNISTRING_UNISTR_H@
+LIBUNISTRING_UNITYPES_H = @LIBUNISTRING_UNITYPES_H@
 LIBZ = @LIBZ@
 LIBZ_PREFIX = @LIBZ_PREFIX@
 LIB_CLOCK_GETTIME = @LIB_CLOCK_GETTIME@
 LIB_SELECT = @LIB_SELECT@
+LIMITS_H = @LIMITS_H@
 LIPO = @LIPO@
 LN_S = @LN_S@
 LTALLOCA = @LTALLOCA@
@@ -1161,6 +1188,7 @@ LTLIBOBJS = @LTLIBOBJS@
 LTLIBPTHREAD = @LTLIBPTHREAD@
 LTLIBRT = @LTLIBRT@
 LTLIBSECCOMP = @LTLIBSECCOMP@
+LTLIBUNISTRING = @LTLIBUNISTRING@
 LTLIBZ = @LTLIBZ@
 LT_AGE = @LT_AGE@
 LT_CURRENT = @LT_CURRENT@
@@ -1175,6 +1203,7 @@ LT_SYS_LIBRARY_PATH = @LT_SYS_LIBRARY_PATH@
 LT_XSSL_AGE = @LT_XSSL_AGE@
 LT_XSSL_CURRENT = @LT_XSSL_CURRENT@
 LT_XSSL_REVISION = @LT_XSSL_REVISION@
+MAINT = @MAINT@
 MAJOR_VERSION = @MAJOR_VERSION@
 MAKEINFO = @MAKEINFO@
 MANIFEST_TOOL = @MANIFEST_TOOL@
@@ -1193,6 +1222,7 @@ NEXT_AS_FIRST_DIRECTIVE_ERRNO_H = @NEXT_AS_FIRST_DIRECTIVE_ERRNO_H@
 NEXT_AS_FIRST_DIRECTIVE_FCNTL_H = @NEXT_AS_FIRST_DIRECTIVE_FCNTL_H@
 NEXT_AS_FIRST_DIRECTIVE_FLOAT_H = @NEXT_AS_FIRST_DIRECTIVE_FLOAT_H@
 NEXT_AS_FIRST_DIRECTIVE_INTTYPES_H = @NEXT_AS_FIRST_DIRECTIVE_INTTYPES_H@
+NEXT_AS_FIRST_DIRECTIVE_LIMITS_H = @NEXT_AS_FIRST_DIRECTIVE_LIMITS_H@
 NEXT_AS_FIRST_DIRECTIVE_NETDB_H = @NEXT_AS_FIRST_DIRECTIVE_NETDB_H@
 NEXT_AS_FIRST_DIRECTIVE_NETINET_IN_H = @NEXT_AS_FIRST_DIRECTIVE_NETINET_IN_H@
 NEXT_AS_FIRST_DIRECTIVE_SIGNAL_H = @NEXT_AS_FIRST_DIRECTIVE_SIGNAL_H@
@@ -1216,6 +1246,7 @@ NEXT_ERRNO_H = @NEXT_ERRNO_H@
 NEXT_FCNTL_H = @NEXT_FCNTL_H@
 NEXT_FLOAT_H = @NEXT_FLOAT_H@
 NEXT_INTTYPES_H = @NEXT_INTTYPES_H@
+NEXT_LIMITS_H = @NEXT_LIMITS_H@
 NEXT_NETDB_H = @NEXT_NETDB_H@
 NEXT_NETINET_IN_H = @NEXT_NETINET_IN_H@
 NEXT_SIGNAL_H = @NEXT_SIGNAL_H@
@@ -1509,11 +1540,17 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
+unistring_LIBOBJS = @unistring_LIBOBJS@
+unistring_LTLIBOBJS = @unistring_LTLIBOBJS@
+unistringtests_LIBOBJS = @unistringtests_LIBOBJS@
+unistringtests_LTLIBOBJS = @unistringtests_LTLIBOBJS@
+unistringtests_WITNESS = @unistringtests_WITNESS@
 ACLOCAL_AMFLAGS = -I ../m4 -I ../gl/m4
 EXTRA_DIST = priority_options.gperf common.mk
 BUILT_SOURCES = pkix_asn1_tab.c gnutls_asn1_tab.c priority_options.h
 SUBDIRS = includes x509 auth ext algorithms extras accelerated \
-	$(am__append_1) $(am__append_2) $(am__append_9)
+	$(am__append_1) $(am__append_2) $(am__append_4) \
+	$(am__append_11)
 AM_CFLAGS = $(WERROR_CFLAGS) $(WSTACK_CFLAGS) $(WARN_CFLAGS) $(NETTLE_CFLAGS) \
   $(LIBTASN1_CFLAGS) $(LIBIDN_CFLAGS) $(P11_KIT_CFLAGS) $(CODE_COVERAGE_CFLAGS)
 
@@ -1522,13 +1559,13 @@ AM_CPPFLAGS = -DLOCALEDIR=\"$(localedir)\" -I$(srcdir)/../gl \
 	-I$(builddir)/../gl -I$(builddir)/includes -I$(builddir)/x509 \
 	-I$(srcdir)/includes -I$(builddir)/includes -I$(srcdir)/x509 \
 	$(LIBTASN1_CFLAGS) $(P11_KIT_CFLAGS) $(am__append_3) \
-	$(am__append_4)
+	$(am__append_5) $(am__append_6)
 
 # Pkg-config script.
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = gnutls.pc
-DISTCLEANFILES = $(pkgconfig_DATA) $(am__append_25)
-lib_LTLIBRARIES = libgnutls.la $(am__append_27)
+DISTCLEANFILES = $(pkgconfig_DATA) $(am__append_29)
+lib_LTLIBRARIES = libgnutls.la $(am__append_31)
 SRP_COBJECTS = srp.c
 PSK_COBJECTS = psk.c
 COBJECTS = range.c record.c compress.c debug.c cipher.c mbuffers.c \
@@ -1539,15 +1576,15 @@ COBJECTS = range.c record.c compress.c debug.c cipher.c mbuffers.c \
 	gnutls_asn1_tab.c mem.c fingerprint.c tls-sig.c ecc.c alert.c \
 	privkey_raw.c system/certs.c system/threads.c \
 	system/fastopen.c system/sockets.c system/inet_ntop.c \
-	system/iconv.c system/vasprintf.c vasprintf.h system.c str.c \
-	state.c x509.c file.c supplemental.c random.c crypto-api.c \
-	privkey.c pcert.c pubkey.c locks.c dtls.c system_override.c \
-	crypto-backend.c verify-tofu.c pin.c tpm.c fips.c \
-	safe-memfuncs.c system/inet_pton.c atfork.c atfork.h \
+	str-iconv.c system/vasprintf.c vasprintf.h system.c str.c \
+	str-unicode.c state.c x509.c file.c supplemental.c random.c \
+	crypto-api.c privkey.c pcert.c pubkey.c locks.c dtls.c \
+	system_override.c crypto-backend.c verify-tofu.c pin.c tpm.c \
+	fips.c safe-memfuncs.c system/inet_pton.c atfork.c atfork.h \
 	randomart.c system-keys.h urls.c urls.h prf.c auto-verify.c \
 	dh-session.c cert-session.c handshake-checks.c dtls-sw.c \
-	$(am__append_5) $(am__append_6) $(am__append_7) \
-	$(am__append_8)
+	dh-primes.c $(am__append_7) $(am__append_8) $(am__append_9) \
+	$(am__append_10)
 HFILES = abstract_int.h debug.h compress.h cipher.h buffers.h errors.h \
 	gnutls_int.h dtls.h handshake.h num.h algorithms.h dh.h kx.h \
 	hash_int.h cipher_int.h db.h auth.h extensions.h x509_b64.h \
@@ -1556,25 +1593,25 @@ HFILES = abstract_int.h debug.h compress.h cipher.h buffers.h errors.h \
 	x509.h crypto-backend.h srp.h auth/srp_kx.h auth/srp_passwd.h \
 	file.h supplemental.h crypto.h random.h system.h locks.h \
 	mbuffers.h ecc.h pin.h fips.h priority_options.h \
-	$(am__append_10)
+	$(am__append_12)
 libgnutls_la_SOURCES = $(HFILES) $(COBJECTS) $(SRP_COBJECTS)	\
 	$(PSK_COBJECTS) \
 	gnutls.asn pkix.asn libgnutls.map
 
 libgnutls_la_LDFLAGS = -no-undefined -version-info \
 	$(LT_CURRENT):$(LT_REVISION):$(LT_AGE) $(COMMON_LINK_FLAGS) \
-	$(am__append_18) $(am__append_19) $(am__append_24)
+	$(am__append_22) $(am__append_23) $(am__append_28)
 libgnutls_la_LIBADD = ../gl/libgnu.la x509/libgnutls_x509.la \
 	ext/libgnutls_ext.la auth/libgnutls_auth.la \
 	algorithms/libgnutls_alg.la extras/libgnutls_extras.la \
-	$(am__append_12) $(am__append_17) $(am__append_20) \
-	$(am__append_23) $(thirdparty_libadd)
+	$(am__append_15) $(am__append_16) $(am__append_21) \
+	$(am__append_24) $(am__append_27) $(thirdparty_libadd)
 thirdparty_libadd = $(LTLIBZ) $(LTLIBINTL) $(LIBSOCKET) $(LTLIBNSL) \
-	$(LTLIBICONV) $(P11_KIT_LIBS) $(LIB_SELECT) $(am__append_11) \
-	$(am__append_13) $(am__append_14) $(am__append_15) \
-	$(am__append_16) $(am__append_21) $(am__append_22) \
-	$(am__append_26)
-@HAVE_LD_OUTPUT_DEF_TRUE@defexecdir = $(bindir)
+	$(P11_KIT_LIBS) $(LIB_SELECT) $(am__append_13) \
+	$(am__append_14) $(am__append_17) $(am__append_18) \
+	$(am__append_19) $(am__append_20) $(am__append_25) \
+	$(am__append_26) $(am__append_30)
+@HAVE_LD_OUTPUT_DEF_TRUE@defexecdir = $(libdir)
 @HAVE_LD_OUTPUT_DEF_TRUE@defexec_DATA = libgnutls-$(DLL_VERSION).def
 
 # C++ library
@@ -1593,7 +1630,7 @@ all: $(BUILT_SOURCES)
 
 .SUFFIXES:
 .SUFFIXES: .c .cpp .lo .o .obj
-$(srcdir)/Makefile.in:  $(srcdir)/Makefile.am $(top_srcdir)/lib/common.mk $(am__configure_deps)
+$(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am $(top_srcdir)/lib/common.mk $(am__configure_deps)
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
 	    *$$dep*) \
@@ -1618,9 +1655,9 @@ $(top_srcdir)/lib/common.mk $(am__empty):
 $(top_builddir)/config.status: $(top_srcdir)/configure $(CONFIG_STATUS_DEPENDENCIES)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
 
-$(top_srcdir)/configure:  $(am__configure_deps)
+$(top_srcdir)/configure: @MAINTAINER_MODE_TRUE@ $(am__configure_deps)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
-$(ACLOCAL_M4):  $(am__aclocal_m4_deps)
+$(ACLOCAL_M4): @MAINTAINER_MODE_TRUE@ $(am__aclocal_m4_deps)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
 $(am__aclocal_m4_deps):
 gnutls.pc: $(top_builddir)/config.status $(srcdir)/gnutls.pc.in
@@ -1676,8 +1713,6 @@ system/sockets.lo: system/$(am__dirstamp) \
 	system/$(DEPDIR)/$(am__dirstamp)
 system/inet_ntop.lo: system/$(am__dirstamp) \
 	system/$(DEPDIR)/$(am__dirstamp)
-system/iconv.lo: system/$(am__dirstamp) \
-	system/$(DEPDIR)/$(am__dirstamp)
 system/vasprintf.lo: system/$(am__dirstamp) \
 	system/$(DEPDIR)/$(am__dirstamp)
 system/inet_pton.lo: system/$(am__dirstamp) \
@@ -1720,6 +1755,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/datum.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/db.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/debug.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dh-primes.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dh-session.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dh.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dtls-sw.Plo@am__quote@
@@ -1768,6 +1804,8 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/srp.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/sslv2_compat.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/state.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/str-iconv.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/str-unicode.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/str.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/supplemental.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/system.Plo@am__quote@
@@ -1780,7 +1818,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/x509_b64.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@system/$(DEPDIR)/certs.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@system/$(DEPDIR)/fastopen.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@system/$(DEPDIR)/iconv.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@system/$(DEPDIR)/inet_ntop.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@system/$(DEPDIR)/inet_pton.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@system/$(DEPDIR)/keys-dummy.Plo@am__quote@

@@ -30,5 +30,9 @@ then the strings that hold their values must be null terminated.
 The  @code{key} may be @code{NULL}  if you are using a sign callback, see
 @code{gnutls_sign_callback_set()} .
 
-@strong{Returns:} @code{GNUTLS_E_SUCCESS}  (0) on success, or a negative error code.
+Note that, this function by default returns zero on success and a negative value on error.
+Since 3.5.6, when the flag @code{GNUTLS_CERTIFICATE_API_V2}  is set using @code{gnutls_certificate_set_flags()} 
+it returns an index (greater or equal to zero). That index can be used to other functions to refer to the added key-pair.
+
+@strong{Returns:} On success this functions returns zero, and otherwise a negative value on error (see above for modifying that behavior).
 @end deftypefun

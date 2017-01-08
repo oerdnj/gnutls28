@@ -9,7 +9,7 @@
 
 @var{clist_size}: The length of the CA list
 
-@var{flags}: should be 0 or an or'ed sequence of @code{GNUTLS_TL}  options.
+@var{flags}: flags from @code{gnutls_trust_list_flags_t} 
 
 This function will add the given certificate authorities
 to the trusted list. The list of CAs must not be deinitialized

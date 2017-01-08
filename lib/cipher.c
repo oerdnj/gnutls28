@@ -323,9 +323,9 @@ compressed_to_ciphertext(gnutls_session_t session,
 	/* Calculate the encrypted length (padding etc.)
 	 */
 	if (algo_type == CIPHER_BLOCK) {
-		/* Call _gnutls_rnd() once. Get data used for the IV
+		/* Call gnutls_rnd() once. Get data used for the IV
 		 */
-		ret = _gnutls_rnd(GNUTLS_RND_NONCE, nonce, blocksize);
+		ret = gnutls_rnd(GNUTLS_RND_NONCE, nonce, blocksize);
 		if (ret < 0)
 			return gnutls_assert_val(ret);
 
@@ -400,10 +400,9 @@ compressed_to_ciphertext(gnutls_session_t session,
 
 			memset(nonce, 0, 4);
 			memcpy(&nonce[4],
-			       UINT64DATA(params->write.sequence_number),
-			       8);
+			       UINT64DATA(params->write.sequence_number), 8);
 
- 			memxor(nonce, params->write.IV.data, 12);
+			memxor(nonce, params->write.IV.data, 12);
 		}
 	}
 
@@ -602,7 +601,7 @@ ciphertext_to_compressed(gnutls_session_t session,
 			memset(nonce, 0, 4);
 			memcpy(&nonce[4], UINT64DATA(*sequence), 8);
 
- 			memxor(nonce, params->read.IV.data, 12);
+			memxor(nonce, params->read.IV.data, 12);
 		}
 
 		length =

@@ -138,14 +138,18 @@ flag = {
 flag = {
     name      = generate-dh-params;
     descrip   = "Generate PKCS #3 encoded Diffie-Hellman parameters";
-    doc = "";
+    doc = "The will generate random parameters to be used with
+Diffie-Hellman key exchange. The output parameters will be in PKCS #3
+format. Note that it is recommended to use the --get-dh-params option
+instead.";
 };
 
 flag = {
     name      = get-dh-params;
     descrip   = "Get the included PKCS #3 encoded Diffie-Hellman parameters";
-    doc = "Returns stored DH parameters in GnuTLS. Those parameters are used in the SRP protocol. The parameters returned by fresh generation
-are more efficient since GnuTLS 3.0.9.";
+    doc = "Returns stored DH parameters in GnuTLS. Those parameters returned
+are defined in RFC7919, and can be considered standard parameters for a TLS
+key exchange.";
 };
 
 flag = {
@@ -172,14 +176,14 @@ flag = {
     name      = load-request;
     descrip   = "Loads a certificate request file";
     arg-type  = string;
-    doc = "";
+    doc = "This option can be used with a file";
 };
 
 flag = {
     name      = load-certificate;
     descrip   = "Loads a certificate file";
     arg-type  = string;
-    doc = "This can be either a file or a PKCS #11 URL";
+    doc = "This option can be used with a file";
 };
 
 flag = {
@@ -193,21 +197,21 @@ flag = {
     name      = load-ca-certificate;
     descrip   = "Loads the certificate authority's certificate file";
     arg-type  = string;
-    doc = "This can be either a file or a PKCS #11 URL";
+    doc = "This option can be used with a file";
 };
 
 flag = {
     name      = load-crl;
     descrip   = "Loads the provided CRL";
     arg-type  = string;
-    doc = "";
+    doc = "This option can be used with a file";
 };
 
 flag = {
     name      = load-data;
     descrip   = "Loads auxiliary data";
     arg-type  = string;
-    doc = "";
+    doc = "This option can be used with a file";
 };
 
 flag = {
@@ -352,7 +356,7 @@ flag = {
     disable   = "no";
     disabled;
     descrip   = "Will show the embedded data in the PKCS #7 structure";
-    doc       = "This option can be combined with --p7-verify and will display the embedded signed data in the PKCS #7 structure.";
+    doc       = "This option can be combined with --p7-verify or --p7-info and will display the embedded signed data in the PKCS #7 structure.";
 };
 
 flag = {
@@ -408,7 +412,6 @@ flag = {
     name      = to-p12;
     descrip   = "Generate a PKCS #12 structure";
     doc = "It requires a certificate, a private key and possibly a CA certificate to be specified.";
-    flags-must = load-certificate;
 };
 
 flag = {

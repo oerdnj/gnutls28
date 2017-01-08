@@ -45,8 +45,9 @@
 
 #include "cert-common.h"
 #include "utils.h"
+#define MIN(x,y) (((x)<(y))?(x):(y))
 
-/* Test for gnutls_certificate_set_key()
+/* Test for gnutls_certificate_set_x509_key()
  *
  */
 
@@ -64,16 +65,83 @@ static time_t mytime(time_t * t)
 	return then;
 }
 
+static void compare(const gnutls_datum_t *der, const void *ipem)
+{
+	gnutls_datum_t pem = {(void*)ipem, strlen((char*)ipem)};
+	gnutls_datum_t new_der;
+	int ret;
+
+	ret = gnutls_pem_base64_decode2("CERTIFICATE", &pem, &new_der);
+	if (ret < 0) {
+		fail("error: %s\n", gnutls_strerror(ret));
+	}
+
+	if (der->size != new_der.size || memcmp(der->data, new_der.data, der->size) != 0) {
+		fail("error in %d: %s\n", __LINE__, "cert don't match");
+		exit(1);
+	}
+	gnutls_free(new_der.data);
+	return;
+}
+
+static int import_key(gnutls_certificate_credentials_t xcred, const gnutls_datum_t *skey, const gnutls_datum_t *cert)
+{
+	gnutls_x509_privkey_t key;
+	gnutls_x509_crt_t *crt_list;
+	unsigned crt_list_size, idx, i;
+	gnutls_datum_t tcert;
+	int ret;
+
+	assert(gnutls_x509_privkey_init(&key)>=0);
+
+	ret = gnutls_x509_crt_list_import2(&crt_list, &crt_list_size, cert, GNUTLS_X509_FMT_PEM, 0);
+	if (ret < 0) {
+		fail("error in gnutls_x509_crt_list_import2: %s\n", gnutls_strerror(ret));
+	}
+
+	ret = gnutls_x509_privkey_import(key, skey, GNUTLS_X509_FMT_PEM);
+	if (ret < 0) {
+		fail("error in key import: %s\n", gnutls_strerror(ret));
+	}
+
+	ret = gnutls_certificate_set_x509_key(xcred, crt_list,
+				crt_list_size, key);
+	if (ret < 0) {
+		success("error in gnutls_certificate_set_x509_key: %s\n", gnutls_strerror(ret));
+		idx = ret;
+		goto cleanup;
+	}
+
+	/* return index */
+	idx = ret;
+
+	/* verify whether the stored certificate match the ones we have */
+	for (i=0;i<MIN(2, crt_list_size);i++) {
+		ret = gnutls_certificate_get_crt_raw(xcred, idx, i, &tcert);
+		if (ret < 0) {
+			fail("error in %d: cert: %d: %s\n", __LINE__, i, gnutls_strerror(ret));
+			exit(1);
+		}
+
+		compare(&tcert, cert->data+i);
+	}
+
+ cleanup:
+	gnutls_x509_privkey_deinit(key);
+	for (i=0;i<crt_list_size;i++) {
+		gnutls_x509_crt_deinit(crt_list[i]);
+	}
+	gnutls_free(crt_list);
+
+	return idx;
+}
+
 static void basic(void)
 {
 	gnutls_certificate_credentials_t x509_cred;
 	gnutls_certificate_credentials_t clicred;
-	gnutls_pcert_st pcert_list[16];
-	gnutls_privkey_t key;
-	unsigned pcert_list_size;
-	const char *names[] = {"localhost", "localhost2"};
-	gnutls_datum_t tcert;
 	int ret;
+	unsigned idx, i;
 
 	/* this must be called once in the program
 	 */
@@ -87,55 +155,23 @@ static void basic(void)
 
 	assert(gnutls_certificate_allocate_credentials(&clicred) >= 0);
 	assert(gnutls_certificate_allocate_credentials(&x509_cred)>=0);
-	assert(gnutls_privkey_init(&key)>=0);
+
+	gnutls_certificate_set_flags(x509_cred, GNUTLS_CERTIFICATE_API_V2);
 
 	ret = gnutls_certificate_set_x509_trust_mem(clicred, &ca_cert, GNUTLS_X509_FMT_PEM);
 	if (ret < 0)
 		fail("set_x509_trust_file failed: %s\n", gnutls_strerror(ret));
 
-	pcert_list_size = sizeof(pcert_list)/sizeof(pcert_list[0]);
-	ret = gnutls_pcert_list_import_x509_raw(pcert_list, &pcert_list_size,
-		&server_cert, GNUTLS_X509_FMT_PEM, 0);
-	if (ret < 0) {
-		fail("error in gnutls_pcert_list_import_x509_raw: %s\n", gnutls_strerror(ret));
-	}
-
-	ret = gnutls_privkey_import_x509_raw(key, &server_key, GNUTLS_X509_FMT_PEM, NULL, 0);
-	if (ret < 0) {
-		fail("error in key import: %s\n", gnutls_strerror(ret));
-	}
-
-	ret = gnutls_certificate_set_key(x509_cred, names, 2, pcert_list,
-				pcert_list_size, key);
-	if (ret < 0) {
-		fail("error in gnutls_certificate_set_key: %s\n", gnutls_strerror(ret));
-		exit(1);
-	}
-
-	/* verify whether the stored certificate match the ones we have */
-	ret = gnutls_certificate_get_crt_raw(x509_cred, 0, 0, &tcert);
-	if (ret < 0) {
-		fail("error in %d: %s\n", __LINE__, gnutls_strerror(ret));
-		exit(1);
-	}
-
-	if (tcert.size != pcert_list[0].cert.size || memcmp(tcert.data, pcert_list[0].cert.data, tcert.size) != 0) {
-		fail("error in %d: %s\n", __LINE__, "cert don't match");
-		exit(1);
-	}
-
-	ret = gnutls_certificate_get_crt_raw(x509_cred, 0, 1, &tcert);
-	if (ret < 0) {
-		fail("error in %d: %s\n", __LINE__, gnutls_strerror(ret));
-		exit(1);
-	}
-
-	if (tcert.size != pcert_list[1].cert.size || memcmp(tcert.data, pcert_list[1].cert.data, tcert.size) != 0) {
-		fail("error in %d: %s\n", __LINE__, "ca cert don't match");
-		exit(1);
-	}
+	idx = import_key(x509_cred, &server_key, &server_cert);
+	assert(idx == 0);
 
 	test_cli_serv(x509_cred, clicred, "NORMAL", "localhost", NULL, NULL, NULL);
+
+	/* verify that we can add certs, and that their index will change */
+	for (i=0;i<16;i++) {
+		idx = import_key(x509_cred, &server_ecc_key, &server_ecc_cert);
+		assert(idx == 1+i);
+	}
 
 	gnutls_certificate_free_credentials(x509_cred);
 	gnutls_certificate_free_credentials(clicred);
@@ -146,82 +182,29 @@ static void basic(void)
 		success("success");
 }
 
-static void auto_parse(void)
+static void failure_mode(void)
 {
-	gnutls_certificate_credentials_t x509_cred, clicred;
-	gnutls_pcert_st pcert_list[16];
-	gnutls_privkey_t key;
-	gnutls_pcert_st second_pcert;
-	gnutls_privkey_t second_key;
-	unsigned pcert_list_size;
+	gnutls_certificate_credentials_t x509_cred;
 	int ret;
 
 	/* this must be called once in the program
 	 */
 	global_init();
 
-	gnutls_global_set_time_function(time);
+	gnutls_global_set_time_function(mytime);
 
 	gnutls_global_set_log_function(tls_log_func);
 	if (debug)
 		gnutls_global_set_log_level(6);
 
 	assert(gnutls_certificate_allocate_credentials(&x509_cred)>=0);
-	assert(gnutls_privkey_init(&key)>=0);
 
-	assert(gnutls_certificate_allocate_credentials(&clicred) >= 0);
-
-	ret = gnutls_certificate_set_x509_trust_mem(clicred, &ca3_cert, GNUTLS_X509_FMT_PEM);
-	if (ret < 0)
-		fail("set_x509_trust_file failed: %s\n", gnutls_strerror(ret));
-
-	pcert_list_size = sizeof(pcert_list)/sizeof(pcert_list[0]);
-	ret = gnutls_pcert_list_import_x509_raw(pcert_list, &pcert_list_size,
-		&server_ca3_localhost_cert, GNUTLS_X509_FMT_PEM, 0);
-	if (ret < 0) {
-		fail("error in gnutls_pcert_list_import_x509_raw: %s\n", gnutls_strerror(ret));
+	ret = import_key(x509_cred, &server_key, &server_ecc_cert);
+	if (ret >= 0) {
+		fail("gnutls_certificate_set_x509_key: succeeded!\n");
 	}
-
-	ret = gnutls_privkey_import_x509_raw(key, &server_ca3_key, GNUTLS_X509_FMT_PEM, NULL, 0);
-	if (ret < 0) {
-		fail("error in key import: %s\n", gnutls_strerror(ret));
-	}
-
-	ret = gnutls_certificate_set_key(x509_cred, NULL, 0, pcert_list,
-				pcert_list_size, key);
-	if (ret < 0) {
-		fail("error in gnutls_certificate_set_key: %s\n", gnutls_strerror(ret));
-		exit(1);
-	}
-
-	/* set the ECC key */
-	assert(gnutls_privkey_init(&second_key)>=0);
-
-	pcert_list_size = 1;
-	ret = gnutls_pcert_list_import_x509_raw(&second_pcert, &pcert_list_size,
-		&server_ca3_localhost6_cert, GNUTLS_X509_FMT_PEM, 0);
-	if (ret < 0) {
-		fail("error in gnutls_pcert_list_import_x509_raw: %s\n", gnutls_strerror(ret));
-	}
-
-	ret = gnutls_privkey_import_x509_raw(second_key, &server_ca3_key, GNUTLS_X509_FMT_PEM, NULL, 0);
-	if (ret < 0) {
-		fail("error in key import: %s\n", gnutls_strerror(ret));
-	}
-
-	ret = gnutls_certificate_set_key(x509_cred, NULL, 0, &second_pcert,
-				1, second_key);
-	if (ret < 0) {
-		fail("error in gnutls_certificate_set_key: %s\n", gnutls_strerror(ret));
-		exit(1);
-	}
-
-	test_cli_serv(x509_cred, clicred, "NORMAL", "localhost", NULL, NULL, NULL); /* the DNS name of the first cert */
-	test_cli_serv(x509_cred, clicred, "NORMAL", "localhost6", NULL, NULL, NULL); /* the DNS name of ECC cert */
-	test_cli_serv(x509_cred, clicred, "NORMAL", "www.none.org", NULL, NULL, NULL); /* the DNS name of ECC cert */
 
 	gnutls_certificate_free_credentials(x509_cred);
-	gnutls_certificate_free_credentials(clicred);
 
 	gnutls_global_deinit();
 
@@ -232,5 +215,5 @@ static void auto_parse(void)
 void doit(void)
 {
 	basic();
-	auto_parse();
+	failure_mode();
 }

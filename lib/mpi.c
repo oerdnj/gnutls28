@@ -60,7 +60,7 @@ _gnutls_mpi_random_modp(bigint_t r, bigint_t p,
 		buf_release = 1;
 	}
 
-	ret = _gnutls_rnd(level, buf, size);
+	ret = gnutls_rnd(level, buf, size);
 	if (ret < 0) {
 		gnutls_assert();
 		goto cleanup;
@@ -306,7 +306,7 @@ __gnutls_x509_read_int(ASN1_TYPE node, const char *value,
 	result = _gnutls_mpi_init_scan(ret_mpi, tmpstr, tmpstr_size);
 
 	if (overwrite)
-                zeroize_key(tmpstr, tmpstr_size);
+		zeroize_key(tmpstr, tmpstr_size);
 	gnutls_free(tmpstr);
 
 	if (result < 0) {

@@ -18,6 +18,14 @@ present in the SignedData of the PKCS @code{7}  structure. If the data
 provided are NULL then the data in the encapsulatedContent field
 will be used instead.
 
+Note that, unlike @code{gnutls_pkcs7_verify()}  this function does not
+verify the key purpose of the signer. It is expected for the caller
+to verify the intended purpose of the @code{signer}  -e.g., via @code{gnutls_x509_crt_get_key_purpose_oid()} ,
+or @code{gnutls_x509_crt_check_key_purpose()} .
+
+Note also, that since GnuTLS 3.5.6 this function introduces checks in the
+end certificate ( @code{signer} ), including time checks and key usage checks.
+
 @strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (0) is returned, otherwise a
 negative error value. A verification error results to a
 @code{GNUTLS_E_PK_SIG_VERIFY_FAILED}  and the lack of encapsulated data

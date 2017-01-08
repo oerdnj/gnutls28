@@ -1,0 +1,48 @@
+<!-- ##### SECTION Title ##### -->
+fips
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### SECTION Image ##### -->
+
+
+<!-- ##### MACRO FIPS140_RND_KEY_SIZE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### ENUM gnutls_lib_state_t ##### -->
+<para>
+
+</para>
+
+@LIB_STATE_POWERON: 
+@LIB_STATE_INIT: 
+@LIB_STATE_SELFTEST: 
+@LIB_STATE_OPERATIONAL: 
+@LIB_STATE_ERROR: 
+@LIB_STATE_SHUTDOWN: 
+
+<!-- ##### MACRO FAIL_IF_LIB_ERROR ##### -->
+<para>
+
+</para>
+
+
+

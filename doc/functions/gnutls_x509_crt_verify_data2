@@ -17,7 +17,11 @@ This function will verify the given signed data, using the
 parameters from the certificate.
 
 @strong{Returns:} In case of a verification failure @code{GNUTLS_E_PK_SIG_VERIFY_FAILED}  
-is returned, and zero or positive code on success.
+is returned, @code{GNUTLS_E_EXPIRED}  or @code{GNUTLS_E_NOT_YET_ACTIVATED}  on expired
+or not yet activated certificate and zero or positive code on success.
+
+Note that since GnuTLS 3.5.6 this function introduces checks in the
+end certificate ( @code{crt} ), including time checks and key usage checks.
 
 @strong{Since:} 3.4.0
 @end deftypefun

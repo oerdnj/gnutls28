@@ -1,0 +1,1131 @@
+<!-- ##### SECTION Title ##### -->
+unictype.in
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### SECTION Image ##### -->
+
+
+<!-- ##### USER_FUNCTION lookup_fn ##### -->
+<para>
+
+</para>
+
+@uc: 
+@bitmask: 
+@Returns: 
+
+
+<!-- ##### VARIABLE UC_CATEGORY_L ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_CATEGORY_LC ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_CATEGORY_Lu ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_CATEGORY_Ll ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_CATEGORY_Lt ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_CATEGORY_Lm ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_CATEGORY_Lo ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_CATEGORY_M ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_CATEGORY_Mn ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_CATEGORY_Mc ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_CATEGORY_Me ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_CATEGORY_N ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_CATEGORY_Nd ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_CATEGORY_Nl ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_CATEGORY_No ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_CATEGORY_P ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_CATEGORY_Pc ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_CATEGORY_Pd ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_CATEGORY_Ps ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_CATEGORY_Pe ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_CATEGORY_Pi ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_CATEGORY_Pf ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_CATEGORY_Po ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_CATEGORY_S ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_CATEGORY_Sm ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_CATEGORY_Sc ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_CATEGORY_Sk ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_CATEGORY_So ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_CATEGORY_Z ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_CATEGORY_Zs ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_CATEGORY_Zl ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_CATEGORY_Zp ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_CATEGORY_C ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_CATEGORY_Cc ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_CATEGORY_Cf ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_CATEGORY_Cs ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_CATEGORY_Co ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_CATEGORY_Cn ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO UC_LETTER ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO UC_CASED_LETTER ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO UC_UPPERCASE_LETTER ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO UC_LOWERCASE_LETTER ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO UC_TITLECASE_LETTER ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO UC_MODIFIER_LETTER ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO UC_OTHER_LETTER ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO UC_MARK ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO UC_NON_SPACING_MARK ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO UC_COMBINING_SPACING_MARK ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO UC_ENCLOSING_MARK ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO UC_NUMBER ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO UC_DECIMAL_DIGIT_NUMBER ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO UC_LETTER_NUMBER ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO UC_OTHER_NUMBER ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO UC_PUNCTUATION ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO UC_CONNECTOR_PUNCTUATION ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO UC_DASH_PUNCTUATION ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO UC_OPEN_PUNCTUATION ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO UC_CLOSE_PUNCTUATION ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO UC_INITIAL_QUOTE_PUNCTUATION ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO UC_FINAL_QUOTE_PUNCTUATION ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO UC_OTHER_PUNCTUATION ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO UC_SYMBOL ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO UC_MATH_SYMBOL ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO UC_CURRENCY_SYMBOL ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO UC_MODIFIER_SYMBOL ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO UC_OTHER_SYMBOL ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO UC_SEPARATOR ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO UC_SPACE_SEPARATOR ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO UC_LINE_SEPARATOR ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO UC_PARAGRAPH_SEPARATOR ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO UC_OTHER ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO UC_CONTROL ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO UC_FORMAT ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO UC_SURROGATE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO UC_PRIVATE_USE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO UC_UNASSIGNED ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION uc_general_category_or ##### -->
+<para>
+
+</para>
+
+@category1: 
+@category2: 
+@Returns: 
+
+
+<!-- ##### FUNCTION uc_general_category_and ##### -->
+<para>
+
+</para>
+
+@category1: 
+@category2: 
+@Returns: 
+
+
+<!-- ##### FUNCTION uc_general_category_and_not ##### -->
+<para>
+
+</para>
+
+@category1: 
+@category2: 
+@Returns: 
+
+
+<!-- ##### FUNCTION uc_general_category_name ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION uc_joining_type_name ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### VARIABLE UC_PROPERTY_WHITE_SPACE ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_ALPHABETIC ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_OTHER_ALPHABETIC ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_NOT_A_CHARACTER ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_DEFAULT_IGNORABLE_CODE_POINT ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_OTHER_DEFAULT_IGNORABLE_CODE_POINT ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_DEPRECATED ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_LOGICAL_ORDER_EXCEPTION ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_VARIATION_SELECTOR ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_PRIVATE_USE ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_UNASSIGNED_CODE_VALUE ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_UPPERCASE ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_OTHER_UPPERCASE ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_LOWERCASE ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_OTHER_LOWERCASE ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_TITLECASE ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_CASED ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_CASE_IGNORABLE ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_CHANGES_WHEN_LOWERCASED ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_CHANGES_WHEN_UPPERCASED ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_CHANGES_WHEN_TITLECASED ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_CHANGES_WHEN_CASEFOLDED ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_CHANGES_WHEN_CASEMAPPED ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_SOFT_DOTTED ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_ID_START ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_OTHER_ID_START ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_ID_CONTINUE ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_OTHER_ID_CONTINUE ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_XID_START ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_XID_CONTINUE ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_PATTERN_WHITE_SPACE ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_PATTERN_SYNTAX ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_JOIN_CONTROL ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_GRAPHEME_BASE ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_GRAPHEME_EXTEND ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_OTHER_GRAPHEME_EXTEND ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_GRAPHEME_LINK ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_BIDI_CONTROL ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_BIDI_LEFT_TO_RIGHT ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_BIDI_HEBREW_RIGHT_TO_LEFT ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_BIDI_ARABIC_RIGHT_TO_LEFT ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_BIDI_EUROPEAN_DIGIT ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_BIDI_EUR_NUM_SEPARATOR ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_BIDI_EUR_NUM_TERMINATOR ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_BIDI_ARABIC_DIGIT ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_BIDI_COMMON_SEPARATOR ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_BIDI_BLOCK_SEPARATOR ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_BIDI_SEGMENT_SEPARATOR ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_BIDI_WHITESPACE ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_BIDI_NON_SPACING_MARK ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_BIDI_BOUNDARY_NEUTRAL ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_BIDI_PDF ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_BIDI_EMBEDDING_OR_OVERRIDE ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_BIDI_OTHER_NEUTRAL ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_HEX_DIGIT ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_ASCII_HEX_DIGIT ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_IDEOGRAPHIC ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_UNIFIED_IDEOGRAPH ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_RADICAL ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_IDS_BINARY_OPERATOR ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_IDS_TRINARY_OPERATOR ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_ZERO_WIDTH ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_SPACE ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_NON_BREAK ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_ISO_CONTROL ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_FORMAT_CONTROL ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_DASH ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_HYPHEN ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_PUNCTUATION ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_LINE_SEPARATOR ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_PARAGRAPH_SEPARATOR ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_QUOTATION_MARK ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_SENTENCE_TERMINAL ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_TERMINAL_PUNCTUATION ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_CURRENCY_SYMBOL ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_MATH ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_OTHER_MATH ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_PAIRED_PUNCTUATION ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_LEFT_OF_PAIR ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_COMBINING ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_COMPOSITE ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_DECIMAL_DIGIT ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_NUMERIC ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_DIACRITIC ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_EXTENDER ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE UC_PROPERTY_IGNORABLE_CONTROL ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION uc_property_byname ##### -->
+<para>
+
+</para>
+
+@property_name: 
+@Returns: 
+
+
+<!-- ##### MACRO uc_property_is_valid ##### -->
+<para>
+
+</para>
+
+@property: 
+
+
+<!-- ##### FUNCTION uc_is_property ##### -->
+<para>
+
+</para>
+
+@uc: 
+@property: 
+@Returns: 
+
+
+<!-- ##### FUNCTION uc_is_property_white_space ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION uc_block ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

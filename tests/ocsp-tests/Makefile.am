@@ -22,17 +22,21 @@
 EXTRA_DIST = certs/ca.key certs/ca.pem certs/ocsp-server.key certs/ocsp-server.pem response1.der \
 	response2.der certs/ocsp_index.txt certs/ocsp_index.txt.attr \
 	certs/server_good.key certs/server_bad.key certs/server_good.template \
-	certs/server_bad.template certs/ocsp-staple-unrelated.der
+	certs/server_bad.template certs/ocsp-staple-unrelated.der suppressions.valgrind
 
-dist_check_SCRIPTS = ocsp-test ocsp-tls-connection
+dist_check_SCRIPTS = ocsp-test
+
+if !WINDOWS
+dist_check_SCRIPTS += ocsp-tls-connection ocsp-must-staple-connection
+endif
 
 TESTS = $(dist_check_SCRIPTS)
 
 TESTS_ENVIRONMENT = EXEEXT=$(EXEEXT) \
-	LC_ALL="C"				\
-	VALGRIND="$(VALGRIND)" 			\
-	LIBTOOL="$(LIBTOOL)"			\
-	top_builddir="$(top_builddir)"		\
+	LC_ALL="C"		\
+	VALGRIND="$(VALGRIND)"	\
+	LIBTOOL="$(LIBTOOL)"	\
+	top_builddir="$(top_builddir)"	\
 	srcdir="$(srcdir)"
 
 if WINDOWS

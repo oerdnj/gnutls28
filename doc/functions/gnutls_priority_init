@@ -19,7 +19,7 @@ Some keywords are defined to provide quick access
 to common preferences.
 
 Unless there is a special need, use the "NORMAL" keyword to
-apply a reasonable security level, or "NORMAL:@code{COMPAT} " for compatibility.
+apply a reasonable security level, or "NORMAL:%COMPAT" for compatibility.
 
 "PERFORMANCE" means all the "secure" ciphersuites are enabled,
 limited to 128 bit ciphers and sorted by terms of speed
@@ -52,7 +52,7 @@ of 192.
 "NONE" means nothing is enabled.  This disables even protocols and
 compression methods.
 
-"@ @code{KEYWORD1} ,KEYWORD2,..." The system administrator imposed settings.
+"@@KEYWORD1,KEYWORD2,..." The system administrator imposed settings.
 The provided keyword(s) will be expanded from a configuration-time
 provided file - default is: /etc/gnutls/default-priorities.
 Any attributes that follow it, will be appended to the expanded
@@ -90,7 +90,7 @@ enabled, SSL3.0 is disabled, and libz compression enabled.
 
 "SECURE256:+SECURE128",
 
-Note that "NORMAL:@code{COMPAT} " is the most compatible mode.
+Note that "NORMAL:%COMPAT" is the most compatible mode.
 
 A @code{NULL}   @code{priorities} string indicates the default priorities to be
 used (this is available since GnuTLS 3.3.0).

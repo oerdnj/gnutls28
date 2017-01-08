@@ -1,5 +1,6 @@
 /*
- * Copyright (C) 2001-2012 Free Software Foundation, Inc.
+ * Copyright (C) 2001-2016 Free Software Foundation, Inc.
+ * Copyright (C) 2015-2016 Red Hat, Inc.
  *
  * Author: Nikos Mavrogiannopoulos
  *
@@ -285,20 +286,28 @@ error:
  * The output is exactly 20 bytes
  */
 static int
-_gnutls_calc_srp_sha(const char *username, const char *password,
+_gnutls_calc_srp_sha(const char *username, const char *_password,
 		     uint8_t * salt, int salt_size, size_t * size,
-		     void *digest)
+		     void *digest, unsigned allow_invalid_pass)
 {
 	digest_hd_st td;
 	uint8_t res[MAX_HASH_SIZE];
 	int ret;
 	const mac_entry_st *me = mac_to_entry(GNUTLS_MAC_SHA1);
+	char *password;
+	gnutls_datum_t pout;
 
 	*size = 20;
 
+	ret = _gnutls_utf8_password_normalize(_password, strlen(_password), &pout, allow_invalid_pass);
+	if (ret < 0)
+		return gnutls_assert_val(ret);
+	password = (char*)pout.data;
+
 	ret = _gnutls_hash_init(&td, me);
 	if (ret < 0) {
-		return GNUTLS_E_MEMORY_ERROR;
+		ret = GNUTLS_E_MEMORY_ERROR;
+		goto cleanup;
 	}
 	_gnutls_hash(&td, username, strlen(username));
 	_gnutls_hash(&td, ":", 1);
@@ -308,15 +317,19 @@ _gnutls_calc_srp_sha(const char *username, const char *password,
 
 	ret = _gnutls_hash_init(&td, me);
 	if (ret < 0) {
-		return GNUTLS_E_MEMORY_ERROR;
+		ret = GNUTLS_E_MEMORY_ERROR;
+		goto cleanup;
 	}
 
 	_gnutls_hash(&td, salt, salt_size);
 	_gnutls_hash(&td, res, 20);	/* 20 bytes is the output of sha1 */
 
 	_gnutls_hash_deinit(&td, digest);
+	ret = 0;
 
-	return 0;
+ cleanup:
+	gnutls_free(password);
+	return ret;
 }
 
 int
@@ -325,7 +338,7 @@ _gnutls_calc_srp_x(char *username, char *password, uint8_t * salt,
 {
 
 	return _gnutls_calc_srp_sha(username, password, salt,
-				    salt_size, size, digest);
+				    salt_size, size, digest, 1);
 }
 
 
@@ -532,7 +545,7 @@ gnutls_srp_allocate_server_credentials(gnutls_srp_server_credentials_t *
 		goto cleanup;
 	}
 
-	ret = _gnutls_rnd(GNUTLS_RND_RANDOM, (*sc)->fake_salt_seed.data,
+	ret = gnutls_rnd(GNUTLS_RND_RANDOM, (*sc)->fake_salt_seed.data,
 				DEFAULT_FAKE_SALT_SEED_SIZE);
 
 	if (ret < 0) {
@@ -734,7 +747,7 @@ gnutls_srp_verifier(const char *username, const char *password,
 	uint8_t digest[20];
 
 	ret = _gnutls_calc_srp_sha(username, password, salt->data,
-				   salt->size, &digest_size, digest);
+				   salt->size, &digest_size, digest, 0);
 	if (ret < 0) {
 		gnutls_assert();
 		return ret;

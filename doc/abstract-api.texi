@@ -17,18 +17,22 @@
 This function sets a certificate/private key pair in the
 gnutls_certificate_credentials_t type.  This function may be
 called more than once, in case multiple keys/certificates exist for
-the server.  For clients that wants to send more than its own end
-entity certificate (e.g., also an intermediate CA cert) then put
-the certificate chain in  @code{pcert_list} . 
+the server.  For clients that want to send more than their own end-
+entity certificate (e.g., also an intermediate CA cert), the full
+certificate chain must be provided in  @code{pcert_list} .
 
 Note that the  @code{key} and the elements of  @code{pcert_list} will become part of the credentials 
 structure and must not be deallocated. They will be automatically deallocated 
-when the  @code{res} type is deinitialized.
+when the  @code{res} structure is deinitialized.
 
 If that function fails to load the  @code{res} structure is at an undefined state, it must
 not be reused to load other keys or certificates.
 
-@strong{Returns:} @code{GNUTLS_E_SUCCESS}  (0) on success, or a negative error code.
+Note that, this function by default returns zero on success and a negative value on error.
+Since 3.5.6, when the flag @code{GNUTLS_CERTIFICATE_API_V2}  is set using @code{gnutls_certificate_set_flags()} 
+it returns an index (greater or equal to zero). That index can be used to other functions to refer to the added key-pair.
+
+@strong{Returns:} On success this functions returns zero, and otherwise a negative value on error (see above for modifying that behavior).
 
 @strong{Since:} 3.0
 @end deftypefun
@@ -1907,7 +1911,7 @@ negative error value.
 
 @var{issuer_key}: holds the issuer's private key
 
-@var{dig}: The message digest to use. GNUTLS_DIG_SHA1 is the safe choice unless you know what you're doing.
+@var{dig}: The message digest to use. GNUTLS_DIG_SHA256 is the safe choice unless you know what you're doing.
 
 @var{flags}: must be 0
 
@@ -1916,6 +1920,10 @@ will copy the issuer's information into the CRL.
 
 This must be the last step in a certificate CRL since all
 the previously set parameters are now signed.
+
+A known limitation of this function is, that a newly-signed CRL will not
+be fully functional (e.g., for signature verification), until it
+is exported an re-imported.
 
 @strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (0) is returned, otherwise a
 negative error value.
@@ -1975,7 +1983,7 @@ negative error value.
 
 @var{issuer_key}: holds the issuer's private key
 
-@var{dig}: The message digest to use, @code{GNUTLS_DIG_SHA1}  is a safe choice
+@var{dig}: The message digest to use, @code{GNUTLS_DIG_SHA256}  is a safe choice
 
 @var{flags}: must be 0
 
@@ -1984,6 +1992,10 @@ will copy the issuer's information into the certificate.
 
 This must be the last step in a certificate generation since all
 the previously set parameters are now signed.
+
+A known limitation of this function is, that a newly-signed certificate will not
+be fully functional (e.g., for signature verification), until it
+is exported an re-imported.
 
 @strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (0) is returned, otherwise a
 negative error value.

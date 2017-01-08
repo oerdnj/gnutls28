@@ -6,16 +6,16 @@ Uploaders: Andreas Metzler <ametzler@debian.org>,
  Eric Dorland <eric@debian.org>,
  James Westby <jw+debian@jameswestby.net>,
  Simon Josefsson <simon@josefsson.org>
-Build-Depends: debhelper (>= 9), nettle-dev (>= 3.1), zlib1g-dev,
- libtasn1-6-dev (>= 4.3), autotools-dev,
- datefudge,
+Build-Depends: debhelper (>= 9.20150628), nettle-dev (>= 3.1), zlib1g-dev,
+ libtasn1-6-dev (>= 4.9), autotools-dev,
+ datefudge <!nocheck>, dpkg-dev (>= 1.17.14),
  libp11-kit-dev (>= 0.23.1), pkg-config, chrpath, libidn11-dev (>= 1.31),
- autogen (>= 1:5.16-0), bison, dh-autoreconf, libcmocka-dev,
+ autogen (>= 1:5.16-0), bison, dh-autoreconf, libcmocka-dev <!nocheck>,
  libgmp-dev (>= 2:6),
- libopts25-dev, automake (>= 1:1.12.2),
- net-tools [!kfreebsd-i386 !kfreebsd-amd64],
- freebsd-net-tools [kfreebsd-i386 kfreebsd-amd64],
- libssl-dev
+ libopts25-dev, automake (>= 1:1.12.2), libunbound-dev (>= 1.5.10-1),
+ net-tools [!kfreebsd-i386 !kfreebsd-amd64] <!nocheck>,
+ freebsd-net-tools [kfreebsd-i386 kfreebsd-amd64] <!nocheck>,
+ libssl-dev <!nocheck>, openssl <!nocheck>, softhsm2 <!nocheck>
 # The b-d on libgmp-dev is not technically necessary, since nettle brings
 # it along. However we want to enforce that gnutls is only built if the
 # dual-licensed GMP is available, otherwise the resulting binary
@@ -33,7 +33,8 @@ Architecture: any
 Provides: gnutls-dev, libgnutls-openssl-dev
 Depends: libgnutls30 (= ${binary:Version}),
  libgnutls-openssl27 (= ${binary:Version}),
- libgnutlsxx28 (= ${binary:Version}), 
+ libgnutlsxx28 (= ${binary:Version}),
+ libgnutls-dane0 (= ${binary:Version}),
  nettle-dev, libc6-dev | libc-dev, zlib1g-dev,
  libtasn1-6-dev, libp11-kit-dev, libidn11-dev (>= 1.31), ${misc:Depends}
 Suggests: gnutls-doc, gnutls-bin
@@ -191,3 +192,30 @@ Description: GNU TLS library - OpenSSL wrapper
     Camellia (RFC 4132)).
  .
  This package contains the runtime library of the GnuTLS OpenSSL wrapper.
+
+Package: libgnutls-dane0
+Priority: extra
+Architecture: any
+Depends: libgnutls30 (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
+Pre-Depends: ${misc:Pre-Depends}
+# dns-root-data for danetool
+Suggests: dns-root-data
+Multi-Arch: same
+Description: GNU TLS library - DANE security support
+ Security (TLS 1.0, 1.1, 1.2) and Secure Sockets Layer (SSL) 3.0 and Datagram
+ Transport Layer Security (DTLS 1.0, 1.2) protocols.
+ .
+ GnuTLS features support for:
+  - TLS extensions: server name indication, max record size, opaque PRF
+    input, etc.
+  - authentication using the SRP protocol.
+  - authentication using both X.509 certificates and OpenPGP keys.
+  - TLS Pre-Shared-Keys (PSK) extension.
+  - Inner Application (TLS/IA) extension.
+  - X.509 and OpenPGP certificate handling.
+  - X.509 Proxy Certificates (RFC 3820).
+  - all the strong encryption algorithms (including SHA-256/384/512 and
+    Camellia (RFC 4132)).
+ .
+ This package contains the runtime library for DANE (DNS-based Authentication
+ of Named Entities) support.

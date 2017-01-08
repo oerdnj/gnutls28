@@ -1,0 +1,54 @@
+<!-- ##### SECTION Title ##### -->
+num
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### SECTION Image ##### -->
+
+
+<!-- ##### MACRO UINT64DATA ##### -->
+<para>
+
+</para>
+
+@x: 
+
+
+<!-- ##### VARIABLE ret ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION bswap_32 ##### -->
+<para>
+
+</para>
+
+@Param1: 
+@Returns: 
+
+
+<!-- ##### FUNCTION bswap_16 ##### -->
+<para>
+
+</para>
+
+@Param1: 
+@Returns: 
+
+

@@ -34,6 +34,7 @@
 #include <common.h>
 #include <x509_b64.h>
 #include "x509_int.h"
+#include "pkcs7_int.h"
 #include <random.h>
 
 
@@ -880,7 +881,7 @@ int gnutls_pkcs12_generate_mac2(gnutls_pkcs12_t pkcs12, gnutls_mac_algorithm_t m
 
 	/* Generate the salt.
 	 */
-	result = _gnutls_rnd(GNUTLS_RND_NONCE, salt, sizeof(salt));
+	result = gnutls_rnd(GNUTLS_RND_NONCE, salt, sizeof(salt));
 	if (result < 0) {
 		gnutls_assert();
 		return result;
@@ -1043,7 +1044,7 @@ int gnutls_pkcs12_verify_mac(gnutls_pkcs12_t pkcs12, const char *pass)
 		return _gnutls_asn2err(result);
 	}
 
-	algo = _gnutls_x509_oid_to_mac(oid);
+	algo = gnutls_oid_to_digest(oid);
 	if (algo == GNUTLS_MAC_UNKNOWN) {
  unknown_mac:
 		gnutls_assert();
@@ -1402,9 +1403,9 @@ static int make_chain(gnutls_x509_crt_t ** chain, unsigned int *chain_len,
  * @chain: the corresponding to key certificate chain (may be %NULL)
  * @chain_len: will be updated with the number of additional (may be %NULL)
  * @extra_certs: optional pointer to receive an array of additional
- *               certificates found in the PKCS12 structure (may be %NULL).
+ *	       certificates found in the PKCS12 structure (may be %NULL).
  * @extra_certs_len: will be updated with the number of additional
- *                   certs (may be %NULL).
+ *		   certs (may be %NULL).
  * @crl: an optional structure to store the parsed CRL (may be %NULL).
  * @flags: should be zero or one of GNUTLS_PKCS12_SP_*
  *
@@ -1779,8 +1780,10 @@ gnutls_pkcs12_simple_parse(gnutls_pkcs12_t p12,
 		gnutls_pkcs12_bag_deinit(bag);
 
 	if (ret < 0) {
-		if (*key)
+		if (*key) {
 			gnutls_x509_privkey_deinit(*key);
+			*key = NULL;
+		}
 		if (_extra_certs_len && _extra_certs != NULL) {
 			for (i = 0; i < _extra_certs_len; i++)
 				gnutls_x509_crt_deinit(_extra_certs[i]);
@@ -1866,7 +1869,7 @@ gnutls_pkcs12_mac_info(gnutls_pkcs12_t pkcs12, unsigned int *mac,
 		*oid = (char*)tmp.data;
 	}
 
-	algo = _gnutls_x509_oid_to_mac((char*)tmp.data);
+	algo = gnutls_oid_to_digest((char*)tmp.data);
 	if (algo == GNUTLS_MAC_UNKNOWN || mac_to_entry(algo) == NULL) {
 		gnutls_assert();
 		return GNUTLS_E_UNKNOWN_HASH_ALGORITHM;

@@ -35,49 +35,7 @@ with a status code of 0.
 
 @exampleindent 0
 @example
-tpmtool - GnuTLS TPM tool
-Usage:  tpmtool [ -<flag> [<val>] | --<name>[@{=| @}<val>] ]...
-
-   -d, --debug=num            Enable debugging
-                                - it must be in the range:
-                                  0 to 9999
-       --infile=file          Input file
-                                - file must pre-exist
-       --outfile=str          Output file
-       --generate-rsa         Generate an RSA private-public key pair
-       --register             Any generated key will be registered in the TPM
-                                - requires the option 'generate-rsa'
-       --signing              Any generated key will be a signing key
-                                - requires the option 'generate-rsa'
-                                -- and prohibits the option 'legacy'
-       --legacy               Any generated key will be a legacy key
-                                - requires the option 'generate-rsa'
-                                -- and prohibits the option 'signing'
-       --user                 Any registered key will be a user key
-                                - requires the option 'register'
-                                -- and prohibits the option 'system'
-       --system               Any registered key will be a system key
-                                - requires the option 'register'
-                                -- and prohibits the option 'user'
-       --pubkey=str           Prints the public key of the provided key
-       --list                 Lists all stored keys in the TPM
-       --delete=str           Delete the key identified by the given URL (UUID).
-       --test-sign=str        Tests the signature operation of the provided object
-       --sec-param=str        Specify the security level [low, legacy, medium, high, ultra].
-       --bits=num             Specify the number of bits for key generate
-       --inder                Use the DER format for keys.
-                                - disabled as '--no-inder'
-       --outder               Use DER format for output keys
-                                - disabled as '--no-outder'
-   -v, --version[=arg]        output version information and exit
-   -h, --help                 display extended usage information and exit
-   -!, --more-help            extended usage information passed thru pager
-
-Options are specified by doubled hyphens and their name or by a single
-hyphen and the flag character.
-
-Program that allows handling cryptographic data from the TPM chip.
-
+tpmtool is unavailable - no --help
 @end example
 @exampleindent 4
 
@@ -92,7 +50,7 @@ Specifies the debug level.
 
 This is the ``generate an rsa private-public key pair'' option.
 Generates an RSA private-public key pair in the TPM chip. 
-The key may be stored in filesystem and protected by a PIN, or stored (registered)
+The key may be stored in file system and protected by a PIN, or stored (registered)
 in the TPM chip flash.
 @anchor{tpmtool user}
 @subsection user option
@@ -185,7 +143,7 @@ The operation failed or the command syntax was not valid.
     p11tool (1), certtool (1)
 @anchor{tpmtool Examples}
 @subsection tpmtool Examples
-To generate a key that is to be stored in filesystem use:
+To generate a key that is to be stored in file system use:
 @example
 $ tpmtool --generate-rsa --bits 2048 --outfile tpmkey.pem
 @end example
@@ -201,7 +159,7 @@ $ tpmtool --pubkey tpmkey:uuid=58ad734b-bde6-45c7-89d8-756a55ad1891;storage=user
           --outfile pubkey.pem
 @end example
 
-or if the key is stored in the filesystem:
+or if the key is stored in the file system:
 @example
 $ tpmtool --pubkey tpmkey:file=tmpkey.pem --outfile pubkey.pem
 @end example

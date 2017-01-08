@@ -29,7 +29,7 @@ and @code{GNUTLS_PKCS7_WRITE_SPKI} . They are explained in the @code{gnutls_pkcs
 definition.
 
 @strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (0) is returned, otherwise a
-negative error value. 
+negative error value.
 
 @strong{Since:} 3.4.2
 @end deftypefun

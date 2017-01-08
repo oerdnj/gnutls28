@@ -365,20 +365,24 @@ int is_broken_allowed(gnutls_sign_algorithm_t sig, unsigned int flags)
 		hash = gnutls_sign_get_hash_algorithm(sigalg); \
 		entry = mac_to_entry(hash); \
 		if (hash <= 0 || entry == NULL) { \
+			_gnutls_cert_log("cert", crt); \
 			_gnutls_debug_log(#level": certificate's signature hash is unknown\n"); \
 			return gnutls_assert_val(0); \
 		} \
 		if (entry->secure == 0 || entry->output_size*8/2 < sym_bits) { \
+			_gnutls_cert_log("cert", crt); \
 			_gnutls_debug_log(#level": certificate's signature hash strength is unacceptable (is %u bits, needed %u)\n", entry->output_size*8/2, sym_bits); \
 			return gnutls_assert_val(0); \
 		} \
 		sp = gnutls_pk_bits_to_sec_param(pkalg, bits); \
 		if (sp < level) { \
+			_gnutls_cert_log("cert", crt); \
 			_gnutls_debug_log(#level": certificate's security level is unacceptable\n"); \
 			return gnutls_assert_val(0); \
 		} \
 		sp = gnutls_pk_bits_to_sec_param(issuer_pkalg, issuer_bits); \
 		if (sp < level) { \
+			_gnutls_cert_log("issuer", issuer); \
 			_gnutls_debug_log(#level": certificate's issuer security level is unacceptable\n"); \
 			return gnutls_assert_val(0); \
 		} \
@@ -396,14 +400,13 @@ static unsigned is_level_acceptable(
 	gnutls_x509_crt_t crt, gnutls_x509_crt_t issuer,
 	gnutls_sign_algorithm_t sigalg, unsigned flags)
 {
-gnutls_certificate_verification_profiles_t profile = GNUTLS_VFLAGS_TO_PROFILE(flags);
-const mac_entry_st *entry;
-int issuer_pkalg, pkalg, ret;
-unsigned bits = 0, issuer_bits = 0, sym_bits = 0;
-gnutls_pk_params_st params;
-gnutls_sec_param_t sp;
-
-int hash;
+	gnutls_certificate_verification_profiles_t profile = GNUTLS_VFLAGS_TO_PROFILE(flags);
+	const mac_entry_st *entry;
+	int issuer_pkalg, pkalg, ret;
+	unsigned bits = 0, issuer_bits = 0, sym_bits = 0;
+	gnutls_pk_params_st params;
+	gnutls_sec_param_t sp;
+	int hash;
 
 	if (profile == 0)
 		return 1;
@@ -660,8 +663,8 @@ verify_crt(gnutls_x509_crt_t cert,
 		if (issuer_version < 0) {
 			MARK_INVALID(0);
 		} else if (!(flags & GNUTLS_VERIFY_DISABLE_CA_SIGN) &&
-	                   ((flags & GNUTLS_VERIFY_DO_NOT_ALLOW_X509_V1_CA_CRT)
-	                    || issuer_version != 1)) {
+			   ((flags & GNUTLS_VERIFY_DO_NOT_ALLOW_X509_V1_CA_CRT)
+			    || issuer_version != 1)) {
 			if (check_if_ca(cert, issuer, &vparams->max_path, flags) != 1) {
 				MARK_INVALID(GNUTLS_CERT_SIGNER_NOT_CA);
 			}
@@ -687,11 +690,11 @@ verify_crt(gnutls_x509_crt_t cert,
 		if (me == NULL) {
 			MARK_INVALID(0);
 		} else if (cert_signed_data.data != NULL &&
-		           cert_signature.data != NULL) {
+			   cert_signature.data != NULL) {
 			ret =
 			    _gnutls_x509_verify_data(me,
 						     &cert_signed_data,
-		        	                     &cert_signature,
+						     &cert_signature,
 						     issuer);
 			if (ret == GNUTLS_E_PK_SIG_VERIFY_FAILED) {
 				MARK_INVALID(GNUTLS_CERT_SIGNATURE_FAILURE);
@@ -1123,8 +1126,8 @@ _gnutls_pkcs11_verify_crt_status(const char* url,
 
 	/* check against issuer */
 	ret = gnutls_pkcs11_get_raw_issuer(url, certificate_list[clist_size - 1],
-			 		   &raw_issuer, GNUTLS_X509_FMT_DER,
-			 		   GNUTLS_PKCS11_OBJ_FLAG_OVERWRITE_TRUSTMOD_EXT|GNUTLS_PKCS11_OBJ_FLAG_PRESENT_IN_TRUSTED_MODULE);
+					   &raw_issuer, GNUTLS_X509_FMT_DER,
+					   GNUTLS_PKCS11_OBJ_FLAG_OVERWRITE_TRUSTMOD_EXT|GNUTLS_PKCS11_OBJ_FLAG_PRESENT_IN_TRUSTED_MODULE);
 	if (ret < 0) {
 		gnutls_assert();
 		if (ret == GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE && clist_size > 2) {
@@ -1132,7 +1135,7 @@ _gnutls_pkcs11_verify_crt_status(const char* url,
 			/* check if the last certificate in the chain is present
 			 * in our trusted list, and if yes, verify against it. */
 			ret = gnutls_pkcs11_crt_is_known(url, certificate_list[clist_size - 1],
-			 	GNUTLS_PKCS11_OBJ_FLAG_RETRIEVE_TRUSTED|GNUTLS_PKCS11_OBJ_FLAG_COMPARE);
+				GNUTLS_PKCS11_OBJ_FLAG_RETRIEVE_TRUSTED|GNUTLS_PKCS11_OBJ_FLAG_COMPARE);
 			if (ret != 0) {
 				return _gnutls_verify_crt_status(certificate_list, clist_size,
 					&certificate_list[clist_size - 1], 1, flags,
@@ -1377,7 +1380,10 @@ find_crl_issuer(gnutls_x509_crl_t crl,
  * function is success (i.e, failure to trust a CRL a certificate does not imply 
  * a negative return value).
  *
- * Returns: On success, %GNUTLS_E_SUCCESS (0) is returned, otherwise a
+ * Before GnuTLS 3.5.7 this function would return zero or a positive
+ * number on success.
+ *
+ * Returns: On success, %GNUTLS_E_SUCCESS (0), otherwise a
  *   negative error value.
  **/
 int
@@ -1483,6 +1489,8 @@ gnutls_x509_crl_verify(gnutls_x509_crl_t crl,
 			if (verify)
 				*verify |= GNUTLS_CERT_INVALID;
 			goto cleanup;
+		} else if (result >= 0) {
+			result = 0; /* everything ok */
 		}
 	}
 

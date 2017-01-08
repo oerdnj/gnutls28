@@ -140,7 +140,7 @@ static int
 proc_rsa_client_kx(gnutls_session_t session, uint8_t * data,
 		   size_t _data_size)
 {
-	gnutls_datum_t plaintext;
+	gnutls_datum_t plaintext = {NULL, 0};
 	gnutls_datum_t ciphertext;
 	int ret, dsize;
 	int use_rnd_key = 0;
@@ -178,7 +178,7 @@ proc_rsa_client_kx(gnutls_session_t session, uint8_t * data,
 
 	/* we do not need strong random numbers here.
 	 */
-	ret = _gnutls_rnd(GNUTLS_RND_NONCE, rndkey.data,
+	ret = gnutls_rnd(GNUTLS_RND_NONCE, rndkey.data,
 			  rndkey.size);
 	if (ret < 0) {
 		gnutls_assert();
@@ -195,6 +195,10 @@ proc_rsa_client_kx(gnutls_session_t session, uint8_t * data,
 		 * attack against pkcs-1 formating).
 		 */
 		_gnutls_debug_log("auth_rsa: Possible PKCS #1 format attack\n");
+		if (ret >= 0) {
+			gnutls_free(plaintext.data);
+			plaintext.data = NULL;
+		}
 		use_rnd_key = 1;
 	} else {
 		/* If the secret was properly formatted, then
@@ -265,7 +269,7 @@ _gnutls_gen_rsa_client_kx(gnutls_session_t session,
 		return GNUTLS_E_MEMORY_ERROR;
 	}
 
-	ret = _gnutls_rnd(GNUTLS_RND_RANDOM, session->key.key.data,
+	ret = gnutls_rnd(GNUTLS_RND_RANDOM, session->key.key.data,
 			  session->key.key.size);
 	if (ret < 0) {
 		gnutls_assert();

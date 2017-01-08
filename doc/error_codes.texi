@@ -19,7 +19,7 @@
 @item -26 @tab GNUTLS_@-E_@-DECOMPRESSION_@-FAILED @tab Decompression of the TLS record packet has failed.
 @item -27 @tab GNUTLS_@-E_@-COMPRESSION_@-FAILED @tab Compression of the TLS record packet has failed.
 @item -28 @tab GNUTLS_@-E_@-AGAIN @tab Resource temporarily unavailable, try again.
-@item -29 @tab GNUTLS_@-E_@-EXPIRED @tab The requested session has expired.
+@item -29 @tab GNUTLS_@-E_@-EXPIRED @tab The session or certificate has expired.
 @item -30 @tab GNUTLS_@-E_@-DB_@-ERROR @tab Error in Database backend.
 @item -31 @tab GNUTLS_@-E_@-SRP_@-PWD_@-ERROR @tab Error in password file.
 @item -32 @tab GNUTLS_@-E_@-INSUFFICIENT_@-CREDENTIALS @tab Insufficient credentials for that request.
@@ -90,6 +90,7 @@
 @item -108 @tab GNUTLS_@-E_@-UNSAFE_@-RENEGOTIATION_@-DENIED @tab Unsafe renegotiation denied.
 @item -109 @tab GNUTLS_@-E_@-UNKNOWN_@-SRP_@-USERNAME @tab The SRP username supplied is unknown.
 @item -110 @tab GNUTLS_@-E_@-PREMATURE_@-TERMINATION @tab The TLS connection was non-properly terminated.
+@item -111 @tab GNUTLS_@-E_@-MALFORMED_@-CIDR @tab CIDR name constraint is malformed in size or structure.
 @item -201 @tab GNUTLS_@-E_@-BASE64_@-ENCODING_@-ERROR @tab Base64 encoding error.
 @item -202 @tab GNUTLS_@-E_@-INCOMPATIBLE_@-GCRYPT_@-LIBRARY @tab The crypto library version is too old.
 @item -203 @tab GNUTLS_@-E_@-INCOMPATIBLE_@-LIBTASN1_@-LIBRARY @tab The tasn1 library version is too old.
@@ -165,4 +166,11 @@
 @item -406 @tab GNUTLS_@-E_@-SESSION_@-USER_@-ID_@-CHANGED @tab Peer's certificate or username has changed during a rehandshake.
 @item -407 @tab GNUTLS_@-E_@-HANDSHAKE_@-DURING_@-FALSE_@-START @tab Attempted handshake during false start.
 @item -408 @tab GNUTLS_@-E_@-UNAVAILABLE_@-DURING_@-HANDSHAKE @tab Cannot obtain resumption parameters while handshake is incomplete.
+@item -409 @tab GNUTLS_@-E_@-PK_@-INVALID_@-PUBKEY @tab The obtained public key is invalid.
+@item -410 @tab GNUTLS_@-E_@-PK_@-INVALID_@-PRIVKEY @tab The private key is invalid.
+@item -411 @tab GNUTLS_@-E_@-NOT_@-YET_@-ACTIVATED @tab The certificate is not yet activated.
+@item -412 @tab GNUTLS_@-E_@-INVALID_@-UTF8_@-STRING @tab The given string contains invalid UTF-8 characters.
+@item -413 @tab GNUTLS_@-E_@-NO_@-EMBEDDED_@-DATA @tab There are no embedded data in the structure.
+@item -414 @tab GNUTLS_@-E_@-INVALID_@-UTF8_@-EMAIL @tab The given email string contains non-ASCII characters before '@'.
+@item -415 @tab GNUTLS_@-E_@-INVALID_@-PASSWORD_@-STRING @tab The given password contains invalid characters.
 @end multitable

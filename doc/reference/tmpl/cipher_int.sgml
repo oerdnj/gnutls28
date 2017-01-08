@@ -1,0 +1,158 @@
+<!-- ##### SECTION Title ##### -->
+cipher_int
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### SECTION Image ##### -->
+
+
+<!-- ##### VARIABLE crypto_cipher_prio ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### USER_FUNCTION cipher_encrypt_func ##### -->
+<para>
+
+</para>
+
+@hd: 
+@plaintext: 
+@Param3: 
+@ciphertext: 
+@Param5: 
+@Returns: 
+
+
+<!-- ##### USER_FUNCTION cipher_decrypt_func ##### -->
+<para>
+
+</para>
+
+@hd: 
+@ciphertext: 
+@Param3: 
+@plaintext: 
+@Param5: 
+@Returns: 
+
+
+<!-- ##### USER_FUNCTION aead_cipher_encrypt_func ##### -->
+<para>
+
+</para>
+
+@hd: 
+@nonce: 
+@Param3: 
+@auth: 
+@Param5: 
+@tag: 
+@plaintext: 
+@Param8: 
+@ciphertext: 
+@Param10: 
+@Returns: 
+
+
+<!-- ##### USER_FUNCTION aead_cipher_decrypt_func ##### -->
+<para>
+
+</para>
+
+@hd: 
+@nonce: 
+@Param3: 
+@auth: 
+@Param5: 
+@tag: 
+@ciphertext: 
+@Param8: 
+@plaintext: 
+@Param10: 
+@Returns: 
+
+
+<!-- ##### USER_FUNCTION cipher_deinit_func ##### -->
+<para>
+
+</para>
+
+@hd: 
+
+
+<!-- ##### USER_FUNCTION cipher_auth_func ##### -->
+<para>
+
+</para>
+
+@hd: 
+@data: 
+@Param3: 
+@Returns: 
+
+
+<!-- ##### USER_FUNCTION cipher_setiv_func ##### -->
+<para>
+
+</para>
+
+@hd: 
+@iv: 
+@Param3: 
+@Returns: 
+
+
+<!-- ##### USER_FUNCTION cipher_tag_func ##### -->
+<para>
+
+</para>
+
+@hd: 
+@tag: 
+@Param3: 
+
+
+<!-- ##### STRUCT cipher_hd_st ##### -->
+<para>
+
+</para>
+
+@handle: 
+@e: 
+@encrypt: 
+@decrypt: 
+@aead_encrypt: 
+@aead_decrypt: 
+@auth: 
+@tag: 
+@setiv: 
+@deinit: 
+
+<!-- ##### STRUCT auth_cipher_hd_st ##### -->
+<para>
+
+</para>
+
+@cipher: 
+@is_mac: 
+@ssl_hmac: 
+@non_null: 
+@etm: 
+@tag_size: 
+

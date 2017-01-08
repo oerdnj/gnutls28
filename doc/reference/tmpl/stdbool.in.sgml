@@ -1,0 +1,49 @@
+<!-- ##### SECTION Title ##### -->
+stdbool.in
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### SECTION Image ##### -->
+
+
+<!-- ##### MACRO bool ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### TYPEDEF _Bool ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO false ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO true ##### -->
+<para>
+
+</para>
+
+
+

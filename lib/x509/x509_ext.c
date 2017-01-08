@@ -28,7 +28,6 @@
 #include <common.h>
 #include <x509.h>
 #include <x509_b64.h>
-#include <c-ctype.h>
 #include "x509_ext_int.h"
 #include "virt-san.h"
 #include <gnutls/x509-ext.h>
@@ -132,7 +131,8 @@ static
 int subject_alt_names_set(struct name_st **names,
 			  unsigned int *size,
 			  unsigned int san_type,
-			  gnutls_datum_t * san, char *othername_oid)
+			  gnutls_datum_t * san, char *othername_oid,
+			  unsigned raw)
 {
 	void *tmp;
 	int ret;
@@ -143,7 +143,7 @@ int subject_alt_names_set(struct name_st **names,
 	}
 	*names = tmp;
 
-	ret = _gnutls_alt_name_assign_virt_type(&(*names)[*size], san_type, san, othername_oid);
+	ret = _gnutls_alt_name_assign_virt_type(&(*names)[*size], san_type, san, othername_oid, raw);
 	if (ret < 0)
 		return gnutls_assert_val(ret);
 
@@ -160,6 +160,9 @@ int subject_alt_names_set(struct name_st **names,
  *
  * This function will store the specified alternative name in
  * the @sans.
+ *
+ * Since version 3.5.7 the %GNUTLS_SAN_RFC822NAME, %GNUTLS_SAN_DNSNAME, and
+ * %GNUTLS_SAN_OTHERNAME_XMPP are converted to ACE format when necessary.
  *
  * Returns: On success, %GNUTLS_E_SUCCESS (0), otherwise a negative error value.
  *
@@ -183,7 +186,7 @@ int gnutls_subject_alt_names_set(gnutls_subject_alt_names_t sans,
 	else
 		ooc = NULL;
 	ret = subject_alt_names_set(&sans->names, &sans->size,
-				    san_type, &copy, ooc);
+				    san_type, &copy, ooc, 0);
 	if (ret < 0) {
 		gnutls_free(copy.data);
 		return gnutls_assert_val(ret);
@@ -258,7 +261,7 @@ int gnutls_x509_ext_import_subject_alt_names(const gnutls_datum_t * ext,
 
 		ret = subject_alt_names_set(&sans->names, &sans->size,
 					    type, &san,
-					    (char *)othername_oid.data);
+					    (char *)othername_oid.data, 1);
 		if (ret < 0)
 			break;
 
@@ -774,15 +777,18 @@ int gnutls_x509_aki_set_id(gnutls_x509_aki_t aki, const gnutls_datum_t * id)
  * to be stored in the @aki type. When storing multiple names, the serial
  * should be set on the first call, and subsequent calls should use a %NULL serial.
  *
+ * Since version 3.5.7 the %GNUTLS_SAN_RFC822NAME, %GNUTLS_SAN_DNSNAME, and
+ * %GNUTLS_SAN_OTHERNAME_XMPP are converted to ACE format when necessary.
+ *
  * Returns: On success, %GNUTLS_E_SUCCESS (0) is returned, otherwise a negative error value.
  *
  * Since: 3.3.0
  **/
 int gnutls_x509_aki_set_cert_issuer(gnutls_x509_aki_t aki,
 				    unsigned int san_type,
-				    const gnutls_datum_t * san,
+				    const gnutls_datum_t *san,
 				    const char *othername_oid,
-				    const gnutls_datum_t * serial)
+				    const gnutls_datum_t *serial)
 {
 	int ret;
 	gnutls_datum_t t_san, t_othername_oid = { NULL, 0 };
@@ -809,7 +815,7 @@ int gnutls_x509_aki_set_cert_issuer(gnutls_x509_aki_t aki,
 	ret =
 	    subject_alt_names_set(&aki->cert_issuer.names,
 				  &aki->cert_issuer.size, san_type, &t_san,
-				  (char *)t_othername_oid.data);
+				  (char *)t_othername_oid.data, 0);
 	if (ret < 0) {
 		gnutls_assert();
 		return ret;
@@ -935,7 +941,7 @@ int gnutls_x509_ext_import_authority_key_id(const gnutls_datum_t * ext,
 		ret = subject_alt_names_set(&aki->cert_issuer.names,
 					    &aki->cert_issuer.size,
 					    type, &san,
-					    (char *)othername_oid.data);
+					    (char *)othername_oid.data, 1);
 		if (ret < 0)
 			break;
 
@@ -1426,7 +1432,7 @@ int gnutls_x509_ext_export_basic_constraints(unsigned int ca, int pathlen,
  *   field and the actual value, -1 indicate that the field is absent.
  * @policyLanguage: output variable with OID of policy language
  * @policy: output variable with policy data
- * @sizeof_policy: output variable size of policy data
+ * @sizeof_policy: output variable with size of policy data
  *
  * This function will return the information from a proxy certificate
  * extension. It reads the ProxyCertInfo X.509 extension (1.3.6.1.5.5.7.1.14).
@@ -1443,7 +1449,8 @@ int gnutls_x509_ext_import_proxy(const gnutls_datum_t * ext, int *pathlen,
 {
 	ASN1_TYPE c2 = ASN1_TYPE_EMPTY;
 	int result;
-	gnutls_datum_t value = { NULL, 0 };
+	gnutls_datum_t value1 = { NULL, 0 };
+	gnutls_datum_t value2 = { NULL, 0 };
 
 	if ((result = asn1_create_element
 	     (_gnutls_get_pkix(), "PKIX1.ProxyCertInfo",
@@ -1473,20 +1480,18 @@ int gnutls_x509_ext_import_proxy(const gnutls_datum_t * ext, int *pathlen,
 	}
 
 	result = _gnutls_x509_read_value(c2, "proxyPolicy.policyLanguage",
-					 &value);
+					 &value1);
 	if (result < 0) {
 		gnutls_assert();
 		goto cleanup;
 	}
 
 	if (policyLanguage) {
-		*policyLanguage = (char *)value.data;
-	} else {
-		gnutls_free(value.data);
-		value.data = NULL;
+		*policyLanguage = (char *)value1.data;
+		value1.data = NULL;
 	}
 
-	result = _gnutls_x509_read_value(c2, "proxyPolicy.policy", &value);
+	result = _gnutls_x509_read_value(c2, "proxyPolicy.policy", &value2);
 	if (result == GNUTLS_E_ASN1_ELEMENT_NOT_FOUND) {
 		if (policy)
 			*policy = NULL;
@@ -1497,16 +1502,17 @@ int gnutls_x509_ext_import_proxy(const gnutls_datum_t * ext, int *pathlen,
 		goto cleanup;
 	} else {
 		if (policy) {
-			*policy = (char *)value.data;
-			value.data = NULL;
+			*policy = (char *)value2.data;
+			value2.data = NULL;
 		}
 		if (sizeof_policy)
-			*sizeof_policy = value.size;
+			*sizeof_policy = value2.size;
 	}
 
 	result = 0;
  cleanup:
-	gnutls_free(value.data);
+	gnutls_free(value1.data);
+	gnutls_free(value2.data);
 	asn1_delete_structure(&c2);
 
 	return result;
@@ -1700,8 +1706,9 @@ void gnutls_x509_policies_deinit(gnutls_x509_policies_t policies)
 {
 	unsigned i;
 
-	for (i = 0; i < policies->size; i++)
+	for (i = 0; i < policies->size; i++) {
 		gnutls_x509_policy_release(&policies->policy[i]);
+	}
 	gnutls_free(policies);
 }
 
@@ -1840,7 +1847,7 @@ int gnutls_x509_ext_import_policies(const gnutls_datum_t * ext,
 		/* create a string like "?1"
 		 */
 		snprintf(tmpstr, sizeof(tmpstr), "?%u.policyIdentifier", j + 1);
-		current = j;
+		current = j+1;
 
 		ret = _gnutls_x509_read_value(c2, tmpstr, &tmpd);
 		if (ret == GNUTLS_E_ASN1_ELEMENT_NOT_FOUND)
@@ -1870,7 +1877,7 @@ int gnutls_x509_ext_import_policies(const gnutls_datum_t * ext,
 			if (ret != ASN1_SUCCESS) {
 				gnutls_assert();
 				ret = _gnutls_asn2err(ret);
-				goto cleanup;
+				goto full_cleanup;
 			}
 
 			if (strcmp(tmpoid, "1.3.6.1.5.5.7.2.1") == 0) {
@@ -2597,6 +2604,37 @@ int gnutls_x509_aia_get(gnutls_x509_aia_t aia, unsigned int seq,
 	return 0;
 }
 
+int _gnutls_alt_name_process(gnutls_datum_t *out, unsigned type, const gnutls_datum_t *san, unsigned raw)
+{
+	int ret;
+	if (type == GNUTLS_SAN_DNSNAME && !raw) {
+		ret = gnutls_idna_map((char*)san->data, san->size, out, 0);
+		if (ret < 0) {
+			return gnutls_assert_val(ret);
+		}
+	} else if (type == GNUTLS_SAN_RFC822NAME && !raw) {
+		ret = _gnutls_idna_email_map((char*)san->data, san->size, out);
+		if (ret < 0) {
+			return gnutls_assert_val(ret);
+		}
+	} else if (type == GNUTLS_SAN_URI && !raw) {
+		if (!_gnutls_str_is_print((char*)san->data, san->size)) {
+			_gnutls_debug_log("non-ASCII URIs are not supported\n");
+			return gnutls_assert_val(GNUTLS_E_UNIMPLEMENTED_FEATURE);
+		} else {
+			ret = _gnutls_set_strdatum(out, san->data, san->size);
+			if (ret < 0)
+				return gnutls_assert_val(ret);
+		}
+	} else {
+		ret = _gnutls_set_strdatum(out, san->data, san->size);
+		if (ret < 0)
+			return gnutls_assert_val(ret);
+	}
+
+	return 0;
+}
+
 /**
  * gnutls_x509_aia_set:
  * @aia: The authority info access
@@ -2610,6 +2648,9 @@ int gnutls_x509_aia_get(gnutls_x509_aia_t aia, unsigned int seq,
  *
  * Typically the value for @oid should be %GNUTLS_OID_AD_OCSP, or
  * %GNUTLS_OID_AD_CAISSUERS.
+ *
+ * Since version 3.5.7 the %GNUTLS_SAN_RFC822NAME, and %GNUTLS_SAN_DNSNAME,
+ * are converted to ACE format when necessary.
  *
  * Returns: On success, %GNUTLS_E_SUCCESS (0), otherwise a negative error value.
  *
@@ -2640,7 +2681,7 @@ int gnutls_x509_aia_set(gnutls_x509_aia_t aia,
 		aia->aia[indx].oid.size = 0;
 	}
 
-	ret = _gnutls_set_datum(&aia->aia[indx].san, san->data, san->size);
+	ret = _gnutls_alt_name_process(&aia->aia[indx].san, san_type, san, 0);
 	if (ret < 0)
 		return gnutls_assert_val(ret);
 
@@ -2666,7 +2707,7 @@ static int parse_aia(ASN1_TYPE c2, gnutls_x509_aia_t aia)
 		result = asn1_read_value(c2, nptr, tmpoid, &len);
 		if (result == ASN1_VALUE_NOT_FOUND
 		    || result == ASN1_ELEMENT_NOT_FOUND) {
-		        ret = GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE;
+			ret = GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE;
 			break;
 		}
 
@@ -3142,7 +3183,7 @@ int _gnutls_x509_decode_ext(const gnutls_datum_t *der, gnutls_x509_ext_st *out)
 	ret = 0;
 	goto cleanup;
  fail:
- 	memset(out, 0, sizeof(*out));
+	memset(out, 0, sizeof(*out));
  cleanup:
 	asn1_delete_structure(&c2);
 	return ret;
