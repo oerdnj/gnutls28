@@ -36,27 +36,7 @@ with a status code of 0.
 
 @exampleindent 0
 @example
-psktool - GnuTLS PSK tool
-Usage:  psktool [ -<flag> [<val>] | --<name>[@{=| @}<val>] ]...
-
-   -d, --debug=num            Enable debugging
-                                - it must be in the range:
-                                  0 to 9999
-   -s, --keysize=num          specify the key size in bytes
-                                - it must be in the range:
-                                  0 to 512
-   -u, --username=str         specify a username
-   -p, --passwd=str           specify a password file
-   -v, --version[=arg]        output version information and exit
-   -h, --help                 display extended usage information and exit
-   -!, --more-help            extended usage information passed thru pager
-
-Options are specified by doubled hyphens and their name or by a single
-hyphen and the flag character.
-
-Program that generates random keys for use with TLS-PSK.  The keys are
-stored in hexadecimal format in a key file.
-
+psktool is unavailable - no --help
 @end example
 @exampleindent 4
 

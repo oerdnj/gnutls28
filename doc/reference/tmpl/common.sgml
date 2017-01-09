@@ -20,7 +20,14 @@ common
 <!-- ##### SECTION Image ##### -->
 
 
-<!-- ##### MACRO MAX_STRING_LEN ##### -->
+<!-- ##### MACRO ASN1_NULL ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO ASN1_NULL_SIZE ##### -->
 <para>
 
 </para>
@@ -34,7 +41,28 @@ common
 
 
 
+<!-- ##### MACRO MAX_STRING_LEN ##### -->
+<para>
+
+</para>
+
+
+
 <!-- ##### MACRO PEM_CRL ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO PEM_PKCS12 ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO PEM_PKCS7 ##### -->
 <para>
 
 </para>
@@ -55,21 +83,21 @@ common
 
 
 
-<!-- ##### MACRO PEM_PKCS7 ##### -->
+<!-- ##### MACRO PK_DSA_OID ##### -->
 <para>
 
 </para>
 
 
 
-<!-- ##### MACRO PEM_PKCS12 ##### -->
+<!-- ##### MACRO PK_GOST_R3410_2001_OID ##### -->
 <para>
 
 </para>
 
 
 
-<!-- ##### MACRO PEM_PK ##### -->
+<!-- ##### MACRO PK_GOST_R3410_94_OID ##### -->
 <para>
 
 </para>
@@ -84,27 +112,6 @@ common
 
 
 <!-- ##### MACRO PK_X509_RSA_OID ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO PK_DSA_OID ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO PK_GOST_R3410_94_OID ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO PK_GOST_R3410_2001_OID ##### -->
 <para>
 
 </para>
@@ -132,14 +139,21 @@ common
 
 
 
-<!-- ##### MACRO SIG_DSA_SHA384_OID ##### -->
+<!-- ##### MACRO SIG_GOST_R3410_2001_OID ##### -->
 <para>
 
 </para>
 
 
 
-<!-- ##### MACRO SIG_DSA_SHA512_OID ##### -->
+<!-- ##### MACRO SIG_GOST_R3410_94_OID ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO SIG_RSA_MD2_OID ##### -->
 <para>
 
 </para>
@@ -153,7 +167,7 @@ common
 
 
 
-<!-- ##### MACRO SIG_RSA_MD2_OID ##### -->
+<!-- ##### MACRO SIG_RSA_RMD160_OID ##### -->
 <para>
 
 </para>
@@ -193,183 +207,5 @@ common
 
 </para>
 
-
-
-<!-- ##### MACRO SIG_RSA_RMD160_OID ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO SIG_GOST_R3410_94_OID ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO SIG_GOST_R3410_2001_OID ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO ISO_SIG_RSA_SHA1_OID ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO SIG_DSA_SHA3_224_OID ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO SIG_DSA_SHA3_256_OID ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO SIG_DSA_SHA3_384_OID ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO SIG_DSA_SHA3_512_OID ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO SIG_ECDSA_SHA3_224_OID ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO SIG_ECDSA_SHA3_256_OID ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO SIG_ECDSA_SHA3_384_OID ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO SIG_ECDSA_SHA3_512_OID ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO SIG_RSA_SHA3_224_OID ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO SIG_RSA_SHA3_256_OID ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO SIG_RSA_SHA3_384_OID ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO SIG_RSA_SHA3_512_OID ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO XMPP_OID ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO KRB5_PRINCIPAL_OID ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO ASN1_NULL ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO ASN1_NULL_SIZE ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### FUNCTION x509_raw_crt_to_raw_pubkey ##### -->
-<para>
-
-</para>
-
-@cert: 
-@rpubkey: 
-@Returns: 
-
-
-<!-- ##### FUNCTION x509_crt_to_raw_pubkey ##### -->
-<para>
-
-</para>
-
-@crt: 
-@rpubkey: 
-@Returns: 
-
-
-<!-- ##### USER_FUNCTION gnutls_cert_vfunc ##### -->
-<para>
-
-</para>
-
-@Param1: 
-
-
-<!-- ##### FUNCTION asn1_der_decoding2 ##### -->
-<para>
-
-</para>
-
-@Param1: 
-@Param2: 
-@Returns: 
 
 

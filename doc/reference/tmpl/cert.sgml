@@ -32,33 +32,3 @@ cert
 @ocsp_func_ptr: 
 @ocsp_response_file: 
 
-<!-- ##### STRUCT certificate_credentials_st ##### -->
-<para>
-
-</para>
-
-@dh_params: 
-@params_func: 
-@certs: 
-@pkey: 
-@keyring: 
-@tlist: 
-@verify_flags: 
-@verify_depth: 
-@verify_bits: 
-@get_cert_callback: 
-@get_cert_callback2: 
-@verify_callback: 
-@pin: 
-@pin_tmp: 
-@glob_ocsp_func: 
-@glob_ocsp_func_ptr: 
-
-<!-- ##### STRUCT rsa_info_st ##### -->
-<para>
-
-</para>
-
-@modulus: 
-@exponent: 
-

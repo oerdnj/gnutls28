@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnutls 3.0.12\n"
 "Report-Msgid-Bugs-To: bug-gnutls@gnu.org\n"
-"POT-Creation-Date: 2017-01-08 11:17+0000\n"
+"POT-Creation-Date: 2017-01-09 08:22+0100\n"
 "PO-Revision-Date: 2012-01-22 10:09+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
@@ -1762,6 +1762,20 @@ msgstr ""
 msgid "Error in file."
 msgstr "Fel i lösenordsfil."
 
+#, fuzzy
+#~ msgid ""
+#~ "\t%s fingerprint:\n"
+#~ "\t\t"
+#~ msgstr ""
+#~ "\tMD5-fingeravtryck:\n"
+#~ "\t\t"
+
+#, fuzzy
+#~ msgid "Public Key ID: "
+#~ msgstr ""
+#~ "\tPublik nyckel-identitet:\n"
+#~ "\t\t"
+
 #~ msgid "Received a TLS/IA Intermediate Phase Finished message"
 #~ msgstr "Tog emot ett TLS/IA Intermediate Phase Finished-meddelande"
 
@@ -1782,13 +1796,6 @@ msgstr "Fel i lösenordsfil."
 
 #~ msgid "\tSubject Public Key Algorithm: %s\n"
 #~ msgstr "\tAlgoritm för innehavarens publika nyckel: %s\n"
-
-#~ msgid ""
-#~ "\tMD5 fingerprint:\n"
-#~ "\t\t"
-#~ msgstr ""
-#~ "\tMD5-fingeravtryck:\n"
-#~ "\t\t"
 
 #~ msgid ""
 #~ "\tSHA-1 fingerprint:\n"

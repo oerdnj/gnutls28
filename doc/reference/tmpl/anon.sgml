@@ -20,18 +20,3 @@ anon
 <!-- ##### SECTION Image ##### -->
 
 
-<!-- ##### STRUCT anon_server_credentials_st ##### -->
-<para>
-
-</para>
-
-@dh_params: 
-@params_func: 
-
-<!-- ##### STRUCT anon_client_credentials_st ##### -->
-<para>
-
-</para>
-
-@dummy: 
-

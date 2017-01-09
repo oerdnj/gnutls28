@@ -1,3 +1,15 @@
+2017-01-09  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* tests/key-tests/Makefile.am: tests: added missing file
+
+2017-01-09  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* NEWS, m4/hooks.m4: bumped version
+
+2017-01-09  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* NEWS: doc update [ci skip]
+
 2017-01-06  Nikos Mavrogiannopoulos <nmav@redhat.com>
 
 	* NEWS: doc update
@@ -16162,7 +16174,12 @@
 
 2014-11-07  Nikos Mavrogiannopoulos <nmav@gnutls.org>
 
-	* pkcs11: pass the correct user type to protected authentication login
+	* lib/pkcs11.c: pkcs11: pass the correct user type to protected
+	authentication login
+
+2014-11-07  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* doc: corrected values for INSECURE level
 
 	-----
 

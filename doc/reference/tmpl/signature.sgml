@@ -26,21 +26,3 @@ signature
 </para>
 
 
-<!-- ##### FUNCTION gnutls_sign_algorithm_set_server ##### -->
-<para>
-
-</para>
-
-@session: 
-@sign: 
-
-
-<!-- ##### FUNCTION gnutls_sign_algorithm_set_client ##### -->
-<para>
-
-</para>
-
-@session: 
-@sign: 
-
-

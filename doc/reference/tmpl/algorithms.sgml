@@ -20,6 +20,13 @@ algorithms
 <!-- ##### SECTION Image ##### -->
 
 
+<!-- ##### MACRO GNUTLS_DISTINCT_PK_ALGORITHMS ##### -->
+<para>
+
+</para>
+
+
+
 <!-- ##### MACRO GNUTLS_RENEGO_PROTECTION_REQUEST_MAJOR ##### -->
 <para>
 
@@ -34,20 +41,6 @@ algorithms
 
 
 
-<!-- ##### MACRO GNUTLS_FALLBACK_SCSV_MAJOR ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO GNUTLS_FALLBACK_SCSV_MINOR ##### -->
-<para>
-
-</para>
-
-
-
 <!-- ##### MACRO MAX_CIPHERSUITE_SIZE ##### -->
 <para>
 
@@ -55,87 +48,12 @@ algorithms
 
 
 
-<!-- ##### MACRO IS_EC ##### -->
-<para>
-
-</para>
-
-@x: 
-
-
-<!-- ##### FUNCTION version_to_entry ##### -->
-<para>
-
-</para>
-
-@c: 
-@Returns: 
-
-
-<!-- ##### MACRO mac_to_entry ##### -->
-<para>
-
-</para>
-
-@x: 
-
-
-<!-- ##### MACRO hash_to_entry ##### -->
-<para>
-
-</para>
-
-@x: 
-
-
-<!-- ##### FUNCTION ciphersuite_to_entry ##### -->
-<para>
-
-</para>
-
-@suite: 
-@Returns: 
-
-
-<!-- ##### FUNCTION cipher_to_entry ##### -->
-<para>
-
-</para>
-
-@c: 
-@Returns: 
-
-
-<!-- ##### FUNCTION cipher_name_to_entry ##### -->
-<para>
-
-</para>
-
-@name: 
-@Returns: 
-
-
-<!-- ##### VARIABLE ret ##### -->
+<!-- ##### MACRO MAX_ECC_CURVE_SIZE ##### -->
 <para>
 
 </para>
 
 
-<!-- ##### MACRO GNUTLS_DISTINCT_PK_ALGORITHMS ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### ENUM encipher_type ##### -->
-<para>
-
-</para>
-
-@CIPHER_ENCRYPT: 
-@CIPHER_SIGN: 
-@CIPHER_IGN: 
 
 <!-- ##### STRUCT gnutls_ecc_curve_entry_st ##### -->
 <para>
@@ -148,20 +66,4 @@ algorithms
 @pk: 
 @tls_id: 
 @size: 
-
-<!-- ##### FUNCTION gnutls_ecc_curve_get_id ##### -->
-<para>
-
-</para>
-
-@name: 
-@Returns: 
-
-
-<!-- ##### MACRO MAX_ECC_CURVE_SIZE ##### -->
-<para>
-
-</para>
-
-
 

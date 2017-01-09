@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- This manual is last updated 30 October 2016 for version
+<!-- This manual is last updated 16 March 2016 for version
 3.5.8 of GnuTLS.
 
 Copyright (C) 2001-2012, 2014, 2016 Free Software Foundation, Inc.
@@ -198,7 +198,7 @@ Next: <a href="#Preface" accesskey="n" rel="next">Preface</a>, Up: <a href="dir.
 <a name="GnuTLS_002dGuile"></a>
 <h1 class="top">GnuTLS-Guile</h1>
 
-<p>This manual is last updated 30 October 2016 for version
+<p>This manual is last updated 16 March 2016 for version
 3.5.8 of GnuTLS.
 </p>
 <p>Copyright &copy; 2001-2012, 2014, 2016 Free Software Foundation, Inc.
@@ -905,8 +905,633 @@ Next: <a href="#Copying-Information" accesskey="n" rel="next">Copying Informatio
 <code>(gnutls)</code> module (see <a href="http://www.gnu.org/software/guile/manual/guile.html#The-Guile-module-system">The Guile module system</a> in <cite>The
 GNU Guile Reference Manual</cite>).
 </p>
-<p>(Guile not available, documentation not generated.)
+
+<dl>
+<dt><a name="index-set_002dlog_002dlevel_0021"></a>Scheme Procedure: <strong>set-log-level!</strong> <em>level</em></dt>
+<dd><p>Enable GnuTLS logging up to <var>level</var> (an integer).
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-set_002dlog_002dprocedure_0021"></a>Scheme Procedure: <strong>set-log-procedure!</strong> <em>proc</em></dt>
+<dd><p>Use <var>proc</var> (a two-argument procedure) as the global GnuTLS log procedure.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-set_002dcertificate_002dcredentials_002dopenpgp_002dkeys_0021"></a>Scheme Procedure: <strong>set-certificate-credentials-openpgp-keys!</strong> <em>cred pub sec</em></dt>
+<dd><p>Use certificate <var>pub</var> and secret key <var>sec</var> in certificate credentials <var>cred</var>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-openpgp_002dkeyring_002dcontains_002dkey_002did_003f"></a>Scheme Procedure: <strong>openpgp-keyring-contains-key-id?</strong> <em>keyring id</em></dt>
+<dd><p>Return <code>#f</code> if key ID <var>id</var> is in <var>keyring</var>, <code>#f</code> otherwise.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-import_002dopenpgp_002dkeyring"></a>Scheme Procedure: <strong>import-openpgp-keyring</strong> <em>data format</em></dt>
+<dd><p>Import <var>data</var> (a u8vector) according to <var>format</var> and return the imported keyring.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-openpgp_002dcertificate_002dusage"></a>Scheme Procedure: <strong>openpgp-certificate-usage</strong> <em>key</em></dt>
+<dd><p>Return a list of values denoting the key usage of <var>key</var>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-openpgp_002dcertificate_002dversion"></a>Scheme Procedure: <strong>openpgp-certificate-version</strong> <em>key</em></dt>
+<dd><p>Return the version of the OpenPGP message format (RFC2440) honored by <var>key</var>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-openpgp_002dcertificate_002dalgorithm"></a>Scheme Procedure: <strong>openpgp-certificate-algorithm</strong> <em>key</em></dt>
+<dd><p>Return two values: the certificate algorithm used by <var>key</var> and the number of bits used.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-openpgp_002dcertificate_002dnames"></a>Scheme Procedure: <strong>openpgp-certificate-names</strong> <em>key</em></dt>
+<dd><p>Return the list of names for <var>key</var>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-openpgp_002dcertificate_002dname"></a>Scheme Procedure: <strong>openpgp-certificate-name</strong> <em>key index</em></dt>
+<dd><p>Return the <var>index</var>th name of <var>key</var>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-openpgp_002dcertificate_002dfingerprint"></a>Scheme Procedure: <strong>openpgp-certificate-fingerprint</strong> <em>key</em></dt>
+<dd><p>Return a new u8vector denoting the fingerprint of <var>key</var>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-openpgp_002dcertificate_002dfingerprint_0021"></a>Scheme Procedure: <strong>openpgp-certificate-fingerprint!</strong> <em>key fpr</em></dt>
+<dd><p>Store in <var>fpr</var> (a u8vector) the fingerprint of <var>key</var>.  Return the number of bytes stored in <var>fpr</var>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-openpgp_002dcertificate_002did_0021"></a>Scheme Procedure: <strong>openpgp-certificate-id!</strong> <em>key id</em></dt>
+<dd><p>Store the ID (an 8 byte sequence) of certificate <var>key</var> in <var>id</var> (a u8vector).
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-openpgp_002dcertificate_002did"></a>Scheme Procedure: <strong>openpgp-certificate-id</strong> <em>key</em></dt>
+<dd><p>Return the ID (an 8-element u8vector) of certificate <var>key</var>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-import_002dopenpgp_002dprivate_002dkey"></a>Scheme Procedure: <strong>import-openpgp-private-key</strong> <em>data format [pass]</em></dt>
+<dd><p>Return a new OpenPGP private key object resulting from the import of <var>data</var> (a uniform array) according to <var>format</var>.  Optionally, a passphrase may be provided.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-import_002dopenpgp_002dcertificate"></a>Scheme Procedure: <strong>import-openpgp-certificate</strong> <em>data format</em></dt>
+<dd><p>Return a new OpenPGP certificate object resulting from the import of <var>data</var> (a uniform array) according to <var>format</var>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-x509_002dcertificate_002dsubject_002dalternative_002dname"></a>Scheme Procedure: <strong>x509-certificate-subject-alternative-name</strong> <em>cert index</em></dt>
+<dd><p>Return two values: the alternative name type for <var>cert</var> (i.e., one of the <code>x509-subject-alternative-name/</code> values) and the actual subject alternative name (a string) at <var>index</var>. Both values are <code>#f</code> if no alternative name is available at <var>index</var>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-x509_002dcertificate_002dsubject_002dkey_002did"></a>Scheme Procedure: <strong>x509-certificate-subject-key-id</strong> <em>cert</em></dt>
+<dd><p>Return the subject key ID (a u8vector) for <var>cert</var>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-x509_002dcertificate_002dauthority_002dkey_002did"></a>Scheme Procedure: <strong>x509-certificate-authority-key-id</strong> <em>cert</em></dt>
+<dd><p>Return the key ID (a u8vector) of the X.509 certificate authority of <var>cert</var>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-x509_002dcertificate_002dkey_002did"></a>Scheme Procedure: <strong>x509-certificate-key-id</strong> <em>cert</em></dt>
+<dd><p>Return a statistically unique ID (a u8vector) for <var>cert</var> that depends on its public key parameters.  This is normally a 20-byte SHA-1 hash.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-x509_002dcertificate_002dversion"></a>Scheme Procedure: <strong>x509-certificate-version</strong> <em>cert</em></dt>
+<dd><p>Return the version of <var>cert</var>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-x509_002dcertificate_002dkey_002dusage"></a>Scheme Procedure: <strong>x509-certificate-key-usage</strong> <em>cert</em></dt>
+<dd><p>Return the key usage of <var>cert</var> (i.e., a list of <code>key-usage/</code> values), or the empty list if <var>cert</var> does not contain such information.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-x509_002dcertificate_002dpublic_002dkey_002dalgorithm"></a>Scheme Procedure: <strong>x509-certificate-public-key-algorithm</strong> <em>cert</em></dt>
+<dd><p>Return two values: the public key algorithm (i.e., one of the <code>pk-algorithm/</code> values) of <var>cert</var> and the number of bits used.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-x509_002dcertificate_002dsignature_002dalgorithm"></a>Scheme Procedure: <strong>x509-certificate-signature-algorithm</strong> <em>cert</em></dt>
+<dd><p>Return the signature algorithm used by <var>cert</var> (i.e., one of the <code>sign-algorithm/</code> values).
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-x509_002dcertificate_002dmatches_002dhostname_003f"></a>Scheme Procedure: <strong>x509-certificate-matches-hostname?</strong> <em>cert hostname</em></dt>
+<dd><p>Return true if <var>cert</var> matches <var>hostname</var>, a string denoting a DNS host name.  This is the basic implementation of <a href="http://tools.ietf.org/html/rfc2818">RFC 2818</a> (aka. HTTPS).
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-x509_002dcertificate_002dissuer_002ddn_002doid"></a>Scheme Procedure: <strong>x509-certificate-issuer-dn-oid</strong> <em>cert index</em></dt>
+<dd><p>Return the OID (a string) at <var>index</var> from <var>cert</var>&rsquo;s issuer DN.  Return <code>#f</code> if no OID is available at <var>index</var>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-x509_002dcertificate_002ddn_002doid"></a>Scheme Procedure: <strong>x509-certificate-dn-oid</strong> <em>cert index</em></dt>
+<dd><p>Return OID (a string) at <var>index</var> from <var>cert</var>.  Return <code>#f</code> if no OID is available at <var>index</var>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-x509_002dcertificate_002dissuer_002ddn"></a>Scheme Procedure: <strong>x509-certificate-issuer-dn</strong> <em>cert</em></dt>
+<dd><p>Return the distinguished name (DN) of X.509 certificate <var>cert</var>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-x509_002dcertificate_002ddn"></a>Scheme Procedure: <strong>x509-certificate-dn</strong> <em>cert</em></dt>
+<dd><p>Return the distinguished name (DN) of X.509 certificate <var>cert</var>.  The form of the DN is as described in <a href="http://tools.ietf.org/html/rfc2253">RFC 2253</a>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-pkcs8_002dimport_002dx509_002dprivate_002dkey"></a>Scheme Procedure: <strong>pkcs8-import-x509-private-key</strong> <em>data format [pass [encrypted]]</em></dt>
+<dd><p>Return a new X.509 private key object resulting from the import of <var>data</var> (a uniform array) according to <var>format</var>.  Optionally, if <var>pass</var> is not <code>#f</code>, it should be a string denoting a passphrase.  <var>encrypted</var> tells whether the private key is encrypted (<code>#t</code> by default).
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-import_002dx509_002dprivate_002dkey"></a>Scheme Procedure: <strong>import-x509-private-key</strong> <em>data format</em></dt>
+<dd><p>Return a new X.509 private key object resulting from the import of <var>data</var> (a uniform array) according to <var>format</var>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-import_002dx509_002dcertificate"></a>Scheme Procedure: <strong>import-x509-certificate</strong> <em>data format</em></dt>
+<dd><p>Return a new X.509 certificate object resulting from the import of <var>data</var> (a uniform array) according to <var>format</var>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-server_002dsession_002dpsk_002dusername"></a>Scheme Procedure: <strong>server-session-psk-username</strong> <em>session</em></dt>
+<dd><p>Return the username associated with PSK server session <var>session</var>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-set_002dpsk_002dclient_002dcredentials_0021"></a>Scheme Procedure: <strong>set-psk-client-credentials!</strong> <em>cred username key key-format</em></dt>
+<dd><p>Set the client credentials for <var>cred</var>, a PSK client credentials object.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-make_002dpsk_002dclient_002dcredentials"></a>Scheme Procedure: <strong>make-psk-client-credentials</strong></dt>
+<dd><p>Return a new PSK client credentials object.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-set_002dpsk_002dserver_002dcredentials_002dfile_0021"></a>Scheme Procedure: <strong>set-psk-server-credentials-file!</strong> <em>cred file</em></dt>
+<dd><p>Use <var>file</var> as the password file for PSK server credentials <var>cred</var>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-make_002dpsk_002dserver_002dcredentials"></a>Scheme Procedure: <strong>make-psk-server-credentials</strong></dt>
+<dd><p>Return new PSK server credentials.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-peer_002dcertificate_002dstatus"></a>Scheme Procedure: <strong>peer-certificate-status</strong> <em>session</em></dt>
+<dd><p>Verify the peer certificate for <var>session</var> and return a list of <code>certificate-status</code> values (such as <code>certificate-status/revoked</code>), or the empty list if the certificate is valid.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-set_002dcertificate_002dcredentials_002dverify_002dflags_0021"></a>Scheme Procedure: <strong>set-certificate-credentials-verify-flags!</strong> <em>cred [flags...]</em></dt>
+<dd><p>Set the certificate verification flags to <var>flags</var>, a series of <code>certificate-verify</code> values.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-set_002dcertificate_002dcredentials_002dverify_002dlimits_0021"></a>Scheme Procedure: <strong>set-certificate-credentials-verify-limits!</strong> <em>cred max-bits max-depth</em></dt>
+<dd><p>Set the verification limits of <code>peer-certificate-status</code> for certificate credentials <var>cred</var> to <var>max_bits</var> bits for an acceptable certificate and <var>max_depth</var> as the maximum depth of a certificate chain.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-set_002dcertificate_002dcredentials_002dx509_002dkeys_0021"></a>Scheme Procedure: <strong>set-certificate-credentials-x509-keys!</strong> <em>cred certs privkey</em></dt>
+<dd><p>Have certificate credentials <var>cred</var> use the X.509 certificates listed in <var>certs</var> and X.509 private key <var>privkey</var>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-set_002dcertificate_002dcredentials_002dx509_002dkey_002ddata_0021"></a>Scheme Procedure: <strong>set-certificate-credentials-x509-key-data!</strong> <em>cred cert key format</em></dt>
+<dd><p>Use X.509 certificate <var>cert</var> and private key <var>key</var>, both uniform arrays containing the X.509 certificate and key in format <var>format</var>, for certificate credentials <var>cred</var>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-set_002dcertificate_002dcredentials_002dx509_002dcrl_002ddata_0021"></a>Scheme Procedure: <strong>set-certificate-credentials-x509-crl-data!</strong> <em>cred data format</em></dt>
+<dd><p>Use <var>data</var> (a uniform array) as the X.509 CRL (certificate revocation list) database for <var>cred</var>.  On success, return the number of CRLs processed.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-set_002dcertificate_002dcredentials_002dx509_002dtrust_002ddata_0021"></a>Scheme Procedure: <strong>set-certificate-credentials-x509-trust-data!</strong> <em>cred data format</em></dt>
+<dd><p>Use <var>data</var> (a uniform array) as the X.509 trust database for <var>cred</var>.  On success, return the number of certificates processed.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-set_002dcertificate_002dcredentials_002dx509_002dcrl_002dfile_0021"></a>Scheme Procedure: <strong>set-certificate-credentials-x509-crl-file!</strong> <em>cred file format</em></dt>
+<dd><p>Use <var>file</var> as the X.509 CRL (certificate revocation list) file for certificate credentials <var>cred</var>.  On success, return the number of CRLs processed.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-set_002dcertificate_002dcredentials_002dx509_002dtrust_002dfile_0021"></a>Scheme Procedure: <strong>set-certificate-credentials-x509-trust-file!</strong> <em>cred file format</em></dt>
+<dd><p>Use <var>file</var> as the X.509 trust file for certificate credentials <var>cred</var>.  On success, return the number of certificates processed.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-set_002dcertificate_002dcredentials_002dx509_002dkey_002dfiles_0021"></a>Scheme Procedure: <strong>set-certificate-credentials-x509-key-files!</strong> <em>cred cert-file key-file format</em></dt>
+<dd><p>Use <var>file</var> as the password file for PSK server credentials <var>cred</var>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-set_002dcertificate_002dcredentials_002ddh_002dparameters_0021"></a>Scheme Procedure: <strong>set-certificate-credentials-dh-parameters!</strong> <em>cred dh-params</em></dt>
+<dd><p>Use Diffie-Hellman parameters <var>dh_params</var> for certificate credentials <var>cred</var>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-make_002dcertificate_002dcredentials"></a>Scheme Procedure: <strong>make-certificate-credentials</strong></dt>
+<dd><p>Return new certificate credentials (i.e., for use with either X.509 or OpenPGP certificates.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-set_002danonymous_002dserver_002ddh_002dparameters_0021"></a>Scheme Procedure: <strong>set-anonymous-server-dh-parameters!</strong> <em>cred dh-params</em></dt>
+<dd><p>Set the Diffie-Hellman parameters of anonymous server credentials <var>cred</var>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-make_002danonymous_002dclient_002dcredentials"></a>Scheme Procedure: <strong>make-anonymous-client-credentials</strong></dt>
+<dd><p>Return anonymous client credentials.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-make_002danonymous_002dserver_002dcredentials"></a>Scheme Procedure: <strong>make-anonymous-server-credentials</strong></dt>
+<dd><p>Return anonymous server credentials.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-set_002dsession_002ddh_002dprime_002dbits_0021"></a>Scheme Procedure: <strong>set-session-dh-prime-bits!</strong> <em>session bits</em></dt>
+<dd><p>Use <var>bits</var> DH prime bits for <var>session</var>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-pkcs3_002dexport_002ddh_002dparameters-1"></a>Scheme Procedure: <strong>pkcs3-export-dh-parameters</strong> <em>dh-params format</em></dt>
+<dd><p>Export Diffie-Hellman parameters <var>dh_params</var> in PKCS3 format according for <var>format</var> (an <code>x509-certificate-format</code> value).  Return a <code>u8vector</code> containing the result.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-pkcs3_002dimport_002ddh_002dparameters"></a>Scheme Procedure: <strong>pkcs3-import-dh-parameters</strong> <em>array format</em></dt>
+<dd><p>Import Diffie-Hellman parameters in PKCS3 format (further specified by <var>format</var>, an <code>x509-certificate-format</code> value) from <var>array</var> (a homogeneous array) and return a new <code>dh-params</code> object.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-make_002ddh_002dparameters-1"></a>Scheme Procedure: <strong>make-dh-parameters</strong> <em>bits</em></dt>
+<dd><p>Return new Diffie-Hellman parameters.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-set_002dsession_002dtransport_002dport_0021-1"></a>Scheme Procedure: <strong>set-session-transport-port!</strong> <em>session port</em></dt>
+<dd><p>Use <var>port</var> as the input/output port for <var>session</var>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-set_002dsession_002dtransport_002dfd_0021-1"></a>Scheme Procedure: <strong>set-session-transport-fd!</strong> <em>session fd</em></dt>
+<dd><p>Use file descriptor <var>fd</var> as the underlying transport for <var>session</var>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-session_002drecord_002dport-1"></a>Scheme Procedure: <strong>session-record-port</strong> <em>session</em></dt>
+<dd><p>Return a read-write port that may be used to communicate over <var>session</var>.  All invocations of <code>session-port</code> on a given session return the same object (in the sense of <code>eq?</code>).
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-record_002dreceive_0021-1"></a>Scheme Procedure: <strong>record-receive!</strong> <em>session array</em></dt>
+<dd><p>Receive data from <var>session</var> into <var>array</var>, a uniform homogeneous array.  Return the number of bytes actually received.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-record_002dsend-1"></a>Scheme Procedure: <strong>record-send</strong> <em>session array</em></dt>
+<dd><p>Send the record constituted by <var>array</var> through <var>session</var>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-set_002dsession_002dserver_002dname_0021"></a>Scheme Procedure: <strong>set-session-server-name!</strong> <em>session type name</em></dt>
+<dd><p>For a client, this procedure provides a way to inform the server that it is known under <var>name</var>, <i>via</i> the <code>SERVER NAME</code> TLS extension.  <var>type</var> must be a <code>server-name-type</code> value, <var>server-name-type/dns</var> for DNS names.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-set_002dsession_002dcredentials_0021"></a>Scheme Procedure: <strong>set-session-credentials!</strong> <em>session cred</em></dt>
+<dd><p>Use <var>cred</var> as <var>session</var>&rsquo;s credentials.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-cipher_002dsuite_002d_003estring"></a>Scheme Procedure: <strong>cipher-suite-&gt;string</strong> <em>kx cipher mac</em></dt>
+<dd><p>Return the name of the given cipher suite.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-set_002dsession_002dpriorities_0021"></a>Scheme Procedure: <strong>set-session-priorities!</strong> <em>session priorities</em></dt>
+<dd><p>Have <var>session</var> use the given <var>priorities</var> for the ciphers, key exchange methods, MACs and compression methods.  <var>priorities</var> must be a string (see <a href="http://www.gnu.org/software/gnutls/manual/gnutls.html#Priority-Strings">Priority Strings</a> in <cite>GnuTLS, Transport Layer Security Library for the GNU system</cite>).  When <var>priorities</var> cannot be parsed, an <code>error/invalid-request</code> error is raised, with an extra argument indication the position of the error.
 </p>
+</dd></dl>
+
+<dl>
+<dt><a name="index-set_002dsession_002ddefault_002dpriority_0021"></a>Scheme Procedure: <strong>set-session-default-priority!</strong> <em>session</em></dt>
+<dd><p>Have <var>session</var> use the default priorities.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-set_002dserver_002dsession_002dcertificate_002drequest_0021"></a>Scheme Procedure: <strong>set-server-session-certificate-request!</strong> <em>session request</em></dt>
+<dd><p>Tell how <var>session</var>, a server-side session, should deal with certificate requests.  <var>request</var> should be either <code>certificate-request/request</code> or <code>certificate-request/require</code>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-session_002dour_002dcertificate_002dchain"></a>Scheme Procedure: <strong>session-our-certificate-chain</strong> <em>session</em></dt>
+<dd><p>Return our certificate chain for <var>session</var> (as sent to the peer) in raw format (a u8vector).  In the case of OpenPGP there is exactly one certificate.  Return the empty list if no certificate was used.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-session_002dpeer_002dcertificate_002dchain"></a>Scheme Procedure: <strong>session-peer-certificate-chain</strong> <em>session</em></dt>
+<dd><p>Return the a list of certificates in raw format (u8vectors) where the first one is the peer&rsquo;s certificate.  In the case of OpenPGP, there is always exactly one certificate.  In the case of X.509, subsequent certificates indicate form a certificate chain.  Return the empty list if no certificate was sent.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-session_002dclient_002dauthentication_002dtype"></a>Scheme Procedure: <strong>session-client-authentication-type</strong> <em>session</em></dt>
+<dd><p>Return the client authentication type (a <code>credential-type</code> value) used in <var>session</var>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-session_002dserver_002dauthentication_002dtype"></a>Scheme Procedure: <strong>session-server-authentication-type</strong> <em>session</em></dt>
+<dd><p>Return the server authentication type (a <code>credential-type</code> value) used in <var>session</var>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-session_002dauthentication_002dtype"></a>Scheme Procedure: <strong>session-authentication-type</strong> <em>session</em></dt>
+<dd><p>Return the authentication type (a <code>credential-type</code> value) used by <var>session</var>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-session_002dprotocol"></a>Scheme Procedure: <strong>session-protocol</strong> <em>session</em></dt>
+<dd><p>Return the protocol used by <var>session</var>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-session_002dcertificate_002dtype"></a>Scheme Procedure: <strong>session-certificate-type</strong> <em>session</em></dt>
+<dd><p>Return <var>session</var>&rsquo;s certificate type.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-session_002dcompression_002dmethod"></a>Scheme Procedure: <strong>session-compression-method</strong> <em>session</em></dt>
+<dd><p>Return <var>session</var>&rsquo;s compression method.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-session_002dmac"></a>Scheme Procedure: <strong>session-mac</strong> <em>session</em></dt>
+<dd><p>Return <var>session</var>&rsquo;s MAC.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-session_002dkx"></a>Scheme Procedure: <strong>session-kx</strong> <em>session</em></dt>
+<dd><p>Return <var>session</var>&rsquo;s kx.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-session_002dcipher-1"></a>Scheme Procedure: <strong>session-cipher</strong> <em>session</em></dt>
+<dd><p>Return <var>session</var>&rsquo;s cipher.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-alert_002dsend"></a>Scheme Procedure: <strong>alert-send</strong> <em>session level alert</em></dt>
+<dd><p>Send <var>alert</var> via <var>session</var>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-alert_002dget"></a>Scheme Procedure: <strong>alert-get</strong> <em>session</em></dt>
+<dd><p>Get an aleter from <var>session</var>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-rehandshake"></a>Scheme Procedure: <strong>rehandshake</strong> <em>session</em></dt>
+<dd><p>Perform a re-handshaking for <var>session</var>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-handshake"></a>Scheme Procedure: <strong>handshake</strong> <em>session</em></dt>
+<dd><p>Perform a handshake for <var>session</var>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-bye"></a>Scheme Procedure: <strong>bye</strong> <em>session how</em></dt>
+<dd><p>Close <var>session</var> according to <var>how</var>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-make_002dsession"></a>Scheme Procedure: <strong>make-session</strong> <em>end</em></dt>
+<dd><p>Return a new session for connection end <var>end</var>, either <code>connection-end/server</code> or <code>connection-end/client</code>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-gnutls_002dversion"></a>Scheme Procedure: <strong>gnutls-version</strong></dt>
+<dd><p>Return a string denoting the version number of the underlying GnuTLS library, e.g., <code>&quot;1.7.2&quot;</code>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-openpgp_002dkeyring_003f"></a>Scheme Procedure: <strong>openpgp-keyring?</strong> <em>obj</em></dt>
+<dd><p>Return true if <var>obj</var> is of type <code>openpgp-keyring</code>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-openpgp_002dprivate_002dkey_003f"></a>Scheme Procedure: <strong>openpgp-private-key?</strong> <em>obj</em></dt>
+<dd><p>Return true if <var>obj</var> is of type <code>openpgp-private-key</code>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-openpgp_002dcertificate_003f"></a>Scheme Procedure: <strong>openpgp-certificate?</strong> <em>obj</em></dt>
+<dd><p>Return true if <var>obj</var> is of type <code>openpgp-certificate</code>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-x509_002dprivate_002dkey_003f"></a>Scheme Procedure: <strong>x509-private-key?</strong> <em>obj</em></dt>
+<dd><p>Return true if <var>obj</var> is of type <code>x509-private-key</code>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-x509_002dcertificate_003f"></a>Scheme Procedure: <strong>x509-certificate?</strong> <em>obj</em></dt>
+<dd><p>Return true if <var>obj</var> is of type <code>x509-certificate</code>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-psk_002dclient_002dcredentials_003f"></a>Scheme Procedure: <strong>psk-client-credentials?</strong> <em>obj</em></dt>
+<dd><p>Return true if <var>obj</var> is of type <code>psk-client-credentials</code>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-psk_002dserver_002dcredentials_003f"></a>Scheme Procedure: <strong>psk-server-credentials?</strong> <em>obj</em></dt>
+<dd><p>Return true if <var>obj</var> is of type <code>psk-server-credentials</code>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-srp_002dclient_002dcredentials_003f"></a>Scheme Procedure: <strong>srp-client-credentials?</strong> <em>obj</em></dt>
+<dd><p>Return true if <var>obj</var> is of type <code>srp-client-credentials</code>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-srp_002dserver_002dcredentials_003f"></a>Scheme Procedure: <strong>srp-server-credentials?</strong> <em>obj</em></dt>
+<dd><p>Return true if <var>obj</var> is of type <code>srp-server-credentials</code>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-certificate_002dcredentials_003f"></a>Scheme Procedure: <strong>certificate-credentials?</strong> <em>obj</em></dt>
+<dd><p>Return true if <var>obj</var> is of type <code>certificate-credentials</code>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-dh_002dparameters_003f"></a>Scheme Procedure: <strong>dh-parameters?</strong> <em>obj</em></dt>
+<dd><p>Return true if <var>obj</var> is of type <code>dh-parameters</code>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-anonymous_002dserver_002dcredentials_003f"></a>Scheme Procedure: <strong>anonymous-server-credentials?</strong> <em>obj</em></dt>
+<dd><p>Return true if <var>obj</var> is of type <code>anonymous-server-credentials</code>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-anonymous_002dclient_002dcredentials_003f"></a>Scheme Procedure: <strong>anonymous-client-credentials?</strong> <em>obj</em></dt>
+<dd><p>Return true if <var>obj</var> is of type <code>anonymous-client-credentials</code>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-session_003f"></a>Scheme Procedure: <strong>session?</strong> <em>obj</em></dt>
+<dd><p>Return true if <var>obj</var> is of type <code>session</code>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-openpgp_002dcertificate_002dformat_002d_003estring"></a>Scheme Procedure: <strong>openpgp-certificate-format-&gt;string</strong> <em>enumval</em></dt>
+<dd><p>Return a string describing <var>enumval</var>, a <code>openpgp-certificate-format</code> value.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-error_002d_003estring-1"></a>Scheme Procedure: <strong>error-&gt;string</strong> <em>enumval</em></dt>
+<dd><p>Return a string describing <var>enumval</var>, a <code>error</code> value.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-certificate_002dverify_002d_003estring"></a>Scheme Procedure: <strong>certificate-verify-&gt;string</strong> <em>enumval</em></dt>
+<dd><p>Return a string describing <var>enumval</var>, a <code>certificate-verify</code> value.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-key_002dusage_002d_003estring"></a>Scheme Procedure: <strong>key-usage-&gt;string</strong> <em>enumval</em></dt>
+<dd><p>Return a string describing <var>enumval</var>, a <code>key-usage</code> value.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-psk_002dkey_002dformat_002d_003estring"></a>Scheme Procedure: <strong>psk-key-format-&gt;string</strong> <em>enumval</em></dt>
+<dd><p>Return a string describing <var>enumval</var>, a <code>psk-key-format</code> value.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-server_002dname_002dtype_002d_003estring"></a>Scheme Procedure: <strong>server-name-type-&gt;string</strong> <em>enumval</em></dt>
+<dd><p>Return a string describing <var>enumval</var>, a <code>server-name-type</code> value.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-sign_002dalgorithm_002d_003estring"></a>Scheme Procedure: <strong>sign-algorithm-&gt;string</strong> <em>enumval</em></dt>
+<dd><p>Return a string describing <var>enumval</var>, a <code>sign-algorithm</code> value.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-pk_002dalgorithm_002d_003estring"></a>Scheme Procedure: <strong>pk-algorithm-&gt;string</strong> <em>enumval</em></dt>
+<dd><p>Return a string describing <var>enumval</var>, a <code>pk-algorithm</code> value.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-x509_002dsubject_002dalternative_002dname_002d_003estring"></a>Scheme Procedure: <strong>x509-subject-alternative-name-&gt;string</strong> <em>enumval</em></dt>
+<dd><p>Return a string describing <var>enumval</var>, a <code>x509-subject-alternative-name</code> value.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-x509_002dcertificate_002dformat_002d_003estring"></a>Scheme Procedure: <strong>x509-certificate-format-&gt;string</strong> <em>enumval</em></dt>
+<dd><p>Return a string describing <var>enumval</var>, a <code>x509-certificate-format</code> value.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-certificate_002dtype_002d_003estring"></a>Scheme Procedure: <strong>certificate-type-&gt;string</strong> <em>enumval</em></dt>
+<dd><p>Return a string describing <var>enumval</var>, a <code>certificate-type</code> value.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-protocol_002d_003estring"></a>Scheme Procedure: <strong>protocol-&gt;string</strong> <em>enumval</em></dt>
+<dd><p>Return a string describing <var>enumval</var>, a <code>protocol</code> value.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-close_002drequest_002d_003estring"></a>Scheme Procedure: <strong>close-request-&gt;string</strong> <em>enumval</em></dt>
+<dd><p>Return a string describing <var>enumval</var>, a <code>close-request</code> value.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-certificate_002drequest_002d_003estring"></a>Scheme Procedure: <strong>certificate-request-&gt;string</strong> <em>enumval</em></dt>
+<dd><p>Return a string describing <var>enumval</var>, a <code>certificate-request</code> value.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-certificate_002dstatus_002d_003estring"></a>Scheme Procedure: <strong>certificate-status-&gt;string</strong> <em>enumval</em></dt>
+<dd><p>Return a string describing <var>enumval</var>, a <code>certificate-status</code> value.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-handshake_002ddescription_002d_003estring"></a>Scheme Procedure: <strong>handshake-description-&gt;string</strong> <em>enumval</em></dt>
+<dd><p>Return a string describing <var>enumval</var>, a <code>handshake-description</code> value.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-alert_002ddescription_002d_003estring"></a>Scheme Procedure: <strong>alert-description-&gt;string</strong> <em>enumval</em></dt>
+<dd><p>Return a string describing <var>enumval</var>, a <code>alert-description</code> value.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-alert_002dlevel_002d_003estring"></a>Scheme Procedure: <strong>alert-level-&gt;string</strong> <em>enumval</em></dt>
+<dd><p>Return a string describing <var>enumval</var>, a <code>alert-level</code> value.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-connection_002dend_002d_003estring"></a>Scheme Procedure: <strong>connection-end-&gt;string</strong> <em>enumval</em></dt>
+<dd><p>Return a string describing <var>enumval</var>, a <code>connection-end</code> value.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-compression_002dmethod_002d_003estring"></a>Scheme Procedure: <strong>compression-method-&gt;string</strong> <em>enumval</em></dt>
+<dd><p>Return a string describing <var>enumval</var>, a <code>compression-method</code> value.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-digest_002d_003estring"></a>Scheme Procedure: <strong>digest-&gt;string</strong> <em>enumval</em></dt>
+<dd><p>Return a string describing <var>enumval</var>, a <code>digest</code> value.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-mac_002d_003estring"></a>Scheme Procedure: <strong>mac-&gt;string</strong> <em>enumval</em></dt>
+<dd><p>Return a string describing <var>enumval</var>, a <code>mac</code> value.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-credentials_002d_003estring"></a>Scheme Procedure: <strong>credentials-&gt;string</strong> <em>enumval</em></dt>
+<dd><p>Return a string describing <var>enumval</var>, a <code>credentials</code> value.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-params_002d_003estring"></a>Scheme Procedure: <strong>params-&gt;string</strong> <em>enumval</em></dt>
+<dd><p>Return a string describing <var>enumval</var>, a <code>params</code> value.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-kx_002d_003estring"></a>Scheme Procedure: <strong>kx-&gt;string</strong> <em>enumval</em></dt>
+<dd><p>Return a string describing <var>enumval</var>, a <code>kx</code> value.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-cipher_002d_003estring"></a>Scheme Procedure: <strong>cipher-&gt;string</strong> <em>enumval</em></dt>
+<dd><p>Return a string describing <var>enumval</var>, a <code>cipher</code> value.
+</p></dd></dl>
+
 
 <hr>
 <a name="Copying-Information"></a>
@@ -1401,49 +2026,234 @@ Next: <a href="#Concept-Index" accesskey="n" rel="next">Concept Index</a>, Previ
 <a name="Procedure-Index-1"></a>
 <h2 class="unnumbered">Procedure Index</h2>
 
-<table><tr><th valign="top">Jump to: &nbsp; </th><td><a class="summary-letter" href="#Procedure-Index_fn_letter-E"><b>E</b></a>
+<table><tr><th valign="top">Jump to: &nbsp; </th><td><a class="summary-letter" href="#Procedure-Index_fn_letter-A"><b>A</b></a>
+ &nbsp; 
+<a class="summary-letter" href="#Procedure-Index_fn_letter-B"><b>B</b></a>
+ &nbsp; 
+<a class="summary-letter" href="#Procedure-Index_fn_letter-C"><b>C</b></a>
+ &nbsp; 
+<a class="summary-letter" href="#Procedure-Index_fn_letter-D"><b>D</b></a>
+ &nbsp; 
+<a class="summary-letter" href="#Procedure-Index_fn_letter-E"><b>E</b></a>
+ &nbsp; 
+<a class="summary-letter" href="#Procedure-Index_fn_letter-G"><b>G</b></a>
+ &nbsp; 
+<a class="summary-letter" href="#Procedure-Index_fn_letter-H"><b>H</b></a>
+ &nbsp; 
+<a class="summary-letter" href="#Procedure-Index_fn_letter-I"><b>I</b></a>
+ &nbsp; 
+<a class="summary-letter" href="#Procedure-Index_fn_letter-K"><b>K</b></a>
  &nbsp; 
 <a class="summary-letter" href="#Procedure-Index_fn_letter-M"><b>M</b></a>
+ &nbsp; 
+<a class="summary-letter" href="#Procedure-Index_fn_letter-O"><b>O</b></a>
  &nbsp; 
 <a class="summary-letter" href="#Procedure-Index_fn_letter-P"><b>P</b></a>
  &nbsp; 
 <a class="summary-letter" href="#Procedure-Index_fn_letter-R"><b>R</b></a>
  &nbsp; 
 <a class="summary-letter" href="#Procedure-Index_fn_letter-S"><b>S</b></a>
+ &nbsp; 
+<a class="summary-letter" href="#Procedure-Index_fn_letter-X"><b>X</b></a>
  &nbsp; 
 </td></tr></table>
 <table class="index-fn" border="0">
 <tr><td></td><th align="left">Index Entry</th><td>&nbsp;</td><th align="left"> Section</th></tr>
 <tr><td colspan="4"> <hr></td></tr>
+<tr><th><a name="Procedure-Index_fn_letter-A">A</a></th><td></td><td></td></tr>
+<tr><td></td><td valign="top"><a href="#index-alert_002ddescription_002d_003estring"><code>alert-description-&gt;string</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-alert_002dget"><code>alert-get</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-alert_002dlevel_002d_003estring"><code>alert-level-&gt;string</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-alert_002dsend"><code>alert-send</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-anonymous_002dclient_002dcredentials_003f"><code>anonymous-client-credentials?</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-anonymous_002dserver_002dcredentials_003f"><code>anonymous-server-credentials?</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td colspan="4"> <hr></td></tr>
+<tr><th><a name="Procedure-Index_fn_letter-B">B</a></th><td></td><td></td></tr>
+<tr><td></td><td valign="top"><a href="#index-bye"><code>bye</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td colspan="4"> <hr></td></tr>
+<tr><th><a name="Procedure-Index_fn_letter-C">C</a></th><td></td><td></td></tr>
+<tr><td></td><td valign="top"><a href="#index-certificate_002dcredentials_003f"><code>certificate-credentials?</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-certificate_002drequest_002d_003estring"><code>certificate-request-&gt;string</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-certificate_002dstatus_002d_003estring"><code>certificate-status-&gt;string</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-certificate_002dtype_002d_003estring"><code>certificate-type-&gt;string</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-certificate_002dverify_002d_003estring"><code>certificate-verify-&gt;string</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-cipher_002d_003estring"><code>cipher-&gt;string</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-cipher_002dsuite_002d_003estring"><code>cipher-suite-&gt;string</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-close_002drequest_002d_003estring"><code>close-request-&gt;string</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-compression_002dmethod_002d_003estring"><code>compression-method-&gt;string</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-connection_002dend_002d_003estring"><code>connection-end-&gt;string</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-credentials_002d_003estring"><code>credentials-&gt;string</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td colspan="4"> <hr></td></tr>
+<tr><th><a name="Procedure-Index_fn_letter-D">D</a></th><td></td><td></td></tr>
+<tr><td></td><td valign="top"><a href="#index-dh_002dparameters_003f"><code>dh-parameters?</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-digest_002d_003estring"><code>digest-&gt;string</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td colspan="4"> <hr></td></tr>
 <tr><th><a name="Procedure-Index_fn_letter-E">E</a></th><td></td><td></td></tr>
 <tr><td></td><td valign="top"><a href="#index-error_002d_003estring"><code>error-&gt;string</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Exception-Handling">Exception Handling</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-error_002d_003estring-1"><code>error-&gt;string</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td colspan="4"> <hr></td></tr>
+<tr><th><a name="Procedure-Index_fn_letter-G">G</a></th><td></td><td></td></tr>
+<tr><td></td><td valign="top"><a href="#index-gnutls_002dversion"><code>gnutls-version</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td colspan="4"> <hr></td></tr>
+<tr><th><a name="Procedure-Index_fn_letter-H">H</a></th><td></td><td></td></tr>
+<tr><td></td><td valign="top"><a href="#index-handshake"><code>handshake</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-handshake_002ddescription_002d_003estring"><code>handshake-description-&gt;string</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td colspan="4"> <hr></td></tr>
+<tr><th><a name="Procedure-Index_fn_letter-I">I</a></th><td></td><td></td></tr>
+<tr><td></td><td valign="top"><a href="#index-import_002dopenpgp_002dcertificate"><code>import-openpgp-certificate</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-import_002dopenpgp_002dkeyring"><code>import-openpgp-keyring</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-import_002dopenpgp_002dprivate_002dkey"><code>import-openpgp-private-key</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-import_002dx509_002dcertificate"><code>import-x509-certificate</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-import_002dx509_002dprivate_002dkey"><code>import-x509-private-key</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td colspan="4"> <hr></td></tr>
+<tr><th><a name="Procedure-Index_fn_letter-K">K</a></th><td></td><td></td></tr>
+<tr><td></td><td valign="top"><a href="#index-key_002dusage_002d_003estring"><code>key-usage-&gt;string</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-kx_002d_003estring"><code>kx-&gt;string</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
 <tr><td colspan="4"> <hr></td></tr>
 <tr><th><a name="Procedure-Index_fn_letter-M">M</a></th><td></td><td></td></tr>
+<tr><td></td><td valign="top"><a href="#index-mac_002d_003estring"><code>mac-&gt;string</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-make_002danonymous_002dclient_002dcredentials"><code>make-anonymous-client-credentials</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-make_002danonymous_002dserver_002dcredentials"><code>make-anonymous-server-credentials</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-make_002dcertificate_002dcredentials"><code>make-certificate-credentials</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-make_002ddh_002dparameters"><code>make-dh-parameters</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Representation-of-Binary-Data">Representation of Binary Data</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-make_002ddh_002dparameters-1"><code>make-dh-parameters</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-make_002dpsk_002dclient_002dcredentials"><code>make-psk-client-credentials</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-make_002dpsk_002dserver_002dcredentials"><code>make-psk-server-credentials</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-make_002dsession"><code>make-session</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td colspan="4"> <hr></td></tr>
+<tr><th><a name="Procedure-Index_fn_letter-O">O</a></th><td></td><td></td></tr>
+<tr><td></td><td valign="top"><a href="#index-openpgp_002dcertificate_002dalgorithm"><code>openpgp-certificate-algorithm</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-openpgp_002dcertificate_002dfingerprint"><code>openpgp-certificate-fingerprint</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-openpgp_002dcertificate_002dfingerprint_0021"><code>openpgp-certificate-fingerprint!</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-openpgp_002dcertificate_002dformat_002d_003estring"><code>openpgp-certificate-format-&gt;string</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-openpgp_002dcertificate_002did"><code>openpgp-certificate-id</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-openpgp_002dcertificate_002did_0021"><code>openpgp-certificate-id!</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-openpgp_002dcertificate_002dname"><code>openpgp-certificate-name</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-openpgp_002dcertificate_002dnames"><code>openpgp-certificate-names</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-openpgp_002dcertificate_002dusage"><code>openpgp-certificate-usage</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-openpgp_002dcertificate_002dversion"><code>openpgp-certificate-version</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-openpgp_002dcertificate_003f"><code>openpgp-certificate?</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-openpgp_002dkeyring_002dcontains_002dkey_002did_003f"><code>openpgp-keyring-contains-key-id?</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-openpgp_002dkeyring_003f"><code>openpgp-keyring?</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-openpgp_002dprivate_002dkey_003f"><code>openpgp-private-key?</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
 <tr><td colspan="4"> <hr></td></tr>
 <tr><th><a name="Procedure-Index_fn_letter-P">P</a></th><td></td><td></td></tr>
+<tr><td></td><td valign="top"><a href="#index-params_002d_003estring"><code>params-&gt;string</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-peer_002dcertificate_002dstatus"><code>peer-certificate-status</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-pk_002dalgorithm_002d_003estring"><code>pk-algorithm-&gt;string</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-pkcs3_002dexport_002ddh_002dparameters"><code>pkcs3-export-dh-parameters</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Representation-of-Binary-Data">Representation of Binary Data</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-pkcs3_002dexport_002ddh_002dparameters-1"><code>pkcs3-export-dh-parameters</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-pkcs3_002dimport_002ddh_002dparameters"><code>pkcs3-import-dh-parameters</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-pkcs8_002dimport_002dx509_002dprivate_002dkey"><code>pkcs8-import-x509-private-key</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-protocol_002d_003estring"><code>protocol-&gt;string</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-psk_002dclient_002dcredentials_003f"><code>psk-client-credentials?</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-psk_002dkey_002dformat_002d_003estring"><code>psk-key-format-&gt;string</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-psk_002dserver_002dcredentials_003f"><code>psk-server-credentials?</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
 <tr><td colspan="4"> <hr></td></tr>
 <tr><th><a name="Procedure-Index_fn_letter-R">R</a></th><td></td><td></td></tr>
 <tr><td></td><td valign="top"><a href="#index-record_002dreceive_0021"><code>record-receive!</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Input-and-Output">Input and Output</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-record_002dreceive_0021-1"><code>record-receive!</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-record_002dsend"><code>record-send</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Input-and-Output">Input and Output</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-record_002dsend-1"><code>record-send</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-rehandshake"><code>rehandshake</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
 <tr><td colspan="4"> <hr></td></tr>
 <tr><th><a name="Procedure-Index_fn_letter-S">S</a></th><td></td><td></td></tr>
+<tr><td></td><td valign="top"><a href="#index-server_002dname_002dtype_002d_003estring"><code>server-name-type-&gt;string</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-server_002dsession_002dpsk_002dusername"><code>server-session-psk-username</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-session_002dauthentication_002dtype"><code>session-authentication-type</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-session_002dcertificate_002dtype"><code>session-certificate-type</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-session_002dcipher"><code>session-cipher</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Enumerates-and-Constants">Enumerates and Constants</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-session_002dcipher-1"><code>session-cipher</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-session_002dclient_002dauthentication_002dtype"><code>session-client-authentication-type</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-session_002dcompression_002dmethod"><code>session-compression-method</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-session_002dkx"><code>session-kx</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-session_002dmac"><code>session-mac</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-session_002dour_002dcertificate_002dchain"><code>session-our-certificate-chain</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-session_002dpeer_002dcertificate_002dchain"><code>session-peer-certificate-chain</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-session_002dprotocol"><code>session-protocol</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-session_002drecord_002dport"><code>session-record-port</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Input-and-Output">Input and Output</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-session_002drecord_002dport-1"><code>session-record-port</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-session_002dserver_002dauthentication_002dtype"><code>session-server-authentication-type</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-session_003f"><code>session?</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-set_002danonymous_002dserver_002ddh_002dparameters_0021"><code>set-anonymous-server-dh-parameters!</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-set_002dcertificate_002dcredentials_002ddh_002dparameters_0021"><code>set-certificate-credentials-dh-parameters!</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-set_002dcertificate_002dcredentials_002dopenpgp_002dkeys_0021"><code>set-certificate-credentials-openpgp-keys!</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-set_002dcertificate_002dcredentials_002dverify_002dflags_0021"><code>set-certificate-credentials-verify-flags!</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-set_002dcertificate_002dcredentials_002dverify_002dlimits_0021"><code>set-certificate-credentials-verify-limits!</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-set_002dcertificate_002dcredentials_002dx509_002dcrl_002ddata_0021"><code>set-certificate-credentials-x509-crl-data!</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-set_002dcertificate_002dcredentials_002dx509_002dcrl_002dfile_0021"><code>set-certificate-credentials-x509-crl-file!</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-set_002dcertificate_002dcredentials_002dx509_002dkey_002ddata_0021"><code>set-certificate-credentials-x509-key-data!</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-set_002dcertificate_002dcredentials_002dx509_002dkey_002dfiles_0021"><code>set-certificate-credentials-x509-key-files!</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-set_002dcertificate_002dcredentials_002dx509_002dkeys_0021"><code>set-certificate-credentials-x509-keys!</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-set_002dcertificate_002dcredentials_002dx509_002dtrust_002ddata_0021"><code>set-certificate-credentials-x509-trust-data!</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-set_002dcertificate_002dcredentials_002dx509_002dtrust_002dfile_0021"><code>set-certificate-credentials-x509-trust-file!</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-set_002dlog_002dlevel_0021"><code>set-log-level!</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-set_002dlog_002dprocedure_0021"><code>set-log-procedure!</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-set_002dpsk_002dclient_002dcredentials_0021"><code>set-psk-client-credentials!</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-set_002dpsk_002dserver_002dcredentials_002dfile_0021"><code>set-psk-server-credentials-file!</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-set_002dserver_002dsession_002dcertificate_002drequest_0021"><code>set-server-session-certificate-request!</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-set_002dsession_002dcredentials_0021"><code>set-session-credentials!</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-set_002dsession_002ddefault_002dpriority_0021"><code>set-session-default-priority!</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-set_002dsession_002ddh_002dprime_002dbits_0021"><code>set-session-dh-prime-bits!</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-set_002dsession_002dpriorities_0021"><code>set-session-priorities!</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-set_002dsession_002dserver_002dname_0021"><code>set-session-server-name!</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-set_002dsession_002dtransport_002dfd_0021"><code>set-session-transport-fd!</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Input-and-Output">Input and Output</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-set_002dsession_002dtransport_002dfd_0021-1"><code>set-session-transport-fd!</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-set_002dsession_002dtransport_002dport_0021"><code>set-session-transport-port!</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Input-and-Output">Input and Output</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-set_002dsession_002dtransport_002dport_0021-1"><code>set-session-transport-port!</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-sign_002dalgorithm_002d_003estring"><code>sign-algorithm-&gt;string</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-srp_002dclient_002dcredentials_003f"><code>srp-client-credentials?</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-srp_002dserver_002dcredentials_003f"><code>srp-server-credentials?</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td colspan="4"> <hr></td></tr>
+<tr><th><a name="Procedure-Index_fn_letter-X">X</a></th><td></td><td></td></tr>
+<tr><td></td><td valign="top"><a href="#index-x509_002dcertificate_002dauthority_002dkey_002did"><code>x509-certificate-authority-key-id</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-x509_002dcertificate_002ddn"><code>x509-certificate-dn</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-x509_002dcertificate_002ddn_002doid"><code>x509-certificate-dn-oid</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-x509_002dcertificate_002dformat_002d_003estring"><code>x509-certificate-format-&gt;string</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-x509_002dcertificate_002dissuer_002ddn"><code>x509-certificate-issuer-dn</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-x509_002dcertificate_002dissuer_002ddn_002doid"><code>x509-certificate-issuer-dn-oid</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-x509_002dcertificate_002dkey_002did"><code>x509-certificate-key-id</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-x509_002dcertificate_002dkey_002dusage"><code>x509-certificate-key-usage</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-x509_002dcertificate_002dmatches_002dhostname_003f"><code>x509-certificate-matches-hostname?</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-x509_002dcertificate_002dpublic_002dkey_002dalgorithm"><code>x509-certificate-public-key-algorithm</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-x509_002dcertificate_002dsignature_002dalgorithm"><code>x509-certificate-signature-algorithm</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-x509_002dcertificate_002dsubject_002dalternative_002dname"><code>x509-certificate-subject-alternative-name</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-x509_002dcertificate_002dsubject_002dkey_002did"><code>x509-certificate-subject-key-id</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-x509_002dcertificate_002dversion"><code>x509-certificate-version</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-x509_002dcertificate_003f"><code>x509-certificate?</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-x509_002dprivate_002dkey_003f"><code>x509-private-key?</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-x509_002dsubject_002dalternative_002dname_002d_003estring"><code>x509-subject-alternative-name-&gt;string</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Guile-Reference">Guile Reference</a></td></tr>
 <tr><td colspan="4"> <hr></td></tr>
 </table>
-<table><tr><th valign="top">Jump to: &nbsp; </th><td><a class="summary-letter" href="#Procedure-Index_fn_letter-E"><b>E</b></a>
+<table><tr><th valign="top">Jump to: &nbsp; </th><td><a class="summary-letter" href="#Procedure-Index_fn_letter-A"><b>A</b></a>
+ &nbsp; 
+<a class="summary-letter" href="#Procedure-Index_fn_letter-B"><b>B</b></a>
+ &nbsp; 
+<a class="summary-letter" href="#Procedure-Index_fn_letter-C"><b>C</b></a>
+ &nbsp; 
+<a class="summary-letter" href="#Procedure-Index_fn_letter-D"><b>D</b></a>
+ &nbsp; 
+<a class="summary-letter" href="#Procedure-Index_fn_letter-E"><b>E</b></a>
+ &nbsp; 
+<a class="summary-letter" href="#Procedure-Index_fn_letter-G"><b>G</b></a>
+ &nbsp; 
+<a class="summary-letter" href="#Procedure-Index_fn_letter-H"><b>H</b></a>
+ &nbsp; 
+<a class="summary-letter" href="#Procedure-Index_fn_letter-I"><b>I</b></a>
+ &nbsp; 
+<a class="summary-letter" href="#Procedure-Index_fn_letter-K"><b>K</b></a>
  &nbsp; 
 <a class="summary-letter" href="#Procedure-Index_fn_letter-M"><b>M</b></a>
+ &nbsp; 
+<a class="summary-letter" href="#Procedure-Index_fn_letter-O"><b>O</b></a>
  &nbsp; 
 <a class="summary-letter" href="#Procedure-Index_fn_letter-P"><b>P</b></a>
  &nbsp; 
 <a class="summary-letter" href="#Procedure-Index_fn_letter-R"><b>R</b></a>
  &nbsp; 
 <a class="summary-letter" href="#Procedure-Index_fn_letter-S"><b>S</b></a>
+ &nbsp; 
+<a class="summary-letter" href="#Procedure-Index_fn_letter-X"><b>X</b></a>
  &nbsp; 
 </td></tr></table>
 

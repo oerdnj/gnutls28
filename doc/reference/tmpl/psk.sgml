@@ -20,24 +20,3 @@ psk
 <!-- ##### SECTION Image ##### -->
 
 
-<!-- ##### STRUCT psk_client_credentials_st ##### -->
-<para>
-
-</para>
-
-@username: 
-@key: 
-@get_function: 
-
-<!-- ##### STRUCT psk_server_cred_st ##### -->
-<para>
-
-</para>
-
-@password_file: 
-@pwd_callback: 
-@dh_params: 
-@deinit_dh_params: 
-@params_func: 
-@hint: 
-

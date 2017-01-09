@@ -41,62 +41,31 @@ pkcs11_int
 
 
 
+<!-- ##### MACRO SESSION_LOGIN ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO SESSION_SO ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO SESSION_WRITE ##### -->
+<para>
+
+</para>
+
+
+
 <!-- ##### TYPEDEF ck_bool_t ##### -->
 <para>
 
 </para>
-
-
-<!-- ##### STRUCT pkcs11_session_info ##### -->
-<para>
-
-</para>
-
-@module: 
-@tinfo: 
-@slot_info: 
-@pks: 
-@sid: 
-@init: 
-@trusted: 
-
-<!-- ##### STRUCT gnutls_pkcs11_obj_st ##### -->
-<para>
-
-</para>
-
-@raw: 
-@type: 
-@class: 
-@flags: 
-@info: 
-@pubkey: 
-@pk_algorithm: 
-@key_usage: 
-@pin: 
-
-<!-- ##### MACRO FIX_KEY_USAGE ##### -->
-<para>
-
-</para>
-
-@pk: 
-@usage: 
-
-
-<!-- ##### MACRO PKCS11_CHECK_INIT ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO PKCS11_CHECK_INIT_RET ##### -->
-<para>
-
-</para>
-
-@x: 
 
 
 <!-- ##### USER_FUNCTION find_func_t ##### -->
@@ -112,86 +81,11 @@ pkcs11_int
 @Returns: 
 
 
-<!-- ##### FUNCTION pkcs11_rv_to_err ##### -->
+<!-- ##### FUNCTION if ##### -->
 <para>
 
 </para>
 
-@rv: 
-@Returns: 
-
-
-<!-- ##### FUNCTION pkcs11_url_to_info ##### -->
-<para>
-
-</para>
-
-@url: 
-@info: 
-@flags: 
-@Returns: 
-
-
-<!-- ##### FUNCTION pkcs11_find_slot ##### -->
-<para>
-
-</para>
-
-@module: 
-@slot: 
-@info: 
-@_tinfo: 
-@_slot_info: 
-@trusted: 
-@Returns: 
-
-
-<!-- ##### FUNCTION pkcs11_read_pubkey ##### -->
-<para>
-
-</para>
-
-@module: 
-@pks: 
-@obj: 
-@key_type: 
-@pobj: 
-@Returns: 
-
-
-<!-- ##### FUNCTION pkcs11_override_cert_exts ##### -->
-<para>
-
-</para>
-
-@sinfo: 
-@spki: 
-@der: 
-@Returns: 
-
-
-<!-- ##### FUNCTION pkcs11_get_info ##### -->
-<para>
-
-</para>
-
-@info: 
-@itype: 
-@output: 
-@output_size: 
-@Returns: 
-
-
-<!-- ##### FUNCTION pkcs11_login ##### -->
-<para>
-
-</para>
-
-@sinfo: 
-@pin_info: 
-@info: 
-@so: 
-@reauth: 
 @Returns: 
 
 
@@ -205,124 +99,43 @@ pkcs11_int
 @Returns: 
 
 
-<!-- ##### FUNCTION pkcs11_rescan_slots ##### -->
+<!-- ##### FUNCTION pkcs11_close_session ##### -->
 <para>
 
 </para>
 
-@void: 
-
-
-<!-- ##### FUNCTION pkcs11_info_to_url ##### -->
-<para>
-
-</para>
-
-@info: 
-@detailed: 
-@url: 
+@Param1: 
 @Returns: 
 
 
-<!-- ##### MACRO SESSION_WRITE ##### -->
+<!-- ##### FUNCTION pkcs11_create_object ##### -->
 <para>
 
 </para>
 
-
-
-<!-- ##### MACRO SESSION_LOGIN ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO SESSION_SO ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO SESSION_TRUSTED ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### FUNCTION pkcs11_open_session ##### -->
-<para>
-
-</para>
-
-@sinfo: 
-@pin_info: 
-@info: 
-@flags: 
+@module: 
+@sess: 
+@templ: 
+@count: 
+@object: 
 @Returns: 
 
 
-<!-- ##### FUNCTION pkcs11_strtype_to_class ##### -->
+<!-- ##### FUNCTION pkcs11_decrypt ##### -->
 <para>
 
 </para>
 
-@type: 
+@module: 
+@sess: 
+@encrypted_data: 
+@encrypted_data_len: 
+@data: 
+@data_len: 
 @Returns: 
 
 
-<!-- ##### MACRO GNUTLS_PKCS11_OBJ_FLAG_EXPECT_CERT ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO GNUTLS_PKCS11_OBJ_FLAG_EXPECT_PRIVKEY ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO GNUTLS_PKCS11_OBJ_FLAG_EXPECT_PUBKEY ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### FUNCTION pkcs11_token_matches_info ##### -->
-<para>
-
-</para>
-
-@info: 
-@tinfo: 
-@lib_info: 
-@Returns: 
-
-
-<!-- ##### FUNCTION pkcs11_obj_flags_to_int ##### -->
-<para>
-
-</para>
-
-@flags: 
-@Returns: 
-
-
-<!-- ##### FUNCTION if ##### -->
-<para>
-
-</para>
-
-@Returns: 
-
-
-<!-- ##### FUNCTION pkcs11_generate_key ##### -->
+<!-- ##### FUNCTION pkcs11_decrypt_init ##### -->
 <para>
 
 </para>
@@ -330,82 +143,18 @@ pkcs11_int
 @module: 
 @sess: 
 @mechanism: 
-@templ: 
-@count: 
 @key: 
 @Returns: 
 
 
-<!-- ##### FUNCTION pkcs11_generate_key_pair ##### -->
+<!-- ##### FUNCTION pkcs11_destroy_object ##### -->
 <para>
 
 </para>
 
 @module: 
 @sess: 
-@mechanism: 
-@pub_templ: 
-@pub_templ_count: 
-@priv_templ: 
-@priv_templ_count: 
-@pub: 
-@priv: 
-@Returns: 
-
-
-<!-- ##### FUNCTION pkcs11_get_slot_list ##### -->
-<para>
-
-</para>
-
-@module: 
-@token_present: 
-@slot_list: 
-@count: 
-@Returns: 
-
-
-<!-- ##### FUNCTION pkcs11_get_module_info ##### -->
-<para>
-
-</para>
-
-@module: 
-@info: 
-@Returns: 
-
-
-<!-- ##### FUNCTION pkcs11_get_slot_info ##### -->
-<para>
-
-</para>
-
-@module: 
-@slot_id: 
-@info: 
-@Returns: 
-
-
-<!-- ##### FUNCTION pkcs11_get_token_info ##### -->
-<para>
-
-</para>
-
-@module: 
-@slot_id: 
-@info: 
-@Returns: 
-
-
-<!-- ##### FUNCTION pkcs11_find_objects_init ##### -->
-<para>
-
-</para>
-
-@module: 
-@sess: 
-@templ: 
-@count: 
+@object: 
 @Returns: 
 
 
@@ -431,25 +180,29 @@ pkcs11_int
 @Returns: 
 
 
-<!-- ##### FUNCTION pkcs11_close_session ##### -->
-<para>
-
-</para>
-
-@Param1: 
-@Returns: 
-
-
-<!-- ##### FUNCTION pkcs11_set_attribute_value ##### -->
+<!-- ##### FUNCTION pkcs11_find_objects_init ##### -->
 <para>
 
 </para>
 
 @module: 
 @sess: 
-@object: 
 @templ: 
 @count: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pkcs11_find_slot ##### -->
+<para>
+
+</para>
+
+@module: 
+@slot: 
+@info: 
+@_tinfo: 
+@_slot_info: 
+@trusted: 
 @Returns: 
 
 
@@ -466,16 +219,15 @@ pkcs11_int
 @Returns: 
 
 
-<!-- ##### FUNCTION pkcs11_get_attribute_avalue ##### -->
+<!-- ##### FUNCTION pkcs11_get_info ##### -->
 <para>
 
 </para>
 
-@module: 
-@sess: 
-@object: 
-@type: 
-@res: 
+@info: 
+@itype: 
+@output: 
+@output_size: 
 @Returns: 
 
 
@@ -491,79 +243,70 @@ pkcs11_int
 @Returns: 
 
 
-<!-- ##### FUNCTION pkcs11_sign_init ##### -->
+<!-- ##### FUNCTION pkcs11_get_module_info ##### -->
 <para>
 
 </para>
 
 @module: 
-@sess: 
-@mechanism: 
-@key: 
+@info: 
 @Returns: 
 
 
-<!-- ##### FUNCTION pkcs11_sign ##### -->
+<!-- ##### FUNCTION pkcs11_get_slot_info ##### -->
 <para>
 
 </para>
 
 @module: 
-@sess: 
-@data: 
-@data_len: 
-@signature: 
-@signature_len: 
+@slot_id: 
+@info: 
 @Returns: 
 
 
-<!-- ##### FUNCTION pkcs11_decrypt_init ##### -->
+<!-- ##### FUNCTION pkcs11_get_slot_list ##### -->
 <para>
 
 </para>
 
 @module: 
-@sess: 
-@mechanism: 
-@key: 
-@Returns: 
-
-
-<!-- ##### FUNCTION pkcs11_decrypt ##### -->
-<para>
-
-</para>
-
-@module: 
-@sess: 
-@encrypted_data: 
-@encrypted_data_len: 
-@data: 
-@data_len: 
-@Returns: 
-
-
-<!-- ##### FUNCTION pkcs11_create_object ##### -->
-<para>
-
-</para>
-
-@module: 
-@sess: 
-@templ: 
+@token_present: 
+@slot_list: 
 @count: 
-@object: 
 @Returns: 
 
 
-<!-- ##### FUNCTION pkcs11_destroy_object ##### -->
+<!-- ##### FUNCTION pkcs11_get_token_info ##### -->
+<para>
+
+</para>
+
+@module: 
+@slot_id: 
+@info: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pkcs11_info_to_url ##### -->
+<para>
+
+</para>
+
+@info: 
+@detailed: 
+@url: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pkcs11_init_pin ##### -->
 <para>
 
 </para>
 
 @module: 
 @sess: 
-@object: 
+@pin: 
+@pin_len: 
 @Returns: 
 
 
@@ -580,15 +323,67 @@ pkcs11_int
 @Returns: 
 
 
-<!-- ##### FUNCTION pkcs11_init_pin ##### -->
+<!-- ##### FUNCTION pkcs11_login ##### -->
+<para>
+
+</para>
+
+@sinfo: 
+@pin_info: 
+@info: 
+@so: 
+@reauth: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pkcs11_obj_flags_to_int ##### -->
+<para>
+
+</para>
+
+@flags: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pkcs11_open_session ##### -->
+<para>
+
+</para>
+
+@sinfo: 
+@pin_info: 
+@info: 
+@flags: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pkcs11_read_pubkey ##### -->
 <para>
 
 </para>
 
 @module: 
-@sess: 
-@pin: 
-@pin_len: 
+@pks: 
+@obj: 
+@key_type: 
+@pobj: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pkcs11_rescan_slots ##### -->
+<para>
+
+</para>
+
+@void: 
+
+
+<!-- ##### FUNCTION pkcs11_rv_to_err ##### -->
+<para>
+
+</para>
+
+@rv: 
 @Returns: 
 
 
@@ -606,12 +401,69 @@ pkcs11_int
 @Returns: 
 
 
+<!-- ##### FUNCTION pkcs11_sign ##### -->
+<para>
+
+</para>
+
+@module: 
+@sess: 
+@data: 
+@data_len: 
+@signature: 
+@signature_len: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pkcs11_sign_init ##### -->
+<para>
+
+</para>
+
+@module: 
+@sess: 
+@mechanism: 
+@key: 
+@Returns: 
+
+
 <!-- ##### FUNCTION pkcs11_strerror ##### -->
 <para>
 
 </para>
 
 @rv: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pkcs11_strtype_to_class ##### -->
+<para>
+
+</para>
+
+@type: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pkcs11_token_matches_info ##### -->
+<para>
+
+</para>
+
+@info: 
+@tinfo: 
+@lib_info: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pkcs11_url_to_info ##### -->
+<para>
+
+</para>
+
+@url: 
+@info: 
+@flags: 
 @Returns: 
 
 

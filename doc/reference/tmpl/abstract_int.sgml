@@ -20,29 +20,6 @@ abstract_int
 <!-- ##### SECTION Image ##### -->
 
 
-<!-- ##### STRUCT gnutls_privkey_st ##### -->
-<para>
-
-</para>
-
-@type: 
-@pk_algorithm: 
-
-<!-- ##### STRUCT gnutls_pubkey_st ##### -->
-<para>
-
-</para>
-
-@pk_algorithm: 
-@bits: 
-@params: 
-@openpgp_key_id: 
-@openpgp_key_id_set: 
-@openpgp_key_fpr: 
-@openpgp_key_fpr_set: 
-@key_usage: 
-@pin: 
-
 <!-- ##### FUNCTION pubkey_to_bits ##### -->
 <para>
 
@@ -50,19 +27,6 @@ abstract_int
 
 @pk: 
 @params: 
-@Returns: 
-
-
-<!-- ##### FUNCTION pubkey_verify_hashed_data ##### -->
-<para>
-
-</para>
-
-@pk: 
-@algo: 
-@hash: 
-@signature: 
-@issuer_params: 
 @Returns: 
 
 
@@ -74,6 +38,19 @@ abstract_int
 @pk: 
 @algo: 
 @data: 
+@signature: 
+@issuer_params: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pubkey_verify_hashed_data ##### -->
+<para>
+
+</para>
+
+@pk: 
+@algo: 
+@hash: 
 @signature: 
 @issuer_params: 
 @Returns: 
