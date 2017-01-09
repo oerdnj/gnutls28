@@ -1,3 +1,9 @@
+gnutls28 (3.5.8-0) experimental; urgency=medium
+
+  * Imported Upstream version 3.5.8
+
+ -- Ondřej Surý <ondrej@debian.org>  Mon, 09 Jan 2017 09:31:22 +0100
+
 gnutls28 (3.5.7+git668ea9-1) experimental; urgency=medium
 
   * New upstream git snapshot 668ea956379d7ad65908912d2fa2e4499d45eddc from
