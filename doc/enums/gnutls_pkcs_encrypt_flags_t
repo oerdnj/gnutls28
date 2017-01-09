@@ -22,4 +22,6 @@ PBES2 AES-256.
 Some schemas distinguish between an empty and a NULL password.
 @item GNUTLS_@-PKCS_@-PBES2_@-DES
 PBES2 single DES.
+@item GNUTLS_@-PKCS_@-PBES1_@-DES_@-MD5
+-- undescribed --
 @end table

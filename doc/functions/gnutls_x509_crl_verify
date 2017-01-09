@@ -22,6 +22,9 @@ Note that value in  @code{verify} is set only when the return value of this
 function is success (i.e, failure to trust a CRL a certificate does not imply 
 a negative return value).
 
-@strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (0) is returned, otherwise a
+Before GnuTLS 3.5.7 this function would return zero or a positive
+number on success.
+
+@strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (0), otherwise a
 negative error value.
 @end deftypefun

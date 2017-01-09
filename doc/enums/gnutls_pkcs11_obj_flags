@@ -37,6 +37,8 @@ When retrieving an object, do not set any requirements (store).
 @item GNUTLS_@-PKCS11_@-OBJ_@-FLAG_@-RETRIEVE_@-TRUSTED
 When retrieving an object, only retrieve the marked as trusted (alias to @code{GNUTLS_PKCS11_OBJ_FLAG_MARK_TRUSTED} ).
 In @code{gnutls_pkcs11_crt_is_known()}  it implies @code{GNUTLS_PKCS11_OBJ_FLAG_RETRIEVE_COMPARE}  if @code{GNUTLS_PKCS11_OBJ_FLAG_COMPARE_KEY}  is not given.
+@item GNUTLS_@-PKCS11_@-OBJ_@-FLAG_@-MARK_@-DISTRUSTED
+When writing an object, mark it as distrusted (store).
 @item GNUTLS_@-PKCS11_@-OBJ_@-FLAG_@-RETRIEVE_@-DISTRUSTED
 When retrieving an object, only retrieve the marked as distrusted (seek).
 @item GNUTLS_@-PKCS11_@-OBJ_@-FLAG_@-COMPARE

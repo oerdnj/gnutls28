@@ -238,7 +238,9 @@ pkcs11_list(FILE * outfile, const char *url, int type, unsigned int flags,
 		}
 
 		fprintf(outfile, "\n");
+		gnutls_pkcs11_obj_deinit(crt_list[i]);
 	}
+	gnutls_free(crt_list);
 
 	UNFIX;
 	return;
@@ -375,16 +377,16 @@ pkcs11_export(FILE * outfile, const char *url, unsigned int flags,
 
 	ret = gnutls_pkcs11_obj_export3(obj, info->outcert_format, &t);
 	if (ret < 0) {
-        	fprintf(stderr, "Error in %s:%d: %s\n", __func__,
+		fprintf(stderr, "Error in %s:%d: %s\n", __func__,
 				__LINE__, gnutls_strerror(ret));
-                exit(1);
-        }
+		exit(1);
+	}
 
 	fwrite(t.data, 1, t.size, outfile);
 	gnutls_free(t.data);
 
 	if (info->outcert_format == GNUTLS_X509_FMT_PEM)
-        	fputs("\n\n", outfile);
+		fputs("\n\n", outfile);
 
 	gnutls_pkcs11_obj_deinit(obj);
 
@@ -430,62 +432,62 @@ pkcs11_export_chain(FILE * outfile, const char *url, unsigned int flags,
 
 	ret = gnutls_x509_crt_import_pkcs11(xcrt, obj);
 	if (ret < 0) {
-        	fprintf(stderr, "Error in %s:%d: %s\n", __func__,
+		fprintf(stderr, "Error in %s:%d: %s\n", __func__,
 				__LINE__, gnutls_strerror(ret));
-                exit(1);
-        }
+		exit(1);
+	}
 
 	ret = gnutls_pkcs11_obj_export3(obj, GNUTLS_X509_FMT_PEM, &t);
 	if (ret < 0) {
-        	fprintf(stderr, "Error in %s:%d: %s\n", __func__,
+		fprintf(stderr, "Error in %s:%d: %s\n", __func__,
 				__LINE__, gnutls_strerror(ret));
-                exit(1);
-        }
+		exit(1);
+	}
 	fwrite(t.data, 1, t.size, outfile);
-       	fputs("\n\n", outfile);
-        gnutls_free(t.data);
+	fputs("\n\n", outfile);
+	gnutls_free(t.data);
 
-        gnutls_pkcs11_obj_deinit(obj);
-        
-        do {
-                ret = gnutls_pkcs11_get_raw_issuer(url, xcrt, &t, GNUTLS_X509_FMT_PEM, 0);
-        	if (ret == GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE)
-	                break;
-        	if (ret < 0) {
-                	fprintf(stderr, "Error in %s:%d: %s\n", __func__,
-		        		__LINE__, gnutls_strerror(ret));
-                        exit(1);
-                }
-                
-        	fwrite(t.data, 1, t.size, outfile);
-               	fputs("\n\n", outfile);
+	gnutls_pkcs11_obj_deinit(obj);
 
-               	gnutls_x509_crt_deinit(xcrt);
+	do {
+		ret = gnutls_pkcs11_get_raw_issuer(url, xcrt, &t, GNUTLS_X509_FMT_PEM, 0);
+		if (ret == GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE)
+			break;
+		if (ret < 0) {
+			fprintf(stderr, "Error in %s:%d: %s\n", __func__,
+					__LINE__, gnutls_strerror(ret));
+			exit(1);
+		}
 
-               	ret = gnutls_x509_crt_init(&xcrt);
-        	if (ret < 0) {
-                	fprintf(stderr, "Error in %s:%d: %s\n", __func__,
-		        		__LINE__, gnutls_strerror(ret));
-                        exit(1);
-                }
+		fwrite(t.data, 1, t.size, outfile);
+		fputs("\n\n", outfile);
 
-               	ret = gnutls_x509_crt_import(xcrt, &t, GNUTLS_X509_FMT_PEM);
-        	if (ret < 0) {
-                	fprintf(stderr, "Error in %s:%d: %s\n", __func__,
-		        		__LINE__, gnutls_strerror(ret));
-                        exit(1);
-                }
+		gnutls_x509_crt_deinit(xcrt);
 
-                gnutls_free(t.data);
-                
-                ret = gnutls_x509_crt_check_issuer(xcrt, xcrt);
-                if (ret != 0) {
-                        /* self signed */
-                        break;
-                }
-                
-        } while(1);
-        
+		ret = gnutls_x509_crt_init(&xcrt);
+		if (ret < 0) {
+			fprintf(stderr, "Error in %s:%d: %s\n", __func__,
+					__LINE__, gnutls_strerror(ret));
+			exit(1);
+		}
+
+		ret = gnutls_x509_crt_import(xcrt, &t, GNUTLS_X509_FMT_PEM);
+		if (ret < 0) {
+			fprintf(stderr, "Error in %s:%d: %s\n", __func__,
+					__LINE__, gnutls_strerror(ret));
+			exit(1);
+		}
+
+		gnutls_free(t.data);
+
+		ret = gnutls_x509_crt_check_issuer(xcrt, xcrt);
+		if (ret != 0) {
+			/* self signed */
+			break;
+		}
+
+	} while(1);
+
 	UNFIX;
 	return;
 }
@@ -838,8 +840,8 @@ pkcs11_export_pubkey(FILE * outfile, const char *url, int detailed, unsigned int
 
 	ret =
 	    gnutls_pkcs11_privkey_export_pubkey(pkey,
-					        GNUTLS_X509_FMT_PEM, &pubkey,
-					        flags);
+						GNUTLS_X509_FMT_PEM, &pubkey,
+						flags);
 	if (ret < 0) {
 		fprintf(stderr, "Error in %s:%d: %s\n", __func__, __LINE__,
 			gnutls_strerror(ret));
@@ -869,6 +871,11 @@ pkcs11_init(FILE * outfile, const char *url, const char *label,
 		exit(1);
 	}
 
+	if (label == NULL) {
+		fprintf(stderr, "error: no label provided for token initialization!\n");
+		exit(1);
+	}
+
 	if (info->so_pin != NULL)
 		pin = info->so_pin;
 	else {
@@ -884,27 +891,61 @@ pkcs11_init(FILE * outfile, const char *url, const char *label,
 
 	strcpy(so_pin, pin);
 
-	if (info->so_pin != NULL) {
-		pin = info->pin;
-	} else {
-		pin = getenv("GNUTLS_PIN");
-		if (pin == NULL && info->batch == 0)
-			pin = getpass("Enter new User's PIN: ");
-		if (pin == NULL)
-			exit(1);
-	}
-
-	if (pin[0] == '\n')
-		exit(1);
-
+	fprintf(stderr, "Initializing token... ");
 	ret = gnutls_pkcs11_token_init(url, so_pin, label);
 	if (ret < 0) {
-		fprintf(stderr, "Error in %s:%d: %s\n", __func__, __LINE__,
+		fprintf(stderr, "\nError in %s:%d: %s\n", __func__, __LINE__,
 			gnutls_strerror(ret));
 		exit(1);
 	}
+	fprintf(stderr, "done\n");
 
-	ret = gnutls_pkcs11_token_set_pin(url, NULL, pin, GNUTLS_PIN_USER);
+	fprintf(stderr, "\nToken was successfully initialized; use --initialize-pin and --initialize-so-pin to set or reset PINs\n");
+
+	return;
+}
+
+void
+pkcs11_set_pin(FILE * outfile, const char *url, common_info_st * info, unsigned so)
+{
+	int ret;
+	const char *pin;
+
+	pkcs11_common(info);
+
+	if (url == NULL) {
+		fprintf(stderr, "error: no token URL given to initialize!\n");
+		exit(1);
+	}
+
+	fprintf(stderr, "Setting token's user PIN...\n");
+
+	if (so) {
+		if (info->so_pin != NULL) {
+			pin = info->so_pin;
+		} else {
+			pin = getenv("GNUTLS_SO_PIN");
+			if (pin == NULL && info->batch == 0)
+				pin = getpass("Enter Administrators's new PIN: ");
+			if (pin == NULL)
+				exit(1);
+		}
+	} else {
+		if (info->pin != NULL) {
+			pin = info->pin;
+		} else {
+			pin = getenv("GNUTLS_PIN");
+			if (pin == NULL && info->batch == 0)
+				pin = getpass("Enter User's new PIN: ");
+			if (pin == NULL)
+				exit(1);
+		}
+	}
+
+	if (pin == NULL || pin[0] == '\n')
+		exit(1);
+
+	ret = gnutls_pkcs11_token_set_pin(url, NULL, pin, (so!=0)?GNUTLS_PIN_SO:GNUTLS_PIN_USER);
 	if (ret < 0) {
 		fprintf(stderr, "Error in %s:%d: %s\n", __func__, __LINE__,
 			gnutls_strerror(ret));
@@ -1147,7 +1188,7 @@ pkcs11_mechanism_list(FILE * outfile, const char *url, unsigned int flags,
 						      &mechanism);
 		if (ret >= 0) {
 			str = NULL;
-			if (mechanism <=
+			if (mechanism <
 			    sizeof(mech_list) / sizeof(mech_list[0]))
 				str = mech_list[mechanism];
 			if (str == NULL)
@@ -1187,6 +1228,7 @@ pkcs11_get_random(FILE * outfile, const char *url, unsigned bytes,
 	}
 
 	fwrite(output, 1, bytes, outfile);
+	free(output);
 
 	return;
 }

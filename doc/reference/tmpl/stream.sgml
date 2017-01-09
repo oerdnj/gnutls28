@@ -39,3 +39,28 @@ stream
 @Returns: 
 
 
+<!-- ##### STRUCT stream_filter_s ##### -->
+<para>
+
+</para>
+
+@next: 
+@fnct: 
+@uint8_t: 
+@tmp: 
+
+<!-- ##### STRUCT cdk_stream_s ##### -->
+<para>
+
+</para>
+
+@filters: 
+@fmode: 
+@error: 
+@blkmode: 
+@fname: 
+@fp: 
+@fp_ref: 
+@cbs: 
+@cbs_hd: 
+

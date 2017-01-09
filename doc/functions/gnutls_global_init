@@ -4,6 +4,10 @@
 
 @deftypefun {int} {gnutls_global_init} ( @var{void})
 
+Since GnuTLS 3.3.0 this function is no longer necessary to be explicitly
+called. To disable the implicit call (in a library constructor) of this
+function set the environment variable @code{GNUTLS_NO_EXPLICIT_INIT}  to 1.
+
 This function performs any required precalculations, detects
 the supported CPU capabilities and initializes the underlying
 cryptographic backend. In order to free any resources 
@@ -16,11 +20,6 @@ called as many times as @code{gnutls_global_init()} .  This is useful when
 GnuTLS is used by more than one library in an application.  This
 function can be called many times, but will only do something the
 first time.
-
-Since GnuTLS 3.3.0 this function is automatically called on library
-constructor. Since the same version this function is also thread safe.
-The automatic initialization can be avoided if the environment variable
-@code{GNUTLS_NO_EXPLICIT_INIT}  is set to be 1.
 
 A subsequent call of this function if the initial has failed will
 return the same error code.

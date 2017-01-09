@@ -20,15 +20,57 @@ keydb
 <!-- ##### SECTION Image ##### -->
 
 
+<!-- ##### STRUCT key_idx_s ##### -->
+<para>
+
+</para>
+
+@offset: 
+@keyid: 
+@fpr: 
+
 <!-- ##### TYPEDEF key_idx_t ##### -->
 <para>
 
 </para>
 
 
+<!-- ##### STRUCT key_table_s ##### -->
+<para>
+
+</para>
+
+@next: 
+@offset: 
+
 <!-- ##### TYPEDEF key_table_t ##### -->
 <para>
 
 </para>
 
+
+<!-- ##### STRUCT cdk_keydb_search_s ##### -->
+<para>
+
+</para>
+
+@off: 
+@type: 
+@cache: 
+@ncache: 
+@no_cache: 
+@idx: 
+@idx_name: 
+
+<!-- ##### STRUCT cdk_keydb_hd_s ##### -->
+<para>
+
+</para>
+
+@type: 
+@fp_ref: 
+@fp: 
+@name: 
+@secret: 
+@isopen: 
 

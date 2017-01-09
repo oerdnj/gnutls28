@@ -1,0 +1,50 @@
+<!-- ##### SECTION Title ##### -->
+decompose-internal
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### SECTION Image ##### -->
+
+
+<!-- ##### FUNCTION uc_compat_decomposition ##### -->
+<para>
+
+</para>
+
+@uc: 
+@decomposition: 
+@Returns: 
+
+
+<!-- ##### STRUCT ucs4_with_ccc ##### -->
+<para>
+
+</para>
+
+@code: 
+@ccc: 
+
+<!-- ##### FUNCTION gl_uninorm_decompose_merge_sort_inplace ##### -->
+<para>
+
+</para>
+
+@src: 
+@n: 
+@tmp: 
+
+

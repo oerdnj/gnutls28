@@ -331,6 +331,7 @@ static const int* cipher_priority_suiteb192 = _cipher_priority_suiteb192;
 static const int _cipher_priority_secure128[] = {
 	GNUTLS_CIPHER_AES_256_GCM,
 	GNUTLS_CIPHER_CAMELLIA_256_GCM,
+	GNUTLS_CIPHER_CHACHA20_POLY1305,
 	GNUTLS_CIPHER_AES_256_CBC,
 	GNUTLS_CIPHER_CAMELLIA_256_CBC,
 	GNUTLS_CIPHER_AES_256_CCM,
@@ -348,6 +349,7 @@ static const int *cipher_priority_secure128 = _cipher_priority_secure128;
 static const int _cipher_priority_secure192[] = {
 	GNUTLS_CIPHER_AES_256_GCM,
 	GNUTLS_CIPHER_CAMELLIA_256_GCM,
+	GNUTLS_CIPHER_CHACHA20_POLY1305,
 	GNUTLS_CIPHER_AES_256_CBC,
 	GNUTLS_CIPHER_CAMELLIA_256_CBC,
 	GNUTLS_CIPHER_AES_256_CCM,
@@ -573,7 +575,7 @@ gnutls_priority_set(gnutls_session_t session, gnutls_priority_t priority)
 	    session->internals.priorities.compression.algorithms == 0)
 		return gnutls_assert_val(GNUTLS_E_NO_PRIORITIES_WERE_SET);
 
-	session->internals.additional_verify_flags |= priority->additional_verify_flags;
+	ADD_PROFILE_VFLAGS(session, priority->additional_verify_flags);
 
 	return 0;
 }
@@ -945,7 +947,8 @@ static void _gnutls_update_system_priorities(void)
 		return;
 	}
 
-	if (sb.st_mtime == system_priority_last_mod) {
+	if (system_priority_buf != NULL &&
+	    sb.st_mtime == system_priority_last_mod) {
 		_gnutls_debug_log("system priority %s has not changed\n",
 				  system_priority_file);
 		return;
@@ -1122,7 +1125,7 @@ finish:
  * to common preferences.
  *
  * Unless there is a special need, use the "NORMAL" keyword to
- * apply a reasonable security level, or "NORMAL:%COMPAT" for compatibility.
+ * apply a reasonable security level, or "NORMAL:%%COMPAT" for compatibility.
  *
  * "PERFORMANCE" means all the "secure" ciphersuites are enabled,
  * limited to 128 bit ciphers and sorted by terms of speed
@@ -1194,7 +1197,7 @@ finish:
  *
  * "SECURE256:+SECURE128",
  *
- * Note that "NORMAL:%COMPAT" is the most compatible mode.
+ * Note that "NORMAL:%%COMPAT" is the most compatible mode.
  *
  * A %NULL @priorities string indicates the default priorities to be
  * used (this is available since GnuTLS 3.3.0).
@@ -1233,7 +1236,7 @@ gnutls_priority_init(gnutls_priority_t * priority_cache,
 	(*priority_cache)->min_record_version = 1;
 
 	if (priorities == NULL)
-		priorities = "NORMAL";
+		priorities = DEFAULT_PRIORITY_STRING;
 
 	darg = _gnutls_resolve_priorities(priorities);
 	if (darg == NULL) {

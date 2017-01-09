@@ -11,7 +11,8 @@
 
 This function will check the provided name against the constraints in
  @code{nc} using the RFC5280 rules. Currently this function is limited to DNS
-names and emails (of type @code{GNUTLS_SAN_DNSNAME}  and @code{GNUTLS_SAN_RFC822NAME} ).
+names, emails and IP addresses (of type @code{GNUTLS_SAN_DNSNAME} ,
+@code{GNUTLS_SAN_RFC822NAME}  and @code{GNUTLS_SAN_IPADDRESS} ).
 
 @strong{Returns:} zero if the provided name is not acceptable, and non-zero otherwise.
 

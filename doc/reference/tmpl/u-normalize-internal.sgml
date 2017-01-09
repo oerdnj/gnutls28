@@ -1,0 +1,90 @@
+<!-- ##### SECTION Title ##### -->
+u-normalize-internal
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### SECTION Image ##### -->
+
+
+<!-- ##### FUNCTION FUNC ##### -->
+<para>
+
+</para>
+
+@dest: 
+@src: 
+@Returns: 
+
+
+<!-- ##### VARIABLE shift ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE combined ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE muc ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE ret ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE old_allocated ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE new_allocated ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION if ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION sizeof ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### VARIABLE saved_errno ##### -->
+<para>
+
+</para>
+
+

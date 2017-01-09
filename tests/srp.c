@@ -27,7 +27,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#if defined(_WIN32)
+#if defined(_WIN32) || !defined(ENABLE_SRP)
 
 int main()
 {
@@ -190,7 +190,7 @@ static gnutls_session_t initialize_tls_session(const char *prio)
 
 	gnutls_credentials_set(session, GNUTLS_CRD_SRP, s_srp_cred);
 	gnutls_credentials_set(session, GNUTLS_CRD_CERTIFICATE,
-			       s_x509_cred);
+				s_x509_cred);
 
 	return session;
 }
@@ -220,7 +220,7 @@ static void server(int fd, const char *prio)
 
 	gnutls_srp_allocate_server_credentials(&s_srp_cred);
 	gnutls_srp_set_server_credentials_file(s_srp_cred, "tpasswd",
-					       "tpasswd.conf");
+						"tpasswd.conf");
 
 	gnutls_certificate_allocate_credentials(&s_x509_cred);
 	gnutls_certificate_set_x509_key_mem(s_x509_cred,
@@ -289,9 +289,7 @@ static void start(const char *prio)
 		/* parent */
 		server(fd[0], prio);
 		wait(&status);
-		if (WEXITSTATUS(status) != 0)
-			fail("Child died with status %d\n",
-			     WEXITSTATUS(status));
+		check_wait_status(status);
 	} else {
 		client(fd[1], prio);
 		exit(0);

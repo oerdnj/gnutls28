@@ -11,7 +11,7 @@
 
 @var{type}: The format of the certificates
 
-@var{tl_flags}: GNUTLS_TL_*
+@var{tl_flags}: flags from @code{gnutls_trust_list_flags_t} 
 
 @var{tl_vflags}: gnutls_certificate_verify_flags if flags specifies GNUTLS_TL_VERIFY_CRL
 

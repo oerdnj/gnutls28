@@ -55,6 +55,8 @@ Tokens:
        --list-token-urls      List the URLs available tokens
        --list-mechanisms      List all available mechanisms in a token
        --initialize           Initializes a PKCS #11 token
+       --initialize-pin       Initializes/Resets a PKCS #11 token user PIN
+       --initialize-so-pin    Initializes/Resets a PKCS #11 token security officer PIN
        --set-pin=str          Specify the PIN to use on token initialization
        --set-so-pin=str       Specify the Security Officer's PIN to use on token initialization
 
@@ -68,16 +70,35 @@ Object listing:
        --list-keys            an alias for the 'list-all-privkeys' option
        --list-all-trusted     List all available certificates marked as trusted
        --export               Export the object specified by the URL
+                                - prohibits these options:
+                                export-stapled
+                                export-chain
+                                export-pubkey
+       --export-stapled       Export the certificate object specified by the URL
+                                - prohibits these options:
+                                export
+                                export-chain
+                                export-pubkey
        --export-chain         Export the certificate specified by the URL and its chain of trust
+                                - prohibits these options:
+                                export-stapled
+                                export
+                                export-pubkey
        --export-pubkey        Export the public key for a private key
+                                - prohibits these options:
+                                export-stapled
+                                export
+                                export-chain
        --info                 List information on an available object in a token
+       --trusted              an alias for the 'mark-trusted' option
+       --distrusted           an alias for the 'mark-distrusted' option
 
 Key generation:
 
        --generate-rsa         Generate an RSA private-public key pair
        --generate-dsa         Generate a DSA private-public key pair
        --generate-ecc         Generate an ECDSA private-public key pair
-       --bits=num             Specify the number of bits for key generate
+       --bits=num             Specify the number of bits for the key generate
        --curve=str            Specify the curve used for EC key generation
        --sec-param=str        Specify the security level
 
@@ -96,26 +117,27 @@ Writing objects:
        --mark-wrap            Marks the generated key to be a wrapping key
                                 - disabled as '--no-mark-wrap'
        --mark-trusted         Marks the object to be written as trusted
+                                - prohibits the option 'mark-distrusted'
                                 - disabled as '--no-mark-trusted'
+       --mark-distrusted      When retrieving objects, it requires the objects to be distrusted
+(blacklisted)
+                                - prohibits the option 'mark-trusted'
        --mark-decrypt         Marks the object to be written for decryption
                                 - disabled as '--no-mark-decrypt'
-   -!, --mark-sign            Marks the object to be written for signature generation
+       --mark-sign            Marks the object to be written for signature generation
                                 - disabled as '--no-mark-sign'
-   -", --mark-ca              Marks the object to be written as a CA
+       --mark-ca              Marks the object to be written as a CA
                                 - disabled as '--no-mark-ca'
-   -#, --mark-private         Marks the object to be written as private
+       --mark-private         Marks the object to be written as private
                                 - disabled as '--no-mark-private'
-                                - enabled by default
-   -$, --trusted              an alias for the 'mark-trusted' option
-   -%, --ca                   an alias for the 'mark-ca' option
-   -&, --private              an alias for the 'mark-private' option
-                                - enabled by default
-   -', --secret-key=str       Provide a hex encoded secret key
-   -(, --load-privkey=file    Private key file to use
+       --ca                   an alias for the 'mark-ca' option
+       --private              an alias for the 'mark-private' option
+       --secret-key=str       Provide a hex encoded secret key
+       --load-privkey=file    Private key file to use
                                 - file must pre-exist
-   -), --load-pubkey=file     Public key file to use
+       --load-pubkey=file     Public key file to use
                                 - file must pre-exist
-   -*, --load-certificate=file Certificate file to use
+       --load-certificate=file Certificate file to use
                                 - file must pre-exist
 
 Other options:
@@ -123,26 +145,26 @@ Other options:
    -d, --debug=num            Enable debugging
                                 - it must be in the range:
                                   0 to 9999
-   -+, --outfile=str          Output file
-   -,, --login                Force (user) login to token
+       --outfile=str          Output file
+       --login                Force (user) login to token
                                 - disabled as '--no-login'
-   --, --so-login             Force security officer login to token
+       --so-login             Force security officer login to token
                                 - disabled as '--no-so-login'
-   -., --admin-login          an alias for the 'so-login' option
-   -/, --test-sign            Tests the signature operation of the provided object
-   -0, --generate-random=num  Generate random data
+       --admin-login          an alias for the 'so-login' option
+       --test-sign            Tests the signature operation of the provided object
+       --generate-random=num  Generate random data
    -8, --pkcs8                Use PKCS #8 format for private keys
-   -1, --inder                Use DER/RAW format for input
+       --inder                Use DER/RAW format for input
                                 - disabled as '--no-inder'
-   -2, --inraw                an alias for the 'inder' option
-   -3, --outder               Use DER format for output certificates, private keys, and DH parameters
+       --inraw                an alias for the 'inder' option
+       --outder               Use DER format for output certificates, private keys, and DH parameters
                                 - disabled as '--no-outder'
-   -4, --outraw               an alias for the 'outder' option
-   -5, --provider=file        Specify the PKCS #11 provider library
-   -6, --detailed-url         Print detailed URLs
+       --outraw               an alias for the 'outder' option
+       --provider=file        Specify the PKCS #11 provider library
+       --detailed-url         Print detailed URLs
                                 - disabled as '--no-detailed-url'
-   -7, --only-urls            Print a compact listing using only the URLs
-   -8, --batch                Disable all interaction with the tool
+       --only-urls            Print a compact listing using only the URLs
+       --batch                Disable all interaction with the tool
 
 Version, usage and configuration options:
 
@@ -209,16 +231,62 @@ This is an alias for the @code{list-all-privkeys} option,
 This is an alias for the @code{list-all-privkeys} option,
 @pxref{p11tool list-all-privkeys, the list-all-privkeys option documentation}.
 
+@subsubheading export-stapled option.
+@anchor{p11tool export-stapled}
+
+This is the ``export the certificate object specified by the url'' option.
+
+@noindent
+This option has some usage constraints.  It:
+@itemize @bullet
+@item
+must not appear in combination with any of the following options:
+export, export-chain, export-pubkey.
+@end itemize
+
+Exports the certificate specified by the URL while including any attached extensions to it.
+Since attached extensions are a p11-kit extension, this option is only
+available on p11-kit registered trust modules.
 @subsubheading export-chain option.
 @anchor{p11tool export-chain}
 
 This is the ``export the certificate specified by the url and its chain of trust'' option.
+
+@noindent
+This option has some usage constraints.  It:
+@itemize @bullet
+@item
+must not appear in combination with any of the following options:
+export-stapled, export, export-pubkey.
+@end itemize
+
 Exports the certificate specified by the URL and generates its chain of trust based on the stored certificates in the module.
 @subsubheading export-pubkey option.
 @anchor{p11tool export-pubkey}
 
 This is the ``export the public key for a private key'' option.
+
+@noindent
+This option has some usage constraints.  It:
+@itemize @bullet
+@item
+must not appear in combination with any of the following options:
+export-stapled, export, export-chain.
+@end itemize
+
 Exports the public key for the specified private key
+@subsubheading trusted option.
+@anchor{p11tool trusted}
+
+This is an alias for the @code{mark-trusted} option,
+@pxref{p11tool mark-trusted, the mark-trusted option documentation}.
+
+@subsubheading distrusted option.
+@anchor{p11tool distrusted}
+
+This is an alias for the @code{mark-distrusted} option,
+@pxref{p11tool mark-distrusted, the mark-distrusted option documentation}.
+
 @anchor{p11tool keygen-related-options}
 @subsection keygen-related-options options
 Key generation.
@@ -227,16 +295,27 @@ Key generation.
 
 This is the ``generate an rsa private-public key pair'' option.
 Generates an RSA private-public key pair on the specified token.
+Should be combined with --sec-param or --bits.
 @subsubheading generate-dsa option.
 @anchor{p11tool generate-dsa}
 
 This is the ``generate a dsa private-public key pair'' option.
 Generates a DSA private-public key pair on the specified token.
+Should be combined with --sec-param or --bits.
 @subsubheading generate-ecc option.
 @anchor{p11tool generate-ecc}
 
 This is the ``generate an ecdsa private-public key pair'' option.
 Generates an ECDSA private-public key pair on the specified token.
+Should be combined with --curve, --sec-param or --bits.
+@subsubheading bits option.
+@anchor{p11tool bits}
+
+This is the ``specify the number of bits for the key generate'' option.
+This option takes a number argument.
+For applications which have no key-size restrictions the
+--sec-param option is recommended, as the sec-param levels will adapt
+to the acceptable security levels with the new versions of gnutls.
 @subsubheading curve option.
 @anchor{p11tool curve}
 
@@ -286,7 +365,8 @@ Modifies or sets the CKA_LABEL in the specified by the URL object
 @anchor{p11tool write}
 
 This is the ``writes the loaded objects to a pkcs #11 token'' option.
-It can be used to write private keys, certificates or secret keys to a token. Must be combined with a --load option.
+It can be used to write private, public keys, certificates or secret keys to a token. Must be combined with
+    one of --load-privkey, --load-pubkey, --load-certificate option.
 @subsubheading id option.
 @anchor{p11tool id}
 
@@ -316,9 +396,28 @@ This option has some usage constraints.  It:
 @itemize @bullet
 @item
 can be disabled with --no-mark-trusted.
+@item
+must not appear in combination with any of the following options:
+mark-distrusted.
 @end itemize
 
 Marks the object to be generated/written with the CKA_TRUST flag.
+@subsubheading mark-distrusted option.
+@anchor{p11tool mark-distrusted}
+
+This is the ``when retrieving objects, it requires the objects to be distrusted (blacklisted)'' option.
+
+@noindent
+This option has some usage constraints.  It:
+@itemize @bullet
+@item
+must not appear in combination with any of the following options:
+mark-trusted.
+@end itemize
+
+Ensures that the objects retrieved have the CKA_X_TRUST flag.
+This is p11-kit trust module extension, thus this flag is only valid with
+p11-kit registered trust modules.
 @subsubheading mark-decrypt option.
 @anchor{p11tool mark-decrypt}
 
@@ -368,17 +467,9 @@ This option has some usage constraints.  It:
 @itemize @bullet
 @item
 can be disabled with --no-mark-private.
-@item
-It is enabled by default.
 @end itemize
 
 Marks the object to be generated/written with the CKA_PRIVATE flag. The written object will require a PIN to be used.
-@subsubheading trusted option.
-@anchor{p11tool trusted}
-
-This is an alias for the @code{mark-trusted} option,
-@pxref{p11tool mark-trusted, the mark-trusted option documentation}.
-
 @subsubheading ca option.
 @anchor{p11tool ca}
 

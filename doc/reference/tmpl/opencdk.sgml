@@ -20,34 +20,6 @@ opencdk
 <!-- ##### SECTION Image ##### -->
 
 
-<!-- ##### MACRO CDK_KEY_USG_ENCR ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO CDK_KEY_USG_SIGN ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO MAX_CDK_DATA_PARTS ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO MAX_CDK_PK_PARTS ##### -->
-<para>
-
-</para>
-
-
-
 <!-- ##### MACRO OPENCDK_VERSION ##### -->
 <para>
 
@@ -76,33 +48,85 @@ opencdk
 
 
 
-<!-- ##### STRUCT cdk_ctx_s ##### -->
-<para>
-
-</para>
-
-@cipher_algo: 
-@digest_algo: 
-@passphrase_cb: 
-@passphrase_cb_value: 
-
 <!-- ##### TYPEDEF cdk_ctx_t ##### -->
 <para>
 
 </para>
 
 
-<!-- ##### STRUCT cdk_desig_revoker_s ##### -->
+<!-- ##### TYPEDEF cdk_strlist_t ##### -->
 <para>
 
 </para>
 
-@next: 
-@r_class: 
-@algid: 
-@fpr: 
+
+<!-- ##### TYPEDEF cdk_listkey_t ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### TYPEDEF cdk_s2k_t ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### TYPEDEF cdk_stream_t ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### TYPEDEF cdk_prefitem_t ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### TYPEDEF cdk_kbnode_t ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### TYPEDEF cdk_keydb_hd_t ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### TYPEDEF cdk_keydb_search_t ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### TYPEDEF cdk_keylist_t ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### TYPEDEF cdk_subpkt_t ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### TYPEDEF cdk_keygen_ctx_t ##### -->
+<para>
+
+</para>
+
 
 <!-- ##### TYPEDEF cdk_desig_revoker_t ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### TYPEDEF cdk_mpi_t ##### -->
 <para>
 
 </para>
@@ -143,21 +167,209 @@ opencdk
 @CDK_No_Passphrase: 
 @CDK_Network_Error: 
 
-<!-- ##### STRUCT cdk_kbnode_s ##### -->
+<!-- ##### ENUM cdk_control_flags ##### -->
 <para>
 
 </para>
 
-@next: 
-@pkt: 
-@is_deleted: 
-@is_cloned: 
+@CDK_CTLF_SET: 
+@CDK_CTLF_GET: 
+@CDK_CTL_DIGEST: 
+@CDK_CTL_ARMOR: 
+@CDK_CTL_COMPRESS: 
+@CDK_CTL_COMPAT: 
+@CDK_CTL_OVERWRITE: 
+@CDK_CTL_S2K: 
+@CDK_CTL_FORCE_DIGEST: 
+@CDK_CTL_BLOCKMODE_ON: 
 
-<!-- ##### TYPEDEF cdk_kbnode_t ##### -->
+<!-- ##### ENUM cdk_log_level_t ##### -->
 <para>
 
 </para>
 
+@CDK_LOG_NONE: 
+@CDK_LOG_INFO: 
+@CDK_LOG_DEBUG: 
+@CDK_LOG_DEBUG_PKT: 
+
+<!-- ##### ENUM cdk_compress_algo_t ##### -->
+<para>
+
+</para>
+
+@CDK_COMPRESS_NONE: 
+@CDK_COMPRESS_ZIP: 
+@CDK_COMPRESS_ZLIB: 
+@CDK_COMPRESS_BZIP2: 
+
+<!-- ##### ENUM cdk_pubkey_algo_t ##### -->
+<para>
+
+</para>
+
+@CDK_PK_UNKNOWN: 
+@CDK_PK_RSA: 
+@CDK_PK_RSA_E: 
+@CDK_PK_RSA_S: 
+@CDK_PK_ELG_E: 
+@CDK_PK_DSA: 
+
+<!-- ##### ENUM cdk_s2k_type_t ##### -->
+<para>
+
+</para>
+
+@CDK_S2K_SIMPLE: 
+@CDK_S2K_SALTED: 
+@CDK_S2K_ITERSALTED: 
+@CDK_S2K_GNU_EXT: 
+
+<!-- ##### ENUM cdk_pref_type_t ##### -->
+<para>
+
+</para>
+
+@CDK_PREFTYPE_NONE: 
+@CDK_PREFTYPE_SYM: 
+@CDK_PREFTYPE_HASH: 
+@CDK_PREFTYPE_ZIP: 
+
+<!-- ##### ENUM cdk_sig_subpacket_t ##### -->
+<para>
+
+</para>
+
+@CDK_SIGSUBPKT_NONE: 
+@CDK_SIGSUBPKT_SIG_CREATED: 
+@CDK_SIGSUBPKT_SIG_EXPIRE: 
+@CDK_SIGSUBPKT_EXPORTABLE: 
+@CDK_SIGSUBPKT_TRUST: 
+@CDK_SIGSUBPKT_REGEXP: 
+@CDK_SIGSUBPKT_REVOCABLE: 
+@CDK_SIGSUBPKT_KEY_EXPIRE: 
+@CDK_SIGSUBPKT_PREFS_SYM: 
+@CDK_SIGSUBPKT_REV_KEY: 
+@CDK_SIGSUBPKT_ISSUER: 
+@CDK_SIGSUBPKT_NOTATION: 
+@CDK_SIGSUBPKT_PREFS_HASH: 
+@CDK_SIGSUBPKT_PREFS_ZIP: 
+@CDK_SIGSUBPKT_KS_FLAGS: 
+@CDK_SIGSUBPKT_PREF_KS: 
+@CDK_SIGSUBPKT_PRIMARY_UID: 
+@CDK_SIGSUBPKT_POLICY: 
+@CDK_SIGSUBPKT_KEY_FLAGS: 
+@CDK_SIGSUBPKT_SIGNERS_UID: 
+@CDK_SIGSUBPKT_REVOC_REASON: 
+@CDK_SIGSUBPKT_FEATURES: 
+
+<!-- ##### ENUM cdk_armor_type_t ##### -->
+<para>
+
+</para>
+
+@CDK_ARMOR_MESSAGE: 
+@CDK_ARMOR_PUBKEY: 
+@CDK_ARMOR_SECKEY: 
+@CDK_ARMOR_SIGNATURE: 
+@CDK_ARMOR_CLEARSIG: 
+
+<!-- ##### ENUM cdk_keydb_flag_t ##### -->
+<para>
+
+</para>
+
+@CDK_DBSEARCH_EXACT: 
+@CDK_DBSEARCH_SUBSTR: 
+@CDK_DBSEARCH_SHORT_KEYID: 
+@CDK_DBSEARCH_KEYID: 
+@CDK_DBSEARCH_FPR: 
+@CDK_DBSEARCH_NEXT: 
+@CDK_DBSEARCH_AUTO: 
+@CDK_DBTYPE_PK_KEYRING: 
+@CDK_DBTYPE_SK_KEYRING: 
+@CDK_DBTYPE_DATA: 
+
+<!-- ##### ENUM cdk_crypto_mode_t ##### -->
+<para>
+
+</para>
+
+@CDK_CRYPTYPE_NONE: 
+@CDK_CRYPTYPE_ENCRYPT: 
+@CDK_CRYPTYPE_DECRYPT: 
+@CDK_CRYPTYPE_SIGN: 
+@CDK_CRYPTYPE_VERIFY: 
+@CDK_CRYPTYPE_EXPORT: 
+@CDK_CRYPTYPE_IMPORT: 
+
+<!-- ##### MACRO CDK_KEY_USG_ENCR ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO CDK_KEY_USG_SIGN ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### ENUM cdk_key_usage_t ##### -->
+<para>
+
+</para>
+
+@CDK_KEY_USG_CERT_SIGN: 
+@CDK_KEY_USG_DATA_SIGN: 
+@CDK_KEY_USG_COMM_ENCR: 
+@CDK_KEY_USG_STORAGE_ENCR: 
+@CDK_KEY_USG_SPLIT_KEY: 
+@CDK_KEY_USG_AUTH: 
+@CDK_KEY_USG_SHARED_KEY: 
+
+<!-- ##### ENUM cdk_key_flag_t ##### -->
+<para>
+
+</para>
+
+@CDK_KEY_VALID: 
+@CDK_KEY_INVALID: 
+@CDK_KEY_EXPIRED: 
+@CDK_KEY_REVOKED: 
+@CDK_KEY_NOSIGNER: 
+
+<!-- ##### ENUM cdk_trust_flag_t ##### -->
+<para>
+
+</para>
+
+@CDK_TRUST_UNKNOWN: 
+@CDK_TRUST_EXPIRED: 
+@CDK_TRUST_UNDEFINED: 
+@CDK_TRUST_NEVER: 
+@CDK_TRUST_MARGINAL: 
+@CDK_TRUST_FULLY: 
+@CDK_TRUST_ULTIMATE: 
+@CDK_TFLAG_REVOKED: 
+@CDK_TFLAG_SUB_REVOKED: 
+@CDK_TFLAG_DISABLED: 
+
+<!-- ##### ENUM cdk_signature_stat_t ##### -->
+<para>
+
+</para>
+
+@CDK_SIGSTAT_NONE: 
+@CDK_SIGSTAT_GOOD: 
+@CDK_SIGSTAT_BAD: 
+@CDK_SIGSTAT_NOKEY: 
+@CDK_SIGSTAT_VALID: 
+@CDK_SIGMODE_NORMAL: 
+@CDK_SIGMODE_DETACHED: 
+@CDK_SIGMODE_CLEAR: 
 
 <!-- ##### ENUM cdk_key_flags_t ##### -->
 <para>
@@ -168,86 +380,6 @@ opencdk
 @CDK_FLAG_KEY_EXPIRED: 
 @CDK_FLAG_SIG_EXPIRED: 
 
-<!-- ##### STRUCT cdk_keydb_hd_s ##### -->
-<para>
-
-</para>
-
-@type: 
-@fp_ref: 
-@fp: 
-@name: 
-@secret: 
-@isopen: 
-
-<!-- ##### TYPEDEF cdk_keydb_hd_t ##### -->
-<para>
-
-</para>
-
-
-<!-- ##### STRUCT cdk_keydb_search_s ##### -->
-<para>
-
-</para>
-
-@off: 
-@type: 
-@cache: 
-@ncache: 
-@no_cache: 
-@idx: 
-@idx_name: 
-
-<!-- ##### TYPEDEF cdk_keydb_search_t ##### -->
-<para>
-
-</para>
-
-
-<!-- ##### STRUCT cdk_keygen_ctx_s ##### -->
-<para>
-
-</para>
-
-
-<!-- ##### TYPEDEF cdk_keygen_ctx_t ##### -->
-<para>
-
-</para>
-
-
-<!-- ##### STRUCT cdk_keylist_s ##### -->
-<para>
-
-</para>
-
-@next: 
-@version: 
-@type: 
-
-<!-- ##### TYPEDEF cdk_keylist_t ##### -->
-<para>
-
-</para>
-
-
-<!-- ##### STRUCT cdk_listkey_s ##### -->
-<para>
-
-</para>
-
-@inp: 
-@db: 
-@type: 
-@t: 
-
-<!-- ##### TYPEDEF cdk_listkey_t ##### -->
-<para>
-
-</para>
-
-
 <!-- ##### ENUM cdk_lit_format_t ##### -->
 <para>
 
@@ -256,12 +388,6 @@ opencdk
 @CDK_LITFMT_BINARY: 
 @CDK_LITFMT_TEXT: 
 @CDK_LITFMT_UNICODE: 
-
-<!-- ##### TYPEDEF cdk_mpi_t ##### -->
-<para>
-
-</para>
-
 
 <!-- ##### ENUM cdk_packet_type_t ##### -->
 <para>
@@ -285,6 +411,100 @@ opencdk
 @CDK_PKT_ATTRIBUTE: 
 @CDK_PKT_MDC: 
 
+<!-- ##### MACRO MAX_CDK_PK_PARTS ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO MAX_CDK_DATA_PARTS ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### STRUCT cdk_ctx_s ##### -->
+<para>
+
+</para>
+
+@cipher_algo: 
+@digest_algo: 
+@passphrase_cb: 
+@passphrase_cb_value: 
+
+<!-- ##### STRUCT cdk_desig_revoker_s ##### -->
+<para>
+
+</para>
+
+@next: 
+@r_class: 
+@algid: 
+@fpr: 
+
+<!-- ##### STRUCT cdk_kbnode_s ##### -->
+<para>
+
+</para>
+
+@next: 
+@pkt: 
+@is_deleted: 
+@is_cloned: 
+
+<!-- ##### STRUCT cdk_keydb_hd_s ##### -->
+<para>
+
+</para>
+
+@type: 
+@fp_ref: 
+@fp: 
+@name: 
+@secret: 
+@isopen: 
+
+<!-- ##### STRUCT cdk_keydb_search_s ##### -->
+<para>
+
+</para>
+
+@off: 
+@type: 
+@cache: 
+@ncache: 
+@no_cache: 
+@idx: 
+@idx_name: 
+
+<!-- ##### STRUCT cdk_keygen_ctx_s ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT cdk_keylist_s ##### -->
+<para>
+
+</para>
+
+@next: 
+@version: 
+@type: 
+
+<!-- ##### STRUCT cdk_listkey_s ##### -->
+<para>
+
+</para>
+
+@inp: 
+@db: 
+@type: 
+@t: 
+
 <!-- ##### STRUCT cdk_prefitem_s ##### -->
 <para>
 
@@ -292,12 +512,6 @@ opencdk
 
 @type: 
 @value: 
-
-<!-- ##### TYPEDEF cdk_prefitem_t ##### -->
-<para>
-
-</para>
-
 
 <!-- ##### STRUCT cdk_s2k_s ##### -->
 <para>
@@ -308,12 +522,6 @@ opencdk
 @hash_algo: 
 @salt: 
 @count: 
-
-<!-- ##### TYPEDEF cdk_s2k_t ##### -->
-<para>
-
-</para>
-
 
 <!-- ##### STRUCT cdk_stream_s ##### -->
 <para>
@@ -330,12 +538,6 @@ opencdk
 @cbs: 
 @cbs_hd: 
 
-<!-- ##### TYPEDEF cdk_stream_t ##### -->
-<para>
-
-</para>
-
-
 <!-- ##### STRUCT cdk_strlist_s ##### -->
 <para>
 
@@ -343,12 +545,6 @@ opencdk
 
 @next: 
 @d: 
-
-<!-- ##### TYPEDEF cdk_strlist_t ##### -->
-<para>
-
-</para>
-
 
 <!-- ##### STRUCT cdk_subpkt_s ##### -->
 <para>
@@ -359,10 +555,4 @@ opencdk
 @size: 
 @type: 
 @d: 
-
-<!-- ##### TYPEDEF cdk_subpkt_t ##### -->
-<para>
-
-</para>
-
 

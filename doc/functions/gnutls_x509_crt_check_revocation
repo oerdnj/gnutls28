@@ -9,7 +9,7 @@
 
 @var{crl_list_length}: the length of the crl_list
 
-This function will return check if the given certificate is
+This function will check if the given certificate is
 revoked.  It is assumed that the CRLs have been verified before.
 
 @strong{Returns:} 0 if the certificate is NOT revoked, and 1 if it is.  A

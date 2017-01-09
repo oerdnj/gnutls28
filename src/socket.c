@@ -35,7 +35,6 @@
 #include <unistd.h>
 #ifndef _WIN32
 # include <arpa/inet.h>
-# include <signal.h>
 #else
 # undef endservent
 # define endservent()
@@ -151,7 +150,7 @@ ssize_t send_line(socket_st * socket, const char *txt)
 
 	if (ret == -1) {
 		fprintf(stderr, "error sending \"%s\"\n", txt);
-		exit(1);
+		exit(2);
 	}
 
 	return ret;
@@ -161,13 +160,21 @@ static
 ssize_t wait_for_text(socket_st * socket, const char *txt, unsigned txt_size)
 {
 	char buf[1024];
-	char *p;
+	char *pbuf, *p;
 	int ret;
 	fd_set read_fds;
 	struct timeval tv;
+	size_t left, got;
+
+	if (txt_size > sizeof(buf))
+		abort();
 
 	if (socket->verbose && txt != NULL)
 		fprintf(stderr, "starttls: waiting for: \"%.*s\"\n", txt_size, txt);
+
+	pbuf = buf;
+	left = sizeof(buf)-1;
+	got = 0;
 
 	do {
 		FD_ZERO(&read_fds);
@@ -178,28 +185,37 @@ ssize_t wait_for_text(socket_st * socket, const char *txt, unsigned txt_size)
 		if (ret <= 0)
 			ret = -1;
 		else
-			ret = recv(socket->fd, buf, sizeof(buf)-1, 0);
-		if (ret == -1) {
-			fprintf(stderr, "error receiving %s\n", txt);
-			exit(1);
+			ret = recv(socket->fd, pbuf, left, 0);
+		if (ret == -1 || ret == 0) {
+			int e = errno;
+			fprintf(stderr, "error receiving %s: %s\n", txt, strerror(e));
+			exit(2);
 		}
-		buf[ret] = 0;
+		pbuf[ret] = 0;
 
 		if (txt == NULL)
 			break;
 
 		if (socket->verbose)
-			fprintf(stderr, "starttls: received: %s\n", buf);
+			fprintf(stderr, "starttls: received: %s\n", pbuf);
 
-		p = memmem(buf, ret, txt, txt_size);
-		if (p != NULL && p != buf) {
-			p--;
-			if (*p == '\n')
+		pbuf += ret;
+		left -= ret;
+		got += ret;
+
+
+		/* check for text after a newline in buffer */
+		if (got > txt_size) {
+			p = memmem(buf, got, txt, txt_size);
+			if (p != NULL && p != buf) {
+				p--;
+				if (*p == '\n' || *p == '\r')
 				break;
+			}
 		}
-	} while(ret < (int)txt_size || strncmp(buf, txt, txt_size) != 0);
+	} while(got < txt_size || strncmp(buf, txt, txt_size) != 0);
 
-	return ret;
+	return got;
 }
 
 static void
@@ -302,17 +318,23 @@ const char *starttls_proto_to_service(const char *app_proto)
 	return "443";
 }
 
-void socket_bye(socket_st * socket)
+void socket_bye(socket_st * socket, unsigned polite)
 {
 	int ret;
-	if (socket->secure) {
-		do
-			ret = gnutls_bye(socket->session, GNUTLS_SHUT_WR);
-		while (ret == GNUTLS_E_INTERRUPTED
-		       || ret == GNUTLS_E_AGAIN);
-		if (socket->verbose && ret < 0)
-			fprintf(stderr, "*** gnutls_bye() error: %s\n",
-				gnutls_strerror(ret));
+
+	if (socket->secure && socket->session) {
+		if (polite) {
+			do
+				ret = gnutls_bye(socket->session, GNUTLS_SHUT_WR);
+			while (ret == GNUTLS_E_INTERRUPTED
+			       || ret == GNUTLS_E_AGAIN);
+			if (socket->verbose && ret < 0)
+				fprintf(stderr, "*** gnutls_bye() error: %s\n",
+					gnutls_strerror(ret));
+		}
+	}
+
+	if (socket->session) {
 		gnutls_deinit(socket->session);
 		socket->session = NULL;
 	}
@@ -367,6 +389,9 @@ socket_open(socket_st * hd, const char *hostname, const char *service,
 	char *a_hostname = (char*)hostname;
 
 	memset(hd, 0, sizeof(*hd));
+
+	if (flags & SOCKET_FLAG_VERBOSE)
+		hd->verbose = 1;
 
 	if (rdata) {
 		hd->rdata.data = rdata->data;
@@ -443,19 +468,30 @@ socket_open(socket_st * hd, const char *hostname, const char *service,
 				continue;
 		}
 
-		if (!(flags & SOCKET_FLAG_RAW)) {
-			if (flags & SOCKET_FLAG_STARTTLS) {
-				socket_starttls(hd);
-			}
+		hd->fd = sd;
+		if (flags & SOCKET_FLAG_STARTTLS) {
+			hd->app_proto = app_proto;
+			socket_starttls(hd);
+			hd->app_proto = NULL;
+		}
 
+		if (!(flags & SOCKET_FLAG_SKIP_INIT)) {
 			hd->session = init_tls_session(hostname);
+			if (hd->session == NULL) {
+				fprintf(stderr, "error initializing session\n");
+				exit(1);
+			}
+		}
+
+		if (hd->session) {
 			if (hd->rdata.data) {
 				gnutls_session_set_data(hd->session, hd->rdata.data, hd->rdata.size);
 			}
 
-			hd->fd = sd;
 			gnutls_transport_set_int(hd->session, sd);
+		}
 
+		if (!(flags & SOCKET_FLAG_RAW) && !(flags & SOCKET_FLAG_SKIP_INIT)) {
 			err = do_handshake(hd);
 			if (err == GNUTLS_E_PUSH_ERROR) { /* failed connecting */
 				gnutls_deinit(hd->session);
@@ -465,8 +501,7 @@ socket_open(socket_st * hd, const char *hostname, const char *service,
 			else if (err < 0) {
 				fprintf(stderr, "*** handshake has failed: %s\n", gnutls_strerror(err));
 				exit(1);
-			} else if (hd->verbose)
-				printf("- Handshake was completed\n");
+			}
 		}
 
 		break;
@@ -484,7 +519,7 @@ socket_open(socket_st * hd, const char *hostname, const char *service,
 		exit(1);
 	}
 
-	if (flags & SOCKET_FLAG_RAW)
+	if ((flags & SOCKET_FLAG_RAW) || (flags & SOCKET_FLAG_SKIP_INIT))
 		hd->secure = 0;
 	else
 		hd->secure = 1;

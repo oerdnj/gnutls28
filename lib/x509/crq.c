@@ -255,6 +255,9 @@ gnutls_x509_crq_get_private_key_usage_period(gnutls_x509_crq_t crq,
  * @buf will be ASCII or UTF-8 encoded, depending on the certificate
  * data.
  *
+ * This function does not output a fully RFC4514 compliant string, if
+ * that is required see gnutls_x509_crq_get_dn3().
+ *
  * Returns: %GNUTLS_E_SHORT_MEMORY_BUFFER if the provided buffer is not
  *   long enough, and in that case the *@buf_size will be updated with
  *   the required size.  On success 0 is returned.
@@ -269,7 +272,7 @@ gnutls_x509_crq_get_dn(gnutls_x509_crq_t crq, char *buf, size_t * buf_size)
 
 	return _gnutls_x509_parse_dn(crq->crq,
 				     "certificationRequestInfo.subject.rdnSequence",
-				     buf, buf_size);
+				     buf, buf_size, GNUTLS_X509_DN_FLAG_COMPAT);
 }
 
 /**
@@ -281,6 +284,9 @@ gnutls_x509_crq_get_dn(gnutls_x509_crq_t crq, char *buf, size_t * buf_size)
  * request. The name will be in the form "C=xxxx,O=yyyy,CN=zzzz" as
  * described in RFC4514. The output string will be ASCII or UTF-8
  * encoded, depending on the certificate data.
+ *
+ * This function does not output a fully RFC4514 compliant string, if
+ * that is required see gnutls_x509_crq_get_dn3().
  *
  * Returns: On success, %GNUTLS_E_SUCCESS (0) is returned, otherwise a
  *   negative error value. and a negative error code on error.
@@ -296,7 +302,39 @@ int gnutls_x509_crq_get_dn2(gnutls_x509_crq_t crq, gnutls_datum_t * dn)
 
 	return _gnutls_x509_get_dn(crq->crq,
 				   "certificationRequestInfo.subject.rdnSequence",
-				   dn);
+				   dn, GNUTLS_X509_DN_FLAG_COMPAT);
+}
+
+/**
+ * gnutls_x509_crq_get_dn3:
+ * @crq: should contain a #gnutls_x509_crq_t type
+ * @dn: a pointer to a structure to hold the name
+ * @flags: zero or %GNUTLS_X509_DN_FLAG_COMPAT
+ *
+ * This function will allocate buffer and copy the name of the Certificate 
+ * request. The name will be in the form "C=xxxx,O=yyyy,CN=zzzz" as
+ * described in RFC4514. The output string will be ASCII or UTF-8
+ * encoded, depending on the certificate data.
+ *
+ * When the flag %GNUTLS_X509_DN_FLAG_COMPAT is specified, the output
+ * format will match the format output by previous to 3.5.6 versions of GnuTLS
+ * which was not not fully RFC4514-compliant.
+ *
+ * Returns: On success, %GNUTLS_E_SUCCESS (0) is returned, otherwise a
+ *   negative error value. and a negative error code on error.
+ *
+ * Since: 3.5.7
+ **/
+int gnutls_x509_crq_get_dn3(gnutls_x509_crq_t crq, gnutls_datum_t * dn, unsigned flags)
+{
+	if (crq == NULL) {
+		gnutls_assert();
+		return GNUTLS_E_INVALID_REQUEST;
+	}
+
+	return _gnutls_x509_get_dn(crq->crq,
+				   "certificationRequestInfo.subject.rdnSequence",
+				   dn, flags);
 }
 
 /**
@@ -1034,6 +1072,7 @@ gnutls_x509_crq_set_challenge_password(gnutls_x509_crq_t crq,
 				       const char *pass)
 {
 	int result;
+	char *password = NULL;
 
 	if (crq == NULL) {
 		gnutls_assert();
@@ -1051,16 +1090,29 @@ gnutls_x509_crq_set_challenge_password(gnutls_x509_crq_t crq,
 		return _gnutls_asn2err(result);
 	}
 
-	result = _gnutls_x509_encode_and_write_attribute
-	    ("1.2.840.113549.1.9.7", crq->crq,
-	     "certificationRequestInfo.attributes.?LAST", pass,
-	     strlen(pass), 1);
-	if (result < 0) {
-		gnutls_assert();
-		return result;
+	if (pass) {
+		gnutls_datum_t out;
+		result = _gnutls_utf8_password_normalize(pass, strlen(pass), &out, 0);
+		if (result < 0)
+			return gnutls_assert_val(result);
+
+		password = (char*)out.data;
 	}
 
-	return 0;
+	result = _gnutls_x509_encode_and_write_attribute
+	    ("1.2.840.113549.1.9.7", crq->crq,
+	     "certificationRequestInfo.attributes.?LAST", password,
+	     strlen(password), 1);
+	if (result < 0) {
+		gnutls_assert();
+		goto cleanup;
+	}
+
+	result = 0;
+
+ cleanup:
+	gnutls_free(password);
+	return result;
 }
 
 /**
@@ -1690,7 +1742,7 @@ gnutls_x509_crq_get_extension_data2(gnutls_x509_crq_t crq,
 	ret = 0;
  cleanup:
 	asn1_delete_structure(&c2);
- 	gnutls_free(extensions);
+	gnutls_free(extensions);
 	return ret;
 }
 
@@ -2099,6 +2151,9 @@ gnutls_x509_crq_get_extension_by_oid2(gnutls_x509_crq_t crq,
  * %GNUTLS_SAN_IPADDRESS: as a binary IP address (4 or 16 bytes)
  *
  * %GNUTLS_SAN_OTHERNAME_XMPP: as a UTF8 string
+ *
+ * Since version 3.5.7 the %GNUTLS_SAN_RFC822NAME, %GNUTLS_SAN_DNSNAME, and
+ * %GNUTLS_SAN_OTHERNAME_XMPP are converted to ACE format when necessary.
  *
  * Returns: On success, %GNUTLS_E_SUCCESS (0) is returned, otherwise a
  *   negative error value.

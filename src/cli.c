@@ -673,14 +673,23 @@ gnutls_session_t init_tls_session(const char *host)
 	} else
 		gnutls_init(&session, init_flags);
 
-	if ((ret =
-	     gnutls_priority_set_direct(session, priorities, &err)) < 0) {
-		if (ret == GNUTLS_E_INVALID_REQUEST)
-			fprintf(stderr, "Syntax error at: %s\n", err);
-		else
-			fprintf(stderr, "Error in priorities: %s\n",
-				gnutls_strerror(ret));
-		exit(1);
+	if (priorities == NULL) {
+		ret = gnutls_set_default_priority(session);
+		if (ret < 0) {
+			fprintf(stderr, "Error in setting priorities: %s\n",
+					gnutls_strerror(ret));
+			exit(1);
+		}
+	} else {
+		ret = gnutls_priority_set_direct(session, priorities, &err);
+		if (ret < 0) {
+			if (ret == GNUTLS_E_INVALID_REQUEST)
+				fprintf(stderr, "Syntax error at: %s\n", err);
+			else
+				fprintf(stderr, "Error in priorities: %s\n",
+					gnutls_strerror(ret));
+			exit(1);
+		}
 	}
 
 	/* allow the use of private ciphersuites.
@@ -742,21 +751,21 @@ gnutls_session_t init_tls_session(const char *host)
 					GNUTLS_HB_PEER_ALLOWED_TO_SEND);
 
 #ifdef ENABLE_DTLS_SRTP
-        if (HAVE_OPT(SRTP_PROFILES)) {
-                ret =
-                    gnutls_srtp_set_profile_direct(session,
-                                                   OPT_ARG(SRTP_PROFILES),
-                                                   &err);
-                if (ret == GNUTLS_E_INVALID_REQUEST)
-                        fprintf(stderr, "Syntax error at: %s\n", err);
-                else if (ret != 0)
-                        fprintf(stderr, "Error in profiles: %s\n",
-                                gnutls_strerror(ret));
-                else fprintf(stderr,"DTLS profile set to %s\n",
-                             OPT_ARG(SRTP_PROFILES));
+	if (HAVE_OPT(SRTP_PROFILES)) {
+		ret =
+		    gnutls_srtp_set_profile_direct(session,
+						   OPT_ARG(SRTP_PROFILES),
+						   &err);
+		if (ret == GNUTLS_E_INVALID_REQUEST)
+			fprintf(stderr, "Syntax error at: %s\n", err);
+		else if (ret != 0)
+			fprintf(stderr, "Error in profiles: %s\n",
+				gnutls_strerror(ret));
+		else fprintf(stderr,"DTLS profile set to %s\n",
+			     OPT_ARG(SRTP_PROFILES));
 
-                if (ret != 0) exit(1);
-        }
+		if (ret != 0) exit(1);
+	}
 #endif
 
 
@@ -908,7 +917,7 @@ static int try_resume(socket_st * hd)
 	}
 
 	printf("- Disconnecting\n");
-	socket_bye(hd);
+	socket_bye(hd, 1);
 
 	canonicalize_host(hostname, service, sizeof(service));
 
@@ -1212,17 +1221,25 @@ int main(int argc, char **argv)
 		socket_flags |= SOCKET_FLAG_UDP;
 	if (fastopen)
 		socket_flags |= SOCKET_FLAG_FASTOPEN;
+	if (verbose)
+		socket_flags |= SOCKET_FLAG_VERBOSE;
 	if (starttls)
+		socket_flags |= SOCKET_FLAG_RAW;
+	else if (HAVE_OPT(STARTTLS_PROTO))
 		socket_flags |= SOCKET_FLAG_STARTTLS;
 
 	socket_open(&hd, hostname, service, OPT_ARG(STARTTLS_PROTO), socket_flags, CONNECT_MSG, NULL);
 	hd.verbose = verbose;
 
-	if (resume != 0)
-		if (try_resume(&hd))
-			return 1;
+	if (hd.secure) {
+		printf("- Handshake was completed\n");
 
-	print_other_info(hd.session);
+		if (resume != 0)
+			if (try_resume(&hd))
+				return 1;
+
+		print_other_info(hd.session);
+	}
 
 	/* Warning!  Do not touch this text string, it is used by external
 	   programs to search for when gnutls-cli has reached this point. */
@@ -1400,9 +1417,9 @@ int main(int argc, char **argv)
 	}
 
 	if (user_term != 0)
-		socket_bye(&hd);
+		socket_bye(&hd, 1);
 	else
-		gnutls_deinit(hd.session);
+		socket_bye(&hd, 0);
 
 #ifdef ENABLE_SRP
 	if (srp_cred)
@@ -1611,8 +1628,7 @@ static void cmd_parser(int argc, char **argv)
 	fastopen = HAVE_OPT(FASTOPEN);
 #else
 	if (HAVE_OPT(FASTOPEN)) {
-		fprintf(stderr, "TCP Fast Open not supported for this OS\n");
-		exit(1);
+		fprintf(stderr, "Warning: TCP Fast Open not supported on this OS\n");
 	}
 #endif
 
@@ -1921,7 +1937,6 @@ static int cert_verify_ocsp(gnutls_session_t session)
 	}
 
 	for (it = 0; it < cert_list_size; it++) {
-		gnutls_x509_crt_init(&cert);
 		if (deinit_cert)
 			gnutls_x509_crt_deinit(cert);
 		gnutls_x509_crt_init(&cert);
@@ -1968,6 +1983,7 @@ static int cert_verify_ocsp(gnutls_session_t session)
 
 		/* verify and check the response for revoked cert */
 		ret = check_ocsp_response(cert, issuer, &resp, &nonce, verbose);
+		free(resp.data);
 		if (ret == 1)
 			ok++;
 		else if (ret == 0) {

@@ -81,6 +81,8 @@ extern "C" {
 #define GNUTLS_KP_IPSEC_IKE			"1.3.6.1.5.5.7.3.17"
 #define GNUTLS_KP_ANY				"2.5.29.37.0"
 
+#define GNUTLS_KP_FLAG_DISALLOW_ANY		1
+
 #define GNUTLS_OID_AIA				"1.3.6.1.5.5.7.1.1"
 #define GNUTLS_OID_AD_OCSP			"1.3.6.1.5.5.7.48.1"
 #define GNUTLS_OID_AD_CAISSUERS			"1.3.6.1.5.5.7.48.2"
@@ -169,6 +171,8 @@ int gnutls_x509_crt_get_issuer_dn(gnutls_x509_crt_t cert,
 				  char *buf, size_t * buf_size);
 int gnutls_x509_crt_get_issuer_dn2(gnutls_x509_crt_t cert,
 				   gnutls_datum_t * dn);
+int gnutls_x509_crt_get_issuer_dn3(gnutls_x509_crt_t cert,
+				   gnutls_datum_t * dn, unsigned flags);
 int gnutls_x509_crt_get_issuer_dn_oid(gnutls_x509_crt_t cert,
 				      unsigned indx, void *oid,
 				      size_t * oid_size);
@@ -176,9 +180,12 @@ int gnutls_x509_crt_get_issuer_dn_by_oid(gnutls_x509_crt_t cert,
 					 const char *oid, unsigned indx,
 					 unsigned int raw_flag,
 					 void *buf, size_t * buf_size);
+
 int gnutls_x509_crt_get_dn(gnutls_x509_crt_t cert, char *buf,
 			   size_t * buf_size);
 int gnutls_x509_crt_get_dn2(gnutls_x509_crt_t cert, gnutls_datum_t * dn);
+int gnutls_x509_crt_get_dn3(gnutls_x509_crt_t cert, gnutls_datum_t * dn, unsigned flags);
+
 int gnutls_x509_crt_get_dn_oid(gnutls_x509_crt_t cert, unsigned indx,
 			       void *oid, size_t * oid_size);
 int gnutls_x509_crt_get_dn_by_oid(gnutls_x509_crt_t cert,
@@ -188,8 +195,8 @@ int gnutls_x509_crt_get_dn_by_oid(gnutls_x509_crt_t cert,
 unsigned gnutls_x509_crt_check_hostname(gnutls_x509_crt_t cert,
 				   const char *hostname);
 unsigned gnutls_x509_crt_check_hostname2(gnutls_x509_crt_t cert,
-	 			    const char *hostname, unsigned int flags);
-int
+					 const char *hostname, unsigned int flags);
+unsigned
 gnutls_x509_crt_check_email(gnutls_x509_crt_t cert,
 			    const char *email, unsigned int flags);
 
@@ -321,6 +328,7 @@ int gnutls_x509_name_constraints_get_permitted(gnutls_x509_name_constraints_t nc
 int gnutls_x509_name_constraints_get_excluded(gnutls_x509_name_constraints_t nc,
 				     unsigned idx,
 				     unsigned *type, gnutls_datum_t * name);
+int gnutls_x509_cidr_to_rfc5280(const char *cidr, gnutls_datum_t *cidr_rfc5280);
 
 
 #define GNUTLS_CRL_REASON_SUPERSEEDED GNUTLS_CRL_REASON_SUPERSEDED,
@@ -660,6 +668,10 @@ int gnutls_x509_crt_get_raw_dn(gnutls_x509_crt_t cert,
  */
 int gnutls_x509_rdn_get(const gnutls_datum_t * idn,
 			char *buf, size_t * sizeof_buf);
+int
+gnutls_x509_rdn_get2(const gnutls_datum_t * idn,
+                     gnutls_datum_t *str, unsigned flags);
+
 int gnutls_x509_rdn_get_oid(const gnutls_datum_t * idn,
 			    unsigned indx, void *buf, size_t * sizeof_buf);
 
@@ -684,6 +696,10 @@ int gnutls_x509_dn_get_rdn_ava(gnutls_x509_dn_t dn, int irdn,
 			       int iava, gnutls_x509_ava_st * ava);
 
 int gnutls_x509_dn_get_str(gnutls_x509_dn_t dn, gnutls_datum_t *str);
+
+#define GNUTLS_X509_DN_FLAG_COMPAT 1
+int gnutls_x509_dn_get_str2(gnutls_x509_dn_t dn, gnutls_datum_t *str, unsigned flags);
+
 int
 gnutls_x509_dn_set_str(gnutls_x509_dn_t dn, const char *str, const char **err);
 
@@ -725,6 +741,9 @@ int gnutls_x509_crl_get_issuer_dn(gnutls_x509_crl_t crl,
 				  char *buf, size_t * sizeof_buf);
 int gnutls_x509_crl_get_issuer_dn2(gnutls_x509_crl_t crl,
 				   gnutls_datum_t * dn);
+int gnutls_x509_crl_get_issuer_dn3(gnutls_x509_crl_t crl,
+				   gnutls_datum_t * dn, unsigned flags);
+
 int gnutls_x509_crl_get_issuer_dn_by_oid(gnutls_x509_crl_t crl,
 					 const char *oid, unsigned indx,
 					 unsigned int raw_flag,
@@ -980,6 +999,9 @@ int gnutls_x509_crt_set_key_purpose_oid(gnutls_x509_crt_t cert,
 					const void *oid,
 					unsigned int critical);
 
+unsigned gnutls_x509_crt_check_key_purpose(gnutls_x509_crt_t cert,
+		const char *purpose, unsigned flags);
+
 /* Private key handling.
  */
 
@@ -1003,6 +1025,7 @@ int gnutls_x509_crt_set_key_purpose_oid(gnutls_x509_crt_t cert,
  * @GNUTLS_PKCS_PBES2_AES_192: PBES2 AES-192.
  * @GNUTLS_PKCS_PBES2_AES_256: PBES2 AES-256.
  * @GNUTLS_PKCS_PBES2_DES: PBES2 single DES.
+ * @GNUTLS_PKCS_PBES2_DES_MD5: PBES1 with single DES; for compatibility with openssl only.
  *
  * Enumeration of different PKCS encryption flags.
  */
@@ -1016,8 +1039,11 @@ typedef enum gnutls_pkcs_encrypt_flags_t {
 	GNUTLS_PKCS_PBES2_AES_192 = 1<<6,
 	GNUTLS_PKCS_PBES2_AES_256 = 1<<7,
 	GNUTLS_PKCS_NULL_PASSWORD = 1<<8,
-	GNUTLS_PKCS_PBES2_DES = 1<<9
+	GNUTLS_PKCS_PBES2_DES = 1<<9,
+	GNUTLS_PKCS_PBES1_DES_MD5 = 1<<10
 } gnutls_pkcs_encrypt_flags_t;
+
+#define GNUTLS_PKCS_CIPHER_MASK(x) ((x)&(~(GNUTLS_PKCS_NULL_PASSWORD)))
 
 #define GNUTLS_PKCS_USE_PKCS12_3DES GNUTLS_PKCS_PKCS12_3DES
 #define GNUTLS_PKCS_USE_PKCS12_ARCFOUR GNUTLS_PKCS_PKCS12_ARCFOUR
@@ -1221,6 +1247,7 @@ int gnutls_x509_crq_get_private_key_usage_period(gnutls_x509_crq_t
 int gnutls_x509_crq_get_dn(gnutls_x509_crq_t crq, char *buf,
 			   size_t * sizeof_buf);
 int gnutls_x509_crq_get_dn2(gnutls_x509_crq_t crq, gnutls_datum_t * dn);
+int gnutls_x509_crq_get_dn3(gnutls_x509_crq_t crq, gnutls_datum_t * dn, unsigned flags);
 int gnutls_x509_crq_get_dn_oid(gnutls_x509_crq_t crq, unsigned indx,
 			       void *oid, size_t * sizeof_oid);
 int gnutls_x509_crq_get_dn_by_oid(gnutls_x509_crq_t crq,
@@ -1402,12 +1429,37 @@ int gnutls_x509_trust_list_get_issuer_by_subject_key_id(gnutls_x509_trust_list_t
 				      const gnutls_datum_t *spki,
 				      gnutls_x509_crt_t *issuer,
 				      unsigned int flags);
-
+/**
+ * gnutls_trust_list_flags_t:
+ * @GNUTLS_TL_VERIFY_CRL: If any CRLs are provided they will be verified for validity
+ *   prior to be added. The CA certificates that will be used for verification are the
+ *   ones already added in the trusted list.
+ * @GNUTLS_TL_USE_IN_TLS: Internal flag used by GnuTLS. If provided the trust list
+ *   structure will cache a copy of CA DNs to be used in the certificate request
+ *   TLS message.
+ * @GNUTLS_TL_NO_DUPLICATES: If this flag is specified, a function adding certificates
+ *   will check and eliminate any duplicates.
+ * @GNUTLS_TL_NO_DUPLICATE_KEY: If this flag is specified, a certificate sharing the
+ *   same key as a previously added on will not be added.
+ * @GNUTLS_TL_GET_COPY: The semantics of this flag are documented to the functions which
+ *   are applicable. In general, on returned value, the function will provide a copy
+ *   if this flag is provided, rather than a pointer to internal data.
+ *
+ * Enumeration of different certificate trust list flags.
+ */
+typedef enum gnutls_trust_list_flags_t {
+	GNUTLS_TL_VERIFY_CRL = 1,
 #define GNUTLS_TL_VERIFY_CRL 1
+	GNUTLS_TL_USE_IN_TLS = (1<<1),
 #define GNUTLS_TL_USE_IN_TLS (1<<1)
+	GNUTLS_TL_NO_DUPLICATES = (1<<2),
 #define GNUTLS_TL_NO_DUPLICATES (1<<2)
+	GNUTLS_TL_NO_DUPLICATE_KEY = (1<<3),
 #define GNUTLS_TL_NO_DUPLICATE_KEY (1<<3)
+	GNUTLS_TL_GET_COPY = (1<<4)
 #define GNUTLS_TL_GET_COPY (1<<4)
+} gnutls_trust_list_flags_t;
+
 int
 gnutls_x509_trust_list_add_cas(gnutls_x509_trust_list_t list,
 			       const gnutls_x509_crt_t * clist,

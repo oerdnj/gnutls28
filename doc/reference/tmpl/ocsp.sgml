@@ -27,6 +27,26 @@ ocsp
 
 
 
+<!-- ##### ENUM gnutls_ocsp_print_formats_t ##### -->
+<para>
+
+</para>
+
+@GNUTLS_OCSP_PRINT_FULL: 
+@GNUTLS_OCSP_PRINT_COMPACT: 
+
+<!-- ##### ENUM gnutls_ocsp_resp_status_t ##### -->
+<para>
+
+</para>
+
+@GNUTLS_OCSP_RESP_SUCCESSFUL: 
+@GNUTLS_OCSP_RESP_MALFORMEDREQUEST: 
+@GNUTLS_OCSP_RESP_INTERNALERROR: 
+@GNUTLS_OCSP_RESP_TRYLATER: 
+@GNUTLS_OCSP_RESP_SIGREQUIRED: 
+@GNUTLS_OCSP_RESP_UNAUTHORIZED: 
+
 <!-- ##### ENUM gnutls_ocsp_cert_status_t ##### -->
 <para>
 
@@ -36,36 +56,47 @@ ocsp
 @GNUTLS_OCSP_CERT_REVOKED: 
 @GNUTLS_OCSP_CERT_UNKNOWN: 
 
-<!-- ##### ENUM gnutls_ocsp_print_formats_t ##### -->
+<!-- ##### ENUM gnutls_x509_crl_reason_t ##### -->
 <para>
 
 </para>
 
-@GNUTLS_OCSP_PRINT_FULL: 
-@GNUTLS_OCSP_PRINT_COMPACT: 
+@GNUTLS_X509_CRLREASON_UNSPECIFIED: 
+@GNUTLS_X509_CRLREASON_KEYCOMPROMISE: 
+@GNUTLS_X509_CRLREASON_CACOMPROMISE: 
+@GNUTLS_X509_CRLREASON_AFFILIATIONCHANGED: 
+@GNUTLS_X509_CRLREASON_SUPERSEDED: 
+@GNUTLS_X509_CRLREASON_CESSATIONOFOPERATION: 
+@GNUTLS_X509_CRLREASON_CERTIFICATEHOLD: 
+@GNUTLS_X509_CRLREASON_REMOVEFROMCRL: 
+@GNUTLS_X509_CRLREASON_PRIVILEGEWITHDRAWN: 
+@GNUTLS_X509_CRLREASON_AACOMPROMISE: 
 
-<!-- ##### FUNCTION gnutls_ocsp_req_add_cert ##### -->
+<!-- ##### ENUM gnutls_ocsp_verify_reason_t ##### -->
+<para>
+
+</para>
+
+@GNUTLS_OCSP_VERIFY_SIGNER_NOT_FOUND: 
+@GNUTLS_OCSP_VERIFY_SIGNER_KEYUSAGE_ERROR: 
+@GNUTLS_OCSP_VERIFY_UNTRUSTED_SIGNER: 
+@GNUTLS_OCSP_VERIFY_INSECURE_ALGORITHM: 
+@GNUTLS_OCSP_VERIFY_SIGNATURE_FAILURE: 
+@GNUTLS_OCSP_VERIFY_CERT_NOT_ACTIVATED: 
+@GNUTLS_OCSP_VERIFY_CERT_EXPIRED: 
+
+<!-- ##### TYPEDEF gnutls_ocsp_req_t ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION gnutls_ocsp_req_init ##### -->
 <para>
 
 </para>
 
 @req: 
-@digest: 
-@issuer: 
-@cert: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_ocsp_req_add_cert_id ##### -->
-<para>
-
-</para>
-
-@req: 
-@digest: 
-@issuer_name_hash: 
-@issuer_key_hash: 
-@serial_number: 
 @Returns: 
 
 
@@ -77,6 +108,16 @@ ocsp
 @req: 
 
 
+<!-- ##### FUNCTION gnutls_ocsp_req_import ##### -->
+<para>
+
+</para>
+
+@req: 
+@data: 
+@Returns: 
+
+
 <!-- ##### FUNCTION gnutls_ocsp_req_export ##### -->
 <para>
 
@@ -84,6 +125,26 @@ ocsp
 
 @req: 
 @data: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_ocsp_req_print ##### -->
+<para>
+
+</para>
+
+@req: 
+@format: 
+@out: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_ocsp_req_get_version ##### -->
+<para>
+
+</para>
+
+@req: 
 @Returns: 
 
 
@@ -101,6 +162,31 @@ ocsp
 @Returns: 
 
 
+<!-- ##### FUNCTION gnutls_ocsp_req_add_cert_id ##### -->
+<para>
+
+</para>
+
+@req: 
+@digest: 
+@issuer_name_hash: 
+@issuer_key_hash: 
+@serial_number: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_ocsp_req_add_cert ##### -->
+<para>
+
+</para>
+
+@req: 
+@digest: 
+@issuer: 
+@cert: 
+@Returns: 
+
+
 <!-- ##### FUNCTION gnutls_ocsp_req_get_extension ##### -->
 <para>
 
@@ -108,6 +194,18 @@ ocsp
 
 @req: 
 @indx: 
+@oid: 
+@critical: 
+@data: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_ocsp_req_set_extension ##### -->
+<para>
+
+</para>
+
+@req: 
 @oid: 
 @critical: 
 @data: 
@@ -125,48 +223,14 @@ ocsp
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_ocsp_req_get_version ##### -->
+<!-- ##### FUNCTION gnutls_ocsp_req_set_nonce ##### -->
 <para>
 
 </para>
 
 @req: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_ocsp_req_import ##### -->
-<para>
-
-</para>
-
-@req: 
-@data: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_ocsp_req_init ##### -->
-<para>
-
-</para>
-
-@req: 
-@Returns: 
-
-
-<!-- ##### STRUCT gnutls_ocsp_req_int ##### -->
-<para>
-
-</para>
-
-
-<!-- ##### FUNCTION gnutls_ocsp_req_print ##### -->
-<para>
-
-</para>
-
-@req: 
-@format: 
-@out: 
+@critical: 
+@nonce: 
 @Returns: 
 
 
@@ -179,43 +243,18 @@ ocsp
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_ocsp_req_set_extension ##### -->
-<para>
-
-</para>
-
-@req: 
-@oid: 
-@critical: 
-@data: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_ocsp_req_set_nonce ##### -->
-<para>
-
-</para>
-
-@req: 
-@critical: 
-@nonce: 
-@Returns: 
-
-
-<!-- ##### TYPEDEF gnutls_ocsp_req_t ##### -->
+<!-- ##### TYPEDEF gnutls_ocsp_resp_t ##### -->
 <para>
 
 </para>
 
 
-<!-- ##### FUNCTION gnutls_ocsp_resp_check_crt ##### -->
+<!-- ##### FUNCTION gnutls_ocsp_resp_init ##### -->
 <para>
 
 </para>
 
 @resp: 
-@indx: 
-@crt: 
 @Returns: 
 
 
@@ -225,6 +264,16 @@ ocsp
 </para>
 
 @resp: 
+
+
+<!-- ##### FUNCTION gnutls_ocsp_resp_import ##### -->
+<para>
+
+</para>
+
+@resp: 
+@data: 
+@Returns: 
 
 
 <!-- ##### FUNCTION gnutls_ocsp_resp_export ##### -->
@@ -237,42 +286,38 @@ ocsp
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_ocsp_resp_get_certs ##### -->
+<!-- ##### FUNCTION gnutls_ocsp_resp_print ##### -->
 <para>
 
 </para>
 
 @resp: 
-@certs: 
-@ncerts: 
+@format: 
+@out: 
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_ocsp_resp_get_extension ##### -->
+<!-- ##### FUNCTION gnutls_ocsp_resp_get_status ##### -->
 <para>
 
 </para>
 
 @resp: 
-@indx: 
-@oid: 
-@critical: 
-@data: 
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_ocsp_resp_get_nonce ##### -->
+<!-- ##### FUNCTION gnutls_ocsp_resp_get_response ##### -->
 <para>
 
 </para>
 
 @resp: 
-@critical: 
-@nonce: 
+@response_type_oid: 
+@response: 
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_ocsp_resp_get_produced ##### -->
+<!-- ##### FUNCTION gnutls_ocsp_resp_get_version ##### -->
 <para>
 
 </para>
@@ -291,28 +336,43 @@ ocsp
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_ocsp_resp_get_response ##### -->
+<!-- ##### FUNCTION gnutls_ocsp_resp_get_responder2 ##### -->
 <para>
 
 </para>
 
 @resp: 
-@response_type_oid: 
-@response: 
+@dn: 
+@flags: 
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_ocsp_resp_get_signature ##### -->
+<!-- ##### MACRO GNUTLS_OCSP_RESP_ID_KEY ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNUTLS_OCSP_RESP_ID_DN ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION gnutls_ocsp_resp_get_responder_raw_id ##### -->
 <para>
 
 </para>
 
 @resp: 
-@sig: 
+@type: 
+@raw: 
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_ocsp_resp_get_signature_algorithm ##### -->
+<!-- ##### FUNCTION gnutls_ocsp_resp_get_produced ##### -->
 <para>
 
 </para>
@@ -340,35 +400,31 @@ ocsp
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_ocsp_resp_get_status ##### -->
+<!-- ##### FUNCTION gnutls_ocsp_resp_get_extension ##### -->
 <para>
 
 </para>
 
 @resp: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_ocsp_resp_get_version ##### -->
-<para>
-
-</para>
-
-@resp: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_ocsp_resp_import ##### -->
-<para>
-
-</para>
-
-@resp: 
+@indx: 
+@oid: 
+@critical: 
 @data: 
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_ocsp_resp_init ##### -->
+<!-- ##### FUNCTION gnutls_ocsp_resp_get_nonce ##### -->
+<para>
+
+</para>
+
+@resp: 
+@critical: 
+@nonce: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_ocsp_resp_get_signature_algorithm ##### -->
 <para>
 
 </para>
@@ -377,50 +433,24 @@ ocsp
 @Returns: 
 
 
-<!-- ##### STRUCT gnutls_ocsp_resp_int ##### -->
-<para>
-
-</para>
-
-
-<!-- ##### FUNCTION gnutls_ocsp_resp_print ##### -->
+<!-- ##### FUNCTION gnutls_ocsp_resp_get_signature ##### -->
 <para>
 
 </para>
 
 @resp: 
-@format: 
-@out: 
+@sig: 
 @Returns: 
 
 
-<!-- ##### ENUM gnutls_ocsp_resp_status_t ##### -->
-<para>
-
-</para>
-
-@GNUTLS_OCSP_RESP_SUCCESSFUL: 
-@GNUTLS_OCSP_RESP_MALFORMEDREQUEST: 
-@GNUTLS_OCSP_RESP_INTERNALERROR: 
-@GNUTLS_OCSP_RESP_TRYLATER: 
-@GNUTLS_OCSP_RESP_SIGREQUIRED: 
-@GNUTLS_OCSP_RESP_UNAUTHORIZED: 
-
-<!-- ##### TYPEDEF gnutls_ocsp_resp_t ##### -->
-<para>
-
-</para>
-
-
-<!-- ##### FUNCTION gnutls_ocsp_resp_verify ##### -->
+<!-- ##### FUNCTION gnutls_ocsp_resp_get_certs ##### -->
 <para>
 
 </para>
 
 @resp: 
-@trustlist: 
-@verify: 
-@flags: 
+@certs: 
+@ncerts: 
 @Returns: 
 
 
@@ -436,32 +466,38 @@ ocsp
 @Returns: 
 
 
-<!-- ##### ENUM gnutls_ocsp_verify_reason_t ##### -->
+<!-- ##### FUNCTION gnutls_ocsp_resp_verify ##### -->
 <para>
 
 </para>
 
-@GNUTLS_OCSP_VERIFY_SIGNER_NOT_FOUND: 
-@GNUTLS_OCSP_VERIFY_SIGNER_KEYUSAGE_ERROR: 
-@GNUTLS_OCSP_VERIFY_UNTRUSTED_SIGNER: 
-@GNUTLS_OCSP_VERIFY_INSECURE_ALGORITHM: 
-@GNUTLS_OCSP_VERIFY_SIGNATURE_FAILURE: 
-@GNUTLS_OCSP_VERIFY_CERT_NOT_ACTIVATED: 
-@GNUTLS_OCSP_VERIFY_CERT_EXPIRED: 
+@resp: 
+@trustlist: 
+@verify: 
+@flags: 
+@Returns: 
 
-<!-- ##### ENUM gnutls_x509_crl_reason_t ##### -->
+
+<!-- ##### FUNCTION gnutls_ocsp_resp_check_crt ##### -->
 <para>
 
 </para>
 
-@GNUTLS_X509_CRLREASON_UNSPECIFIED: 
-@GNUTLS_X509_CRLREASON_KEYCOMPROMISE: 
-@GNUTLS_X509_CRLREASON_CACOMPROMISE: 
-@GNUTLS_X509_CRLREASON_AFFILIATIONCHANGED: 
-@GNUTLS_X509_CRLREASON_SUPERSEDED: 
-@GNUTLS_X509_CRLREASON_CESSATIONOFOPERATION: 
-@GNUTLS_X509_CRLREASON_CERTIFICATEHOLD: 
-@GNUTLS_X509_CRLREASON_REMOVEFROMCRL: 
-@GNUTLS_X509_CRLREASON_PRIVILEGEWITHDRAWN: 
-@GNUTLS_X509_CRLREASON_AACOMPROMISE: 
+@resp: 
+@indx: 
+@crt: 
+@Returns: 
+
+
+<!-- ##### STRUCT gnutls_ocsp_req_int ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT gnutls_ocsp_resp_int ##### -->
+<para>
+
+</para>
+
 

@@ -9,12 +9,10 @@ crypto
 
 </para>
 
-
 <!-- ##### SECTION See_Also ##### -->
 <para>
 
 </para>
-
 
 <!-- ##### SECTION Stability_Level ##### -->
 
@@ -22,14 +20,32 @@ crypto
 <!-- ##### SECTION Image ##### -->
 
 
-<!-- ##### FUNCTION gnutls_cipher_add_auth ##### -->
+<!-- ##### TYPEDEF gnutls_cipher_hd_t ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION gnutls_cipher_init ##### -->
+<para>
+
+</para>
+
+@handle: 
+@cipher: 
+@key: 
+@iv: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_cipher_encrypt ##### -->
 <para>
 
 </para>
 
 @handle: 
 @text: 
-@text_size: 
+@textlen: 
 @Returns: 
 
 
@@ -57,25 +73,6 @@ crypto
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_cipher_deinit ##### -->
-<para>
-
-</para>
-
-@handle: 
-
-
-<!-- ##### FUNCTION gnutls_cipher_encrypt ##### -->
-<para>
-
-</para>
-
-@handle: 
-@text: 
-@textlen: 
-@Returns: 
-
-
 <!-- ##### FUNCTION gnutls_cipher_encrypt2 ##### -->
 <para>
 
@@ -86,32 +83,6 @@ crypto
 @textlen: 
 @ciphertext: 
 @ciphertextlen: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_cipher_get_block_size ##### -->
-<para>
-
-</para>
-
-@Returns: 
-
-
-<!-- ##### TYPEDEF gnutls_cipher_hd_t ##### -->
-<para>
-
-</para>
-
-
-<!-- ##### FUNCTION gnutls_cipher_init ##### -->
-<para>
-
-</para>
-
-@handle: 
-@cipher: 
-@key: 
-@iv: 
 @Returns: 
 
 
@@ -136,32 +107,75 @@ crypto
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_hash ##### -->
+<!-- ##### FUNCTION gnutls_cipher_add_auth ##### -->
 <para>
 
 </para>
 
 @handle: 
 @text: 
-@textlen: 
+@text_size: 
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_hash_deinit ##### -->
+<!-- ##### FUNCTION gnutls_cipher_deinit ##### -->
 <para>
 
 </para>
 
 @handle: 
-@digest: 
 
 
-<!-- ##### FUNCTION gnutls_hash_get_len ##### -->
+<!-- ##### FUNCTION gnutls_cipher_get_block_size ##### -->
 <para>
 
 </para>
 
 @Returns: 
+
+
+<!-- ##### FUNCTION gnutls_aead_cipher_decrypt ##### -->
+<para>
+
+</para>
+
+@handle: 
+@nonce: 
+@nonce_len: 
+@auth: 
+@auth_len: 
+@tag_size: 
+@ctext: 
+@ctext_len: 
+@ptext: 
+@ptext_len: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_aead_cipher_encrypt ##### -->
+<para>
+
+</para>
+
+@handle: 
+@nonce: 
+@nonce_len: 
+@auth: 
+@auth_len: 
+@tag_size: 
+@ptext: 
+@ptext_len: 
+@ctext: 
+@ctext_len: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_aead_cipher_deinit ##### -->
+<para>
+
+</para>
+
+@handle: 
 
 
 <!-- ##### TYPEDEF gnutls_hash_hd_t ##### -->
@@ -170,23 +184,28 @@ crypto
 </para>
 
 
-<!-- ##### FUNCTION gnutls_hash_init ##### -->
+<!-- ##### TYPEDEF gnutls_hmac_hd_t ##### -->
 <para>
 
 </para>
 
-@dig: 
-@algorithm: 
+
+<!-- ##### FUNCTION gnutls_mac_get_nonce_size ##### -->
+<para>
+
+</para>
+
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_hash_output ##### -->
+<!-- ##### FUNCTION gnutls_hmac_set_nonce ##### -->
 <para>
 
 </para>
 
 @handle: 
-@digest: 
+@nonce: 
+@nonce_len: 
 
 
 <!-- ##### FUNCTION gnutls_hmac ##### -->
@@ -198,6 +217,15 @@ crypto
 @text: 
 @textlen: 
 @Returns: 
+
+
+<!-- ##### FUNCTION gnutls_hmac_output ##### -->
+<para>
+
+</para>
+
+@handle: 
+@digest: 
 
 
 <!-- ##### FUNCTION gnutls_hmac_deinit ##### -->
@@ -217,13 +245,28 @@ crypto
 @Returns: 
 
 
-<!-- ##### TYPEDEF gnutls_hmac_hd_t ##### -->
+<!-- ##### FUNCTION gnutls_hash_init ##### -->
 <para>
 
 </para>
 
+@dig: 
+@algorithm: 
+@Returns: 
 
-<!-- ##### FUNCTION gnutls_hmac_output ##### -->
+
+<!-- ##### FUNCTION gnutls_hash ##### -->
+<para>
+
+</para>
+
+@handle: 
+@text: 
+@textlen: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_hash_output ##### -->
 <para>
 
 </para>
@@ -231,6 +274,32 @@ crypto
 @handle: 
 @digest: 
 
+
+<!-- ##### FUNCTION gnutls_hash_deinit ##### -->
+<para>
+
+</para>
+
+@handle: 
+@digest: 
+
+
+<!-- ##### FUNCTION gnutls_hash_get_len ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### ENUM gnutls_rnd_level_t ##### -->
+<para>
+
+</para>
+
+@GNUTLS_RND_NONCE: 
+@GNUTLS_RND_RANDOM: 
+@GNUTLS_RND_KEY: 
 
 <!-- ##### FUNCTION gnutls_rnd ##### -->
 <para>
@@ -243,12 +312,351 @@ crypto
 @Returns: 
 
 
-<!-- ##### ENUM gnutls_rnd_level_t ##### -->
+<!-- ##### FUNCTION gnutls_rnd_refresh ##### -->
 <para>
 
 </para>
 
-@GNUTLS_RND_NONCE: 
-@GNUTLS_RND_RANDOM: 
-@GNUTLS_RND_KEY: 
+@void: 
+
+
+<!-- ##### USER_FUNCTION gnutls_cipher_init_func ##### -->
+<para>
+
+</para>
+
+@Param1: 
+@ctx: 
+@enc: 
+@Returns: 
+
+
+<!-- ##### USER_FUNCTION gnutls_cipher_setkey_func ##### -->
+<para>
+
+</para>
+
+@ctx: 
+@key: 
+@keysize: 
+@Returns: 
+
+
+<!-- ##### USER_FUNCTION gnutls_cipher_setiv_func ##### -->
+<para>
+
+</para>
+
+@ctx: 
+@iv: 
+@ivsize: 
+@Returns: 
+
+
+<!-- ##### USER_FUNCTION gnutls_cipher_encrypt_func ##### -->
+<para>
+
+</para>
+
+@ctx: 
+@plain: 
+@plainsize: 
+@encr: 
+@encrsize: 
+@Returns: 
+
+
+<!-- ##### USER_FUNCTION gnutls_cipher_decrypt_func ##### -->
+<para>
+
+</para>
+
+@ctx: 
+@encr: 
+@encrsize: 
+@plain: 
+@plainsize: 
+@Returns: 
+
+
+<!-- ##### USER_FUNCTION gnutls_cipher_auth_func ##### -->
+<para>
+
+</para>
+
+@ctx: 
+@data: 
+@datasize: 
+@Returns: 
+
+
+<!-- ##### USER_FUNCTION gnutls_cipher_tag_func ##### -->
+<para>
+
+</para>
+
+@ctx: 
+@tag: 
+@tagsize: 
+
+
+<!-- ##### USER_FUNCTION gnutls_cipher_aead_encrypt_func ##### -->
+<para>
+
+</para>
+
+@ctx: 
+@nonce: 
+@noncesize: 
+@auth: 
+@authsize: 
+@tag_size: 
+@plain: 
+@plainsize: 
+@encr: 
+@encrsize: 
+@Returns: 
+
+
+<!-- ##### USER_FUNCTION gnutls_cipher_aead_decrypt_func ##### -->
+<para>
+
+</para>
+
+@ctx: 
+@nonce: 
+@noncesize: 
+@auth: 
+@authsize: 
+@tag_size: 
+@encr: 
+@encrsize: 
+@plain: 
+@plainsize: 
+@Returns: 
+
+
+<!-- ##### USER_FUNCTION gnutls_cipher_deinit_func ##### -->
+<para>
+
+</para>
+
+@ctx: 
+
+
+<!-- ##### FUNCTION gnutls_crypto_register_cipher ##### -->
+<para>
+
+</para>
+
+@algorithm: 
+@priority: 
+@init: 
+@setkey: 
+@setiv: 
+@encrypt: 
+@decrypt: 
+@deinit: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_crypto_register_aead_cipher ##### -->
+<para>
+
+</para>
+
+@algorithm: 
+@priority: 
+@init: 
+@setkey: 
+@aead_encrypt: 
+@aead_decrypt: 
+@deinit: 
+@Returns: 
+
+
+<!-- ##### USER_FUNCTION gnutls_mac_init_func ##### -->
+<para>
+
+</para>
+
+@Param1: 
+@ctx: 
+@Returns: 
+
+
+<!-- ##### USER_FUNCTION gnutls_mac_setkey_func ##### -->
+<para>
+
+</para>
+
+@ctx: 
+@key: 
+@keysize: 
+@Returns: 
+
+
+<!-- ##### USER_FUNCTION gnutls_mac_setnonce_func ##### -->
+<para>
+
+</para>
+
+@ctx: 
+@nonce: 
+@noncesize: 
+@Returns: 
+
+
+<!-- ##### USER_FUNCTION gnutls_mac_hash_func ##### -->
+<para>
+
+</para>
+
+@ctx: 
+@text: 
+@textsize: 
+@Returns: 
+
+
+<!-- ##### USER_FUNCTION gnutls_mac_output_func ##### -->
+<para>
+
+</para>
+
+@src_ctx: 
+@digest: 
+@digestsize: 
+@Returns: 
+
+
+<!-- ##### USER_FUNCTION gnutls_mac_deinit_func ##### -->
+<para>
+
+</para>
+
+@ctx: 
+
+
+<!-- ##### USER_FUNCTION gnutls_mac_fast_func ##### -->
+<para>
+
+</para>
+
+@Param1: 
+@nonce: 
+@nonce_size: 
+@key: 
+@keysize: 
+@text: 
+@textsize: 
+@digest: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_crypto_register_mac ##### -->
+<para>
+
+</para>
+
+@mac: 
+@priority: 
+@init: 
+@setkey: 
+@setnonce: 
+@hash: 
+@output: 
+@deinit: 
+@hash_fast: 
+@Returns: 
+
+
+<!-- ##### USER_FUNCTION gnutls_digest_init_func ##### -->
+<para>
+
+</para>
+
+@Param1: 
+@ctx: 
+@Returns: 
+
+
+<!-- ##### USER_FUNCTION gnutls_digest_hash_func ##### -->
+<para>
+
+</para>
+
+@ctx: 
+@text: 
+@textsize: 
+@Returns: 
+
+
+<!-- ##### USER_FUNCTION gnutls_digest_output_func ##### -->
+<para>
+
+</para>
+
+@src_ctx: 
+@digest: 
+@digestsize: 
+@Returns: 
+
+
+<!-- ##### USER_FUNCTION gnutls_digest_deinit_func ##### -->
+<para>
+
+</para>
+
+@ctx: 
+
+
+<!-- ##### USER_FUNCTION gnutls_digest_fast_func ##### -->
+<para>
+
+</para>
+
+@Param1: 
+@text: 
+@textsize: 
+@digest: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_crypto_register_digest ##### -->
+<para>
+
+</para>
+
+@digest: 
+@priority: 
+@init: 
+@hash: 
+@output: 
+@deinit: 
+@hash_fast: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_encode_ber_digest_info ##### -->
+<para>
+
+</para>
+
+@hash: 
+@digest: 
+@output: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_decode_ber_digest_info ##### -->
+<para>
+
+</para>
+
+@info: 
+@hash: 
+@digest: 
+@digest_size: 
+@Returns: 
+
 

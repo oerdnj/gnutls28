@@ -98,29 +98,24 @@ int
 gnutls_x509_privkey_cpy(gnutls_x509_privkey_t dst,
 			gnutls_x509_privkey_t src)
 {
-	unsigned int i;
 	int ret;
 
 	if (!src || !dst)
 		return GNUTLS_E_INVALID_REQUEST;
 
-	for (i = 0; i < src->params.params_nr; i++) {
-		dst->params.params[i] =
-		    _gnutls_mpi_copy(src->params.params[i]);
-		if (dst->params.params[i] == NULL)
-			return GNUTLS_E_MEMORY_ERROR;
-	}
-
-	dst->params.params_nr = src->params.params_nr;
-	dst->params.flags = src->params.flags;
-
 	dst->pk_algorithm = src->pk_algorithm;
+
+	ret = _gnutls_pk_params_copy(&dst->params, &src->params);
+	if (ret < 0) {
+		return gnutls_assert_val(ret);
+	}
 
 	ret =
 	    _gnutls_asn1_encode_privkey(dst->pk_algorithm, &dst->key,
 					&dst->params, src->flags&GNUTLS_PRIVKEY_FLAG_EXPORT_COMPAT);
 	if (ret < 0) {
 		gnutls_assert();
+		gnutls_pk_params_release(&dst->params);
 		return ret;
 	}
 
@@ -140,8 +135,6 @@ _gnutls_privkey_decode_pkcs1_rsa_key(const gnutls_datum_t * raw_key,
 	int tmp_size;
 
 	gnutls_pk_params_init(&pkey->params);
-
-	pkey->params.algo = GNUTLS_PK_RSA;
 
 	if ((result =
 	     asn1_create_element(_gnutls_get_gnutls_asn(),
@@ -224,6 +217,7 @@ _gnutls_privkey_decode_pkcs1_rsa_key(const gnutls_datum_t * raw_key,
 	pkey->params.params_nr++;
 
 	pkey->params.params_nr = RSA_PRIVATE_PARAMS;
+	pkey->params.algo = GNUTLS_PK_RSA;
 
 	tmp_size = sizeof(tmp);
 	result = asn1_read_value(pkey_asn, "otherInfo", tmp, &tmp_size);
@@ -273,7 +267,6 @@ _gnutls_privkey_decode_ecc_key(ASN1_TYPE* pkey_asn, const gnutls_datum_t * raw_k
 
 	gnutls_pk_params_init(&pkey->params);
 
-	pkey->params.algo = GNUTLS_PK_EC;
 	if ((ret =
 	     asn1_create_element(_gnutls_get_gnutls_asn(),
 				 "GNUTLS.ECPrivateKey",
@@ -359,6 +352,7 @@ _gnutls_privkey_decode_ecc_key(ASN1_TYPE* pkey_asn, const gnutls_datum_t * raw_k
 		goto error;
 	}
 	pkey->params.params_nr++;
+	pkey->params.algo = GNUTLS_PK_EC;
 
 	return 0;
 
@@ -390,7 +384,6 @@ decode_dsa_key(const gnutls_datum_t * raw_key, gnutls_x509_privkey_t pkey)
 
 	gnutls_pk_params_init(&pkey->params);
 
-	pkey->params.algo = GNUTLS_PK_DSA;
 
 	result =
 	    _asn1_strict_der_decode(&dsa_asn, raw_key->data, raw_key->size,
@@ -439,6 +432,7 @@ decode_dsa_key(const gnutls_datum_t * raw_key, gnutls_x509_privkey_t pkey)
 		goto error;
 	}
 	pkey->params.params_nr++;
+	pkey->params.algo = GNUTLS_PK_DSA;
 
 	oid_size = sizeof(oid);
 	result = asn1_read_value(dsa_asn, "seed.algorithm", oid, &oid_size);
@@ -555,8 +549,8 @@ gnutls_x509_privkey_import(gnutls_x509_privkey_t key,
 				if (key->pk_algorithm == GNUTLS_PK_UNKNOWN && left >= sizeof(PEM_KEY_PKCS8)) {
 					if (memcmp(ptr, PEM_KEY_PKCS8, sizeof(PEM_KEY_PKCS8)-1) == 0) {
 						result =
-						    _gnutls_fbase64_decode(PEM_KEY_PKCS8, begin_ptr,
-							   	   left, &_data);
+							_gnutls_fbase64_decode(PEM_KEY_PKCS8,
+								begin_ptr, left, &_data);
 						if (result >= 0) {
 							/* signal for PKCS #8 keys */
 							key->pk_algorithm = -1;
@@ -758,7 +752,7 @@ gnutls_x509_privkey_import2(gnutls_x509_privkey_t key,
 				if (memcmp(ptr, PEM_KEY_RSA, sizeof(PEM_KEY_RSA)-1) == 0 ||
 				    memcmp(ptr, PEM_KEY_ECC, sizeof(PEM_KEY_ECC)-1) == 0 ||
 				    memcmp(ptr, PEM_KEY_DSA, sizeof(PEM_KEY_DSA)-1) == 0) {
-				    	head_enc = 0;
+					head_enc = 0;
 				}
 			}
 		}
@@ -788,7 +782,7 @@ gnutls_x509_privkey_import2(gnutls_x509_privkey_t key,
 		    /* use the callback if any */
 			ret = _gnutls_retrieve_pin(&key->pin, "key:", "", 0, pin, sizeof(pin));
 			if (ret == 0) {
-		    		password = pin;
+				password = pin;
 			}
 
 			ret =
@@ -1471,95 +1465,6 @@ gnutls_x509_privkey_export_dsa_raw(gnutls_x509_privkey_t key,
 	return _gnutls_params_get_dsa_raw(&key->params, p, q, g, y, x);
 }
 
-#ifdef ENABLE_FIPS140
-static int pct_test(gnutls_pk_algorithm_t algo, const gnutls_pk_params_st* params)
-{
-int ret;
-gnutls_datum_t sig = {NULL, 0};
-const char const_data[20] = "onetwothreefourfive";
-gnutls_datum_t ddata, tmp = {NULL,0};
-char* gen_data = NULL;
-
-	if (algo == GNUTLS_PK_DSA || algo == GNUTLS_PK_EC) {
-		unsigned hash_len;
-
-		_gnutls_dsa_q_to_hash(algo, params, &hash_len);
-		gen_data = gnutls_malloc(hash_len);
-		gnutls_rnd(GNUTLS_RND_NONCE, gen_data, hash_len);
-
-		ddata.data = (void*)gen_data;
-		ddata.size = hash_len;
-	} else {
-		ddata.data = (void*)const_data;
-		ddata.size = sizeof(const_data);
-	}
-
-	switch (algo) {
-	case GNUTLS_PK_RSA:
-		ret = _gnutls_pk_encrypt(algo, &sig, &ddata, params);
-		if (ret < 0) {
-			ret = gnutls_assert_val(GNUTLS_E_PK_GENERATION_ERROR);
-			goto cleanup;
-		}
-
-		if (ddata.size == sig.size && memcmp(ddata.data, sig.data, sig.size) == 0) {
-			ret = gnutls_assert_val(GNUTLS_E_PK_GENERATION_ERROR);
-			gnutls_assert();
-			goto cleanup;
-		}
-
-		ret = _gnutls_pk_decrypt(algo, &tmp, &sig, params);
-		if (ret < 0) {
-			ret = gnutls_assert_val(GNUTLS_E_PK_GENERATION_ERROR);
-			gnutls_assert();
-			goto cleanup;
-		}
-
-		if (tmp.size != ddata.size || memcmp(tmp.data, ddata.data, tmp.size) != 0) {
-			ret = gnutls_assert_val(GNUTLS_E_PK_GENERATION_ERROR);
-			gnutls_assert();
-			goto cleanup;
-		}
-
-		free(sig.data);
-		sig.data = NULL;
-
-		/* Here we don't know the purpose of the key. Check both
-		 * signing and encryption.
-		 */
-	case GNUTLS_PK_EC: /* we only do keys for ECDSA */
-	case GNUTLS_PK_DSA:
-		ret = _gnutls_pk_sign(algo, &sig, &ddata, params);
-		if (ret < 0) {
-			ret = gnutls_assert_val(GNUTLS_E_PK_GENERATION_ERROR);
-			goto cleanup;
-		}
-
-		ret = _gnutls_pk_verify(algo, &ddata, &sig, params);
-		if (ret < 0) {
-			ret = gnutls_assert_val(GNUTLS_E_PK_GENERATION_ERROR);
-			gnutls_assert();
-			goto cleanup;
-		}
-		break;
-
-	default:
-		ret = gnutls_assert_val(GNUTLS_E_UNKNOWN_PK_ALGORITHM);
-		goto cleanup;
-	}
-
-	ret = 0;
-cleanup:
-	if (ret == GNUTLS_E_PK_GENERATION_ERROR) {
-		_gnutls_switch_lib_state(LIB_STATE_ERROR);
-	}
-	gnutls_free(gen_data);
-	gnutls_free(sig.data);
-	gnutls_free(tmp.data);
-	return ret;
-}
-#endif
-
 /**
  * gnutls_x509_privkey_generate:
  * @key: an initialized key
@@ -1665,11 +1570,8 @@ gnutls_x509_privkey_generate2(gnutls_x509_privkey_t key,
 		gnutls_assert();
 		goto cleanup;
 	}
-#ifndef ENABLE_FIPS140
+
 	ret = _gnutls_pk_verify_priv_params(algo, &key->params);
-#else
-	ret = pct_test(algo, &key->params);
-#endif
 	if (ret < 0) {
 		gnutls_assert();
 		goto cleanup;
@@ -1784,17 +1686,17 @@ int cmp_rsa_key(gnutls_x509_privkey_t key1, gnutls_x509_privkey_t key2)
 
 	ret = 0;
  cleanup:
-      	gnutls_free(m1.data);
-      	gnutls_free(e1.data);
-      	gnutls_free(d1.data);
-      	gnutls_free(p1.data);
-      	gnutls_free(q1.data);
-      	gnutls_free(m2.data);
-      	gnutls_free(e2.data);
-      	gnutls_free(d2.data);
-      	gnutls_free(p2.data);
-      	gnutls_free(q2.data);
- 	return ret;
+	gnutls_free(m1.data);
+	gnutls_free(e1.data);
+	gnutls_free(d1.data);
+	gnutls_free(p1.data);
+	gnutls_free(q1.data);
+	gnutls_free(m2.data);
+	gnutls_free(e2.data);
+	gnutls_free(d2.data);
+	gnutls_free(p2.data);
+	gnutls_free(q2.data);
+	return ret;
 }
 
 static
@@ -1836,13 +1738,13 @@ int cmp_dsa_key(gnutls_x509_privkey_t key1, gnutls_x509_privkey_t key2)
 
 	ret = 0;
  cleanup:
-      	gnutls_free(g1.data);
-      	gnutls_free(p1.data);
-      	gnutls_free(q1.data);
-      	gnutls_free(g2.data);
-      	gnutls_free(p2.data);
-      	gnutls_free(q2.data);
- 	return ret;
+	gnutls_free(g1.data);
+	gnutls_free(p1.data);
+	gnutls_free(q1.data);
+	gnutls_free(g2.data);
+	gnutls_free(p2.data);
+	gnutls_free(q2.data);
+	return ret;
 }
 
 /**
@@ -1909,7 +1811,7 @@ int gnutls_x509_privkey_verify_seed(gnutls_x509_privkey_t key, gnutls_digest_alg
 		ret = cmp_dsa_key(key, okey);
 
       cleanup:
-        gnutls_x509_privkey_deinit(okey);
+	gnutls_x509_privkey_deinit(okey);
 
 	return ret;
 }
@@ -2224,7 +2126,7 @@ void gnutls_x509_privkey_set_pin_function(gnutls_x509_privkey_t privkey,
  *
  **/
 void gnutls_x509_privkey_set_flags(gnutls_x509_privkey_t key,
- 			      	   unsigned int flags)
+				   unsigned int flags)
 {
 	key->flags |= flags;
 }

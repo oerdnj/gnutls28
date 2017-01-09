@@ -20,6 +20,9 @@ handshakes. If no hostname is provided, no hostname verification
 will be performed. For a more advanced verification function check
 @code{gnutls_session_set_verify_cert2()} .
 
+If  @code{flags} is provided which contain a profile, this function should be
+called after any session priority setting functions.
+
 The @code{gnutls_session_set_verify_cert()}  function is intended to be used by TLS
 clients to verify the server's certificate.
 

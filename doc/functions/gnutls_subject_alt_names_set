@@ -14,6 +14,9 @@
 This function will store the specified alternative name in
 the  @code{sans} .
 
+Since version 3.5.7 the @code{GNUTLS_SAN_RFC822NAME} , @code{GNUTLS_SAN_DNSNAME} , and
+@code{GNUTLS_SAN_OTHERNAME_XMPP}  are converted to ACE format when necessary.
+
 @strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (0), otherwise a negative error value.
 
 @strong{Since:} 3.3.0

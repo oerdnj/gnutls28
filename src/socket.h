@@ -5,6 +5,8 @@
 #define SOCKET_FLAG_FASTOPEN (1<<1)
 #define SOCKET_FLAG_STARTTLS (1<<2)
 #define SOCKET_FLAG_RAW (1<<3) /* unencrypted */
+#define SOCKET_FLAG_VERBOSE (1<<4)
+#define SOCKET_FLAG_SKIP_INIT (1<<5)
 
 
 typedef struct {
@@ -43,7 +45,7 @@ void
 socket_open(socket_st * hd, const char *hostname, const char *service,
 	    const char *app_proto, int flags, const char *msg, gnutls_datum_t *rdata);
 
-void socket_bye(socket_st * socket);
+void socket_bye(socket_st * socket, unsigned polite);
 
 int service_to_port(const char *service, const char *proto);
 const char *port_to_service(const char *sport, const char *proto);

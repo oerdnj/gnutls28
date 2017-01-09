@@ -1,0 +1,32 @@
+<!-- ##### SECTION Title ##### -->
+normalize-internal
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### SECTION Image ##### -->
+
+
+<!-- ##### STRUCT unicode_normalization_form ##### -->
+<para>
+
+</para>
+
+@description: 
+@decomposer: 
+@composer: 
+@decomposing_variant: 
+

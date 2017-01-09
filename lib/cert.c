@@ -43,7 +43,7 @@
 #ifdef ENABLE_OPENPGP
 #include "openpgp/openpgp.h"
 #endif
-#include "str.h"
+#include "dh.h"
 
 /**
  * gnutls_certificate_free_keys:
@@ -63,6 +63,7 @@ void gnutls_certificate_free_keys(gnutls_certificate_credentials_t sc)
 			gnutls_pcert_deinit(&sc->certs[i].cert_list[j]);
 		}
 		gnutls_free(sc->certs[i].cert_list);
+		gnutls_free(sc->certs[i].ocsp_response_file);
 		_gnutls_str_array_clear(&sc->certs[i].names);
 	}
 
@@ -135,7 +136,8 @@ gnutls_certificate_get_issuer(gnutls_certificate_credentials_t sc,
  * This function will return the DER encoded certificate of the
  * server or any other certificate on its certificate chain (based on @idx2).
  * The returned data should be treated as constant and only accessible during the lifetime
- * of @sc.
+ * of @sc. The @idx1 matches the value gnutls_certificate_set_x509_key() and friends
+ * functions.
  *
  * Returns: On success, %GNUTLS_E_SUCCESS (0) is returned, otherwise a
  *   negative error value. In case the indexes are out of bounds %GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE
@@ -199,11 +201,13 @@ gnutls_certificate_free_credentials(gnutls_certificate_credentials_t sc)
 {
 	gnutls_x509_trust_list_deinit(sc->tlist, 1);
 	gnutls_certificate_free_keys(sc);
-	gnutls_free(sc->ocsp_response_file);
 	memset(sc->pin_tmp, 0, sizeof(sc->pin_tmp));
 #ifdef ENABLE_OPENPGP
 	gnutls_openpgp_keyring_deinit(sc->keyring);
 #endif
+	if (sc->deinit_dh_params) {
+		gnutls_dh_params_deinit(sc->dh_params);
+	}
 
 	gnutls_free(sc);
 }
@@ -237,6 +241,59 @@ gnutls_certificate_allocate_credentials(gnutls_certificate_credentials_t *
 	(*res)->verify_bits = DEFAULT_MAX_VERIFY_BITS;
 	(*res)->verify_depth = DEFAULT_MAX_VERIFY_DEPTH;
 
+
+	return 0;
+}
+
+/* Returns 0 if it's ok to use the gnutls_kx_algorithm_t with this 
+ * certificate (uses the KeyUsage field). 
+ */
+static int
+check_key_usage(const gnutls_pcert_st * cert,
+		gnutls_kx_algorithm_t alg)
+{
+	unsigned int key_usage = 0;
+	int encipher_type;
+
+	if (cert == NULL || alg == GNUTLS_KX_UNKNOWN) {
+		gnutls_assert();
+		return GNUTLS_E_INTERNAL_ERROR;
+	}
+
+	if (_gnutls_map_kx_get_cred(alg, 1) == GNUTLS_CRD_CERTIFICATE ||
+	    _gnutls_map_kx_get_cred(alg, 0) == GNUTLS_CRD_CERTIFICATE) {
+
+		gnutls_pubkey_get_key_usage(cert->pubkey, &key_usage);
+
+		encipher_type = _gnutls_kx_encipher_type(alg);
+
+		if (key_usage != 0 && encipher_type != CIPHER_IGN) {
+			/* If key_usage has been set in the certificate
+			 */
+
+			if (encipher_type == CIPHER_ENCRYPT) {
+				/* If the key exchange method requires an encipher
+				 * type algorithm, and key's usage does not permit
+				 * encipherment, then fail.
+				 */
+				if (!(key_usage & GNUTLS_KEY_KEY_ENCIPHERMENT)) {
+					gnutls_assert();
+					return
+					    GNUTLS_E_KEY_USAGE_VIOLATION;
+				}
+			}
+
+			if (encipher_type == CIPHER_SIGN) {
+				/* The same as above, but for sign only keys
+				 */
+				if (!(key_usage & GNUTLS_KEY_DIGITAL_SIGNATURE)) {
+					gnutls_assert();
+					return
+					    GNUTLS_E_KEY_USAGE_VIOLATION;
+				}
+			}
+		}
+	}
 	return 0;
 }
 
@@ -267,10 +324,10 @@ _gnutls_selected_cert_supported_kx(gnutls_session_t session,
 	i = 0;
 
 	for (kx = 0; kx < MAX_ALGOS; kx++) {
-		pk = _gnutls_map_pk_get_pk(kx);
+		pk = _gnutls_map_kx_get_pk(kx);
 		if (pk == cert_pk) {
 			/* then check key usage */
-			if (_gnutls_check_key_usage(cert, kx) == 0 ||
+			if (check_key_usage(cert, kx) == 0 ||
 			    unlikely(session->internals.priorities.allow_server_key_usage_violation != 0)) {
 				alg[i] = kx;
 				i++;
@@ -1015,7 +1072,50 @@ void
 gnutls_certificate_set_dh_params(gnutls_certificate_credentials_t res,
 				 gnutls_dh_params_t dh_params)
 {
+	if (res->deinit_dh_params) {
+		res->deinit_dh_params = 0;
+		gnutls_dh_params_deinit(res->dh_params);
+		res->dh_params = NULL;
+	}
+
 	res->dh_params = dh_params;
+}
+
+
+/**
+ * gnutls_certificate_set_known_dh_params:
+ * @res: is a gnutls_certificate_credentials_t type
+ * @sec_param: is an option of the %gnutls_sec_param_t enumeration
+ *
+ * This function will set the Diffie-Hellman parameters for a
+ * certificate server to use. These parameters will be used in
+ * Ephemeral Diffie-Hellman cipher suites and will be selected from
+ * the FFDHE set of RFC7919 according to the security level provided.
+ *
+ * Returns: On success, %GNUTLS_E_SUCCESS (0) is returned, otherwise a
+ *   negative error value.
+ *
+ * Since: 3.5.6
+ **/
+int
+gnutls_certificate_set_known_dh_params(gnutls_certificate_credentials_t res,
+				       gnutls_sec_param_t sec_param)
+{
+	int ret;
+
+	if (res->deinit_dh_params) {
+		res->deinit_dh_params = 0;
+		gnutls_dh_params_deinit(res->dh_params);
+		res->dh_params = NULL;
+	}
+
+	ret = _gnutls_set_cred_dh_params(&res->dh_params, sec_param);
+	if (ret < 0)
+		return gnutls_assert_val(ret);
+
+	res->deinit_dh_params = 1;
+
+	return 0;
 }
 
 #endif				/* DH */

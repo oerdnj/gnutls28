@@ -121,8 +121,8 @@ TESTS = test-alloca-opt$(EXEEXT) test-binary-io.sh \
 	test-ftello.sh test-ftello2.sh test-ftello3$(EXEEXT) \
 	test-ftello4.sh test-func$(EXEEXT) test-fwrite$(EXEEXT) \
 	test-getdelim$(EXEEXT) test-getline$(EXEEXT) \
-	test-gettimeofday$(EXEEXT) test-iconv$(EXEEXT) \
-	test-intprops$(EXEEXT) test-inttypes$(EXEEXT) \
+	test-gettimeofday$(EXEEXT) test-intprops$(EXEEXT) \
+	test-inttypes$(EXEEXT) test-limits-h$(EXEEXT) \
 	test-memchr$(EXEEXT) test-netdb$(EXEEXT) \
 	test-netinet_in$(EXEEXT) test-read-file$(EXEEXT) \
 	test-snprintf$(EXEEXT) test-stdalign$(EXEEXT) \
@@ -148,8 +148,8 @@ check_PROGRAMS = test-alloca-opt$(EXEEXT) test-binary-io$(EXEEXT) \
 	test-ftello3$(EXEEXT) test-ftello4$(EXEEXT) test-func$(EXEEXT) \
 	test-fwrite$(EXEEXT) test-getdelim$(EXEEXT) \
 	test-getline$(EXEEXT) test-gettimeofday$(EXEEXT) \
-	test-iconv$(EXEEXT) test-intprops$(EXEEXT) \
-	test-inttypes$(EXEEXT) test-memchr$(EXEEXT) \
+	test-intprops$(EXEEXT) test-inttypes$(EXEEXT) \
+	test-limits-h$(EXEEXT) test-memchr$(EXEEXT) \
 	test-netdb$(EXEEXT) test-netinet_in$(EXEEXT) \
 	test-read-file$(EXEEXT) test-snprintf$(EXEEXT) \
 	test-stdalign$(EXEEXT) test-stdbool$(EXEEXT) \
@@ -165,17 +165,24 @@ check_PROGRAMS = test-alloca-opt$(EXEEXT) test-binary-io$(EXEEXT) \
 	test-wchar$(EXEEXT)
 subdir = gl/tests
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
-am__aclocal_m4_deps = $(top_srcdir)/src/gl/m4/arpa_inet_h.m4 \
+am__aclocal_m4_deps = $(top_srcdir)/lib/unistring/m4/gnulib-comp.m4 \
+	$(top_srcdir)/lib/unistring/m4/inline.m4 \
+	$(top_srcdir)/lib/unistring/m4/libunistring-base.m4 \
+	$(top_srcdir)/src/gl/m4/arpa_inet_h.m4 \
 	$(top_srcdir)/src/gl/m4/bison.m4 \
 	$(top_srcdir)/src/gl/m4/clock_time.m4 \
 	$(top_srcdir)/src/gl/m4/close.m4 \
+	$(top_srcdir)/src/gl/m4/dirname.m4 \
+	$(top_srcdir)/src/gl/m4/double-slash-root.m4 \
 	$(top_srcdir)/src/gl/m4/dup2.m4 \
 	$(top_srcdir)/src/gl/m4/eealloc.m4 \
 	$(top_srcdir)/src/gl/m4/environ.m4 \
 	$(top_srcdir)/src/gl/m4/error.m4 \
+	$(top_srcdir)/src/gl/m4/flexmember.m4 \
 	$(top_srcdir)/src/gl/m4/fseek.m4 \
 	$(top_srcdir)/src/gl/m4/getaddrinfo.m4 \
 	$(top_srcdir)/src/gl/m4/getpass.m4 \
+	$(top_srcdir)/src/gl/m4/getprogname.m4 \
 	$(top_srcdir)/src/gl/m4/gettime.m4 \
 	$(top_srcdir)/src/gl/m4/gnulib-comp.m4 \
 	$(top_srcdir)/src/gl/m4/hostent.m4 \
@@ -192,7 +199,10 @@ am__aclocal_m4_deps = $(top_srcdir)/src/gl/m4/arpa_inet_h.m4 \
 	$(top_srcdir)/src/gl/m4/sockets.m4 \
 	$(top_srcdir)/src/gl/m4/strdup.m4 \
 	$(top_srcdir)/src/gl/m4/strerror.m4 \
+	$(top_srcdir)/src/gl/m4/strftime.m4 \
 	$(top_srcdir)/src/gl/m4/sys_select_h.m4 \
+	$(top_srcdir)/src/gl/m4/time_rz.m4 \
+	$(top_srcdir)/src/gl/m4/timegm.m4 \
 	$(top_srcdir)/src/gl/m4/timespec.m4 \
 	$(top_srcdir)/src/gl/m4/tm_gmtoff.m4 \
 	$(top_srcdir)/src/gl/m4/xalloc.m4 \
@@ -216,11 +226,17 @@ am__aclocal_m4_deps = $(top_srcdir)/src/gl/m4/arpa_inet_h.m4 \
 	$(top_srcdir)/gl/m4/gnulib-comp.m4 \
 	$(top_srcdir)/gl/m4/include_next.m4 \
 	$(top_srcdir)/gl/m4/intmax_t.m4 \
+	$(top_srcdir)/gl/m4/inttypes-pri.m4 \
 	$(top_srcdir)/gl/m4/inttypes.m4 \
+	$(top_srcdir)/gl/m4/inttypes_h.m4 \
 	$(top_srcdir)/gl/m4/largefile.m4 \
 	$(top_srcdir)/gl/m4/ld-output-def.m4 \
 	$(top_srcdir)/gl/m4/ld-version-script.m4 \
-	$(top_srcdir)/gl/m4/lseek.m4 $(top_srcdir)/gl/m4/malloc.m4 \
+	$(top_srcdir)/gl/m4/lib-ld.m4 $(top_srcdir)/gl/m4/lib-link.m4 \
+	$(top_srcdir)/gl/m4/lib-prefix.m4 \
+	$(top_srcdir)/gl/m4/limits-h.m4 \
+	$(top_srcdir)/gl/m4/longlong.m4 $(top_srcdir)/gl/m4/lseek.m4 \
+	$(top_srcdir)/gl/m4/malloc.m4 \
 	$(top_srcdir)/gl/m4/manywarnings.m4 \
 	$(top_srcdir)/gl/m4/memchr.m4 $(top_srcdir)/gl/m4/memmem.m4 \
 	$(top_srcdir)/gl/m4/minmax.m4 $(top_srcdir)/gl/m4/mmap-anon.m4 \
@@ -234,12 +250,14 @@ am__aclocal_m4_deps = $(top_srcdir)/src/gl/m4/arpa_inet_h.m4 \
 	$(top_srcdir)/gl/m4/printf.m4 $(top_srcdir)/gl/m4/read-file.m4 \
 	$(top_srcdir)/gl/m4/realloc.m4 \
 	$(top_srcdir)/gl/m4/secure_getenv.m4 \
+	$(top_srcdir)/gl/m4/size_max.m4 \
 	$(top_srcdir)/gl/m4/snprintf.m4 $(top_srcdir)/gl/m4/socklen.m4 \
 	$(top_srcdir)/gl/m4/sockpfaf.m4 $(top_srcdir)/gl/m4/ssize_t.m4 \
 	$(top_srcdir)/gl/m4/stdalign.m4 $(top_srcdir)/gl/m4/stdbool.m4 \
 	$(top_srcdir)/gl/m4/stddef_h.m4 $(top_srcdir)/gl/m4/stdint.m4 \
-	$(top_srcdir)/gl/m4/stdio_h.m4 $(top_srcdir)/gl/m4/stdlib_h.m4 \
-	$(top_srcdir)/gl/m4/strcase.m4 $(top_srcdir)/gl/m4/string_h.m4 \
+	$(top_srcdir)/gl/m4/stdint_h.m4 $(top_srcdir)/gl/m4/stdio_h.m4 \
+	$(top_srcdir)/gl/m4/stdlib_h.m4 $(top_srcdir)/gl/m4/strcase.m4 \
+	$(top_srcdir)/gl/m4/string_h.m4 \
 	$(top_srcdir)/gl/m4/strings_h.m4 \
 	$(top_srcdir)/gl/m4/strndup.m4 $(top_srcdir)/gl/m4/strnlen.m4 \
 	$(top_srcdir)/gl/m4/strtok_r.m4 \
@@ -257,22 +275,15 @@ am__aclocal_m4_deps = $(top_srcdir)/src/gl/m4/arpa_inet_h.m4 \
 	$(top_srcdir)/gl/m4/vsnprintf.m4 \
 	$(top_srcdir)/gl/m4/warn-on-use.m4 \
 	$(top_srcdir)/gl/m4/warnings.m4 $(top_srcdir)/gl/m4/wchar_h.m4 \
+	$(top_srcdir)/gl/m4/wchar_t.m4 $(top_srcdir)/gl/m4/wint_t.m4 \
+	$(top_srcdir)/gl/m4/xsize.m4 \
 	$(top_srcdir)/m4/ax_code_coverage.m4 \
 	$(top_srcdir)/m4/extern-inline.m4 $(top_srcdir)/m4/fcntl-o.m4 \
-	$(top_srcdir)/m4/gettext.m4 $(top_srcdir)/m4/gtk-doc.m4 \
-	$(top_srcdir)/m4/guile.m4 $(top_srcdir)/m4/hooks.m4 \
-	$(top_srcdir)/m4/iconv.m4 $(top_srcdir)/m4/intlmacosx.m4 \
-	$(top_srcdir)/m4/inttypes-pri.m4 \
-	$(top_srcdir)/m4/inttypes_h.m4 $(top_srcdir)/m4/lib-ld.m4 \
-	$(top_srcdir)/m4/lib-link.m4 $(top_srcdir)/m4/lib-prefix.m4 \
-	$(top_srcdir)/m4/libtool.m4 $(top_srcdir)/m4/longlong.m4 \
+	$(top_srcdir)/m4/gtk-doc.m4 $(top_srcdir)/m4/guile.m4 \
+	$(top_srcdir)/m4/hooks.m4 $(top_srcdir)/m4/libtool.m4 \
 	$(top_srcdir)/m4/ltoptions.m4 $(top_srcdir)/m4/ltsugar.m4 \
 	$(top_srcdir)/m4/ltversion.m4 $(top_srcdir)/m4/lt~obsolete.m4 \
-	$(top_srcdir)/m4/nls.m4 $(top_srcdir)/m4/pkg.m4 \
-	$(top_srcdir)/m4/po.m4 $(top_srcdir)/m4/progtest.m4 \
-	$(top_srcdir)/m4/size_max.m4 $(top_srcdir)/m4/stdint_h.m4 \
-	$(top_srcdir)/m4/wchar_t.m4 $(top_srcdir)/m4/wint_t.m4 \
-	$(top_srcdir)/m4/xsize.m4 $(top_srcdir)/configure.ac
+	$(top_srcdir)/m4/pkg.m4 $(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 DIST_COMMON = $(srcdir)/Makefile.am $(noinst_HEADERS) \
@@ -410,11 +421,6 @@ test_gettimeofday_OBJECTS = test-gettimeofday.$(OBJEXT)
 test_gettimeofday_LDADD = $(LDADD)
 test_gettimeofday_DEPENDENCIES = libtests.a ../../gl/libgnu.la \
 	libtests.a $(am__DEPENDENCIES_1)
-test_iconv_SOURCES = test-iconv.c
-test_iconv_OBJECTS = test-iconv.$(OBJEXT)
-am__DEPENDENCIES_2 = libtests.a ../../gl/libgnu.la libtests.a \
-	$(am__DEPENDENCIES_1)
-test_iconv_DEPENDENCIES = $(am__DEPENDENCIES_2)
 test_intprops_SOURCES = test-intprops.c
 test_intprops_OBJECTS = test-intprops.$(OBJEXT)
 test_intprops_LDADD = $(LDADD)
@@ -424,6 +430,11 @@ test_inttypes_SOURCES = test-inttypes.c
 test_inttypes_OBJECTS = test-inttypes.$(OBJEXT)
 test_inttypes_LDADD = $(LDADD)
 test_inttypes_DEPENDENCIES = libtests.a ../../gl/libgnu.la libtests.a \
+	$(am__DEPENDENCIES_1)
+test_limits_h_SOURCES = test-limits-h.c
+test_limits_h_OBJECTS = test-limits-h.$(OBJEXT)
+test_limits_h_LDADD = $(LDADD)
+test_limits_h_DEPENDENCIES = libtests.a ../../gl/libgnu.la libtests.a \
 	$(am__DEPENDENCIES_1)
 test_memchr_SOURCES = test-memchr.c
 test_memchr_OBJECTS = test-memchr.$(OBJEXT)
@@ -601,8 +612,8 @@ SOURCES = $(libtests_a_SOURCES) $(EXTRA_libtests_a_SOURCES) \
 	test-fread.c test-fstat.c test-ftell.c test-ftell3.c \
 	test-ftello.c test-ftello3.c test-ftello4.c test-func.c \
 	test-fwrite.c test-getdelim.c test-getline.c \
-	test-gettimeofday.c test-iconv.c test-intprops.c \
-	test-inttypes.c test-memchr.c test-netdb.c test-netinet_in.c \
+	test-gettimeofday.c test-intprops.c test-inttypes.c \
+	test-limits-h.c test-memchr.c test-netdb.c test-netinet_in.c \
 	test-read-file.c test-snprintf.c test-stdalign.c \
 	test-stdbool.c test-stddef.c test-stdint.c test-stdio.c \
 	test-stdlib.c test-string.c test-strings.c test-strnlen.c \
@@ -617,8 +628,8 @@ DIST_SOURCES = $(libtests_a_SOURCES) $(EXTRA_libtests_a_SOURCES) \
 	test-fread.c test-fstat.c test-ftell.c test-ftell3.c \
 	test-ftello.c test-ftello3.c test-ftello4.c test-func.c \
 	test-fwrite.c test-getdelim.c test-getline.c \
-	test-gettimeofday.c test-iconv.c test-intprops.c \
-	test-inttypes.c test-memchr.c test-netdb.c test-netinet_in.c \
+	test-gettimeofday.c test-intprops.c test-inttypes.c \
+	test-limits-h.c test-memchr.c test-netdb.c test-netinet_in.c \
 	test-read-file.c test-snprintf.c test-stdalign.c \
 	test-stdbool.c test-stddef.c test-stdint.c test-stdio.c \
 	test-stdlib.c test-string.c test-strings.c test-strnlen.c \
@@ -948,6 +959,7 @@ DEFINE_SSIZE_T = @DEFINE_SSIZE_T@
 DEFS = @DEFS@
 DEPDIR = @DEPDIR@
 DLLTOOL = @DLLTOOL@
+DLL_SSL_VERSION = @DLL_SSL_VERSION@
 DLL_VERSION = @DLL_VERSION@
 DSYMUTIL = @DSYMUTIL@
 DUMPBIN = @DUMPBIN@
@@ -1256,6 +1268,7 @@ HAVE_ACCEPT4 = @HAVE_ACCEPT4@
 HAVE_ARPA_INET_H = @HAVE_ARPA_INET_H@
 HAVE_ATOLL = @HAVE_ATOLL@
 HAVE_BTOWC = @HAVE_BTOWC@
+HAVE_C99_STDINT_H = @HAVE_C99_STDINT_H@
 HAVE_CANONICALIZE_FILE_NAME = @HAVE_CANONICALIZE_FILE_NAME@
 HAVE_CHOWN = @HAVE_CHOWN@
 HAVE_DECL_ENVIRON = @HAVE_DECL_ENVIRON@
@@ -1335,11 +1348,11 @@ HAVE_LCHMOD = @HAVE_LCHMOD@
 HAVE_LCHOWN = @HAVE_LCHOWN@
 HAVE_LIBCRYPTO = @HAVE_LIBCRYPTO@
 HAVE_LIBDL = @HAVE_LIBDL@
-HAVE_LIBICONV = @HAVE_LIBICONV@
 HAVE_LIBNSL = @HAVE_LIBNSL@
 HAVE_LIBPTHREAD = @HAVE_LIBPTHREAD@
 HAVE_LIBRT = @HAVE_LIBRT@
 HAVE_LIBSECCOMP = @HAVE_LIBSECCOMP@
+HAVE_LIBUNISTRING = @HAVE_LIBUNISTRING@
 HAVE_LIBZ = @HAVE_LIBZ@
 HAVE_LINK = @HAVE_LINK@
 HAVE_LINKAT = @HAVE_LINKAT@
@@ -1382,6 +1395,7 @@ HAVE_PTHREAD_SIGMASK = @HAVE_PTHREAD_SIGMASK@
 HAVE_PTSNAME = @HAVE_PTSNAME@
 HAVE_PTSNAME_R = @HAVE_PTSNAME_R@
 HAVE_PWRITE = @HAVE_PWRITE@
+HAVE_QSORT_R = @HAVE_QSORT_R@
 HAVE_RAISE = @HAVE_RAISE@
 HAVE_RANDOM = @HAVE_RANDOM@
 HAVE_RANDOM_H = @HAVE_RANDOM_H@
@@ -1511,7 +1525,6 @@ LIBDL_PREFIX = @LIBDL_PREFIX@
 LIBGNUTLS_CFLAGS = @LIBGNUTLS_CFLAGS@
 LIBGNUTLS_LIBS = @LIBGNUTLS_LIBS@
 LIBICONV = @LIBICONV@
-LIBICONV_PREFIX = @LIBICONV_PREFIX@
 LIBIDN_CFLAGS = @LIBIDN_CFLAGS@
 LIBIDN_LIBS = @LIBIDN_LIBS@
 LIBINTL = @LIBINTL@
@@ -1533,10 +1546,17 @@ LIBTASN1_CFLAGS = @LIBTASN1_CFLAGS@
 LIBTASN1_LIBS = @LIBTASN1_LIBS@
 LIBTESTS_LIBDEPS = @LIBTESTS_LIBDEPS@
 LIBTOOL = @LIBTOOL@
+LIBUNISTRING = @LIBUNISTRING@
+LIBUNISTRING_PREFIX = @LIBUNISTRING_PREFIX@
+LIBUNISTRING_UNICTYPE_H = @LIBUNISTRING_UNICTYPE_H@
+LIBUNISTRING_UNINORM_H = @LIBUNISTRING_UNINORM_H@
+LIBUNISTRING_UNISTR_H = @LIBUNISTRING_UNISTR_H@
+LIBUNISTRING_UNITYPES_H = @LIBUNISTRING_UNITYPES_H@
 LIBZ = @LIBZ@
 LIBZ_PREFIX = @LIBZ_PREFIX@
 LIB_CLOCK_GETTIME = @LIB_CLOCK_GETTIME@
 LIB_SELECT = @LIB_SELECT@
+LIMITS_H = @LIMITS_H@
 LIPO = @LIPO@
 LN_S = @LN_S@
 LTALLOCA = @LTALLOCA@
@@ -1549,6 +1569,7 @@ LTLIBOBJS = @LTLIBOBJS@
 LTLIBPTHREAD = @LTLIBPTHREAD@
 LTLIBRT = @LTLIBRT@
 LTLIBSECCOMP = @LTLIBSECCOMP@
+LTLIBUNISTRING = @LTLIBUNISTRING@
 LTLIBZ = @LTLIBZ@
 LT_AGE = @LT_AGE@
 LT_CURRENT = @LT_CURRENT@
@@ -1563,6 +1584,7 @@ LT_SYS_LIBRARY_PATH = @LT_SYS_LIBRARY_PATH@
 LT_XSSL_AGE = @LT_XSSL_AGE@
 LT_XSSL_CURRENT = @LT_XSSL_CURRENT@
 LT_XSSL_REVISION = @LT_XSSL_REVISION@
+MAINT = @MAINT@
 MAJOR_VERSION = @MAJOR_VERSION@
 MAKEINFO = @MAKEINFO@
 MANIFEST_TOOL = @MANIFEST_TOOL@
@@ -1581,6 +1603,7 @@ NEXT_AS_FIRST_DIRECTIVE_ERRNO_H = @NEXT_AS_FIRST_DIRECTIVE_ERRNO_H@
 NEXT_AS_FIRST_DIRECTIVE_FCNTL_H = @NEXT_AS_FIRST_DIRECTIVE_FCNTL_H@
 NEXT_AS_FIRST_DIRECTIVE_FLOAT_H = @NEXT_AS_FIRST_DIRECTIVE_FLOAT_H@
 NEXT_AS_FIRST_DIRECTIVE_INTTYPES_H = @NEXT_AS_FIRST_DIRECTIVE_INTTYPES_H@
+NEXT_AS_FIRST_DIRECTIVE_LIMITS_H = @NEXT_AS_FIRST_DIRECTIVE_LIMITS_H@
 NEXT_AS_FIRST_DIRECTIVE_NETDB_H = @NEXT_AS_FIRST_DIRECTIVE_NETDB_H@
 NEXT_AS_FIRST_DIRECTIVE_NETINET_IN_H = @NEXT_AS_FIRST_DIRECTIVE_NETINET_IN_H@
 NEXT_AS_FIRST_DIRECTIVE_SIGNAL_H = @NEXT_AS_FIRST_DIRECTIVE_SIGNAL_H@
@@ -1604,6 +1627,7 @@ NEXT_ERRNO_H = @NEXT_ERRNO_H@
 NEXT_FCNTL_H = @NEXT_FCNTL_H@
 NEXT_FLOAT_H = @NEXT_FLOAT_H@
 NEXT_INTTYPES_H = @NEXT_INTTYPES_H@
+NEXT_LIMITS_H = @NEXT_LIMITS_H@
 NEXT_NETDB_H = @NEXT_NETDB_H@
 NEXT_NETINET_IN_H = @NEXT_NETINET_IN_H@
 NEXT_SIGNAL_H = @NEXT_SIGNAL_H@
@@ -1897,6 +1921,11 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
+unistring_LIBOBJS = @unistring_LIBOBJS@
+unistring_LTLIBOBJS = @unistring_LTLIBOBJS@
+unistringtests_LIBOBJS = @unistringtests_LIBOBJS@
+unistringtests_LTLIBOBJS = @unistringtests_LTLIBOBJS@
+unistringtests_WITNESS = @unistringtests_WITNESS@
 AUTOMAKE_OPTIONS = 1.9.6 foreign
 SUBDIRS = .
 TESTS_ENVIRONMENT = EXEEXT='@EXEEXT@' srcdir='$(srcdir)' \
@@ -1917,11 +1946,10 @@ EXTRA_DIST = test-alloca-opt.c test-binary-io.sh test-binary-io.c \
 	macros.h test-func.c macros.h test-fwrite.c signature.h \
 	macros.h test-getdelim.c signature.h macros.h test-getline.c \
 	signature.h macros.h getpagesize.c signature.h \
-	test-gettimeofday.c test-iconv.c signature.h macros.h \
-	test-intprops.c macros.h inttypes.in.h test-inttypes.c \
-	test-memchr.c zerosize-ptr.h signature.h macros.h test-netdb.c \
-	test-netinet_in.c test-read-file.c \
-	$(top_srcdir)/build-aux/snippet/_Noreturn.h \
+	test-gettimeofday.c test-intprops.c macros.h inttypes.in.h \
+	test-inttypes.c test-limits-h.c test-memchr.c zerosize-ptr.h \
+	signature.h macros.h test-netdb.c test-netinet_in.c \
+	test-read-file.c $(top_srcdir)/build-aux/snippet/_Noreturn.h \
 	$(top_srcdir)/build-aux/snippet/arg-nonnull.h \
 	$(top_srcdir)/build-aux/snippet/c++defs.h \
 	$(top_srcdir)/build-aux/snippet/warn-on-use.h test-snprintf.c \
@@ -1974,7 +2002,6 @@ libtests_a_LIBADD = $(gltests_LIBOBJS)
 libtests_a_DEPENDENCIES = $(gltests_LIBOBJS)
 EXTRA_libtests_a_SOURCES = fdopen.c getpagesize.c
 AM_LIBTOOLFLAGS = --preserve-dup-deps
-test_iconv_LDADD = $(LDADD) @LIBICONV@
 
 # Because this Makefile snippet defines a variable used by other
 # gnulib Makefile snippets, it must be present in all Makefile.am that
@@ -1988,7 +2015,7 @@ all: $(BUILT_SOURCES)
 
 .SUFFIXES:
 .SUFFIXES: .c .lo .log .o .obj .test .test$(EXEEXT) .trs
-$(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
+$(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am  $(am__configure_deps)
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
 	    *$$dep*) \
@@ -2012,9 +2039,9 @@ Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 $(top_builddir)/config.status: $(top_srcdir)/configure $(CONFIG_STATUS_DEPENDENCIES)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
 
-$(top_srcdir)/configure:  $(am__configure_deps)
+$(top_srcdir)/configure: @MAINTAINER_MODE_TRUE@ $(am__configure_deps)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
-$(ACLOCAL_M4):  $(am__aclocal_m4_deps)
+$(ACLOCAL_M4): @MAINTAINER_MODE_TRUE@ $(am__aclocal_m4_deps)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
 $(am__aclocal_m4_deps):
 
@@ -2139,10 +2166,6 @@ test-gettimeofday$(EXEEXT): $(test_gettimeofday_OBJECTS) $(test_gettimeofday_DEP
 	@rm -f test-gettimeofday$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(test_gettimeofday_OBJECTS) $(test_gettimeofday_LDADD) $(LIBS)
 
-test-iconv$(EXEEXT): $(test_iconv_OBJECTS) $(test_iconv_DEPENDENCIES) $(EXTRA_test_iconv_DEPENDENCIES) 
-	@rm -f test-iconv$(EXEEXT)
-	$(AM_V_CCLD)$(LINK) $(test_iconv_OBJECTS) $(test_iconv_LDADD) $(LIBS)
-
 test-intprops$(EXEEXT): $(test_intprops_OBJECTS) $(test_intprops_DEPENDENCIES) $(EXTRA_test_intprops_DEPENDENCIES) 
 	@rm -f test-intprops$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(test_intprops_OBJECTS) $(test_intprops_LDADD) $(LIBS)
@@ -2150,6 +2173,10 @@ test-intprops$(EXEEXT): $(test_intprops_OBJECTS) $(test_intprops_DEPENDENCIES) $
 test-inttypes$(EXEEXT): $(test_inttypes_OBJECTS) $(test_inttypes_DEPENDENCIES) $(EXTRA_test_inttypes_DEPENDENCIES) 
 	@rm -f test-inttypes$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(test_inttypes_OBJECTS) $(test_inttypes_LDADD) $(LIBS)
+
+test-limits-h$(EXEEXT): $(test_limits_h_OBJECTS) $(test_limits_h_DEPENDENCIES) $(EXTRA_test_limits_h_DEPENDENCIES) 
+	@rm -f test-limits-h$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(test_limits_h_OBJECTS) $(test_limits_h_LDADD) $(LIBS)
 
 test-memchr$(EXEEXT): $(test_memchr_OBJECTS) $(test_memchr_DEPENDENCIES) $(EXTRA_test_memchr_DEPENDENCIES) 
 	@rm -f test-memchr$(EXEEXT)
@@ -2291,9 +2318,9 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-getdelim.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-getline.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-gettimeofday.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-iconv.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-intprops.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-inttypes.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-limits-h.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-memchr.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-netdb.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-netinet_in.Po@am__quote@
@@ -2767,13 +2794,6 @@ test-gettimeofday.log: test-gettimeofday$(EXEEXT)
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
 	"$$tst" $(AM_TESTS_FD_REDIRECT)
-test-iconv.log: test-iconv$(EXEEXT)
-	@p='test-iconv$(EXEEXT)'; \
-	b='test-iconv'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
 test-intprops.log: test-intprops$(EXEEXT)
 	@p='test-intprops$(EXEEXT)'; \
 	b='test-intprops'; \
@@ -2784,6 +2804,13 @@ test-intprops.log: test-intprops$(EXEEXT)
 test-inttypes.log: test-inttypes$(EXEEXT)
 	@p='test-inttypes$(EXEEXT)'; \
 	b='test-inttypes'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+test-limits-h.log: test-limits-h$(EXEEXT)
+	@p='test-limits-h$(EXEEXT)'; \
+	b='test-limits-h'; \
 	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \

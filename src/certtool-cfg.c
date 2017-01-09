@@ -45,10 +45,12 @@
 
 #if HAVE_SYS_SOCKET_H
 #include <sys/socket.h>
-#include <arpa/inet.h>
 #elif HAVE_WS2TCPIP_H
 #include <ws2tcpip.h>
 #endif
+
+/* From gnulib for inet_pton() */
+#include <arpa/inet.h>
 
 /* Gnulib portability files. */
 #include <getpass.h>
@@ -73,7 +75,7 @@ struct cfg_options {
 	unsigned type;
 
 	/* used when parsing */
-	unsigned found; 
+	unsigned found;
 };
 
 static struct cfg_options available_options[] = {
@@ -237,12 +239,12 @@ void cfg_init(void)
       i = 0; \
       s_name = malloc(sizeof(char*)*MAX_ENTRIES); \
       do { \
-        if (val && !strcmp(val->pzName, name)==0) \
-          continue; \
-        s_name[i] = strdup(val->v.strVal); \
-        i++; \
-          if (i>=MAX_ENTRIES) \
-            break; \
+	if (val && !strcmp(val->pzName, name)==0) \
+	  continue; \
+	s_name[i] = strdup(val->v.strVal); \
+	i++; \
+	  if (i>=MAX_ENTRIES) \
+	    break; \
       } while((val = optionNextValue(pov, val)) != NULL); \
       s_name[i] = NULL; \
     } \
@@ -254,30 +256,36 @@ void cfg_init(void)
   { \
     char str[512]; \
     char * p; \
+    int len; \
     if (s_name == NULL) { \
       i = 0; \
       s_name = malloc(sizeof(char*)*MAX_ENTRIES); \
       do { \
-        if (val && !strcmp(val->pzName, name)==0) \
-          continue; \
-        strncpy(str, val->v.strVal, sizeof(str)-1); \
-        str[sizeof(str)-1] = 0; \
-        if ((p=strchr(str, ' ')) == NULL && (p=strchr(str, '\t')) == NULL) { \
-          fprintf(stderr, "Error parsing %s\n", name); \
-          exit(1); \
-        } \
-        p[0] = 0; \
-        p++; \
-        s_name[i] = strdup(str); \
-        while(*p==' ' || *p == '\t') p++; \
-        if (p[0] == 0) { \
-          fprintf(stderr, "Error (2) parsing %s\n", name); \
-          exit(1); \
-        } \
-        s_name[i+1] = strdup(p); \
-        i+=2; \
-        if (i>=MAX_ENTRIES) \
-          break; \
+	if (val && !strcmp(val->pzName, name)==0) \
+	  continue; \
+	len = strlen(val->v.strVal); \
+	if (sizeof(str) > (unsigned)len) { \
+		strcpy(str, val->v.strVal); \
+	} else { \
+		memcpy(str, val->v.strVal, sizeof(str)-1); \
+		str[sizeof(str)-1] = 0; \
+	} \
+	if ((p=strchr(str, ' ')) == NULL && (p=strchr(str, '\t')) == NULL) { \
+	  fprintf(stderr, "Error parsing %s\n", name); \
+	  exit(1); \
+	} \
+	p[0] = 0; \
+	p++; \
+	s_name[i] = strdup(str); \
+	while(*p==' ' || *p == '\t') p++; \
+	if (p[0] == 0) { \
+	  fprintf(stderr, "Error (2) parsing %s\n", name); \
+	  exit(1); \
+	} \
+	s_name[i+1] = strdup(p); \
+	i+=2; \
+	if (i>=MAX_ENTRIES) \
+	  break; \
       } while((val = optionNextValue(pov, val)) != NULL); \
       s_name[i] = NULL; \
     } \
@@ -293,8 +301,8 @@ void cfg_init(void)
 /* READ_NUMERIC only returns a long */
 #define CHECK_LONG_OVERFLOW(x) \
       if (x == LONG_MAX) { \
-      	fprintf(stderr, "overflow in number\n"); \
-      	exit(1); \
+        fprintf(stderr, "overflow in number\n"); \
+        exit(1); \
       }
 
 #define READ_NUMERIC(name, s_name) \
@@ -302,9 +310,9 @@ void cfg_init(void)
   if (val != NULL) \
     { \
       if (val->valType == OPARG_TYPE_NUMERIC) \
-        s_name = val->v.longVal; \
+	s_name = val->v.longVal; \
       else if (val->valType == OPARG_TYPE_STRING) \
-        s_name = strtol(val->v.strVal, NULL, 10); \
+	s_name = strtol(val->v.strVal, NULL, 10); \
     }
 
 #define HEX_DECODE(hex, output, output_size) \
@@ -333,7 +341,7 @@ unsigned len, cmp;
 			cmp = strcasecmp(val->pzName, available_options[j].name);
 
 		if (cmp == 0) {
-			if (available_options[j].type != OPTION_MULTI_LINE && 
+			if (available_options[j].type != OPTION_MULTI_LINE &&
 			    available_options[j].found != 0) {
 			    fprintf(stderr, "Warning: multiple options found for '%s'; only the first will be taken into account.\n", available_options[j].name);
 			}
@@ -949,103 +957,6 @@ void get_dn_crt_set(gnutls_x509_crt_t crt)
 	}
 }
 
-static void prefix_to_mask6(unsigned prefix, uint8_t mask[16])
-{
-	int i, j;
-
-	memset(mask, 0, 16);
-
-	for (i = prefix, j = 0; i > 0; i -= 8, j++) {
-		if (i >= 8) {
-			mask[j] = 0xff;
-		} else {
-			mask[j] = (unsigned long)(0xffU << (8 - i));
-		}
-	}
-
-	return;
-}
-
-static void prefix_to_mask4(unsigned prefix, uint8_t _mask[4])
-{
-	uint32_t mask;
-
-	mask = htonl(~((1 << (32 - prefix)) - 1));
-	memcpy(_mask, &mask, 4);
-}
-
-static void mask_ip(uint8_t *ip, uint8_t *mask, unsigned size)
-{
-	unsigned i;
-	for (i=0;i<size;i++)
-		ip[i] &= mask[i];
-}
-
-/* converts an IP to the format RFC5280 expects it */
-static void cidr_to_datum(char *ip, gnutls_datum_t *res)
-{
-	int prefix = -1;
-	uint8_t out[32];
-	int ret;
-	char *p;
-
-	p = strchr(ip, '/');
-	if (p != NULL) {
-		prefix = atoi(p+1);
-		if (prefix == 0) {
-			fprintf(stderr, "Invalid prefix given for %s\n", ip);
-			exit(1);
-		}
-		*p = 0;
-	}
-
-	if (strchr(ip, ':') != 0) { /* IPv6 */
-		if (prefix == -1)
-			prefix = 128;
-
-		if (prefix == 0 || prefix > 128) {
-			fprintf(stderr, "Invalid IPv6 prefix (%d)\n", prefix);
-			exit(1);
-		}
-
-		ret = inet_pton(AF_INET6, ip, out);
-		if (ret == 0) {
-			fprintf(stderr, "Error parsing IPv6 %s\n", ip);
-			exit(1);
-		}
-
-		prefix_to_mask6(prefix, &out[16]);
-		mask_ip(out, &out[16], 16);
-		res->size = 32;
-	} else {
-		if (prefix == -1)
-			prefix = 32;
-
-		if (prefix == 0 || prefix > 32) {
-			fprintf(stderr, "Invalid IPv4 prefix (%d)\n", prefix);
-			exit(1);
-		}
-
-		ret = inet_pton(AF_INET, ip, out);
-		if (ret == 0) {
-			fprintf(stderr, "Error parsing IPv4 %s\n", ip);
-			exit(1);
-		}
-
-		prefix_to_mask4(prefix, &out[4]);
-		mask_ip(out, &out[4], 4);
-		res->size = 8;
-	}
-
-	res->data = malloc(res->size);
-	if (res->data == NULL) {
-		fprintf(stderr, "memory error\n");
-		exit(1);
-	}
-
-	memcpy(res->data, out, res->size);
-}
-
 void crt_constraints_set(gnutls_x509_crt_t crt)
 {
 	int ret;
@@ -1067,7 +978,11 @@ void crt_constraints_set(gnutls_x509_crt_t crt)
 
 		if (cfg.permitted_nc_ip) {
 			for (i = 0; cfg.permitted_nc_ip[i] != NULL; i++) {
-				cidr_to_datum(cfg.permitted_nc_ip[i], &name);
+				ret = gnutls_x509_cidr_to_rfc5280(cfg.permitted_nc_ip[i], &name);
+				if (ret < 0) {
+					fprintf(stderr, "error parsing IP constraint: %s\n", gnutls_strerror(ret));
+					exit(1);
+				}
 				ret = gnutls_x509_name_constraints_add_permitted(nc, GNUTLS_SAN_IPADDRESS, &name);
 				if (ret < 0) {
 					fprintf(stderr, "error adding constraint: %s\n", gnutls_strerror(ret));
@@ -1079,7 +994,11 @@ void crt_constraints_set(gnutls_x509_crt_t crt)
 
 		if (cfg.excluded_nc_ip) {
 			for (i = 0; cfg.excluded_nc_ip[i] != NULL; i++) {
-				cidr_to_datum(cfg.excluded_nc_ip[i], &name);
+				ret = gnutls_x509_cidr_to_rfc5280(cfg.excluded_nc_ip[i], &name);
+				if (ret < 0) {
+					fprintf(stderr, "error parsing IP constraint: %s\n", gnutls_strerror(ret));
+					exit(1);
+				}
 				ret = gnutls_x509_name_constraints_add_excluded(nc, GNUTLS_SAN_IPADDRESS, &name);
 				if (ret < 0) {
 					fprintf(stderr, "error adding constraint: %s\n", gnutls_strerror(ret));
@@ -1546,18 +1465,18 @@ time_t get_date(const char* date)
 	struct timespec r;
 
 	if (date==NULL || parse_datetime(&r, date, NULL) == 0) {
-	        fprintf(stderr, "Cannot parse date: %s\n", date);
-	        exit(1);
-        }
-        
-        return r.tv_sec;
+		fprintf(stderr, "Cannot parse date: %s\n", date);
+		exit(1);
+	}
+
+	return r.tv_sec;
 }
 
 time_t get_activation_date(void)
 {
 
 	if (batch && cfg.activation_date != NULL) {
-       		return get_date(cfg.activation_date);
+		return get_date(cfg.activation_date);
 	}
 
 	return time(NULL);
@@ -1567,7 +1486,7 @@ time_t get_crl_revocation_date(void)
 {
 
 	if (batch && cfg.revocation_date != NULL) {
-       		return get_date(cfg.revocation_date);
+		return get_date(cfg.revocation_date);
 	}
 
 	return time(NULL);
@@ -1577,7 +1496,7 @@ time_t get_crl_this_update_date(void)
 {
 
 	if (batch && cfg.this_update_date != NULL) {
-       		return get_date(cfg.this_update_date);
+		return get_date(cfg.this_update_date);
 	}
 
 	return time(NULL);
@@ -1589,26 +1508,26 @@ time_t days_to_secs(int days)
 time_t secs = days;
 time_t now = time(NULL);
 
-       	if (secs != (time_t)-1) {
-      	        if (INT_MULTIPLY_OVERFLOW(secs, 24*60*60)) {
-                        goto overflow;
-	        } else {
-    	                secs *= 24*60*60;
-      	        }
-        }
-                                
-        if (secs != (time_t)-1) {
-                if (INT_ADD_OVERFLOW(secs, now)) {
-                        goto overflow;
-                } else {
-                        secs += now;
-                }
-        }
-        
-        return secs;
+	if (secs != (time_t)-1) {
+		if (INT_MULTIPLY_OVERFLOW(secs, 24*60*60)) {
+			goto overflow;
+		} else {
+			secs *= 24*60*60;
+		}
+	}
+
+	if (secs != (time_t)-1) {
+		if (INT_ADD_OVERFLOW(secs, now)) {
+			goto overflow;
+		} else {
+			secs += now;
+		}
+	}
+
+	return secs;
  overflow:
- 	fprintf(stderr, "Overflow while parsing days\n");
- 	exit(1);
+	fprintf(stderr, "Overflow while parsing days\n");
+	exit(1);
 }
 
 static
@@ -1616,13 +1535,13 @@ time_t get_int_date(const char *txt_val, int int_val, const char *msg)
 {
 	if (batch) {
 		if (txt_val == NULL) {
-		        time_t secs;
-		        
-        		if (int_val == 0 || int_val < -2)
-        		        secs = days_to_secs(365);
-                        else {
-                                secs = days_to_secs(int_val);
-                        }
+			time_t secs;
+
+			if (int_val == 0 || int_val < -2)
+				secs = days_to_secs(365);
+			else {
+				secs = days_to_secs(int_val);
+			}
 
 			return secs;
 		} else

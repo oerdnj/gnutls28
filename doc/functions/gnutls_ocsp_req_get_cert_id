@@ -20,11 +20,11 @@ This function will return the certificate information of the
 corresponds to the CertID structure:
 
 <informalexample><programlisting>
-CertID          ::=     SEQUENCE @{
+CertID	  ::=     SEQUENCE @{
 hashAlgorithm       AlgorithmIdentifier,
 issuerNameHash      OCTET STRING, -- Hash of Issuer's DN
 issuerKeyHash       OCTET STRING, -- Hash of Issuers public key
-serialNumber        CertificateSerialNumber @}
+serialNumber	CertificateSerialNumber @}
 </programlisting></informalexample>
 
 Each of the pointers to output variables may be NULL to indicate

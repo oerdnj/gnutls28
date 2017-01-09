@@ -1,0 +1,107 @@
+<!-- ##### SECTION Title ##### -->
+aes-aarch64
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### SECTION Image ##### -->
+
+
+<!-- ##### MACRO ALIGN16 ##### -->
+<para>
+
+</para>
+
+@x: 
+
+
+<!-- ##### MACRO AES_KEY_ALIGN_SIZE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO AES_MAXNR ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### STRUCT AES_KEY ##### -->
+<para>
+
+</para>
+
+@rd_key: 
+@rounds: 
+
+<!-- ##### FUNCTION aes_v8_set_encrypt_key ##### -->
+<para>
+
+</para>
+
+@userKey: 
+@bits: 
+@key: 
+@Returns: 
+
+
+<!-- ##### FUNCTION aes_v8_set_decrypt_key ##### -->
+<para>
+
+</para>
+
+@userKey: 
+@bits: 
+@key: 
+@Returns: 
+
+
+<!-- ##### FUNCTION aes_v8_cbc_encrypt ##### -->
+<para>
+
+</para>
+
+@in: 
+@out: 
+@length: 
+@key: 
+@ivec: 
+@enc: 
+
+
+<!-- ##### FUNCTION aes_v8_encrypt ##### -->
+<para>
+
+</para>
+
+@in: 
+@out: 
+@key: 
+
+
+<!-- ##### FUNCTION aes_v8_decrypt ##### -->
+<para>
+
+</para>
+
+@in: 
+@out: 
+@key: 
+
+

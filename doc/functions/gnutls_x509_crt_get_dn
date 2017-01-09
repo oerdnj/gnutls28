@@ -16,6 +16,9 @@ encoded, depending on the certificate data.
 
 If  @code{buf} is null then only the size will be filled. 
 
+This function does not output a fully RFC4514 compliant string, if
+that is required see @code{gnutls_x509_crt_get_dn3()} .
+
 @strong{Returns:} @code{GNUTLS_E_SHORT_MEMORY_BUFFER}  if the provided buffer is not
 long enough, and in that case the  @code{buf_size} will be updated
 with the required size. @code{GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE}  if

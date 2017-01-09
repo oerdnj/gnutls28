@@ -20,13 +20,12 @@ typedef int (*gnutls_status_request_ocsp_func)
 The callback will be invoked if the client requests an OCSP certificate
 status.  The callback may return @code{GNUTLS_E_NO_CERTIFICATE_STATUS} , if
 there is no recent OCSP response. If the callback returns @code{GNUTLS_E_SUCCESS} ,
-the server will provide the client with the ocsp_response.
+it is expected to have the  @code{ocsp_response} field set with a valid (DER-encoded)
+OCSP response. The response must be a value allocated using @code{gnutls_malloc()} ,
+and will be deinitialized by the caller.
 
-The response must be a value allocated using @code{gnutls_malloc()} , and will be
-deinitialized when needed.
-
-@strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (0) is returned,
-otherwise a negative error code is returned.
+It is possible to set a specific callback for each provided certificate
+using @code{gnutls_certificate_set_ocsp_status_request_function2()} .
 
 @strong{Since:} 3.1.3
 @end deftypefun

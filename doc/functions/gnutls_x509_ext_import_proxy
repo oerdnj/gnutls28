@@ -13,7 +13,7 @@ field and the actual value, -1 indicate that the field is absent.
 
 @var{policy}: output variable with policy data
 
-@var{sizeof_policy}: output variable size of policy data
+@var{sizeof_policy}: output variable with size of policy data
 
 This function will return the information from a proxy certificate
 extension. It reads the ProxyCertInfo X.509 extension (1.3.6.1.5.5.7.1.14).

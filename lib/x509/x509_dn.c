@@ -86,12 +86,21 @@ int dn_attr_crt_set(set_dn_func f, void *crt, const gnutls_datum_t * name,
 			return gnutls_assert_val(GNUTLS_E_MEMORY_ERROR);
 		}
 
+		/* unescape */
 		for (j=i=0;i<tmp.size;i++) {
-			if (1+j!=val->size && val->data[j] == '\\' &&
-			    (val->data[j+1] == ',' || val->data[j+1] == '#' || val->data[j+1] == ' ')) {
-				tmp.data[i] = val->data[j+1];
-				j+=2;
-				tmp.size--;
+			if (1+j!=val->size && val->data[j] == '\\') {
+				if (val->data[j+1] == ',' || val->data[j+1] == '#' ||
+				    val->data[j+1] == ' ' || val->data[j+1] == '+' ||
+				    val->data[j+1] == '"' || val->data[j+1] == '<' ||
+				    val->data[j+1] == '>' || val->data[j+1] == ';' ||
+				    val->data[j+1] == '\\' || val->data[j+1] == '=') {
+					tmp.data[i] = val->data[j+1];
+					j+=2;
+					tmp.size--;
+				} else {
+					ret = gnutls_assert_val(GNUTLS_E_PARSING_ERROR);
+					goto fail;
+				}
 			} else {
 				tmp.data[i] = val->data[j++];
 			}
@@ -100,16 +109,20 @@ int dn_attr_crt_set(set_dn_func f, void *crt, const gnutls_datum_t * name,
 	}
 
 	ret = f(crt, oid, is_raw, tmp.data, tmp.size);
+	if (ret < 0) {
+		gnutls_assert();
+		goto fail;
+	}
+
+	ret = 0;
+ fail:
 	gnutls_free(tmp.data);
-
-	if (ret < 0)
-		return gnutls_assert_val(ret);
-
-	return 0;
+	return ret;
 }
 
 static int read_attr_and_val(const char **ptr,
-			     gnutls_datum_t * name, gnutls_datum_t * val, unsigned *is_raw)
+			     gnutls_datum_t *name, gnutls_datum_t *val,
+			     unsigned *is_raw)
 {
 	const unsigned char *p = (void *) *ptr;
 
@@ -148,6 +161,15 @@ static int read_attr_and_val(const char **ptr,
 		p++;
 	}
 	val->size = p - (val->data);
+	*ptr = (void*)p;
+
+	p = val->data;
+	/* check for unescaped '+' - we do not support them */
+	while (*p != 0) {
+		if (*p == '+' && (*(p - 1) != '\\'))
+			return gnutls_assert_val(GNUTLS_E_PARSING_ERROR);
+		p++;
+	}
 
 	/* remove spaces from the end */
 	while(val->size > 0 && c_isspace(val->data[val->size-1])) {
@@ -159,7 +181,29 @@ static int read_attr_and_val(const char **ptr,
 	if (val->size == 0 || name->size == 0)
 		return gnutls_assert_val(GNUTLS_E_PARSING_ERROR);
 
-	*ptr = (void *) p;
+	return 0;
+}
+
+typedef struct elem_list_st {
+	gnutls_datum_t name;
+	gnutls_datum_t val;
+	const char *pos;
+	unsigned is_raw;
+	struct elem_list_st *next;
+} elem_list_st;
+
+static int add_new_elem(elem_list_st **head, const gnutls_datum_t *name, const gnutls_datum_t *val, const char *pos, unsigned is_raw)
+{
+	elem_list_st *elem = gnutls_malloc(sizeof(*elem));
+	if (elem == NULL)
+		return gnutls_assert_val(GNUTLS_E_MEMORY_ERROR);
+
+	memcpy(&elem->name, name, sizeof(*name));
+	memcpy(&elem->val, val, sizeof(*val));
+	elem->pos = pos;
+	elem->is_raw = is_raw;
+	elem->next = *head;
+	*head = elem;
 
 	return 0;
 }
@@ -171,9 +215,14 @@ crt_set_dn(set_dn_func f, void *crt, const char *dn, const char **err)
 	int ret;
 	gnutls_datum_t name, val;
 	unsigned is_raw;
+	elem_list_st *list = NULL, *plist, *next;
 
 	if (crt == NULL || dn == NULL)
 		return gnutls_assert_val(GNUTLS_E_INVALID_REQUEST);
+
+	/* We parse the string and set all elements to a linked list in
+	 * reverse order. That way we can encode in reverse order,
+	 * the way RFC4514 requires. */
 
 	/* For each element */
 	while (*p != 0 && *p != '\n') {
@@ -182,27 +231,49 @@ crt_set_dn(set_dn_func f, void *crt, const char *dn, const char **err)
 
 		is_raw = 0;
 		ret = read_attr_and_val(&p, &name, &val, &is_raw);
-		if (ret < 0)
-			return gnutls_assert_val(ret);
+		if (ret < 0) {
+			gnutls_assert();
+			goto fail;
+		}
 
 		/* skip spaces and look for comma */
 		while (c_isspace(*p))
 			p++;
 
-		ret = dn_attr_crt_set(f, crt, &name, &val, is_raw);
-		if (ret < 0)
-			return gnutls_assert_val(ret);
+		ret = add_new_elem(&list, &name, &val, p, is_raw);
+		if (ret < 0) {
+			gnutls_assert();
+			goto fail;
+		}
 
-		if (err)
-			*err = p;
-
-		if (*p != ',' && *p != 0 && *p != '\n')
-			return gnutls_assert_val(GNUTLS_E_PARSING_ERROR);
+		if (*p != ',' && *p != 0 && *p != '\n') {
+			ret = gnutls_assert_val(GNUTLS_E_PARSING_ERROR);
+			goto fail;
+		}
 		if (*p == ',')
 			p++;
 	}
 
-	return 0;
+	plist = list;
+	while(plist) {
+		if (err)
+			*err = plist->pos;
+		ret = dn_attr_crt_set(f, crt, &plist->name, &plist->val, plist->is_raw);
+		if (ret < 0)
+			goto fail;
+
+		plist = plist->next;
+	}
+
+	ret = 0;
+fail:
+	plist = list;
+	while(plist) {
+		next = plist->next;
+		gnutls_free(plist);
+		plist = next;
+	}
+	return ret;
 }
 
 
@@ -215,6 +286,11 @@ crt_set_dn(set_dn_func f, void *crt, const char *dn, const char **err)
  * This function will set the DN on the provided certificate.
  * The input string should be plain ASCII or UTF-8 encoded. On
  * DN parsing error %GNUTLS_E_PARSING_ERROR is returned.
+ *
+ * Note that DNs are not expected to hold DNS information, and thus
+ * no automatic IDNA convertions are attempted when using this function.
+ * If that is required (e.g., store a domain in CN), process the corresponding
+ * input with gnutls_idna_map().
  *
  * Returns: On success, %GNUTLS_E_SUCCESS (0) is returned, otherwise a
  *   negative error value.
@@ -591,5 +667,36 @@ gnutls_x509_dn_get_str(gnutls_x509_dn_t dn, gnutls_datum_t *str)
 		return GNUTLS_E_INVALID_REQUEST;
 	}
 
-	return _gnutls_x509_get_dn(dn->asn, "rdnSequence", str);
+	return _gnutls_x509_get_dn(dn->asn, "rdnSequence", str, GNUTLS_X509_DN_FLAG_COMPAT);
+}
+
+/**
+ * gnutls_x509_dn_get_str:
+ * @dn: a pointer to DN
+ * @str: a datum that will hold the name
+ * @flags: zero or %GNUTLS_X509_DN_FLAG_COMPAT
+ *
+ * This function will allocate buffer and copy the name in the provided DN.
+ * The name will be in the form "C=xxxx,O=yyyy,CN=zzzz" as
+ * described in RFC4514. The output string will be ASCII or UTF-8
+ * encoded, depending on the certificate data.
+ *
+ * When the flag %GNUTLS_X509_DN_FLAG_COMPAT is specified, the output
+ * format will match the format output by previous to 3.5.6 versions of GnuTLS
+ * which was not not fully RFC4514-compliant.
+ *
+ * Returns: On success, %GNUTLS_E_SUCCESS (0) is returned, otherwise a
+ *   negative error value.
+ *
+ * Since: 3.5.7
+ **/
+int
+gnutls_x509_dn_get_str2(gnutls_x509_dn_t dn, gnutls_datum_t *str, unsigned flags)
+{
+	if (dn == NULL) {
+		gnutls_assert();
+		return GNUTLS_E_INVALID_REQUEST;
+	}
+
+	return _gnutls_x509_get_dn(dn->asn, "rdnSequence", str, flags);
 }

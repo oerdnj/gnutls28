@@ -1,5 +1,6 @@
 /*
- * Copyright (C) 2003-2012 Free Software Foundation, Inc.
+ * Copyright (C) 2003-2016 Free Software Foundation, Inc.
+ * Copyright (C) 2015-2016 Red Hat, Inc.
  *
  * This file is part of GnuTLS.
  *
@@ -270,7 +271,7 @@ gnutls_privkey_t load_private_key(int mand, common_info_st * info)
 	dat.size = size;
 
 	if (!dat.data) {
-		fprintf(stderr, "reading --load-privkey: %s\n",
+		fprintf(stderr, "error reading --load-privkey: %s\n",
 			info->privkey);
 		exit(1);
 	}
@@ -313,7 +314,7 @@ load_x509_private_key(int mand, common_info_st * info)
 	dat.size = size;
 
 	if (!dat.data) {
-		fprintf(stderr, "reading --load-privkey: %s\n",
+		fprintf(stderr, "error reading --load-privkey: %s\n",
 			info->privkey);
 		exit(1);
 	}
@@ -512,7 +513,7 @@ gnutls_x509_crq_t load_request(common_info_st * info)
 	dat.size = size;
 
 	if (!dat.data) {
-		fprintf(stderr, "reading --load-request: %s\n",
+		fprintf(stderr, "error reading --load-request: %s\n",
 			info->request);
 		exit(1);
 	}
@@ -553,7 +554,7 @@ gnutls_privkey_t load_ca_private_key(common_info_st * info)
 	dat.size = size;
 
 	if (!dat.data) {
-		fprintf(stderr, "reading --load-ca-privkey: %s\n",
+		fprintf(stderr, "error reading --load-ca-privkey: %s\n",
 			info->ca_privkey);
 		exit(1);
 	}
@@ -640,7 +641,7 @@ gnutls_pubkey_t load_pubkey(int mand, common_info_st * info)
 	dat.size = size;
 
 	if (!dat.data) {
-		fprintf(stderr, "reading --load-pubkey: %s\n", info->pubkey);
+		fprintf(stderr, "error reading --load-pubkey: %s\n", info->pubkey);
 		exit(1);
 	}
 
@@ -679,7 +680,11 @@ gnutls_pubkey_t load_public_key_or_import(int mand,
 
 	if (!privkey || (ret = gnutls_pubkey_import_privkey(pubkey, privkey, 0, 0)) < 0) {	/* could not get (e.g. on PKCS #11 */
 		gnutls_pubkey_deinit(pubkey);
-		return load_pubkey(mand, info);
+		pubkey = load_pubkey(0, info);
+		if (pubkey == NULL && mand) {
+			fprintf(stderr, "You must specify --load-privkey\n");
+			exit(1);
+		}
 	}
 
 	return pubkey;
@@ -1179,15 +1184,24 @@ static void privkey_info_int(FILE *outfile, common_info_st * cinfo,
 	}
 
 	size = lbuffer_size;
-	if ((ret =
-	     gnutls_x509_privkey_get_key_id(key, GNUTLS_KEYID_USE_SHA1, lbuffer, &size)) < 0) {
+	ret =
+	     gnutls_x509_privkey_get_key_id(key, GNUTLS_KEYID_USE_SHA256, lbuffer, &size);
+	if (ret < 0) {
 		fprintf(stderr, "Error in key id calculation: %s\n",
 			gnutls_strerror(ret));
 	} else {
 		gnutls_datum_t art;
 
-		fprintf(outfile, "Public Key ID: %s\n",
+		fprintf(outfile, "Public Key ID:\n\tsha256:%s\n",
 			raw_to_string(lbuffer, size));
+
+		size = lbuffer_size;
+		ret =
+		     gnutls_x509_privkey_get_key_id(key, GNUTLS_KEYID_USE_SHA1, lbuffer, &size);
+		if (ret >= 0) {
+			fprintf(outfile, "\tsha1:%s\n",
+				raw_to_string(lbuffer, size));
+		}
 
 		ret =
 		    gnutls_random_art(GNUTLS_RANDOM_ART_OPENSSH, cprint,
@@ -1272,7 +1286,7 @@ int generate_prime(FILE * outfile, int how, common_info_st * info)
 	gnutls_dh_params_t dh_params;
 	gnutls_datum_t p, g;
 	int bits = get_bits(GNUTLS_PK_DH, info->bits, info->sec_param, 1);
-	unsigned int q_bits = 0;
+	unsigned int q_bits = 0, key_bits = 0;
 
 	fix_lbuffer(0);
 
@@ -1357,12 +1371,40 @@ int generate_prime(FILE * outfile, int how, common_info_st * info)
 			exit(1);
 		}
 	} else {
-#ifdef ENABLE_SRP
 		if (info->provable != 0) {
 			fprintf(stderr, "The DH parameters obtained via this option are not provable\n");
 			exit(1);
 		}
+#if defined(ENABLE_DHE) || defined(ENABLE_ANON)
+		if (bits <= 2048) {
+			p = gnutls_ffdhe_2048_group_prime;
+			g = gnutls_ffdhe_2048_group_generator;
+			key_bits = gnutls_ffdhe_2048_key_bits;
+			bits = 2048;
+		} else if (bits <= 3072) {
+			p = gnutls_ffdhe_3072_group_prime;
+			g = gnutls_ffdhe_3072_group_generator;
+			key_bits = gnutls_ffdhe_3072_key_bits;
+			bits = 3072;
+		} else if (bits <= 4096) {
+			p = gnutls_ffdhe_4096_group_prime;
+			g = gnutls_ffdhe_4096_group_generator;
+			key_bits = gnutls_ffdhe_4096_key_bits;
+			bits = 4096;
+		} else {
+			p = gnutls_ffdhe_8192_group_prime;
+			g = gnutls_ffdhe_8192_group_generator;
+			key_bits = gnutls_ffdhe_8192_key_bits;
+			bits = 8192;
+		}
 
+		ret = gnutls_dh_params_import_raw2(dh_params, &p, &g, key_bits);
+		if (ret < 0) {
+			fprintf(stderr, "Error exporting parameters: %s\n",
+				gnutls_strerror(ret));
+			exit(1);
+		}
+#elif defined(ENABLE_SRP)
 		if (bits <= 1024) {
 			p = gnutls_srp_1024_group_prime;
 			g = gnutls_srp_1024_group_generator;

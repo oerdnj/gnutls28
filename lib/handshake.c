@@ -204,7 +204,7 @@ static int create_tls_random(uint8_t * dst)
 	_gnutls_write_uint32(tim, dst);
 
 	ret =
-	    _gnutls_rnd(GNUTLS_RND_NONCE, &dst[3], GNUTLS_RANDOM_SIZE - 3);
+	    gnutls_rnd(GNUTLS_RND_NONCE, &dst[3], GNUTLS_RANDOM_SIZE - 3);
 	if (ret < 0) {
 		gnutls_assert();
 		return ret;
@@ -649,7 +649,7 @@ read_client_hello(gnutls_session_t session, uint8_t * data,
 		return 0;
 	}
 
-	/* select an appropriate cipher suite
+	/* select an appropriate cipher suite (as well as certificate)
 	 */
 	ret = _gnutls_server_select_suite(session, suite_ptr, suite_size);
 	if (ret < 0) {
@@ -661,6 +661,15 @@ read_client_hello(gnutls_session_t session, uint8_t * data,
 	ret =
 	    server_select_comp_method(session, comp_ptr,
 					      comp_size);
+	if (ret < 0) {
+		gnutls_assert();
+		return ret;
+	}
+
+	/* call extensions that are intended to be parsed after the ciphersuite/cert
+	 * are known. */
+	ret =
+	    _gnutls_parse_extensions(session, _GNUTLS_EXT_TLS_POST_CS, ext_ptr, ext_size);
 	if (ret < 0) {
 		gnutls_assert();
 		return ret;
@@ -870,7 +879,7 @@ server_find_pk_algos_in_ciphersuites(const uint8_t *
 		kx = _gnutls_cipher_suite_get_kx_algo(&data[j]);
 		if (_gnutls_map_kx_get_cred(kx, 1) ==
 		    GNUTLS_CRD_CERTIFICATE) {
-			pk = _gnutls_map_pk_get_pk(kx);
+			pk = _gnutls_map_kx_get_pk(kx);
 			found = 0;
 			for (x = 0; x < *algos_size; x++) {
 				if (algos[x] == pk) {
@@ -881,7 +890,7 @@ server_find_pk_algos_in_ciphersuites(const uint8_t *
 
 			if (found == 0) {
 				algos[(*algos_size)++] =
-				    _gnutls_map_pk_get_pk(kx);
+				    _gnutls_map_kx_get_pk(kx);
 				if ((*algos_size) >= max)
 					return 0;
 			}
@@ -1264,7 +1273,7 @@ _gnutls_send_handshake(gnutls_session_t session, mbuffer_st * bufel,
 		}
 
 	ret = call_hook_func(session, type, GNUTLS_HOOK_PRE, 0,
-		             _mbuffer_get_udata_ptr(bufel), _mbuffer_get_udata_size(bufel));
+			     _mbuffer_get_udata_ptr(bufel), _mbuffer_get_udata_size(bufel));
 	if (ret < 0) {
 		gnutls_assert();
 		_mbuffer_xfree(&bufel);
@@ -1281,7 +1290,7 @@ _gnutls_send_handshake(gnutls_session_t session, mbuffer_st * bufel,
 	}
 
 	ret = call_hook_func(session, type, GNUTLS_HOOK_POST, 0, 
-	                      _mbuffer_get_udata_ptr(bufel), _mbuffer_get_udata_size(bufel));
+			      _mbuffer_get_udata_ptr(bufel), _mbuffer_get_udata_size(bufel));
 	if (ret < 0) {
 		gnutls_assert();
 		return ret;
@@ -1318,8 +1327,10 @@ _gnutls_send_handshake(gnutls_session_t session, mbuffer_st * bufel,
 #define CHECK_SIZE(ll) \
   if ((session->internals.max_handshake_data_buffer_size > 0) && \
       (((ll) + session->internals.handshake_hash_buffer.length) > \
-       session->internals.max_handshake_data_buffer_size)) \
-    return gnutls_assert_val(GNUTLS_E_HANDSHAKE_TOO_LARGE)
+       session->internals.max_handshake_data_buffer_size)) { \
+    _gnutls_debug_log("Handshake buffer length is %u (max: %u)\n", (unsigned)((ll) + session->internals.handshake_hash_buffer.length), (unsigned)session->internals.max_handshake_data_buffer_size); \
+    return gnutls_assert_val(GNUTLS_E_HANDSHAKE_TOO_LARGE); \
+    }
 
 /* This function add the handshake headers and the
  * handshake data to the handshake hash buffers. Needed
@@ -1707,8 +1718,8 @@ client_check_if_resuming(gnutls_session_t session,
 
 		memcpy(session->security_parameters.cipher_suite,
 			session->internals.resumed_security_parameters.cipher_suite, 2);
-                session->security_parameters.compression_method =
-		        session->internals.resumed_security_parameters.compression_method;
+		session->security_parameters.compression_method =
+			session->internals.resumed_security_parameters.compression_method;
 
 		_gnutls_epoch_set_cipher_suite
 		    (session, EPOCH_NEXT,
@@ -1786,7 +1797,7 @@ read_server_hello(gnutls_session_t session,
 
 	if (len < session_id_len || session_id_len > GNUTLS_MAX_SESSION_ID_SIZE) {
 		gnutls_assert();
-		return GNUTLS_E_UNSUPPORTED_VERSION_PACKET;
+		return GNUTLS_E_ILLEGAL_PARAMETER;
 	}
 	DECR_LEN(len, session_id_len);
 
@@ -2007,6 +2018,8 @@ static int send_client_hello(gnutls_session_t session, int again)
 			gnutls_assert();
 			goto cleanup;
 		}
+		_gnutls_handshake_log("HSK[%p]: Adv. version: %u.%u\n", session,
+				      (unsigned)tver[0], (unsigned)tver[1]);
 
 		/* Set the version we advertized as maximum 
 		 * (RSA uses it).
@@ -2344,37 +2357,37 @@ recv_hello_verify_request(gnutls_session_t session,
 
 /* The packets in gnutls_handshake (it's more broad than original TLS handshake)
  *
- *     Client                                               Server
+ *     Client					       Server
  *
- *     ClientHello                  -------->
- *                                  <--------         ServerHello
+ *     ClientHello		  -------->
+ *				  <--------	 ServerHello
  *
- *                                                    Certificate*
- *                                              ServerKeyExchange*
- *                                  <--------   CertificateRequest*
+ *						    Certificate*
+ *					      ServerKeyExchange*
+ *				  <--------   CertificateRequest*
  *
- *                                  <--------      ServerHelloDone
+ *				  <--------      ServerHelloDone
  *     Certificate*
  *     ClientKeyExchange
  *     CertificateVerify*
  *     [ChangeCipherSpec]
- *     Finished                     -------->
- *                                                NewSessionTicket
- *                                              [ChangeCipherSpec]
- *                                  <--------             Finished
+ *     Finished		     -------->
+ *						NewSessionTicket
+ *					      [ChangeCipherSpec]
+ *				  <--------	     Finished
  *
  * (*): means optional packet.
  */
 
 /* Handshake when resumming session:
- *      Client                                                Server
+ *      Client						Server
  *
- *      ClientHello                   -------->
- *                                                      ServerHello
- *                                               [ChangeCipherSpec]
- *                                   <--------             Finished
+ *      ClientHello		   -------->
+ *						      ServerHello
+ *					       [ChangeCipherSpec]
+ *				   <--------	     Finished
  *     [ChangeCipherSpec]
- *     Finished                      -------->
+ *     Finished		      -------->
  * 
  */
 
@@ -2570,7 +2583,7 @@ int gnutls_handshake(gnutls_session_t session)
 		if (session->internals.handshake_timeout_ms &&
 		    session->internals.handshake_endtime == 0)
 			    session->internals.handshake_endtime = session->internals.handshake_start_time.tv_sec +
-			    	session->internals.handshake_timeout_ms / 1000;
+			    session->internals.handshake_timeout_ms / 1000;
 	}
 
 	if (session->internals.recv_state == RECV_STATE_FALSE_START) {
@@ -2673,12 +2686,17 @@ gnutls_handshake_set_timeout(gnutls_session_t session, unsigned int ms)
 			return ret; \
 		if (ret == GNUTLS_E_GOT_APPLICATION_DATA && session->internals.initial_negotiation_completed != 0) \
 			return ret; \
-		if (ret == GNUTLS_E_LARGE_PACKET && session->internals.handshake_large_loops < 16) { \
-			session->internals.handshake_large_loops++; \
-			return ret; \
+		if (session->internals.handshake_suspicious_loops < 16) { \
+			if (ret == GNUTLS_E_LARGE_PACKET) { \
+				session->internals.handshake_suspicious_loops++; \
+				return ret; \
+			} \
+			/* a warning alert might interrupt handshake */ \
+			if (allow_alert != 0 && ret==GNUTLS_E_WARNING_ALERT_RECEIVED) { \
+				session->internals.handshake_suspicious_loops++; \
+				return ret; \
+			} \
 		} \
-                /* a warning alert might interrupt handshake */ \
-		if (allow_alert != 0 && ret==GNUTLS_E_WARNING_ALERT_RECEIVED) return ret; \
 		gnutls_assert(); \
 		ERR( str, ret); \
 		/* do not allow non-fatal errors at this point */ \
@@ -3349,7 +3367,7 @@ int _gnutls_generate_session_id(uint8_t * session_id, uint8_t * len)
 	*len = GNUTLS_MAX_SESSION_ID_SIZE;
 
 	ret =
-	    _gnutls_rnd(GNUTLS_RND_NONCE, session_id,
+	    gnutls_rnd(GNUTLS_RND_NONCE, session_id,
 			GNUTLS_MAX_SESSION_ID_SIZE);
 	if (ret < 0) {
 		gnutls_assert();
@@ -3392,11 +3410,14 @@ _gnutls_recv_hello_request(gnutls_session_t session, void *data,
  * This function will set the maximum size of all handshake messages.
  * Handshakes over this size are rejected with
  * %GNUTLS_E_HANDSHAKE_TOO_LARGE error code.  The default value is
- * 48kb which is typically large enough.  Set this to 0 if you do not
+ * 128kb which is typically large enough.  Set this to 0 if you do not
  * want to set an upper limit.
  *
  * The reason for restricting the handshake message sizes are to
  * limit Denial of Service attacks.
+ *
+ * Note that the maximum handshake size was increased to 128kb
+ * from 48kb in GnuTLS 3.5.5.
  **/
 void
 gnutls_handshake_set_max_packet_length(gnutls_session_t session,

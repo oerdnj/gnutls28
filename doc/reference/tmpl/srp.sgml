@@ -22,3 +22,25 @@ srp
 <!-- ##### SECTION Image ##### -->
 
 
+<!-- ##### MACRO IS_SRP_KX ##### -->
+<para>
+
+</para>
+
+@kx: 
+
+
+<!-- ##### VARIABLE ext_mod_srp ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT srp_ext_st ##### -->
+<para>
+
+</para>
+
+@username: 
+@password: 
+

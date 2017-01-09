@@ -26,7 +26,7 @@ and only  @code{oid} , will be set. That is,  @code{oid} will be set on encrypte
 structures whether supported or not. It must be deinitialized using @code{gnutls_free()} .
 The other variables are only set on supported structures.
 
-@strong{Returns:} @code{GNUTLS_E_INVALID_REQUEST}  if the provided structure isn't encrypted,
+@strong{Returns:} @code{GNUTLS_E_INVALID_REQUEST}  if the provided structure isn't an encrypted key,
 @code{GNUTLS_E_UNKNOWN_CIPHER_TYPE}  if the structure's encryption isn't supported, or
 another negative error code in case of a failure. Zero on success.
 @end deftypefun

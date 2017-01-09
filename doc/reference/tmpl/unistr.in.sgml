@@ -1,0 +1,793 @@
+<!-- ##### SECTION Title ##### -->
+unistr.in
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### SECTION Image ##### -->
+
+
+<!-- ##### FUNCTION u8_check ##### -->
+<para>
+
+</para>
+
+@s: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u8_to_u32 ##### -->
+<para>
+
+</para>
+
+@s: 
+@n: 
+@resultbuf: 
+@lengthp: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u16_to_u8 ##### -->
+<para>
+
+</para>
+
+@s: 
+@n: 
+@resultbuf: 
+@lengthp: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u16_to_u32 ##### -->
+<para>
+
+</para>
+
+@s: 
+@n: 
+@resultbuf: 
+@lengthp: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u32_to_u8 ##### -->
+<para>
+
+</para>
+
+@s: 
+@n: 
+@resultbuf: 
+@lengthp: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u32_to_u16 ##### -->
+<para>
+
+</para>
+
+@s: 
+@n: 
+@resultbuf: 
+@lengthp: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u8_mblen ##### -->
+<para>
+
+</para>
+
+@s: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u8_mbtouc_unsafe_aux ##### -->
+<para>
+
+</para>
+
+@puc: 
+@s: 
+@n: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u8_mbtouc_unsafe ##### -->
+<para>
+
+</para>
+
+@puc: 
+@s: 
+@n: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u16_mbtouc_unsafe ##### -->
+<para>
+
+</para>
+
+@puc: 
+@s: 
+@n: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u16_mbtouc_unsafe_aux ##### -->
+<para>
+
+</para>
+
+@puc: 
+@s: 
+@n: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u32_mbtouc_unsafe ##### -->
+<para>
+
+</para>
+
+@puc: 
+@s: 
+@n: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u8_mbtouc ##### -->
+<para>
+
+</para>
+
+@puc: 
+@s: 
+@n: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u8_mbtouc_aux ##### -->
+<para>
+
+</para>
+
+@puc: 
+@s: 
+@n: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u16_mbtouc ##### -->
+<para>
+
+</para>
+
+@puc: 
+@s: 
+@n: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u16_mbtouc_aux ##### -->
+<para>
+
+</para>
+
+@puc: 
+@s: 
+@n: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u32_mbtouc ##### -->
+<para>
+
+</para>
+
+@puc: 
+@s: 
+@n: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u8_mbtoucr ##### -->
+<para>
+
+</para>
+
+@puc: 
+@s: 
+@n: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u16_mbtoucr ##### -->
+<para>
+
+</para>
+
+@puc: 
+@s: 
+@n: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u32_mbtoucr ##### -->
+<para>
+
+</para>
+
+@puc: 
+@s: 
+@n: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u8_uctomb_aux ##### -->
+<para>
+
+</para>
+
+@s: 
+@uc: 
+@n: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u8_uctomb ##### -->
+<para>
+
+</para>
+
+@s: 
+@uc: 
+@n: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u16_uctomb_aux ##### -->
+<para>
+
+</para>
+
+@s: 
+@uc: 
+@n: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u16_uctomb ##### -->
+<para>
+
+</para>
+
+@s: 
+@uc: 
+@n: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u32_uctomb ##### -->
+<para>
+
+</para>
+
+@s: 
+@uc: 
+@n: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u8_cpy ##### -->
+<para>
+
+</para>
+
+@dest: 
+@src: 
+@n: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u16_cpy ##### -->
+<para>
+
+</para>
+
+@dest: 
+@src: 
+@n: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u32_cpy ##### -->
+<para>
+
+</para>
+
+@dest: 
+@src: 
+@n: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u8_move ##### -->
+<para>
+
+</para>
+
+@dest: 
+@src: 
+@n: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u16_move ##### -->
+<para>
+
+</para>
+
+@dest: 
+@src: 
+@n: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u32_move ##### -->
+<para>
+
+</para>
+
+@dest: 
+@src: 
+@n: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u8_set ##### -->
+<para>
+
+</para>
+
+@s: 
+@uc: 
+@n: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u16_set ##### -->
+<para>
+
+</para>
+
+@s: 
+@uc: 
+@n: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u32_set ##### -->
+<para>
+
+</para>
+
+@s: 
+@uc: 
+@n: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u8_cmp ##### -->
+<para>
+
+</para>
+
+@s1: 
+@s2: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u16_cpy_alloc ##### -->
+<para>
+
+</para>
+
+@s: 
+@n: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u32_cpy_alloc ##### -->
+<para>
+
+</para>
+
+@s: 
+@n: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u8_strmblen ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION u16_strmbtouc ##### -->
+<para>
+
+</para>
+
+@puc: 
+@s: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u32_strmbtouc ##### -->
+<para>
+
+</para>
+
+@puc: 
+@s: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u8_next ##### -->
+<para>
+
+</para>
+
+@puc: 
+@s: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u16_next ##### -->
+<para>
+
+</para>
+
+@puc: 
+@s: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u32_next ##### -->
+<para>
+
+</para>
+
+@puc: 
+@s: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u8_prev ##### -->
+<para>
+
+</para>
+
+@puc: 
+@s: 
+@start: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u16_prev ##### -->
+<para>
+
+</para>
+
+@puc: 
+@s: 
+@start: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u32_prev ##### -->
+<para>
+
+</para>
+
+@puc: 
+@s: 
+@start: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u8_strlen ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION u16_strcpy ##### -->
+<para>
+
+</para>
+
+@dest: 
+@src: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u32_strcpy ##### -->
+<para>
+
+</para>
+
+@dest: 
+@src: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u8_stpcpy ##### -->
+<para>
+
+</para>
+
+@dest: 
+@src: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u16_stpcpy ##### -->
+<para>
+
+</para>
+
+@dest: 
+@src: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u32_stpcpy ##### -->
+<para>
+
+</para>
+
+@dest: 
+@src: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u8_strncpy ##### -->
+<para>
+
+</para>
+
+@dest: 
+@src: 
+@n: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u16_strncpy ##### -->
+<para>
+
+</para>
+
+@dest: 
+@src: 
+@n: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u32_strncpy ##### -->
+<para>
+
+</para>
+
+@dest: 
+@src: 
+@n: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u8_stpncpy ##### -->
+<para>
+
+</para>
+
+@dest: 
+@src: 
+@n: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u16_stpncpy ##### -->
+<para>
+
+</para>
+
+@dest: 
+@src: 
+@n: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u32_stpncpy ##### -->
+<para>
+
+</para>
+
+@dest: 
+@src: 
+@n: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u8_strcat ##### -->
+<para>
+
+</para>
+
+@dest: 
+@src: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u16_strcat ##### -->
+<para>
+
+</para>
+
+@dest: 
+@src: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u32_strcat ##### -->
+<para>
+
+</para>
+
+@dest: 
+@src: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u8_strncat ##### -->
+<para>
+
+</para>
+
+@dest: 
+@src: 
+@n: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u16_strncat ##### -->
+<para>
+
+</para>
+
+@dest: 
+@src: 
+@n: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u32_strncat ##### -->
+<para>
+
+</para>
+
+@dest: 
+@src: 
+@n: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u8_strcmp_gnu ##### -->
+<para>
+
+</para>
+
+@s1: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u16_strcoll ##### -->
+<para>
+
+</para>
+
+@s1: 
+@s2: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u32_strcoll ##### -->
+<para>
+
+</para>
+
+@s1: 
+@s2: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u8_strncmp ##### -->
+<para>
+
+</para>
+
+@s1: 
+@s2: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u16_strdup ##### -->
+<para>
+
+</para>
+
+@s: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u32_strdup ##### -->
+<para>
+
+</para>
+
+@s: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u8_strchr ##### -->
+<para>
+
+</para>
+
+@str: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u16_strtok ##### -->
+<para>
+
+</para>
+
+@str: 
+@delim: 
+@ptr: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u32_strtok ##### -->
+<para>
+
+</para>
+
+@str: 
+@delim: 
+@ptr: 
+@Returns: 
+
+

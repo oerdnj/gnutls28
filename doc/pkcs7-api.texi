@@ -249,10 +249,10 @@ then  @code{certificate_size} is updated and
 
 @subheading gnutls_pkcs7_get_embedded_data
 @anchor{gnutls_pkcs7_get_embedded_data}
-@deftypefun {int} {gnutls_pkcs7_get_embedded_data} (gnutls_pkcs7_t @var{pkcs7}, unsigned @var{idx}, gnutls_datum_t * @var{data})
+@deftypefun {int} {gnutls_pkcs7_get_embedded_data} (gnutls_pkcs7_t @var{pkcs7}, unsigned @var{flags}, gnutls_datum_t * @var{data})
 @var{pkcs7}: should contain a gnutls_pkcs7_t type
 
-@var{idx}: the index of the signature info to get the data from
+@var{flags}: must be zero or @code{GNUTLS_PKCS7_EDATA_GET_RAW} 
 
 @var{data}: will hold the embedded data in the provided structure
 
@@ -260,14 +260,32 @@ This function will return the data embedded in the signature of
 the PKCS7 structure. If no data are available then
 @code{GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE}  will be returned.
 
-Note, that since a PKCS@code{7}  structure may contain embedded data
-for each attached signature, this function accepts and index which
-corresponds to the signature index to get the data from.
+The returned data must be de-allocated using @code{gnutls_free()} .
+
+Note, that this function returns the exact same data that are
+authenticated. If the @code{GNUTLS_PKCS7_EDATA_GET_RAW}  flag is provided,
+the returned data will be including the wrapping tag/value as
+they are encoded in the structure.
 
 @strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (0) is returned, otherwise a
-negative error value. 
+negative error value.
 
 @strong{Since:} 3.4.8
+@end deftypefun
+
+@subheading gnutls_pkcs7_get_embedded_data_oid
+@anchor{gnutls_pkcs7_get_embedded_data_oid}
+@deftypefun {const char *} {gnutls_pkcs7_get_embedded_data_oid} (gnutls_pkcs7_t @var{pkcs7})
+@var{pkcs7}: should contain a gnutls_pkcs7_t type
+
+This function will return the OID of the data embedded in the signature of
+the PKCS7 structure. If no data are available then @code{NULL}  will be
+returned. The returned value will be valid during the lifetime
+of the  @code{pkcs7} structure.
+
+@strong{Returns:} On success, a pointer to an OID string, @code{NULL}  on error.
+
+@strong{Since:} 3.5.5
 @end deftypefun
 
 @subheading gnutls_pkcs7_get_signature_count
@@ -441,7 +459,7 @@ and @code{GNUTLS_PKCS7_WRITE_SPKI} . They are explained in the @code{gnutls_pkcs
 definition.
 
 @strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (0) is returned, otherwise a
-negative error value. 
+negative error value.
 
 @strong{Since:} 3.4.2
 @end deftypefun
@@ -504,6 +522,14 @@ This function will verify the provided data against the signature
 present in the SignedData of the PKCS @code{7}  structure. If the data
 provided are NULL then the data in the encapsulatedContent field
 will be used instead.
+
+Note that, unlike @code{gnutls_pkcs7_verify()}  this function does not
+verify the key purpose of the signer. It is expected for the caller
+to verify the intended purpose of the @code{signer}  -e.g., via @code{gnutls_x509_crt_get_key_purpose_oid()} ,
+or @code{gnutls_x509_crt_check_key_purpose()} .
+
+Note also, that since GnuTLS 3.5.6 this function introduces checks in the
+end certificate ( @code{signer} ), including time checks and key usage checks.
 
 @strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (0) is returned, otherwise a
 negative error value. A verification error results to a

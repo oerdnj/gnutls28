@@ -29,6 +29,7 @@
 #include <string.h>
 #include <gnutls/gnutls.h>
 #include <gnutls/x509.h>
+#include <assert.h>
 
 #include "utils.h"
 
@@ -37,23 +38,51 @@ static void tls_log_func(int level, const char *str)
 	fprintf(stderr, "%s |<%d>| %s", "crq_key_id", level, str);
 }
 
+static unsigned char saved_crq_pem[] =
+	"-----BEGIN NEW CERTIFICATE REQUEST-----\n"
+	"MIICHTCCAYYCAQAwKzEOMAwGA1UEAxMFbmlrb3MxGTAXBgNVBAoTEG5vbmUgdG8s\n"
+	"IG1lbnRpb24wgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBALtmQ/Xyxde2jMzF\n"
+	"3/WIO7HJS2oOoa0gUEAIgKFPXKPQ+GzP5jz37AR2ExeLZIkiW8DdU3w77XwEu4C5\n"
+	"KL6Om8aOoKUSy/VXHqLnu7czSZ/ju0quak1o/8kR4jKNzj2AC41179gAgY8oBAOg\n"
+	"Io1hBAf6tjd9IQdJ0glhaZiQo1ipAgMBAAGggbEwEgYJKoZIhvcNAQkHMQUTA2Zv\n"
+	"bzCBmgYJKoZIhvcNAQkOMYGMMIGJMA8GA1UdEwEB/wQFMAMCAQAwDwYDVR0PAQH/\n"
+	"BAUDAwcAADAjBgNVHREEHDAaggNhcGGCA2Zvb4IOeG4tLWt4YXdoay5jb20wHQYD\n"
+	"VR0lBBYwFAYIKwYBBQUHAwEGCCsGAQUFBwMCMAsGBCoDBAUEA8r+/zAUBggtA4KI\n"
+	"9LkXBQEB/wQFyv7/+v4wDQYJKoZIhvcNAQELBQADgYEAlspSTGu5KPL7iEQObEvs\n"
+	"+FMZpXnPDXyeJyiJFEfDaTDCpeHfZfMXUpPQEAxLjk5t8gPUxepQCjOizOuMD70k\n"
+	"jg8x97E8crA2mZ9Bk/eRhxvdXGN1hBdNzY6BGuPWifN/8dfE6O8wQkZDIZFcYxyr\n"
+	"V1VQd3moq0ge+tR9+xpPVWg=\n"
+	"-----END NEW CERTIFICATE REQUEST-----\n";
+
+const gnutls_datum_t saved_crq = { saved_crq_pem, sizeof(saved_crq_pem)-1 };
+
 static unsigned char key_pem[] =
-    "-----BEGIN RSA PRIVATE KEY-----\n"
-    "MIICXAIBAAKBgQC7ZkP18sXXtozMxd/1iDuxyUtqDqGtIFBACIChT1yj0Phsz+Y8\n"
-    "9+wEdhMXi2SJIlvA3VN8O+18BLuAuSi+jpvGjqClEsv1Vx6i57u3M0mf47tKrmpN\n"
-    "aP/JEeIyjc49gAuNde/YAIGPKAQDoCKNYQQH+rY3fSEHSdIJYWmYkKNYqQIDAQAB\n"
-    "AoGADpmARG5CQxS+AesNkGmpauepiCz1JBF/JwnyiX6vEzUh0Ypd39SZztwrDxvF\n"
-    "PJjQaKVljml1zkJpIDVsqvHdyVdse8M+Qn6hw4x2p5rogdvhhIL1mdWo7jWeVJTF\n"
-    "RKB7zLdMPs3ySdtcIQaF9nUAQ2KJEvldkO3m/bRJFEp54k0CQQDYy+RlTmwRD6hy\n"
-    "7UtMjR0H3CSZJeQ8svMCxHLmOluG9H1UKk55ZBYfRTsXniqUkJBZ5wuV1L+pR9EK\n"
-    "ca89a+1VAkEA3UmBelwEv2u9cAU1QjKjmwju1JgXbrjEohK+3B5y0ESEXPAwNQT9\n"
-    "TrDM1m9AyxYTWLxX93dI5QwNFJtmbtjeBQJARSCWXhsoaDRG8QZrCSjBxfzTCqZD\n"
-    "ZXtl807ymCipgJm60LiAt0JLr4LiucAsMZz6+j+quQbSakbFCACB8SLV1QJBAKZQ\n"
-    "YKf+EPNtnmta/rRKKvySsi3GQZZN+Dt3q0r094XgeTsAqrqujVNfPhTMeP4qEVBX\n"
-    "/iVX2cmMTSh3w3z8MaECQEp0XJWDVKOwcTW6Ajp9SowtmiZ3YDYo1LF9igb4iaLv\n"
-    "sWZGfbnU3ryjvkb6YuFjgtzbZDZHWQCo8/cOtOBmPdk=\n"
-    "-----END RSA PRIVATE KEY-----\n";
-const gnutls_datum_t key = { key_pem, sizeof(key_pem) };
+	"-----BEGIN RSA PRIVATE KEY-----\n"
+	"MIICXAIBAAKBgQC7ZkP18sXXtozMxd/1iDuxyUtqDqGtIFBACIChT1yj0Phsz+Y8\n"
+	"9+wEdhMXi2SJIlvA3VN8O+18BLuAuSi+jpvGjqClEsv1Vx6i57u3M0mf47tKrmpN\n"
+	"aP/JEeIyjc49gAuNde/YAIGPKAQDoCKNYQQH+rY3fSEHSdIJYWmYkKNYqQIDAQAB\n"
+	"AoGADpmARG5CQxS+AesNkGmpauepiCz1JBF/JwnyiX6vEzUh0Ypd39SZztwrDxvF\n"
+	"PJjQaKVljml1zkJpIDVsqvHdyVdse8M+Qn6hw4x2p5rogdvhhIL1mdWo7jWeVJTF\n"
+	"RKB7zLdMPs3ySdtcIQaF9nUAQ2KJEvldkO3m/bRJFEp54k0CQQDYy+RlTmwRD6hy\n"
+	"7UtMjR0H3CSZJeQ8svMCxHLmOluG9H1UKk55ZBYfRTsXniqUkJBZ5wuV1L+pR9EK\n"
+	"ca89a+1VAkEA3UmBelwEv2u9cAU1QjKjmwju1JgXbrjEohK+3B5y0ESEXPAwNQT9\n"
+	"TrDM1m9AyxYTWLxX93dI5QwNFJtmbtjeBQJARSCWXhsoaDRG8QZrCSjBxfzTCqZD\n"
+	"ZXtl807ymCipgJm60LiAt0JLr4LiucAsMZz6+j+quQbSakbFCACB8SLV1QJBAKZQ\n"
+	"YKf+EPNtnmta/rRKKvySsi3GQZZN+Dt3q0r094XgeTsAqrqujVNfPhTMeP4qEVBX\n"
+	"/iVX2cmMTSh3w3z8MaECQEp0XJWDVKOwcTW6Ajp9SowtmiZ3YDYo1LF9igb4iaLv\n"
+	"sWZGfbnU3ryjvkb6YuFjgtzbZDZHWQCo8/cOtOBmPdk=\n"
+	"-----END RSA PRIVATE KEY-----\n";
+const gnutls_datum_t key = { key_pem, sizeof(key_pem)-1 };
+
+static time_t mytime(time_t * t)
+{
+	time_t then = 1207000800;
+
+	if (t)
+		*t = then;
+
+	return then;
+}
 
 static gnutls_x509_crq_t generate_crq(void)
 {
@@ -104,7 +133,7 @@ static gnutls_x509_crq_t generate_crq(void)
 		fail("%d: gnutls_x509_crq_get_challenge_password %d: %s\n",
 		     __LINE__, ret, gnutls_strerror(ret));
 
-	ret = gnutls_x509_crq_set_dn(crq, "cn = nikos, o = none to\\, mention", &err);
+	ret = gnutls_x509_crq_set_dn(crq, "o = none to\\, mention,cn = nikos", &err);
 	if (ret < 0) {
 		fail("gnutls_x509_crq_set_dn: %s, %s\n", gnutls_strerror(ret), err);
 	}
@@ -150,6 +179,11 @@ static gnutls_x509_crq_t generate_crq(void)
 
 	ret = gnutls_x509_crq_set_subject_alt_name(crq, GNUTLS_SAN_DNSNAME,
 						   "foo", 3, 1);
+	if (ret != 0)
+		fail("gnutls_x509_crq_set_subject_alt_name\n");
+
+	ret = gnutls_x509_crq_set_subject_alt_name(crq, GNUTLS_SAN_DNSNAME,
+						   "νίκο.com", strlen("νίκο.com"), GNUTLS_FSAN_APPEND);
 	if (ret != 0)
 		fail("gnutls_x509_crq_set_subject_alt_name\n");
 
@@ -260,7 +294,7 @@ static void run_set_extensions(gnutls_x509_crq_t crq)
 	if (ret != 0)
 		fail("gnutls_x509_crt_set_crq: %s\n", gnutls_strerror(ret));
 
-	ret = gnutls_x509_crt_set_issuer_dn(crt, "cn = my CA, o = big\\, and one", &err);
+	ret = gnutls_x509_crt_set_issuer_dn(crt, "o = big\\, and one, cn = my CA", &err);
 	if (ret < 0) {
 		fail("gnutls_x509_crt_set_issuer_dn: %s, %s\n", gnutls_strerror(ret), err);
 	}
@@ -286,6 +320,7 @@ static void run_set_extensions(gnutls_x509_crq_t crq)
 
 	if (out.size != 41 ||
 	    memcmp(out.data, "\x30\x27\x31\x0e\x30\x0c\x06\x03\x55\x04\x03\x13\x05\x6d\x79\x20\x43\x41\x31\x15\x30\x13\x06\x03\x55\x04\x0a\x13\x0c\x62\x69\x67\x2c\x20\x61\x6e\x64\x20\x6f\x6e\x65", 41) != 0) {
+		hexprint(out.data, out.size);
 		fail("issuer DN comparison failed\n");
 	}
 	gnutls_free(out.data);
@@ -332,7 +367,7 @@ static void run_set_extension_by_oid(gnutls_x509_crq_t crq)
 	if (ret != 0)
 		fail("gnutls_x509_crt_set_crq: %s\n", gnutls_strerror(ret));
 
-	ret = gnutls_x509_crt_set_issuer_dn(crt, "cn = my CA, o = big\\, and one", &err);
+	ret = gnutls_x509_crt_set_issuer_dn(crt, "o = big\\, and one,cn = my CA", &err);
 	if (ret < 0) {
 		fail("gnutls_x509_crt_set_issuer_dn: %s, %s\n", gnutls_strerror(ret), err);
 	}
@@ -401,10 +436,23 @@ static void run_set_extension_by_oid(gnutls_x509_crq_t crq)
 
 void doit(void)
 {
-	gnutls_x509_crq_t crq = generate_crq();
+	gnutls_datum_t out;
+	gnutls_x509_crq_t crq;
+
+	gnutls_global_set_time_function(mytime);
+
+	crq = generate_crq();
 
 	run_set_extensions(crq);
 	run_set_extension_by_oid(crq);
 
+	assert(gnutls_x509_crq_export2(crq, GNUTLS_X509_FMT_PEM, &out) >= 0);
+
+#ifdef HAVE_LIBIDN
+	assert(out.size == saved_crq.size);
+	assert(memcmp(out.data, saved_crq.data, out.size)==0);
+#endif
+
+	gnutls_free(out.data);
 	gnutls_x509_crq_deinit(crq);
 }

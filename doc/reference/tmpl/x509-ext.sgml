@@ -1,0 +1,638 @@
+<!-- ##### SECTION Title ##### -->
+x509-ext
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### SECTION Image ##### -->
+
+
+<!-- ##### TYPEDEF gnutls_subject_alt_names_t ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION gnutls_subject_alt_names_init ##### -->
+<para>
+
+</para>
+
+@Param1: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_subject_alt_names_deinit ##### -->
+<para>
+
+</para>
+
+@sans: 
+
+
+<!-- ##### FUNCTION gnutls_subject_alt_names_get ##### -->
+<para>
+
+</para>
+
+@sans: 
+@seq: 
+@san_type: 
+@san: 
+@othername_oid: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_subject_alt_names_set ##### -->
+<para>
+
+</para>
+
+@sans: 
+@san_type: 
+@san: 
+@othername_oid: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_ext_import_subject_alt_names ##### -->
+<para>
+
+</para>
+
+@ext: 
+@Param2: 
+@flags: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_ext_export_subject_alt_names ##### -->
+<para>
+
+</para>
+
+@Param1: 
+@ext: 
+@Returns: 
+
+
+<!-- ##### MACRO gnutls_x509_ext_import_issuer_alt_name ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO gnutls_x509_ext_export_issuer_alt_name ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### TYPEDEF gnutls_x509_crl_dist_points_t ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION gnutls_x509_crl_dist_points_init ##### -->
+<para>
+
+</para>
+
+@Param1: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crl_dist_points_deinit ##### -->
+<para>
+
+</para>
+
+@Param1: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crl_dist_points_get ##### -->
+<para>
+
+</para>
+
+@Param1: 
+@seq: 
+@type: 
+@dist: 
+@reason_flags: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crl_dist_points_set ##### -->
+<para>
+
+</para>
+
+@Param1: 
+@type: 
+@dist: 
+@reason_flags: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_ext_import_crl_dist_points ##### -->
+<para>
+
+</para>
+
+@ext: 
+@dp: 
+@flags: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_ext_export_crl_dist_points ##### -->
+<para>
+
+</para>
+
+@dp: 
+@ext: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_ext_import_name_constraints ##### -->
+<para>
+
+</para>
+
+@ext: 
+@nc: 
+@flags: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_ext_export_name_constraints ##### -->
+<para>
+
+</para>
+
+@nc: 
+@ext: 
+@Returns: 
+
+
+<!-- ##### TYPEDEF gnutls_x509_aia_t ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION gnutls_x509_aia_init ##### -->
+<para>
+
+</para>
+
+@Param1: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_aia_deinit ##### -->
+<para>
+
+</para>
+
+@Param1: 
+
+
+<!-- ##### FUNCTION gnutls_x509_aia_get ##### -->
+<para>
+
+</para>
+
+@aia: 
+@seq: 
+@oid: 
+@san_type: 
+@san: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_aia_set ##### -->
+<para>
+
+</para>
+
+@aia: 
+@oid: 
+@san_type: 
+@san: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_ext_import_aia ##### -->
+<para>
+
+</para>
+
+@ext: 
+@Param2: 
+@flags: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_ext_export_aia ##### -->
+<para>
+
+</para>
+
+@aia: 
+@ext: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_ext_import_subject_key_id ##### -->
+<para>
+
+</para>
+
+@ext: 
+@id: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_ext_export_subject_key_id ##### -->
+<para>
+
+</para>
+
+@id: 
+@ext: 
+@Returns: 
+
+
+<!-- ##### TYPEDEF gnutls_x509_aki_t ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION gnutls_x509_ext_export_authority_key_id ##### -->
+<para>
+
+</para>
+
+@Param1: 
+@ext: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_ext_import_authority_key_id ##### -->
+<para>
+
+</para>
+
+@ext: 
+@Param2: 
+@flags: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_othername_to_virtual ##### -->
+<para>
+
+</para>
+
+@oid: 
+@othername: 
+@virt_type: 
+@virt: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_aki_init ##### -->
+<para>
+
+</para>
+
+@Param1: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_aki_get_id ##### -->
+<para>
+
+</para>
+
+@Param1: 
+@id: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_aki_get_cert_issuer ##### -->
+<para>
+
+</para>
+
+@aki: 
+@seq: 
+@san_type: 
+@san: 
+@othername_oid: 
+@serial: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_aki_set_id ##### -->
+<para>
+
+</para>
+
+@aki: 
+@id: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_aki_set_cert_issuer ##### -->
+<para>
+
+</para>
+
+@aki: 
+@san_type: 
+@san: 
+@othername_oid: 
+@serial: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_aki_deinit ##### -->
+<para>
+
+</para>
+
+@Param1: 
+
+
+<!-- ##### FUNCTION gnutls_x509_ext_import_private_key_usage_period ##### -->
+<para>
+
+</para>
+
+@ext: 
+@activation: 
+@expiration: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_ext_export_private_key_usage_period ##### -->
+<para>
+
+</para>
+
+@activation: 
+@expiration: 
+@ext: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_ext_import_basic_constraints ##### -->
+<para>
+
+</para>
+
+@ext: 
+@ca: 
+@pathlen: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_ext_export_basic_constraints ##### -->
+<para>
+
+</para>
+
+@ca: 
+@pathlen: 
+@ext: 
+@Returns: 
+
+
+<!-- ##### TYPEDEF gnutls_x509_key_purposes_t ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION gnutls_x509_key_purpose_init ##### -->
+<para>
+
+</para>
+
+@p: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_key_purpose_deinit ##### -->
+<para>
+
+</para>
+
+@p: 
+
+
+<!-- ##### FUNCTION gnutls_x509_key_purpose_set ##### -->
+<para>
+
+</para>
+
+@p: 
+@oid: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_key_purpose_get ##### -->
+<para>
+
+</para>
+
+@p: 
+@idx: 
+@oid: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_ext_import_key_purposes ##### -->
+<para>
+
+</para>
+
+@ext: 
+@Param2: 
+@flags: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_ext_export_key_purposes ##### -->
+<para>
+
+</para>
+
+@Param1: 
+@ext: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_ext_import_key_usage ##### -->
+<para>
+
+</para>
+
+@ext: 
+@key_usage: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_ext_export_key_usage ##### -->
+<para>
+
+</para>
+
+@key_usage: 
+@ext: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_ext_import_proxy ##### -->
+<para>
+
+</para>
+
+@ext: 
+@pathlen: 
+@policyLanguage: 
+@policy: 
+@sizeof_policy: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_ext_export_proxy ##### -->
+<para>
+
+</para>
+
+@pathLenConstraint: 
+@policyLanguage: 
+@policy: 
+@sizeof_policy: 
+@ext: 
+@Returns: 
+
+
+<!-- ##### TYPEDEF gnutls_x509_policies_t ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION gnutls_x509_policies_init ##### -->
+<para>
+
+</para>
+
+@Param1: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_policies_deinit ##### -->
+<para>
+
+</para>
+
+@Param1: 
+
+
+<!-- ##### FUNCTION gnutls_x509_policies_get ##### -->
+<para>
+
+</para>
+
+@policies: 
+@seq: 
+@policy: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_policies_set ##### -->
+<para>
+
+</para>
+
+@policies: 
+@policy: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_ext_import_policies ##### -->
+<para>
+
+</para>
+
+@ext: 
+@policies: 
+@flags: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_ext_export_policies ##### -->
+<para>
+
+</para>
+
+@policies: 
+@ext: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_ext_import_tlsfeatures ##### -->
+<para>
+
+</para>
+
+@ext: 
+@Param2: 
+@flags: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_ext_export_tlsfeatures ##### -->
+<para>
+
+</para>
+
+@f: 
+@ext: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_tlsfeatures_add ##### -->
+<para>
+
+</para>
+
+@f: 
+@feature: 
+@Returns: 
+
+

@@ -20,38 +20,24 @@ system
 <!-- ##### SECTION Image ##### -->
 
 
-<!-- ##### MACRO HAVE_NO_LOCKS ##### -->
+<!-- ##### MACRO NEED_CERT_ENUM_CRLS ##### -->
 <para>
 
 </para>
 
 
 
-<!-- ##### MACRO HAVE_PTHREAD_LOCKS ##### -->
+<!-- ##### VARIABLE pCertEnumCRLsInStore ##### -->
 <para>
 
 </para>
 
 
-
-<!-- ##### MACRO HAVE_WIN32_LOCKS ##### -->
+<!-- ##### MACRO GNUTLS_PATH_MAX ##### -->
 <para>
 
 </para>
 
-
-
-<!-- ##### MACRO HAVE_WRITEV ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### VARIABLE gnutls_time ##### -->
-<para>
-
-</para>
 
 
 <!-- ##### FUNCTION system_errno ##### -->
@@ -60,17 +46,6 @@ system
 </para>
 
 @Param1: 
-@Returns: 
-
-
-<!-- ##### FUNCTION system_read ##### -->
-<para>
-
-</para>
-
-@ptr: 
-@data: 
-@data_size: 
 @Returns: 
 
 
@@ -85,6 +60,13 @@ system
 @Returns: 
 
 
+<!-- ##### MACRO HAVE_WRITEV ##### -->
+<para>
+
+</para>
+
+
+
 <!-- ##### FUNCTION system_writev ##### -->
 <para>
 
@@ -94,5 +76,76 @@ system
 @iovec: 
 @iovec_cnt: 
 @Returns: 
+
+
+<!-- ##### FUNCTION system_writev_nosignal ##### -->
+<para>
+
+</para>
+
+@ptr: 
+@iovec: 
+@iovec_cnt: 
+@Returns: 
+
+
+<!-- ##### FUNCTION system_writev_tfo ##### -->
+<para>
+
+</para>
+
+@ptr: 
+@iovec: 
+@iovec_cnt: 
+@Returns: 
+
+
+<!-- ##### FUNCTION system_writev_nosignal_tfo ##### -->
+<para>
+
+</para>
+
+@ptr: 
+@iovec: 
+@iovec_cnt: 
+@Returns: 
+
+
+<!-- ##### FUNCTION system_read ##### -->
+<para>
+
+</para>
+
+@ptr: 
+@data: 
+@data_size: 
+@Returns: 
+
+
+<!-- ##### MACRO HAVE_WIN32_LOCKS ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO HAVE_PTHREAD_LOCKS ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO HAVE_NO_LOCKS ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### VARIABLE gnutls_time ##### -->
+<para>
+
+</para>
 
 

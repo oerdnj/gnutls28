@@ -51,6 +51,11 @@ SUBDIRS += openpgp
 AM_CPPFLAGS += -I$(srcdir)/opencdk
 endif
 
+if !HAVE_LIBUNISTRING
+SUBDIRS += unistring
+AM_CPPFLAGS += -I$(srcdir)/unistring/ -I$(builddir)/unistring/
+endif
+
 if ENABLE_MINITASN1
 AM_CPPFLAGS += -I$(srcdir)/minitasn1
 endif
@@ -68,18 +73,18 @@ PSK_COBJECTS = psk.c
 
 COBJECTS = range.c record.c compress.c debug.c cipher.c			\
 	mbuffers.c buffers.c handshake.c num.c errors.c dh.c kx.c	\
-	priority.c hash_int.c cipher_int.c session.c db.c x509_b64.c 	\
+	priority.c hash_int.c cipher_int.c session.c db.c x509_b64.c	\
 	extensions.c auth.c sslv2_compat.c datum.c session_pack.c mpi.c \
 	pk.c cert.c global.c constate.c anon_cred.c pkix_asn1_tab.c gnutls_asn1_tab.c	\
-	mem.c fingerprint.c tls-sig.c ecc.c alert.c privkey_raw.c	\
-	system/certs.c system/threads.c system/fastopen.c system/sockets.c \
-	system/inet_ntop.c system/iconv.c system/vasprintf.c vasprintf.h system.c \
-	str.c state.c x509.c file.c supplemental.c	\
-	random.c crypto-api.c privkey.c pcert.c	pubkey.c locks.c dtls.c 	\
+	mem.c fingerprint.c tls-sig.c ecc.c alert.c privkey_raw.c		\
+	system/certs.c system/threads.c system/fastopen.c system/sockets.c	\
+	system/inet_ntop.c str-iconv.c system/vasprintf.c vasprintf.h system.c \
+	str.c str-unicode.c state.c x509.c file.c supplemental.c		\
+	random.c crypto-api.c privkey.c pcert.c	pubkey.c locks.c dtls.c		\
 	system_override.c crypto-backend.c verify-tofu.c pin.c tpm.c fips.c	\
 	safe-memfuncs.c system/inet_pton.c atfork.c atfork.h randomart.c \
 	system-keys.h urls.c urls.h prf.c auto-verify.c dh-session.c \
-	cert-session.c handshake-checks.c dtls-sw.c
+	cert-session.c handshake-checks.c dtls-sw.c dh-primes.c
 
 if WINDOWS
 COBJECTS += system/keys-win.c
@@ -131,10 +136,16 @@ libgnutls_la_LIBADD = ../gl/libgnu.la x509/libgnutls_x509.la \
 	auth/libgnutls_auth.la algorithms/libgnutls_alg.la \
 	extras/libgnutls_extras.la
 thirdparty_libadd = $(LTLIBZ) $(LTLIBINTL) $(LIBSOCKET) $(LTLIBNSL) \
-	$(LTLIBICONV) $(P11_KIT_LIBS) $(LIB_SELECT)
+	$(P11_KIT_LIBS) $(LIB_SELECT)
 
 if HAVE_LIBIDN
 thirdparty_libadd += $(LIBIDN_LIBS)
+endif
+
+if HAVE_LIBUNISTRING
+thirdparty_libadd += $(LTLIBUNISTRING)
+else
+libgnutls_la_LIBADD += unistring/libunistring.la
 endif
 
 if ENABLE_NETTLE
@@ -150,11 +161,11 @@ thirdparty_libadd += $(LTLIBRT)
 endif
 
 if ENABLE_FIPS140
-thirdparty_libadd += $(FIPS140_LIBS)
+thirdparty_libadd += $(FIPS140_LIBS) $(LTLIBDL)
 endif
 
 if ENABLE_TROUSERS
-thirdparty_libadd += $(LIBDL)
+thirdparty_libadd += $(LTLIBDL)
 endif
 
 if ENABLE_OPENPGP
@@ -182,7 +193,7 @@ endif
 if HAVE_LD_OUTPUT_DEF
 libgnutls_la_LDFLAGS += -Wl,--output-def,libgnutls-$(DLL_VERSION).def
 libgnutls-$(DLL_VERSION).def: libgnutls.la
-defexecdir = $(bindir)
+defexecdir = $(libdir)
 defexec_DATA = libgnutls-$(DLL_VERSION).def
 DISTCLEANFILES += $(defexec_DATA)
 endif

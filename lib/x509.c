@@ -56,6 +56,13 @@
  * some x509 certificate parsing functions.
  */
 
+#define CRED_RET_SUCCESS(cred) \
+	if (cred->flags & GNUTLS_CERTIFICATE_API_V2) { \
+		return cred->ncerts-1; \
+	} else { \
+		return 0; \
+	}
+
 /* fifteen days */
 #define MAX_OCSP_VALIDITY_SECS (15*60*60*24)
 #ifdef ENABLE_OCSP
@@ -364,8 +371,8 @@ _gnutls_x509_cert_verify_peers(gnutls_session_t session,
 	}
 
 	ret =
-	    check_ocsp_response(session, peer_certificate_list[0], cred->tlist, cand_issuers,
-	    			cand_issuers_size, &resp, &ocsp_status);
+		check_ocsp_response(session, peer_certificate_list[0], cred->tlist, cand_issuers,
+				    cand_issuers_size, &resp, &ocsp_status);
 
 	if (ret < 0) {
 		CLEAR_CERTS;
@@ -396,6 +403,25 @@ _gnutls_x509_cert_verify_peers(gnutls_session_t session,
 	return 0;
 }
 
+static int str_array_append_idna(gnutls_str_array_t * head, const char *name, size_t size)
+{
+	int ret;
+	gnutls_datum_t ahost;
+
+	/* convert the provided hostname to ACE-Labels domain. */
+	ret = gnutls_idna_map(name, size, &ahost, 0);
+	if (ret < 0) {
+		_gnutls_debug_log("unable to convert hostname %s to IDNA format\n", name);
+		/* insert the raw name */
+		return _gnutls_str_array_append(head, name, size);
+	}
+
+	ret = _gnutls_str_array_append(head, (char*)ahost.data, ahost.size);
+	gnutls_free(ahost.data);
+
+	return ret;
+}
+
 /* Returns the name of the certificate of a null name
  */
 static int get_x509_name(gnutls_x509_crt_t crt, gnutls_str_array_t * names)
@@ -415,8 +441,8 @@ static int get_x509_name(gnutls_x509_crt_t crt, gnutls_str_array_t * names)
 			have_dns_name = 1;
 
 			ret2 =
-			    _gnutls_str_array_append(names, name,
-						     max_size);
+			    str_array_append_idna(names, name,
+						  max_size);
 			if (ret2 < 0) {
 				_gnutls_str_array_clear(names);
 				return gnutls_assert_val(ret2);
@@ -430,7 +456,7 @@ static int get_x509_name(gnutls_x509_crt_t crt, gnutls_str_array_t * names)
 		    gnutls_x509_crt_get_dn_by_oid(crt, OID_X520_COMMON_NAME, 0, 0,
 						  name, &max_size);
 		if (ret >= 0) {
-			ret = _gnutls_str_array_append(names, name, max_size);
+			ret = str_array_append_idna(names, name, max_size);
 			if (ret < 0) {
 				_gnutls_str_array_clear(names);
 				return gnutls_assert_val(ret);
@@ -820,11 +846,11 @@ read_cert_url(gnutls_certificate_credentials_t res, const char *url)
 
 	/* Try to load the whole certificate chain from the PKCS #11 token */
 	for (i=0;i<MAX_PKCS11_CERT_CHAIN;i++) {
-       	        ret = gnutls_x509_crt_check_issuer(crt, crt);
-                if (i > 0 && ret != 0) {
-                	/* self signed */
-       	                break;
-                }
+		ret = gnutls_x509_crt_check_issuer(crt, crt);
+		if (i > 0 && ret != 0) {
+			/* self signed */
+			break;
+		}
 
 		ret = gnutls_pcert_import_x509(&ccert[i], crt, 0);
 		if (ret < 0) {
@@ -966,7 +992,12 @@ read_key_file(gnutls_certificate_credentials_t res,
  * The @key may be %NULL if you are using a sign callback, see
  * gnutls_sign_callback_set().
  *
- * Returns: %GNUTLS_E_SUCCESS (0) on success, or a negative error code.
+ * Note that, this function by default returns zero on success and a negative value on error.
+ * Since 3.5.6, when the flag %GNUTLS_CERTIFICATE_API_V2 is set using gnutls_certificate_set_flags()
+ * it returns an index (greater or equal to zero). That index can be used to other functions to refer to the added key-pair.
+ *
+ * Returns: On success this functions returns zero, and otherwise a negative value on error (see above for modifying that behavior).
+ *
  **/
 int
 gnutls_certificate_set_x509_key_mem(gnutls_certificate_credentials_t res,
@@ -1002,7 +1033,11 @@ gnutls_certificate_set_x509_key_mem(gnutls_certificate_credentials_t res,
  * The @key may be %NULL if you are using a sign callback, see
  * gnutls_sign_callback_set().
  *
- * Returns: %GNUTLS_E_SUCCESS (0) on success, or a negative error code.
+ * Note that, this function by default returns zero on success and a negative value on error.
+ * Since 3.5.6, when the flag %GNUTLS_CERTIFICATE_API_V2 is set using gnutls_certificate_set_flags()
+ * it returns an index (greater or equal to zero). That index can be used to other functions to refer to the added key-pair.
+ *
+ * Returns: On success this functions returns zero, and otherwise a negative value on error (see above for modifying that behavior).
  **/
 int
 gnutls_certificate_set_x509_key_mem2(gnutls_certificate_credentials_t res,
@@ -1032,7 +1067,7 @@ gnutls_certificate_set_x509_key_mem2(gnutls_certificate_credentials_t res,
 		return ret;
 	}
 
-	return 0;
+	CRED_RET_SUCCESS(res);
 }
 
 int
@@ -1047,6 +1082,8 @@ certificate_credential_append_crt_list(gnutls_certificate_credentials_t
 		gnutls_assert();
 		return GNUTLS_E_MEMORY_ERROR;
 	}
+
+	memset(&res->certs[res->ncerts], 0, sizeof(res->certs[0]));
 
 	res->certs[res->ncerts].cert_list = crt;
 	res->certs[res->ncerts].cert_list_length = nr;
@@ -1092,7 +1129,11 @@ certificate_credentials_append_pkey(gnutls_certificate_credentials_t res,
  * If that function fails to load the @res type is at an undefined state, it must
  * not be reused to load other keys or certificates.
  *
- * Returns: %GNUTLS_E_SUCCESS (0) on success, or a negative error code.
+ * Note that, this function by default returns zero on success and a negative value on error.
+ * Since 3.5.6, when the flag %GNUTLS_CERTIFICATE_API_V2 is set using gnutls_certificate_set_flags()
+ * it returns an index (greater or equal to zero). That index can be used to other functions to refer to the added key-pair.
+ *
+ * Returns: On success this functions returns zero, and otherwise a negative value on error (see above for modifying that behavior).
  *
  * Since: 2.4.0
  **/
@@ -1149,8 +1190,8 @@ gnutls_certificate_set_x509_key(gnutls_certificate_credentials_t res,
 	}
 
 	ret =
-	    gnutls_pcert_import_x509_list(pcerts, cert_list, (unsigned int*)&cert_list_size,
-	    				  GNUTLS_X509_CRT_LIST_SORT);
+		gnutls_pcert_import_x509_list(pcerts, cert_list, (unsigned int*)&cert_list_size,
+					      GNUTLS_X509_CRT_LIST_SORT);
 	if (ret < 0) {
 		gnutls_assert();
 		goto cleanup;
@@ -1166,15 +1207,18 @@ gnutls_certificate_set_x509_key(gnutls_certificate_credentials_t res,
 
 	res->ncerts++;
 
+	/* after this point we do not deinitialize anything on failure to avoid
+	 * double freeing. We intentionally keep everything as the credentials state
+	 * is documented to be on undefined state. */
 	if ((ret = _gnutls_check_key_cert_match(res)) < 0) {
 		gnutls_assert();
-		goto cleanup;
+		return ret;
 	}
 
-	return 0;
+	CRED_RET_SUCCESS(res);
 
       cleanup:
-        gnutls_free(pcerts);
+	gnutls_free(pcerts);
 	_gnutls_str_array_clear(&names);
 	return ret;
 }
@@ -1193,6 +1237,9 @@ gnutls_certificate_set_x509_key(gnutls_certificate_credentials_t res,
  * gnutls_certificate_set_x509_key_mem2(). The returned key must be deallocated
  * with gnutls_x509_privkey_deinit() when no longer needed.
  *
+ * The @index matches the return value of gnutls_certificate_set_x509_key() and friends
+ * functions, when the %GNUTLS_CERTIFICATE_API_V2 flag is set.
+ *
  * If there is no key with the given index,
  * %GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE is returned. If the key with the
  * given index is not a X.509 key, %GNUTLS_E_INVALID_REQUEST is returned.
@@ -1203,8 +1250,8 @@ gnutls_certificate_set_x509_key(gnutls_certificate_credentials_t res,
  */
 int
 gnutls_certificate_get_x509_key(gnutls_certificate_credentials_t res,
-                                unsigned index,
-                                gnutls_x509_privkey_t *key)
+				unsigned index,
+				gnutls_x509_privkey_t *key)
 {
 	if (index >= res->ncerts) {
 		gnutls_assert();
@@ -1230,6 +1277,9 @@ gnutls_certificate_get_x509_key(gnutls_certificate_credentials_t res,
  * certificate list must be deallocated with gnutls_x509_crt_deinit(), and the
  * list itself must be freed with gnutls_free().
  *
+ * The @index matches the return value of gnutls_certificate_set_x509_key() and friends
+ * functions, when the %GNUTLS_CERTIFICATE_API_V2 flag is set.
+ *
  * If there is no certificate with the given index,
  * %GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE is returned. If the certificate
  * with the given index is not a X.509 certificate, %GNUTLS_E_INVALID_REQUEST
@@ -1242,9 +1292,9 @@ gnutls_certificate_get_x509_key(gnutls_certificate_credentials_t res,
  */
 int
 gnutls_certificate_get_x509_crt(gnutls_certificate_credentials_t res,
-                                unsigned index,
-                                gnutls_x509_crt_t **crt_list,
-                                unsigned *crt_list_size)
+				unsigned index,
+				gnutls_x509_crt_t **crt_list,
+				unsigned *crt_list_size)
 {
 	int ret;
 	unsigned i;
@@ -1289,18 +1339,22 @@ gnutls_certificate_get_x509_crt(gnutls_certificate_credentials_t res,
  * This function sets a certificate/private key pair in the
  * gnutls_certificate_credentials_t type.  This function may be
  * called more than once, in case multiple keys/certificates exist for
- * the server.  For clients that wants to send more than its own end
- * entity certificate (e.g., also an intermediate CA cert) then put
- * the certificate chain in @pcert_list. 
+ * the server.  For clients that want to send more than their own end-
+ * entity certificate (e.g., also an intermediate CA cert), the full
+ * certificate chain must be provided in @pcert_list.
  *
  * Note that the @key and the elements of @pcert_list will become part of the credentials 
  * structure and must not be deallocated. They will be automatically deallocated 
- * when the @res type is deinitialized.
+ * when the @res structure is deinitialized.
  *
  * If that function fails to load the @res structure is at an undefined state, it must
  * not be reused to load other keys or certificates.
  *
- * Returns: %GNUTLS_E_SUCCESS (0) on success, or a negative error code.
+ * Note that, this function by default returns zero on success and a negative value on error.
+ * Since 3.5.6, when the flag %GNUTLS_CERTIFICATE_API_V2 is set using gnutls_certificate_set_flags()
+ * it returns an index (greater or equal to zero). That index can be used to other functions to refer to the added key-pair.
+ *
+ * Returns: On success this functions returns zero, and otherwise a negative value on error (see above for modifying that behavior).
  *
  * Since: 3.0
  **/
@@ -1320,7 +1374,7 @@ gnutls_certificate_set_key(gnutls_certificate_credentials_t res,
 	if (names != NULL && names_size > 0) {
 		for (i = 0; i < names_size; i++) {
 			ret =
-			    _gnutls_str_array_append(&str_names, names[i],
+			    str_array_append_idna(&str_names, names[i],
 						     strlen(names[i]));
 			if (ret < 0) {
 				ret = gnutls_assert_val(ret);
@@ -1381,12 +1435,18 @@ gnutls_certificate_set_key(gnutls_certificate_credentials_t res,
 
 	res->ncerts++;
 
+	/* Unlike gnutls_certificate_set_x509_key, we deinitialize everything
+	 * local after a failure. That is because the caller is responsible for
+	 * freeing these values after a failure, and if we keep references we
+	 * lead to double freeing */
 	if ((ret = _gnutls_check_key_cert_match(res)) < 0) {
 		gnutls_assert();
-		return ret;
+		gnutls_free(new_pcert_list);
+		res->ncerts--;
+		goto cleanup;
 	}
 
-	return 0;
+	CRED_RET_SUCCESS(res);
 
       cleanup:
 	_gnutls_str_array_clear(&str_names);
@@ -1433,7 +1493,7 @@ gnutls_certificate_set_trust_list(gnutls_certificate_credentials_t res,
  **/
 void
 gnutls_certificate_get_trust_list(gnutls_certificate_credentials_t res,
-                                  gnutls_x509_trust_list_t *tlist)
+				  gnutls_x509_trust_list_t *tlist)
 {
 	*tlist = res->tlist;
 }
@@ -1467,7 +1527,11 @@ gnutls_certificate_get_trust_list(gnutls_certificate_credentials_t res,
  * If that function fails to load the @res structure is at an undefined state, it must
  * not be reused to load other keys or certificates.
  *
- * Returns: %GNUTLS_E_SUCCESS (0) on success, or a negative error code.
+ * Note that, this function by default returns zero on success and a negative value on error.
+ * Since 3.5.6, when the flag %GNUTLS_CERTIFICATE_API_V2 is set using gnutls_certificate_set_flags()
+ * it returns an index (greater or equal to zero). That index can be used to other functions to refer to the added key-pair.
+ *
+ * Returns: On success this functions returns zero, and otherwise a negative value on error (see above for modifying that behavior).
  *
  * Since: 3.1.11
  **/
@@ -1515,7 +1579,12 @@ gnutls_certificate_set_x509_key_file(gnutls_certificate_credentials_t res,
  * If that function fails to load the @res structure is at an undefined state, it must
  * not be reused to load other keys or certificates.
  *
- * Returns: %GNUTLS_E_SUCCESS (0) on success, or a negative error code.
+ * Note that, this function by default returns zero on success and a negative value on error.
+ * Since 3.5.6, when the flag %GNUTLS_CERTIFICATE_API_V2 is set using gnutls_certificate_set_flags()
+ * it returns an index (greater or equal to zero). That index can be used to other functions to refer to the added key-pair.
+ *
+ * Returns: On success this functions returns zero, and otherwise a negative value on error (see above for modifying that behavior).
+ *
  **/
 int
 gnutls_certificate_set_x509_key_file2(gnutls_certificate_credentials_t res,
@@ -1544,63 +1613,7 @@ gnutls_certificate_set_x509_key_file2(gnutls_certificate_credentials_t res,
 		return ret;
 	}
 
-	return 0;
-}
-
-/* Returns 0 if it's ok to use the gnutls_kx_algorithm_t with this 
- * certificate (uses the KeyUsage field). 
- */
-int
-_gnutls_check_key_usage(const gnutls_pcert_st * cert,
-			gnutls_kx_algorithm_t alg)
-{
-	unsigned int key_usage = 0;
-	int encipher_type;
-
-	if (cert == NULL) {
-		gnutls_assert();
-		return GNUTLS_E_INTERNAL_ERROR;
-	}
-
-	if (_gnutls_map_kx_get_cred(alg, 1) == GNUTLS_CRD_CERTIFICATE ||
-	    _gnutls_map_kx_get_cred(alg, 0) == GNUTLS_CRD_CERTIFICATE) {
-
-		gnutls_pubkey_get_key_usage(cert->pubkey, &key_usage);
-
-		encipher_type = _gnutls_kx_encipher_type(alg);
-
-		if (key_usage != 0 && encipher_type != CIPHER_IGN) {
-			/* If key_usage has been set in the certificate
-			 */
-
-			if (encipher_type == CIPHER_ENCRYPT) {
-				/* If the key exchange method requires an encipher
-				 * type algorithm, and key's usage does not permit
-				 * encipherment, then fail.
-				 */
-				if (!
-				    (key_usage &
-				     GNUTLS_KEY_KEY_ENCIPHERMENT)) {
-					gnutls_assert();
-					return
-					    GNUTLS_E_KEY_USAGE_VIOLATION;
-				}
-			}
-
-			if (encipher_type == CIPHER_SIGN) {
-				/* The same as above, but for sign only keys
-				 */
-				if (!
-				    (key_usage &
-				     GNUTLS_KEY_DIGITAL_SIGNATURE)) {
-					gnutls_assert();
-					return
-					    GNUTLS_E_KEY_USAGE_VIOLATION;
-				}
-			}
-		}
-	}
-	return 0;
+	CRED_RET_SUCCESS(res);
 }
 
 /**
@@ -1936,7 +1949,12 @@ int ret;
  * complexity that would make it harder to use this functionality at
  * all.
  *
- * Returns: %GNUTLS_E_SUCCESS (0) on success, or a negative error code.
+ * Note that, this function by default returns zero on success and a negative value on error.
+ * Since 3.5.6, when the flag %GNUTLS_CERTIFICATE_API_V2 is set using gnutls_certificate_set_flags()
+ * it returns an index (greater or equal to zero). That index can be used to other functions to refer to the added key-pair.
+ *
+ * Returns: On success this functions returns zero, and otherwise a negative value on error (see above for modifying that behavior).
+ *
  **/
 int
  gnutls_certificate_set_x509_simple_pkcs12_file
@@ -1991,7 +2009,11 @@ int
  * complexity that would make it harder to use this functionality at
  * all.
  *
- * Returns: %GNUTLS_E_SUCCESS (0) on success, or a negative error code.
+ * Note that, this function by default returns zero on success and a negative value on error.
+ * Since 3.5.6, when the flag %GNUTLS_CERTIFICATE_API_V2 is set using gnutls_certificate_set_flags()
+ * it returns an index (greater or equal to zero). That index can be used to other functions to refer to the added key-pair.
+ *
+ * Returns: On success this functions returns zero, and otherwise a negative value on error (see above for modifying that behavior).
  *
  * Since: 2.8.0
  **/
@@ -2004,7 +2026,7 @@ int
 	gnutls_x509_crt_t *chain = NULL;
 	gnutls_x509_crl_t crl = NULL;
 	unsigned int chain_size = 0, i;
-	int ret;
+	int ret, idx;
 
 	ret = gnutls_pkcs12_init(&p12);
 	if (ret < 0) {
@@ -2045,6 +2067,8 @@ int
 			gnutls_assert();
 			goto done;
 		}
+
+		idx = ret;
 	} else {
 		gnutls_assert();
 		ret = GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE;
@@ -2059,7 +2083,10 @@ int
 		}
 	}
 
-	ret = 0;
+	if (res->flags & GNUTLS_CERTIFICATE_API_V2)
+		ret = idx;
+	else
+		ret = 0;
 
       done:
 	if (chain) {

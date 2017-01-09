@@ -1,0 +1,79 @@
+<!-- ##### SECTION Title ##### -->
+errors
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### SECTION Image ##### -->
+
+
+<!-- ##### MACRO GNUTLS_E_INT_RET_0 ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNUTLS_E_INT_CHECK_AGAIN ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO gnutls_assert ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO LEVEL ##### -->
+<para>
+
+</para>
+
+@l: 
+@...: 
+
+
+<!-- ##### FUNCTION gnutls_assert_val_int ##### -->
+<para>
+
+</para>
+
+@val: 
+@file: 
+@func: 
+@Returns: 
+
+
+<!-- ##### MACRO gnutls_assert_val ##### -->
+<para>
+
+</para>
+
+@x: 
+
+
+<!-- ##### MACRO gnutls_assert_val_fatal ##### -->
+<para>
+
+</para>
+
+@x: 
+
+

@@ -1,7 +1,7 @@
-This is gnutls-guile.info, produced by makeinfo version 6.1 from
+This is gnutls-guile.info, produced by makeinfo version 6.3 from
 gnutls-guile.texi.
 
-This manual is last updated 16 March 2016 for version 3.5.3 of GnuTLS.
+This manual is last updated 30 October 2016 for version 3.5.8 of GnuTLS.
 
 Copyright (C) 2001-2012, 2014, 2016 Free Software Foundation, Inc.
 
@@ -22,7 +22,7 @@ File: gnutls-guile.info,  Node: Top,  Next: Preface,  Up: (dir)
 GnuTLS-Guile
 ************
 
-This manual is last updated 16 March 2016 for version 3.5.3 of GnuTLS.
+This manual is last updated 30 October 2016 for version 3.5.8 of GnuTLS.
 
 Copyright (C) 2001-2012, 2014, 2016 Free Software Foundation, Inc.
 
@@ -130,7 +130,7 @@ the version number of the loaded library as follows:
      $ guile
      scheme@(guile-user)> (use-modules (gnutls))
      scheme@(guile-user)> (gnutls-version)
-     "3.5.3"
+     "3.5.8"
      scheme@(guile-user)>
 
 
@@ -574,475 +574,7 @@ File: gnutls-guile.info,  Node: Guile Reference,  Next: Copying Information,  Pr
 This chapter lists the GnuTLS Scheme procedures exported by the
 '(gnutls)' module (*note (guile)The Guile module system::).
 
- -- Scheme Procedure: set-log-level! level
-     Enable GnuTLS logging up to LEVEL (an integer).
-
- -- Scheme Procedure: set-log-procedure! proc
-     Use PROC (a two-argument procedure) as the global GnuTLS log
-     procedure.
-
- -- Scheme Procedure: set-certificate-credentials-openpgp-keys! cred pub
-          sec
-     Use certificate PUB and secret key SEC in certificate credentials
-     CRED.
-
- -- Scheme Procedure: openpgp-keyring-contains-key-id? keyring id
-     Return '#f' if key ID ID is in KEYRING, '#f' otherwise.
-
- -- Scheme Procedure: import-openpgp-keyring data format
-     Import DATA (a u8vector) according to FORMAT and return the
-     imported keyring.
-
- -- Scheme Procedure: openpgp-certificate-usage key
-     Return a list of values denoting the key usage of KEY.
-
- -- Scheme Procedure: openpgp-certificate-version key
-     Return the version of the OpenPGP message format (RFC2440) honored
-     by KEY.
-
- -- Scheme Procedure: openpgp-certificate-algorithm key
-     Return two values: the certificate algorithm used by KEY and the
-     number of bits used.
-
- -- Scheme Procedure: openpgp-certificate-names key
-     Return the list of names for KEY.
-
- -- Scheme Procedure: openpgp-certificate-name key index
-     Return the INDEXth name of KEY.
-
- -- Scheme Procedure: openpgp-certificate-fingerprint key
-     Return a new u8vector denoting the fingerprint of KEY.
-
- -- Scheme Procedure: openpgp-certificate-fingerprint! key fpr
-     Store in FPR (a u8vector) the fingerprint of KEY.  Return the
-     number of bytes stored in FPR.
-
- -- Scheme Procedure: openpgp-certificate-id! key id
-     Store the ID (an 8 byte sequence) of certificate KEY in ID (a
-     u8vector).
-
- -- Scheme Procedure: openpgp-certificate-id key
-     Return the ID (an 8-element u8vector) of certificate KEY.
-
- -- Scheme Procedure: import-openpgp-private-key data format [pass]
-     Return a new OpenPGP private key object resulting from the import
-     of DATA (a uniform array) according to FORMAT.  Optionally, a
-     passphrase may be provided.
-
- -- Scheme Procedure: import-openpgp-certificate data format
-     Return a new OpenPGP certificate object resulting from the import
-     of DATA (a uniform array) according to FORMAT.
-
- -- Scheme Procedure: x509-certificate-subject-alternative-name cert
-          index
-     Return two values: the alternative name type for CERT (i.e., one of
-     the 'x509-subject-alternative-name/' values) and the actual subject
-     alternative name (a string) at INDEX.  Both values are '#f' if no
-     alternative name is available at INDEX.
-
- -- Scheme Procedure: x509-certificate-subject-key-id cert
-     Return the subject key ID (a u8vector) for CERT.
-
- -- Scheme Procedure: x509-certificate-authority-key-id cert
-     Return the key ID (a u8vector) of the X.509 certificate authority
-     of CERT.
-
- -- Scheme Procedure: x509-certificate-key-id cert
-     Return a statistically unique ID (a u8vector) for CERT that depends
-     on its public key parameters.  This is normally a 20-byte SHA-1
-     hash.
-
- -- Scheme Procedure: x509-certificate-version cert
-     Return the version of CERT.
-
- -- Scheme Procedure: x509-certificate-key-usage cert
-     Return the key usage of CERT (i.e., a list of 'key-usage/' values),
-     or the empty list if CERT does not contain such information.
-
- -- Scheme Procedure: x509-certificate-public-key-algorithm cert
-     Return two values: the public key algorithm (i.e., one of the
-     'pk-algorithm/' values) of CERT and the number of bits used.
-
- -- Scheme Procedure: x509-certificate-signature-algorithm cert
-     Return the signature algorithm used by CERT (i.e., one of the
-     'sign-algorithm/' values).
-
- -- Scheme Procedure: x509-certificate-matches-hostname? cert hostname
-     Return true if CERT matches HOSTNAME, a string denoting a DNS host
-     name.  This is the basic implementation of RFC 2818
-     (http://tools.ietf.org/html/rfc2818) (aka.  HTTPS).
-
- -- Scheme Procedure: x509-certificate-issuer-dn-oid cert index
-     Return the OID (a string) at INDEX from CERT's issuer DN. Return
-     '#f' if no OID is available at INDEX.
-
- -- Scheme Procedure: x509-certificate-dn-oid cert index
-     Return OID (a string) at INDEX from CERT.  Return '#f' if no OID is
-     available at INDEX.
-
- -- Scheme Procedure: x509-certificate-issuer-dn cert
-     Return the distinguished name (DN) of X.509 certificate CERT.
-
- -- Scheme Procedure: x509-certificate-dn cert
-     Return the distinguished name (DN) of X.509 certificate CERT.  The
-     form of the DN is as described in RFC 2253
-     (http://tools.ietf.org/html/rfc2253).
-
- -- Scheme Procedure: pkcs8-import-x509-private-key data format [pass
-          [encrypted]]
-     Return a new X.509 private key object resulting from the import of
-     DATA (a uniform array) according to FORMAT.  Optionally, if PASS is
-     not '#f', it should be a string denoting a passphrase.  ENCRYPTED
-     tells whether the private key is encrypted ('#t' by default).
-
- -- Scheme Procedure: import-x509-private-key data format
-     Return a new X.509 private key object resulting from the import of
-     DATA (a uniform array) according to FORMAT.
-
- -- Scheme Procedure: import-x509-certificate data format
-     Return a new X.509 certificate object resulting from the import of
-     DATA (a uniform array) according to FORMAT.
-
- -- Scheme Procedure: server-session-psk-username session
-     Return the username associated with PSK server session SESSION.
-
- -- Scheme Procedure: set-psk-client-credentials! cred username key
-          key-format
-     Set the client credentials for CRED, a PSK client credentials
-     object.
-
- -- Scheme Procedure: make-psk-client-credentials
-     Return a new PSK client credentials object.
-
- -- Scheme Procedure: set-psk-server-credentials-file! cred file
-     Use FILE as the password file for PSK server credentials CRED.
-
- -- Scheme Procedure: make-psk-server-credentials
-     Return new PSK server credentials.
-
- -- Scheme Procedure: peer-certificate-status session
-     Verify the peer certificate for SESSION and return a list of
-     'certificate-status' values (such as 'certificate-status/revoked'),
-     or the empty list if the certificate is valid.
-
- -- Scheme Procedure: set-certificate-credentials-verify-flags! cred
-          [flags...]
-     Set the certificate verification flags to FLAGS, a series of
-     'certificate-verify' values.
-
- -- Scheme Procedure: set-certificate-credentials-verify-limits! cred
-          max-bits max-depth
-     Set the verification limits of 'peer-certificate-status' for
-     certificate credentials CRED to MAX_BITS bits for an acceptable
-     certificate and MAX_DEPTH as the maximum depth of a certificate
-     chain.
-
- -- Scheme Procedure: set-certificate-credentials-x509-keys! cred certs
-          privkey
-     Have certificate credentials CRED use the X.509 certificates listed
-     in CERTS and X.509 private key PRIVKEY.
-
- -- Scheme Procedure: set-certificate-credentials-x509-key-data! cred
-          cert key format
-     Use X.509 certificate CERT and private key KEY, both uniform arrays
-     containing the X.509 certificate and key in format FORMAT, for
-     certificate credentials CRED.
-
- -- Scheme Procedure: set-certificate-credentials-x509-crl-data! cred
-          data format
-     Use DATA (a uniform array) as the X.509 CRL (certificate revocation
-     list) database for CRED.  On success, return the number of CRLs
-     processed.
-
- -- Scheme Procedure: set-certificate-credentials-x509-trust-data! cred
-          data format
-     Use DATA (a uniform array) as the X.509 trust database for CRED.
-     On success, return the number of certificates processed.
-
- -- Scheme Procedure: set-certificate-credentials-x509-crl-file! cred
-          file format
-     Use FILE as the X.509 CRL (certificate revocation list) file for
-     certificate credentials CRED.  On success, return the number of
-     CRLs processed.
-
- -- Scheme Procedure: set-certificate-credentials-x509-trust-file! cred
-          file format
-     Use FILE as the X.509 trust file for certificate credentials CRED.
-     On success, return the number of certificates processed.
-
- -- Scheme Procedure: set-certificate-credentials-x509-key-files! cred
-          cert-file key-file format
-     Use FILE as the password file for PSK server credentials CRED.
-
- -- Scheme Procedure: set-certificate-credentials-dh-parameters! cred
-          dh-params
-     Use Diffie-Hellman parameters DH_PARAMS for certificate credentials
-     CRED.
-
- -- Scheme Procedure: make-certificate-credentials
-     Return new certificate credentials (i.e., for use with either X.509
-     or OpenPGP certificates.
-
- -- Scheme Procedure: set-anonymous-server-dh-parameters! cred dh-params
-     Set the Diffie-Hellman parameters of anonymous server credentials
-     CRED.
-
- -- Scheme Procedure: make-anonymous-client-credentials
-     Return anonymous client credentials.
-
- -- Scheme Procedure: make-anonymous-server-credentials
-     Return anonymous server credentials.
-
- -- Scheme Procedure: set-session-dh-prime-bits! session bits
-     Use BITS DH prime bits for SESSION.
-
- -- Scheme Procedure: pkcs3-export-dh-parameters dh-params format
-     Export Diffie-Hellman parameters DH_PARAMS in PKCS3 format
-     according for FORMAT (an 'x509-certificate-format' value).  Return
-     a 'u8vector' containing the result.
-
- -- Scheme Procedure: pkcs3-import-dh-parameters array format
-     Import Diffie-Hellman parameters in PKCS3 format (further specified
-     by FORMAT, an 'x509-certificate-format' value) from ARRAY (a
-     homogeneous array) and return a new 'dh-params' object.
-
- -- Scheme Procedure: make-dh-parameters bits
-     Return new Diffie-Hellman parameters.
-
- -- Scheme Procedure: set-session-transport-port! session port
-     Use PORT as the input/output port for SESSION.
-
- -- Scheme Procedure: set-session-transport-fd! session fd
-     Use file descriptor FD as the underlying transport for SESSION.
-
- -- Scheme Procedure: session-record-port session
-     Return a read-write port that may be used to communicate over
-     SESSION.  All invocations of 'session-port' on a given session
-     return the same object (in the sense of 'eq?').
-
- -- Scheme Procedure: record-receive! session array
-     Receive data from SESSION into ARRAY, a uniform homogeneous array.
-     Return the number of bytes actually received.
-
- -- Scheme Procedure: record-send session array
-     Send the record constituted by ARRAY through SESSION.
-
- -- Scheme Procedure: set-session-server-name! session type name
-     For a client, this procedure provides a way to inform the server
-     that it is known under NAME, via the 'SERVER NAME' TLS extension.
-     TYPE must be a 'server-name-type' value, SERVER-NAME-TYPE/DNS for
-     DNS names.
-
- -- Scheme Procedure: set-session-credentials! session cred
-     Use CRED as SESSION's credentials.
-
- -- Scheme Procedure: cipher-suite->string kx cipher mac
-     Return the name of the given cipher suite.
-
- -- Scheme Procedure: set-session-priorities! session priorities
-     Have SESSION use the given PRIORITIES for the ciphers, key exchange
-     methods, MACs and compression methods.  PRIORITIES must be a string
-     (*note (gnutls)Priority Strings::).  When PRIORITIES cannot be
-     parsed, an 'error/invalid-request' error is raised, with an extra
-     argument indication the position of the error.
-
- -- Scheme Procedure: set-session-default-priority! session
-     Have SESSION use the default priorities.
-
- -- Scheme Procedure: set-server-session-certificate-request! session
-          request
-     Tell how SESSION, a server-side session, should deal with
-     certificate requests.  REQUEST should be either
-     'certificate-request/request' or 'certificate-request/require'.
-
- -- Scheme Procedure: session-our-certificate-chain session
-     Return our certificate chain for SESSION (as sent to the peer) in
-     raw format (a u8vector).  In the case of OpenPGP there is exactly
-     one certificate.  Return the empty list if no certificate was used.
-
- -- Scheme Procedure: session-peer-certificate-chain session
-     Return the a list of certificates in raw format (u8vectors) where
-     the first one is the peer's certificate.  In the case of OpenPGP,
-     there is always exactly one certificate.  In the case of X.509,
-     subsequent certificates indicate form a certificate chain.  Return
-     the empty list if no certificate was sent.
-
- -- Scheme Procedure: session-client-authentication-type session
-     Return the client authentication type (a 'credential-type' value)
-     used in SESSION.
-
- -- Scheme Procedure: session-server-authentication-type session
-     Return the server authentication type (a 'credential-type' value)
-     used in SESSION.
-
- -- Scheme Procedure: session-authentication-type session
-     Return the authentication type (a 'credential-type' value) used by
-     SESSION.
-
- -- Scheme Procedure: session-protocol session
-     Return the protocol used by SESSION.
-
- -- Scheme Procedure: session-certificate-type session
-     Return SESSION's certificate type.
-
- -- Scheme Procedure: session-compression-method session
-     Return SESSION's compression method.
-
- -- Scheme Procedure: session-mac session
-     Return SESSION's MAC.
-
- -- Scheme Procedure: session-kx session
-     Return SESSION's kx.
-
- -- Scheme Procedure: session-cipher session
-     Return SESSION's cipher.
-
- -- Scheme Procedure: alert-send session level alert
-     Send ALERT via SESSION.
-
- -- Scheme Procedure: alert-get session
-     Get an aleter from SESSION.
-
- -- Scheme Procedure: rehandshake session
-     Perform a re-handshaking for SESSION.
-
- -- Scheme Procedure: handshake session
-     Perform a handshake for SESSION.
-
- -- Scheme Procedure: bye session how
-     Close SESSION according to HOW.
-
- -- Scheme Procedure: make-session end
-     Return a new session for connection end END, either
-     'connection-end/server' or 'connection-end/client'.
-
- -- Scheme Procedure: gnutls-version
-     Return a string denoting the version number of the underlying
-     GnuTLS library, e.g., '"1.7.2"'.
-
- -- Scheme Procedure: openpgp-keyring? obj
-     Return true if OBJ is of type 'openpgp-keyring'.
-
- -- Scheme Procedure: openpgp-private-key? obj
-     Return true if OBJ is of type 'openpgp-private-key'.
-
- -- Scheme Procedure: openpgp-certificate? obj
-     Return true if OBJ is of type 'openpgp-certificate'.
-
- -- Scheme Procedure: x509-private-key? obj
-     Return true if OBJ is of type 'x509-private-key'.
-
- -- Scheme Procedure: x509-certificate? obj
-     Return true if OBJ is of type 'x509-certificate'.
-
- -- Scheme Procedure: psk-client-credentials? obj
-     Return true if OBJ is of type 'psk-client-credentials'.
-
- -- Scheme Procedure: psk-server-credentials? obj
-     Return true if OBJ is of type 'psk-server-credentials'.
-
- -- Scheme Procedure: srp-client-credentials? obj
-     Return true if OBJ is of type 'srp-client-credentials'.
-
- -- Scheme Procedure: srp-server-credentials? obj
-     Return true if OBJ is of type 'srp-server-credentials'.
-
- -- Scheme Procedure: certificate-credentials? obj
-     Return true if OBJ is of type 'certificate-credentials'.
-
- -- Scheme Procedure: dh-parameters? obj
-     Return true if OBJ is of type 'dh-parameters'.
-
- -- Scheme Procedure: anonymous-server-credentials? obj
-     Return true if OBJ is of type 'anonymous-server-credentials'.
-
- -- Scheme Procedure: anonymous-client-credentials? obj
-     Return true if OBJ is of type 'anonymous-client-credentials'.
-
- -- Scheme Procedure: session? obj
-     Return true if OBJ is of type 'session'.
-
- -- Scheme Procedure: openpgp-certificate-format->string enumval
-     Return a string describing ENUMVAL, a 'openpgp-certificate-format'
-     value.
-
- -- Scheme Procedure: error->string enumval
-     Return a string describing ENUMVAL, a 'error' value.
-
- -- Scheme Procedure: certificate-verify->string enumval
-     Return a string describing ENUMVAL, a 'certificate-verify' value.
-
- -- Scheme Procedure: key-usage->string enumval
-     Return a string describing ENUMVAL, a 'key-usage' value.
-
- -- Scheme Procedure: psk-key-format->string enumval
-     Return a string describing ENUMVAL, a 'psk-key-format' value.
-
- -- Scheme Procedure: server-name-type->string enumval
-     Return a string describing ENUMVAL, a 'server-name-type' value.
-
- -- Scheme Procedure: sign-algorithm->string enumval
-     Return a string describing ENUMVAL, a 'sign-algorithm' value.
-
- -- Scheme Procedure: pk-algorithm->string enumval
-     Return a string describing ENUMVAL, a 'pk-algorithm' value.
-
- -- Scheme Procedure: x509-subject-alternative-name->string enumval
-     Return a string describing ENUMVAL, a
-     'x509-subject-alternative-name' value.
-
- -- Scheme Procedure: x509-certificate-format->string enumval
-     Return a string describing ENUMVAL, a 'x509-certificate-format'
-     value.
-
- -- Scheme Procedure: certificate-type->string enumval
-     Return a string describing ENUMVAL, a 'certificate-type' value.
-
- -- Scheme Procedure: protocol->string enumval
-     Return a string describing ENUMVAL, a 'protocol' value.
-
- -- Scheme Procedure: close-request->string enumval
-     Return a string describing ENUMVAL, a 'close-request' value.
-
- -- Scheme Procedure: certificate-request->string enumval
-     Return a string describing ENUMVAL, a 'certificate-request' value.
-
- -- Scheme Procedure: certificate-status->string enumval
-     Return a string describing ENUMVAL, a 'certificate-status' value.
-
- -- Scheme Procedure: handshake-description->string enumval
-     Return a string describing ENUMVAL, a 'handshake-description'
-     value.
-
- -- Scheme Procedure: alert-description->string enumval
-     Return a string describing ENUMVAL, a 'alert-description' value.
-
- -- Scheme Procedure: alert-level->string enumval
-     Return a string describing ENUMVAL, a 'alert-level' value.
-
- -- Scheme Procedure: connection-end->string enumval
-     Return a string describing ENUMVAL, a 'connection-end' value.
-
- -- Scheme Procedure: compression-method->string enumval
-     Return a string describing ENUMVAL, a 'compression-method' value.
-
- -- Scheme Procedure: digest->string enumval
-     Return a string describing ENUMVAL, a 'digest' value.
-
- -- Scheme Procedure: mac->string enumval
-     Return a string describing ENUMVAL, a 'mac' value.
-
- -- Scheme Procedure: credentials->string enumval
-     Return a string describing ENUMVAL, a 'credentials' value.
-
- -- Scheme Procedure: params->string enumval
-     Return a string describing ENUMVAL, a 'params' value.
-
- -- Scheme Procedure: kx->string enumval
-     Return a string describing ENUMVAL, a 'kx' value.
-
- -- Scheme Procedure: cipher->string enumval
-     Return a string describing ENUMVAL, a 'cipher' value.
+(Guile not available, documentation not generated.)
 
 
 File: gnutls-guile.info,  Node: Copying Information,  Next: Procedure Index,  Prev: Guile Reference,  Up: Top
@@ -1538,151 +1070,18 @@ Procedure Index
  [index ]
 * Menu:
 
-* alert-description->string:             Guile Reference.     (line 449)
-* alert-get:                             Guile Reference.     (line 335)
-* alert-level->string:                   Guile Reference.     (line 452)
-* alert-send:                            Guile Reference.     (line 332)
-* anonymous-client-credentials?:         Guile Reference.     (line 391)
-* anonymous-server-credentials?:         Guile Reference.     (line 388)
-* bye:                                   Guile Reference.     (line 344)
-* certificate-credentials?:              Guile Reference.     (line 382)
-* certificate-request->string:           Guile Reference.     (line 439)
-* certificate-status->string:            Guile Reference.     (line 442)
-* certificate-type->string:              Guile Reference.     (line 430)
-* certificate-verify->string:            Guile Reference.     (line 404)
-* cipher->string:                        Guile Reference.     (line 476)
-* cipher-suite->string:                  Guile Reference.     (line 271)
-* close-request->string:                 Guile Reference.     (line 436)
-* compression-method->string:            Guile Reference.     (line 458)
-* connection-end->string:                Guile Reference.     (line 455)
-* credentials->string:                   Guile Reference.     (line 467)
-* dh-parameters?:                        Guile Reference.     (line 385)
-* digest->string:                        Guile Reference.     (line 461)
-* error->string:                         Exception Handling.  (line   6)
-* error->string <1>:                     Guile Reference.     (line 401)
-* gnutls-version:                        Guile Reference.     (line 351)
-* handshake:                             Guile Reference.     (line 341)
-* handshake-description->string:         Guile Reference.     (line 445)
-* import-openpgp-certificate:            Guile Reference.     (line  64)
-* import-openpgp-keyring:                Guile Reference.     (line  24)
-* import-openpgp-private-key:            Guile Reference.     (line  59)
-* import-x509-certificate:               Guile Reference.     (line 134)
-* import-x509-private-key:               Guile Reference.     (line 130)
-* key-usage->string:                     Guile Reference.     (line 407)
-* kx->string:                            Guile Reference.     (line 473)
-* mac->string:                           Guile Reference.     (line 464)
-* make-anonymous-client-credentials:     Guile Reference.     (line 222)
-* make-anonymous-server-credentials:     Guile Reference.     (line 225)
-* make-certificate-credentials:          Guile Reference.     (line 214)
+* error->string:                         Exception Handling.   (line  6)
 * make-dh-parameters:                    Representation of Binary Data.
-                                                              (line  16)
-* make-dh-parameters <1>:                Guile Reference.     (line 241)
-* make-psk-client-credentials:           Guile Reference.     (line 146)
-* make-psk-server-credentials:           Guile Reference.     (line 152)
-* make-session:                          Guile Reference.     (line 347)
-* openpgp-certificate-algorithm:         Guile Reference.     (line  35)
-* openpgp-certificate-fingerprint:       Guile Reference.     (line  45)
-* openpgp-certificate-fingerprint!:      Guile Reference.     (line  48)
-* openpgp-certificate-format->string:    Guile Reference.     (line 397)
-* openpgp-certificate-id:                Guile Reference.     (line  56)
-* openpgp-certificate-id!:               Guile Reference.     (line  52)
-* openpgp-certificate-name:              Guile Reference.     (line  42)
-* openpgp-certificate-names:             Guile Reference.     (line  39)
-* openpgp-certificate-usage:             Guile Reference.     (line  28)
-* openpgp-certificate-version:           Guile Reference.     (line  31)
-* openpgp-certificate?:                  Guile Reference.     (line 361)
-* openpgp-keyring-contains-key-id?:      Guile Reference.     (line  21)
-* openpgp-keyring?:                      Guile Reference.     (line 355)
-* openpgp-private-key?:                  Guile Reference.     (line 358)
-* params->string:                        Guile Reference.     (line 470)
-* peer-certificate-status:               Guile Reference.     (line 155)
-* pk-algorithm->string:                  Guile Reference.     (line 419)
+                                                               (line 16)
 * pkcs3-export-dh-parameters:            Representation of Binary Data.
-                                                              (line  16)
-* pkcs3-export-dh-parameters <1>:        Guile Reference.     (line 231)
-* pkcs3-import-dh-parameters:            Guile Reference.     (line 236)
-* pkcs8-import-x509-private-key:         Guile Reference.     (line 123)
-* protocol->string:                      Guile Reference.     (line 433)
-* psk-client-credentials?:               Guile Reference.     (line 370)
-* psk-key-format->string:                Guile Reference.     (line 410)
-* psk-server-credentials?:               Guile Reference.     (line 373)
-* record-receive!:                       Input and Output.    (line  55)
-* record-receive! <1>:                   Guile Reference.     (line 255)
-* record-send:                           Input and Output.    (line  55)
-* record-send <1>:                       Guile Reference.     (line 259)
-* rehandshake:                           Guile Reference.     (line 338)
-* server-name-type->string:              Guile Reference.     (line 413)
-* server-session-psk-username:           Guile Reference.     (line 138)
-* session-authentication-type:           Guile Reference.     (line 310)
-* session-certificate-type:              Guile Reference.     (line 317)
+                                                               (line 16)
+* record-receive!:                       Input and Output.     (line 55)
+* record-send:                           Input and Output.     (line 55)
 * session-cipher:                        Enumerates and Constants.
-                                                              (line  47)
-* session-cipher <1>:                    Guile Reference.     (line 329)
-* session-client-authentication-type:    Guile Reference.     (line 302)
-* session-compression-method:            Guile Reference.     (line 320)
-* session-kx:                            Guile Reference.     (line 326)
-* session-mac:                           Guile Reference.     (line 323)
-* session-our-certificate-chain:         Guile Reference.     (line 290)
-* session-peer-certificate-chain:        Guile Reference.     (line 295)
-* session-protocol:                      Guile Reference.     (line 314)
-* session-record-port:                   Input and Output.    (line  28)
-* session-record-port <1>:               Guile Reference.     (line 250)
-* session-server-authentication-type:    Guile Reference.     (line 306)
-* session?:                              Guile Reference.     (line 394)
-* set-anonymous-server-dh-parameters!:   Guile Reference.     (line 218)
-* set-certificate-credentials-dh-parameters!: Guile Reference.
-                                                              (line 209)
-* set-certificate-credentials-openpgp-keys!: Guile Reference. (line  16)
-* set-certificate-credentials-verify-flags!: Guile Reference. (line 160)
-* set-certificate-credentials-verify-limits!: Guile Reference.
-                                                              (line 165)
-* set-certificate-credentials-x509-crl-data!: Guile Reference.
-                                                              (line 183)
-* set-certificate-credentials-x509-crl-file!: Guile Reference.
-                                                              (line 194)
-* set-certificate-credentials-x509-key-data!: Guile Reference.
-                                                              (line 177)
-* set-certificate-credentials-x509-key-files!: Guile Reference.
-                                                              (line 205)
-* set-certificate-credentials-x509-keys!: Guile Reference.    (line 172)
-* set-certificate-credentials-x509-trust-data!: Guile Reference.
-                                                              (line 189)
-* set-certificate-credentials-x509-trust-file!: Guile Reference.
-                                                              (line 200)
-* set-log-level!:                        Guile Reference.     (line   9)
-* set-log-procedure!:                    Guile Reference.     (line  12)
-* set-psk-client-credentials!:           Guile Reference.     (line 141)
-* set-psk-server-credentials-file!:      Guile Reference.     (line 149)
-* set-server-session-certificate-request!: Guile Reference.   (line 284)
-* set-session-credentials!:              Guile Reference.     (line 268)
-* set-session-default-priority!:         Guile Reference.     (line 281)
-* set-session-dh-prime-bits!:            Guile Reference.     (line 228)
-* set-session-priorities!:               Guile Reference.     (line 274)
-* set-session-server-name!:              Guile Reference.     (line 262)
-* set-session-transport-fd!:             Input and Output.    (line   6)
-* set-session-transport-fd! <1>:         Guile Reference.     (line 247)
-* set-session-transport-port!:           Input and Output.    (line   6)
-* set-session-transport-port! <1>:       Guile Reference.     (line 244)
-* sign-algorithm->string:                Guile Reference.     (line 416)
-* srp-client-credentials?:               Guile Reference.     (line 376)
-* srp-server-credentials?:               Guile Reference.     (line 379)
-* x509-certificate-authority-key-id:     Guile Reference.     (line  78)
-* x509-certificate-dn:                   Guile Reference.     (line 118)
-* x509-certificate-dn-oid:               Guile Reference.     (line 111)
-* x509-certificate-format->string:       Guile Reference.     (line 426)
-* x509-certificate-issuer-dn:            Guile Reference.     (line 115)
-* x509-certificate-issuer-dn-oid:        Guile Reference.     (line 107)
-* x509-certificate-key-id:               Guile Reference.     (line  82)
-* x509-certificate-key-usage:            Guile Reference.     (line  90)
-* x509-certificate-matches-hostname?:    Guile Reference.     (line 102)
-* x509-certificate-public-key-algorithm: Guile Reference.     (line  94)
-* x509-certificate-signature-algorithm:  Guile Reference.     (line  98)
-* x509-certificate-subject-alternative-name: Guile Reference. (line  68)
-* x509-certificate-subject-key-id:       Guile Reference.     (line  75)
-* x509-certificate-version:              Guile Reference.     (line  87)
-* x509-certificate?:                     Guile Reference.     (line 367)
-* x509-private-key?:                     Guile Reference.     (line 364)
-* x509-subject-alternative-name->string: Guile Reference.     (line 422)
+                                                               (line 47)
+* session-record-port:                   Input and Output.     (line 28)
+* set-session-transport-fd!:             Input and Output.     (line  6)
+* set-session-transport-port!:           Input and Output.     (line  6)
 
 
 File: gnutls-guile.info,  Node: Concept Index,  Prev: Procedure Index,  Up: Top
@@ -1712,23 +1111,23 @@ Concept Index
 
 
 Tag Table:
-Node: Top788
-Node: Preface1846
-Node: Guile Preparations2412
-Node: Guile API Conventions5185
-Node: Enumerates and Constants5759
-Node: Procedure Names8084
-Node: Representation of Binary Data9067
-Ref: Representation of Binary Data-Footnote-110093
-Node: Input and Output10209
-Node: Exception Handling12554
-Node: Guile Examples14382
-Node: Anonymous Authentication Guile Example14836
-Node: OpenPGP Authentication Guile Example17398
-Node: Importing OpenPGP Keys Guile Example19884
-Node: Guile Reference21324
-Node: Copying Information40344
-Node: Procedure Index65530
-Node: Concept Index76198
+Node: Top790
+Node: Preface1850
+Node: Guile Preparations2416
+Node: Guile API Conventions5189
+Node: Enumerates and Constants5763
+Node: Procedure Names8088
+Node: Representation of Binary Data9071
+Ref: Representation of Binary Data-Footnote-110097
+Node: Input and Output10213
+Node: Exception Handling12558
+Node: Guile Examples14386
+Node: Anonymous Authentication Guile Example14840
+Node: OpenPGP Authentication Guile Example17402
+Node: Importing OpenPGP Keys Guile Example19888
+Node: Guile Reference21328
+Node: Copying Information21655
+Node: Procedure Index46841
+Node: Concept Index47875
 
 End Tag Table

@@ -27,6 +27,16 @@ srtp
 
 
 
+<!-- ##### STRUCT srtp_ext_st ##### -->
+<para>
+
+</para>
+
+@profiles: 
+@selected_profile: 
+@mki: 
+@mki_received: 
+
 <!-- ##### VARIABLE ext_mod_srtp ##### -->
 <para>
 

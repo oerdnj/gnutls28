@@ -30,15 +30,18 @@ AM_CPPFLAGS = \
 	-I$(top_srcdir)/tests/suite/ecore/src/include \
 	-I$(top_srcdir)/tests/suite/ecore/src/lib
 
-EXTRA_DIST = crl/long.crl crl/long.pem
+EXTRA_DIST = crl/long.crl crl/long.pem data/test1.cat data/test2.cat \
+	data/test1.cat.data data/test2.cat.data \
+	data/test1.cat.out data/test2.cat.out data/ca.pem
 
-check_PROGRAMS = rng
+check_PROGRAMS = rng prime-check
 AM_LDFLAGS = -no-install
 LDADD = ../../lib/libgnutls.la \
 	../../gl/libgnu.la \
 	../libutils.la \
 	$(LIBSOCKET) $(INET_NTOP_LIB) $(INET_PTON_LIB)
 
+prime_check_LDADD = $(LDADD) -lhogweed -lgmp
 
 libecore_la_CPPFLAGS = -I$(top_srcdir)/tests/suite/ecore/		\
 	-I$(top_srcdir)/tests/suite/ecore/src/include			\
@@ -86,18 +89,19 @@ nodist_libecore_la_SOURCES = ecore/src/lib/ecore_anim.c			\
 EXTRA_DIST += testcompat-main-polarssl testcompat-main-openssl testcompat-common \
 	testpkcs11.pkcs15 testpkcs11.softhsm testpkcs11.sc-hsm
 nodist_check_SCRIPTS = testsrn.sh chain.sh invalid-cert.sh \
-	testpkcs11.sh testrng.sh testcompat-polarssl.sh testcompat-openssl.sh \
-	testrandom.sh
+	testrng.sh testcompat-polarssl.sh testcompat-openssl.sh \
+	testrandom.sh pkcs7-cat
 
 if ENABLE_PKCS11
 nodist_check_SCRIPTS += testpkcs11.sh crl-test
 endif
 
 TESTS_ENVIRONMENT = EXEEXT=$(EXEEXT) \
-	LC_ALL="C"					\
-	VALGRIND="$(VALGRIND)"				\
-	top_builddir="$(top_builddir)"			\
-	srcdir="$(srcdir)"				\
+	LC_ALL="C"			\
+	VALGRIND="$(VALGRIND)"		\
+	top_builddir="$(top_builddir)"	\
+	srcdir="$(srcdir)"		\
+	ASAN_OPTIONS="detect_leaks=0"	\
 	OPENSSL_ia32cap=0x00000000
 
 if ENABLE_NON_SUITEB_CURVES
@@ -126,7 +130,9 @@ nodist_check_SCRIPTS += eagain.sh
 endif
 endif
 
-TESTS = $(nodist_check_SCRIPTS)
+TESTS = $(nodist_check_SCRIPTS) prime-check
+
+prime_check_CPPFLAGS = $(AM_CPPFLAGS) $(NETTLE_CFLAGS)
 
 TEST_EXTENSIONS = .sh
 

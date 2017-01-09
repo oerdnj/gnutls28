@@ -142,8 +142,6 @@ inline static int _gnutls_mac_get_key_size(const mac_entry_st * e)
 		return e->key_size;
 }
 
-#define _gnutls_x509_oid_to_mac(oid) (gnutls_mac_algorithm_t)gnutls_oid_to_digest(oid)
-
 /* Functions for digests. */
 #define _gnutls_x509_digest_to_oid _gnutls_x509_mac_to_oid
 #define _gnutls_digest_get_name _gnutls_mac_get_name
@@ -288,9 +286,8 @@ gnutls_credentials_type_t _gnutls_map_kx_get_cred(gnutls_kx_algorithm_t
 
 /* DSA + RSA + ECC */
 #define GNUTLS_DISTINCT_PK_ALGORITHMS 3
-gnutls_pk_algorithm_t _gnutls_map_pk_get_pk(gnutls_kx_algorithm_t
+gnutls_pk_algorithm_t _gnutls_map_kx_get_pk(gnutls_kx_algorithm_t
 					    kx_algorithm);
-const char *gnutls_pk_get_oid(gnutls_pk_algorithm_t pk);
 
 enum encipher_type { CIPHER_ENCRYPT = 0, CIPHER_SIGN = 1, CIPHER_IGN };
 

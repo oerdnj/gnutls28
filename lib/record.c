@@ -626,8 +626,7 @@ get_packet_from_buffers(gnutls_session_t session, content_type_t type,
 	if (_gnutls_record_buffer_get_size(session) > 0) {
 		int ret;
 		ret =
-		    _gnutls_record_buffer_get_packet(type, session,
-					      	     packet);
+			_gnutls_record_buffer_get_packet(type, session, packet);
 		if (ret < 0) {
 			if (IS_DTLS(session)) {
 				if (ret == GNUTLS_E_UNEXPECTED_PACKET) {
@@ -763,6 +762,12 @@ record_add_to_buffers(gnutls_session_t session,
 			     gnutls_alert_get_name((int) bufel->msg.
 						   data[1]));
 
+			if (!session->internals.initial_negotiation_completed &&
+			    session->internals.handshake_in_progress && STATE == STATE0) { /* handshake hasn't started */
+				ret = gnutls_assert_val(GNUTLS_E_UNEXPECTED_PACKET);
+				goto unexpected_packet;
+			}
+
 			session->internals.last_alert = bufel->msg.data[1];
 
 			/* if close notify is received and
@@ -779,7 +784,6 @@ record_add_to_buffers(gnutls_session_t session,
 				/* if the alert is FATAL or WARNING
 				 * return the apropriate message
 				 */
-
 				gnutls_assert();
 				ret = GNUTLS_E_WARNING_ALERT_RECEIVED;
 				if (bufel->msg.data[0] == GNUTLS_AL_FATAL) {
@@ -1404,7 +1408,7 @@ check_session_status(gnutls_session_t session)
 		 * prior to anything else. */
 		if (session->security_parameters.entity == GNUTLS_CLIENT &&
 		    (session->internals.flags & GNUTLS_ENABLE_FALSE_START)) {
-		    	/* Attempt to complete handshake */
+			/* Attempt to complete handshake */
 
 			session->internals.recv_state = RECV_STATE_FALSE_START_HANDLING;
 			ret = gnutls_handshake(session);
@@ -1558,7 +1562,7 @@ gnutls_record_discard_queued(gnutls_session_t session)
  **/
 ssize_t
 gnutls_record_recv_packet(gnutls_session_t session, 
-		   	  gnutls_packet_t *packet)
+			  gnutls_packet_t *packet)
 {
 	int ret;
 
@@ -1574,7 +1578,7 @@ gnutls_record_recv_packet(gnutls_session_t session,
 		return ret;
 
 	ret = _gnutls_recv_in_buffers(session, GNUTLS_APPLICATION_DATA, -1,
-	                              session->internals.record_timeout_ms);
+				      session->internals.record_timeout_ms);
 	if (ret < 0 && ret != GNUTLS_E_SESSION_EOF)
 		return gnutls_assert_val(ret);
 
@@ -1746,7 +1750,7 @@ int gnutls_record_uncork(gnutls_session_t session, unsigned int flags)
  * depending on the client's will. A server receiving this error code
  * can only initiate a new handshake or terminate the session.
  *
- * If %EINTR is returned by the internal push function (the default
+ * If %EINTR is returned by the internal pull function (the default
  * is recv()) then %GNUTLS_E_INTERRUPTED will be returned.  If
  * %GNUTLS_E_INTERRUPTED or %GNUTLS_E_AGAIN is returned, you must
  * call this function again to get the data.  See also

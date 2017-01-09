@@ -20,193 +20,6 @@ gnutls_int
 <!-- ##### SECTION Image ##### -->
 
 
-<!-- ##### MACRO AEAD_EXPLICIT_DATA_SIZE ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO AEAD_IMPLICIT_DATA_SIZE ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO DECR_LEN ##### -->
-<para>
-
-</para>
-
-@len: 
-@x: 
-
-
-<!-- ##### MACRO DECR_LENGTH_COM ##### -->
-<para>
-
-</para>
-
-@len: 
-@x: 
-@COM: 
-
-
-<!-- ##### MACRO DECR_LENGTH_RET ##### -->
-<para>
-
-</para>
-
-@len: 
-@x: 
-@RET: 
-
-
-<!-- ##### MACRO DEFAULT_EXPIRE_TIME ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO DEFAULT_MAX_RECORD_SIZE ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO DEFAULT_MAX_VERIFY_BITS ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO DEFAULT_MAX_VERIFY_DEPTH ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO DTLS_DEFAULT_MTU ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO DTLS_HANDSHAKE_HEADER_SIZE ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO DTLS_MAX_COOKIE_SIZE ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO DTLS_RECORD_HEADER_SIZE ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO ENABLE_COMPAT ##### -->
-<para>
-
-</para>
-
-@x: 
-
-
-<!-- ##### MACRO EPOCH_NEXT ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO EPOCH_READ_CURRENT ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO EPOCH_WRITE_CURRENT ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO EXTRA_COMP_SIZE ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO GNUTLS_INT_TO_POINTER ##### -->
-<para>
-
-</para>
-
-@_: 
-
-
-<!-- ##### MACRO GNUTLS_MASTER_SIZE ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO GNUTLS_PK_ANY ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO GNUTLS_PK_NONE ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO GNUTLS_POINTER_TO_INT ##### -->
-<para>
-
-</para>
-
-@_: 
-
-
-<!-- ##### MACRO GNUTLS_RANDOM_SIZE ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO HANDSHAKE_HEADER_SIZE ##### -->
-<para>
-
-</para>
-
-@session: 
-
-
 <!-- ##### MACRO HAVE_SSIZE_T ##### -->
 <para>
 
@@ -214,15 +27,64 @@ gnutls_int
 
 
 
-<!-- ##### MACRO IS_DTLS ##### -->
+<!-- ##### TYPEDEF ssize_t ##### -->
 <para>
 
 </para>
 
-@session: 
+
+<!-- ##### MACRO memxor ##### -->
+<para>
+
+</para>
 
 
-<!-- ##### MACRO MAX_ALGOS ##### -->
+
+<!-- ##### MACRO ENABLE_ALIGN16 ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO likely ##### -->
+<para>
+
+</para>
+
+@x: 
+
+
+<!-- ##### MACRO unlikely ##### -->
+<para>
+
+</para>
+
+@x: 
+
+
+<!-- ##### STRUCT uint64 ##### -->
+<para>
+
+</para>
+
+@i: 
+
+<!-- ##### MACRO MAX_HANDSHAKE_PACKET_SIZE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO MAX_FILENAME ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO MAX_HASH_SIZE ##### -->
 <para>
 
 </para>
@@ -243,7 +105,49 @@ gnutls_int
 
 
 
-<!-- ##### MACRO MAX_EPOCH_INDEX ##### -->
+<!-- ##### MACRO MAX_USERNAME_SIZE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO MAX_SERVER_NAME_SIZE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO AEAD_EXPLICIT_DATA_SIZE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO AEAD_IMPLICIT_DATA_SIZE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNUTLS_MASTER_SIZE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNUTLS_RANDOM_SIZE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO DTLS_RETRANS_TIMEOUT ##### -->
 <para>
 
 </para>
@@ -257,7 +161,154 @@ gnutls_int
 
 
 
+<!-- ##### MACRO DEFAULT_EXPIRE_TIME ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO DEFAULT_HANDSHAKE_TIMEOUT_MS ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### ENUM transport_t ##### -->
+<para>
+
+</para>
+
+@GNUTLS_STREAM: 
+@GNUTLS_DGRAM: 
+
+<!-- ##### ENUM record_flush_t ##### -->
+<para>
+
+</para>
+
+@RECORD_FLUSH: 
+@RECORD_CORKED: 
+
+<!-- ##### MACRO IS_DTLS ##### -->
+<para>
+
+</para>
+
+@session: 
+
+
+<!-- ##### MACRO DEFAULT_MAX_RECORD_SIZE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO TLS_RECORD_HEADER_SIZE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO DTLS_RECORD_HEADER_SIZE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO RECORD_HEADER_SIZE ##### -->
+<para>
+
+</para>
+
+@session: 
+
+
+<!-- ##### MACRO MAX_RECORD_HEADER_SIZE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO MAX_RECORD_SEND_OVERHEAD ##### -->
+<para>
+
+</para>
+
+@session: 
+
+
+<!-- ##### MACRO MAX_RECORD_SEND_SIZE ##### -->
+<para>
+
+</para>
+
+@session: 
+
+
+<!-- ##### MACRO MAX_PAD_SIZE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO EXTRA_COMP_SIZE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO TLS_HANDSHAKE_HEADER_SIZE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO DTLS_HANDSHAKE_HEADER_SIZE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO HANDSHAKE_HEADER_SIZE ##### -->
+<para>
+
+</para>
+
+@session: 
+
+
 <!-- ##### MACRO MAX_HANDSHAKE_HEADER_SIZE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO MAX_PVP_SEED_SIZE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO DTLS_DEFAULT_MTU ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO DTLS_MAX_COOKIE_SIZE ##### -->
 <para>
 
 </para>
@@ -271,78 +322,21 @@ gnutls_int
 
 
 
-<!-- ##### MACRO MAX_HANDSHAKE_MSGS ##### -->
+<!-- ##### MACRO MAX_PK_PARAM_SIZE ##### -->
 <para>
 
 </para>
 
 
 
-<!-- ##### MACRO MAX_HANDSHAKE_PACKET_SIZE ##### -->
+<!-- ##### MACRO DEFAULT_MAX_VERIFY_DEPTH ##### -->
 <para>
 
 </para>
 
 
 
-<!-- ##### MACRO MAX_HASH_SIZE ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO MAX_PAD_SIZE ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO MAX_RECORD_HEADER_SIZE ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO MAX_RECORD_SEND_SIZE ##### -->
-<para>
-
-</para>
-
-@session: 
-
-
-<!-- ##### MACRO MAX_SERVER_NAME_SIZE ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO MAX_SIGNATURE_ALGORITHMS ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO MAX_SIGN_ALGO_SIZE ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO MAX_USERNAME_SIZE ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO MAX_VERIFY_DATA_SIZE ##### -->
+<!-- ##### MACRO DEFAULT_MAX_VERIFY_BITS ##### -->
 <para>
 
 </para>
@@ -365,122 +359,73 @@ gnutls_int
 @y: 
 
 
-<!-- ##### MACRO RECORD_HEADER_SIZE ##### -->
+<!-- ##### MACRO DECR_LEN ##### -->
 <para>
 
 </para>
 
-@session: 
-
-
-<!-- ##### MACRO RESUME_FALSE ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO RESUME_TRUE ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO TLS_HANDSHAKE_HEADER_SIZE ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO TLS_RECORD_HEADER_SIZE ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### ENUM cipher_type_t ##### -->
-<para>
-
-</para>
-
-@CIPHER_STREAM: 
-@CIPHER_BLOCK: 
-@CIPHER_AEAD: 
-
-<!-- ##### ENUM content_type_t ##### -->
-<para>
-
-</para>
-
-@GNUTLS_CHANGE_CIPHER_SPEC: 
-@GNUTLS_ALERT: 
-@GNUTLS_HANDSHAKE: 
-@GNUTLS_APPLICATION_DATA: 
-@GNUTLS_HEARTBEAT: 
-
-<!-- ##### ENUM extensions_t ##### -->
-<para>
-
-</para>
-
-@GNUTLS_EXTENSION_SERVER_NAME: 
-@GNUTLS_EXTENSION_MAX_RECORD_SIZE: 
-@GNUTLS_EXTENSION_STATUS_REQUEST: 
-@GNUTLS_EXTENSION_CERT_TYPE: 
-@GNUTLS_EXTENSION_SUPPORTED_ECC: 
-@GNUTLS_EXTENSION_SUPPORTED_ECC_PF: 
-@GNUTLS_EXTENSION_SRP: 
-@GNUTLS_EXTENSION_SIGNATURE_ALGORITHMS: 
-@GNUTLS_EXTENSION_SRTP: 
-@GNUTLS_EXTENSION_HEARTBEAT: 
-@GNUTLS_EXTENSION_ALPN: 
-@GNUTLS_EXTENSION_DUMBFW: 
-@GNUTLS_EXTENSION_ETM: 
-@GNUTLS_EXTENSION_EXT_MASTER_SECRET: 
-@GNUTLS_EXTENSION_SESSION_TICKET: 
-@GNUTLS_EXTENSION_SAFE_RENEGOTIATION: 
-
-<!-- ##### ENUM gnutls_ext_parse_type_t ##### -->
-<para>
-
-</para>
-
-@GNUTLS_EXT_ANY: 
-@GNUTLS_EXT_APPLICATION: 
-@GNUTLS_EXT_TLS: 
-@GNUTLS_EXT_MANDATORY: 
-@GNUTLS_EXT_NONE: 
-
-<!-- ##### STRUCT gnutls_key_st ##### -->
-<para>
-
-</para>
-
-@ecdh_params: 
-@ecdh_x: 
-@ecdh_y: 
-@ecdhx: 
-@key: 
-@dh_params: 
-@client_Y: 
-@srp_key: 
-@srp_g: 
-@srp_p: 
-@A: 
-@B: 
-@u: 
-@b: 
-@a: 
+@len: 
 @x: 
-@auth_info: 
-@auth_info_type: 
-@auth_info_size: 
-@crypt_algo: 
-@cred: 
-@crt_requested: 
+
+
+<!-- ##### MACRO DECR_LEN_FINAL ##### -->
+<para>
+
+</para>
+
+@len: 
+@x: 
+
+
+<!-- ##### MACRO DECR_LENGTH_RET ##### -->
+<para>
+
+</para>
+
+@len: 
+@x: 
+@RET: 
+
+
+<!-- ##### MACRO DECR_LENGTH_COM ##### -->
+<para>
+
+</para>
+
+@len: 
+@x: 
+@COM: 
+
+
+<!-- ##### MACRO GNUTLS_POINTER_TO_INT ##### -->
+<para>
+
+</para>
+
+@_: 
+
+
+<!-- ##### MACRO GNUTLS_INT_TO_POINTER ##### -->
+<para>
+
+</para>
+
+@_: 
+
+
+<!-- ##### MACRO GNUTLS_KX_INVALID ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### STRUCT uint24 ##### -->
+<para>
+
+</para>
+
+@pint: 
 
 <!-- ##### ENUM handshake_state_t ##### -->
 <para>
@@ -516,6 +461,22 @@ gnutls_int
 @STATE41: 
 @STATE50: 
 
+<!-- ##### ENUM bye_state_t ##### -->
+<para>
+
+</para>
+
+@BYE_STATE0: 
+@BYE_STATE1: 
+@BYE_STATE2: 
+
+<!-- ##### MACRO BYE_STATE ##### -->
+<para>
+
+</para>
+
+
+
 <!-- ##### ENUM heartbeat_state_t ##### -->
 <para>
 
@@ -524,33 +485,6 @@ gnutls_int
 @SHB_SEND1: 
 @SHB_SEND2: 
 @SHB_RECV: 
-
-<!-- ##### MACRO likely ##### -->
-<para>
-
-</para>
-
-@x: 
-
-
-<!-- ##### MACRO memxor ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### TYPEDEF record_parameters_st ##### -->
-<para>
-
-</para>
-
-
-<!-- ##### TYPEDEF record_state_st ##### -->
-<para>
-
-</para>
-
 
 <!-- ##### ENUM recv_state_t ##### -->
 <para>
@@ -562,6 +496,335 @@ gnutls_int
 @RECV_STATE_FALSE_START_HANDLING: 
 @RECV_STATE_FALSE_START: 
 
+<!-- ##### MACRO MAX_ALGOS ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### ENUM extensions_t ##### -->
+<para>
+
+</para>
+
+@GNUTLS_EXTENSION_SERVER_NAME: 
+@GNUTLS_EXTENSION_MAX_RECORD_SIZE: 
+@GNUTLS_EXTENSION_STATUS_REQUEST: 
+@GNUTLS_EXTENSION_CERT_TYPE: 
+@GNUTLS_EXTENSION_SUPPORTED_ECC: 
+@GNUTLS_EXTENSION_SUPPORTED_ECC_PF: 
+@GNUTLS_EXTENSION_SRP: 
+@GNUTLS_EXTENSION_SIGNATURE_ALGORITHMS: 
+@GNUTLS_EXTENSION_SRTP: 
+@GNUTLS_EXTENSION_HEARTBEAT: 
+@GNUTLS_EXTENSION_ALPN: 
+@GNUTLS_EXTENSION_DUMBFW: 
+@GNUTLS_EXTENSION_ETM: 
+@GNUTLS_EXTENSION_EXT_MASTER_SECRET: 
+@GNUTLS_EXTENSION_SESSION_TICKET: 
+@GNUTLS_EXTENSION_SAFE_RENEGOTIATION: 
+
+<!-- ##### ENUM cipher_type_t ##### -->
+<para>
+
+</para>
+
+@CIPHER_STREAM: 
+@CIPHER_BLOCK: 
+@CIPHER_AEAD: 
+
+<!-- ##### MACRO RESUME_TRUE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO RESUME_FALSE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### ENUM content_type_t ##### -->
+<para>
+
+</para>
+
+@GNUTLS_CHANGE_CIPHER_SPEC: 
+@GNUTLS_ALERT: 
+@GNUTLS_HANDSHAKE: 
+@GNUTLS_APPLICATION_DATA: 
+@GNUTLS_HEARTBEAT: 
+
+<!-- ##### MACRO GNUTLS_PK_ANY ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNUTLS_PK_NONE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO MAX_HANDSHAKE_MSGS ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### STRUCT handshake_buffer_st ##### -->
+<para>
+
+</para>
+
+@htype: 
+@length: 
+@sequence: 
+@start_offset: 
+@end_offset: 
+@header: 
+@header_size: 
+@data: 
+
+<!-- ##### STRUCT mbuffer_st ##### -->
+<para>
+
+</para>
+
+@next: 
+@prev: 
+@mark: 
+@msg: 
+@maximum_size: 
+@uhead_mark: 
+@type: 
+@record_sequence: 
+@epoch: 
+@htype: 
+@handshake_sequence: 
+
+<!-- ##### STRUCT mbuffer_head_st ##### -->
+<para>
+
+</para>
+
+@head: 
+@tail: 
+@length: 
+@byte_length: 
+
+<!-- ##### STRUCT auth_cred_st ##### -->
+<para>
+
+</para>
+
+@algorithm: 
+@credentials: 
+@next: 
+
+<!-- ##### STRUCT gnutls_key_st ##### -->
+<para>
+
+</para>
+
+@ecdh_params: 
+@ecdh_x: 
+@ecdh_y: 
+@ecdhx: 
+@key: 
+@dh_params: 
+@client_Y: 
+@srp_key: 
+@srp_g: 
+@srp_p: 
+@A: 
+@B: 
+@u: 
+@b: 
+@a: 
+@x: 
+@auth_info: 
+@auth_info_type: 
+@auth_info_size: 
+@crypt_algo: 
+@cred: 
+@crt_requested: 
+
+<!-- ##### STRUCT pin_info_st ##### -->
+<para>
+
+</para>
+
+@cb: 
+@data: 
+
+<!-- ##### TYPEDEF record_state_st ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### TYPEDEF record_parameters_st ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT cipher_entry_st ##### -->
+<para>
+
+</para>
+
+@name: 
+@id: 
+@blocksize: 
+@keysize: 
+@type: 
+@implicit_iv: 
+@explicit_iv: 
+@cipher_iv: 
+@tagsize: 
+@xor_nonce: 
+
+<!-- ##### STRUCT gnutls_cipher_suite_entry_st ##### -->
+<para>
+
+</para>
+
+@name: 
+@id: 
+@block_algorithm: 
+@kx_algorithm: 
+@mac_algorithm: 
+@min_version: 
+@min_dtls_version: 
+@prf: 
+
+<!-- ##### STRUCT mac_entry_st ##### -->
+<para>
+
+</para>
+
+@name: 
+@oid: 
+@mac_oid: 
+@id: 
+
+<!-- ##### STRUCT version_entry_st ##### -->
+<para>
+
+</para>
+
+@name: 
+@id: 
+@major: 
+@minor: 
+@transport: 
+@supported: 
+@explicit_iv: 
+@extensions: 
+@selectable_sighash: 
+@selectable_prf: 
+@obsolete: 
+@false_start: 
+
+<!-- ##### STRUCT sign_algorithm_st ##### -->
+<para>
+
+</para>
+
+@hash_algorithm: 
+@sign_algorithm: 
+
+<!-- ##### MACRO MAX_SIGNATURE_ALGORITHMS ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO MAX_SIGN_ALGO_SIZE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO MAX_VERIFY_DATA_SIZE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### STRUCT security_parameters_st ##### -->
+<para>
+
+</para>
+
+@entity: 
+@kx_algorithm: 
+@epoch_read: 
+@epoch_write: 
+@epoch_next: 
+@epoch_min: 
+@cipher_suite: 
+@compression_method: 
+@master_secret: 
+@client_random: 
+@server_random: 
+@session_id: 
+@session_id_size: 
+@timestamp: 
+@max_record_send_size: 
+@max_record_recv_size: 
+@cert_type: 
+@ecc_curve: 
+@server_sign_algo: 
+@client_sign_algo: 
+@ext_master_secret: 
+@etm: 
+@do_recv_supplemental: 
+@do_send_supplemental: 
+@pversion: 
+
+<!-- ##### MACRO EPOCH_READ_CURRENT ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO EPOCH_WRITE_CURRENT ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO EPOCH_NEXT ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### STRUCT priority_st ##### -->
+<para>
+
+</para>
+
+@priority: 
+@algorithms: 
+
 <!-- ##### ENUM safe_renegotiation_t ##### -->
 <para>
 
@@ -571,6 +834,223 @@ gnutls_int
 @SR_UNSAFE: 
 @SR_PARTIAL: 
 @SR_SAFE: 
+
+<!-- ##### STRUCT gnutls_priority_st ##### -->
+<para>
+
+</para>
+
+@cipher: 
+@mac: 
+@kx: 
+@compression: 
+@protocol: 
+@cert_type: 
+@sign_algo: 
+@supported_ecc: 
+@no_extensions: 
+@no_ext_master_secret: 
+@allow_large_records: 
+@dumbfw: 
+@sr: 
+@min_record_version: 
+@server_precedence: 
+@allow_key_usage_violation: 
+@allow_server_key_usage_violation: 
+@allow_wrong_pms: 
+@no_tickets: 
+@no_etm: 
+@have_cbc: 
+@stateless_compression: 
+@additional_verify_flags: 
+@level: 
+@dh_prime_bits: 
+@fallback: 
+
+<!-- ##### MACRO DEFAULT_MAX_EMPTY_RECORDS ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO ENABLE_COMPAT ##### -->
+<para>
+
+</para>
+
+@x: 
+
+
+<!-- ##### STRUCT dh_params_st ##### -->
+<para>
+
+</para>
+
+@params: 
+@q_bits: 
+
+<!-- ##### STRUCT internal_params_st ##### -->
+<para>
+
+</para>
+
+@dh_params: 
+@free_dh_params: 
+
+<!-- ##### STRUCT dtls_st ##### -->
+<para>
+
+</para>
+
+@cookie: 
+@cookie_len: 
+@hsk_write_seq: 
+@hsk_read_seq: 
+@mtu: 
+@flight_init: 
+@last_flight: 
+@retrans_timeout_ms: 
+@hsk_hello_verify_requests: 
+@actual_retrans_timeout_ms: 
+@async_term: 
+@last_retransmit: 
+@packets_dropped: 
+
+<!-- ##### STRUCT tfo_st ##### -->
+<para>
+
+</para>
+
+@fd: 
+@flags: 
+@connect_only: 
+@connect_addr: 
+@connect_addrlen: 
+
+<!-- ##### STRUCT internals_st ##### -->
+<para>
+
+</para>
+
+@record_buffer: 
+@handshake_hash_buffer_prev_len: 
+@handshake_hash_buffer: 
+@resumable: 
+@ticket_sent: 
+@bye_state: 
+@handshake_final_state: 
+@handshake_state: 
+@invalid_connection: 
+@may_not_read: 
+@may_not_write: 
+@read_eof: 
+@last_alert: 
+@last_handshake_in: 
+@last_handshake_out: 
+@priorities: 
+@resumed: 
+@resumption_requested: 
+@resumed_security_parameters: 
+@resumption_data: 
+@handshake_send_buffer: 
+@handshake_recv_buffer: 
+@handshake_recv_buffer_size: 
+@record_recv_buffer: 
+@record_send_buffer: 
+@record_send_buffer_user_size: 
+@record_flush_mode: 
+@record_presend_buffer: 
+@expire_time: 
+@auth_struct: 
+@adv_version_major: 
+@adv_version_minor: 
+@max_handshake_data_buffer_size: 
+@pull_timeout_func: 
+@pull_func: 
+@push_func: 
+@vec_push_func: 
+@errno_func: 
+@transport_recv_ptr: 
+@transport_send_ptr: 
+@db_store_func: 
+@db_retrieve_func: 
+@db_remove_func: 
+@db_ptr: 
+@user_hello_func: 
+@h_hook: 
+@h_type: 
+@h_post: 
+@selected_cert_list: 
+@selected_cert_list_length: 
+@selected_key: 
+@selected_need_free: 
+@selected_ocsp_func: 
+@selected_ocsp_func_ptr: 
+@extensions_sent: 
+@extensions_sent_size: 
+@pgp_fingerprint: 
+@default_record_version: 
+@default_hello_version: 
+@user_ptr: 
+@enable_private: 
+@direction: 
+@openpgp_recv_key_func: 
+@ignore_rdn_sequence: 
+@rsa_pms_version: 
+@params: 
+@errnum: 
+@srp_prime_bits: 
+@initial_negotiation_completed: 
+@transport: 
+@dtls: 
+@handshake_in_progress: 
+@premaster_set: 
+@cb_tls_unique_len: 
+@cb_tls_unique: 
+@handshake_start_time: 
+@handshake_endtime: 
+@handshake_timeout_ms: 
+@record_timeout_ms: 
+@hb_local_data: 
+@hb_remote_data: 
+@hb_ping_start: 
+@hb_ping_sent: 
+@hb_actual_retrans_timeout_ms: 
+@hb_retrans_timeout_ms: 
+@hb_total_timeout_ms: 
+@ocsp_check_ok: 
+@hb_state: 
+@recv_state: 
+@sc_random_set: 
+@verify_callback: 
+@vc_data: 
+@vc_sdata: 
+@additional_verify_flags: 
+@cert_hash_set: 
+@saved_username: 
+@saved_username_set: 
+@false_start_used: 
+@tfo: 
+@rsup: 
+@rexts: 
+
+<!-- ##### MACRO MAX_EPOCH_INDEX ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### STRUCT gnutls_session_int ##### -->
+<para>
+
+</para>
+
+@security_parameters: 
+@record_parameters: 
+@internals: 
+@key: 
 
 <!-- ##### MACRO set_adv_version ##### -->
 <para>
@@ -582,25 +1062,10 @@ gnutls_int
 @minor: 
 
 
-<!-- ##### TYPEDEF ssize_t ##### -->
+<!-- ##### MACRO timespec_sub_ms ##### -->
 <para>
 
 </para>
 
-
-<!-- ##### ENUM transport_t ##### -->
-<para>
-
-</para>
-
-@GNUTLS_STREAM: 
-@GNUTLS_DGRAM: 
-
-<!-- ##### MACRO unlikely ##### -->
-<para>
-
-</para>
-
-@x: 
 
 

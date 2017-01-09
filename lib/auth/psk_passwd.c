@@ -94,7 +94,7 @@ static int _randomize_psk(gnutls_datum_t * psk)
 
 	psk->size = 16;
 
-	ret = _gnutls_rnd(GNUTLS_RND_NONCE, (char *) psk->data, 16);
+	ret = gnutls_rnd(GNUTLS_RND_NONCE, (char *) psk->data, 16);
 	if (ret < 0) {
 		gnutls_assert();
 		return ret;
@@ -194,8 +194,8 @@ _gnutls_psk_pwd_find_entry(gnutls_session_t session, char *username,
 cleanup:
 	if (fd != NULL)
 		fclose(fd);
-        
-        zeroize_key(line, line_size);
+
+	zeroize_key(line, line_size);
 	free(line);
 
 	return ret;

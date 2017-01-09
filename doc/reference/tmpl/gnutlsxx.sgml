@@ -20,16 +20,7 @@ gnutlsxx
 <!-- ##### SECTION Image ##### -->
 
 
-<!-- ##### FUNCTION bye ##### -->
-<para>
-
-</para>
-
-@how: 
-@Returns: 
-
-
-<!-- ##### FUNCTION check_pending ##### -->
+<!-- ##### FUNCTION what ##### -->
 <para>
 
 </para>
@@ -37,14 +28,7 @@ gnutlsxx
 @Returns: 
 
 
-<!-- ##### FUNCTION clear_credentials ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### FUNCTION db_check_entry ##### -->
+<!-- ##### FUNCTION get_code ##### -->
 <para>
 
 </para>
@@ -52,21 +36,26 @@ gnutlsxx
 @Returns: 
 
 
-<!-- ##### FUNCTION db_remove ##### -->
+<!-- ##### FUNCTION import_raw ##### -->
 <para>
 
 </para>
 
 
 
-<!-- ##### FUNCTION export_pkcs1 ##### -->
+<!-- ##### FUNCTION import_pkcs3 ##### -->
 <para>
 
 </para>
 
-@format: 
-@params_data: 
-@params_data_size: 
+
+
+<!-- ##### FUNCTION generate ##### -->
+<para>
+
+</para>
+
+@bits: 
 
 
 <!-- ##### FUNCTION export_pkcs3 ##### -->
@@ -86,147 +75,7 @@ gnutlsxx
 
 
 
-<!-- ##### FUNCTION free_ca_names ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### FUNCTION free_cas ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### FUNCTION free_crls ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### FUNCTION free_keys ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### FUNCTION generate ##### -->
-<para>
-
-</para>
-
-@bits: 
-
-
-<!-- ##### FUNCTION get_alert ##### -->
-<para>
-
-</para>
-
-@Returns: 
-
-
-<!-- ##### FUNCTION get_auth_type ##### -->
-<para>
-
-</para>
-
-@Returns: 
-
-
-<!-- ##### FUNCTION get_cipher ##### -->
-<para>
-
-</para>
-
-@Returns: 
-
-
-<!-- ##### FUNCTION get_code ##### -->
-<para>
-
-</para>
-
-@Returns: 
-
-
-<!-- ##### FUNCTION get_data ##### -->
-<para>
-
-</para>
-
-@session_data: 
-
-
-<!-- ##### FUNCTION get_dh_secret_bits ##### -->
-<para>
-
-</para>
-
-@Returns: 
-
-
-<!-- ##### FUNCTION get_handshake_last_out ##### -->
-<para>
-
-</para>
-
-@Returns: 
-
-
 <!-- ##### FUNCTION get_params_t ##### -->
-<para>
-
-</para>
-
-@Returns: 
-
-
-<!-- ##### FUNCTION get_protocol_version ##### -->
-<para>
-
-</para>
-
-@Returns: 
-
-
-<!-- ##### FUNCTION get_record_direction ##### -->
-<para>
-
-</para>
-
-@Returns: 
-
-
-<!-- ##### FUNCTION get_request_status ##### -->
-<para>
-
-</para>
-
-@Returns: 
-
-
-<!-- ##### FUNCTION get_transport_ptr ##### -->
-<para>
-
-</para>
-
-@Returns: 
-
-
-<!-- ##### FUNCTION get_user_ptr ##### -->
-<para>
-
-</para>
-
-@Returns: 
-
-
-<!-- ##### FUNCTION handshake ##### -->
 <para>
 
 </para>
@@ -241,34 +90,59 @@ gnutlsxx
 
 
 
-<!-- ##### FUNCTION import_pkcs3 ##### -->
+<!-- ##### FUNCTION export_pkcs1 ##### -->
 <para>
 
 </para>
 
+@format: 
+@params_data: 
+@params_data_size: 
 
 
-<!-- ##### FUNCTION import_raw ##### -->
+<!-- ##### FUNCTION bye ##### -->
 <para>
 
 </para>
 
+@how: 
+@Returns: 
 
 
-<!-- ##### FUNCTION prf_raw ##### -->
+<!-- ##### FUNCTION handshake ##### -->
 <para>
 
 </para>
 
-@label_size: 
-@label: 
-@seed_size: 
-@seed: 
-@outsize: 
-@out: 
+@Returns: 
 
 
-<!-- ##### FUNCTION ptr ##### -->
+<!-- ##### FUNCTION get_alert ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION send_appropriate_alert ##### -->
+<para>
+
+</para>
+
+@err: 
+@Returns: 
+
+
+<!-- ##### FUNCTION get_cipher ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION get_handshake_last_out ##### -->
 <para>
 
 </para>
@@ -286,67 +160,33 @@ gnutlsxx
 @Returns: 
 
 
-<!-- ##### FUNCTION send_appropriate_alert ##### -->
+<!-- ##### FUNCTION get_record_direction ##### -->
 <para>
 
 </para>
 
-@err: 
 @Returns: 
 
 
-<!-- ##### FUNCTION set_certificate_request ##### -->
+<!-- ##### FUNCTION check_pending ##### -->
 <para>
 
 </para>
 
-@Param1: 
+@Returns: 
 
 
-<!-- ##### FUNCTION set_credentials ##### -->
+<!-- ##### FUNCTION prf_raw ##### -->
 <para>
 
 </para>
 
-
-
-<!-- ##### FUNCTION set_credentials_file ##### -->
-<para>
-
-</para>
-
-@password_file: 
-@password_conf_file: 
-
-
-<!-- ##### FUNCTION set_credentials_function ##### -->
-<para>
-
-</para>
-
-@func: 
-
-
-<!-- ##### FUNCTION set_db ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### FUNCTION set_dh_params ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### FUNCTION set_params_function ##### -->
-<para>
-
-</para>
-
-@func: 
+@label_size: 
+@label: 
+@seed_size: 
+@seed: 
+@outsize: 
+@out: 
 
 
 <!-- ##### FUNCTION set_priority ##### -->
@@ -358,39 +198,34 @@ gnutlsxx
 @err_pos: 
 
 
-<!-- ##### FUNCTION set_retrieve_function ##### -->
+<!-- ##### FUNCTION get_protocol_version ##### -->
 <para>
 
 </para>
 
-@func: 
+@Returns: 
 
 
-<!-- ##### FUNCTION set_rsa_export_params ##### -->
+<!-- ##### FUNCTION get_data ##### -->
+<para>
+
+</para>
+
+@session_data: 
+
+
+<!-- ##### FUNCTION clear_credentials ##### -->
 <para>
 
 </para>
 
 
 
-<!-- ##### FUNCTION set_server_name ##### -->
+<!-- ##### FUNCTION set_credentials ##### -->
 <para>
 
 </para>
 
-@type: 
-@name: 
-@name_length: 
-
-
-<!-- ##### FUNCTION set_simple_pkcs12_file ##### -->
-<para>
-
-</para>
-
-@pkcs12file: 
-@type: 
-@password: 
 
 
 <!-- ##### FUNCTION set_transport_ptr ##### -->
@@ -401,12 +236,12 @@ gnutlsxx
 @ptr: 
 
 
-<!-- ##### FUNCTION set_transport_pull_function ##### -->
+<!-- ##### FUNCTION get_transport_ptr ##### -->
 <para>
 
 </para>
 
-@pull_func: 
+@Returns: 
 
 
 <!-- ##### FUNCTION set_transport_push_function ##### -->
@@ -425,12 +260,142 @@ gnutlsxx
 @vec_push_func: 
 
 
+<!-- ##### FUNCTION set_transport_pull_function ##### -->
+<para>
+
+</para>
+
+@pull_func: 
+
+
 <!-- ##### FUNCTION set_user_ptr ##### -->
 <para>
 
 </para>
 
 @ptr: 
+
+
+<!-- ##### FUNCTION get_user_ptr ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION get_auth_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION get_dh_secret_bits ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION db_remove ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION set_db ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION db_check_entry ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION set_certificate_request ##### -->
+<para>
+
+</para>
+
+@Param1: 
+
+
+<!-- ##### FUNCTION set_server_name ##### -->
+<para>
+
+</para>
+
+@type: 
+@name: 
+@name_length: 
+
+
+<!-- ##### FUNCTION get_request_status ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION ptr ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION free_keys ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION free_cas ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION free_ca_names ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION free_crls ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION set_dh_params ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION set_rsa_export_params ##### -->
+<para>
+
+</para>
+
 
 
 <!-- ##### FUNCTION set_verify_flags ##### -->
@@ -450,7 +415,16 @@ gnutlsxx
 @max_depth: 
 
 
-<!-- ##### FUNCTION set_x509_crl ##### -->
+<!-- ##### FUNCTION set_x509_trust_file ##### -->
+<para>
+
+</para>
+
+@cafile: 
+@type: 
+
+
+<!-- ##### FUNCTION set_x509_trust ##### -->
 <para>
 
 </para>
@@ -466,7 +440,7 @@ gnutlsxx
 @type: 
 
 
-<!-- ##### FUNCTION set_x509_key ##### -->
+<!-- ##### FUNCTION set_x509_crl ##### -->
 <para>
 
 </para>
@@ -483,27 +457,53 @@ gnutlsxx
 @type: 
 
 
-<!-- ##### FUNCTION set_x509_trust ##### -->
+<!-- ##### FUNCTION set_x509_key ##### -->
 <para>
 
 </para>
 
 
 
-<!-- ##### FUNCTION set_x509_trust_file ##### -->
+<!-- ##### FUNCTION set_simple_pkcs12_file ##### -->
 <para>
 
 </para>
 
-@cafile: 
+@pkcs12file: 
 @type: 
+@password: 
 
 
-<!-- ##### FUNCTION what ##### -->
+<!-- ##### FUNCTION set_retrieve_function ##### -->
 <para>
 
 </para>
 
-@Returns: 
+@func: 
+
+
+<!-- ##### FUNCTION set_params_function ##### -->
+<para>
+
+</para>
+
+@func: 
+
+
+<!-- ##### FUNCTION set_credentials_file ##### -->
+<para>
+
+</para>
+
+@password_file: 
+@password_conf_file: 
+
+
+<!-- ##### FUNCTION set_credentials_function ##### -->
+<para>
+
+</para>
+
+@func: 
 
 

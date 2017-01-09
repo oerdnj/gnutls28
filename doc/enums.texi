@@ -234,6 +234,8 @@ Allow the peer to replace its certificate, or change its ID during a rehandshake
 Enable the TLS false start on client side if the negotiated ciphersuites allow it. This will enable sending data prior to the handshake being complete, and may introduce a risk of crypto failure when combined with certain key exchanged; for that GnuTLS may not enable that option in ciphersuites that are known to be not safe for false start. Since 3.5.0.
 @item GNUTLS_@-FORCE_@-CLIENT_@-CERT
 When in client side and only a single cert is specified, send that certificate irrespective of the issuers expectated by the server. Since 3.5.0.
+@item GNUTLS_@-NO_@-TICKETS
+Flag to indicate that the session should not use resumption with session tickets.
 @end table
 
 @c gnutls_alert_level_t
@@ -689,6 +691,8 @@ former isn't available. Prior to matching the email address will be converted to
 @table @code
 @item GNUTLS_@-CERTIFICATE_@-SKIP_@-KEY_@-CERT_@-MATCH
 Skip the key and certificate matching check.
+@item GNUTLS_@-CERTIFICATE_@-API_@-V2
+If set the gnutls_certificate_set_*key* functions will return an index of the added key pair instead of zero.
 @end table
 
 @c gnutls_psk_key_flags
@@ -781,7 +785,7 @@ it will increase by one for each subsequent attempt.
 @c gnutls_ext_parse_type_t
 @table @code
 @item GNUTLS_@-EXT_@-ANY
-Any extension type.
+Any extension type (internal use only).
 @item GNUTLS_@-EXT_@-APPLICATION
 Application extension.
 @item GNUTLS_@-EXT_@-TLS
@@ -916,6 +920,8 @@ PBES2 AES-256.
 Some schemas distinguish between an empty and a NULL password.
 @item GNUTLS_@-PKCS_@-PBES2_@-DES
 PBES2 single DES.
+@item GNUTLS_@-PKCS_@-PBES1_@-DES_@-MD5
+-- undescribed --
 @end table
 
 @c gnutls_keygen_types_t
@@ -1007,6 +1013,8 @@ When retrieving an object, do not set any requirements (store).
 @item GNUTLS_@-PKCS11_@-OBJ_@-FLAG_@-RETRIEVE_@-TRUSTED
 When retrieving an object, only retrieve the marked as trusted (alias to @code{GNUTLS_PKCS11_OBJ_FLAG_MARK_TRUSTED} ).
 In @code{gnutls_pkcs11_crt_is_known()}  it implies @code{GNUTLS_PKCS11_OBJ_FLAG_RETRIEVE_COMPARE}  if @code{GNUTLS_PKCS11_OBJ_FLAG_COMPARE_KEY}  is not given.
+@item GNUTLS_@-PKCS11_@-OBJ_@-FLAG_@-MARK_@-DISTRUSTED
+When writing an object, mark it as distrusted (store).
 @item GNUTLS_@-PKCS11_@-OBJ_@-FLAG_@-RETRIEVE_@-DISTRUSTED
 When retrieving an object, only retrieve the marked as distrusted (seek).
 @item GNUTLS_@-PKCS11_@-OBJ_@-FLAG_@-COMPARE

@@ -9,10 +9,12 @@ x509
 
 </para>
 
+
 <!-- ##### SECTION See_Also ##### -->
 <para>
 
 </para>
+
 
 <!-- ##### SECTION Stability_Level ##### -->
 
@@ -20,112 +22,105 @@ x509
 <!-- ##### SECTION Image ##### -->
 
 
-<!-- ##### MACRO GNUTLS_CRL_REASON_SUPERSEEDED ##### -->
+<!-- ##### MACRO GNUTLS_OID_X520_COUNTRY_NAME ##### -->
 <para>
 
 </para>
 
 
 
-<!-- ##### MACRO GNUTLS_FSAN_APPEND ##### -->
+<!-- ##### MACRO GNUTLS_OID_X520_ORGANIZATION_NAME ##### -->
 <para>
 
 </para>
 
 
 
-<!-- ##### MACRO GNUTLS_FSAN_SET ##### -->
+<!-- ##### MACRO GNUTLS_OID_X520_ORGANIZATIONAL_UNIT_NAME ##### -->
 <para>
 
 </para>
 
 
 
-<!-- ##### MACRO GNUTLS_KP_ANY ##### -->
+<!-- ##### MACRO GNUTLS_OID_X520_COMMON_NAME ##### -->
 <para>
 
 </para>
 
 
 
-<!-- ##### MACRO GNUTLS_KP_CODE_SIGNING ##### -->
+<!-- ##### MACRO GNUTLS_OID_X520_LOCALITY_NAME ##### -->
 <para>
 
 </para>
 
 
 
-<!-- ##### MACRO GNUTLS_KP_EMAIL_PROTECTION ##### -->
+<!-- ##### MACRO GNUTLS_OID_X520_STATE_OR_PROVINCE_NAME ##### -->
 <para>
 
 </para>
 
 
 
-<!-- ##### MACRO GNUTLS_KP_IPSEC_IKE ##### -->
+<!-- ##### MACRO GNUTLS_OID_X520_INITIALS ##### -->
 <para>
 
 </para>
 
 
 
-<!-- ##### MACRO GNUTLS_KP_MS_SMART_CARD_LOGON ##### -->
+<!-- ##### MACRO GNUTLS_OID_X520_GENERATION_QUALIFIER ##### -->
 <para>
 
 </para>
 
 
 
-<!-- ##### MACRO GNUTLS_KP_OCSP_SIGNING ##### -->
+<!-- ##### MACRO GNUTLS_OID_X520_SURNAME ##### -->
 <para>
 
 </para>
 
 
 
-<!-- ##### MACRO GNUTLS_KP_TIME_STAMPING ##### -->
+<!-- ##### MACRO GNUTLS_OID_X520_GIVEN_NAME ##### -->
 <para>
 
 </para>
 
 
 
-<!-- ##### MACRO GNUTLS_KP_TLS_WWW_CLIENT ##### -->
+<!-- ##### MACRO GNUTLS_OID_X520_TITLE ##### -->
 <para>
 
 </para>
 
 
 
-<!-- ##### MACRO GNUTLS_KP_TLS_WWW_SERVER ##### -->
+<!-- ##### MACRO GNUTLS_OID_X520_DN_QUALIFIER ##### -->
 <para>
 
 </para>
 
 
 
-<!-- ##### MACRO GNUTLS_MAX_QUALIFIERS ##### -->
+<!-- ##### MACRO GNUTLS_OID_X520_PSEUDONYM ##### -->
 <para>
 
 </para>
 
 
 
-<!-- ##### MACRO GNUTLS_OID_AD_CAISSUERS ##### -->
+<!-- ##### MACRO GNUTLS_OID_X520_POSTALCODE ##### -->
 <para>
 
 </para>
 
 
 
-<!-- ##### MACRO GNUTLS_OID_AD_OCSP ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO GNUTLS_OID_AIA ##### -->
+<!-- ##### MACRO GNUTLS_OID_X520_NAME ##### -->
 <para>
 
 </para>
@@ -153,6 +148,27 @@ x509
 
 
 
+<!-- ##### MACRO GNUTLS_OID_PKIX_DATE_OF_BIRTH ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNUTLS_OID_PKIX_PLACE_OF_BIRTH ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNUTLS_OID_PKIX_GENDER ##### -->
+<para>
+
+</para>
+
+
+
 <!-- ##### MACRO GNUTLS_OID_PKIX_COUNTRY_OF_CITIZENSHIP ##### -->
 <para>
 
@@ -167,168 +183,217 @@ x509
 
 
 
-<!-- ##### MACRO GNUTLS_OID_PKIX_DATE_OF_BIRTH ##### -->
+<!-- ##### MACRO GNUTLS_KP_TLS_WWW_SERVER ##### -->
 <para>
 
 </para>
 
 
 
-<!-- ##### MACRO GNUTLS_OID_PKIX_GENDER ##### -->
+<!-- ##### MACRO GNUTLS_KP_TLS_WWW_CLIENT ##### -->
 <para>
 
 </para>
 
 
 
-<!-- ##### MACRO GNUTLS_OID_PKIX_PLACE_OF_BIRTH ##### -->
+<!-- ##### MACRO GNUTLS_KP_CODE_SIGNING ##### -->
 <para>
 
 </para>
 
 
 
-<!-- ##### MACRO GNUTLS_OID_X520_COMMON_NAME ##### -->
+<!-- ##### MACRO GNUTLS_KP_MS_SMART_CARD_LOGON ##### -->
 <para>
 
 </para>
 
 
 
-<!-- ##### MACRO GNUTLS_OID_X520_COUNTRY_NAME ##### -->
+<!-- ##### MACRO GNUTLS_KP_EMAIL_PROTECTION ##### -->
 <para>
 
 </para>
 
 
 
-<!-- ##### MACRO GNUTLS_OID_X520_DN_QUALIFIER ##### -->
+<!-- ##### MACRO GNUTLS_KP_TIME_STAMPING ##### -->
 <para>
 
 </para>
 
 
 
-<!-- ##### MACRO GNUTLS_OID_X520_GENERATION_QUALIFIER ##### -->
+<!-- ##### MACRO GNUTLS_KP_OCSP_SIGNING ##### -->
 <para>
 
 </para>
 
 
 
-<!-- ##### MACRO GNUTLS_OID_X520_GIVEN_NAME ##### -->
+<!-- ##### MACRO GNUTLS_KP_IPSEC_IKE ##### -->
 <para>
 
 </para>
 
 
 
-<!-- ##### MACRO GNUTLS_OID_X520_INITIALS ##### -->
+<!-- ##### MACRO GNUTLS_KP_ANY ##### -->
 <para>
 
 </para>
 
 
 
-<!-- ##### MACRO GNUTLS_OID_X520_LOCALITY_NAME ##### -->
+<!-- ##### MACRO GNUTLS_KP_FLAG_DISALLOW_ANY ##### -->
 <para>
 
 </para>
 
 
 
-<!-- ##### MACRO GNUTLS_OID_X520_NAME ##### -->
+<!-- ##### MACRO GNUTLS_OID_AIA ##### -->
 <para>
 
 </para>
 
 
 
-<!-- ##### MACRO GNUTLS_OID_X520_ORGANIZATIONAL_UNIT_NAME ##### -->
+<!-- ##### MACRO GNUTLS_OID_AD_OCSP ##### -->
 <para>
 
 </para>
 
 
 
-<!-- ##### MACRO GNUTLS_OID_X520_ORGANIZATION_NAME ##### -->
+<!-- ##### MACRO GNUTLS_OID_AD_CAISSUERS ##### -->
 <para>
 
 </para>
 
 
 
-<!-- ##### MACRO GNUTLS_OID_X520_POSTALCODE ##### -->
+<!-- ##### MACRO GNUTLS_FSAN_SET ##### -->
 <para>
 
 </para>
 
 
 
-<!-- ##### MACRO GNUTLS_OID_X520_PSEUDONYM ##### -->
+<!-- ##### MACRO GNUTLS_FSAN_APPEND ##### -->
 <para>
 
 </para>
 
 
 
-<!-- ##### MACRO GNUTLS_OID_X520_STATE_OR_PROVINCE_NAME ##### -->
+<!-- ##### MACRO GNUTLS_FSAN_ENCODE_OCTET_STRING ##### -->
 <para>
 
 </para>
 
 
 
-<!-- ##### MACRO GNUTLS_OID_X520_SURNAME ##### -->
+<!-- ##### MACRO GNUTLS_FSAN_ENCODE_UTF8_STRING ##### -->
 <para>
 
 </para>
 
 
 
-<!-- ##### MACRO GNUTLS_OID_X520_TITLE ##### -->
+<!-- ##### MACRO GNUTLS_X509EXT_OID_SUBJECT_KEY_ID ##### -->
 <para>
 
 </para>
 
 
 
-<!-- ##### MACRO GNUTLS_PKCS8_PLAIN ##### -->
+<!-- ##### MACRO GNUTLS_X509EXT_OID_KEY_USAGE ##### -->
 <para>
 
 </para>
 
 
 
-<!-- ##### MACRO GNUTLS_PKCS8_USE_PKCS12_3DES ##### -->
+<!-- ##### MACRO GNUTLS_X509EXT_OID_PRIVATE_KEY_USAGE_PERIOD ##### -->
 <para>
 
 </para>
 
 
 
-<!-- ##### MACRO GNUTLS_PKCS8_USE_PKCS12_ARCFOUR ##### -->
+<!-- ##### MACRO GNUTLS_X509EXT_OID_SAN ##### -->
 <para>
 
 </para>
 
 
 
-<!-- ##### MACRO GNUTLS_PKCS8_USE_PKCS12_RC2_40 ##### -->
+<!-- ##### MACRO GNUTLS_X509EXT_OID_IAN ##### -->
 <para>
 
 </para>
 
 
 
-<!-- ##### MACRO GNUTLS_TL_VERIFY_CRL ##### -->
+<!-- ##### MACRO GNUTLS_X509EXT_OID_BASIC_CONSTRAINTS ##### -->
 <para>
 
 </para>
 
 
 
-<!-- ##### MACRO GNUTLS_X509_DN_OID_RETURN_OID ##### -->
+<!-- ##### MACRO GNUTLS_X509EXT_OID_NAME_CONSTRAINTS ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNUTLS_X509EXT_OID_CRL_DIST_POINTS ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNUTLS_X509EXT_OID_CRT_POLICY ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNUTLS_X509EXT_OID_AUTHORITY_KEY_ID ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNUTLS_X509EXT_OID_EXTENDED_KEY_USAGE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNUTLS_X509EXT_OID_AUTHORITY_INFO_ACCESS ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNUTLS_X509EXT_OID_PROXY_CRT_INFO ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNUTLS_X509EXT_OID_TLSFEATURES ##### -->
 <para>
 
 </para>
@@ -344,1126 +409,12 @@ x509
 @GNUTLS_X509_CRT_LIST_FAIL_IF_UNSORTED: 
 @GNUTLS_X509_CRT_LIST_SORT: 
 
-<!-- ##### ENUM gnutls_certificate_verify_flags ##### -->
-<para>
-
-</para>
-
-@GNUTLS_VERIFY_DISABLE_CA_SIGN: 
-@GNUTLS_VERIFY_DO_NOT_ALLOW_SAME: 
-@GNUTLS_VERIFY_ALLOW_ANY_X509_V1_CA_CRT: 
-@GNUTLS_VERIFY_ALLOW_SIGN_RSA_MD2: 
-@GNUTLS_VERIFY_ALLOW_SIGN_RSA_MD5: 
-@GNUTLS_VERIFY_DISABLE_TIME_CHECKS: 
-@GNUTLS_VERIFY_DISABLE_TRUSTED_TIME_CHECKS: 
-@GNUTLS_VERIFY_DO_NOT_ALLOW_X509_V1_CA_CRT: 
-@GNUTLS_VERIFY_DISABLE_CRL_CHECKS: 
-@GNUTLS_VERIFY_ALLOW_UNSORTED_CHAIN: 
-@GNUTLS_VERIFY_DO_NOT_ALLOW_UNSORTED_CHAIN: 
-@GNUTLS_VERIFY_DO_NOT_ALLOW_WILDCARDS: 
-@GNUTLS_VERIFY_USE_TLS1_RSA: 
-
-<!-- ##### ENUM gnutls_info_access_what_t ##### -->
-<para>
-
-</para>
-
-@GNUTLS_IA_ACCESSMETHOD_OID: 
-@GNUTLS_IA_ACCESSLOCATION_GENERALNAME_TYPE: 
-@GNUTLS_IA_URI: 
-@GNUTLS_IA_UNKNOWN: 
-@GNUTLS_IA_OCSP_URI: 
-@GNUTLS_IA_CAISSUERS_URI: 
-
-<!-- ##### FUNCTION gnutls_pkcs7_deinit ##### -->
-<para>
-
-</para>
-
-@pkcs7: 
-
-
-<!-- ##### FUNCTION gnutls_pkcs7_delete_crl ##### -->
-<para>
-
-</para>
-
-@pkcs7: 
-@indx: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_pkcs7_delete_crt ##### -->
-<para>
-
-</para>
-
-@pkcs7: 
-@indx: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_pkcs7_export ##### -->
-<para>
-
-</para>
-
-@pkcs7: 
-@format: 
-@output_data: 
-@output_data_size: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_pkcs7_export2 ##### -->
-<para>
-
-</para>
-
-@pkcs7: 
-@format: 
-@out: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_pkcs7_get_crl_count ##### -->
-<para>
-
-</para>
-
-@pkcs7: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_pkcs7_get_crl_raw ##### -->
-<para>
-
-</para>
-
-@pkcs7: 
-@indx: 
-@crl: 
-@crl_size: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_pkcs7_get_crt_count ##### -->
-<para>
-
-</para>
-
-@pkcs7: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_pkcs7_get_crt_raw ##### -->
-<para>
-
-</para>
-
-@pkcs7: 
-@indx: 
-@certificate: 
-@certificate_size: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_pkcs7_import ##### -->
-<para>
-
-</para>
-
-@pkcs7: 
-@data: 
-@format: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_pkcs7_init ##### -->
-<para>
-
-</para>
-
-@pkcs7: 
-@Returns: 
-
-
-<!-- ##### STRUCT gnutls_pkcs7_int ##### -->
-<para>
-
-</para>
-
-@pkcs7: 
-@signed_data: 
-
-<!-- ##### FUNCTION gnutls_pkcs7_set_crl ##### -->
-<para>
-
-</para>
-
-@pkcs7: 
-@crl: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_pkcs7_set_crl_raw ##### -->
-<para>
-
-</para>
-
-@pkcs7: 
-@crl: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_pkcs7_set_crt ##### -->
-<para>
-
-</para>
-
-@pkcs7: 
-@crt: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_pkcs7_set_crt_raw ##### -->
-<para>
-
-</para>
-
-@pkcs7: 
-@crt: 
-@Returns: 
-
-
-<!-- ##### TYPEDEF gnutls_pkcs7_t ##### -->
-<para>
-
-</para>
-
-
-<!-- ##### ENUM gnutls_pkcs_encrypt_flags_t ##### -->
-<para>
-
-</para>
-
-@GNUTLS_PKCS_PLAIN: 
-@GNUTLS_PKCS_PKCS12_3DES: 
-@GNUTLS_PKCS_PKCS12_ARCFOUR: 
-@GNUTLS_PKCS_PKCS12_RC2_40: 
-@GNUTLS_PKCS_PBES2_3DES: 
-@GNUTLS_PKCS_PBES2_AES_128: 
-@GNUTLS_PKCS_PBES2_AES_192: 
-@GNUTLS_PKCS_PBES2_AES_256: 
-@GNUTLS_PKCS_NULL_PASSWORD: 
-@GNUTLS_PKCS_PBES2_DES: 
-
-<!-- ##### FUNCTION gnutls_x509_crl_check_issuer ##### -->
-<para>
-
-</para>
-
-@crl: 
-@issuer: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crl_deinit ##### -->
-<para>
-
-</para>
-
-@crl: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crl_export ##### -->
-<para>
-
-</para>
-
-@crl: 
-@format: 
-@output_data: 
-@output_data_size: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crl_export2 ##### -->
-<para>
-
-</para>
-
-@crl: 
-@format: 
-@out: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crl_get_authority_key_gn_serial ##### -->
-<para>
-
-</para>
-
-@crl: 
-@seq: 
-@alt: 
-@alt_size: 
-@alt_type: 
-@serial: 
-@serial_size: 
-@critical: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crl_get_authority_key_id ##### -->
-<para>
-
-</para>
-
-@crl: 
-@id: 
-@id_size: 
-@critical: 
-@Returns: 
-
-
-<!-- ##### MACRO gnutls_x509_crl_get_certificate ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO gnutls_x509_crl_get_certificate_count ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### FUNCTION gnutls_x509_crl_get_crt_count ##### -->
-<para>
-
-</para>
-
-@crl: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crl_get_crt_serial ##### -->
-<para>
-
-</para>
-
-@crl: 
-@indx: 
-@serial: 
-@serial_size: 
-@t: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crl_get_dn_oid ##### -->
-<para>
-
-</para>
-
-@crl: 
-@indx: 
-@oid: 
-@sizeof_oid: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crl_get_extension_data ##### -->
-<para>
-
-</para>
-
-@crl: 
-@indx: 
-@data: 
-@sizeof_data: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crl_get_extension_info ##### -->
-<para>
-
-</para>
-
-@crl: 
-@indx: 
-@oid: 
-@sizeof_oid: 
-@critical: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crl_get_extension_oid ##### -->
-<para>
-
-</para>
-
-@crl: 
-@indx: 
-@oid: 
-@sizeof_oid: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crl_get_issuer_dn ##### -->
-<para>
-
-</para>
-
-@crl: 
-@buf: 
-@sizeof_buf: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crl_get_issuer_dn_by_oid ##### -->
-<para>
-
-</para>
-
-@crl: 
-@oid: 
-@indx: 
-@raw_flag: 
-@buf: 
-@sizeof_buf: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crl_get_next_update ##### -->
-<para>
-
-</para>
-
-@crl: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crl_get_number ##### -->
-<para>
-
-</para>
-
-@crl: 
-@ret: 
-@ret_size: 
-@critical: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crl_get_raw_issuer_dn ##### -->
-<para>
-
-</para>
-
-@crl: 
-@dn: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crl_get_signature ##### -->
-<para>
-
-</para>
-
-@crl: 
-@sig: 
-@sizeof_sig: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crl_get_signature_algorithm ##### -->
-<para>
-
-</para>
-
-@crl: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crl_get_this_update ##### -->
-<para>
-
-</para>
-
-@crl: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crl_get_version ##### -->
-<para>
-
-</para>
-
-@crl: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crl_import ##### -->
-<para>
-
-</para>
-
-@crl: 
-@data: 
-@format: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crl_init ##### -->
-<para>
-
-</para>
-
-@crl: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crl_list_import ##### -->
-<para>
-
-</para>
-
-@crls: 
-@crl_max: 
-@data: 
-@format: 
-@flags: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crl_list_import2 ##### -->
-<para>
-
-</para>
-
-@crls: 
-@size: 
-@data: 
-@format: 
-@flags: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crl_print ##### -->
-<para>
-
-</para>
-
-@crl: 
-@format: 
-@out: 
-@Returns: 
-
-
-<!-- ##### ENUM gnutls_x509_crl_reason_flags_t ##### -->
-<para>
-
-</para>
-
-@GNUTLS_CRL_REASON_UNSPECIFIED: 
-@GNUTLS_CRL_REASON_PRIVILEGE_WITHDRAWN: 
-@GNUTLS_CRL_REASON_CERTIFICATE_HOLD: 
-@GNUTLS_CRL_REASON_CESSATION_OF_OPERATION: 
-@GNUTLS_CRL_REASON_SUPERSEDED: 
-@GNUTLS_CRL_REASON_AFFILIATION_CHANGED: 
-@GNUTLS_CRL_REASON_CA_COMPROMISE: 
-@GNUTLS_CRL_REASON_KEY_COMPROMISE: 
-@GNUTLS_CRL_REASON_UNUSED: 
-@GNUTLS_CRL_REASON_AA_COMPROMISE: 
-
-<!-- ##### FUNCTION gnutls_x509_crl_set_authority_key_id ##### -->
-<para>
-
-</para>
-
-@crl: 
-@id: 
-@id_size: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crl_set_crt ##### -->
-<para>
-
-</para>
-
-@crl: 
-@crt: 
-@revocation_time: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crl_set_crt_serial ##### -->
-<para>
-
-</para>
-
-@crl: 
-@serial: 
-@serial_size: 
-@revocation_time: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crl_set_next_update ##### -->
-<para>
-
-</para>
-
-@crl: 
-@exp_time: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crl_set_number ##### -->
-<para>
-
-</para>
-
-@crl: 
-@nr: 
-@nr_size: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crl_set_this_update ##### -->
-<para>
-
-</para>
-
-@crl: 
-@act_time: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crl_set_version ##### -->
-<para>
-
-</para>
-
-@crl: 
-@version: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crl_sign2 ##### -->
-<para>
-
-</para>
-
-@crl: 
-@issuer: 
-@issuer_key: 
-@dig: 
-@flags: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crl_verify ##### -->
-<para>
-
-</para>
-
-@crl: 
-@CA_list: 
-@CA_list_length: 
-@flags: 
-@verify: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crq_deinit ##### -->
-<para>
-
-</para>
-
-@crq: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crq_export ##### -->
-<para>
-
-</para>
-
-@crq: 
-@format: 
-@output_data: 
-@output_data_size: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crq_export2 ##### -->
-<para>
-
-</para>
-
-@crq: 
-@format: 
-@out: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crq_get_attribute_by_oid ##### -->
-<para>
-
-</para>
-
-@crq: 
-@oid: 
-@indx: 
-@buf: 
-@sizeof_buf: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crq_get_attribute_data ##### -->
-<para>
-
-</para>
-
-@crq: 
-@indx: 
-@data: 
-@sizeof_data: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crq_get_attribute_info ##### -->
-<para>
-
-</para>
-
-@crq: 
-@indx: 
-@oid: 
-@sizeof_oid: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crq_get_basic_constraints ##### -->
-<para>
-
-</para>
-
-@crq: 
-@critical: 
-@ca: 
-@pathlen: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crq_get_challenge_password ##### -->
-<para>
-
-</para>
-
-@crq: 
-@pass: 
-@sizeof_pass: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crq_get_dn ##### -->
-<para>
-
-</para>
-
-@crq: 
-@buf: 
-@sizeof_buf: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crq_get_dn_by_oid ##### -->
-<para>
-
-</para>
-
-@crq: 
-@oid: 
-@indx: 
-@raw_flag: 
-@buf: 
-@sizeof_buf: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crq_get_dn_oid ##### -->
-<para>
-
-</para>
-
-@crq: 
-@indx: 
-@oid: 
-@sizeof_oid: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crq_get_extension_by_oid ##### -->
-<para>
-
-</para>
-
-@crq: 
-@oid: 
-@indx: 
-@buf: 
-@sizeof_buf: 
-@critical: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crq_get_extension_data ##### -->
-<para>
-
-</para>
-
-@crq: 
-@indx: 
-@data: 
-@sizeof_data: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crq_get_extension_info ##### -->
-<para>
-
-</para>
-
-@crq: 
-@indx: 
-@oid: 
-@sizeof_oid: 
-@critical: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crq_get_key_id ##### -->
-<para>
-
-</para>
-
-@crq: 
-@flags: 
-@output_data: 
-@output_data_size: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crq_get_key_purpose_oid ##### -->
-<para>
-
-</para>
-
-@crq: 
-@indx: 
-@oid: 
-@sizeof_oid: 
-@critical: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crq_get_key_rsa_raw ##### -->
-<para>
-
-</para>
-
-@crq: 
-@m: 
-@e: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crq_get_key_usage ##### -->
-<para>
-
-</para>
-
-@crq: 
-@key_usage: 
-@critical: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crq_get_pk_algorithm ##### -->
-<para>
-
-</para>
-
-@crq: 
-@bits: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crq_get_private_key_usage_period ##### -->
+<!-- ##### FUNCTION gnutls_x509_crt_init ##### -->
 <para>
 
 </para>
 
 @cert: 
-@activation: 
-@expiration: 
-@critical: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crq_get_subject_alt_name ##### -->
-<para>
-
-</para>
-
-@crq: 
-@seq: 
-@ret: 
-@ret_size: 
-@ret_type: 
-@critical: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crq_get_subject_alt_othername_oid ##### -->
-<para>
-
-</para>
-
-@crq: 
-@seq: 
-@ret: 
-@ret_size: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crq_get_version ##### -->
-<para>
-
-</para>
-
-@crq: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crq_import ##### -->
-<para>
-
-</para>
-
-@crq: 
-@data: 
-@format: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crq_init ##### -->
-<para>
-
-</para>
-
-@crq: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crq_print ##### -->
-<para>
-
-</para>
-
-@crq: 
-@format: 
-@out: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crq_set_attribute_by_oid ##### -->
-<para>
-
-</para>
-
-@crq: 
-@oid: 
-@buf: 
-@sizeof_buf: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crq_set_basic_constraints ##### -->
-<para>
-
-</para>
-
-@crq: 
-@ca: 
-@pathLenConstraint: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crq_set_challenge_password ##### -->
-<para>
-
-</para>
-
-@crq: 
-@pass: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crq_set_dn_by_oid ##### -->
-<para>
-
-</para>
-
-@crq: 
-@oid: 
-@raw_flag: 
-@data: 
-@sizeof_data: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crq_set_key ##### -->
-<para>
-
-</para>
-
-@crq: 
-@key: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crq_set_key_purpose_oid ##### -->
-<para>
-
-</para>
-
-@crq: 
-@oid: 
-@critical: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crq_set_key_rsa_raw ##### -->
-<para>
-
-</para>
-
-@crq: 
-@m: 
-@e: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crq_set_key_usage ##### -->
-<para>
-
-</para>
-
-@crq: 
-@usage: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crq_set_private_key_usage_period ##### -->
-<para>
-
-</para>
-
-@crq: 
-@activation: 
-@expiration: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crq_set_subject_alt_name ##### -->
-<para>
-
-</para>
-
-@crq: 
-@nt: 
-@data: 
-@data_size: 
-@flags: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crq_set_version ##### -->
-<para>
-
-</para>
-
-@crq: 
-@version: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crq_sign2 ##### -->
-<para>
-
-</para>
-
-@crq: 
-@key: 
-@dig: 
-@flags: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crq_verify ##### -->
-<para>
-
-</para>
-
-@crq: 
-@flags: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crt_check_hostname ##### -->
-<para>
-
-</para>
-
-@cert: 
-@hostname: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crt_check_issuer ##### -->
-<para>
-
-</para>
-
-@cert: 
-@issuer: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crt_check_revocation ##### -->
-<para>
-
-</para>
-
-@cert: 
-@crl_list: 
-@crl_list_length: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crt_cpy_crl_dist_points ##### -->
-<para>
-
-</para>
-
-@dst: 
-@src: 
 @Returns: 
 
 
@@ -1473,6 +424,74 @@ x509
 </para>
 
 @cert: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crt_equals ##### -->
+<para>
+
+</para>
+
+@cert1: 
+@cert2: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crt_equals2 ##### -->
+<para>
+
+</para>
+
+@cert1: 
+@der: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crt_import ##### -->
+<para>
+
+</para>
+
+@cert: 
+@data: 
+@format: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crt_list_import2 ##### -->
+<para>
+
+</para>
+
+@certs: 
+@size: 
+@data: 
+@format: 
+@flags: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crt_list_import ##### -->
+<para>
+
+</para>
+
+@certs: 
+@cert_max: 
+@data: 
+@format: 
+@flags: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crt_import_url ##### -->
+<para>
+
+</para>
+
+@crt: 
+@url: 
+@flags: 
+@Returns: 
 
 
 <!-- ##### FUNCTION gnutls_x509_crt_export ##### -->
@@ -1498,7 +517,167 @@ x509
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_x509_crt_get_activation_time ##### -->
+<!-- ##### FUNCTION gnutls_x509_crt_get_private_key_usage_period ##### -->
+<para>
+
+</para>
+
+@cert: 
+@activation: 
+@expiration: 
+@critical: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crt_get_issuer_dn ##### -->
+<para>
+
+</para>
+
+@cert: 
+@buf: 
+@buf_size: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crt_get_issuer_dn2 ##### -->
+<para>
+
+</para>
+
+@cert: 
+@dn: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crt_get_issuer_dn3 ##### -->
+<para>
+
+</para>
+
+@cert: 
+@dn: 
+@flags: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crt_get_issuer_dn_oid ##### -->
+<para>
+
+</para>
+
+@cert: 
+@indx: 
+@oid: 
+@oid_size: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crt_get_issuer_dn_by_oid ##### -->
+<para>
+
+</para>
+
+@cert: 
+@oid: 
+@indx: 
+@raw_flag: 
+@buf: 
+@buf_size: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crt_get_dn ##### -->
+<para>
+
+</para>
+
+@cert: 
+@buf: 
+@buf_size: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crt_get_dn2 ##### -->
+<para>
+
+</para>
+
+@cert: 
+@dn: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crt_get_dn3 ##### -->
+<para>
+
+</para>
+
+@cert: 
+@dn: 
+@flags: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crt_get_dn_oid ##### -->
+<para>
+
+</para>
+
+@cert: 
+@indx: 
+@oid: 
+@oid_size: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crt_get_dn_by_oid ##### -->
+<para>
+
+</para>
+
+@cert: 
+@oid: 
+@indx: 
+@raw_flag: 
+@buf: 
+@buf_size: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crt_check_hostname ##### -->
+<para>
+
+</para>
+
+@cert: 
+@hostname: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crt_check_hostname2 ##### -->
+<para>
+
+</para>
+
+@cert: 
+@hostname: 
+@flags: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crt_check_email ##### -->
+<para>
+
+</para>
+
+@cert: 
+@email: 
+@flags: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crt_get_signature_algorithm ##### -->
 <para>
 
 </para>
@@ -1507,15 +686,99 @@ x509
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_x509_crt_get_authority_info_access ##### -->
+<!-- ##### FUNCTION gnutls_x509_crt_get_signature ##### -->
+<para>
+
+</para>
+
+@cert: 
+@sig: 
+@sizeof_sig: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crt_get_version ##### -->
+<para>
+
+</para>
+
+@cert: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crt_get_pk_oid ##### -->
+<para>
+
+</para>
+
+@cert: 
+@oid: 
+@oid_size: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crt_get_signature_oid ##### -->
+<para>
+
+</para>
+
+@cert: 
+@oid: 
+@oid_size: 
+@Returns: 
+
+
+<!-- ##### ENUM gnutls_keyid_flags_t ##### -->
+<para>
+
+</para>
+
+@GNUTLS_KEYID_USE_SHA1: 
+@GNUTLS_KEYID_USE_SHA256: 
+@GNUTLS_KEYID_USE_BEST_KNOWN: 
+
+<!-- ##### FUNCTION gnutls_x509_crt_get_key_id ##### -->
 <para>
 
 </para>
 
 @crt: 
-@seq: 
-@what: 
-@data: 
+@flags: 
+@output_data: 
+@output_data_size: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crt_set_private_key_usage_period ##### -->
+<para>
+
+</para>
+
+@crt: 
+@activation: 
+@expiration: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crt_set_authority_key_id ##### -->
+<para>
+
+</para>
+
+@cert: 
+@id: 
+@id_size: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crt_get_authority_key_id ##### -->
+<para>
+
+</para>
+
+@cert: 
+@id: 
+@id_size: 
 @critical: 
 @Returns: 
 
@@ -1536,39 +799,235 @@ x509
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_x509_crt_get_authority_key_id ##### -->
+<!-- ##### FUNCTION gnutls_x509_crt_get_subject_key_id ##### -->
 <para>
 
 </para>
 
 @cert: 
-@id: 
-@id_size: 
+@ret: 
+@ret_size: 
 @critical: 
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_x509_crt_get_basic_constraints ##### -->
+<!-- ##### FUNCTION gnutls_x509_crt_get_subject_unique_id ##### -->
 <para>
 
 </para>
 
-@cert: 
-@critical: 
-@ca: 
-@pathlen: 
+@crt: 
+@buf: 
+@buf_size: 
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_x509_crt_get_ca_status ##### -->
+<!-- ##### FUNCTION gnutls_x509_crt_get_issuer_unique_id ##### -->
 <para>
 
 </para>
 
-@cert: 
+@crt: 
+@buf: 
+@buf_size: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crt_set_pin_function ##### -->
+<para>
+
+</para>
+
+@crt: 
+@fn: 
+@userdata: 
+
+
+<!-- ##### ENUM gnutls_info_access_what_t ##### -->
+<para>
+
+</para>
+
+@GNUTLS_IA_ACCESSMETHOD_OID: 
+@GNUTLS_IA_ACCESSLOCATION_GENERALNAME_TYPE: 
+@GNUTLS_IA_URI: 
+@GNUTLS_IA_UNKNOWN: 
+@GNUTLS_IA_OCSP_URI: 
+@GNUTLS_IA_CAISSUERS_URI: 
+
+<!-- ##### FUNCTION gnutls_x509_crt_get_authority_info_access ##### -->
+<para>
+
+</para>
+
+@crt: 
+@seq: 
+@what: 
+@data: 
 @critical: 
 @Returns: 
 
+
+<!-- ##### TYPEDEF gnutls_x509_name_constraints_t ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION gnutls_x509_name_constraints_check ##### -->
+<para>
+
+</para>
+
+@nc: 
+@type: 
+@name: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_name_constraints_check_crt ##### -->
+<para>
+
+</para>
+
+@nc: 
+@type: 
+@crt: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_name_constraints_init ##### -->
+<para>
+
+</para>
+
+@nc: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_name_constraints_deinit ##### -->
+<para>
+
+</para>
+
+@nc: 
+
+
+<!-- ##### MACRO GNUTLS_EXT_FLAG_APPEND ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNUTLS_NAME_CONSTRAINTS_FLAG_APPEND ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION gnutls_x509_crt_get_name_constraints ##### -->
+<para>
+
+</para>
+
+@crt: 
+@nc: 
+@flags: 
+@critical: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_name_constraints_add_permitted ##### -->
+<para>
+
+</para>
+
+@nc: 
+@type: 
+@name: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_name_constraints_add_excluded ##### -->
+<para>
+
+</para>
+
+@nc: 
+@type: 
+@name: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crt_set_name_constraints ##### -->
+<para>
+
+</para>
+
+@crt: 
+@nc: 
+@critical: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_name_constraints_get_permitted ##### -->
+<para>
+
+</para>
+
+@nc: 
+@idx: 
+@type: 
+@name: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_name_constraints_get_excluded ##### -->
+<para>
+
+</para>
+
+@nc: 
+@idx: 
+@type: 
+@name: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_cidr_to_rfc5280 ##### -->
+<para>
+
+</para>
+
+@cidr: 
+@cidr_rfc5280: 
+@Returns: 
+
+
+<!-- ##### MACRO GNUTLS_CRL_REASON_SUPERSEEDED ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### ENUM gnutls_x509_crl_reason_flags_t ##### -->
+<para>
+
+</para>
+
+@GNUTLS_CRL_REASON_UNSPECIFIED: 
+@GNUTLS_CRL_REASON_PRIVILEGE_WITHDRAWN: 
+@GNUTLS_CRL_REASON_CERTIFICATE_HOLD: 
+@GNUTLS_CRL_REASON_CESSATION_OF_OPERATION: 
+@GNUTLS_CRL_REASON_SUPERSEDED: 
+@GNUTLS_CRL_REASON_AFFILIATION_CHANGED: 
+@GNUTLS_CRL_REASON_CA_COMPROMISE: 
+@GNUTLS_CRL_REASON_KEY_COMPROMISE: 
+@GNUTLS_CRL_REASON_UNUSED: 
+@GNUTLS_CRL_REASON_AA_COMPROMISE: 
 
 <!-- ##### FUNCTION gnutls_x509_crt_get_crl_dist_points ##### -->
 <para>
@@ -1584,41 +1043,68 @@ x509
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_x509_crt_get_dn ##### -->
+<!-- ##### FUNCTION gnutls_x509_crt_set_crl_dist_points2 ##### -->
+<para>
+
+</para>
+
+@crt: 
+@type: 
+@data: 
+@data_size: 
+@reason_flags: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crt_set_crl_dist_points ##### -->
+<para>
+
+</para>
+
+@crt: 
+@type: 
+@data_string: 
+@reason_flags: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crt_cpy_crl_dist_points ##### -->
+<para>
+
+</para>
+
+@dst: 
+@src: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crl_sign2 ##### -->
+<para>
+
+</para>
+
+@crl: 
+@issuer: 
+@issuer_key: 
+@dig: 
+@flags: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crt_get_activation_time ##### -->
 <para>
 
 </para>
 
 @cert: 
-@buf: 
-@buf_size: 
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_x509_crt_get_dn_by_oid ##### -->
+<!-- ##### MACRO GNUTLS_X509_NO_WELL_DEFINED_EXPIRATION ##### -->
 <para>
 
 </para>
 
-@cert: 
-@oid: 
-@indx: 
-@raw_flag: 
-@buf: 
-@buf_size: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crt_get_dn_oid ##### -->
-<para>
-
-</para>
-
-@cert: 
-@indx: 
-@oid: 
-@oid_size: 
-@Returns: 
 
 
 <!-- ##### FUNCTION gnutls_x509_crt_get_expiration_time ##### -->
@@ -1630,199 +1116,14 @@ x509
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_x509_crt_get_extension_by_oid ##### -->
+<!-- ##### FUNCTION gnutls_x509_crt_get_serial ##### -->
 <para>
 
 </para>
 
 @cert: 
-@oid: 
-@indx: 
-@buf: 
-@buf_size: 
-@critical: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crt_get_extension_data ##### -->
-<para>
-
-</para>
-
-@cert: 
-@indx: 
-@data: 
-@sizeof_data: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crt_get_extension_info ##### -->
-<para>
-
-</para>
-
-@cert: 
-@indx: 
-@oid: 
-@oid_size: 
-@critical: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crt_get_extension_oid ##### -->
-<para>
-
-</para>
-
-@cert: 
-@indx: 
-@oid: 
-@oid_size: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crt_get_fingerprint ##### -->
-<para>
-
-</para>
-
-@cert: 
-@algo: 
-@buf: 
-@buf_size: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crt_get_issuer ##### -->
-<para>
-
-</para>
-
-@cert: 
-@dn: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crt_get_issuer_alt_name ##### -->
-<para>
-
-</para>
-
-@cert: 
-@seq: 
-@ian: 
-@ian_size: 
-@critical: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crt_get_issuer_alt_name2 ##### -->
-<para>
-
-</para>
-
-@cert: 
-@seq: 
-@ian: 
-@ian_size: 
-@ian_type: 
-@critical: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crt_get_issuer_alt_othername_oid ##### -->
-<para>
-
-</para>
-
-@cert: 
-@seq: 
-@ret: 
-@ret_size: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crt_get_issuer_dn ##### -->
-<para>
-
-</para>
-
-@cert: 
-@buf: 
-@buf_size: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crt_get_issuer_dn_by_oid ##### -->
-<para>
-
-</para>
-
-@cert: 
-@oid: 
-@indx: 
-@raw_flag: 
-@buf: 
-@buf_size: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crt_get_issuer_dn_oid ##### -->
-<para>
-
-</para>
-
-@cert: 
-@indx: 
-@oid: 
-@oid_size: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crt_get_issuer_unique_id ##### -->
-<para>
-
-</para>
-
-@crt: 
-@buf: 
-@buf_size: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crt_get_key_id ##### -->
-<para>
-
-</para>
-
-@crt: 
-@flags: 
-@output_data: 
-@output_data_size: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crt_get_key_purpose_oid ##### -->
-<para>
-
-</para>
-
-@cert: 
-@indx: 
-@oid: 
-@oid_size: 
-@critical: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crt_get_key_usage ##### -->
-<para>
-
-</para>
-
-@cert: 
-@key_usage: 
-@critical: 
+@result: 
+@result_size: 
 @Returns: 
 
 
@@ -1833,6 +1134,17 @@ x509
 
 @cert: 
 @bits: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crt_get_pk_rsa_raw ##### -->
+<para>
+
+</para>
+
+@crt: 
+@m: 
+@e: 
 @Returns: 
 
 
@@ -1849,113 +1161,15 @@ x509
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_x509_crt_get_pk_rsa_raw ##### -->
+<!-- ##### FUNCTION gnutls_x509_crt_get_pk_ecc_raw ##### -->
 <para>
 
 </para>
 
 @crt: 
-@m: 
-@e: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crt_get_policy ##### -->
-<para>
-
-</para>
-
-@crt: 
-@indx: 
-@policy: 
-@critical: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crt_get_private_key_usage_period ##### -->
-<para>
-
-</para>
-
-@cert: 
-@activation: 
-@expiration: 
-@critical: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crt_get_proxy ##### -->
-<para>
-
-</para>
-
-@cert: 
-@critical: 
-@pathlen: 
-@policyLanguage: 
-@policy: 
-@sizeof_policy: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crt_get_raw_dn ##### -->
-<para>
-
-</para>
-
-@cert: 
-@start: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crt_get_raw_issuer_dn ##### -->
-<para>
-
-</para>
-
-@cert: 
-@start: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crt_get_serial ##### -->
-<para>
-
-</para>
-
-@cert: 
-@result: 
-@result_size: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crt_get_signature ##### -->
-<para>
-
-</para>
-
-@cert: 
-@sig: 
-@sizeof_sig: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crt_get_signature_algorithm ##### -->
-<para>
-
-</para>
-
-@cert: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crt_get_subject ##### -->
-<para>
-
-</para>
-
-@cert: 
-@dn: 
+@curve: 
+@x: 
+@y: 
 @Returns: 
 
 
@@ -1998,118 +1212,85 @@ x509
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_x509_crt_get_subject_key_id ##### -->
+<!-- ##### FUNCTION gnutls_x509_crt_get_issuer_alt_name ##### -->
 <para>
 
 </para>
 
 @cert: 
-@ret: 
-@ret_size: 
+@seq: 
+@ian: 
+@ian_size: 
 @critical: 
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_x509_crt_get_subject_unique_id ##### -->
+<!-- ##### FUNCTION gnutls_x509_crt_get_issuer_alt_name2 ##### -->
+<para>
+
+</para>
+
+@cert: 
+@seq: 
+@ian: 
+@ian_size: 
+@ian_type: 
+@critical: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crt_get_issuer_alt_othername_oid ##### -->
+<para>
+
+</para>
+
+@cert: 
+@seq: 
+@ret: 
+@ret_size: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crt_get_ca_status ##### -->
+<para>
+
+</para>
+
+@cert: 
+@critical: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crt_get_basic_constraints ##### -->
+<para>
+
+</para>
+
+@cert: 
+@critical: 
+@ca: 
+@pathlen: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crt_get_key_usage ##### -->
+<para>
+
+</para>
+
+@cert: 
+@key_usage: 
+@critical: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crt_set_key_usage ##### -->
 <para>
 
 </para>
 
 @crt: 
-@buf: 
-@buf_size: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crt_get_version ##### -->
-<para>
-
-</para>
-
-@cert: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crt_import ##### -->
-<para>
-
-</para>
-
-@cert: 
-@data: 
-@format: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crt_init ##### -->
-<para>
-
-</para>
-
-@cert: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crt_list_import ##### -->
-<para>
-
-</para>
-
-@certs: 
-@cert_max: 
-@data: 
-@format: 
-@flags: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crt_list_import2 ##### -->
-<para>
-
-</para>
-
-@certs: 
-@size: 
-@data: 
-@format: 
-@flags: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crt_list_verify ##### -->
-<para>
-
-</para>
-
-@cert_list: 
-@cert_list_length: 
-@CA_list: 
-@CA_list_length: 
-@CRL_list: 
-@CRL_list_length: 
-@flags: 
-@verify: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crt_print ##### -->
-<para>
-
-</para>
-
-@cert: 
-@format: 
-@out: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crt_set_activation_time ##### -->
-<para>
-
-</para>
-
-@cert: 
-@act_time: 
+@usage: 
 @Returns: 
 
 
@@ -2124,103 +1305,248 @@ x509
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_x509_crt_set_authority_key_id ##### -->
+<!-- ##### FUNCTION gnutls_x509_crt_get_proxy ##### -->
 <para>
 
 </para>
 
 @cert: 
-@id: 
-@id_size: 
+@critical: 
+@pathlen: 
+@policyLanguage: 
+@policy: 
+@sizeof_policy: 
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_x509_crt_set_basic_constraints ##### -->
+<!-- ##### TYPEDEF gnutls_x509_tlsfeatures_t ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION gnutls_x509_tlsfeatures_init ##### -->
+<para>
+
+</para>
+
+@features: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_tlsfeatures_deinit ##### -->
+<para>
+
+</para>
+
+@Param1: 
+
+
+<!-- ##### FUNCTION gnutls_x509_tlsfeatures_get ##### -->
+<para>
+
+</para>
+
+@f: 
+@idx: 
+@feature: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crt_set_tlsfeatures ##### -->
 <para>
 
 </para>
 
 @crt: 
-@ca: 
-@pathLenConstraint: 
+@features: 
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_x509_crt_set_ca_status ##### -->
+<!-- ##### FUNCTION gnutls_x509_crt_get_tlsfeatures ##### -->
 <para>
 
 </para>
 
-@crt: 
-@ca: 
+@cert: 
+@features: 
+@flags: 
+@critical: 
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_x509_crt_set_crl_dist_points ##### -->
+<!-- ##### FUNCTION gnutls_x509_tlsfeatures_check_crt ##### -->
 <para>
 
 </para>
 
+@feat: 
 @crt: 
-@type: 
-@data_string: 
-@reason_flags: 
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_x509_crt_set_crl_dist_points2 ##### -->
+<!-- ##### MACRO GNUTLS_MAX_QUALIFIERS ##### -->
 <para>
 
 </para>
 
-@crt: 
-@type: 
-@data: 
-@data_size: 
-@reason_flags: 
-@Returns: 
 
 
-<!-- ##### FUNCTION gnutls_x509_crt_set_crq ##### -->
+<!-- ##### ENUM gnutls_x509_qualifier_t ##### -->
 <para>
 
 </para>
 
-@crt: 
-@crq: 
-@Returns: 
+@GNUTLS_X509_QUALIFIER_UNKNOWN: 
+@GNUTLS_X509_QUALIFIER_URI: 
+@GNUTLS_X509_QUALIFIER_NOTICE: 
 
-
-<!-- ##### FUNCTION gnutls_x509_crt_set_crq_extensions ##### -->
+<!-- ##### STRUCT gnutls_x509_policy_st ##### -->
 <para>
 
 </para>
 
-@crt: 
-@crq: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crt_set_dn_by_oid ##### -->
-<para>
-
-</para>
-
-@crt: 
 @oid: 
-@raw_flag: 
-@name: 
-@sizeof_name: 
+@qualifiers: 
+
+<!-- ##### FUNCTION gnutls_x509_policy_release ##### -->
+<para>
+
+</para>
+
+@policy: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crt_get_policy ##### -->
+<para>
+
+</para>
+
+@crt: 
+@indx: 
+@policy: 
+@critical: 
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_x509_crt_set_expiration_time ##### -->
+<!-- ##### FUNCTION gnutls_x509_crt_set_policy ##### -->
+<para>
+
+</para>
+
+@crt: 
+@policy: 
+@critical: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_dn_oid_known ##### -->
+<para>
+
+</para>
+
+@oid: 
+@Returns: 
+
+
+<!-- ##### MACRO GNUTLS_X509_DN_OID_RETURN_OID ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION gnutls_x509_dn_oid_name ##### -->
+<para>
+
+</para>
+
+@oid: 
+@flags: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crt_get_extension_oid ##### -->
 <para>
 
 </para>
 
 @cert: 
-@exp_time: 
+@indx: 
+@oid: 
+@oid_size: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crt_get_extension_by_oid ##### -->
+<para>
+
+</para>
+
+@cert: 
+@oid: 
+@indx: 
+@buf: 
+@buf_size: 
+@critical: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crq_get_signature_algorithm ##### -->
+<para>
+
+</para>
+
+@crq: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crq_get_extension_by_oid2 ##### -->
+<para>
+
+</para>
+
+@crq: 
+@oid: 
+@indx: 
+@output: 
+@critical: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crt_get_extension_info ##### -->
+<para>
+
+</para>
+
+@cert: 
+@indx: 
+@oid: 
+@oid_size: 
+@critical: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crt_get_extension_data ##### -->
+<para>
+
+</para>
+
+@cert: 
+@indx: 
+@data: 
+@sizeof_data: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crt_get_extension_data2 ##### -->
+<para>
+
+</para>
+
+@cert: 
+@indx: 
+@data: 
 @Returns: 
 
 
@@ -2237,6 +1563,30 @@ x509
 @Returns: 
 
 
+<!-- ##### FUNCTION gnutls_x509_crt_set_dn ##### -->
+<para>
+
+</para>
+
+@crt: 
+@dn: 
+@err: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crt_set_dn_by_oid ##### -->
+<para>
+
+</para>
+
+@crt: 
+@oid: 
+@raw_flag: 
+@name: 
+@sizeof_name: 
+@Returns: 
+
+
 <!-- ##### FUNCTION gnutls_x509_crt_set_issuer_dn_by_oid ##### -->
 <para>
 
@@ -2250,6 +1600,27 @@ x509
 @Returns: 
 
 
+<!-- ##### FUNCTION gnutls_x509_crt_set_issuer_dn ##### -->
+<para>
+
+</para>
+
+@crt: 
+@dn: 
+@err: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crt_set_version ##### -->
+<para>
+
+</para>
+
+@crt: 
+@version: 
+@Returns: 
+
+
 <!-- ##### FUNCTION gnutls_x509_crt_set_key ##### -->
 <para>
 
@@ -2260,93 +1631,57 @@ x509
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_x509_crt_set_key_purpose_oid ##### -->
+<!-- ##### FUNCTION gnutls_x509_crt_set_ca_status ##### -->
 <para>
 
 </para>
 
-@cert: 
-@oid: 
-@critical: 
+@crt: 
+@ca: 
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_x509_crt_set_key_usage ##### -->
+<!-- ##### FUNCTION gnutls_x509_crt_set_basic_constraints ##### -->
 <para>
 
 </para>
 
 @crt: 
-@usage: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crt_set_pin_function ##### -->
-<para>
-
-</para>
-
-@crt: 
-@fn: 
-@userdata: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crt_set_policy ##### -->
-<para>
-
-</para>
-
-@crt: 
-@policy: 
-@critical: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crt_set_private_key_usage_period ##### -->
-<para>
-
-</para>
-
-@crt: 
-@activation: 
-@expiration: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crt_set_proxy ##### -->
-<para>
-
-</para>
-
-@crt: 
+@ca: 
 @pathLenConstraint: 
-@policyLanguage: 
-@policy: 
-@sizeof_policy: 
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_x509_crt_set_proxy_dn ##### -->
-<para>
-
-</para>
-
-@crt: 
-@eecrt: 
-@raw_flag: 
-@name: 
-@sizeof_name: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crt_set_serial ##### -->
+<!-- ##### FUNCTION gnutls_x509_crt_set_subject_unique_id ##### -->
 <para>
 
 </para>
 
 @cert: 
-@serial: 
-@serial_size: 
+@id: 
+@id_size: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crt_set_issuer_unique_id ##### -->
+<para>
+
+</para>
+
+@cert: 
+@id: 
+@id_size: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crt_set_subject_alternative_name ##### -->
+<para>
+
+</para>
+
+@crt: 
+@type: 
+@data_string: 
 @Returns: 
 
 
@@ -2363,35 +1698,42 @@ x509
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_x509_crt_set_subject_alternative_name ##### -->
+<!-- ##### FUNCTION gnutls_x509_crt_set_subject_alt_othername ##### -->
+<para>
+
+</para>
+
+@crt: 
+@oid: 
+@data: 
+@data_size: 
+@flags: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crt_set_issuer_alt_name ##### -->
 <para>
 
 </para>
 
 @crt: 
 @type: 
-@data_string: 
+@data: 
+@data_size: 
+@flags: 
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_x509_crt_set_subject_key_id ##### -->
-<para>
-
-</para>
-
-@cert: 
-@id: 
-@id_size: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_crt_set_version ##### -->
+<!-- ##### FUNCTION gnutls_x509_crt_set_issuer_alt_othername ##### -->
 <para>
 
 </para>
 
 @crt: 
-@version: 
+@oid: 
+@data: 
+@data_size: 
+@flags: 
 @Returns: 
 
 
@@ -2419,25 +1761,267 @@ x509
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_x509_crt_verify ##### -->
+<!-- ##### FUNCTION gnutls_x509_crt_set_activation_time ##### -->
 <para>
 
 </para>
 
 @cert: 
-@CA_list: 
-@CA_list_length: 
-@flags: 
-@verify: 
+@act_time: 
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_x509_dn_deinit ##### -->
+<!-- ##### FUNCTION gnutls_x509_crt_set_expiration_time ##### -->
+<para>
+
+</para>
+
+@cert: 
+@exp_time: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crt_set_serial ##### -->
+<para>
+
+</para>
+
+@cert: 
+@serial: 
+@serial_size: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crt_set_subject_key_id ##### -->
+<para>
+
+</para>
+
+@cert: 
+@id: 
+@id_size: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crt_set_proxy_dn ##### -->
+<para>
+
+</para>
+
+@crt: 
+@eecrt: 
+@raw_flag: 
+@name: 
+@sizeof_name: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crt_set_proxy ##### -->
+<para>
+
+</para>
+
+@crt: 
+@pathLenConstraint: 
+@policyLanguage: 
+@policy: 
+@sizeof_policy: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crt_print ##### -->
+<para>
+
+</para>
+
+@cert: 
+@format: 
+@out: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crl_print ##### -->
+<para>
+
+</para>
+
+@crl: 
+@format: 
+@out: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crt_get_raw_issuer_dn ##### -->
+<para>
+
+</para>
+
+@cert: 
+@start: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crt_get_raw_dn ##### -->
+<para>
+
+</para>
+
+@cert: 
+@start: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_rdn_get ##### -->
+<para>
+
+</para>
+
+@idn: 
+@buf: 
+@sizeof_buf: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_rdn_get2 ##### -->
+<para>
+
+</para>
+
+@idn: 
+@str: 
+@flags: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_rdn_get_oid ##### -->
+<para>
+
+</para>
+
+@idn: 
+@indx: 
+@buf: 
+@sizeof_buf: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_rdn_get_by_oid ##### -->
+<para>
+
+</para>
+
+@idn: 
+@oid: 
+@indx: 
+@raw_flag: 
+@buf: 
+@sizeof_buf: 
+@Returns: 
+
+
+<!-- ##### TYPEDEF gnutls_x509_dn_t ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT gnutls_x509_ava_st ##### -->
+<para>
+
+</para>
+
+@oid: 
+@value: 
+@value_tag: 
+
+<!-- ##### FUNCTION gnutls_x509_crt_get_subject ##### -->
+<para>
+
+</para>
+
+@cert: 
+@dn: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crt_get_issuer ##### -->
+<para>
+
+</para>
+
+@cert: 
+@dn: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_dn_get_rdn_ava ##### -->
 <para>
 
 </para>
 
 @dn: 
+@irdn: 
+@iava: 
+@ava: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_dn_get_str ##### -->
+<para>
+
+</para>
+
+@dn: 
+@str: 
+@Returns: 
+
+
+<!-- ##### MACRO GNUTLS_X509_DN_FLAG_COMPAT ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION gnutls_x509_dn_get_str2 ##### -->
+<para>
+
+</para>
+
+@dn: 
+@str: 
+@flags: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_dn_set_str ##### -->
+<para>
+
+</para>
+
+@dn: 
+@str: 
+@err: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_dn_init ##### -->
+<para>
+
+</para>
+
+@dn: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_dn_import ##### -->
+<para>
+
+</para>
+
+@dn: 
+@data: 
+@Returns: 
 
 
 <!-- ##### FUNCTION gnutls_x509_dn_export ##### -->
@@ -2463,77 +2047,765 @@ x509
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_x509_dn_get_rdn_ava ##### -->
+<!-- ##### FUNCTION gnutls_x509_dn_deinit ##### -->
 <para>
 
 </para>
 
 @dn: 
-@irdn: 
-@iava: 
-@ava: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crl_init ##### -->
+<para>
+
+</para>
+
+@crl: 
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_x509_dn_import ##### -->
+<!-- ##### FUNCTION gnutls_x509_crl_deinit ##### -->
 <para>
 
 </para>
 
-@dn: 
+@crl: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crl_import ##### -->
+<para>
+
+</para>
+
+@crl: 
 @data: 
+@format: 
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_x509_dn_init ##### -->
+<!-- ##### FUNCTION gnutls_x509_crl_export ##### -->
 <para>
 
 </para>
 
+@crl: 
+@format: 
+@output_data: 
+@output_data_size: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crl_export2 ##### -->
+<para>
+
+</para>
+
+@crl: 
+@format: 
+@out: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crl_get_raw_issuer_dn ##### -->
+<para>
+
+</para>
+
+@crl: 
 @dn: 
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_x509_dn_oid_known ##### -->
+<!-- ##### FUNCTION gnutls_x509_crl_get_issuer_dn ##### -->
 <para>
 
 </para>
 
-@oid: 
+@crl: 
+@buf: 
+@sizeof_buf: 
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_x509_dn_oid_name ##### -->
+<!-- ##### FUNCTION gnutls_x509_crl_get_issuer_dn2 ##### -->
 <para>
 
 </para>
 
-@oid: 
+@crl: 
+@dn: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crl_get_issuer_dn3 ##### -->
+<para>
+
+</para>
+
+@crl: 
+@dn: 
 @flags: 
 @Returns: 
 
 
-<!-- ##### TYPEDEF gnutls_x509_dn_t ##### -->
+<!-- ##### FUNCTION gnutls_x509_crl_get_issuer_dn_by_oid ##### -->
+<para>
+
+</para>
+
+@crl: 
+@oid: 
+@indx: 
+@raw_flag: 
+@buf: 
+@sizeof_buf: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crl_get_dn_oid ##### -->
+<para>
+
+</para>
+
+@crl: 
+@indx: 
+@oid: 
+@sizeof_oid: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crl_get_signature_algorithm ##### -->
+<para>
+
+</para>
+
+@crl: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crl_get_signature ##### -->
+<para>
+
+</para>
+
+@crl: 
+@sig: 
+@sizeof_sig: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crl_get_version ##### -->
+<para>
+
+</para>
+
+@crl: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crl_get_signature_oid ##### -->
+<para>
+
+</para>
+
+@crl: 
+@oid: 
+@oid_size: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crl_get_this_update ##### -->
+<para>
+
+</para>
+
+@crl: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crl_get_next_update ##### -->
+<para>
+
+</para>
+
+@crl: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crl_get_crt_count ##### -->
+<para>
+
+</para>
+
+@crl: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crl_get_crt_serial ##### -->
+<para>
+
+</para>
+
+@crl: 
+@indx: 
+@serial: 
+@serial_size: 
+@t: 
+@Returns: 
+
+
+<!-- ##### TYPEDEF gnutls_x509_crl_iter_t ##### -->
 <para>
 
 </para>
 
 
-<!-- ##### FUNCTION gnutls_x509_policy_release ##### -->
+<!-- ##### FUNCTION gnutls_x509_crl_iter_crt_serial ##### -->
 <para>
 
 </para>
 
-@policy: 
+@crl: 
+@Param2: 
+@serial: 
+@serial_size: 
+@t: 
+@Returns: 
 
 
-<!-- ##### FUNCTION gnutls_x509_privkey_cpy ##### -->
+<!-- ##### FUNCTION gnutls_x509_crl_iter_deinit ##### -->
 <para>
 
 </para>
 
-@dst: 
-@src: 
+@Param1: 
+
+
+<!-- ##### MACRO gnutls_x509_crl_get_certificate_count ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO gnutls_x509_crl_get_certificate ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION gnutls_x509_crl_check_issuer ##### -->
+<para>
+
+</para>
+
+@crl: 
+@issuer: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crl_list_import2 ##### -->
+<para>
+
+</para>
+
+@crls: 
+@size: 
+@data: 
+@format: 
+@flags: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crl_list_import ##### -->
+<para>
+
+</para>
+
+@crls: 
+@crl_max: 
+@data: 
+@format: 
+@flags: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crl_set_version ##### -->
+<para>
+
+</para>
+
+@crl: 
+@version: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crl_set_this_update ##### -->
+<para>
+
+</para>
+
+@crl: 
+@act_time: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crl_set_next_update ##### -->
+<para>
+
+</para>
+
+@crl: 
+@exp_time: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crl_set_crt_serial ##### -->
+<para>
+
+</para>
+
+@crl: 
+@serial: 
+@serial_size: 
+@revocation_time: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crl_set_crt ##### -->
+<para>
+
+</para>
+
+@crl: 
+@crt: 
+@revocation_time: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crl_get_authority_key_id ##### -->
+<para>
+
+</para>
+
+@crl: 
+@id: 
+@id_size: 
+@critical: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crl_get_authority_key_gn_serial ##### -->
+<para>
+
+</para>
+
+@crl: 
+@seq: 
+@alt: 
+@alt_size: 
+@alt_type: 
+@serial: 
+@serial_size: 
+@critical: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crl_get_number ##### -->
+<para>
+
+</para>
+
+@crl: 
+@ret: 
+@ret_size: 
+@critical: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crl_get_extension_oid ##### -->
+<para>
+
+</para>
+
+@crl: 
+@indx: 
+@oid: 
+@sizeof_oid: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crl_get_extension_info ##### -->
+<para>
+
+</para>
+
+@crl: 
+@indx: 
+@oid: 
+@sizeof_oid: 
+@critical: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crl_get_extension_data ##### -->
+<para>
+
+</para>
+
+@crl: 
+@indx: 
+@data: 
+@sizeof_data: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crl_get_extension_data2 ##### -->
+<para>
+
+</para>
+
+@crl: 
+@indx: 
+@data: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crl_set_authority_key_id ##### -->
+<para>
+
+</para>
+
+@crl: 
+@id: 
+@id_size: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crl_set_number ##### -->
+<para>
+
+</para>
+
+@crl: 
+@nr: 
+@nr_size: 
+@Returns: 
+
+
+<!-- ##### ENUM gnutls_certificate_verify_flags ##### -->
+<para>
+
+</para>
+
+@GNUTLS_VERIFY_DISABLE_CA_SIGN: 
+@GNUTLS_VERIFY_DO_NOT_ALLOW_SAME: 
+@GNUTLS_VERIFY_ALLOW_ANY_X509_V1_CA_CRT: 
+@GNUTLS_VERIFY_ALLOW_SIGN_RSA_MD2: 
+@GNUTLS_VERIFY_ALLOW_SIGN_RSA_MD5: 
+@GNUTLS_VERIFY_DISABLE_TIME_CHECKS: 
+@GNUTLS_VERIFY_DISABLE_TRUSTED_TIME_CHECKS: 
+@GNUTLS_VERIFY_DO_NOT_ALLOW_X509_V1_CA_CRT: 
+@GNUTLS_VERIFY_DISABLE_CRL_CHECKS: 
+@GNUTLS_VERIFY_ALLOW_UNSORTED_CHAIN: 
+@GNUTLS_VERIFY_DO_NOT_ALLOW_UNSORTED_CHAIN: 
+@GNUTLS_VERIFY_DO_NOT_ALLOW_WILDCARDS: 
+@GNUTLS_VERIFY_USE_TLS1_RSA: 
+
+<!-- ##### MACRO GNUTLS_VERIFY_ALLOW_BROKEN ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### ENUM gnutls_certificate_verification_profiles_t ##### -->
+<para>
+
+</para>
+
+@GNUTLS_PROFILE_VERY_WEAK: 
+@GNUTLS_PROFILE_LOW: 
+@GNUTLS_PROFILE_LEGACY: 
+@GNUTLS_PROFILE_MEDIUM: 
+@GNUTLS_PROFILE_HIGH: 
+@GNUTLS_PROFILE_ULTRA: 
+@GNUTLS_PROFILE_SUITEB128: 
+@GNUTLS_PROFILE_SUITEB192: 
+
+<!-- ##### MACRO GNUTLS_PROFILE_TO_VFLAGS ##### -->
+<para>
+
+</para>
+
+@x: 
+
+
+<!-- ##### MACRO GNUTLS_VFLAGS_PROFILE_MASK ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNUTLS_VFLAGS_TO_PROFILE ##### -->
+<para>
+
+</para>
+
+@x: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crt_check_issuer ##### -->
+<para>
+
+</para>
+
+@cert: 
+@issuer: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crt_list_verify ##### -->
+<para>
+
+</para>
+
+@cert_list: 
+@cert_list_length: 
+@CA_list: 
+@CA_list_length: 
+@CRL_list: 
+@CRL_list_length: 
+@flags: 
+@verify: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crt_verify ##### -->
+<para>
+
+</para>
+
+@cert: 
+@CA_list: 
+@CA_list_length: 
+@flags: 
+@verify: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crl_verify ##### -->
+<para>
+
+</para>
+
+@crl: 
+@CA_list: 
+@CA_list_length: 
+@flags: 
+@verify: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crt_verify_data2 ##### -->
+<para>
+
+</para>
+
+@crt: 
+@algo: 
+@flags: 
+@data: 
+@signature: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crt_check_revocation ##### -->
+<para>
+
+</para>
+
+@cert: 
+@crl_list: 
+@crl_list_length: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crt_get_fingerprint ##### -->
+<para>
+
+</para>
+
+@cert: 
+@algo: 
+@buf: 
+@buf_size: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crt_get_key_purpose_oid ##### -->
+<para>
+
+</para>
+
+@cert: 
+@indx: 
+@oid: 
+@oid_size: 
+@critical: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crt_set_key_purpose_oid ##### -->
+<para>
+
+</para>
+
+@cert: 
+@oid: 
+@critical: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crt_check_key_purpose ##### -->
+<para>
+
+</para>
+
+@cert: 
+@purpose: 
+@flags: 
+@Returns: 
+
+
+<!-- ##### MACRO GNUTLS_PKCS8_PLAIN ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNUTLS_PKCS8_USE_PKCS12_3DES ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNUTLS_PKCS8_USE_PKCS12_ARCFOUR ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNUTLS_PKCS8_USE_PKCS12_RC2_40 ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### ENUM gnutls_pkcs_encrypt_flags_t ##### -->
+<para>
+
+</para>
+
+@GNUTLS_PKCS_PLAIN: 
+@GNUTLS_PKCS_PKCS12_3DES: 
+@GNUTLS_PKCS_PKCS12_ARCFOUR: 
+@GNUTLS_PKCS_PKCS12_RC2_40: 
+@GNUTLS_PKCS_PBES2_3DES: 
+@GNUTLS_PKCS_PBES2_AES_128: 
+@GNUTLS_PKCS_PBES2_AES_192: 
+@GNUTLS_PKCS_PBES2_AES_256: 
+@GNUTLS_PKCS_NULL_PASSWORD: 
+@GNUTLS_PKCS_PBES2_DES: 
+@GNUTLS_PKCS_PBES1_DES_MD5: 
+
+<!-- ##### MACRO GNUTLS_PKCS_CIPHER_MASK ##### -->
+<para>
+
+</para>
+
+@x: 
+
+
+<!-- ##### MACRO GNUTLS_PKCS_USE_PKCS12_3DES ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNUTLS_PKCS_USE_PKCS12_ARCFOUR ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNUTLS_PKCS_USE_PKCS12_RC2_40 ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNUTLS_PKCS_USE_PBES2_3DES ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNUTLS_PKCS_USE_PBES2_AES_128 ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNUTLS_PKCS_USE_PBES2_AES_192 ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNUTLS_PKCS_USE_PBES2_AES_256 ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION gnutls_pkcs_schema_get_name ##### -->
+<para>
+
+</para>
+
+@schema: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_pkcs_schema_get_oid ##### -->
+<para>
+
+</para>
+
+@schema: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_privkey_init ##### -->
+<para>
+
+</para>
+
+@key: 
 @Returns: 
 
 
@@ -2545,116 +2817,7 @@ x509
 @key: 
 
 
-<!-- ##### FUNCTION gnutls_x509_privkey_export ##### -->
-<para>
-
-</para>
-
-@key: 
-@format: 
-@output_data: 
-@output_data_size: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_privkey_export2 ##### -->
-<para>
-
-</para>
-
-@key: 
-@format: 
-@out: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_privkey_export2_pkcs8 ##### -->
-<para>
-
-</para>
-
-@key: 
-@format: 
-@password: 
-@flags: 
-@out: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_privkey_export_dsa_raw ##### -->
-<para>
-
-</para>
-
-@key: 
-@p: 
-@q: 
-@g: 
-@y: 
-@x: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_privkey_export_ecc_raw ##### -->
-<para>
-
-</para>
-
-@key: 
-@curve: 
-@x: 
-@y: 
-@k: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_privkey_export_pkcs8 ##### -->
-<para>
-
-</para>
-
-@key: 
-@format: 
-@password: 
-@flags: 
-@output_data: 
-@output_data_size: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_privkey_export_rsa_raw ##### -->
-<para>
-
-</para>
-
-@key: 
-@m: 
-@e: 
-@d: 
-@p: 
-@q: 
-@u: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_privkey_export_rsa_raw2 ##### -->
-<para>
-
-</para>
-
-@key: 
-@m: 
-@e: 
-@d: 
-@p: 
-@q: 
-@u: 
-@e1: 
-@e2: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_privkey_fix ##### -->
+<!-- ##### FUNCTION gnutls_x509_privkey_sec_param ##### -->
 <para>
 
 </para>
@@ -2663,46 +2826,23 @@ x509
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_x509_privkey_generate ##### -->
+<!-- ##### FUNCTION gnutls_x509_privkey_set_pin_function ##### -->
 <para>
 
 </para>
 
 @key: 
-@algo: 
-@bits: 
-@flags: 
-@Returns: 
+@fn: 
+@userdata: 
 
 
-<!-- ##### FUNCTION gnutls_x509_privkey_get_key_id ##### -->
+<!-- ##### FUNCTION gnutls_x509_privkey_cpy ##### -->
 <para>
 
 </para>
 
-@key: 
-@flags: 
-@output_data: 
-@output_data_size: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_privkey_get_pk_algorithm ##### -->
-<para>
-
-</para>
-
-@key: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_privkey_get_pk_algorithm2 ##### -->
-<para>
-
-</para>
-
-@key: 
-@bits: 
+@dst: 
+@src: 
 @Returns: 
 
 
@@ -2717,7 +2857,7 @@ x509
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_x509_privkey_import2 ##### -->
+<!-- ##### FUNCTION gnutls_x509_privkey_import_pkcs8 ##### -->
 <para>
 
 </para>
@@ -2727,33 +2867,6 @@ x509
 @format: 
 @password: 
 @flags: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_privkey_import_dsa_raw ##### -->
-<para>
-
-</para>
-
-@key: 
-@p: 
-@q: 
-@g: 
-@y: 
-@x: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_privkey_import_ecc_raw ##### -->
-<para>
-
-</para>
-
-@key: 
-@curve: 
-@x: 
-@y: 
-@k: 
 @Returns: 
 
 
@@ -2768,7 +2881,23 @@ x509
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_x509_privkey_import_pkcs8 ##### -->
+<!-- ##### FUNCTION gnutls_pkcs8_info ##### -->
+<para>
+
+</para>
+
+@data: 
+@format: 
+@schema: 
+@cipher: 
+@salt: 
+@salt_size: 
+@iter_count: 
+@oid: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_privkey_import2 ##### -->
 <para>
 
 </para>
@@ -2813,7 +2942,20 @@ x509
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_x509_privkey_init ##### -->
+<!-- ##### FUNCTION gnutls_x509_privkey_import_ecc_raw ##### -->
+<para>
+
+</para>
+
+@key: 
+@curve: 
+@x: 
+@y: 
+@k: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_privkey_fix ##### -->
 <para>
 
 </para>
@@ -2822,12 +2964,138 @@ x509
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_x509_privkey_sec_param ##### -->
+<!-- ##### FUNCTION gnutls_x509_privkey_export_dsa_raw ##### -->
 <para>
 
 </para>
 
 @key: 
+@p: 
+@q: 
+@g: 
+@y: 
+@x: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_privkey_import_dsa_raw ##### -->
+<para>
+
+</para>
+
+@key: 
+@p: 
+@q: 
+@g: 
+@y: 
+@x: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_privkey_get_pk_algorithm ##### -->
+<para>
+
+</para>
+
+@key: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_privkey_get_pk_algorithm2 ##### -->
+<para>
+
+</para>
+
+@key: 
+@bits: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_privkey_get_key_id ##### -->
+<para>
+
+</para>
+
+@key: 
+@flags: 
+@output_data: 
+@output_data_size: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_privkey_generate ##### -->
+<para>
+
+</para>
+
+@key: 
+@algo: 
+@bits: 
+@flags: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_privkey_set_flags ##### -->
+<para>
+
+</para>
+
+@key: 
+@flags: 
+
+
+<!-- ##### ENUM gnutls_keygen_types_t ##### -->
+<para>
+
+</para>
+
+@GNUTLS_KEYGEN_SEED: 
+@GNUTLS_KEYGEN_DIGEST: 
+
+<!-- ##### STRUCT gnutls_keygen_data_st ##### -->
+<para>
+
+</para>
+
+@type: 
+@data: 
+@size: 
+
+<!-- ##### FUNCTION gnutls_x509_privkey_generate2 ##### -->
+<para>
+
+</para>
+
+@key: 
+@algo: 
+@bits: 
+@flags: 
+@data: 
+@data_size: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_privkey_verify_seed ##### -->
+<para>
+
+</para>
+
+@key: 
+@Param2: 
+@seed: 
+@seed_size: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_privkey_get_seed ##### -->
+<para>
+
+</para>
+
+@key: 
+@Param2: 
+@seed: 
+@seed_size: 
 @Returns: 
 
 
@@ -2840,32 +3108,238 @@ x509
 @Returns: 
 
 
-<!-- ##### ENUM gnutls_x509_qualifier_t ##### -->
+<!-- ##### FUNCTION gnutls_x509_privkey_export ##### -->
 <para>
 
 </para>
 
-@GNUTLS_X509_QUALIFIER_UNKNOWN: 
-@GNUTLS_X509_QUALIFIER_URI: 
-@GNUTLS_X509_QUALIFIER_NOTICE: 
+@key: 
+@format: 
+@output_data: 
+@output_data_size: 
+@Returns: 
 
-<!-- ##### FUNCTION gnutls_x509_rdn_get ##### -->
+
+<!-- ##### FUNCTION gnutls_x509_privkey_export2 ##### -->
 <para>
 
 </para>
 
-@idn: 
+@key: 
+@format: 
+@out: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_privkey_export_pkcs8 ##### -->
+<para>
+
+</para>
+
+@key: 
+@format: 
+@password: 
+@flags: 
+@output_data: 
+@output_data_size: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_privkey_export2_pkcs8 ##### -->
+<para>
+
+</para>
+
+@key: 
+@format: 
+@password: 
+@flags: 
+@out: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_privkey_export_rsa_raw2 ##### -->
+<para>
+
+</para>
+
+@key: 
+@m: 
+@e: 
+@d: 
+@p: 
+@q: 
+@u: 
+@e1: 
+@e2: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_privkey_export_rsa_raw ##### -->
+<para>
+
+</para>
+
+@key: 
+@m: 
+@e: 
+@d: 
+@p: 
+@q: 
+@u: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_privkey_export_ecc_raw ##### -->
+<para>
+
+</para>
+
+@key: 
+@curve: 
+@x: 
+@y: 
+@k: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_privkey_sign_data ##### -->
+<para>
+
+</para>
+
+@key: 
+@digest: 
+@flags: 
+@data: 
+@signature: 
+@signature_size: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crq_sign2 ##### -->
+<para>
+
+</para>
+
+@crq: 
+@key: 
+@dig: 
+@flags: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crq_print ##### -->
+<para>
+
+</para>
+
+@crq: 
+@format: 
+@out: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crq_verify ##### -->
+<para>
+
+</para>
+
+@crq: 
+@flags: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crq_init ##### -->
+<para>
+
+</para>
+
+@crq: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crq_deinit ##### -->
+<para>
+
+</para>
+
+@crq: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crq_import ##### -->
+<para>
+
+</para>
+
+@crq: 
+@data: 
+@format: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crq_get_private_key_usage_period ##### -->
+<para>
+
+</para>
+
+@cert: 
+@activation: 
+@expiration: 
+@critical: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crq_get_dn ##### -->
+<para>
+
+</para>
+
+@crq: 
 @buf: 
 @sizeof_buf: 
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_x509_rdn_get_by_oid ##### -->
+<!-- ##### FUNCTION gnutls_x509_crq_get_dn2 ##### -->
 <para>
 
 </para>
 
-@idn: 
+@crq: 
+@dn: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crq_get_dn3 ##### -->
+<para>
+
+</para>
+
+@crq: 
+@dn: 
+@flags: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crq_get_dn_oid ##### -->
+<para>
+
+</para>
+
+@crq: 
+@indx: 
+@oid: 
+@sizeof_oid: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crq_get_dn_by_oid ##### -->
+<para>
+
+</para>
+
+@crq: 
 @oid: 
 @indx: 
 @raw_flag: 
@@ -2874,92 +3348,498 @@ x509
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_x509_rdn_get_oid ##### -->
+<!-- ##### FUNCTION gnutls_x509_crq_set_dn ##### -->
 <para>
 
 </para>
 
-@idn: 
+@crq: 
+@dn: 
+@err: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crq_set_dn_by_oid ##### -->
+<para>
+
+</para>
+
+@crq: 
+@oid: 
+@raw_flag: 
+@data: 
+@sizeof_data: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crq_set_version ##### -->
+<para>
+
+</para>
+
+@crq: 
+@version: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crq_get_version ##### -->
+<para>
+
+</para>
+
+@crq: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crq_set_key ##### -->
+<para>
+
+</para>
+
+@crq: 
+@key: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crq_set_extension_by_oid ##### -->
+<para>
+
+</para>
+
+@crq: 
+@oid: 
+@buf: 
+@sizeof_buf: 
+@critical: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crq_set_challenge_password ##### -->
+<para>
+
+</para>
+
+@crq: 
+@pass: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crq_get_challenge_password ##### -->
+<para>
+
+</para>
+
+@crq: 
+@pass: 
+@sizeof_pass: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crq_set_attribute_by_oid ##### -->
+<para>
+
+</para>
+
+@crq: 
+@oid: 
+@buf: 
+@sizeof_buf: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crq_get_attribute_by_oid ##### -->
+<para>
+
+</para>
+
+@crq: 
+@oid: 
 @indx: 
 @buf: 
 @sizeof_buf: 
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_x509_trust_list_add_cas ##### -->
+<!-- ##### FUNCTION gnutls_x509_crq_export ##### -->
 <para>
 
 </para>
 
-@list: 
-@clist: 
-@clist_size: 
+@crq: 
+@format: 
+@output_data: 
+@output_data_size: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crq_export2 ##### -->
+<para>
+
+</para>
+
+@crq: 
+@format: 
+@out: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crt_set_crq ##### -->
+<para>
+
+</para>
+
+@crt: 
+@crq: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crt_set_crq_extensions ##### -->
+<para>
+
+</para>
+
+@crt: 
+@crq: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crt_set_crq_extension_by_oid ##### -->
+<para>
+
+</para>
+
+@crt: 
+@crq: 
+@oid: 
 @flags: 
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_x509_trust_list_add_crls ##### -->
+<!-- ##### FUNCTION gnutls_x509_crq_set_private_key_usage_period ##### -->
 <para>
 
 </para>
 
-@list: 
-@crl_list: 
-@crl_size: 
-@flags: 
-@verification_flags: 
+@crq: 
+@activation: 
+@expiration: 
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_x509_trust_list_add_named_crt ##### -->
+<!-- ##### FUNCTION gnutls_x509_crq_set_key_rsa_raw ##### -->
 <para>
 
 </para>
 
-@list: 
+@crq: 
+@m: 
+@e: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crq_set_subject_alt_name ##### -->
+<para>
+
+</para>
+
+@crq: 
+@nt: 
+@data: 
+@data_size: 
+@flags: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crq_set_subject_alt_othername ##### -->
+<para>
+
+</para>
+
+@crq: 
+@oid: 
+@data: 
+@data_size: 
+@flags: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crq_set_key_usage ##### -->
+<para>
+
+</para>
+
+@crq: 
+@usage: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crq_set_basic_constraints ##### -->
+<para>
+
+</para>
+
+@crq: 
+@ca: 
+@pathLenConstraint: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crq_set_key_purpose_oid ##### -->
+<para>
+
+</para>
+
+@crq: 
+@oid: 
+@critical: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crq_get_key_purpose_oid ##### -->
+<para>
+
+</para>
+
+@crq: 
+@indx: 
+@oid: 
+@sizeof_oid: 
+@critical: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crq_get_extension_data ##### -->
+<para>
+
+</para>
+
+@crq: 
+@indx: 
+@data: 
+@sizeof_data: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crq_get_extension_data2 ##### -->
+<para>
+
+</para>
+
+@crq: 
+@indx: 
+@data: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crq_get_extension_info ##### -->
+<para>
+
+</para>
+
+@crq: 
+@indx: 
+@oid: 
+@sizeof_oid: 
+@critical: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crq_get_attribute_data ##### -->
+<para>
+
+</para>
+
+@crq: 
+@indx: 
+@data: 
+@sizeof_data: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crq_get_attribute_info ##### -->
+<para>
+
+</para>
+
+@crq: 
+@indx: 
+@oid: 
+@sizeof_oid: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crq_get_pk_algorithm ##### -->
+<para>
+
+</para>
+
+@crq: 
+@bits: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crq_get_signature_oid ##### -->
+<para>
+
+</para>
+
+@crq: 
+@oid: 
+@oid_size: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crq_get_pk_oid ##### -->
+<para>
+
+</para>
+
+@crq: 
+@oid: 
+@oid_size: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crq_get_key_id ##### -->
+<para>
+
+</para>
+
+@crq: 
+@flags: 
+@output_data: 
+@output_data_size: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crq_get_key_rsa_raw ##### -->
+<para>
+
+</para>
+
+@crq: 
+@m: 
+@e: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crq_get_key_usage ##### -->
+<para>
+
+</para>
+
+@crq: 
+@key_usage: 
+@critical: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crq_get_basic_constraints ##### -->
+<para>
+
+</para>
+
+@crq: 
+@critical: 
+@ca: 
+@pathlen: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crq_get_subject_alt_name ##### -->
+<para>
+
+</para>
+
+@crq: 
+@seq: 
+@ret: 
+@ret_size: 
+@ret_type: 
+@critical: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crq_get_subject_alt_othername_oid ##### -->
+<para>
+
+</para>
+
+@crq: 
+@seq: 
+@ret: 
+@ret_size: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crq_get_extension_by_oid ##### -->
+<para>
+
+</para>
+
+@crq: 
+@oid: 
+@indx: 
+@buf: 
+@sizeof_buf: 
+@critical: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crq_get_tlsfeatures ##### -->
+<para>
+
+</para>
+
+@crq: 
+@features: 
+@flags: 
+@critical: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crq_set_tlsfeatures ##### -->
+<para>
+
+</para>
+
+@crq: 
+@features: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_crt_get_extension_by_oid2 ##### -->
+<para>
+
+</para>
+
 @cert: 
-@name: 
-@name_size: 
-@flags: 
+@oid: 
+@indx: 
+@output: 
+@critical: 
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_x509_trust_list_add_system_trust ##### -->
+<!-- ##### TYPEDEF gnutls_x509_trust_list_t ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### TYPEDEF gnutls_x509_trust_list_iter_t ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION gnutls_x509_trust_list_init ##### -->
 <para>
 
 </para>
 
 @list: 
-@tl_flags: 
-@tl_vflags: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_trust_list_add_trust_file ##### -->
-<para>
-
-</para>
-
-@list: 
-@ca_file: 
-@crl_file: 
-@type: 
-@tl_flags: 
-@tl_vflags: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_x509_trust_list_add_trust_mem ##### -->
-<para>
-
-</para>
-
-@list: 
-@cas: 
-@crls: 
-@type: 
-@tl_flags: 
-@tl_vflags: 
+@size: 
 @Returns: 
 
 
@@ -2984,20 +3864,138 @@ x509
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_x509_trust_list_init ##### -->
+<!-- ##### FUNCTION gnutls_x509_trust_list_get_issuer_by_dn ##### -->
 <para>
 
 </para>
 
 @list: 
-@size: 
+@dn: 
+@issuer: 
+@flags: 
 @Returns: 
 
 
-<!-- ##### TYPEDEF gnutls_x509_trust_list_t ##### -->
+<!-- ##### FUNCTION gnutls_x509_trust_list_get_issuer_by_subject_key_id ##### -->
 <para>
 
 </para>
+
+@list: 
+@dn: 
+@spki: 
+@issuer: 
+@flags: 
+@Returns: 
+
+
+<!-- ##### ENUM gnutls_trust_list_flags_t ##### -->
+<para>
+
+</para>
+
+@GNUTLS_TL_VERIFY_CRL: 
+@GNUTLS_TL_USE_IN_TLS: 
+@GNUTLS_TL_NO_DUPLICATES: 
+@GNUTLS_TL_NO_DUPLICATE_KEY: 
+
+<!-- ##### FUNCTION gnutls_x509_trust_list_add_cas ##### -->
+<para>
+
+</para>
+
+@list: 
+@clist: 
+@clist_size: 
+@flags: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_trust_list_remove_cas ##### -->
+<para>
+
+</para>
+
+@list: 
+@clist: 
+@clist_size: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_trust_list_add_named_crt ##### -->
+<para>
+
+</para>
+
+@list: 
+@cert: 
+@name: 
+@name_size: 
+@flags: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_trust_list_add_crls ##### -->
+<para>
+
+</para>
+
+@list: 
+@crl_list: 
+@crl_size: 
+@flags: 
+@verification_flags: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_trust_list_iter_get_ca ##### -->
+<para>
+
+</para>
+
+@list: 
+@iter: 
+@crt: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_trust_list_iter_deinit ##### -->
+<para>
+
+</para>
+
+@iter: 
+
+
+<!-- ##### FUNCTION gnutls_x509_trust_list_verify_named_crt ##### -->
+<para>
+
+</para>
+
+@list: 
+@cert: 
+@name: 
+@name_size: 
+@flags: 
+@verify: 
+@func: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_trust_list_verify_crt2 ##### -->
+<para>
+
+</para>
+
+@list: 
+@cert_list: 
+@cert_list_size: 
+@data: 
+@elements: 
+@flags: 
+@voutput: 
+@func: 
+@Returns: 
 
 
 <!-- ##### FUNCTION gnutls_x509_trust_list_verify_crt ##### -->
@@ -3014,18 +4012,126 @@ x509
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_x509_trust_list_verify_named_crt ##### -->
+<!-- ##### FUNCTION gnutls_x509_trust_list_add_trust_mem ##### -->
 <para>
 
 </para>
 
 @list: 
-@cert: 
-@name: 
-@name_size: 
+@cas: 
+@crls: 
+@type: 
+@tl_flags: 
+@tl_vflags: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_trust_list_add_trust_file ##### -->
+<para>
+
+</para>
+
+@list: 
+@ca_file: 
+@crl_file: 
+@type: 
+@tl_flags: 
+@tl_vflags: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_trust_list_add_trust_dir ##### -->
+<para>
+
+</para>
+
+@list: 
+@ca_dir: 
+@crl_dir: 
+@type: 
+@tl_flags: 
+@tl_vflags: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_trust_list_remove_trust_file ##### -->
+<para>
+
+</para>
+
+@list: 
+@ca_file: 
+@type: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_trust_list_remove_trust_mem ##### -->
+<para>
+
+</para>
+
+@list: 
+@cas: 
+@type: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_x509_trust_list_add_system_trust ##### -->
+<para>
+
+</para>
+
+@list: 
+@tl_flags: 
+@tl_vflags: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_certificate_set_trust_list ##### -->
+<para>
+
+</para>
+
+@res: 
+@tlist: 
 @flags: 
-@verify: 
-@func: 
+
+
+<!-- ##### FUNCTION gnutls_certificate_get_trust_list ##### -->
+<para>
+
+</para>
+
+@res: 
+@tlist: 
+
+
+<!-- ##### STRUCT gnutls_x509_ext_st ##### -->
+<para>
+
+</para>
+
+@oid: 
+@critical: 
+@data: 
+
+<!-- ##### FUNCTION gnutls_x509_ext_deinit ##### -->
+<para>
+
+</para>
+
+@ext: 
+
+
+<!-- ##### FUNCTION gnutls_x509_ext_print ##### -->
+<para>
+
+</para>
+
+@exts: 
+@exts_size: 
+@format: 
+@out: 
 @Returns: 
 
 

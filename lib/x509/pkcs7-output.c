@@ -27,8 +27,7 @@
 #include <num.h>
 #include "errors.h"
 #include <extras/randomart.h>
-#include <c-ctype.h>
-#include <gnutls-idna.h>
+#include <pkcs7_int.h>
 
 #define addf _gnutls_buffer_append_printf
 #define adds _gnutls_buffer_append_str
@@ -52,7 +51,7 @@ static void print_dn(gnutls_buffer_st * str, const char *prefix,
 		goto cleanup;
 	}
 
-	ret = gnutls_x509_dn_get_str(dn, &output);
+	ret = gnutls_x509_dn_get_str2(dn, &output, 0);
 	if (ret < 0) {
 		addf(str, "%s: [error]\n", prefix);
 		goto cleanup;
@@ -68,21 +67,20 @@ static void print_dn(gnutls_buffer_st * str, const char *prefix,
 static void print_raw(gnutls_buffer_st * str, const char *prefix,
 		      const gnutls_datum_t * raw)
 {
-	char data[512];
-	size_t data_size;
+	gnutls_datum_t result;
 	int ret;
 
 	if (raw->data == NULL || raw->size == 0)
 		return;
 
-	data_size = sizeof(data);
-	ret = gnutls_hex_encode(raw, data, &data_size);
+	ret = gnutls_hex_encode2(raw, &result);
 	if (ret < 0) {
 		addf(str, "%s: [error]\n", prefix);
 		return;
 	}
 
-	addf(str, "%s: %s\n", prefix, data);
+	addf(str, "%s: %s\n", prefix, result.data);
+	gnutls_free(result.data);
 }
 
 static void print_pkcs7_info(gnutls_pkcs7_signature_info_st * info,
@@ -97,7 +95,8 @@ static void print_pkcs7_info(gnutls_pkcs7_signature_info_st * info,
 	size_t max;
 	int ret;
 
-	print_dn(str, "\tSigner's issuer DN", &info->issuer_dn);
+	if (info->issuer_dn.size > 0)
+		print_dn(str, "\tSigner's issuer DN", &info->issuer_dn);
 	print_raw(str, "\tSigner's serial", &info->signer_serial);
 	print_raw(str, "\tSigner's issuer key ID", &info->issuer_keyid);
 	if (info->signing_time != -1) {
@@ -179,8 +178,19 @@ int gnutls_pkcs7_print(gnutls_pkcs7_t pkcs7,
 	int count, ret, i;
 	gnutls_pkcs7_signature_info_st info;
 	gnutls_buffer_st str;
+	const char *oid;
 
 	_gnutls_buffer_init(&str);
+
+	/* For backwards compatibility with structures using the default OID,
+	 * we don't print the eContent Type explicitly */
+	oid = gnutls_pkcs7_get_embedded_data_oid(pkcs7);
+	if (oid) {
+		if (strcmp(oid, DATA_OID) != 0
+		    && strcmp(oid, DIGESTED_DATA_OID) != 0) {
+			addf(&str, "eContent Type: %s\n", oid);
+		}
+	}
 
 	for (i = 0;; i++) {
 		if (i == 0)

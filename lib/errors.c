@@ -74,8 +74,8 @@ static const gnutls_error_entry error_entries[] = {
 
 	ERROR_ENTRY(N_("GnuTLS internal error."), GNUTLS_E_INTERNAL_ERROR),
 	ERROR_ENTRY(N_(
-	            "A connection with inappropriate fallback was attempted."),
-	            GNUTLS_E_INAPPROPRIATE_FALLBACK),
+		    "A connection with inappropriate fallback was attempted."),
+		    GNUTLS_E_INAPPROPRIATE_FALLBACK),
 	ERROR_ENTRY(N_("An illegal TLS extension was received."),
 		    GNUTLS_E_RECEIVED_ILLEGAL_EXTENSION),
 	ERROR_ENTRY(N_("A TLS fatal alert has been received."),
@@ -134,8 +134,10 @@ static const gnutls_error_entry error_entries[] = {
 	ERROR_ENTRY(N_("Error in password file."), GNUTLS_E_SRP_PWD_ERROR),
 	ERROR_ENTRY(N_("Wrong padding in PKCS1 packet."),
 		    GNUTLS_E_PKCS1_WRONG_PAD),
-	ERROR_ENTRY(N_("The requested session has expired."),
+	ERROR_ENTRY(N_("The session or certificate has expired."),
 		    GNUTLS_E_EXPIRED),
+	ERROR_ENTRY(N_("The certificate is not yet activated."),
+		    GNUTLS_E_NOT_YET_ACTIVATED),
 	ERROR_ENTRY(N_("Hashing has failed."), GNUTLS_E_HASH_FAILED),
 	ERROR_ENTRY(N_("Base64 decoding error."),
 		    GNUTLS_E_BASE64_DECODING_ERROR),
@@ -147,6 +149,8 @@ static const gnutls_error_entry error_entries[] = {
 		    GNUTLS_E_SRP_PWD_PARSING_ERROR),
 	ERROR_ENTRY(N_("The requested data were not available."),
 		    GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE),
+	ERROR_ENTRY(N_("There are no embedded data in the structure."),
+		    GNUTLS_E_NO_EMBEDDED_DATA),
 	ERROR_ENTRY(N_("Error in the pull function."), GNUTLS_E_PULL_ERROR),
 	ERROR_ENTRY(N_("Error in the push function."), GNUTLS_E_PUSH_ERROR),
 	ERROR_ENTRY(N_
@@ -163,6 +167,9 @@ static const gnutls_error_entry error_entries[] = {
 	ERROR_ENTRY(N_
 		    ("Unknown Subject Alternative name in X.509 certificate."),
 		    GNUTLS_E_X509_UNKNOWN_SAN),
+	ERROR_ENTRY(N_
+			("CIDR name constraint is malformed in size or structure."),
+			GNUTLS_E_MALFORMED_CIDR),
 
 	ERROR_ENTRY(N_
 		    ("Unsupported critical extension in X.509 certificate."),
@@ -267,6 +274,12 @@ static const gnutls_error_entry error_entries[] = {
 		    GNUTLS_E_UNKNOWN_PKCS_BAG_TYPE),
 	ERROR_ENTRY(N_("The given password contains invalid characters."),
 		    GNUTLS_E_INVALID_PASSWORD),
+	ERROR_ENTRY(N_("The given string contains invalid UTF-8 characters."),
+		    GNUTLS_E_INVALID_UTF8_STRING),
+	ERROR_ENTRY(N_("The given email string contains non-ASCII characters before '@'."),
+		    GNUTLS_E_INVALID_UTF8_EMAIL),
+	ERROR_ENTRY(N_("The given password contains invalid characters."),
+		    GNUTLS_E_INVALID_PASSWORD_STRING),
 	ERROR_ENTRY(N_
 		    ("The Message Authentication Code verification failed."),
 		    GNUTLS_E_MAC_VERIFY_FAILED),
@@ -388,6 +401,10 @@ static const gnutls_error_entry error_entries[] = {
 		    GNUTLS_E_IDNA_ERROR),
 	ERROR_ENTRY(N_("Cannot obtain resumption parameters while handshake is incomplete."),
 		    GNUTLS_E_UNAVAILABLE_DURING_HANDSHAKE),
+	ERROR_ENTRY(N_("The obtained public key is invalid."),
+		    GNUTLS_E_PK_INVALID_PUBKEY),
+	ERROR_ENTRY(N_("The private key is invalid."),
+		    GNUTLS_E_PK_INVALID_PRIVKEY),
 	{NULL, NULL, 0}
 };
 
