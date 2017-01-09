@@ -20,20 +20,7 @@ tpm
 <!-- ##### SECTION Image ##### -->
 
 
-<!-- ##### TYPEDEF gnutls_tpm_key_list_t ##### -->
-<para>
-
-</para>
-
-
 <!-- ##### MACRO GNUTLS_TPM_KEY_SIGNING ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO GNUTLS_TPM_REGISTER_KEY ##### -->
 <para>
 
 </para>
@@ -47,29 +34,19 @@ tpm
 
 
 
-<!-- ##### ENUM gnutls_tpmkey_fmt_t ##### -->
+<!-- ##### MACRO GNUTLS_TPM_REGISTER_KEY ##### -->
 <para>
 
 </para>
 
-@GNUTLS_TPMKEY_FMT_RAW: 
-@GNUTLS_TPMKEY_FMT_DER: 
-@GNUTLS_TPMKEY_FMT_CTK_PEM: 
 
-<!-- ##### FUNCTION gnutls_tpm_privkey_generate ##### -->
+
+<!-- ##### FUNCTION gnutls_tpm_get_registered ##### -->
 <para>
 
 </para>
 
-@pk: 
-@bits: 
-@srk_password: 
-@key_password: 
-@format: 
-@pub_format: 
-@privkey: 
-@pubkey: 
-@flags: 
+@list: 
 @Returns: 
 
 
@@ -93,13 +70,10 @@ tpm
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_tpm_get_registered ##### -->
+<!-- ##### TYPEDEF gnutls_tpm_key_list_t ##### -->
 <para>
 
 </para>
-
-@list: 
-@Returns: 
 
 
 <!-- ##### FUNCTION gnutls_tpm_privkey_delete ##### -->
@@ -111,6 +85,32 @@ tpm
 @srk_password: 
 @Returns: 
 
+
+<!-- ##### FUNCTION gnutls_tpm_privkey_generate ##### -->
+<para>
+
+</para>
+
+@pk: 
+@bits: 
+@srk_password: 
+@key_password: 
+@format: 
+@pub_format: 
+@privkey: 
+@pubkey: 
+@flags: 
+@Returns: 
+
+
+<!-- ##### ENUM gnutls_tpmkey_fmt_t ##### -->
+<para>
+
+</para>
+
+@GNUTLS_TPMKEY_FMT_RAW: 
+@GNUTLS_TPMKEY_FMT_DER: 
+@GNUTLS_TPMKEY_FMT_CTK_PEM: 
 
 <!-- ##### STRUCT tpm_key_list_st ##### -->
 <para>

@@ -20,13 +20,3 @@ dh_common
 <!-- ##### SECTION Image ##### -->
 
 
-<!-- ##### STRUCT dh_info_st ##### -->
-<para>
-
-</para>
-
-@secret_bits: 
-@prime: 
-@generator: 
-@public_key: 
-

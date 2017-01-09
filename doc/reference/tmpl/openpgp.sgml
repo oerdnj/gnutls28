@@ -9,26 +9,16 @@ openpgp
 
 </para>
 
-
 <!-- ##### SECTION See_Also ##### -->
 <para>
 
 </para>
-
 
 <!-- ##### SECTION Stability_Level ##### -->
 
 
 <!-- ##### SECTION Image ##### -->
 
-
-<!-- ##### ENUM gnutls_openpgp_crt_fmt_t ##### -->
-<para>
-
-</para>
-
-@GNUTLS_OPENPGP_FMT_RAW: 
-@GNUTLS_OPENPGP_FMT_BASE64: 
 
 <!-- ##### MACRO GNUTLS_OPENPGP_KEYID_SIZE ##### -->
 <para>
@@ -37,19 +27,104 @@ openpgp
 
 
 
-<!-- ##### MACRO GNUTLS_OPENPGP_V4_FINGERPRINT_SIZE ##### -->
+<!-- ##### MACRO GNUTLS_OPENPGP_MASTER_KEYID_IDX ##### -->
 <para>
 
 </para>
 
 
 
-<!-- ##### FUNCTION gnutls_openpgp_crt_init ##### -->
+<!-- ##### FUNCTION gnutls_certificate_set_openpgp_key ##### -->
+<para>
+
+</para>
+
+@res: 
+@crt: 
+@pkey: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_certificate_set_openpgp_key_file ##### -->
+<para>
+
+</para>
+
+@res: 
+@certfile: 
+@keyfile: 
+@format: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_certificate_set_openpgp_key_file2 ##### -->
+<para>
+
+</para>
+
+@res: 
+@certfile: 
+@keyfile: 
+@subkey_id: 
+@format: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_certificate_set_openpgp_key_mem ##### -->
+<para>
+
+</para>
+
+@res: 
+@cert: 
+@key: 
+@format: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_certificate_set_openpgp_key_mem2 ##### -->
+<para>
+
+</para>
+
+@res: 
+@cert: 
+@key: 
+@subkey_id: 
+@format: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_certificate_set_openpgp_keyring_file ##### -->
+<para>
+
+</para>
+
+@c: 
+@file: 
+@format: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_certificate_set_openpgp_keyring_mem ##### -->
+<para>
+
+</para>
+
+@c: 
+@data: 
+@dlen: 
+@format: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_openpgp_crt_check_hostname ##### -->
 <para>
 
 </para>
 
 @key: 
+@hostname: 
 @Returns: 
 
 
@@ -59,17 +134,6 @@ openpgp
 </para>
 
 @key: 
-
-
-<!-- ##### FUNCTION gnutls_openpgp_crt_import ##### -->
-<para>
-
-</para>
-
-@key: 
-@data: 
-@format: 
-@Returns: 
 
 
 <!-- ##### FUNCTION gnutls_openpgp_crt_export ##### -->
@@ -95,31 +159,40 @@ openpgp
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_openpgp_crt_print ##### -->
+<!-- ##### ENUM gnutls_openpgp_crt_fmt_t ##### -->
 <para>
 
 </para>
 
-@cert: 
-@format: 
-@out: 
+@GNUTLS_OPENPGP_FMT_RAW: 
+@GNUTLS_OPENPGP_FMT_BASE64: 
+
+<!-- ##### FUNCTION gnutls_openpgp_crt_get_auth_subkey ##### -->
+<para>
+
+</para>
+
+@crt: 
+@keyid: 
+@flag: 
 @Returns: 
 
 
-<!-- ##### MACRO GNUTLS_OPENPGP_MASTER_KEYID_IDX ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### FUNCTION gnutls_openpgp_crt_get_key_usage ##### -->
+<!-- ##### FUNCTION gnutls_openpgp_crt_get_creation_time ##### -->
 <para>
 
 </para>
 
 @key: 
-@key_usage: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_openpgp_crt_get_expiration_time ##### -->
+<para>
+
+</para>
+
+@key: 
 @Returns: 
 
 
@@ -134,15 +207,23 @@ openpgp
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_openpgp_crt_get_subkey_fingerprint ##### -->
+<!-- ##### FUNCTION gnutls_openpgp_crt_get_key_id ##### -->
 <para>
 
 </para>
 
 @key: 
-@idx: 
-@fpr: 
-@fprlen: 
+@keyid: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_openpgp_crt_get_key_usage ##### -->
+<para>
+
+</para>
+
+@key: 
+@key_usage: 
 @Returns: 
 
 
@@ -165,192 +246,6 @@ openpgp
 
 @key: 
 @bits: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_openpgp_crt_get_version ##### -->
-<para>
-
-</para>
-
-@key: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_openpgp_crt_get_creation_time ##### -->
-<para>
-
-</para>
-
-@key: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_openpgp_crt_get_expiration_time ##### -->
-<para>
-
-</para>
-
-@key: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_openpgp_crt_get_key_id ##### -->
-<para>
-
-</para>
-
-@key: 
-@keyid: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_openpgp_crt_check_hostname ##### -->
-<para>
-
-</para>
-
-@key: 
-@hostname: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_openpgp_crt_check_hostname2 ##### -->
-<para>
-
-</para>
-
-@key: 
-@hostname: 
-@flags: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_openpgp_crt_check_email ##### -->
-<para>
-
-</para>
-
-@key: 
-@email: 
-@flags: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_openpgp_crt_get_revoked_status ##### -->
-<para>
-
-</para>
-
-@key: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_openpgp_crt_get_subkey_count ##### -->
-<para>
-
-</para>
-
-@key: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_openpgp_crt_get_subkey_idx ##### -->
-<para>
-
-</para>
-
-@key: 
-@keyid: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_openpgp_crt_get_subkey_revoked_status ##### -->
-<para>
-
-</para>
-
-@key: 
-@idx: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_openpgp_crt_get_subkey_pk_algorithm ##### -->
-<para>
-
-</para>
-
-@key: 
-@idx: 
-@bits: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_openpgp_crt_get_subkey_creation_time ##### -->
-<para>
-
-</para>
-
-@key: 
-@idx: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_openpgp_crt_get_subkey_expiration_time ##### -->
-<para>
-
-</para>
-
-@key: 
-@idx: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_openpgp_crt_get_subkey_id ##### -->
-<para>
-
-</para>
-
-@key: 
-@idx: 
-@keyid: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_openpgp_crt_get_subkey_usage ##### -->
-<para>
-
-</para>
-
-@key: 
-@idx: 
-@key_usage: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_openpgp_crt_get_subkey_pk_dsa_raw ##### -->
-<para>
-
-</para>
-
-@crt: 
-@idx: 
-@p: 
-@q: 
-@g: 
-@y: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_openpgp_crt_get_subkey_pk_rsa_raw ##### -->
-<para>
-
-</para>
-
-@crt: 
-@idx: 
-@m: 
-@e: 
 @Returns: 
 
 
@@ -388,6 +283,175 @@ openpgp
 @Returns: 
 
 
+<!-- ##### FUNCTION gnutls_openpgp_crt_get_revoked_status ##### -->
+<para>
+
+</para>
+
+@key: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_openpgp_crt_get_subkey_count ##### -->
+<para>
+
+</para>
+
+@key: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_openpgp_crt_get_subkey_creation_time ##### -->
+<para>
+
+</para>
+
+@key: 
+@idx: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_openpgp_crt_get_subkey_expiration_time ##### -->
+<para>
+
+</para>
+
+@key: 
+@idx: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_openpgp_crt_get_subkey_fingerprint ##### -->
+<para>
+
+</para>
+
+@key: 
+@idx: 
+@fpr: 
+@fprlen: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_openpgp_crt_get_subkey_id ##### -->
+<para>
+
+</para>
+
+@key: 
+@idx: 
+@keyid: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_openpgp_crt_get_subkey_idx ##### -->
+<para>
+
+</para>
+
+@key: 
+@keyid: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_openpgp_crt_get_subkey_pk_algorithm ##### -->
+<para>
+
+</para>
+
+@key: 
+@idx: 
+@bits: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_openpgp_crt_get_subkey_pk_dsa_raw ##### -->
+<para>
+
+</para>
+
+@crt: 
+@idx: 
+@p: 
+@q: 
+@g: 
+@y: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_openpgp_crt_get_subkey_pk_rsa_raw ##### -->
+<para>
+
+</para>
+
+@crt: 
+@idx: 
+@m: 
+@e: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_openpgp_crt_get_subkey_revoked_status ##### -->
+<para>
+
+</para>
+
+@key: 
+@idx: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_openpgp_crt_get_subkey_usage ##### -->
+<para>
+
+</para>
+
+@key: 
+@idx: 
+@key_usage: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_openpgp_crt_get_version ##### -->
+<para>
+
+</para>
+
+@key: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_openpgp_crt_import ##### -->
+<para>
+
+</para>
+
+@key: 
+@data: 
+@format: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_openpgp_crt_init ##### -->
+<para>
+
+</para>
+
+@key: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_openpgp_crt_print ##### -->
+<para>
+
+</para>
+
+@cert: 
+@format: 
+@out: 
+@Returns: 
+
+
 <!-- ##### FUNCTION gnutls_openpgp_crt_set_preferred_key_id ##### -->
 <para>
 
@@ -398,12 +462,85 @@ openpgp
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_openpgp_privkey_init ##### -->
+<!-- ##### FUNCTION gnutls_openpgp_crt_verify_ring ##### -->
 <para>
 
 </para>
 
 @key: 
+@keyring: 
+@flags: 
+@verify: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_openpgp_crt_verify_self ##### -->
+<para>
+
+</para>
+
+@key: 
+@flags: 
+@verify: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_openpgp_keyring_check_id ##### -->
+<para>
+
+</para>
+
+@ring: 
+@keyid: 
+@flags: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_openpgp_keyring_deinit ##### -->
+<para>
+
+</para>
+
+@keyring: 
+
+
+<!-- ##### FUNCTION gnutls_openpgp_keyring_get_crt ##### -->
+<para>
+
+</para>
+
+@ring: 
+@idx: 
+@cert: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_openpgp_keyring_get_crt_count ##### -->
+<para>
+
+</para>
+
+@ring: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_openpgp_keyring_import ##### -->
+<para>
+
+</para>
+
+@keyring: 
+@data: 
+@format: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_openpgp_keyring_init ##### -->
+<para>
+
+</para>
+
+@keyring: 
 @Returns: 
 
 
@@ -415,148 +552,59 @@ openpgp
 @key: 
 
 
-<!-- ##### FUNCTION gnutls_openpgp_privkey_get_pk_algorithm ##### -->
+<!-- ##### FUNCTION gnutls_openpgp_privkey_export ##### -->
 <para>
 
 </para>
 
 @key: 
-@bits: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_openpgp_privkey_sec_param ##### -->
-<para>
-
-</para>
-
-@key: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_openpgp_privkey_import ##### -->
-<para>
-
-</para>
-
-@key: 
-@data: 
 @format: 
 @password: 
 @flags: 
+@output_data: 
+@output_data_size: 
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_openpgp_privkey_get_fingerprint ##### -->
+<!-- ##### FUNCTION gnutls_openpgp_privkey_export2 ##### -->
 <para>
 
 </para>
 
 @key: 
-@fpr: 
-@fprlen: 
+@format: 
+@password: 
+@flags: 
+@out: 
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_openpgp_privkey_get_subkey_fingerprint ##### -->
+<!-- ##### FUNCTION gnutls_openpgp_privkey_export_dsa_raw ##### -->
 <para>
 
 </para>
 
-@key: 
-@idx: 
-@fpr: 
-@fprlen: 
+@pkey: 
+@p: 
+@q: 
+@g: 
+@y: 
+@x: 
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_openpgp_privkey_get_key_id ##### -->
+<!-- ##### FUNCTION gnutls_openpgp_privkey_export_rsa_raw ##### -->
 <para>
 
 </para>
 
-@key: 
-@keyid: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_openpgp_privkey_get_subkey_count ##### -->
-<para>
-
-</para>
-
-@key: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_openpgp_privkey_get_subkey_idx ##### -->
-<para>
-
-</para>
-
-@key: 
-@keyid: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_openpgp_privkey_get_subkey_revoked_status ##### -->
-<para>
-
-</para>
-
-@key: 
-@idx: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_openpgp_privkey_get_revoked_status ##### -->
-<para>
-
-</para>
-
-@key: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_openpgp_privkey_get_subkey_pk_algorithm ##### -->
-<para>
-
-</para>
-
-@key: 
-@idx: 
-@bits: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_openpgp_privkey_get_subkey_expiration_time ##### -->
-<para>
-
-</para>
-
-@key: 
-@idx: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_openpgp_privkey_get_subkey_id ##### -->
-<para>
-
-</para>
-
-@key: 
-@idx: 
-@keyid: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_openpgp_privkey_get_subkey_creation_time ##### -->
-<para>
-
-</para>
-
-@key: 
-@idx: 
+@pkey: 
+@m: 
+@e: 
+@d: 
+@p: 
+@q: 
+@u: 
 @Returns: 
 
 
@@ -591,69 +639,34 @@ openpgp
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_openpgp_privkey_export_dsa_raw ##### -->
-<para>
-
-</para>
-
-@pkey: 
-@p: 
-@q: 
-@g: 
-@y: 
-@x: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_openpgp_privkey_export_rsa_raw ##### -->
-<para>
-
-</para>
-
-@pkey: 
-@m: 
-@e: 
-@d: 
-@p: 
-@q: 
-@u: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_openpgp_privkey_export ##### -->
+<!-- ##### FUNCTION gnutls_openpgp_privkey_get_fingerprint ##### -->
 <para>
 
 </para>
 
 @key: 
-@format: 
-@password: 
-@flags: 
-@output_data: 
-@output_data_size: 
+@fpr: 
+@fprlen: 
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_openpgp_privkey_export2 ##### -->
-<para>
-
-</para>
-
-@key: 
-@format: 
-@password: 
-@flags: 
-@out: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_openpgp_privkey_set_preferred_key_id ##### -->
+<!-- ##### FUNCTION gnutls_openpgp_privkey_get_key_id ##### -->
 <para>
 
 </para>
 
 @key: 
 @keyid: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_openpgp_privkey_get_pk_algorithm ##### -->
+<para>
+
+</para>
+
+@key: 
+@bits: 
 @Returns: 
 
 
@@ -667,96 +680,136 @@ openpgp
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_openpgp_crt_get_auth_subkey ##### -->
+<!-- ##### FUNCTION gnutls_openpgp_privkey_get_revoked_status ##### -->
 <para>
 
 </para>
 
-@crt: 
+@key: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_openpgp_privkey_get_subkey_count ##### -->
+<para>
+
+</para>
+
+@key: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_openpgp_privkey_get_subkey_creation_time ##### -->
+<para>
+
+</para>
+
+@key: 
+@idx: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_openpgp_privkey_get_subkey_expiration_time ##### -->
+<para>
+
+</para>
+
+@key: 
+@idx: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_openpgp_privkey_get_subkey_fingerprint ##### -->
+<para>
+
+</para>
+
+@key: 
+@idx: 
+@fpr: 
+@fprlen: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_openpgp_privkey_get_subkey_id ##### -->
+<para>
+
+</para>
+
+@key: 
+@idx: 
 @keyid: 
-@flag: 
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_openpgp_keyring_init ##### -->
+<!-- ##### FUNCTION gnutls_openpgp_privkey_get_subkey_idx ##### -->
 <para>
 
 </para>
 
-@keyring: 
+@key: 
+@keyid: 
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_openpgp_keyring_deinit ##### -->
+<!-- ##### FUNCTION gnutls_openpgp_privkey_get_subkey_pk_algorithm ##### -->
 <para>
 
 </para>
 
-@keyring: 
+@key: 
+@idx: 
+@bits: 
+@Returns: 
 
 
-<!-- ##### FUNCTION gnutls_openpgp_keyring_import ##### -->
+<!-- ##### FUNCTION gnutls_openpgp_privkey_get_subkey_revoked_status ##### -->
 <para>
 
 </para>
 
-@keyring: 
+@key: 
+@idx: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_openpgp_privkey_import ##### -->
+<para>
+
+</para>
+
+@key: 
 @data: 
 @format: 
+@password: 
+@flags: 
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_openpgp_keyring_check_id ##### -->
+<!-- ##### FUNCTION gnutls_openpgp_privkey_init ##### -->
 <para>
 
 </para>
 
-@ring: 
+@key: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_openpgp_privkey_sec_param ##### -->
+<para>
+
+</para>
+
+@key: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnutls_openpgp_privkey_set_preferred_key_id ##### -->
+<para>
+
+</para>
+
+@key: 
 @keyid: 
-@flags: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_openpgp_crt_verify_ring ##### -->
-<para>
-
-</para>
-
-@key: 
-@keyring: 
-@flags: 
-@verify: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_openpgp_crt_verify_self ##### -->
-<para>
-
-</para>
-
-@key: 
-@flags: 
-@verify: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_openpgp_keyring_get_crt ##### -->
-<para>
-
-</para>
-
-@ring: 
-@idx: 
-@cert: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_openpgp_keyring_get_crt_count ##### -->
-<para>
-
-</para>
-
-@ring: 
 @Returns: 
 
 
@@ -779,112 +832,5 @@ openpgp
 
 @session: 
 @func: 
-
-
-<!-- ##### FUNCTION gnutls_certificate_set_openpgp_key ##### -->
-<para>
-
-</para>
-
-@res: 
-@crt: 
-@pkey: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_certificate_get_openpgp_key ##### -->
-<para>
-
-</para>
-
-@res: 
-@index: 
-@key: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_certificate_get_openpgp_crt ##### -->
-<para>
-
-</para>
-
-@res: 
-@index: 
-@crt_list: 
-@crt_list_size: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_certificate_set_openpgp_key_file ##### -->
-<para>
-
-</para>
-
-@res: 
-@certfile: 
-@keyfile: 
-@format: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_certificate_set_openpgp_key_mem ##### -->
-<para>
-
-</para>
-
-@res: 
-@cert: 
-@key: 
-@format: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_certificate_set_openpgp_key_file2 ##### -->
-<para>
-
-</para>
-
-@res: 
-@certfile: 
-@keyfile: 
-@subkey_id: 
-@format: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_certificate_set_openpgp_key_mem2 ##### -->
-<para>
-
-</para>
-
-@res: 
-@cert: 
-@key: 
-@subkey_id: 
-@format: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_certificate_set_openpgp_keyring_mem ##### -->
-<para>
-
-</para>
-
-@c: 
-@data: 
-@dlen: 
-@format: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnutls_certificate_set_openpgp_keyring_file ##### -->
-<para>
-
-</para>
-
-@c: 
-@file: 
-@format: 
-@Returns: 
 
 

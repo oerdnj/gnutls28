@@ -20,27 +20,12 @@ server_name
 <!-- ##### SECTION Image ##### -->
 
 
-<!-- ##### STRUCT server_name_st ##### -->
-<para>
-
-</para>
-
-@name: 
-@type: 
-
 <!-- ##### MACRO MAX_SERVER_NAME_EXTENSIONS ##### -->
 <para>
 
 </para>
 
 
-
-<!-- ##### STRUCT server_name_ext_st ##### -->
-<para>
-
-</para>
-
-@server_names: 
 
 <!-- ##### VARIABLE ext_mod_server_name ##### -->
 <para>

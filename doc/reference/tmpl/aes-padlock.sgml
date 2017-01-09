@@ -20,21 +20,6 @@ aes-padlock
 <!-- ##### SECTION Image ##### -->
 
 
-<!-- ##### STRUCT padlock_cipher_data ##### -->
-<para>
-
-</para>
-
-@iv: 
-
-<!-- ##### STRUCT padlock_ctx ##### -->
-<para>
-
-</para>
-
-@expanded_key: 
-@enc: 
-
 <!-- ##### FUNCTION padlock_aes_cipher_setkey ##### -->
 <para>
 
@@ -55,12 +40,16 @@ aes-padlock
 @Returns: 
 
 
-<!-- ##### FUNCTION padlock_reload_key ##### -->
+<!-- ##### FUNCTION padlock_cbc_encrypt ##### -->
 <para>
 
 </para>
 
-@void: 
+@out: 
+@inp: 
+@ctx: 
+@len: 
+@Returns: 
 
 
 <!-- ##### FUNCTION padlock_ecb_encrypt ##### -->
@@ -75,15 +64,11 @@ aes-padlock
 @Returns: 
 
 
-<!-- ##### FUNCTION padlock_cbc_encrypt ##### -->
+<!-- ##### FUNCTION padlock_reload_key ##### -->
 <para>
 
 </para>
 
-@out: 
-@inp: 
-@ctx: 
-@len: 
-@Returns: 
+@void: 
 
 

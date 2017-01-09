@@ -29,28 +29,3 @@ openpgp_int
 @src: 
 
 
-<!-- ##### STRUCT gnutls_openpgp_crt_int ##### -->
-<para>
-
-</para>
-
-@knode: 
-@preferred_keyid: 
-@preferred_set: 
-
-<!-- ##### STRUCT gnutls_openpgp_privkey_int ##### -->
-<para>
-
-</para>
-
-@knode: 
-@preferred_keyid: 
-@preferred_set: 
-
-<!-- ##### STRUCT gnutls_openpgp_keyring_int ##### -->
-<para>
-
-</para>
-
-@db: 
-

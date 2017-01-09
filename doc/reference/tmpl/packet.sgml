@@ -20,13 +20,3 @@ packet
 <!-- ##### SECTION Image ##### -->
 
 
-<!-- ##### STRUCT cdk_kbnode_s ##### -->
-<para>
-
-</para>
-
-@next: 
-@pkt: 
-@is_deleted: 
-@is_cloned: 
-

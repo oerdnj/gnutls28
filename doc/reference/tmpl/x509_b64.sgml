@@ -20,14 +20,6 @@ x509_b64
 <!-- ##### SECTION Image ##### -->
 
 
-<!-- ##### MACRO B64SIZE ##### -->
-<para>
-
-</para>
-
-@data_size: 
-
-
 <!-- ##### MACRO B64FSIZE ##### -->
 <para>
 
@@ -35,5 +27,13 @@ x509_b64
 
 @hsize: 
 @dsize: 
+
+
+<!-- ##### MACRO B64SIZE ##### -->
+<para>
+
+</para>
+
+@data_size: 
 
 

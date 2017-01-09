@@ -20,6 +20,13 @@ heartbeat
 <!-- ##### SECTION Image ##### -->
 
 
+<!-- ##### MACRO HEARTBEAT_DEFAULT_POLICY ##### -->
+<para>
+
+</para>
+
+
+
 <!-- ##### MACRO HEARTBEAT_REQUEST ##### -->
 <para>
 
@@ -28,13 +35,6 @@ heartbeat
 
 
 <!-- ##### MACRO HEARTBEAT_RESPONSE ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO MAX_HEARTBEAT_LENGTH ##### -->
 <para>
 
 </para>
@@ -55,7 +55,7 @@ heartbeat
 
 
 
-<!-- ##### MACRO HEARTBEAT_DEFAULT_POLICY ##### -->
+<!-- ##### MACRO MAX_HEARTBEAT_LENGTH ##### -->
 <para>
 
 </para>

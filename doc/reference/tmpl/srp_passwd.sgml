@@ -20,14 +20,3 @@ srp_passwd
 <!-- ##### SECTION Image ##### -->
 
 
-<!-- ##### STRUCT SRP_PWD_ENTRY ##### -->
-<para>
-
-</para>
-
-@username: 
-@salt: 
-@v: 
-@g: 
-@n: 
-

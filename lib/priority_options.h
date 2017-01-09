@@ -169,12 +169,12 @@ in_word_set (register const char *str, register unsigned int len)
       register int key = hash (str, len);
 
       if (key <= MAX_HASH_VALUE && key >= 0)
-        {
-          register const char *s = wordlist[key].name;
+	{
+	  register const char *s = wordlist[key].name;
 
-          if (*str == *s && !strcmp (str + 1, s + 1))
-            return &wordlist[key];
-        }
+	  if (*str == *s && !strcmp (str + 1, s + 1))
+	    return &wordlist[key];
+	}
     }
   return 0;
 }

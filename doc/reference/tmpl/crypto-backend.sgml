@@ -20,217 +20,14 @@ crypto-backend
 <!-- ##### SECTION Image ##### -->
 
 
-<!-- ##### MACRO gnutls_crypto_single_cipher_st ##### -->
+<!-- ##### MACRO DSA_G ##### -->
 <para>
 
 </para>
 
 
 
-<!-- ##### MACRO gnutls_crypto_single_mac_st ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO gnutls_crypto_single_digest_st ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### STRUCT gnutls_crypto_cipher_st ##### -->
-<para>
-
-</para>
-
-@init: 
-@setkey: 
-@setiv: 
-@encrypt: 
-@decrypt: 
-@aead_encrypt: 
-@aead_decrypt: 
-@deinit: 
-@auth: 
-@tag: 
-@exists: 
-
-<!-- ##### STRUCT gnutls_crypto_mac_st ##### -->
-<para>
-
-</para>
-
-@init: 
-@setkey: 
-@setnonce: 
-@hash: 
-@output: 
-@deinit: 
-@fast: 
-@exists: 
-
-<!-- ##### STRUCT gnutls_crypto_digest_st ##### -->
-<para>
-
-</para>
-
-@init: 
-@hash: 
-@output: 
-@deinit: 
-@fast: 
-@exists: 
-
-<!-- ##### STRUCT gnutls_crypto_rnd_st ##### -->
-<para>
-
-</para>
-
-@init: 
-@rnd: 
-@rnd_refresh: 
-@deinit: 
-@self_test: 
-
-<!-- ##### TYPEDEF bigint_t ##### -->
-<para>
-
-</para>
-
-
-<!-- ##### ENUM gnutls_bigint_format_t ##### -->
-<para>
-
-</para>
-
-@GNUTLS_MPI_FORMAT_USG: 
-@GNUTLS_MPI_FORMAT_STD: 
-@GNUTLS_MPI_FORMAT_PGP: 
-
-<!-- ##### STRUCT gnutls_crypto_bigint_st ##### -->
-<para>
-
-</para>
-
-@bigint_init: 
-@bigint_init_multi: 
-@bigint_release: 
-@bigint_clear: 
-@bigint_cmp: 
-@bigint_cmp_ui: 
-@bigint_modm: 
-@bigint_set: 
-@bigint_copy: 
-@bigint_set_ui: 
-@bigint_get_nbits: 
-@bigint_powm: 
-@bigint_addm: 
-@bigint_subm: 
-@bigint_mulm: 
-@bigint_add: 
-@bigint_sub: 
-@bigint_mul: 
-@bigint_add_ui: 
-@bigint_sub_ui: 
-@bigint_mul_ui: 
-@bigint_div: 
-@bigint_prime_check: 
-@bigint_scan: 
-@bigint_print: 
-
-<!-- ##### MACRO GNUTLS_MAX_PK_PARAMS ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### STRUCT gnutls_pk_params_st ##### -->
-<para>
-
-</para>
-
-@params: 
-@params_nr: 
-@flags: 
-@raw_pub: 
-@raw_priv: 
-@seed_size: 
-@seed: 
-@palgo: 
-@algo: 
-
-<!-- ##### ENUM gnutls_pk_flag_t ##### -->
-<para>
-
-</para>
-
-@GNUTLS_PK_FLAG_NONE: 
-@GNUTLS_PK_FLAG_PROVABLE: 
-
-<!-- ##### FUNCTION gnutls_pk_params_release ##### -->
-<para>
-
-</para>
-
-@p: 
-
-
-<!-- ##### FUNCTION gnutls_pk_params_clear ##### -->
-<para>
-
-</para>
-
-@p: 
-
-
-<!-- ##### FUNCTION gnutls_pk_params_init ##### -->
-<para>
-
-</para>
-
-@p: 
-
-
-<!-- ##### MACRO MAX_PUBLIC_PARAMS_SIZE ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO DSA_PUBLIC_PARAMS ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO DH_PUBLIC_PARAMS ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO RSA_PUBLIC_PARAMS ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO ECC_PUBLIC_PARAMS ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO MAX_PRIV_PARAMS_SIZE ##### -->
+<!-- ##### MACRO DSA_P ##### -->
 <para>
 
 </para>
@@ -244,14 +41,35 @@ crypto-backend
 
 
 
-<!-- ##### MACRO DH_PRIVATE_PARAMS ##### -->
+<!-- ##### MACRO DSA_PUBLIC_PARAMS ##### -->
 <para>
 
 </para>
 
 
 
-<!-- ##### MACRO RSA_PRIVATE_PARAMS ##### -->
+<!-- ##### MACRO DSA_Q ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO DSA_X ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO DSA_Y ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO ECC_K ##### -->
 <para>
 
 </para>
@@ -259,6 +77,13 @@ crypto-backend
 
 
 <!-- ##### MACRO ECC_PRIVATE_PARAMS ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO ECC_PUBLIC_PARAMS ##### -->
 <para>
 
 </para>
@@ -279,112 +104,21 @@ crypto-backend
 
 
 
-<!-- ##### MACRO ECC_K ##### -->
+<!-- ##### MACRO GNUTLS_MAX_PK_PARAMS ##### -->
 <para>
 
 </para>
 
 
 
-<!-- ##### MACRO DSA_P ##### -->
+<!-- ##### MACRO MAX_PRIV_PARAMS_SIZE ##### -->
 <para>
 
 </para>
 
 
 
-<!-- ##### MACRO DSA_Q ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO DSA_G ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO DSA_Y ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO DSA_X ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO DH_P ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO DH_Q ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO DH_G ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO DH_Y ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO DH_X ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO RSA_MODULUS ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO RSA_PUB ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO RSA_PRIV ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO RSA_PRIME1 ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO RSA_PRIME2 ##### -->
+<!-- ##### MACRO MAX_PUBLIC_PARAMS_SIZE ##### -->
 <para>
 
 </para>
@@ -412,68 +146,79 @@ crypto-backend
 
 
 
-<!-- ##### ENUM gnutls_direction_t ##### -->
+<!-- ##### MACRO RSA_MODULUS ##### -->
 <para>
 
 </para>
 
-@GNUTLS_IMPORT: 
-@GNUTLS_EXPORT: 
 
-<!-- ##### STRUCT gnutls_crypto_pk_st ##### -->
+
+<!-- ##### MACRO RSA_PRIME1 ##### -->
 <para>
 
 </para>
 
-@encrypt: 
-@decrypt: 
-@sign: 
-@verify: 
-@verify_priv_params: 
-@verify_pub_params: 
-@generate_keys: 
-@generate_params: 
-@pk_fixup_private_params: 
-@derive: 
-@curve_exists: 
 
-<!-- ##### FUNCTION gnutls_crypto_single_cipher_register ##### -->
+
+<!-- ##### MACRO RSA_PRIME2 ##### -->
 <para>
 
 </para>
 
-@algorithm: 
-@priority: 
-@s: 
-@free_s: 
-@Returns: 
 
 
-<!-- ##### FUNCTION gnutls_crypto_single_mac_register ##### -->
+<!-- ##### MACRO RSA_PRIV ##### -->
 <para>
 
 </para>
 
-@algorithm: 
-@priority: 
-@s: 
-@free_s: 
-@Returns: 
 
 
-<!-- ##### FUNCTION gnutls_crypto_single_digest_register ##### -->
+<!-- ##### MACRO RSA_PRIVATE_PARAMS ##### -->
 <para>
 
 </para>
 
-@algorithm: 
-@priority: 
-@s: 
-@free_s: 
-@Returns: 
 
 
-<!-- ##### FUNCTION gnutls_crypto_rnd_register ##### -->
+<!-- ##### MACRO RSA_PUB ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO RSA_PUBLIC_PARAMS ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### TYPEDEF bigint_t ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION generate ##### -->
+<para>
+
+</para>
+
+@bits: 
+
+
+<!-- ##### ENUM gnutls_bigint_format_t ##### -->
+<para>
+
+</para>
+
+@GNUTLS_MPI_FORMAT_USG: 
+@GNUTLS_MPI_FORMAT_STD: 
+@GNUTLS_MPI_FORMAT_PGP: 
+
+<!-- ##### FUNCTION gnutls_crypto_bigint_register ##### -->
 <para>
 
 </para>
@@ -493,7 +238,7 @@ crypto-backend
 @Returns: 
 
 
-<!-- ##### FUNCTION gnutls_crypto_bigint_register ##### -->
+<!-- ##### FUNCTION gnutls_crypto_rnd_register ##### -->
 <para>
 
 </para>
@@ -501,5 +246,94 @@ crypto-backend
 @priority: 
 @s: 
 @Returns: 
+
+
+<!-- ##### FUNCTION gnutls_crypto_single_cipher_register ##### -->
+<para>
+
+</para>
+
+@algorithm: 
+@priority: 
+@s: 
+@free_s: 
+@Returns: 
+
+
+<!-- ##### MACRO gnutls_crypto_single_cipher_st ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION gnutls_crypto_single_digest_register ##### -->
+<para>
+
+</para>
+
+@algorithm: 
+@priority: 
+@s: 
+@free_s: 
+@Returns: 
+
+
+<!-- ##### MACRO gnutls_crypto_single_digest_st ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION gnutls_crypto_single_mac_register ##### -->
+<para>
+
+</para>
+
+@algorithm: 
+@priority: 
+@s: 
+@free_s: 
+@Returns: 
+
+
+<!-- ##### MACRO gnutls_crypto_single_mac_st ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### ENUM gnutls_direction_t ##### -->
+<para>
+
+</para>
+
+@GNUTLS_IMPORT: 
+@GNUTLS_EXPORT: 
+
+<!-- ##### ENUM gnutls_pk_flag_t ##### -->
+<para>
+
+</para>
+
+@GNUTLS_PK_FLAG_NONE: 
+@GNUTLS_PK_FLAG_PROVABLE: 
+
+<!-- ##### FUNCTION gnutls_pk_params_init ##### -->
+<para>
+
+</para>
+
+@p: 
+
+
+<!-- ##### FUNCTION gnutls_pk_params_release ##### -->
+<para>
+
+</para>
+
+@p: 
 
 

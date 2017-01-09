@@ -20,17 +20,3 @@ verify-high
 <!-- ##### SECTION Image ##### -->
 
 
-<!-- ##### STRUCT gnutls_x509_trust_list_st ##### -->
-<para>
-
-</para>
-
-@size: 
-@node: 
-@x509_rdn_sequence: 
-@blacklisted: 
-@blacklisted_size: 
-@keep_certs: 
-@keep_certs_size: 
-@pkcs11_token: 
-
