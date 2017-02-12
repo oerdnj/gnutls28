@@ -23,9 +23,15 @@
 srcdir="${srcdir:-.}"
 CERTTOOL="${CERTTOOL:-../../src/certtool${EXEEXT}}"
 DIFF="${DIFF:-diff -b -B}"
+
+if ! test -x "${CERTTOOL}"; then
+	exit 77
+fi
+
 if ! test -z "${VALGRIND}"; then
 	VALGRIND="${LIBTOOL:-libtool} --mode=execute ${VALGRIND} --error-exitcode=15"
 fi
+
 OUTFILE=out-pkcs7.$$.tmp
 OUTFILE2=out2-pkcs7.$$.tmp
 
@@ -74,7 +80,7 @@ if test "${rc}" = "0"; then
 fi
 
 # check validation with date after intermediate cert issuance
-datefudge -s "2038-10-12" \
+datefudge -s "2038-10-13" \
 ${VALGRIND} "${CERTTOOL}" --inder --p7-verify --load-ca-certificate "${srcdir}/../../doc/credentials/x509/ca.pem" --infile "${srcdir}/data/${FILE}" >"${OUTFILE}"
 rc=$?
 

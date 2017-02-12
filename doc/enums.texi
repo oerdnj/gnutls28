@@ -932,30 +932,6 @@ Specifies the seed to be used in key generation.
 The size field specifies the hash algorithm to be used in key generation.
 @end table
 
-@c gnutls_openpgp_crt_fmt_t
-@table @code
-@item GNUTLS_@-OPENPGP_@-FMT_@-RAW
-OpenPGP certificate in raw format.
-@item GNUTLS_@-OPENPGP_@-FMT_@-BASE64
-OpenPGP certificate in base64 format.
-@end table
-@subheading int
-@anchor{int}
-@deftypefun {typedef} {int} (* @var{gnutls_openpgp_recv_key_func})
-@var{gnutls_openpgp_recv_key_func}: -- undescribed --
-
-A callback of this type is used to retrieve OpenPGP keys.  Only
-useful on the server, and will only be used if the peer send a key
-fingerprint instead of a full key.  See also
-@code{gnutls_openpgp_set_recv_key_function()} .
-
-The variable  @code{key} must be allocated using @code{gnutls_malloc()} .
-
-@strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (zero) is returned,
-otherwise an error code is returned.
-@end deftypefun
-
-
 @c gnutls_pkcs12_bag_type_t
 @table @code
 @item GNUTLS_@-BAG_@-EMPTY

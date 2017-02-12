@@ -43,7 +43,9 @@
 #include <c-ctype.h>
 #include "sockets.h"
 
-#ifdef HAVE_LIBIDN
+#ifdef HAVE_LIBIDN2
+#include <idn2.h>
+#elif defined HAVE_LIBIDN
 #include <idna.h>
 #include <idn-free.h>
 #endif
@@ -383,10 +385,12 @@ socket_open(socket_st * hd, const char *hostname, const char *service,
 	struct addrinfo hints, *res, *ptr;
 	int sd, err = 0;
 	int udp = flags & SOCKET_FLAG_UDP;
+	int ret;
 	int fastopen = flags & SOCKET_FLAG_FASTOPEN;
 	char buffer[MAX_BUF + 1];
 	char portname[16] = { 0 };
-	char *a_hostname = (char*)hostname;
+	gnutls_datum_t idna;
+	char *a_hostname;
 
 	memset(hd, 0, sizeof(*hd));
 
@@ -398,18 +402,17 @@ socket_open(socket_st * hd, const char *hostname, const char *service,
 		hd->rdata.size = rdata->size;
 	}
 
-#ifdef HAVE_LIBIDN
-	err = idna_to_ascii_8z(hostname, &a_hostname, IDNA_ALLOW_UNASSIGNED);
-	if (err != IDNA_SUCCESS) {
-		fprintf(stderr, "Cannot convert %s to IDNA: %s\n", hostname,
-			idna_strerror(err));
+	ret = gnutls_idna_map(hostname, strlen(hostname), &idna, 0);
+	if (ret < 0) {
+		fprintf(stderr, "Cannot convert %s to IDNA: %s\n", hostname, gnutls_strerror(ret));
 		exit(1);
 	}
-#endif
+
 	hd->hostname = strdup(hostname);
+	a_hostname = (char*)idna.data;
 
 	if (msg != NULL)
-		printf("Resolving '%s:%s'...\n", a_hostname,service);
+		printf("Resolving '%s:%s'...\n", a_hostname, service);
 
 	/* get server name */
 	memset(&hints, 0, sizeof(hints));
@@ -530,9 +533,7 @@ socket_open(socket_st * hd, const char *hostname, const char *service,
 	hd->ptr = ptr;
 	hd->addr_info = res;
 	hd->rdata.data = NULL;
-#ifdef HAVE_LIBIDN
-	idn_free(a_hostname);
-#endif
+	gnutls_free(idna.data);
 	return;
 }
 

@@ -1,6 +1,6 @@
 This is gnutls.info, produced by makeinfo version 6.3 from gnutls.texi.
 
-This manual is last updated 8 January 2017 for version 3.5.8 of GnuTLS.
+This manual is last updated 8 January 2017 for version 3.5.9 of GnuTLS.
 
 Copyright (C) 2001-2017 Free Software Foundation, Inc.\\ Copyright (C)
 2001-2017 Nikos Mavrogiannopoulos
@@ -25,175 +25,6 @@ START-INFO-DIR-ENTRY
 * psktool: (gnutls)Invoking psktool.	Simple TLS-Pre-Shared-Keys manager.
 * srptool: (gnutls)Invoking srptool.	Simple SRP password tool.
 END-INFO-DIR-ENTRY
-
-
-File: gnutls.info,  Node: Thread safety,  Next: Running in a sandbox,  Prev: Debugging and auditing,  Up: Introduction to the library
-
-6.1.5 Thread safety
--------------------
-
-The GnuTLS library is thread safe by design, meaning that objects of the
-library such as TLS sessions, can be safely divided across threads as
-long as a single thread accesses a single object.  This is sufficient to
-support a server which handles several sessions per thread.  If,
-however, an object needs to be shared across threads then access must be
-protected with a mutex.  Read-only access to objects, for example the
-credentials holding structures, is also thread-safe.
-
-A 'gnutls_session_t' object can be shared by two threads, one sending,
-the other receiving.  In that case rehandshakes, if required, must only
-be handled by a single thread being active.  The termination of a
-session should be handled, either by a single thread being active, or by
-the sender thread using *note gnutls_bye:: with 'GNUTLS_SHUT_WR' and the
-receiving thread waiting for a return value of zero.
-
-The random generator of the cryptographic back-end, utilizes mutex locks
-(e.g., pthreads on GNU/Linux and CriticalSection on Windows) which are
-setup by GnuTLS on library initialization.  Prior to version 3.3.0 they
-were setup by calling *note gnutls_global_init::.(1)  Note that, on
-Glibc systems the GnuTLS library does not link with the libpthread
-library by default, it utilizes the Glibc mutex stubs, which allows
-Glibc to use the non-multithreaded (and optimized) variants of its
-algorithms.  That, however, for applications using GnuTLS that may
-potentially utilize mutexes, requires them to explicitly link with
-libpthread.
-
-   ---------- Footnotes ----------
-
-   (1) On special systems you could manually specify the locking system
-using the function *note gnutls_global_set_mutex:: before calling any
-other GnuTLS function.  Setting mutexes manually is not recommended.
-
-
-File: gnutls.info,  Node: Running in a sandbox,  Next: Sessions and fork,  Prev: Thread safety,  Up: Introduction to the library
-
-6.1.6 Running in a sandbox
---------------------------
-
-Given that TLS protocol handling as well as X.509 certificate parsing
-are complicated processes involving several thousands lines of code, it
-is often desirable (and recommended) to run the TLS session handling in
-a sandbox like seccomp.  That has to be allowed by the overall software
-design, but if available, it adds an additional layer of protection by
-preventing parsing errors from becoming vessels for further security
-issues such as code execution.
-
-GnuTLS requires the following system calls to be available for its
-proper operation.
-
-   * nanosleep
-   * time
-   * gettimeofday
-   * clock_gettime
-   * getrusage
-   * getpid
-   * send
-   * recv
-   * sendmsg
-   * read (to read from /dev/urandom)
-   * getrandom (this is Linux-kernel specific)
-   * poll
-
-As well as any calls needed for memory allocation to work.  Note
-however, that GnuTLS depends on libc for the system calls, and there is
-no guarantee that libc will call the expected system call.  For that it
-is recommended to test your program in all the targetted platforms when
-filters like seccomp are in place.
-
-An example with a seccomp filter from GnuTLS' test suite is at:
-<http://gitlab.com/gnutls/gnutls/blob/master/tests/seccomp.c>.
-
-
-File: gnutls.info,  Node: Sessions and fork,  Next: Callback functions,  Prev: Running in a sandbox,  Up: Introduction to the library
-
-6.1.7 Sessions and fork
------------------------
-
-A 'gnutls_session_t' object can be shared by two processes after a fork,
-one sending, the other receiving.  In that case rehandshakes, cannot and
-must not be performed.  As with threads, the termination of a session
-should be handled by the sender process using *note gnutls_bye:: with
-'GNUTLS_SHUT_WR' and the receiving process waiting for a return value of
-zero.
-
-
-File: gnutls.info,  Node: Callback functions,  Prev: Sessions and fork,  Up: Introduction to the library
-
-6.1.8 Callback functions
-------------------------
-
-There are several cases where GnuTLS may need out of band input from
-your program.  This is now implemented using some callback functions,
-which your program is expected to register.
-
-An example of this type of functions are the push and pull callbacks
-which are used to specify the functions that will retrieve and send data
-to the transport layer.
-
-'VOID *note gnutls_transport_set_push_function:: (gnutls_session_t SESSION, gnutls_push_func PUSH_FUNC)'
-'VOID *note gnutls_transport_set_pull_function:: (gnutls_session_t SESSION, gnutls_pull_func PULL_FUNC)'
-
-Other callback functions may require more complicated input and data to
-be allocated.  Such an example is *note
-gnutls_srp_set_server_credentials_function::.  All callbacks should
-allocate and free memory using 'gnutls_malloc' and 'gnutls_free'.
-
-
-File: gnutls.info,  Node: Preparation,  Next: Session initialization,  Prev: Introduction to the library,  Up: How to use GnuTLS in applications
-
-6.2 Preparation
-===============
-
-To use GnuTLS, you have to perform some changes to your sources and your
-build system.  The necessary changes are explained in the following
-subsections.
-
-* Menu:
-
-* Headers::
-* Initialization::
-* Version check::
-* Building the source::
-
-
-File: gnutls.info,  Node: Headers,  Next: Initialization,  Up: Preparation
-
-6.2.1 Headers
--------------
-
-All the data types and functions of the GnuTLS library are defined in
-the header file 'gnutls/gnutls.h'.  This must be included in all
-programs that make use of the GnuTLS library.
-
-
-File: gnutls.info,  Node: Initialization,  Next: Version check,  Prev: Headers,  Up: Preparation
-
-6.2.2 Initialization
---------------------
-
-The GnuTLS library is initialized on load; prior to 3.3.0 was
-initialized by calling *note gnutls_global_init::(1).  The
-initialization typically enables CPU-specific acceleration, performs any
-required precalculations needed, opens any required system devices
-(e.g., /dev/urandom on Linux) and initializes subsystems that could be
-used later.
-
-The resources allocated by the initialization process will be released
-on library deinitialization, or explicitly by calling *note
-gnutls_global_deinit::.
-
-Note that during initialization file descriptors may be kept open by
-GnuTLS (e.g.  /dev/urandom) on library load.  Applications closing all
-unknown file descriptors must immediately call *note
-gnutls_global_init::, after that, to ensure they don't disrupt GnuTLS'
-operation.
-
-   ---------- Footnotes ----------
-
-   (1) The original behavior of requiring explicit initialization can
-obtained by setting the GNUTLS_NO_EXPLICIT_INIT environment variable to
-1, or by using the macro GNUTLS_SKIP_GLOBAL_INIT in a global section of
-your program.
 
 
 File: gnutls.info,  Node: Version check,  Next: Building the source,  Prev: Initialization,  Up: Preparation
@@ -453,10 +284,6 @@ not to be included since the peer should possess it already.
 'INT *note gnutls_certificate_set_x509_key_mem2:: (gnutls_certificate_credentials_t RES, const gnutls_datum_t * CERT, const gnutls_datum_t * KEY, gnutls_x509_crt_fmt_t TYPE, const char * PASS, unsigned int FLAGS)'
 'INT *note gnutls_certificate_set_x509_key:: (gnutls_certificate_credentials_t RES, gnutls_x509_crt_t * CERT_LIST, int CERT_LIST_SIZE, gnutls_x509_privkey_t KEY)'
 
-'INT *note gnutls_certificate_set_openpgp_key_file:: (gnutls_certificate_credentials_t RES, const char * CERTFILE, const char * KEYFILE, gnutls_openpgp_crt_fmt_t FORMAT)'
-'INT *note gnutls_certificate_set_openpgp_key_mem:: (gnutls_certificate_credentials_t RES, const gnutls_datum_t * CERT, const gnutls_datum_t * KEY, gnutls_openpgp_crt_fmt_t FORMAT)'
-'INT *note gnutls_certificate_set_openpgp_key:: (gnutls_certificate_credentials_t RES, gnutls_openpgp_crt_t CRT, gnutls_openpgp_privkey_t PKEY)'
-
 It is recommended to use the higher level functions such as *note
 gnutls_certificate_set_x509_key_file2:: which accept not only file names
 but URLs that specify objects stored in token, or system certificates
@@ -563,9 +390,7 @@ typedef struct gnutls_pcert_st
 } gnutls_pcert_st;
 
 'INT *note gnutls_pcert_import_x509:: (gnutls_pcert_st * PCERT, gnutls_x509_crt_t CRT, unsigned int FLAGS)'
-'INT *note gnutls_pcert_import_openpgp:: (gnutls_pcert_st * PCERT, gnutls_openpgp_crt_t CRT, unsigned int FLAGS)'
 'INT *note gnutls_pcert_import_x509_raw:: (gnutls_pcert_st * PCERT, const gnutls_datum_t * CERT, gnutls_x509_crt_fmt_t FORMAT, unsigned int FLAGS)'
-'INT *note gnutls_pcert_import_openpgp_raw:: (gnutls_pcert_st * PCERT, const gnutls_datum_t * CERT, gnutls_openpgp_crt_fmt_t FORMAT, gnutls_openpgp_keyid_t KEYID, unsigned int FLAGS)'
 'VOID *note gnutls_pcert_deinit:: (gnutls_pcert_st * PCERT)'
 
 In a handshake, the negotiated cipher suite depends on the certificate's
@@ -626,9 +451,9 @@ Client or server certificate verification
 
 Certificate verification is possible by loading the trusted authorities
 into the credentials structure by using the following functions,
-applicable to X.509 and OpenPGP certificates.  In modern systems it is
-recommended to utilize *note gnutls_certificate_set_x509_system_trust::
-which will load the trusted authorities from the system store.
+applicable to X.509 certificates.  In modern systems it is recommended
+to utilize *note gnutls_certificate_set_x509_system_trust:: which will
+load the trusted authorities from the system store.
 
  -- Function: int gnutls_certificate_set_x509_system_trust
           (gnutls_certificate_credentials_t CRED)
@@ -646,7 +471,6 @@ which will load the trusted authorities from the system store.
      *Since:* 3.0.20
 'INT *note gnutls_certificate_set_x509_trust_file:: (gnutls_certificate_credentials_t CRED, const char * CAFILE, gnutls_x509_crt_fmt_t TYPE)'
 'INT *note gnutls_certificate_set_x509_trust_dir:: (gnutls_certificate_credentials_t CRED, const char * CA_DIR, gnutls_x509_crt_fmt_t TYPE)'
-'INT *note gnutls_certificate_set_openpgp_keyring_file:: (gnutls_certificate_credentials_t C, const char * FILE, gnutls_openpgp_crt_fmt_t FORMAT)'
 
 The peer's certificate will be automatically verified if *note
 gnutls_session_set_verify_cert:: is called prior to handshake.
@@ -1719,15 +1543,31 @@ File: gnutls.info,  Node: Priority Strings,  Next: Selecting cryptographic key s
 6.10 Priority strings
 =====================
 
+How to use Priority Strings
+---------------------------
+
 The GnuTLS priority strings specify the TLS session's handshake
-algorithms and options in a compact, easy-to-use format.  That string
-may contain a single initial keyword such as in *note Table 6.3:
-tab:prio-keywords. and may be followed by additional algorithm or
-special keywords.  Note that their description is intentionally avoiding
-specific algorithm details, as the priority strings are not constant
-between gnutls versions (they are periodically updated to account for
-cryptographic advances while providing compatibility with old clients
-and servers).
+algorithms and options in a compact, easy-to-use format.  These strings
+are intended as a user-specified override of the library defaults.
+
+That is, applications should use the default settings (c.f.  *note
+gnutls_set_default_priority::), and provide the user with access to
+priority strings for overriding the default behavior, on configuration
+files, or other UI. Following such a principle, makes the GnuTLS library
+as the default settings provider.  That is necessary and a good
+practice, because TLS protocol hardening and phasing out of legacy
+algorithms, is easier to co-ordinate when happens in a single library.
+
+Using Priority Strings
+----------------------
+
+A priority string string may contain a single initial keyword such as in
+*note Table 6.3: tab:prio-keywords. and may be followed by additional
+algorithm or special keywords.  Note that their description is
+intentionally avoiding specific algorithm details, as the priority
+strings are not constant between gnutls versions (they are periodically
+updated to account for cryptographic advances while providing
+compatibility with old clients and servers).
 
 'INT *note gnutls_priority_set_direct:: (gnutls_session_t SESSION, const char * PRIORITIES, const char ** ERR_POS)'
 'INT *note gnutls_priority_set:: (gnutls_session_t SESSION, gnutls_priority_t PRIORITY)'
@@ -1905,8 +1745,9 @@ curves         CURVE-SECP256R1, CURVE-SECP384R1,
                which enables all curves from NORMAL priority is
                CURVE-ALL.
                
-Certificate    CTYPE-OPENPGP, CTYPE-X509.  Catch all is
-type           CTYPE-ALL.
+Certificate    The options CTYPE-OPENPGP (deprecated), and
+type           CTYPE-X509 are available.  Catch all is
+               CTYPE-ALL.
                
 
 Table 6.4: The supported algorithm keywords in priority strings.
@@ -2698,12 +2539,13 @@ File: gnutls.info,  Node: Parameter generation,  Next: Deriving keys for other a
 6.12.4 Parameter generation
 ---------------------------
 
-Several TLS ciphersuites require additional parameters that need to be
-generated or provided by the application.  The Diffie-Hellman based
-ciphersuites (ANON-DH or DHE), require the group parameters to be
-provided.  These parameters can be specified in a TLS credentials
-structure by calling *note gnutls_certificate_set_known_dh_params::,
-*note gnutls_anon_set_server_known_dh_params::, or *note
+Few TLS ciphersuites require additional parameters that need to be
+generated or provided by the application.  In particular, the
+Diffie-Hellman based ciphersuites (ANON-DH or DHE), require the group
+parameters to be provided.  Applications can specify these parameters in
+a TLS credentials structure by calling *note
+gnutls_certificate_set_known_dh_params::, *note
+gnutls_anon_set_server_known_dh_params::, or *note
 gnutls_psk_set_server_known_dh_params::, depending on the type of the
 credentials.
 
@@ -2720,17 +2562,24 @@ are the FFDHE parameters from [_RFC7919_].
 
 Note that older than 3.5.6 versions of GnuTLS provided functions to
 generate or import arbitrary DH parameters from a file.  This practice
-is still supported but discouraged in current versions.
+is still supported but discouraged in current versions.  There is no
+known advantage from using random parameters, while there have been
+several occasions where applications were utilizing incorrect, or
+insecure parameters.  This is the main reason GnuTLS includes the
+well-known parameters of [_RFC7919_] and recommends to applications
+utilizing them.
+
+In older applications which require to specify explicit DH parameters,
+we recommend using 'certtool' (of GnuTLS 3.5.6 or later) with the
+'--get-dh-params' option to obtain the FFDHE parameters descussed above.
+The output parameters of the tool are in PKCS#3 format and can be
+imported by most existing applications.
+
+The following functions are still supported but considered obsolete.
 
 'INT *note gnutls_dh_params_generate2:: (gnutls_dh_params_t DPARAMS, unsigned int BITS)'
 'INT *note gnutls_dh_params_import_pkcs3:: (gnutls_dh_params_t PARAMS, const gnutls_datum_t * PKCS3_PARAMS, gnutls_x509_crt_fmt_t FORMAT)'
 'VOID *note gnutls_certificate_set_dh_params:: (gnutls_certificate_credentials_t RES, gnutls_dh_params_t DH_PARAMS)'
-
-For old applications which require explicit DH parameters, we recommend
-using 'certtool' (of GnuTLS 3.5.6) with the '--get-dh-params' option to
-obtain the FFDHE parameters descussed above.  The output parameters of
-the tool are in PKCS#3 format and can be imported by most existing
-applications.
 
 
 File: gnutls.info,  Node: Deriving keys for other applications/protocols,  Next: Channel Bindings,  Prev: Parameter generation,  Up: Advanced topics
@@ -7923,3 +7772,155 @@ this command:
                  --srppasswdconf srp-tpasswd.conf \
                  --srppasswd srp-passwd.txt \
                  --pskpasswd psk-passwd.txt
+
+
+File: gnutls.info,  Node: gnutls-cli-debug Invocation,  Prev: gnutls-serv Invocation,  Up: Other included programs
+
+9.3 Invoking gnutls-cli-debug
+=============================
+
+TLS debug client.  It sets up multiple TLS connections to a server and
+queries its capabilities.  It was created to assist in debugging GnuTLS,
+but it might be useful to extract a TLS server's capabilities.  It
+connects to a TLS server, performs tests and print the server's
+capabilities.  If called with the '-v' parameter more checks will be
+performed.  Can be used to check for servers with special needs or bugs.
+
+This section was generated by *AutoGen*, using the 'agtexi-cmd' template
+and the option descriptions for the 'gnutls-cli-debug' program.  This
+software is released under the GNU General Public License, version 3 or
+later.
+
+gnutls-cli-debug help/usage ('--help')
+--------------------------------------
+
+This is the automatically generated usage text for gnutls-cli-debug.
+
+The text printed is the same whether selected with the 'help' option
+('--help') or the 'more-help' option ('--more-help').  'more-help' will
+print the usage text by passing it through a pager program.  'more-help'
+is disabled on platforms without a working 'fork(2)' function.  The
+'PAGER' environment variable is used to select the program, defaulting
+to 'more'.  Both will exit with a status code of 0.
+
+     gnutls-cli-debug - GnuTLS debug client
+     Usage:  gnutls-cli-debug [ -<flag> [<val>] | --<name>[{=| }<val>] ]...
+
+        -d, --debug=num            Enable debugging
+                                     - it must be in the range:
+                                       0 to 9999
+        -V, --verbose              More verbose output
+                                     - may appear multiple times
+        -p, --port=num             The port to connect to
+                                     - it must be in the range:
+                                       0 to 65536
+            --app-proto=str        an alias for the 'starttls-proto' option
+            --starttls-proto=str   The application protocol to be used to obtain the server's certificate
+     (https, ftp, smtp, imap, ldap, xmpp)
+        -v, --version[=arg]        output version information and exit
+        -h, --help                 display extended usage information and exit
+        -!, --more-help            extended usage information passed thru pager
+
+     Options are specified by doubled hyphens and their name or by a single
+     hyphen and the flag character.
+     Operands and options may be intermixed.  They will be reordered.
+
+     TLS debug client.  It sets up multiple TLS connections to a server and
+     queries its capabilities.  It was created to assist in debugging GnuTLS,
+     but it might be useful to extract a TLS server's capabilities.  It connects
+     to a TLS server, performs tests and print the server's capabilities.  If
+     called with the `-v' parameter more checks will be performed.  Can be used
+     to check for servers with special needs or bugs.
+
+
+debug option (-d)
+-----------------
+
+This is the "enable debugging" option.  This option takes a number
+argument.  Specifies the debug level.
+
+app-proto option
+----------------
+
+This is an alias for the 'starttls-proto' option, *note the
+starttls-proto option documentation: gnutls-cli-debug starttls-proto.
+
+starttls-proto option
+---------------------
+
+This is the "the application protocol to be used to obtain the server's
+certificate (https, ftp, smtp, imap, ldap, xmpp)" option.  This option
+takes a string argument.  Specify the application layer protocol for
+STARTTLS. If the protocol is supported, gnutls-cli will proceed to the
+TLS negotiation.
+
+gnutls-cli-debug exit status
+----------------------------
+
+One of the following exit values will be returned:
+'0 (EXIT_SUCCESS)'
+     Successful program execution.
+'1 (EXIT_FAILURE)'
+     The operation failed or the command syntax was not valid.
+
+gnutls-cli-debug See Also
+-------------------------
+
+gnutls-cli(1), gnutls-serv(1)
+
+gnutls-cli-debug Examples
+-------------------------
+
+     $ gnutls-cli-debug localhost
+     GnuTLS debug client 3.5.0
+     Checking localhost:443
+                                  for SSL 3.0 (RFC6101) support... yes
+                             whether we need to disable TLS 1.2... no
+                             whether we need to disable TLS 1.1... no
+                             whether we need to disable TLS 1.0... no
+                             whether %NO_EXTENSIONS is required... no
+                                    whether %COMPAT is required... no
+                                  for TLS 1.0 (RFC2246) support... yes
+                                  for TLS 1.1 (RFC4346) support... yes
+                                  for TLS 1.2 (RFC5246) support... yes
+                                       fallback from TLS 1.6 to... TLS1.2
+                             for RFC7507 inappropriate fallback... yes
+                                          for HTTPS server name... Local
+                                    for certificate chain order... sorted
+                       for safe renegotiation (RFC5746) support... yes
+                          for Safe renegotiation support (SCSV)... no
+                         for encrypt-then-MAC (RFC7366) support... no
+                        for ext master secret (RFC7627) support... no
+                                for heartbeat (RFC6520) support... no
+                            for version rollback bug in RSA PMS... dunno
+                       for version rollback bug in Client Hello... no
+                 whether the server ignores the RSA PMS version... yes
+     whether small records (512 bytes) are tolerated on handshake... yes
+         whether cipher suites not in SSL 3.0 spec are accepted... yes
+     whether a bogus TLS record version in the client hello is accepted... yes
+              whether the server understands TLS closure alerts... partially
+                 whether the server supports session resumption... yes
+                           for anonymous authentication support... no
+                           for ephemeral Diffie-Hellman support... no
+                        for ephemeral EC Diffie-Hellman support... yes
+                         ephemeral EC Diffie-Hellman group info... SECP256R1
+                       for AES-128-GCM cipher (RFC5288) support... yes
+                       for AES-128-CCM cipher (RFC6655) support... no
+                     for AES-128-CCM-8 cipher (RFC6655) support... no
+                       for AES-128-CBC cipher (RFC3268) support... yes
+                  for CAMELLIA-128-GCM cipher (RFC6367) support... no
+                  for CAMELLIA-128-CBC cipher (RFC5932) support... no
+                          for 3DES-CBC cipher (RFC2246) support... yes
+                       for ARCFOUR 128 cipher (RFC2246) support... yes
+                                            for MD5 MAC support... yes
+                                           for SHA1 MAC support... yes
+                                         for SHA256 MAC support... yes
+                                   for ZLIB compression support... no
+                          for max record size (RFC6066) support... no
+                     for OCSP status response (RFC6066) support... no
+                   for OpenPGP authentication (RFC6091) support... no
+
+You could also use the client to debug services with starttls
+capability.
+     $ gnutls-cli-debug --starttls-proto smtp --port 25 localhost
+

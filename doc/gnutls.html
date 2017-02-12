@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <!-- This manual is last updated 8 January 2017 for version
-3.5.8 of GnuTLS.
+3.5.9 of GnuTLS.
 
 Copyright (C) 2001-2017 Free Software Foundation, Inc.\\
 Copyright (C) 2001-2017 Nikos Mavrogiannopoulos
@@ -14,10 +14,10 @@ copy of the license is included in the section entitled "GNU Free
 Documentation License". -->
 <!-- Created by GNU Texinfo 6.3, http://www.gnu.org/software/texinfo/ -->
 <head>
-<title>GnuTLS 3.5.8</title>
+<title>GnuTLS 3.5.9</title>
 
-<meta name="description" content="GnuTLS 3.5.8">
-<meta name="keywords" content="GnuTLS 3.5.8">
+<meta name="description" content="GnuTLS 3.5.9">
+<meta name="keywords" content="GnuTLS 3.5.9">
 <meta name="resource-type" content="document">
 <meta name="distribution" content="global">
 <meta name="Generator" content="makeinfo">
@@ -153,7 +153,7 @@ dl {
 </head>
 
 <body lang="en">
-<h1 class="settitle" align="center">GnuTLS 3.5.8</h1>
+<h1 class="settitle" align="center">GnuTLS 3.5.9</h1>
 
 
 
@@ -240,12 +240,7 @@ dl {
         <li><a name="toc-Verifying-a-certificate-in-the-context-of-TLS-session-1" href="#Verifying-a-certificate-in-the-context-of-TLS-session">4.1.1.8 Verifying a certificate in the context of TLS session</a></li>
         <li><a name="toc-Verifying-a-certificate-using-PKCS-_002311" href="#Verification-using-PKCS11">4.1.1.9 Verifying a certificate using PKCS #11</a></li>
       </ul></li>
-      <li><a name="toc-OpenPGP-certificates-1" href="#OpenPGP-certificates">4.1.2 <acronym>OpenPGP</acronym> certificates</a>
-      <ul class="no-bullet">
-        <li><a name="toc-OpenPGP-certificate-structure" href="#OpenPGP-certificate-structure">4.1.2.1 <acronym>OpenPGP</acronym> certificate structure</a></li>
-        <li><a name="toc-Verifying-an-OpenPGP-certificate" href="#Verifying-an-OpenPGP-certificate">4.1.2.2 Verifying an <acronym>OpenPGP</acronym> certificate</a></li>
-        <li><a name="toc-Verifying-a-certificate-in-the-context-of-a-TLS-session" href="#Verifying-a-certificate-in-the-context-of-a-TLS-session">4.1.2.3 Verifying a certificate in the context of a TLS session</a></li>
-      </ul></li>
+      <li><a name="toc-OpenPGP-certificates-1" href="#OpenPGP-certificates">4.1.2 <acronym>OpenPGP</acronym> certificates</a></li>
       <li><a name="toc-Advanced-certificate-verification-1" href="#Advanced-certificate-verification">4.1.3 Advanced certificate verification</a>
       <ul class="no-bullet">
         <li><a name="toc-Verifying-a-certificate-using-trust-on-first-use-authentication-1" href="#Verifying-a-certificate-using-trust-on-first-use-authentication">4.1.3.1 Verifying a certificate using trust on first use authentication</a></li>
@@ -487,15 +482,14 @@ dl {
     <li><a name="toc-X_002e509-certificate-API" href="#X509-certificate-API">E.3 <acronym>X.509</acronym> certificate API</a></li>
     <li><a name="toc-PKCS-7-API-1" href="#PKCS-7-API">E.4 <acronym>PKCS</acronym> 7 API</a></li>
     <li><a name="toc-OCSP-API-1" href="#OCSP-API">E.5 <acronym>OCSP</acronym> API</a></li>
-    <li><a name="toc-OpenPGP-API-1" href="#OpenPGP-API">E.6 <acronym>OpenPGP</acronym> API</a></li>
-    <li><a name="toc-PKCS-12-API-1" href="#PKCS-12-API">E.7 PKCS 12 API</a></li>
-    <li><a name="toc-Hardware-token-via-PKCS-11-API" href="#PKCS-11-API">E.8 Hardware token via PKCS 11 API</a></li>
-    <li><a name="toc-TPM-API-1" href="#TPM-API">E.9 TPM API</a></li>
-    <li><a name="toc-Abstract-key-API-1" href="#Abstract-key-API">E.10 Abstract key API</a></li>
-    <li><a name="toc-Socket-specific-API-1" href="#Socket-specific-API">E.11 Socket specific API</a></li>
-    <li><a name="toc-DANE-API-1" href="#DANE-API">E.12 DANE API</a></li>
-    <li><a name="toc-Cryptographic-API-1" href="#Cryptographic-API">E.13 Cryptographic API</a></li>
-    <li><a name="toc-Compatibility-API-1" href="#Compatibility-API">E.14 Compatibility API</a></li>
+    <li><a name="toc-PKCS-12-API-1" href="#PKCS-12-API">E.6 PKCS 12 API</a></li>
+    <li><a name="toc-Hardware-token-via-PKCS-11-API" href="#PKCS-11-API">E.7 Hardware token via PKCS 11 API</a></li>
+    <li><a name="toc-TPM-API-1" href="#TPM-API">E.8 TPM API</a></li>
+    <li><a name="toc-Abstract-key-API-1" href="#Abstract-key-API">E.9 Abstract key API</a></li>
+    <li><a name="toc-Socket-specific-API-1" href="#Socket-specific-API">E.10 Socket specific API</a></li>
+    <li><a name="toc-DANE-API-1" href="#DANE-API">E.11 DANE API</a></li>
+    <li><a name="toc-Cryptographic-API-1" href="#Cryptographic-API">E.12 Cryptographic API</a></li>
+    <li><a name="toc-Compatibility-API-1" href="#Compatibility-API">E.13 Compatibility API</a></li>
   </ul></li>
   <li><a name="toc-Copying-Information-1" href="#Copying-Information">Appendix F Copying Information</a></li>
   <li><a name="toc-Bibliography-1" href="#Bibliography">Bibliography</a></li>
@@ -514,7 +508,7 @@ Next: <a href="#Preface" accesskey="n" rel="next">Preface</a>, Up: <a href="dir.
 <h1 class="top">GnuTLS</h1>
 
 <p>This manual is last updated 8 January 2017 for version
-3.5.8 of GnuTLS.
+3.5.9 of GnuTLS.
 </p>
 <p>Copyright &copy; 2001-2017 Free Software Foundation, Inc.\\
 Copyright &copy; 2001-2017 Nikos Mavrogiannopoulos
@@ -1977,9 +1971,8 @@ Next: <a href="#More-on-certificate-authentication" accesskey="n" rel="next">Mor
 
 <p>The most known authentication method of <acronym>TLS</acronym> are certificates.
 The PKIX [<em>PKIX</em>] public key infrastructure is daily used by anyone
-using a browser today. <acronym>GnuTLS</acronym> supports both 
-<acronym>X.509</acronym> certificates [<em>PKIX</em>] and <acronym>OpenPGP</acronym>
-certificates using a common API.
+using a browser today. <acronym>GnuTLS</acronym> provides a simple API to 
+use the <acronym>X.509</acronym> certificates [<em>PKIX</em>].
 </p>
 <p>The key exchange algorithms supported by certificate authentication are
 shown in <a href="#tab_003akey_002dexchange">Table 4.1</a>.
@@ -2992,175 +2985,17 @@ Next: <a href="#Advanced-certificate-verification" accesskey="n" rel="next">Adva
 <h4 class="subsection">4.1.2 <acronym>OpenPGP</acronym> certificates</h4>
 <a name="index-OpenPGP-certificates"></a>
 
-<p>The <acronym>OpenPGP</acronym> key authentication relies on a distributed trust
-model, called the &ldquo;web of trust&rdquo;. The &ldquo;web of trust&rdquo; uses a
-decentralized system of trusted introducers, which are the same as a
-CA. <acronym>OpenPGP</acronym> allows anyone to sign anyone else&rsquo;s public
-key. When Alice signs Bob&rsquo;s key, she is introducing Bob&rsquo;s key to
-anyone who trusts Alice. If someone trusts Alice to introduce keys,
-then Alice is a trusted introducer in the mind of that observer.
-For example in <a href="#fig_002dopenpgp">Figure 4.4</a>, David trusts Alice to be an introducer and Alice
-signed Bob&rsquo;s key thus Dave trusts Bob&rsquo;s key to be the real one.
+<p>Previous versions of GnuTLS supported limited <acronym>OpenPGP</acronym> key
+authentication. That functionality has been deprecated and although
+is still made available, it is no longer recommended to use.
+The reason is that, supporting alternative authentication
+methods, when X.509 and PKIX were new and not well established, seemed like a
+good idea, in today&rsquo;s internet X.509 is unquestionably the main
+container for certificates. As such supporting more options with no clear
+use-cases, is a distraction that consumes considerable resources for
+improving and testing. For that we have decided to mark this functionality
+as deprecated, and will be dropped in one of the next GnuTLS major releases.
 </p>
-<div class="float"><a name="fig_002dopenpgp"></a>
-<img src="gnutls-pgp.png" alt="gnutls-pgp">
-
-<div class="float-caption"><p><strong>Figure 4.4: </strong>An example of the OpenPGP trust model.</p></div></div>
-<p>There are some key points that are important in that model. In the
-example Alice has to sign Bob&rsquo;s key, only if she is sure that the key
-belongs to Bob. Otherwise she may also make Dave falsely believe that
-this is Bob&rsquo;s key. Dave has also the responsibility to know who to
-trust.  This model is similar to real life relations.
-</p>
-<p>Just see how Charlie behaves in the previous example. Although he has
-signed Bob&rsquo;s key - because he knows, somehow, that it belongs to Bob -
-he does not trust Bob to be an introducer. Charlie decided to trust
-only Kevin, for some reason. A reason could be that Bob is lazy
-enough, and signs other people&rsquo;s keys without being sure that they
-belong to the actual owner.
-</p>
-<div class="float"><a name="tab_003aopenpgp_002dcertificate"></a>
-<table>
-<thead><tr><th width="20%">Field</th><th width="70%">Description</th></tr></thead>
-<tr><td width="20%">version</td><td width="70%">The field that indicates the version of the OpenPGP structure.</td></tr>
-<tr><td width="20%">user ID</td><td width="70%">An RFC 2822 string that identifies the owner of the key. There may be
-multiple user identifiers in a key.</td></tr>
-<tr><td width="20%">public key</td><td width="70%">The main public key of the certificate.</td></tr>
-<tr><td width="20%">expiration</td><td width="70%">The expiration time of the main public key.</td></tr>
-<tr><td width="20%">public subkey</td><td width="70%">An additional public key of the certificate. There may be multiple subkeys
-in a certificate.</td></tr>
-<tr><td width="20%">public subkey expiration</td><td width="70%">The expiration time of the subkey.</td></tr>
-</table>
-
-<div class="float-caption"><p><strong>Table 4.5: </strong>OpenPGP certificate fields.</p></div></div>
-
-<a name="OpenPGP-certificate-structure"></a>
-<h4 class="subsubsection">4.1.2.1 <acronym>OpenPGP</acronym> certificate structure</h4>
-
-<p>In <acronym>GnuTLS</acronym> the <acronym>OpenPGP</acronym> certificate structures
-[<em>RFC2440</em>] are handled using the <code>gnutls_openpgp_crt_t</code> type.
-A typical certificate contains the user ID, which is an RFC 2822
-mail and name address, a public key, possibly a number of additional
-public keys (called subkeys), and a number of signatures. The various
-fields are shown in <a href="#tab_003aopenpgp_002dcertificate">Table 4.5</a>.
-</p>
-<p>The additional subkeys may provide key for various different purposes,
-e.g. one key to encrypt mail, and another to sign a TLS key exchange.
-Each subkey is identified by a unique key ID.
-The keys that are to be used in a TLS key exchange that requires
-signatures are called authentication keys in the OpenPGP jargon.
-The mapping of TLS key exchange methods to public keys is shown in
-<a href="#tab_003aopenpgp_002dkey_002dexchange">Table 4.6</a>.
-</p>
-<div class="float"><a name="tab_003aopenpgp_002dkey_002dexchange"></a>
-<table>
-<thead><tr><th width="20%">Key exchange</th><th width="70%">Public key requirements</th></tr></thead>
-<tr><td width="20%">RSA</td><td width="70%">An RSA public key that allows encryption.</td></tr>
-<tr><td width="20%">DHE_RSA</td><td width="70%">An RSA public key that is marked for authentication.</td></tr>
-<tr><td width="20%">ECDHE_RSA</td><td width="70%">An RSA public key that is marked for authentication.</td></tr>
-<tr><td width="20%">DHE_DSS</td><td width="70%">A DSA public key that is marked for authentication.</td></tr>
-</table>
-
-<div class="float-caption"><p><strong>Table 4.6: </strong>The types of (sub)keys required for the various TLS key exchange methods.</p></div></div>
-<p>The corresponding private keys are stored in the
-<code>gnutls_openpgp_privkey_t</code> type. All the prototypes for the key
-handling functions can be found in <samp>gnutls/openpgp.h</samp>.
-</p>
-<a name="Verifying-an-OpenPGP-certificate"></a>
-<h4 class="subsubsection">4.1.2.2 Verifying an <acronym>OpenPGP</acronym> certificate</h4>
-
-<p>The verification functions of <acronym>OpenPGP</acronym> keys, included in
-<acronym>GnuTLS</acronym>, are simple ones, and do not use the features of the
-&ldquo;web of trust&rdquo;.  For that reason, if the verification needs are
-complex, the assistance of external tools like <acronym>GnuPG</acronym> and
-GPGME<a name="DOCF9" href="#FOOT9"><sup>9</sup></a> is
-recommended.
-</p>
-<p>In GnuTLS there is a verification function for OpenPGP certificates,
-the <a href="#gnutls_005fopenpgp_005fcrt_005fverify_005fring">gnutls_openpgp_crt_verify_ring</a>.  This checks an
-<acronym>OpenPGP</acronym> key against a given set of public keys (keyring) and
-returns the key status. The key verification status is the same as in
-<acronym>X.509</acronym> certificates, although the meaning and interpretation
-are different. For example an <acronym>OpenPGP</acronym> key may be valid, if
-the self signature is ok, even if no signers were found.  The meaning
-of verification status flags is the same as in the <acronym>X.509</acronym> certificates
-(see <a href="#gnutls_005fcertificate_005fverify_005fflags">Figure 4.3</a>).
-</p>
-
-
-
-
-<dl>
-<dt><a name="index-gnutls_005fopenpgp_005fcrt_005fverify_005fring"></a>Function: <em>int</em> <strong>gnutls_openpgp_crt_verify_ring</strong> <em>(gnutls_openpgp_crt_t <var>key</var>, gnutls_openpgp_keyring_t <var>keyring</var>, unsigned int <var>flags</var>, unsigned int * <var>verify</var>)</em></dt>
-<dd><p><var>key</var>: the structure that holds the key.
-</p>
-<p><var>keyring</var>: holds the keyring to check against
-</p>
-<p><var>flags</var>: unused (should be 0)
-</p>
-<p><var>verify</var>: will hold the certificate verification output.
-</p>
-<p>Verify all signatures in the key, using the given set of keys
-(keyring).
-</p>
-<p>The key verification output will be put in  <code>verify</code> and will be one
-or more of the <code>gnutls_certificate_status_t</code>  enumerated elements
-bitwise or&rsquo;d.
-</p>
-<p>Note that this function does not verify using any &quot;web of trust&quot;.
-You may use GnuPG for that purpose, or any other external PGP
-application.
-</p>
-<p><strong>Returns:</strong> <code>GNUTLS_E_SUCCESS</code>  on success, or an error code.
-</p></dd></dl>
-
-
-
-
-
-<dl>
-<dt><a name="index-gnutls_005fopenpgp_005fcrt_005fverify_005fself"></a>Function: <em>int</em> <strong>gnutls_openpgp_crt_verify_self</strong> <em>(gnutls_openpgp_crt_t <var>key</var>, unsigned int <var>flags</var>, unsigned int * <var>verify</var>)</em></dt>
-<dd><p><var>key</var>: the structure that holds the key.
-</p>
-<p><var>flags</var>: unused (should be 0)
-</p>
-<p><var>verify</var>: will hold the key verification output.
-</p>
-<p>Verifies the self signature in the key.  The key verification
-output will be put in  <code>verify</code> and will be one or more of the
-gnutls_certificate_status_t enumerated elements bitwise or&rsquo;d.
-</p>
-<p><strong>Returns:</strong> <code>GNUTLS_E_SUCCESS</code>  on success, or an error code.
-</p></dd></dl>
-
-<a name="Verifying-a-certificate-in-the-context-of-a-TLS-session"></a>
-<h4 class="subsubsection">4.1.2.3 Verifying a certificate in the context of a TLS session</h4>
-
-<p>Similarly with X.509 certificates, one needs to specify
-the OpenPGP keyring file in the credentials structure. The certificates
-in this file will be  used by <a href="#gnutls_005fcertificate_005fverify_005fpeers3">gnutls_certificate_verify_peers3</a>
-to verify the signatures in the certificate sent by the peer.
-</p>
-
-
-
-
-<dl>
-<dt><a name="index-gnutls_005fcertificate_005fset_005fopenpgp_005fkeyring_005ffile"></a>Function: <em>int</em> <strong>gnutls_certificate_set_openpgp_keyring_file</strong> <em>(gnutls_certificate_credentials_t <var>c</var>, const char * <var>file</var>, gnutls_openpgp_crt_fmt_t <var>format</var>)</em></dt>
-<dd><p><var>c</var>: A certificate credentials structure
-</p>
-<p><var>file</var>: filename of the keyring.
-</p>
-<p><var>format</var>: format of keyring.
-</p>
-<p>The function is used to set keyrings that will be used internally
-by various OpenPGP functions. For example to find a key when it
-is needed for an operations. The keyring will also be used at the
-verification functions.
-</p>
-<p><strong>Returns:</strong> On success, <code>GNUTLS_E_SUCCESS</code>  (0) is returned, otherwise a
-negative error value.
-</p></dd></dl>
 
 <hr>
 <a name="Advanced-certificate-verification"></a>
@@ -3592,7 +3427,7 @@ Next: <a href="#OCSP-certificate-status-checking" accesskey="n" rel="next">OCSP 
 <p>A certificate revocation list (CRL) is a structure issued by an authority
 periodically containing a list of revoked certificates serial numbers.
 The CRL structure is signed with the issuing authorities&rsquo; keys. A typical
-CRL contains the fields as shown in <a href="#tab_003acrl">Table 4.7</a>.
+CRL contains the fields as shown in <a href="#tab_003acrl">Table 4.5</a>.
 Certificate revocation lists are used to complement the expiration date of a certificate,
 in order to account for other reasons of revocation, such as compromised keys, etc.
 </p>
@@ -3612,7 +3447,7 @@ the issuing time of the next update.
 <tr><td width="20%">extensions</td><td width="70%">Optional CRL structure extensions.</td></tr>
 </table>
 
-<div class="float-caption"><p><strong>Table 4.7: </strong>Certificate revocation list fields.</p></div></div>
+<div class="float-caption"><p><strong>Table 4.5: </strong>Certificate revocation list fields.</p></div></div>
 <p>The basic CRL structure functions follow.
 </p>
 <dl compact="compact">
@@ -3884,7 +3719,7 @@ attacker will not be able to give a stale response for the same nonce.
 </dl>
 
 <p>The OCSP response structures is a complex structure. A simplified overview
-of it is in <a href="#tab_003aocsp_002dresponse">Table 4.8</a>. Note that a response may contain 
+of it is in <a href="#tab_003aocsp_002dresponse">Table 4.6</a>. Note that a response may contain 
 information on multiple certificates.
 </p>
 <div class="float"><a name="tab_003aocsp_002dresponse"></a>
@@ -3902,7 +3737,7 @@ information on multiple certificates.
 <tr><td width="20%">revocationReason</td><td width="70%">The reason the certificate was revoked.</td></tr>
 </table>
 
-<div class="float-caption"><p><strong>Table 4.8: </strong>The most important OCSP response fields.</p></div></div>
+<div class="float-caption"><p><strong>Table 4.6: </strong>The most important OCSP response fields.</p></div></div>
 
 <p>We provide basic functions for initialization, importing, exporting
 and deallocating OCSP responses.  
@@ -3999,7 +3834,7 @@ below.
 </p></dd>
 </dl>
 
-<div class="float-caption"><p><strong>Figure 4.5: </strong>The revocation reasons</p></div></div>
+<div class="float-caption"><p><strong>Figure 4.4: </strong>The revocation reasons</p></div></div>
 <p>Note, that the OCSP response needs to be verified against some set of trust
 anchors before it can be relied upon. It is also important to check
 whether the received OCSP response corresponds to the certificate being checked.
@@ -4200,7 +4035,7 @@ be decrypted.
 </p></dd>
 </dl>
 
-<div class="float-caption"><p><strong>Figure 4.6: </strong>Encryption flags</p></div></div>
+<div class="float-caption"><p><strong>Figure 4.5: </strong>Encryption flags</p></div></div>
 <a name="PKCS-_002312-structures"></a>
 <h4 class="subsubheading"><acronym>PKCS</acronym> #12 structures</h4>
 <a name="index-PKCS-_002312"></a>
@@ -6282,7 +6117,6 @@ sequence.
 </p>
 <dl compact="compact">
 <dt><code><var>int</var> <a href="#gnutls_005fpubkey_005fimport_005fx509">gnutls_pubkey_import_x509</a> (gnutls_pubkey_t <var>key</var>, gnutls_x509_crt_t <var>crt</var>, unsigned int <var>flags</var>)</code></dt>
-<dt><code><var>int</var> <a href="#gnutls_005fpubkey_005fimport_005fopenpgp">gnutls_pubkey_import_openpgp</a> (gnutls_pubkey_t <var>key</var>, gnutls_openpgp_crt_t <var>crt</var>, unsigned int <var>flags</var>)</code></dt>
 <dt><code><var>int</var> <a href="#gnutls_005fpubkey_005fimport_005fpkcs11">gnutls_pubkey_import_pkcs11</a> (gnutls_pubkey_t <var>key</var>, gnutls_pkcs11_obj_t <var>obj</var>, unsigned int <var>flags</var>)</code></dt>
 </dl>
 
@@ -6325,7 +6159,6 @@ OpenPGP structures are shown below.
 </p>
 <dl compact="compact">
 <dt><code><var>int</var> <a href="#gnutls_005fpubkey_005fimport_005fx509_005fraw">gnutls_pubkey_import_x509_raw</a> (gnutls_pubkey_t <var>pkey</var>, const gnutls_datum_t * <var>data</var>, gnutls_x509_crt_fmt_t <var>format</var>, unsigned int <var>flags</var>)</code></dt>
-<dt><code><var>int</var> <a href="#gnutls_005fpubkey_005fimport_005fopenpgp_005fraw">gnutls_pubkey_import_openpgp_raw</a> (gnutls_pubkey_t <var>pkey</var>, const gnutls_datum_t * <var>data</var>, gnutls_openpgp_crt_fmt_t <var>format</var>, const gnutls_openpgp_keyid_t <var>keyid</var>, unsigned int <var>flags</var>)</code></dt>
 </dl>
 
 <p>An important function is <a href="#gnutls_005fpubkey_005fimport_005furl">gnutls_pubkey_import_url</a> which will import
@@ -6392,7 +6225,6 @@ makes available only operations.
 </p>
 <dl compact="compact">
 <dt><code><var>int</var> <a href="#gnutls_005fprivkey_005fimport_005fx509">gnutls_privkey_import_x509</a> (gnutls_privkey_t <var>pkey</var>, gnutls_x509_privkey_t <var>key</var>, unsigned int <var>flags</var>)</code></dt>
-<dt><code><var>int</var> <a href="#gnutls_005fprivkey_005fimport_005fopenpgp">gnutls_privkey_import_openpgp</a> (gnutls_privkey_t <var>pkey</var>, gnutls_openpgp_privkey_t <var>key</var>, unsigned int <var>flags</var>)</code></dt>
 <dt><code><var>int</var> <a href="#gnutls_005fprivkey_005fimport_005fpkcs11">gnutls_privkey_import_pkcs11</a> (gnutls_privkey_t <var>pkey</var>, gnutls_pkcs11_privkey_t <var>key</var>, unsigned int <var>flags</var>)</code></dt>
 </dl>
 
@@ -6400,11 +6232,6 @@ makes available only operations.
 OpenPGP structures are shown below. Again, as with public keys, private keys 
 can be imported from a hardware module using URLs.
 </p>
-<dl compact="compact">
-<dt><code><var>int</var> <a href="#gnutls_005fprivkey_005fimport_005fx509_005fraw">gnutls_privkey_import_x509_raw</a> (gnutls_privkey_t <var>pkey</var>, const gnutls_datum_t * <var>data</var>, gnutls_x509_crt_fmt_t <var>format</var>, const char * <var>password</var>, unsigned int <var>flags</var>)</code></dt>
-<dt><code><var>int</var> <a href="#gnutls_005fprivkey_005fimport_005fopenpgp_005fraw">gnutls_privkey_import_openpgp_raw</a> (gnutls_privkey_t <var>pkey</var>, const gnutls_datum_t * <var>data</var>, gnutls_openpgp_crt_fmt_t <var>format</var>, const gnutls_openpgp_keyid_t <var>keyid</var>, const char * <var>password</var>)</code></dt>
-</dl>
-
 
 
 
@@ -6428,6 +6255,7 @@ negative error value.
 </p></dd></dl>
 
 <dl compact="compact">
+<dt><code><var>int</var> <a href="#gnutls_005fprivkey_005fimport_005fx509_005fraw">gnutls_privkey_import_x509_raw</a> (gnutls_privkey_t <var>pkey</var>, const gnutls_datum_t * <var>data</var>, gnutls_x509_crt_fmt_t <var>format</var>, const char * <var>password</var>, unsigned int <var>flags</var>)</code></dt>
 <dt><code><var>int</var> <a href="#gnutls_005fprivkey_005fget_005fpk_005falgorithm">gnutls_privkey_get_pk_algorithm</a> (gnutls_privkey_t <var>key</var>, unsigned int * <var>bits</var>)</code></dt>
 <dt><code><var>gnutls_privkey_type_t</var> <a href="#gnutls_005fprivkey_005fget_005ftype">gnutls_privkey_get_type</a> (gnutls_privkey_t <var>key</var>)</code></dt>
 <dt><code><var>int</var> <a href="#gnutls_005fprivkey_005fstatus">gnutls_privkey_status</a> (gnutls_privkey_t <var>key</var>)</code></dt>
@@ -6860,7 +6688,7 @@ separation subsystem.
 </p>
 <p><acronym>PKCS</acronym> #11 is plugin API allowing applications to access cryptographic
 operations on a security module, as well as to objects residing on it. PKCS
-#11 modules exist for hardware tokens such as smart cards<a name="DOCF10" href="#FOOT10"><sup>10</sup></a>,
+#11 modules exist for hardware tokens such as smart cards<a name="DOCF9" href="#FOOT9"><sup>9</sup></a>,
 cryptographic tokens, as well as for software modules like <acronym>Gnome Keyring</acronym>. 
 The objects residing on a security module may be certificates, public keys, 
 private keys or secret keys. Of those certificates and public/private key 
@@ -6905,7 +6733,7 @@ and tokens, <acronym>PKCS</acronym> #11 is automatically initialized during the 
 call of a <acronym>PKCS</acronym> #11 related function, in a thread safe way.
 The default initialization process, utilizes p11-kit configuration, and loads any
 appropriate <acronym>PKCS</acronym> #11 modules. The p11-kit configuration
-files<a name="DOCF11" href="#FOOT11"><sup>11</sup></a> are typically stored in <code>/etc/pkcs11/modules/</code>.
+files<a name="DOCF10" href="#FOOT10"><sup>10</sup></a> are typically stored in <code>/etc/pkcs11/modules/</code>.
 For example a file that will instruct GnuTLS to load the <acronym>OpenSC</acronym> module,
 could be named <code>/etc/pkcs11/modules/opensc.module</code> and contain the following:
 </p>
@@ -6927,7 +6755,7 @@ for more information).
 <p>Note that, PKCS #11 modules behave in a peculiar way after a fork; they
 require a reinitialization of all the used PKCS #11 resources.
 While GnuTLS automates that process, there are corner cases where
-it is not possible to handle it correctly in an automated way<a name="DOCF12" href="#FOOT12"><sup>12</sup></a>. For that, it is
+it is not possible to handle it correctly in an automated way<a name="DOCF11" href="#FOOT11"><sup>11</sup></a>. For that, it is
 recommended not to mix fork() and PKCS #11 module usage. It is recommended
 to initialize and use any PKCS #11 resources in a single process.
 </p>
@@ -7361,14 +7189,14 @@ Next: <a href="#p11tool-Invocation" accesskey="n" rel="next">p11tool Invocation<
 same operating system to access shared cryptographic keys and certificates in a
 uniform way, as in <a href="#fig_002dpkcs11_002dvision">Figure 5.1</a>. That way applications could load their
 trusted certificate list, as well as user certificates from a common PKCS #11 module.
-Such a provider is the p11-kit trust storage module<a name="DOCF13" href="#FOOT13"><sup>13</sup></a>
+Such a provider is the p11-kit trust storage module<a name="DOCF12" href="#FOOT12"><sup>12</sup></a>
 and it provides access to the trusted Root CA certificates in a system. That
 provides a more dynamic list of Root CA certificates, as opposed to a static
 list in a file or directory.
 </p>
 <p>That store, allows for blacklisting of CAs or certificates, as well as
 categorization of the Root CAs (Web verification, Code signing, etc.), in
-addition to restricting their purpose via stapled extensions<a name="DOCF14" href="#FOOT14"><sup>14</sup></a>.
+addition to restricting their purpose via stapled extensions<a name="DOCF13" href="#FOOT13"><sup>13</sup></a>.
 GnuTLS will utilize the p11-kit trust module as the default trust store
 if configured to; i.e., if &rsquo;&ndash;with-default-trust-store-pkcs11=pkcs11:&rsquo; is given to 
 the configure script.
@@ -7841,7 +7669,7 @@ Previous: <a href="#Smart-cards-and-HSMs" accesskey="p" rel="prev">Smart cards a
 <p>In this section we present the Trusted Platform Module (TPM) support 
 in <acronym>GnuTLS</acronym>. Note that we recommend against using TPM with this
 API because it is restricted to TPM 1.2. We recommend instead
-to use PKCS#11 wrappers for TPM such as CHAPS<a name="DOCF15" href="#FOOT15"><sup>15</sup></a> or opencryptoki<a name="DOCF16" href="#FOOT16"><sup>16</sup></a>.
+to use PKCS#11 wrappers for TPM such as CHAPS<a name="DOCF14" href="#FOOT14"><sup>14</sup></a> or opencryptoki<a name="DOCF15" href="#FOOT15"><sup>15</sup></a>.
 These will allow using the standard smart card and HSM functionality (see <a href="#Smart-cards-and-HSMs">Smart cards and HSMs</a>) for TPM keys.
 </p>
 <p>There was a big hype when the TPM chip was introduced into 
@@ -8373,7 +8201,7 @@ database back-end to hold the session&rsquo;s parameters.  Every
 appropriate back-end function (see <a href="#resume">resume</a>)
 to store the newly negotiated session. The session
 database is examined by the server just after having received the
-client hello<a name="DOCF17" href="#FOOT17"><sup>17</sup></a>,
+client hello<a name="DOCF16" href="#FOOT16"><sup>16</sup></a>,
 and if the session ID sent by the client, matches a stored session,
 the stored session will be retrieved, and the new session will be a
 resumed one, and will share the same session ID with the previous one.
@@ -8572,7 +8400,7 @@ waiting for a return value of zero.
 </p>
 <p>The random generator of the cryptographic back-end, utilizes mutex locks (e.g., pthreads on GNU/Linux and CriticalSection on Windows)
 which are setup by <acronym>GnuTLS</acronym> on library initialization. Prior to version 3.3.0
-they were setup by calling <a href="#gnutls_005fglobal_005finit">gnutls_global_init</a>.<a name="DOCF18" href="#FOOT18"><sup>18</sup></a>
+they were setup by calling <a href="#gnutls_005fglobal_005finit">gnutls_global_init</a>.<a name="DOCF17" href="#FOOT17"><sup>17</sup></a>
 Note that, on Glibc systems the GnuTLS library does not link with the libpthread
 library by default, it utilizes the Glibc mutex stubs, which allows Glibc to
 use the non-multithreaded (and optimized) variants of its algorithms.
@@ -8718,7 +8546,7 @@ Next: <a href="#Version-check" accesskey="n" rel="next">Version check</a>, Previ
 <a name="Initialization-2"></a>
 <h4 class="subsection">6.2.2 Initialization</h4>
 
-<p>The GnuTLS library is initialized on load; prior to 3.3.0 was initialized by calling <a href="#gnutls_005fglobal_005finit">gnutls_global_init</a><a name="DOCF19" href="#FOOT19"><sup>19</sup></a>. 
+<p>The GnuTLS library is initialized on load; prior to 3.3.0 was initialized by calling <a href="#gnutls_005fglobal_005finit">gnutls_global_init</a><a name="DOCF18" href="#FOOT18"><sup>18</sup></a>. 
 The initialization typically enables CPU-specific acceleration, performs any required
 precalculations needed, opens any required system devices (e.g., /dev/urandom on Linux)
 and initializes subsystems that could be used later.
@@ -9030,12 +8858,6 @@ already.
 <dt><code><var>int</var> <a href="#gnutls_005fcertificate_005fset_005fx509_005fkey">gnutls_certificate_set_x509_key</a> (gnutls_certificate_credentials_t <var>res</var>, gnutls_x509_crt_t * <var>cert_list</var>, int <var>cert_list_size</var>, gnutls_x509_privkey_t <var>key</var>)</code></dt>
 </dl>
 
-<dl compact="compact">
-<dt><code><var>int</var> <a href="#gnutls_005fcertificate_005fset_005fopenpgp_005fkey_005ffile">gnutls_certificate_set_openpgp_key_file</a> (gnutls_certificate_credentials_t      <var>res</var>, const char * <var>certfile</var>, const char * <var>keyfile</var>, gnutls_openpgp_crt_fmt_t <var>format</var>)</code></dt>
-<dt><code><var>int</var> <a href="#gnutls_005fcertificate_005fset_005fopenpgp_005fkey_005fmem">gnutls_certificate_set_openpgp_key_mem</a> (gnutls_certificate_credentials_t            <var>res</var>, const gnutls_datum_t * <var>cert</var>, const gnutls_datum_t * <var>key</var>, gnutls_openpgp_crt_fmt_t <var>format</var>)</code></dt>
-<dt><code><var>int</var> <a href="#gnutls_005fcertificate_005fset_005fopenpgp_005fkey">gnutls_certificate_set_openpgp_key</a> (gnutls_certificate_credentials_t <var>res</var>, gnutls_openpgp_crt_t <var>crt</var>, gnutls_openpgp_privkey_t <var>pkey</var>)</code></dt>
-</dl>
-
 <p>It is recommended to use the higher level functions such as <a href="#gnutls_005fcertificate_005fset_005fx509_005fkey_005ffile2">gnutls_certificate_set_x509_key_file2</a>
 which accept not only file names but URLs that specify objects stored in token,
 or system certificates and keys (see <a href="#Application_002dspecific-keys">Application-specific keys</a>). For these cases, another important 
@@ -9140,9 +8962,7 @@ filled in. Helper functions to fill in the structure are listed below.
 </pre>
 <dl compact="compact">
 <dt><code><var>int</var> <a href="#gnutls_005fpcert_005fimport_005fx509">gnutls_pcert_import_x509</a> (gnutls_pcert_st * <var>pcert</var>, gnutls_x509_crt_t <var>crt</var>, unsigned int <var>flags</var>)</code></dt>
-<dt><code><var>int</var> <a href="#gnutls_005fpcert_005fimport_005fopenpgp">gnutls_pcert_import_openpgp</a> (gnutls_pcert_st * <var>pcert</var>, gnutls_openpgp_crt_t <var>crt</var>, unsigned int <var>flags</var>)</code></dt>
 <dt><code><var>int</var> <a href="#gnutls_005fpcert_005fimport_005fx509_005fraw">gnutls_pcert_import_x509_raw</a> (gnutls_pcert_st * <var>pcert</var>, const gnutls_datum_t * <var>cert</var>, gnutls_x509_crt_fmt_t <var>format</var>, unsigned int <var>flags</var>)</code></dt>
-<dt><code><var>int</var> <a href="#gnutls_005fpcert_005fimport_005fopenpgp_005fraw">gnutls_pcert_import_openpgp_raw</a> (gnutls_pcert_st * <var>pcert</var>, const gnutls_datum_t * <var>cert</var>, gnutls_openpgp_crt_fmt_t <var>format</var>, gnutls_openpgp_keyid_t <var>keyid</var>, unsigned int <var>flags</var>)</code></dt>
 <dt><code><var>void</var> <a href="#gnutls_005fpcert_005fdeinit">gnutls_pcert_deinit</a> (gnutls_pcert_st * <var>pcert</var>)</code></dt>
 </dl>
 
@@ -9215,7 +9035,7 @@ methods other than certificate with X.509 certificates.
 
 <p>Certificate verification is possible by loading the trusted
 authorities into the credentials structure by using
-the following functions, applicable to X.509 and OpenPGP certificates.
+the following functions, applicable to X.509 certificates.
 In modern systems it is recommended to utilize <a href="#gnutls_005fcertificate_005fset_005fx509_005fsystem_005ftrust">gnutls_certificate_set_x509_system_trust</a>
 which will load the trusted authorities from the system store.
 </p>
@@ -9241,7 +9061,6 @@ on error.
 <dl compact="compact">
 <dt><code><var>int</var> <a href="#gnutls_005fcertificate_005fset_005fx509_005ftrust_005ffile">gnutls_certificate_set_x509_trust_file</a> (gnutls_certificate_credentials_t            <var>cred</var>, const char * <var>cafile</var>, gnutls_x509_crt_fmt_t <var>type</var>)</code></dt>
 <dt><code><var>int</var> <a href="#gnutls_005fcertificate_005fset_005fx509_005ftrust_005fdir">gnutls_certificate_set_x509_trust_dir</a> (gnutls_certificate_credentials_t <var>cred</var>, const char * <var>ca_dir</var>, gnutls_x509_crt_fmt_t <var>type</var>)</code></dt>
-<dt><code><var>int</var> <a href="#gnutls_005fcertificate_005fset_005fopenpgp_005fkeyring_005ffile">gnutls_certificate_set_openpgp_keyring_file</a> (gnutls_certificate_credentials_t <var>c</var>, const char * <var>file</var>, gnutls_openpgp_crt_fmt_t <var>format</var>)</code></dt>
 </dl>
 
 <p>The peer&rsquo;s certificate will be automatically verified if
@@ -9962,7 +9781,7 @@ Next: <a href="#DTLS-and-SCTP" accesskey="n" rel="next">DTLS and SCTP</a>, Previ
 <p>Because datagram TLS can operate over connections where the client
 cannot be reliably verified, functionality in the form of cookies, is available to prevent
 denial of service attacks to servers. <acronym>GnuTLS</acronym> requires a server
-to generate a secret key that is used to sign a cookie<a name="DOCF20" href="#FOOT20"><sup>20</sup></a>. 
+to generate a secret key that is used to sign a cookie<a name="DOCF19" href="#FOOT19"><sup>19</sup></a>. 
 That cookie is sent to the client using <a href="#gnutls_005fdtls_005fcookie_005fsend">gnutls_dtls_cookie_send</a>, and 
 the client must reply using the correct cookie. The server side
 should verify the initial message sent by client using <a href="#gnutls_005fdtls_005fcookie_005fverify">gnutls_dtls_cookie_verify</a>.
@@ -10510,9 +10329,26 @@ Next: <a href="#Selecting-cryptographic-key-sizes" accesskey="n" rel="next">Sele
 <h3 class="section">6.10 Priority strings</h3>
 <a name="index-Priority-strings"></a>
 
+<a name="How-to-use-Priority-Strings"></a>
+<h4 class="subheading">How to use Priority Strings</h4>
+
 <p>The GnuTLS priority strings specify the TLS session&rsquo;s handshake
-algorithms and options in a compact, easy-to-use format.  That string
-may contain a single initial keyword such as in
+algorithms and options in a compact, easy-to-use format. These
+strings are intended as a user-specified override of the library defaults.
+</p>
+<p>That is, applications should use the default settings
+(c.f. <a href="#gnutls_005fset_005fdefault_005fpriority">gnutls_set_default_priority</a>), and provide the user 
+with access to priority strings for overriding the default behavior,
+on configuration files, or other UI. Following such a principle,
+makes the GnuTLS library as the default settings provider. That is
+necessary and a good practice, because TLS protocol hardening and
+phasing out of legacy algorithms, is easier to co-ordinate when happens
+in a single library.
+</p>
+<a name="Using-Priority-Strings"></a>
+<h4 class="subheading">Using Priority Strings</h4>
+
+<p>A priority string string may contain a single initial keyword such as in
 <a href="#tab_003aprio_002dkeywords">Table 6.3</a> and may be followed by additional algorithm or
 special keywords. Note that their description is intentionally avoiding
 specific algorithm details, as the priority strings are not constant between
@@ -10527,7 +10363,7 @@ advances while providing compatibility with old clients and servers).
 <div class="float"><a name="tab_003aprio_002dkeywords"></a>
 <table>
 <thead><tr><th width="20%">Keyword</th><th width="70%">Description</th></tr></thead>
-<tr><td width="20%">@KEYWORD</td><td width="70%">Means that a compile-time specified system configuration file<a name="DOCF21" href="#FOOT21"><sup>21</sup></a> 
+<tr><td width="20%">@KEYWORD</td><td width="70%">Means that a compile-time specified system configuration file<a name="DOCF20" href="#FOOT20"><sup>20</sup></a> 
 will be used to expand the provided keyword. That is used to impose system-specific policies.
 It may be followed by additional options that will be appended to the
 system string (e.g., &quot;@SYSTEM:+SRP&quot;). The system file should have the
@@ -10655,12 +10491,12 @@ This option is only considered for TLS 1.2 and later.</td></tr>
 <tr><td width="20%">Elliptic curves</td><td width="70%">CURVE-SECP192R1, CURVE-SECP224R1, CURVE-SECP256R1, CURVE-SECP384R1,
 CURVE-SECP521R1, and CURVE-X25519.
 Catch all which enables all curves from NORMAL priority is CURVE-ALL.</td></tr>
-<tr><td width="20%">Certificate type</td><td width="70%">CTYPE-OPENPGP, CTYPE-X509. Catch all is CTYPE-ALL.</td></tr>
+<tr><td width="20%">Certificate type</td><td width="70%">The options CTYPE-OPENPGP (deprecated), and CTYPE-X509 are available. Catch all is CTYPE-ALL.</td></tr>
 </table>
 
 <div class="float-caption"><p><strong>Table 6.4: </strong>The supported algorithm keywords in priority strings.</p></div></div>
 <p>Note that the DHE key exchange methods are generally
-slower<a name="DOCF22" href="#FOOT22"><sup>22</sup></a> than their elliptic curves counterpart
+slower<a name="DOCF21" href="#FOOT21"><sup>21</sup></a> than their elliptic curves counterpart
 (ECDHE). Moreover the plain Diffie-Hellman key exchange
 requires parameters to be generated and associated with a credentials
 structure by the server (see <a href="#Parameter-generation">Parameter generation</a>). 
@@ -11422,11 +11258,11 @@ Next: <a href="#Deriving-keys-for-other-applications_002fprotocols" accesskey="n
 <a name="index-parameter-generation"></a>
 <a name="index-generating-parameters"></a>
 
-<p>Several TLS ciphersuites require additional parameters that
-need to be generated or provided by the application. The
-Diffie-Hellman based ciphersuites (ANON-DH or DHE), require
+<p>Few TLS ciphersuites require additional parameters that
+need to be generated or provided by the application. In particular,
+the Diffie-Hellman based ciphersuites (ANON-DH or DHE), require
 the group parameters to be provided. 
-These parameters can be specified in a <acronym>TLS</acronym> credentials
+Applications can specify these parameters in a <acronym>TLS</acronym> credentials
 structure by calling
 <a href="#gnutls_005fcertificate_005fset_005fknown_005fdh_005fparams">gnutls_certificate_set_known_dh_params</a>,
 <a href="#gnutls_005fanon_005fset_005fserver_005fknown_005fdh_005fparams">gnutls_anon_set_server_known_dh_params</a>, or
@@ -11448,6 +11284,19 @@ the FFDHE parameters from [<em>RFC7919</em>].
 <p>Note that older than 3.5.6 versions of GnuTLS provided functions
 to generate or import arbitrary DH parameters from a file. This
 practice is still supported but discouraged in current versions.
+There is no known advantage from using random parameters, while there
+have been several occasions where applications were utilizing incorrect,
+or insecure parameters. This is the main reason GnuTLS includes the
+well-known parameters of [<em>RFC7919</em>] and recommends to applications
+utilizing them.
+</p>
+<p>In older applications which require to specify explicit DH parameters, we recommend
+using <code>certtool</code> (of GnuTLS 3.5.6 or later) with the <code>--get-dh-params</code>
+option to obtain the FFDHE parameters descussed above. The output
+parameters of the tool are in PKCS#3 format and can be imported by
+most existing applications.
+</p>
+<p>The following functions are still supported but considered obsolete.
 </p>
 <dl compact="compact">
 <dt><code><var>int</var> <a href="#gnutls_005fdh_005fparams_005fgenerate2">gnutls_dh_params_generate2</a> (gnutls_dh_params_t <var>dparams</var>, unsigned int <var>bits</var>)</code></dt>
@@ -11455,12 +11304,7 @@ practice is still supported but discouraged in current versions.
 <dt><code><var>void</var> <a href="#gnutls_005fcertificate_005fset_005fdh_005fparams">gnutls_certificate_set_dh_params</a> (gnutls_certificate_credentials_t <var>res</var>, gnutls_dh_params_t <var>dh_params</var>)</code></dt>
 </dl>
 
-<p>For old applications which require explicit DH parameters, we recommend
-using <code>certtool</code> (of GnuTLS 3.5.6) with the <code>--get-dh-params</code>
-option to obtain the FFDHE parameters descussed above. The output
-parameters of the tool are in PKCS#3 format and can be imported by
-most existing applications.
-</p>
+
 <hr>
 <a name="Deriving-keys-for-other-applications_002fprotocols"></a>
 <div class="header">
@@ -15529,7 +15373,7 @@ it does not provide access to basic cryptographic primitives. However
 it abstracts the internal cryptographic back-end (see <a href="#Cryptographic-Backend">Cryptographic Backend</a>),
 providing symmetric crypto, hash and HMAC algorithms, as well access
 to the random number generation. For a low-level crypto API the usage of nettle
-<a name="DOCF23" href="#FOOT23"><sup>23</sup></a> library is recommended.
+<a name="DOCF22" href="#FOOT22"><sup>22</sup></a> library is recommended.
 </p>
 <table class="menu" border="0" cellspacing="0">
 <tr><td align="left" valign="top">&bull; <a href="#Symmetric-algorithms" accesskey="1">Symmetric algorithms</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
@@ -17207,7 +17051,7 @@ authentication method needs to implement the functions shown below.
 <p>Those functions are responsible for the
 interpretation of the handshake protocol messages. It is common for such
 functions to read data from one or more <code>credentials_t</code>
-structures<a name="DOCF24" href="#FOOT24"><sup>24</sup></a> and write data,
+structures<a name="DOCF23" href="#FOOT23"><sup>23</sup></a> and write data,
 such as certificates, usernames etc. to <code>auth_info_t</code> structures.
 </p>
 
@@ -17595,7 +17439,7 @@ an efficient way.
 <h4 class="subheading">Cryptographic library layer</h4>
 <p>The Cryptographic library layer, currently supports only
 libnettle. Older versions of GnuTLS used to support libgcrypt,
-but it was switched with nettle mainly for performance reasons<a name="DOCF25" href="#FOOT25"><sup>25</sup></a>
+but it was switched with nettle mainly for performance reasons<a name="DOCF24" href="#FOOT24"><sup>24</sup></a>
 and secondary because it is a simpler library to use.
 In the future other cryptographic libraries might be supported as well.
 </p>
@@ -17605,7 +17449,7 @@ In the future other cryptographic libraries might be supported as well.
 kernel drivers to utilize the operations from software. For this reason 
 GnuTLS provides a layer where each individual algorithm used can be replaced
 by another implementation, i.e., the one provided by the driver. The
-FreeBSD, OpenBSD and Linux kernels<a name="DOCF26" href="#FOOT26"><sup>26</sup></a> include already 
+FreeBSD, OpenBSD and Linux kernels<a name="DOCF25" href="#FOOT25"><sup>25</sup></a> include already 
 a number of hardware assisted implementations, and also provide an interface 
 to access them, called <code>/dev/crypto</code>.
 GnuTLS will take advantage of this interface if compiled with special
@@ -18544,15 +18388,13 @@ Next: <a href="#Copying-Information" accesskey="n" rel="next">Copying Informatio
 </td></tr>
 <tr><td align="left" valign="top">&bull; <a href="#OCSP-API" accesskey="5">OCSP API</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
 </td></tr>
-<tr><td align="left" valign="top">&bull; <a href="#OpenPGP-API" accesskey="6">OpenPGP API</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+<tr><td align="left" valign="top">&bull; <a href="#PKCS-12-API" accesskey="6">PKCS 12 API</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
 </td></tr>
-<tr><td align="left" valign="top">&bull; <a href="#PKCS-12-API" accesskey="7">PKCS 12 API</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+<tr><td align="left" valign="top">&bull; <a href="#PKCS-11-API" accesskey="7">PKCS 11 API</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
 </td></tr>
-<tr><td align="left" valign="top">&bull; <a href="#PKCS-11-API" accesskey="8">PKCS 11 API</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+<tr><td align="left" valign="top">&bull; <a href="#TPM-API" accesskey="8">TPM API</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
 </td></tr>
-<tr><td align="left" valign="top">&bull; <a href="#TPM-API" accesskey="9">TPM API</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="#Abstract-key-API">Abstract key API</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+<tr><td align="left" valign="top">&bull; <a href="#Abstract-key-API" accesskey="9">Abstract key API</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
 </td></tr>
 <tr><td align="left" valign="top">&bull; <a href="#Socket-specific-API">Socket specific API</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
 </td></tr>
@@ -20725,15 +20567,22 @@ otherwise a negative error code is returned.
 <p><var>bits</var>: is the prime&rsquo;s number of bits
 </p>
 <p>This function will generate a new pair of prime and generator for use in
-the Diffie-Hellman key exchange. The new parameters will be allocated using
-<code>gnutls_malloc()</code>  and will be stored in the appropriate datum.
-This function is normally slow.
+the Diffie-Hellman key exchange. This may take long time.
 </p>
-<p>Do not set the number of bits directly, use <code>gnutls_sec_param_to_pk_bits()</code>  to
-get bits for <code>GNUTLS_PK_DSA</code> .
+<p>It is recommended not to set the number of bits directly, but 
+use <code>gnutls_sec_param_to_pk_bits()</code>  instead.
 Also note that the DH parameters are only useful to servers.
 Since clients use the parameters sent by the server, it&rsquo;s of
 no use to call this in client side.
+</p>
+<p>The parameters generated are of the DSA form. It also is possible
+to generate provable parameters (following the Shawe-Taylor
+algorithm), using <code>gnutls_x509_privkey_generate2()</code>  with DSA option
+and the <code>GNUTLS_PRIVKEY_FLAG_PROVABLE</code>  flag set. These can the
+be imported with <code>gnutls_dh_params_import_dsa()</code> .
+</p>
+<p>It is no longer recommended for applications to generate parameters.
+See the &quot;Parameter generation&quot; section in the manual.
 </p>
 <p><strong>Returns:</strong> On success, <code>GNUTLS_E_SUCCESS</code>  (0) is returned,
 otherwise a negative error code is returned.
@@ -21610,6 +21459,9 @@ to <code>GNUTLS_HEARTBEAT_WAIT</code>  then it waits for a reply from the peer.
 flag <code>GNUTLS_HEARTBEAT_WAIT</code> , or you need to handle retransmissions
 and timeouts manually.
 </p>
+<p>The total TLS data transmitted as part of the ping message are given by
+the following formula: MAX(16,  <code>data_size</code> )+<code>gnutls_record_overhead_size()</code> +3.
+</p>
 <p><strong>Returns:</strong> <code>GNUTLS_E_SUCCESS</code>  on success, otherwise a negative error code.
 </p>
 <p><strong>Since:</strong> 3.1.2
@@ -21738,6 +21590,61 @@ the hex encoding, as used in the PSK password files.
 <p>Note that the size of the result does NOT include the null terminator.
 </p>
 <p><strong>Returns:</strong> <code>GNUTLS_E_SUCCESS</code>  on success, otherwise a negative error code.
+</p></dd></dl>
+
+<a name="gnutls_005fidna_005fmap-1"></a>
+<h4 class="subheading">gnutls_idna_map</h4>
+<a name="gnutls_005fidna_005fmap"></a><dl>
+<dt><a name="index-gnutls_005fidna_005fmap"></a>Function: <em>int</em> <strong>gnutls_idna_map</strong> <em>(const char * <var>input</var>, unsigned <var>ilen</var>, gnutls_datum_t * <var>out</var>, unsigned <var>flags</var>)</em></dt>
+<dd><p><var>input</var>: contain the UTF-8 formatted domain name
+</p>
+<p><var>ilen</var>: the length of the provided string
+</p>
+<p><var>out</var>: the result in an null-terminated allocated string
+</p>
+<p><var>flags</var>: should be zero
+</p>
+<p>This function will convert the provided UTF-8 domain name, to
+its IDNA mapping in an allocated variable. Note that depending on the flags the used gnutls
+library was compiled with, the output of this function may vary (i.e.,
+may be IDNA2008, or IDNA2003).
+</p>
+<p>To force IDNA2008 specify the flag <code>GNUTLS_IDNA_FORCE_2008</code> . In
+the case GnuTLS is not compiled with the necessary dependencies,
+<code>GNUTLS_E_UNIMPLEMENTED_FEATURE</code>  will be returned to indicate that
+gnutls is unable to perform the requested conversion.
+</p>
+<p>Note also, that this function will return an empty string if an
+empty string is provided as input.
+</p>
+<p><strong>Returns:</strong> <code>GNUTLS_E_INVALID_UTF8_STRING</code>  on invalid UTF-8 data, or 0 on success.
+</p>
+<p><strong>Since:</strong> 3.5.8
+</p></dd></dl>
+
+<a name="gnutls_005fidna_005freverse_005fmap-1"></a>
+<h4 class="subheading">gnutls_idna_reverse_map</h4>
+<a name="gnutls_005fidna_005freverse_005fmap"></a><dl>
+<dt><a name="index-gnutls_005fidna_005freverse_005fmap"></a>Function: <em>int</em> <strong>gnutls_idna_reverse_map</strong> <em>(const char * <var>input</var>, unsigned <var>ilen</var>, gnutls_datum_t * <var>out</var>, unsigned <var>flags</var>)</em></dt>
+<dd><p><var>input</var>: contain the ACE (IDNA) formatted domain name
+</p>
+<p><var>ilen</var>: the length of the provided string
+</p>
+<p><var>out</var>: the result in an null-terminated allocated UTF-8 string
+</p>
+<p><var>flags</var>: should be zero
+</p>
+<p>This function will convert an ACE (ASCII-encoded) domain name to a UTF-8 domain name.
+</p>
+<p>If GnuTLS is compiled without IDNA support, then this function
+will return <code>GNUTLS_E_UNIMPLEMENTED_FEATURE</code> .
+</p>
+<p>Note also, that this function will return an empty string if an
+empty string is provided as input.
+</p>
+<p><strong>Returns:</strong> A negative error code on error, or 0 on success.
+</p>
+<p><strong>Since:</strong> 3.5.8
 </p></dd></dl>
 
 <a name="gnutls_005finit-1"></a>
@@ -33948,7 +33855,7 @@ to verify to a <code>GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE</code> .
 <a name="OCSP-API"></a>
 <div class="header">
 <p>
-Next: <a href="#OpenPGP-API" accesskey="n" rel="next">OpenPGP API</a>, Previous: <a href="#PKCS-7-API" accesskey="p" rel="prev">PKCS 7 API</a>, Up: <a href="#API-reference" accesskey="u" rel="up">API reference</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Function-and-Data-Index" title="Index" rel="index">Index</a>]</p>
+Next: <a href="#PKCS-12-API" accesskey="n" rel="next">PKCS 12 API</a>, Previous: <a href="#PKCS-7-API" accesskey="p" rel="prev">PKCS 7 API</a>, Up: <a href="#API-reference" accesskey="u" rel="up">API reference</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Function-and-Data-Index" title="Index" rel="index">Index</a>]</p>
 </div>
 <a name="OCSP-API-1"></a>
 <h3 class="section">E.5 <acronym>OCSP</acronym> API</h3>
@@ -34679,1406 +34586,13 @@ negative error value.
 
 
 <hr>
-<a name="OpenPGP-API"></a>
-<div class="header">
-<p>
-Next: <a href="#PKCS-12-API" accesskey="n" rel="next">PKCS 12 API</a>, Previous: <a href="#OCSP-API" accesskey="p" rel="prev">OCSP API</a>, Up: <a href="#API-reference" accesskey="u" rel="up">API reference</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Function-and-Data-Index" title="Index" rel="index">Index</a>]</p>
-</div>
-<a name="OpenPGP-API-1"></a>
-<h3 class="section">E.6 <acronym>OpenPGP</acronym> API</h3>
-<a name="index-OpenPGP-API"></a>
-
-<p>The following functions are to be used for <acronym>OpenPGP</acronym>
-certificate handling.  Their prototypes lie in
-<samp>gnutls/openpgp.h</samp>.
-</p>
-
-<a name="gnutls_005fcertificate_005fget_005fopenpgp_005fcrt-1"></a>
-<h4 class="subheading">gnutls_certificate_get_openpgp_crt</h4>
-<a name="gnutls_005fcertificate_005fget_005fopenpgp_005fcrt"></a><dl>
-<dt><a name="index-gnutls_005fcertificate_005fget_005fopenpgp_005fcrt"></a>Function: <em>int</em> <strong>gnutls_certificate_get_openpgp_crt</strong> <em>(gnutls_certificate_credentials_t <var>res</var>, unsigned <var>index</var>, gnutls_openpgp_crt_t ** <var>crt_list</var>, unsigned * <var>crt_list_size</var>)</em></dt>
-<dd><p><var>res</var>: is a <code>gnutls_certificate_credentials_t</code>  type.
-</p>
-<p><var>index</var>: The index of the certificate list to obtain.
-</p>
-<p><var>crt_list</var>: Where to store the certificate list.
-</p>
-<p><var>crt_list_size</var>: &ndash; undescribed &ndash;
-</p>
-<p>Obtains a X.509 certificate list that has been stored in  <code>res</code> with one of
-<code>gnutls_certificate_set_openpgp_key()</code> ,
-<code>gnutls_certificate_set_openpgp_key_file()</code> ,
-<code>gnutls_certificate_set_openpgp_key_file2()</code> ,
-<code>gnutls_certificate_set_openpgp_key_mem()</code> , or
-<code>gnutls_certificate_set_openpgp_key_mem2()</code> .  Each certificate in the
-returned certificate list must be deallocated with
-<code>gnutls_openpgp_crt_deinit()</code> , and the list itself must be freed with
-<code>gnutls_free()</code> .
-</p>
-<p>If there is no certificate with the given index,
-<code>GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE</code>  is returned. If the certificate
-with the given index is not a X.509 certificate, <code>GNUTLS_E_INVALID_REQUEST</code> 
-is returned.
-</p>
-<p><strong>Returns:</strong> <code>GNUTLS_E_SUCCESS</code>  (0) on success, or a negative error code.
-</p>
-<p><strong>Since:</strong> 3.4.0
-</p></dd></dl>
-
-<a name="gnutls_005fcertificate_005fget_005fopenpgp_005fkey-1"></a>
-<h4 class="subheading">gnutls_certificate_get_openpgp_key</h4>
-<a name="gnutls_005fcertificate_005fget_005fopenpgp_005fkey"></a><dl>
-<dt><a name="index-gnutls_005fcertificate_005fget_005fopenpgp_005fkey"></a>Function: <em>int</em> <strong>gnutls_certificate_get_openpgp_key</strong> <em>(gnutls_certificate_credentials_t <var>res</var>, unsigned <var>index</var>, gnutls_openpgp_privkey_t * <var>key</var>)</em></dt>
-<dd><p><var>res</var>: is a <code>gnutls_certificate_credentials_t</code>  type.
-</p>
-<p><var>index</var>: The index of the key to obtain.
-</p>
-<p><var>key</var>: Location to store the key.
-</p>
-<p>Obtains a OpenPGP private key that has been stored in  <code>res</code> with one of
-<code>gnutls_certificate_set_openpgp_key()</code> ,
-<code>gnutls_certificate_set_openpgp_key_file()</code> ,
-<code>gnutls_certificate_set_openpgp_key_file2()</code> ,
-<code>gnutls_certificate_set_openpgp_key_mem()</code> , or
-<code>gnutls_certificate_set_openpgp_key_mem2()</code> .
-The returned key must be deallocated with <code>gnutls_openpgp_privkey_deinit()</code> 
-when no longer needed.
-</p>
-<p>If there is no key with the given index,
-<code>GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE</code>  is returned. If the key with the
-given index is not a X.509 key, <code>GNUTLS_E_INVALID_REQUEST</code>  is returned.
-</p>
-<p><strong>Returns:</strong> <code>GNUTLS_E_SUCCESS</code>  (0) on success, or a negative error code.
-</p>
-<p><strong>Since:</strong> 3.4.0
-</p></dd></dl>
-
-<a name="gnutls_005fcertificate_005fset_005fopenpgp_005fkey-1"></a>
-<h4 class="subheading">gnutls_certificate_set_openpgp_key</h4>
-<a name="gnutls_005fcertificate_005fset_005fopenpgp_005fkey"></a><dl>
-<dt><a name="index-gnutls_005fcertificate_005fset_005fopenpgp_005fkey"></a>Function: <em>int</em> <strong>gnutls_certificate_set_openpgp_key</strong> <em>(gnutls_certificate_credentials_t <var>res</var>, gnutls_openpgp_crt_t <var>crt</var>, gnutls_openpgp_privkey_t <var>pkey</var>)</em></dt>
-<dd><p><var>res</var>: is a <code>gnutls_certificate_credentials_t</code>  type.
-</p>
-<p><var>crt</var>: contains an openpgp public key
-</p>
-<p><var>pkey</var>: is an openpgp private key
-</p>
-<p>This function sets a certificate/private key pair in the
-gnutls_certificate_credentials_t type.  This function may be
-called more than once (in case multiple keys/certificates exist
-for the server).
-</p>
-<p>Note that this function requires that the preferred key ids have
-been set and be used. See <code>gnutls_openpgp_crt_set_preferred_key_id()</code> .
-Otherwise the master key will be used.
-</p>
-<p><strong>Returns:</strong> On success, <code>GNUTLS_E_SUCCESS</code>  (0) is returned,
-otherwise a negative error code is returned.
-</p></dd></dl>
-
-<a name="gnutls_005fcertificate_005fset_005fopenpgp_005fkey_005ffile-1"></a>
-<h4 class="subheading">gnutls_certificate_set_openpgp_key_file</h4>
-<a name="gnutls_005fcertificate_005fset_005fopenpgp_005fkey_005ffile"></a><dl>
-<dt><a name="index-gnutls_005fcertificate_005fset_005fopenpgp_005fkey_005ffile"></a>Function: <em>int</em> <strong>gnutls_certificate_set_openpgp_key_file</strong> <em>(gnutls_certificate_credentials_t      <var>res</var>, const char * <var>certfile</var>, const char * <var>keyfile</var>, gnutls_openpgp_crt_fmt_t <var>format</var>)</em></dt>
-<dd><p><var>res</var>: the destination context to save the data.
-</p>
-<p><var>certfile</var>: the file that contains the public key.
-</p>
-<p><var>keyfile</var>: the file that contains the secret key.
-</p>
-<p><var>format</var>: the format of the keys
-</p>
-<p>This function is used to load OpenPGP keys into the GnuTLS
-credentials structure. The file should contain at least one valid non encrypted subkey.
-</p>
-<p><strong>Returns:</strong> On success, <code>GNUTLS_E_SUCCESS</code>  (0) is returned, otherwise a
-negative error value.
-</p></dd></dl>
-
-<a name="gnutls_005fcertificate_005fset_005fopenpgp_005fkey_005ffile2-1"></a>
-<h4 class="subheading">gnutls_certificate_set_openpgp_key_file2</h4>
-<a name="gnutls_005fcertificate_005fset_005fopenpgp_005fkey_005ffile2"></a><dl>
-<dt><a name="index-gnutls_005fcertificate_005fset_005fopenpgp_005fkey_005ffile2"></a>Function: <em>int</em> <strong>gnutls_certificate_set_openpgp_key_file2</strong> <em>(gnutls_certificate_credentials_t       <var>res</var>, const char * <var>certfile</var>, const char * <var>keyfile</var>, const char * <var>subkey_id</var>, gnutls_openpgp_crt_fmt_t <var>format</var>)</em></dt>
-<dd><p><var>res</var>: the destination context to save the data.
-</p>
-<p><var>certfile</var>: the file that contains the public key.
-</p>
-<p><var>keyfile</var>: the file that contains the secret key.
-</p>
-<p><var>subkey_id</var>: a hex encoded subkey id
-</p>
-<p><var>format</var>: the format of the keys
-</p>
-<p>This function is used to load OpenPGP keys into the GnuTLS credential 
-structure. The file should contain at least one valid non encrypted subkey.
-</p>
-<p>The special keyword &quot;auto&quot; is also accepted as  <code>subkey_id</code> .  In that
-case the <code>gnutls_openpgp_crt_get_auth_subkey()</code>  will be used to
-retrieve the subkey.
-</p>
-<p><strong>Returns:</strong> On success, <code>GNUTLS_E_SUCCESS</code>  (0) is returned, otherwise a
-negative error value.
-</p>
-<p><strong>Since:</strong> 2.4.0
-</p></dd></dl>
-
-<a name="gnutls_005fcertificate_005fset_005fopenpgp_005fkey_005fmem-1"></a>
-<h4 class="subheading">gnutls_certificate_set_openpgp_key_mem</h4>
-<a name="gnutls_005fcertificate_005fset_005fopenpgp_005fkey_005fmem"></a><dl>
-<dt><a name="index-gnutls_005fcertificate_005fset_005fopenpgp_005fkey_005fmem"></a>Function: <em>int</em> <strong>gnutls_certificate_set_openpgp_key_mem</strong> <em>(gnutls_certificate_credentials_t            <var>res</var>, const gnutls_datum_t * <var>cert</var>, const gnutls_datum_t * <var>key</var>, gnutls_openpgp_crt_fmt_t <var>format</var>)</em></dt>
-<dd><p><var>res</var>: the destination context to save the data.
-</p>
-<p><var>cert</var>: the datum that contains the public key.
-</p>
-<p><var>key</var>: the datum that contains the secret key.
-</p>
-<p><var>format</var>: the format of the keys
-</p>
-<p>This function is used to load OpenPGP keys into the GnuTLS credential 
-structure. The datum should contain at least one valid non encrypted subkey.
-</p>
-<p><strong>Returns:</strong> On success, <code>GNUTLS_E_SUCCESS</code>  (0) is returned, otherwise a
-negative error value.
-</p></dd></dl>
-
-<a name="gnutls_005fcertificate_005fset_005fopenpgp_005fkey_005fmem2-1"></a>
-<h4 class="subheading">gnutls_certificate_set_openpgp_key_mem2</h4>
-<a name="gnutls_005fcertificate_005fset_005fopenpgp_005fkey_005fmem2"></a><dl>
-<dt><a name="index-gnutls_005fcertificate_005fset_005fopenpgp_005fkey_005fmem2"></a>Function: <em>int</em> <strong>gnutls_certificate_set_openpgp_key_mem2</strong> <em>(gnutls_certificate_credentials_t      <var>res</var>, const gnutls_datum_t * <var>cert</var>, const gnutls_datum_t * <var>key</var>, const char * <var>subkey_id</var>, gnutls_openpgp_crt_fmt_t <var>format</var>)</em></dt>
-<dd><p><var>res</var>: the destination context to save the data.
-</p>
-<p><var>cert</var>: the datum that contains the public key.
-</p>
-<p><var>key</var>: the datum that contains the secret key.
-</p>
-<p><var>subkey_id</var>: a hex encoded subkey id
-</p>
-<p><var>format</var>: the format of the keys
-</p>
-<p>This function is used to load OpenPGP keys into the GnuTLS
-credentials structure. The datum should contain at least one valid non encrypted subkey.
-</p>
-<p>The special keyword &quot;auto&quot; is also accepted as  <code>subkey_id</code> .  In that
-case the <code>gnutls_openpgp_crt_get_auth_subkey()</code>  will be used to
-retrieve the subkey.
-</p>
-<p><strong>Returns:</strong> On success, <code>GNUTLS_E_SUCCESS</code>  (0) is returned, otherwise a
-negative error value.
-</p>
-<p><strong>Since:</strong> 2.4.0
-</p></dd></dl>
-
-<a name="gnutls_005fcertificate_005fset_005fopenpgp_005fkeyring_005ffile-1"></a>
-<h4 class="subheading">gnutls_certificate_set_openpgp_keyring_file</h4>
-<a name="gnutls_005fcertificate_005fset_005fopenpgp_005fkeyring_005ffile"></a><dl>
-<dt><a name="index-gnutls_005fcertificate_005fset_005fopenpgp_005fkeyring_005ffile-1"></a>Function: <em>int</em> <strong>gnutls_certificate_set_openpgp_keyring_file</strong> <em>(gnutls_certificate_credentials_t <var>c</var>, const char * <var>file</var>, gnutls_openpgp_crt_fmt_t <var>format</var>)</em></dt>
-<dd><p><var>c</var>: A certificate credentials structure
-</p>
-<p><var>file</var>: filename of the keyring.
-</p>
-<p><var>format</var>: format of keyring.
-</p>
-<p>The function is used to set keyrings that will be used internally
-by various OpenPGP functions. For example to find a key when it
-is needed for an operations. The keyring will also be used at the
-verification functions.
-</p>
-<p><strong>Returns:</strong> On success, <code>GNUTLS_E_SUCCESS</code>  (0) is returned, otherwise a
-negative error value.
-</p></dd></dl>
-
-<a name="gnutls_005fcertificate_005fset_005fopenpgp_005fkeyring_005fmem-1"></a>
-<h4 class="subheading">gnutls_certificate_set_openpgp_keyring_mem</h4>
-<a name="gnutls_005fcertificate_005fset_005fopenpgp_005fkeyring_005fmem"></a><dl>
-<dt><a name="index-gnutls_005fcertificate_005fset_005fopenpgp_005fkeyring_005fmem"></a>Function: <em>int</em> <strong>gnutls_certificate_set_openpgp_keyring_mem</strong> <em>(gnutls_certificate_credentials_t         <var>c</var>, const uint8_t * <var>data</var>, size_t <var>dlen</var>, gnutls_openpgp_crt_fmt_t <var>format</var>)</em></dt>
-<dd><p><var>c</var>: A certificate credentials structure
-</p>
-<p><var>data</var>: buffer with keyring data.
-</p>
-<p><var>dlen</var>: length of data buffer.
-</p>
-<p><var>format</var>: the format of the keyring
-</p>
-<p>The function is used to set keyrings that will be used internally
-by various OpenPGP functions. For example to find a key when it
-is needed for an operations. The keyring will also be used at the
-verification functions.
-</p>
-<p><strong>Returns:</strong> On success, <code>GNUTLS_E_SUCCESS</code>  (0) is returned, otherwise a
-negative error value.
-</p></dd></dl>
-
-<a name="gnutls_005fopenpgp_005fcrt_005fcheck_005femail-1"></a>
-<h4 class="subheading">gnutls_openpgp_crt_check_email</h4>
-<a name="gnutls_005fopenpgp_005fcrt_005fcheck_005femail"></a><dl>
-<dt><a name="index-gnutls_005fopenpgp_005fcrt_005fcheck_005femail"></a>Function: <em>int</em> <strong>gnutls_openpgp_crt_check_email</strong> <em>(gnutls_openpgp_crt_t <var>key</var>, const char * <var>email</var>, unsigned <var>flags</var>)</em></dt>
-<dd><p><var>key</var>: should contain a <code>gnutls_openpgp_crt_t</code>  type
-</p>
-<p><var>email</var>: A null terminated string that contains an RFC822 address (email)
-</p>
-<p><var>flags</var>: gnutls_certificate_verify_flags
-</p>
-<p>This function will check if the given key&rsquo;s owner matches the
-given email address. 
-</p>
-<p><strong>Returns:</strong> non-zero for a successful match, and zero on failure.
-</p></dd></dl>
-
-<a name="gnutls_005fopenpgp_005fcrt_005fcheck_005fhostname-1"></a>
-<h4 class="subheading">gnutls_openpgp_crt_check_hostname</h4>
-<a name="gnutls_005fopenpgp_005fcrt_005fcheck_005fhostname"></a><dl>
-<dt><a name="index-gnutls_005fopenpgp_005fcrt_005fcheck_005fhostname"></a>Function: <em>int</em> <strong>gnutls_openpgp_crt_check_hostname</strong> <em>(gnutls_openpgp_crt_t <var>key</var>, const char * <var>hostname</var>)</em></dt>
-<dd><p><var>key</var>: should contain a <code>gnutls_openpgp_crt_t</code>  type
-</p>
-<p><var>hostname</var>: A null terminated string that contains a DNS name
-</p>
-<p>This function will check if the given key&rsquo;s owner matches the
-given hostname. This is a basic implementation of the matching
-described in RFC2818 (HTTPS), which takes into account wildcards.
-</p>
-<p><strong>Returns:</strong> non-zero for a successful match, and zero on failure.
-</p></dd></dl>
-
-<a name="gnutls_005fopenpgp_005fcrt_005fcheck_005fhostname2-1"></a>
-<h4 class="subheading">gnutls_openpgp_crt_check_hostname2</h4>
-<a name="gnutls_005fopenpgp_005fcrt_005fcheck_005fhostname2"></a><dl>
-<dt><a name="index-gnutls_005fopenpgp_005fcrt_005fcheck_005fhostname2"></a>Function: <em>int</em> <strong>gnutls_openpgp_crt_check_hostname2</strong> <em>(gnutls_openpgp_crt_t <var>key</var>, const char * <var>hostname</var>, unsigned <var>flags</var>)</em></dt>
-<dd><p><var>key</var>: should contain a <code>gnutls_openpgp_crt_t</code>  type
-</p>
-<p><var>hostname</var>: A null terminated string that contains a DNS name
-</p>
-<p><var>flags</var>: gnutls_certificate_verify_flags
-</p>
-<p>This function will check if the given key&rsquo;s owner matches the
-given hostname. 
-</p>
-<p>Unless, the flag <code>GNUTLS_VERIFY_DO_NOT_ALLOW_WILDCARDS</code>  is specified,
-wildcards are only considered if the domain name consists of three
-components or more, and the wildcard starts at the leftmost position.
-</p>
-<p><strong>Returns:</strong> non-zero for a successful match, and zero on failure.
-</p></dd></dl>
-
-<a name="gnutls_005fopenpgp_005fcrt_005fdeinit-1"></a>
-<h4 class="subheading">gnutls_openpgp_crt_deinit</h4>
-<a name="gnutls_005fopenpgp_005fcrt_005fdeinit"></a><dl>
-<dt><a name="index-gnutls_005fopenpgp_005fcrt_005fdeinit"></a>Function: <em>void</em> <strong>gnutls_openpgp_crt_deinit</strong> <em>(gnutls_openpgp_crt_t <var>key</var>)</em></dt>
-<dd><p><var>key</var>: A pointer to the type to be initialized
-</p>
-<p>This function will deinitialize a key structure.
-</p></dd></dl>
-
-<a name="gnutls_005fopenpgp_005fcrt_005fexport-1"></a>
-<h4 class="subheading">gnutls_openpgp_crt_export</h4>
-<a name="gnutls_005fopenpgp_005fcrt_005fexport"></a><dl>
-<dt><a name="index-gnutls_005fopenpgp_005fcrt_005fexport"></a>Function: <em>int</em> <strong>gnutls_openpgp_crt_export</strong> <em>(gnutls_openpgp_crt_t <var>key</var>, gnutls_openpgp_crt_fmt_t <var>format</var>, void * <var>output_data</var>, size_t * <var>output_data_size</var>)</em></dt>
-<dd><p><var>key</var>: Holds the key.
-</p>
-<p><var>format</var>: One of gnutls_openpgp_crt_fmt_t elements.
-</p>
-<p><var>output_data</var>: will contain the raw or base64 encoded key
-</p>
-<p><var>output_data_size</var>: holds the size of output_data (and will
-be replaced by the actual size of parameters)
-</p>
-<p>This function will convert the given key to RAW or Base64 format.
-If the buffer provided is not long enough to hold the output, then
-<code>GNUTLS_E_SHORT_MEMORY_BUFFER</code>  will be returned.
-</p>
-<p><strong>Returns:</strong> <code>GNUTLS_E_SUCCESS</code>  on success, or an error code.
-</p></dd></dl>
-
-<a name="gnutls_005fopenpgp_005fcrt_005fexport2-1"></a>
-<h4 class="subheading">gnutls_openpgp_crt_export2</h4>
-<a name="gnutls_005fopenpgp_005fcrt_005fexport2"></a><dl>
-<dt><a name="index-gnutls_005fopenpgp_005fcrt_005fexport2"></a>Function: <em>int</em> <strong>gnutls_openpgp_crt_export2</strong> <em>(gnutls_openpgp_crt_t <var>key</var>, gnutls_openpgp_crt_fmt_t <var>format</var>, gnutls_datum_t * <var>out</var>)</em></dt>
-<dd><p><var>key</var>: Holds the key.
-</p>
-<p><var>format</var>: One of gnutls_openpgp_crt_fmt_t elements.
-</p>
-<p><var>out</var>: will contain the raw or base64 encoded key
-</p>
-<p>This function will convert the given key to RAW or Base64 format.
-The output buffer is allocated using <code>gnutls_malloc()</code> .
-</p>
-<p><strong>Returns:</strong> <code>GNUTLS_E_SUCCESS</code>  on success, or an error code.
-</p>
-<p><strong>Since:</strong> 3.1.3
-</p></dd></dl>
-
-<a name="gnutls_005fopenpgp_005fcrt_005fget_005fauth_005fsubkey-1"></a>
-<h4 class="subheading">gnutls_openpgp_crt_get_auth_subkey</h4>
-<a name="gnutls_005fopenpgp_005fcrt_005fget_005fauth_005fsubkey"></a><dl>
-<dt><a name="index-gnutls_005fopenpgp_005fcrt_005fget_005fauth_005fsubkey"></a>Function: <em>int</em> <strong>gnutls_openpgp_crt_get_auth_subkey</strong> <em>(gnutls_openpgp_crt_t <var>crt</var>, gnutls_openpgp_keyid_t <var>keyid</var>, unsigned int <var>flag</var>)</em></dt>
-<dd><p><var>crt</var>: the structure that contains the OpenPGP public key.
-</p>
-<p><var>keyid</var>: the struct to save the keyid.
-</p>
-<p><var>flag</var>: Non-zero indicates that a valid subkey is always returned.
-</p>
-<p>Returns the 64-bit keyID of the first valid OpenPGP subkey marked
-for authentication.  If flag is non-zero and no authentication
-subkey exists, then a valid subkey will be returned even if it is
-not marked for authentication.
-</p>
-<p><strong>Returns:</strong> <code>GNUTLS_E_SUCCESS</code>  on success, or an error code.
-</p></dd></dl>
-
-<a name="gnutls_005fopenpgp_005fcrt_005fget_005fcreation_005ftime-1"></a>
-<h4 class="subheading">gnutls_openpgp_crt_get_creation_time</h4>
-<a name="gnutls_005fopenpgp_005fcrt_005fget_005fcreation_005ftime"></a><dl>
-<dt><a name="index-gnutls_005fopenpgp_005fcrt_005fget_005fcreation_005ftime"></a>Function: <em>time_t</em> <strong>gnutls_openpgp_crt_get_creation_time</strong> <em>(gnutls_openpgp_crt_t <var>key</var>)</em></dt>
-<dd><p><var>key</var>: the structure that contains the OpenPGP public key.
-</p>
-<p>Get key creation time.
-</p>
-<p><strong>Returns:</strong> the timestamp when the OpenPGP key was created.
-</p></dd></dl>
-
-<a name="gnutls_005fopenpgp_005fcrt_005fget_005fexpiration_005ftime-1"></a>
-<h4 class="subheading">gnutls_openpgp_crt_get_expiration_time</h4>
-<a name="gnutls_005fopenpgp_005fcrt_005fget_005fexpiration_005ftime"></a><dl>
-<dt><a name="index-gnutls_005fopenpgp_005fcrt_005fget_005fexpiration_005ftime"></a>Function: <em>time_t</em> <strong>gnutls_openpgp_crt_get_expiration_time</strong> <em>(gnutls_openpgp_crt_t <var>key</var>)</em></dt>
-<dd><p><var>key</var>: the structure that contains the OpenPGP public key.
-</p>
-<p>Get key expiration time.  A value of &rsquo;0&rsquo; means that the key doesn&rsquo;t
-expire at all.
-</p>
-<p><strong>Returns:</strong> the time when the OpenPGP key expires.
-</p></dd></dl>
-
-<a name="gnutls_005fopenpgp_005fcrt_005fget_005ffingerprint-1"></a>
-<h4 class="subheading">gnutls_openpgp_crt_get_fingerprint</h4>
-<a name="gnutls_005fopenpgp_005fcrt_005fget_005ffingerprint"></a><dl>
-<dt><a name="index-gnutls_005fopenpgp_005fcrt_005fget_005ffingerprint"></a>Function: <em>int</em> <strong>gnutls_openpgp_crt_get_fingerprint</strong> <em>(gnutls_openpgp_crt_t <var>key</var>, void * <var>fpr</var>, size_t * <var>fprlen</var>)</em></dt>
-<dd><p><var>key</var>: the raw data that contains the OpenPGP public key.
-</p>
-<p><var>fpr</var>: the buffer to save the fingerprint, must hold at least 20 bytes.
-</p>
-<p><var>fprlen</var>: the integer to save the length of the fingerprint.
-</p>
-<p>Get key fingerprint.  Depending on the algorithm, the fingerprint
-can be 16 or 20 bytes.
-</p>
-<p><strong>Returns:</strong> On success, 0 is returned.  Otherwise, an error code.
-</p></dd></dl>
-
-<a name="gnutls_005fopenpgp_005fcrt_005fget_005fkey_005fid-1"></a>
-<h4 class="subheading">gnutls_openpgp_crt_get_key_id</h4>
-<a name="gnutls_005fopenpgp_005fcrt_005fget_005fkey_005fid"></a><dl>
-<dt><a name="index-gnutls_005fopenpgp_005fcrt_005fget_005fkey_005fid"></a>Function: <em>int</em> <strong>gnutls_openpgp_crt_get_key_id</strong> <em>(gnutls_openpgp_crt_t <var>key</var>, gnutls_openpgp_keyid_t <var>keyid</var>)</em></dt>
-<dd><p><var>key</var>: the structure that contains the OpenPGP public key.
-</p>
-<p><var>keyid</var>: the buffer to save the keyid.
-</p>
-<p>Get key id string.
-</p>
-<p><strong>Returns:</strong> the 64-bit keyID of the OpenPGP key.
-</p>
-<p><strong>Since:</strong> 2.4.0
-</p></dd></dl>
-
-<a name="gnutls_005fopenpgp_005fcrt_005fget_005fkey_005fusage-1"></a>
-<h4 class="subheading">gnutls_openpgp_crt_get_key_usage</h4>
-<a name="gnutls_005fopenpgp_005fcrt_005fget_005fkey_005fusage"></a><dl>
-<dt><a name="index-gnutls_005fopenpgp_005fcrt_005fget_005fkey_005fusage"></a>Function: <em>int</em> <strong>gnutls_openpgp_crt_get_key_usage</strong> <em>(gnutls_openpgp_crt_t <var>key</var>, unsigned int * <var>key_usage</var>)</em></dt>
-<dd><p><var>key</var>: should contain a gnutls_openpgp_crt_t type
-</p>
-<p><var>key_usage</var>: where the key usage bits will be stored
-</p>
-<p>This function will return certificate&rsquo;s key usage, by checking the
-key algorithm. The key usage value will ORed values of the:
-<code>GNUTLS_KEY_DIGITAL_SIGNATURE</code> , <code>GNUTLS_KEY_KEY_ENCIPHERMENT</code> .
-</p>
-<p><strong>Returns:</strong> <code>GNUTLS_E_SUCCESS</code>  on success, or an error code.
-</p></dd></dl>
-
-<a name="gnutls_005fopenpgp_005fcrt_005fget_005fname-1"></a>
-<h4 class="subheading">gnutls_openpgp_crt_get_name</h4>
-<a name="gnutls_005fopenpgp_005fcrt_005fget_005fname"></a><dl>
-<dt><a name="index-gnutls_005fopenpgp_005fcrt_005fget_005fname"></a>Function: <em>int</em> <strong>gnutls_openpgp_crt_get_name</strong> <em>(gnutls_openpgp_crt_t <var>key</var>, int <var>idx</var>, char * <var>buf</var>, size_t * <var>sizeof_buf</var>)</em></dt>
-<dd><p><var>key</var>: the structure that contains the OpenPGP public key.
-</p>
-<p><var>idx</var>: the index of the ID to extract
-</p>
-<p><var>buf</var>: a pointer to a structure to hold the name, may be <code>NULL</code> 
-to only get the  <code>sizeof_buf</code> .
-</p>
-<p><var>sizeof_buf</var>: holds the maximum size of  <code>buf</code> , on return hold the
-actual/required size of  <code>buf</code> .
-</p>
-<p>Extracts the userID from the parsed OpenPGP key.
-</p>
-<p><strong>Returns:</strong> <code>GNUTLS_E_SUCCESS</code>  on success, and if the index of the ID
-does not exist <code>GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE</code> , or an
-error code.
-</p></dd></dl>
-
-<a name="gnutls_005fopenpgp_005fcrt_005fget_005fpk_005falgorithm-1"></a>
-<h4 class="subheading">gnutls_openpgp_crt_get_pk_algorithm</h4>
-<a name="gnutls_005fopenpgp_005fcrt_005fget_005fpk_005falgorithm"></a><dl>
-<dt><a name="index-gnutls_005fopenpgp_005fcrt_005fget_005fpk_005falgorithm"></a>Function: <em>gnutls_pk_algorithm_t</em> <strong>gnutls_openpgp_crt_get_pk_algorithm</strong> <em>(gnutls_openpgp_crt_t <var>key</var>, unsigned int * <var>bits</var>)</em></dt>
-<dd><p><var>key</var>: is an OpenPGP key
-</p>
-<p><var>bits</var>: if bits is non null it will hold the size of the parameters&rsquo; in bits
-</p>
-<p>This function will return the public key algorithm of an OpenPGP
-certificate.
-</p>
-<p>If bits is non null, it should have enough size to hold the parameters
-size in bits. For RSA the bits returned is the modulus.
-For DSA the bits returned are of the public exponent.
-</p>
-<p><strong>Returns:</strong> a member of the <code>gnutls_pk_algorithm_t</code>  enumeration on
-success, or GNUTLS_PK_UNKNOWN on error.
-</p></dd></dl>
-
-<a name="gnutls_005fopenpgp_005fcrt_005fget_005fpk_005fdsa_005fraw-1"></a>
-<h4 class="subheading">gnutls_openpgp_crt_get_pk_dsa_raw</h4>
-<a name="gnutls_005fopenpgp_005fcrt_005fget_005fpk_005fdsa_005fraw"></a><dl>
-<dt><a name="index-gnutls_005fopenpgp_005fcrt_005fget_005fpk_005fdsa_005fraw"></a>Function: <em>int</em> <strong>gnutls_openpgp_crt_get_pk_dsa_raw</strong> <em>(gnutls_openpgp_crt_t <var>crt</var>, gnutls_datum_t * <var>p</var>, gnutls_datum_t * <var>q</var>, gnutls_datum_t * <var>g</var>, gnutls_datum_t * <var>y</var>)</em></dt>
-<dd><p><var>crt</var>: Holds the certificate
-</p>
-<p><var>p</var>: will hold the p
-</p>
-<p><var>q</var>: will hold the q
-</p>
-<p><var>g</var>: will hold the g
-</p>
-<p><var>y</var>: will hold the y
-</p>
-<p>This function will export the DSA public key&rsquo;s parameters found in
-the given certificate.  The new parameters will be allocated using
-<code>gnutls_malloc()</code>  and will be stored in the appropriate datum.
-</p>
-<p><strong>Returns:</strong> <code>GNUTLS_E_SUCCESS</code>  on success, otherwise a negative error code.
-</p>
-<p><strong>Since:</strong> 2.4.0
-</p></dd></dl>
-
-<a name="gnutls_005fopenpgp_005fcrt_005fget_005fpk_005frsa_005fraw-1"></a>
-<h4 class="subheading">gnutls_openpgp_crt_get_pk_rsa_raw</h4>
-<a name="gnutls_005fopenpgp_005fcrt_005fget_005fpk_005frsa_005fraw"></a><dl>
-<dt><a name="index-gnutls_005fopenpgp_005fcrt_005fget_005fpk_005frsa_005fraw"></a>Function: <em>int</em> <strong>gnutls_openpgp_crt_get_pk_rsa_raw</strong> <em>(gnutls_openpgp_crt_t <var>crt</var>, gnutls_datum_t * <var>m</var>, gnutls_datum_t * <var>e</var>)</em></dt>
-<dd><p><var>crt</var>: Holds the certificate
-</p>
-<p><var>m</var>: will hold the modulus
-</p>
-<p><var>e</var>: will hold the public exponent
-</p>
-<p>This function will export the RSA public key&rsquo;s parameters found in
-the given structure.  The new parameters will be allocated using
-<code>gnutls_malloc()</code>  and will be stored in the appropriate datum.
-</p>
-<p><strong>Returns:</strong> <code>GNUTLS_E_SUCCESS</code>  on success, otherwise a negative error code.
-</p>
-<p><strong>Since:</strong> 2.4.0
-</p></dd></dl>
-
-<a name="gnutls_005fopenpgp_005fcrt_005fget_005fpreferred_005fkey_005fid-1"></a>
-<h4 class="subheading">gnutls_openpgp_crt_get_preferred_key_id</h4>
-<a name="gnutls_005fopenpgp_005fcrt_005fget_005fpreferred_005fkey_005fid"></a><dl>
-<dt><a name="index-gnutls_005fopenpgp_005fcrt_005fget_005fpreferred_005fkey_005fid"></a>Function: <em>int</em> <strong>gnutls_openpgp_crt_get_preferred_key_id</strong> <em>(gnutls_openpgp_crt_t <var>key</var>, gnutls_openpgp_keyid_t <var>keyid</var>)</em></dt>
-<dd><p><var>key</var>: the structure that contains the OpenPGP public key.
-</p>
-<p><var>keyid</var>: the struct to save the keyid.
-</p>
-<p>Get preferred key id.  If it hasn&rsquo;t been set it returns
-<code>GNUTLS_E_INVALID_REQUEST</code> .
-</p>
-<p><strong>Returns:</strong> the 64-bit preferred keyID of the OpenPGP key.
-</p></dd></dl>
-
-<a name="gnutls_005fopenpgp_005fcrt_005fget_005frevoked_005fstatus-1"></a>
-<h4 class="subheading">gnutls_openpgp_crt_get_revoked_status</h4>
-<a name="gnutls_005fopenpgp_005fcrt_005fget_005frevoked_005fstatus"></a><dl>
-<dt><a name="index-gnutls_005fopenpgp_005fcrt_005fget_005frevoked_005fstatus"></a>Function: <em>int</em> <strong>gnutls_openpgp_crt_get_revoked_status</strong> <em>(gnutls_openpgp_crt_t <var>key</var>)</em></dt>
-<dd><p><var>key</var>: the structure that contains the OpenPGP public key.
-</p>
-<p>Get revocation status of key.
-</p>
-<p><strong>Returns:</strong> true (1) if the key has been revoked, or false (0) if it
-has not.
-</p>
-<p><strong>Since:</strong> 2.4.0
-</p></dd></dl>
-
-<a name="gnutls_005fopenpgp_005fcrt_005fget_005fsubkey_005fcount-1"></a>
-<h4 class="subheading">gnutls_openpgp_crt_get_subkey_count</h4>
-<a name="gnutls_005fopenpgp_005fcrt_005fget_005fsubkey_005fcount"></a><dl>
-<dt><a name="index-gnutls_005fopenpgp_005fcrt_005fget_005fsubkey_005fcount"></a>Function: <em>int</em> <strong>gnutls_openpgp_crt_get_subkey_count</strong> <em>(gnutls_openpgp_crt_t <var>key</var>)</em></dt>
-<dd><p><var>key</var>: is an OpenPGP key
-</p>
-<p>This function will return the number of subkeys present in the
-given OpenPGP certificate.
-</p>
-<p><strong>Returns:</strong> the number of subkeys, or a negative error code on error.
-</p>
-<p><strong>Since:</strong> 2.4.0
-</p></dd></dl>
-
-<a name="gnutls_005fopenpgp_005fcrt_005fget_005fsubkey_005fcreation_005ftime-1"></a>
-<h4 class="subheading">gnutls_openpgp_crt_get_subkey_creation_time</h4>
-<a name="gnutls_005fopenpgp_005fcrt_005fget_005fsubkey_005fcreation_005ftime"></a><dl>
-<dt><a name="index-gnutls_005fopenpgp_005fcrt_005fget_005fsubkey_005fcreation_005ftime"></a>Function: <em>time_t</em> <strong>gnutls_openpgp_crt_get_subkey_creation_time</strong> <em>(gnutls_openpgp_crt_t <var>key</var>, unsigned int <var>idx</var>)</em></dt>
-<dd><p><var>key</var>: the structure that contains the OpenPGP public key.
-</p>
-<p><var>idx</var>: the subkey index
-</p>
-<p>Get subkey creation time.
-</p>
-<p><strong>Returns:</strong> the timestamp when the OpenPGP sub-key was created.
-</p>
-<p><strong>Since:</strong> 2.4.0
-</p></dd></dl>
-
-<a name="gnutls_005fopenpgp_005fcrt_005fget_005fsubkey_005fexpiration_005ftime-1"></a>
-<h4 class="subheading">gnutls_openpgp_crt_get_subkey_expiration_time</h4>
-<a name="gnutls_005fopenpgp_005fcrt_005fget_005fsubkey_005fexpiration_005ftime"></a><dl>
-<dt><a name="index-gnutls_005fopenpgp_005fcrt_005fget_005fsubkey_005fexpiration_005ftime"></a>Function: <em>time_t</em> <strong>gnutls_openpgp_crt_get_subkey_expiration_time</strong> <em>(gnutls_openpgp_crt_t <var>key</var>, unsigned int <var>idx</var>)</em></dt>
-<dd><p><var>key</var>: the structure that contains the OpenPGP public key.
-</p>
-<p><var>idx</var>: the subkey index
-</p>
-<p>Get subkey expiration time.  A value of &rsquo;0&rsquo; means that the key
-doesn&rsquo;t expire at all.
-</p>
-<p><strong>Returns:</strong> the time when the OpenPGP key expires.
-</p>
-<p><strong>Since:</strong> 2.4.0
-</p></dd></dl>
-
-<a name="gnutls_005fopenpgp_005fcrt_005fget_005fsubkey_005ffingerprint-1"></a>
-<h4 class="subheading">gnutls_openpgp_crt_get_subkey_fingerprint</h4>
-<a name="gnutls_005fopenpgp_005fcrt_005fget_005fsubkey_005ffingerprint"></a><dl>
-<dt><a name="index-gnutls_005fopenpgp_005fcrt_005fget_005fsubkey_005ffingerprint"></a>Function: <em>int</em> <strong>gnutls_openpgp_crt_get_subkey_fingerprint</strong> <em>(gnutls_openpgp_crt_t <var>key</var>, unsigned int <var>idx</var>, void * <var>fpr</var>, size_t * <var>fprlen</var>)</em></dt>
-<dd><p><var>key</var>: the raw data that contains the OpenPGP public key.
-</p>
-<p><var>idx</var>: the subkey index
-</p>
-<p><var>fpr</var>: the buffer to save the fingerprint, must hold at least 20 bytes.
-</p>
-<p><var>fprlen</var>: the integer to save the length of the fingerprint.
-</p>
-<p>Get key fingerprint of a subkey.  Depending on the algorithm, the
-fingerprint can be 16 or 20 bytes.
-</p>
-<p><strong>Returns:</strong> On success, 0 is returned.  Otherwise, an error code.
-</p>
-<p><strong>Since:</strong> 2.4.0
-</p></dd></dl>
-
-<a name="gnutls_005fopenpgp_005fcrt_005fget_005fsubkey_005fid-1"></a>
-<h4 class="subheading">gnutls_openpgp_crt_get_subkey_id</h4>
-<a name="gnutls_005fopenpgp_005fcrt_005fget_005fsubkey_005fid"></a><dl>
-<dt><a name="index-gnutls_005fopenpgp_005fcrt_005fget_005fsubkey_005fid"></a>Function: <em>int</em> <strong>gnutls_openpgp_crt_get_subkey_id</strong> <em>(gnutls_openpgp_crt_t <var>key</var>, unsigned int <var>idx</var>, gnutls_openpgp_keyid_t <var>keyid</var>)</em></dt>
-<dd><p><var>key</var>: the structure that contains the OpenPGP public key.
-</p>
-<p><var>idx</var>: the subkey index
-</p>
-<p><var>keyid</var>: the buffer to save the keyid.
-</p>
-<p>Get the subkey&rsquo;s key-id.
-</p>
-<p><strong>Returns:</strong> the 64-bit keyID of the OpenPGP key.
-</p></dd></dl>
-
-<a name="gnutls_005fopenpgp_005fcrt_005fget_005fsubkey_005fidx-1"></a>
-<h4 class="subheading">gnutls_openpgp_crt_get_subkey_idx</h4>
-<a name="gnutls_005fopenpgp_005fcrt_005fget_005fsubkey_005fidx"></a><dl>
-<dt><a name="index-gnutls_005fopenpgp_005fcrt_005fget_005fsubkey_005fidx"></a>Function: <em>int</em> <strong>gnutls_openpgp_crt_get_subkey_idx</strong> <em>(gnutls_openpgp_crt_t <var>key</var>, const gnutls_openpgp_keyid_t <var>keyid</var>)</em></dt>
-<dd><p><var>key</var>: the structure that contains the OpenPGP public key.
-</p>
-<p><var>keyid</var>: the keyid.
-</p>
-<p>Get subkey&rsquo;s index.
-</p>
-<p><strong>Returns:</strong> the index of the subkey or a negative error value.
-</p>
-<p><strong>Since:</strong> 2.4.0
-</p></dd></dl>
-
-<a name="gnutls_005fopenpgp_005fcrt_005fget_005fsubkey_005fpk_005falgorithm-1"></a>
-<h4 class="subheading">gnutls_openpgp_crt_get_subkey_pk_algorithm</h4>
-<a name="gnutls_005fopenpgp_005fcrt_005fget_005fsubkey_005fpk_005falgorithm"></a><dl>
-<dt><a name="index-gnutls_005fopenpgp_005fcrt_005fget_005fsubkey_005fpk_005falgorithm"></a>Function: <em>gnutls_pk_algorithm_t</em> <strong>gnutls_openpgp_crt_get_subkey_pk_algorithm</strong> <em>(gnutls_openpgp_crt_t <var>key</var>, unsigned int <var>idx</var>, unsigned int * <var>bits</var>)</em></dt>
-<dd><p><var>key</var>: is an OpenPGP key
-</p>
-<p><var>idx</var>: is the subkey index
-</p>
-<p><var>bits</var>: if bits is non null it will hold the size of the parameters&rsquo; in bits
-</p>
-<p>This function will return the public key algorithm of a subkey of an OpenPGP
-certificate.
-</p>
-<p>If bits is non null, it should have enough size to hold the
-parameters size in bits.  For RSA the bits returned is the modulus.
-For DSA the bits returned are of the public exponent.
-</p>
-<p><strong>Returns:</strong> a member of the <code>gnutls_pk_algorithm_t</code>  enumeration on
-success, or GNUTLS_PK_UNKNOWN on error.
-</p>
-<p><strong>Since:</strong> 2.4.0
-</p></dd></dl>
-
-<a name="gnutls_005fopenpgp_005fcrt_005fget_005fsubkey_005fpk_005fdsa_005fraw-1"></a>
-<h4 class="subheading">gnutls_openpgp_crt_get_subkey_pk_dsa_raw</h4>
-<a name="gnutls_005fopenpgp_005fcrt_005fget_005fsubkey_005fpk_005fdsa_005fraw"></a><dl>
-<dt><a name="index-gnutls_005fopenpgp_005fcrt_005fget_005fsubkey_005fpk_005fdsa_005fraw"></a>Function: <em>int</em> <strong>gnutls_openpgp_crt_get_subkey_pk_dsa_raw</strong> <em>(gnutls_openpgp_crt_t <var>crt</var>, unsigned int <var>idx</var>, gnutls_datum_t * <var>p</var>, gnutls_datum_t * <var>q</var>, gnutls_datum_t * <var>g</var>, gnutls_datum_t * <var>y</var>)</em></dt>
-<dd><p><var>crt</var>: Holds the certificate
-</p>
-<p><var>idx</var>: Is the subkey index
-</p>
-<p><var>p</var>: will hold the p
-</p>
-<p><var>q</var>: will hold the q
-</p>
-<p><var>g</var>: will hold the g
-</p>
-<p><var>y</var>: will hold the y
-</p>
-<p>This function will export the DSA public key&rsquo;s parameters found in
-the given certificate.  The new parameters will be allocated using
-<code>gnutls_malloc()</code>  and will be stored in the appropriate datum.
-</p>
-<p><strong>Returns:</strong> <code>GNUTLS_E_SUCCESS</code>  on success, otherwise a negative error code.
-</p>
-<p><strong>Since:</strong> 2.4.0
-</p></dd></dl>
-
-<a name="gnutls_005fopenpgp_005fcrt_005fget_005fsubkey_005fpk_005frsa_005fraw-1"></a>
-<h4 class="subheading">gnutls_openpgp_crt_get_subkey_pk_rsa_raw</h4>
-<a name="gnutls_005fopenpgp_005fcrt_005fget_005fsubkey_005fpk_005frsa_005fraw"></a><dl>
-<dt><a name="index-gnutls_005fopenpgp_005fcrt_005fget_005fsubkey_005fpk_005frsa_005fraw"></a>Function: <em>int</em> <strong>gnutls_openpgp_crt_get_subkey_pk_rsa_raw</strong> <em>(gnutls_openpgp_crt_t <var>crt</var>, unsigned int <var>idx</var>, gnutls_datum_t * <var>m</var>, gnutls_datum_t * <var>e</var>)</em></dt>
-<dd><p><var>crt</var>: Holds the certificate
-</p>
-<p><var>idx</var>: Is the subkey index
-</p>
-<p><var>m</var>: will hold the modulus
-</p>
-<p><var>e</var>: will hold the public exponent
-</p>
-<p>This function will export the RSA public key&rsquo;s parameters found in
-the given structure.  The new parameters will be allocated using
-<code>gnutls_malloc()</code>  and will be stored in the appropriate datum.
-</p>
-<p><strong>Returns:</strong> <code>GNUTLS_E_SUCCESS</code>  on success, otherwise a negative error code.
-</p>
-<p><strong>Since:</strong> 2.4.0
-</p></dd></dl>
-
-<a name="gnutls_005fopenpgp_005fcrt_005fget_005fsubkey_005frevoked_005fstatus-1"></a>
-<h4 class="subheading">gnutls_openpgp_crt_get_subkey_revoked_status</h4>
-<a name="gnutls_005fopenpgp_005fcrt_005fget_005fsubkey_005frevoked_005fstatus"></a><dl>
-<dt><a name="index-gnutls_005fopenpgp_005fcrt_005fget_005fsubkey_005frevoked_005fstatus"></a>Function: <em>int</em> <strong>gnutls_openpgp_crt_get_subkey_revoked_status</strong> <em>(gnutls_openpgp_crt_t <var>key</var>, unsigned int <var>idx</var>)</em></dt>
-<dd><p><var>key</var>: the structure that contains the OpenPGP public key.
-</p>
-<p><var>idx</var>: is the subkey index
-</p>
-<p>Get subkey revocation status.  A negative error code indicates an error.
-</p>
-<p><strong>Returns:</strong> true (1) if the key has been revoked, or false (0) if it
-has not.
-</p>
-<p><strong>Since:</strong> 2.4.0
-</p></dd></dl>
-
-<a name="gnutls_005fopenpgp_005fcrt_005fget_005fsubkey_005fusage-1"></a>
-<h4 class="subheading">gnutls_openpgp_crt_get_subkey_usage</h4>
-<a name="gnutls_005fopenpgp_005fcrt_005fget_005fsubkey_005fusage"></a><dl>
-<dt><a name="index-gnutls_005fopenpgp_005fcrt_005fget_005fsubkey_005fusage"></a>Function: <em>int</em> <strong>gnutls_openpgp_crt_get_subkey_usage</strong> <em>(gnutls_openpgp_crt_t <var>key</var>, unsigned int <var>idx</var>, unsigned int * <var>key_usage</var>)</em></dt>
-<dd><p><var>key</var>: should contain a gnutls_openpgp_crt_t type
-</p>
-<p><var>idx</var>: the subkey index
-</p>
-<p><var>key_usage</var>: where the key usage bits will be stored
-</p>
-<p>This function will return certificate&rsquo;s key usage, by checking the
-key algorithm.  The key usage value will ORed values of
-<code>GNUTLS_KEY_DIGITAL_SIGNATURE</code>  or <code>GNUTLS_KEY_KEY_ENCIPHERMENT</code> .
-</p>
-<p>A negative error code may be returned in case of parsing error.
-</p>
-<p><strong>Returns:</strong> key usage value.
-</p>
-<p><strong>Since:</strong> 2.4.0
-</p></dd></dl>
-
-<a name="gnutls_005fopenpgp_005fcrt_005fget_005fversion-1"></a>
-<h4 class="subheading">gnutls_openpgp_crt_get_version</h4>
-<a name="gnutls_005fopenpgp_005fcrt_005fget_005fversion"></a><dl>
-<dt><a name="index-gnutls_005fopenpgp_005fcrt_005fget_005fversion"></a>Function: <em>int</em> <strong>gnutls_openpgp_crt_get_version</strong> <em>(gnutls_openpgp_crt_t <var>key</var>)</em></dt>
-<dd><p><var>key</var>: the structure that contains the OpenPGP public key.
-</p>
-<p>Extract the version of the OpenPGP key.
-</p>
-<p><strong>Returns:</strong> the version number is returned, or a negative error code on errors.
-</p></dd></dl>
-
-<a name="gnutls_005fopenpgp_005fcrt_005fimport-1"></a>
-<h4 class="subheading">gnutls_openpgp_crt_import</h4>
-<a name="gnutls_005fopenpgp_005fcrt_005fimport"></a><dl>
-<dt><a name="index-gnutls_005fopenpgp_005fcrt_005fimport"></a>Function: <em>int</em> <strong>gnutls_openpgp_crt_import</strong> <em>(gnutls_openpgp_crt_t <var>key</var>, const gnutls_datum_t * <var>data</var>, gnutls_openpgp_crt_fmt_t <var>format</var>)</em></dt>
-<dd><p><var>key</var>: The structure to store the parsed key.
-</p>
-<p><var>data</var>: The RAW or BASE64 encoded key.
-</p>
-<p><var>format</var>: One of gnutls_openpgp_crt_fmt_t elements.
-</p>
-<p>This function will convert the given RAW or Base64 encoded key to
-the native <code>gnutls_openpgp_crt_t</code>  format. The output will be stored
-in &rsquo;key&rsquo;.
-</p>
-<p><strong>Returns:</strong> <code>GNUTLS_E_SUCCESS</code>  on success, or an error code.
-</p></dd></dl>
-
-<a name="gnutls_005fopenpgp_005fcrt_005finit-1"></a>
-<h4 class="subheading">gnutls_openpgp_crt_init</h4>
-<a name="gnutls_005fopenpgp_005fcrt_005finit"></a><dl>
-<dt><a name="index-gnutls_005fopenpgp_005fcrt_005finit"></a>Function: <em>int</em> <strong>gnutls_openpgp_crt_init</strong> <em>(gnutls_openpgp_crt_t * <var>key</var>)</em></dt>
-<dd><p><var>key</var>: A pointer to the type to be initialized
-</p>
-<p>This function will initialize an OpenPGP key structure.
-</p>
-<p><strong>Returns:</strong> <code>GNUTLS_E_SUCCESS</code>  on success, or an error code.
-</p></dd></dl>
-
-<a name="gnutls_005fopenpgp_005fcrt_005fprint-1"></a>
-<h4 class="subheading">gnutls_openpgp_crt_print</h4>
-<a name="gnutls_005fopenpgp_005fcrt_005fprint"></a><dl>
-<dt><a name="index-gnutls_005fopenpgp_005fcrt_005fprint"></a>Function: <em>int</em> <strong>gnutls_openpgp_crt_print</strong> <em>(gnutls_openpgp_crt_t <var>cert</var>, gnutls_certificate_print_formats_t <var>format</var>, gnutls_datum_t * <var>out</var>)</em></dt>
-<dd><p><var>cert</var>: The structure to be printed
-</p>
-<p><var>format</var>: Indicate the format to use
-</p>
-<p><var>out</var>: Newly allocated datum with (0) terminated string.
-</p>
-<p>This function will pretty print an OpenPGP certificate, suitable
-for display to a human.
-</p>
-<p>The format should be (0) for future compatibility.
-</p>
-<p>The output  <code>out</code> needs to be deallocate using <code>gnutls_free()</code> .
-</p>
-<p><strong>Returns:</strong> <code>GNUTLS_E_SUCCESS</code>  on success, or an error code.
-</p></dd></dl>
-
-<a name="gnutls_005fopenpgp_005fcrt_005fset_005fpreferred_005fkey_005fid-1"></a>
-<h4 class="subheading">gnutls_openpgp_crt_set_preferred_key_id</h4>
-<a name="gnutls_005fopenpgp_005fcrt_005fset_005fpreferred_005fkey_005fid"></a><dl>
-<dt><a name="index-gnutls_005fopenpgp_005fcrt_005fset_005fpreferred_005fkey_005fid"></a>Function: <em>int</em> <strong>gnutls_openpgp_crt_set_preferred_key_id</strong> <em>(gnutls_openpgp_crt_t <var>key</var>, const gnutls_openpgp_keyid_t <var>keyid</var>)</em></dt>
-<dd><p><var>key</var>: the structure that contains the OpenPGP public key.
-</p>
-<p><var>keyid</var>: the selected keyid
-</p>
-<p>This allows setting a preferred key id for the given certificate.
-This key will be used by functions that involve key handling.
-</p>
-<p>If the provided  <code>keyid</code> is <code>NULL</code>  then the master key is
-set as preferred.
-</p>
-<p><strong>Returns:</strong> On success, <code>GNUTLS_E_SUCCESS</code>  (0) is returned,
-otherwise a negative error code is returned.
-</p></dd></dl>
-
-<a name="gnutls_005fopenpgp_005fcrt_005fverify_005fring-1"></a>
-<h4 class="subheading">gnutls_openpgp_crt_verify_ring</h4>
-<a name="gnutls_005fopenpgp_005fcrt_005fverify_005fring"></a><dl>
-<dt><a name="index-gnutls_005fopenpgp_005fcrt_005fverify_005fring-1"></a>Function: <em>int</em> <strong>gnutls_openpgp_crt_verify_ring</strong> <em>(gnutls_openpgp_crt_t <var>key</var>, gnutls_openpgp_keyring_t <var>keyring</var>, unsigned int <var>flags</var>, unsigned int * <var>verify</var>)</em></dt>
-<dd><p><var>key</var>: the structure that holds the key.
-</p>
-<p><var>keyring</var>: holds the keyring to check against
-</p>
-<p><var>flags</var>: unused (should be 0)
-</p>
-<p><var>verify</var>: will hold the certificate verification output.
-</p>
-<p>Verify all signatures in the key, using the given set of keys
-(keyring).
-</p>
-<p>The key verification output will be put in  <code>verify</code> and will be one
-or more of the <code>gnutls_certificate_status_t</code>  enumerated elements
-bitwise or&rsquo;d.
-</p>
-<p>Note that this function does not verify using any &quot;web of trust&quot;.
-You may use GnuPG for that purpose, or any other external PGP
-application.
-</p>
-<p><strong>Returns:</strong> <code>GNUTLS_E_SUCCESS</code>  on success, or an error code.
-</p></dd></dl>
-
-<a name="gnutls_005fopenpgp_005fcrt_005fverify_005fself-1"></a>
-<h4 class="subheading">gnutls_openpgp_crt_verify_self</h4>
-<a name="gnutls_005fopenpgp_005fcrt_005fverify_005fself"></a><dl>
-<dt><a name="index-gnutls_005fopenpgp_005fcrt_005fverify_005fself-1"></a>Function: <em>int</em> <strong>gnutls_openpgp_crt_verify_self</strong> <em>(gnutls_openpgp_crt_t <var>key</var>, unsigned int <var>flags</var>, unsigned int * <var>verify</var>)</em></dt>
-<dd><p><var>key</var>: the structure that holds the key.
-</p>
-<p><var>flags</var>: unused (should be 0)
-</p>
-<p><var>verify</var>: will hold the key verification output.
-</p>
-<p>Verifies the self signature in the key.  The key verification
-output will be put in  <code>verify</code> and will be one or more of the
-gnutls_certificate_status_t enumerated elements bitwise or&rsquo;d.
-</p>
-<p><strong>Returns:</strong> <code>GNUTLS_E_SUCCESS</code>  on success, or an error code.
-</p></dd></dl>
-
-<a name="gnutls_005fopenpgp_005fkeyring_005fcheck_005fid-1"></a>
-<h4 class="subheading">gnutls_openpgp_keyring_check_id</h4>
-<a name="gnutls_005fopenpgp_005fkeyring_005fcheck_005fid"></a><dl>
-<dt><a name="index-gnutls_005fopenpgp_005fkeyring_005fcheck_005fid"></a>Function: <em>int</em> <strong>gnutls_openpgp_keyring_check_id</strong> <em>(gnutls_openpgp_keyring_t <var>ring</var>, const gnutls_openpgp_keyid_t <var>keyid</var>, unsigned int <var>flags</var>)</em></dt>
-<dd><p><var>ring</var>: holds the keyring to check against
-</p>
-<p><var>keyid</var>: will hold the keyid to check for.
-</p>
-<p><var>flags</var>: unused (should be 0)
-</p>
-<p>Check if a given key ID exists in the keyring.
-</p>
-<p><strong>Returns:</strong> <code>GNUTLS_E_SUCCESS</code>  on success (if keyid exists) and a
-negative error code on failure.
-</p></dd></dl>
-
-<a name="gnutls_005fopenpgp_005fkeyring_005fdeinit-1"></a>
-<h4 class="subheading">gnutls_openpgp_keyring_deinit</h4>
-<a name="gnutls_005fopenpgp_005fkeyring_005fdeinit"></a><dl>
-<dt><a name="index-gnutls_005fopenpgp_005fkeyring_005fdeinit"></a>Function: <em>void</em> <strong>gnutls_openpgp_keyring_deinit</strong> <em>(gnutls_openpgp_keyring_t <var>keyring</var>)</em></dt>
-<dd><p><var>keyring</var>: A pointer to the type to be initialized
-</p>
-<p>This function will deinitialize a keyring structure.
-</p></dd></dl>
-
-<a name="gnutls_005fopenpgp_005fkeyring_005fget_005fcrt-1"></a>
-<h4 class="subheading">gnutls_openpgp_keyring_get_crt</h4>
-<a name="gnutls_005fopenpgp_005fkeyring_005fget_005fcrt"></a><dl>
-<dt><a name="index-gnutls_005fopenpgp_005fkeyring_005fget_005fcrt"></a>Function: <em>int</em> <strong>gnutls_openpgp_keyring_get_crt</strong> <em>(gnutls_openpgp_keyring_t <var>ring</var>, unsigned int <var>idx</var>, gnutls_openpgp_crt_t * <var>cert</var>)</em></dt>
-<dd><p><var>ring</var>: Holds the keyring.
-</p>
-<p><var>idx</var>: the index of the certificate to export
-</p>
-<p><var>cert</var>: An uninitialized <code>gnutls_openpgp_crt_t</code>  type
-</p>
-<p>This function will extract an OpenPGP certificate from the given
-keyring.  If the index given is out of range
-<code>GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE</code>  will be returned. The
-returned structure needs to be deinited.
-</p>
-<p><strong>Returns:</strong> <code>GNUTLS_E_SUCCESS</code>  on success, or an error code.
-</p></dd></dl>
-
-<a name="gnutls_005fopenpgp_005fkeyring_005fget_005fcrt_005fcount-1"></a>
-<h4 class="subheading">gnutls_openpgp_keyring_get_crt_count</h4>
-<a name="gnutls_005fopenpgp_005fkeyring_005fget_005fcrt_005fcount"></a><dl>
-<dt><a name="index-gnutls_005fopenpgp_005fkeyring_005fget_005fcrt_005fcount"></a>Function: <em>int</em> <strong>gnutls_openpgp_keyring_get_crt_count</strong> <em>(gnutls_openpgp_keyring_t <var>ring</var>)</em></dt>
-<dd><p><var>ring</var>: is an OpenPGP key ring
-</p>
-<p>This function will return the number of OpenPGP certificates
-present in the given keyring.
-</p>
-<p><strong>Returns:</strong> the number of subkeys, or a negative error code on error.
-</p></dd></dl>
-
-<a name="gnutls_005fopenpgp_005fkeyring_005fimport-1"></a>
-<h4 class="subheading">gnutls_openpgp_keyring_import</h4>
-<a name="gnutls_005fopenpgp_005fkeyring_005fimport"></a><dl>
-<dt><a name="index-gnutls_005fopenpgp_005fkeyring_005fimport"></a>Function: <em>int</em> <strong>gnutls_openpgp_keyring_import</strong> <em>(gnutls_openpgp_keyring_t <var>keyring</var>, const gnutls_datum_t * <var>data</var>, gnutls_openpgp_crt_fmt_t <var>format</var>)</em></dt>
-<dd><p><var>keyring</var>: The structure to store the parsed key.
-</p>
-<p><var>data</var>: The RAW or BASE64 encoded keyring.
-</p>
-<p><var>format</var>: One of <code>gnutls_openpgp_keyring_fmt</code>  elements.
-</p>
-<p>This function will convert the given RAW or Base64 encoded keyring
-to the native <code>gnutls_openpgp_keyring_t</code>  format.  The output will be
-stored in &rsquo;keyring&rsquo;.
-</p>
-<p><strong>Returns:</strong> <code>GNUTLS_E_SUCCESS</code>  on success, or an error code.
-</p></dd></dl>
-
-<a name="gnutls_005fopenpgp_005fkeyring_005finit-1"></a>
-<h4 class="subheading">gnutls_openpgp_keyring_init</h4>
-<a name="gnutls_005fopenpgp_005fkeyring_005finit"></a><dl>
-<dt><a name="index-gnutls_005fopenpgp_005fkeyring_005finit"></a>Function: <em>int</em> <strong>gnutls_openpgp_keyring_init</strong> <em>(gnutls_openpgp_keyring_t * <var>keyring</var>)</em></dt>
-<dd><p><var>keyring</var>: A pointer to the type to be initialized
-</p>
-<p>This function will initialize an keyring structure.
-</p>
-<p><strong>Returns:</strong> <code>GNUTLS_E_SUCCESS</code>  on success, or an error code.
-</p></dd></dl>
-
-<a name="gnutls_005fopenpgp_005fprivkey_005fdeinit-1"></a>
-<h4 class="subheading">gnutls_openpgp_privkey_deinit</h4>
-<a name="gnutls_005fopenpgp_005fprivkey_005fdeinit"></a><dl>
-<dt><a name="index-gnutls_005fopenpgp_005fprivkey_005fdeinit"></a>Function: <em>void</em> <strong>gnutls_openpgp_privkey_deinit</strong> <em>(gnutls_openpgp_privkey_t <var>key</var>)</em></dt>
-<dd><p><var>key</var>: A pointer to the type to be initialized
-</p>
-<p>This function will deinitialize a key structure.
-</p></dd></dl>
-
-<a name="gnutls_005fopenpgp_005fprivkey_005fexport-1"></a>
-<h4 class="subheading">gnutls_openpgp_privkey_export</h4>
-<a name="gnutls_005fopenpgp_005fprivkey_005fexport"></a><dl>
-<dt><a name="index-gnutls_005fopenpgp_005fprivkey_005fexport"></a>Function: <em>int</em> <strong>gnutls_openpgp_privkey_export</strong> <em>(gnutls_openpgp_privkey_t <var>key</var>, gnutls_openpgp_crt_fmt_t <var>format</var>, const char * <var>password</var>, unsigned int <var>flags</var>, void * <var>output_data</var>, size_t * <var>output_data_size</var>)</em></dt>
-<dd><p><var>key</var>: Holds the key.
-</p>
-<p><var>format</var>: One of gnutls_openpgp_crt_fmt_t elements.
-</p>
-<p><var>password</var>: the password that will be used to encrypt the key. (unused for now)
-</p>
-<p><var>flags</var>: (0) for future compatibility
-</p>
-<p><var>output_data</var>: will contain the key base64 encoded or raw
-</p>
-<p><var>output_data_size</var>: holds the size of output_data (and will be
-replaced by the actual size of parameters)
-</p>
-<p>This function will convert the given key to RAW or Base64 format.
-If the buffer provided is not long enough to hold the output, then
-GNUTLS_E_SHORT_MEMORY_BUFFER will be returned.
-</p>
-<p><strong>Returns:</strong> <code>GNUTLS_E_SUCCESS</code>  on success, or an error code.
-</p>
-<p><strong>Since:</strong> 2.4.0
-</p></dd></dl>
-
-<a name="gnutls_005fopenpgp_005fprivkey_005fexport2-1"></a>
-<h4 class="subheading">gnutls_openpgp_privkey_export2</h4>
-<a name="gnutls_005fopenpgp_005fprivkey_005fexport2"></a><dl>
-<dt><a name="index-gnutls_005fopenpgp_005fprivkey_005fexport2"></a>Function: <em>int</em> <strong>gnutls_openpgp_privkey_export2</strong> <em>(gnutls_openpgp_privkey_t <var>key</var>, gnutls_openpgp_crt_fmt_t <var>format</var>, const char * <var>password</var>, unsigned int <var>flags</var>, gnutls_datum_t * <var>out</var>)</em></dt>
-<dd><p><var>key</var>: Holds the key.
-</p>
-<p><var>format</var>: One of gnutls_openpgp_crt_fmt_t elements.
-</p>
-<p><var>password</var>: the password that will be used to encrypt the key. (unused for now)
-</p>
-<p><var>flags</var>: (0) for future compatibility
-</p>
-<p><var>out</var>: will contain the raw or based64 encoded key
-</p>
-<p>This function will convert the given key to RAW or Base64 format.
-The output buffer is allocated using <code>gnutls_malloc()</code> .
-</p>
-<p><strong>Returns:</strong> <code>GNUTLS_E_SUCCESS</code>  on success, or an error code.
-</p>
-<p><strong>Since:</strong> 3.1.3
-</p></dd></dl>
-
-<a name="gnutls_005fopenpgp_005fprivkey_005fexport_005fdsa_005fraw-1"></a>
-<h4 class="subheading">gnutls_openpgp_privkey_export_dsa_raw</h4>
-<a name="gnutls_005fopenpgp_005fprivkey_005fexport_005fdsa_005fraw"></a><dl>
-<dt><a name="index-gnutls_005fopenpgp_005fprivkey_005fexport_005fdsa_005fraw"></a>Function: <em>int</em> <strong>gnutls_openpgp_privkey_export_dsa_raw</strong> <em>(gnutls_openpgp_privkey_t <var>pkey</var>, gnutls_datum_t * <var>p</var>, gnutls_datum_t * <var>q</var>, gnutls_datum_t * <var>g</var>, gnutls_datum_t * <var>y</var>, gnutls_datum_t * <var>x</var>)</em></dt>
-<dd><p><var>pkey</var>: Holds the certificate
-</p>
-<p><var>p</var>: will hold the p
-</p>
-<p><var>q</var>: will hold the q
-</p>
-<p><var>g</var>: will hold the g
-</p>
-<p><var>y</var>: will hold the y
-</p>
-<p><var>x</var>: will hold the x
-</p>
-<p>This function will export the DSA private key&rsquo;s parameters found in
-the given certificate.  The new parameters will be allocated using
-<code>gnutls_malloc()</code>  and will be stored in the appropriate datum.
-</p>
-<p><strong>Returns:</strong> <code>GNUTLS_E_SUCCESS</code>  on success, otherwise a negative error code.
-</p>
-<p><strong>Since:</strong> 2.4.0
-</p></dd></dl>
-
-<a name="gnutls_005fopenpgp_005fprivkey_005fexport_005frsa_005fraw-1"></a>
-<h4 class="subheading">gnutls_openpgp_privkey_export_rsa_raw</h4>
-<a name="gnutls_005fopenpgp_005fprivkey_005fexport_005frsa_005fraw"></a><dl>
-<dt><a name="index-gnutls_005fopenpgp_005fprivkey_005fexport_005frsa_005fraw"></a>Function: <em>int</em> <strong>gnutls_openpgp_privkey_export_rsa_raw</strong> <em>(gnutls_openpgp_privkey_t <var>pkey</var>, gnutls_datum_t * <var>m</var>, gnutls_datum_t * <var>e</var>, gnutls_datum_t * <var>d</var>, gnutls_datum_t * <var>p</var>, gnutls_datum_t * <var>q</var>, gnutls_datum_t * <var>u</var>)</em></dt>
-<dd><p><var>pkey</var>: Holds the certificate
-</p>
-<p><var>m</var>: will hold the modulus
-</p>
-<p><var>e</var>: will hold the public exponent
-</p>
-<p><var>d</var>: will hold the private exponent
-</p>
-<p><var>p</var>: will hold the first prime (p)
-</p>
-<p><var>q</var>: will hold the second prime (q)
-</p>
-<p><var>u</var>: will hold the coefficient
-</p>
-<p>This function will export the RSA private key&rsquo;s parameters found in
-the given structure.  The new parameters will be allocated using
-<code>gnutls_malloc()</code>  and will be stored in the appropriate datum.
-</p>
-<p><strong>Returns:</strong> <code>GNUTLS_E_SUCCESS</code>  on success, otherwise a negative error code.
-</p>
-<p><strong>Since:</strong> 2.4.0
-</p></dd></dl>
-
-<a name="gnutls_005fopenpgp_005fprivkey_005fexport_005fsubkey_005fdsa_005fraw-1"></a>
-<h4 class="subheading">gnutls_openpgp_privkey_export_subkey_dsa_raw</h4>
-<a name="gnutls_005fopenpgp_005fprivkey_005fexport_005fsubkey_005fdsa_005fraw"></a><dl>
-<dt><a name="index-gnutls_005fopenpgp_005fprivkey_005fexport_005fsubkey_005fdsa_005fraw"></a>Function: <em>int</em> <strong>gnutls_openpgp_privkey_export_subkey_dsa_raw</strong> <em>(gnutls_openpgp_privkey_t <var>pkey</var>, unsigned int <var>idx</var>, gnutls_datum_t * <var>p</var>, gnutls_datum_t * <var>q</var>, gnutls_datum_t * <var>g</var>, gnutls_datum_t * <var>y</var>, gnutls_datum_t * <var>x</var>)</em></dt>
-<dd><p><var>pkey</var>: Holds the certificate
-</p>
-<p><var>idx</var>: Is the subkey index
-</p>
-<p><var>p</var>: will hold the p
-</p>
-<p><var>q</var>: will hold the q
-</p>
-<p><var>g</var>: will hold the g
-</p>
-<p><var>y</var>: will hold the y
-</p>
-<p><var>x</var>: will hold the x
-</p>
-<p>This function will export the DSA private key&rsquo;s parameters found
-in the given certificate.  The new parameters will be allocated
-using <code>gnutls_malloc()</code>  and will be stored in the appropriate datum.
-</p>
-<p><strong>Returns:</strong> <code>GNUTLS_E_SUCCESS</code>  on success, otherwise a negative error code.
-</p>
-<p><strong>Since:</strong> 2.4.0
-</p></dd></dl>
-
-<a name="gnutls_005fopenpgp_005fprivkey_005fexport_005fsubkey_005frsa_005fraw-1"></a>
-<h4 class="subheading">gnutls_openpgp_privkey_export_subkey_rsa_raw</h4>
-<a name="gnutls_005fopenpgp_005fprivkey_005fexport_005fsubkey_005frsa_005fraw"></a><dl>
-<dt><a name="index-gnutls_005fopenpgp_005fprivkey_005fexport_005fsubkey_005frsa_005fraw"></a>Function: <em>int</em> <strong>gnutls_openpgp_privkey_export_subkey_rsa_raw</strong> <em>(gnutls_openpgp_privkey_t <var>pkey</var>, unsigned int <var>idx</var>, gnutls_datum_t * <var>m</var>, gnutls_datum_t * <var>e</var>, gnutls_datum_t * <var>d</var>, gnutls_datum_t * <var>p</var>, gnutls_datum_t * <var>q</var>, gnutls_datum_t * <var>u</var>)</em></dt>
-<dd><p><var>pkey</var>: Holds the certificate
-</p>
-<p><var>idx</var>: Is the subkey index
-</p>
-<p><var>m</var>: will hold the modulus
-</p>
-<p><var>e</var>: will hold the public exponent
-</p>
-<p><var>d</var>: will hold the private exponent
-</p>
-<p><var>p</var>: will hold the first prime (p)
-</p>
-<p><var>q</var>: will hold the second prime (q)
-</p>
-<p><var>u</var>: will hold the coefficient
-</p>
-<p>This function will export the RSA private key&rsquo;s parameters found in
-the given structure.  The new parameters will be allocated using
-<code>gnutls_malloc()</code>  and will be stored in the appropriate datum.
-</p>
-<p><strong>Returns:</strong> <code>GNUTLS_E_SUCCESS</code>  on success, otherwise a negative error code.
-</p>
-<p><strong>Since:</strong> 2.4.0
-</p></dd></dl>
-
-<a name="gnutls_005fopenpgp_005fprivkey_005fget_005ffingerprint-1"></a>
-<h4 class="subheading">gnutls_openpgp_privkey_get_fingerprint</h4>
-<a name="gnutls_005fopenpgp_005fprivkey_005fget_005ffingerprint"></a><dl>
-<dt><a name="index-gnutls_005fopenpgp_005fprivkey_005fget_005ffingerprint"></a>Function: <em>int</em> <strong>gnutls_openpgp_privkey_get_fingerprint</strong> <em>(gnutls_openpgp_privkey_t <var>key</var>, void * <var>fpr</var>, size_t * <var>fprlen</var>)</em></dt>
-<dd><p><var>key</var>: the raw data that contains the OpenPGP secret key.
-</p>
-<p><var>fpr</var>: the buffer to save the fingerprint, must hold at least 20 bytes.
-</p>
-<p><var>fprlen</var>: the integer to save the length of the fingerprint.
-</p>
-<p>Get the fingerprint of the OpenPGP key. Depends on the
-algorithm, the fingerprint can be 16 or 20 bytes.
-</p>
-<p><strong>Returns:</strong> On success, 0 is returned, or an error code.
-</p>
-<p><strong>Since:</strong> 2.4.0
-</p></dd></dl>
-
-<a name="gnutls_005fopenpgp_005fprivkey_005fget_005fkey_005fid-1"></a>
-<h4 class="subheading">gnutls_openpgp_privkey_get_key_id</h4>
-<a name="gnutls_005fopenpgp_005fprivkey_005fget_005fkey_005fid"></a><dl>
-<dt><a name="index-gnutls_005fopenpgp_005fprivkey_005fget_005fkey_005fid"></a>Function: <em>int</em> <strong>gnutls_openpgp_privkey_get_key_id</strong> <em>(gnutls_openpgp_privkey_t <var>key</var>, gnutls_openpgp_keyid_t <var>keyid</var>)</em></dt>
-<dd><p><var>key</var>: the structure that contains the OpenPGP secret key.
-</p>
-<p><var>keyid</var>: the buffer to save the keyid.
-</p>
-<p>Get key-id.
-</p>
-<p><strong>Returns:</strong> the 64-bit keyID of the OpenPGP key.
-</p>
-<p><strong>Since:</strong> 2.4.0
-</p></dd></dl>
-
-<a name="gnutls_005fopenpgp_005fprivkey_005fget_005fpk_005falgorithm-1"></a>
-<h4 class="subheading">gnutls_openpgp_privkey_get_pk_algorithm</h4>
-<a name="gnutls_005fopenpgp_005fprivkey_005fget_005fpk_005falgorithm"></a><dl>
-<dt><a name="index-gnutls_005fopenpgp_005fprivkey_005fget_005fpk_005falgorithm"></a>Function: <em>gnutls_pk_algorithm_t</em> <strong>gnutls_openpgp_privkey_get_pk_algorithm</strong> <em>(gnutls_openpgp_privkey_t <var>key</var>, unsigned int * <var>bits</var>)</em></dt>
-<dd><p><var>key</var>: is an OpenPGP key
-</p>
-<p><var>bits</var>: if bits is non null it will hold the size of the parameters&rsquo; in bits
-</p>
-<p>This function will return the public key algorithm of an OpenPGP
-certificate.
-</p>
-<p>If bits is non null, it should have enough size to hold the parameters
-size in bits. For RSA the bits returned is the modulus.
-For DSA the bits returned are of the public exponent.
-</p>
-<p><strong>Returns:</strong> a member of the <code>gnutls_pk_algorithm_t</code>  enumeration on
-success, or a negative error code on error.
-</p>
-<p><strong>Since:</strong> 2.4.0
-</p></dd></dl>
-
-<a name="gnutls_005fopenpgp_005fprivkey_005fget_005fpreferred_005fkey_005fid-1"></a>
-<h4 class="subheading">gnutls_openpgp_privkey_get_preferred_key_id</h4>
-<a name="gnutls_005fopenpgp_005fprivkey_005fget_005fpreferred_005fkey_005fid"></a><dl>
-<dt><a name="index-gnutls_005fopenpgp_005fprivkey_005fget_005fpreferred_005fkey_005fid"></a>Function: <em>int</em> <strong>gnutls_openpgp_privkey_get_preferred_key_id</strong> <em>(gnutls_openpgp_privkey_t <var>key</var>, gnutls_openpgp_keyid_t <var>keyid</var>)</em></dt>
-<dd><p><var>key</var>: the structure that contains the OpenPGP public key.
-</p>
-<p><var>keyid</var>: the struct to save the keyid.
-</p>
-<p>Get the preferred key-id for the key.
-</p>
-<p><strong>Returns:</strong> the 64-bit preferred keyID of the OpenPGP key, or if it
-hasn&rsquo;t been set it returns <code>GNUTLS_E_INVALID_REQUEST</code> .
-</p></dd></dl>
-
-<a name="gnutls_005fopenpgp_005fprivkey_005fget_005frevoked_005fstatus-1"></a>
-<h4 class="subheading">gnutls_openpgp_privkey_get_revoked_status</h4>
-<a name="gnutls_005fopenpgp_005fprivkey_005fget_005frevoked_005fstatus"></a><dl>
-<dt><a name="index-gnutls_005fopenpgp_005fprivkey_005fget_005frevoked_005fstatus"></a>Function: <em>int</em> <strong>gnutls_openpgp_privkey_get_revoked_status</strong> <em>(gnutls_openpgp_privkey_t <var>key</var>)</em></dt>
-<dd><p><var>key</var>: the structure that contains the OpenPGP private key.
-</p>
-<p>Get revocation status of key.
-</p>
-<p><strong>Returns:</strong> true (1) if the key has been revoked, or false (0) if it
-has not, or a negative error code indicates an error.
-</p>
-<p><strong>Since:</strong> 2.4.0
-</p></dd></dl>
-
-<a name="gnutls_005fopenpgp_005fprivkey_005fget_005fsubkey_005fcount-1"></a>
-<h4 class="subheading">gnutls_openpgp_privkey_get_subkey_count</h4>
-<a name="gnutls_005fopenpgp_005fprivkey_005fget_005fsubkey_005fcount"></a><dl>
-<dt><a name="index-gnutls_005fopenpgp_005fprivkey_005fget_005fsubkey_005fcount"></a>Function: <em>int</em> <strong>gnutls_openpgp_privkey_get_subkey_count</strong> <em>(gnutls_openpgp_privkey_t <var>key</var>)</em></dt>
-<dd><p><var>key</var>: is an OpenPGP key
-</p>
-<p>This function will return the number of subkeys present in the
-given OpenPGP certificate.
-</p>
-<p><strong>Returns:</strong> the number of subkeys, or a negative error code on error.
-</p>
-<p><strong>Since:</strong> 2.4.0
-</p></dd></dl>
-
-<a name="gnutls_005fopenpgp_005fprivkey_005fget_005fsubkey_005fcreation_005ftime-1"></a>
-<h4 class="subheading">gnutls_openpgp_privkey_get_subkey_creation_time</h4>
-<a name="gnutls_005fopenpgp_005fprivkey_005fget_005fsubkey_005fcreation_005ftime"></a><dl>
-<dt><a name="index-gnutls_005fopenpgp_005fprivkey_005fget_005fsubkey_005fcreation_005ftime"></a>Function: <em>time_t</em> <strong>gnutls_openpgp_privkey_get_subkey_creation_time</strong> <em>(gnutls_openpgp_privkey_t       <var>key</var>, unsigned int <var>idx</var>)</em></dt>
-<dd><p><var>key</var>: the structure that contains the OpenPGP private key.
-</p>
-<p><var>idx</var>: the subkey index
-</p>
-<p>Get subkey creation time.
-</p>
-<p><strong>Returns:</strong> the timestamp when the OpenPGP key was created.
-</p>
-<p><strong>Since:</strong> 2.4.0
-</p></dd></dl>
-
-<a name="gnutls_005fopenpgp_005fprivkey_005fget_005fsubkey_005fexpiration_005ftime-1"></a>
-<h4 class="subheading">gnutls_openpgp_privkey_get_subkey_expiration_time</h4>
-<a name="gnutls_005fopenpgp_005fprivkey_005fget_005fsubkey_005fexpiration_005ftime"></a><dl>
-<dt><a name="index-gnutls_005fopenpgp_005fprivkey_005fget_005fsubkey_005fexpiration_005ftime"></a>Function: <em>time_t</em> <strong>gnutls_openpgp_privkey_get_subkey_expiration_time</strong> <em>(gnutls_openpgp_privkey_t         <var>key</var>, unsigned int <var>idx</var>)</em></dt>
-<dd><p><var>key</var>: the structure that contains the OpenPGP private key.
-</p>
-<p><var>idx</var>: the subkey index
-</p>
-<p>Get subkey expiration time.  A value of &rsquo;0&rsquo; means that the key
-doesn&rsquo;t expire at all.
-</p>
-<p><strong>Returns:</strong> the time when the OpenPGP key expires.
-</p>
-<p><strong>Since:</strong> 2.4.0
-</p></dd></dl>
-
-<a name="gnutls_005fopenpgp_005fprivkey_005fget_005fsubkey_005ffingerprint-1"></a>
-<h4 class="subheading">gnutls_openpgp_privkey_get_subkey_fingerprint</h4>
-<a name="gnutls_005fopenpgp_005fprivkey_005fget_005fsubkey_005ffingerprint"></a><dl>
-<dt><a name="index-gnutls_005fopenpgp_005fprivkey_005fget_005fsubkey_005ffingerprint"></a>Function: <em>int</em> <strong>gnutls_openpgp_privkey_get_subkey_fingerprint</strong> <em>(gnutls_openpgp_privkey_t <var>key</var>, unsigned int <var>idx</var>, void * <var>fpr</var>, size_t * <var>fprlen</var>)</em></dt>
-<dd><p><var>key</var>: the raw data that contains the OpenPGP secret key.
-</p>
-<p><var>idx</var>: the subkey index
-</p>
-<p><var>fpr</var>: the buffer to save the fingerprint, must hold at least 20 bytes.
-</p>
-<p><var>fprlen</var>: the integer to save the length of the fingerprint.
-</p>
-<p>Get the fingerprint of an OpenPGP subkey.  Depends on the
-algorithm, the fingerprint can be 16 or 20 bytes.
-</p>
-<p><strong>Returns:</strong> On success, 0 is returned, or an error code.
-</p>
-<p><strong>Since:</strong> 2.4.0
-</p></dd></dl>
-
-<a name="gnutls_005fopenpgp_005fprivkey_005fget_005fsubkey_005fid-1"></a>
-<h4 class="subheading">gnutls_openpgp_privkey_get_subkey_id</h4>
-<a name="gnutls_005fopenpgp_005fprivkey_005fget_005fsubkey_005fid"></a><dl>
-<dt><a name="index-gnutls_005fopenpgp_005fprivkey_005fget_005fsubkey_005fid"></a>Function: <em>int</em> <strong>gnutls_openpgp_privkey_get_subkey_id</strong> <em>(gnutls_openpgp_privkey_t <var>key</var>, unsigned int <var>idx</var>, gnutls_openpgp_keyid_t <var>keyid</var>)</em></dt>
-<dd><p><var>key</var>: the structure that contains the OpenPGP secret key.
-</p>
-<p><var>idx</var>: the subkey index
-</p>
-<p><var>keyid</var>: the buffer to save the keyid.
-</p>
-<p>Get the key-id for the subkey.
-</p>
-<p><strong>Returns:</strong> the 64-bit keyID of the OpenPGP key.
-</p>
-<p><strong>Since:</strong> 2.4.0
-</p></dd></dl>
-
-<a name="gnutls_005fopenpgp_005fprivkey_005fget_005fsubkey_005fidx-1"></a>
-<h4 class="subheading">gnutls_openpgp_privkey_get_subkey_idx</h4>
-<a name="gnutls_005fopenpgp_005fprivkey_005fget_005fsubkey_005fidx"></a><dl>
-<dt><a name="index-gnutls_005fopenpgp_005fprivkey_005fget_005fsubkey_005fidx"></a>Function: <em>int</em> <strong>gnutls_openpgp_privkey_get_subkey_idx</strong> <em>(gnutls_openpgp_privkey_t <var>key</var>, const gnutls_openpgp_keyid_t <var>keyid</var>)</em></dt>
-<dd><p><var>key</var>: the structure that contains the OpenPGP private key.
-</p>
-<p><var>keyid</var>: the keyid.
-</p>
-<p>Get index of subkey.
-</p>
-<p><strong>Returns:</strong> the index of the subkey or a negative error value.
-</p>
-<p><strong>Since:</strong> 2.4.0
-</p></dd></dl>
-
-<a name="gnutls_005fopenpgp_005fprivkey_005fget_005fsubkey_005fpk_005falgorithm-1"></a>
-<h4 class="subheading">gnutls_openpgp_privkey_get_subkey_pk_algorithm</h4>
-<a name="gnutls_005fopenpgp_005fprivkey_005fget_005fsubkey_005fpk_005falgorithm"></a><dl>
-<dt><a name="index-gnutls_005fopenpgp_005fprivkey_005fget_005fsubkey_005fpk_005falgorithm"></a>Function: <em>gnutls_pk_algorithm_t</em> <strong>gnutls_openpgp_privkey_get_subkey_pk_algorithm</strong> <em>(gnutls_openpgp_privkey_t             <var>key</var>, unsigned int <var>idx</var>, unsigned int * <var>bits</var>)</em></dt>
-<dd><p><var>key</var>: is an OpenPGP key
-</p>
-<p><var>idx</var>: is the subkey index
-</p>
-<p><var>bits</var>: if bits is non null it will hold the size of the parameters&rsquo; in bits
-</p>
-<p>This function will return the public key algorithm of a subkey of an OpenPGP
-certificate.
-</p>
-<p>If bits is non null, it should have enough size to hold the parameters
-size in bits. For RSA the bits returned is the modulus.
-For DSA the bits returned are of the public exponent.
-</p>
-<p><strong>Returns:</strong> a member of the <code>gnutls_pk_algorithm_t</code>  enumeration on
-success, or a negative error code on error.
-</p>
-<p><strong>Since:</strong> 2.4.0
-</p></dd></dl>
-
-<a name="gnutls_005fopenpgp_005fprivkey_005fget_005fsubkey_005frevoked_005fstatus-1"></a>
-<h4 class="subheading">gnutls_openpgp_privkey_get_subkey_revoked_status</h4>
-<a name="gnutls_005fopenpgp_005fprivkey_005fget_005fsubkey_005frevoked_005fstatus"></a><dl>
-<dt><a name="index-gnutls_005fopenpgp_005fprivkey_005fget_005fsubkey_005frevoked_005fstatus"></a>Function: <em>int</em> <strong>gnutls_openpgp_privkey_get_subkey_revoked_status</strong> <em>(gnutls_openpgp_privkey_t        <var>key</var>, unsigned int <var>idx</var>)</em></dt>
-<dd><p><var>key</var>: the structure that contains the OpenPGP private key.
-</p>
-<p><var>idx</var>: is the subkey index
-</p>
-<p>Get revocation status of key.
-</p>
-<p><strong>Returns:</strong> true (1) if the key has been revoked, or false (0) if it
-has not, or a negative error code indicates an error.
-</p>
-<p><strong>Since:</strong> 2.4.0
-</p></dd></dl>
-
-<a name="gnutls_005fopenpgp_005fprivkey_005fimport-1"></a>
-<h4 class="subheading">gnutls_openpgp_privkey_import</h4>
-<a name="gnutls_005fopenpgp_005fprivkey_005fimport"></a><dl>
-<dt><a name="index-gnutls_005fopenpgp_005fprivkey_005fimport"></a>Function: <em>int</em> <strong>gnutls_openpgp_privkey_import</strong> <em>(gnutls_openpgp_privkey_t <var>key</var>, const gnutls_datum_t * <var>data</var>, gnutls_openpgp_crt_fmt_t <var>format</var>, const char * <var>password</var>, unsigned int <var>flags</var>)</em></dt>
-<dd><p><var>key</var>: The structure to store the parsed key.
-</p>
-<p><var>data</var>: The RAW or BASE64 encoded key.
-</p>
-<p><var>format</var>: One of <code>gnutls_openpgp_crt_fmt_t</code>  elements.
-</p>
-<p><var>password</var>: not used for now
-</p>
-<p><var>flags</var>: should be (0)
-</p>
-<p>This function will convert the given RAW or Base64 encoded key to
-the native gnutls_openpgp_privkey_t format.  The output will be
-stored in &rsquo;key&rsquo;.
-</p>
-<p><strong>Returns:</strong> <code>GNUTLS_E_SUCCESS</code>  on success, or an error code.
-</p></dd></dl>
-
-<a name="gnutls_005fopenpgp_005fprivkey_005finit-1"></a>
-<h4 class="subheading">gnutls_openpgp_privkey_init</h4>
-<a name="gnutls_005fopenpgp_005fprivkey_005finit"></a><dl>
-<dt><a name="index-gnutls_005fopenpgp_005fprivkey_005finit"></a>Function: <em>int</em> <strong>gnutls_openpgp_privkey_init</strong> <em>(gnutls_openpgp_privkey_t * <var>key</var>)</em></dt>
-<dd><p><var>key</var>: A pointer to the type to be initialized
-</p>
-<p>This function will initialize an OpenPGP key structure.
-</p>
-<p><strong>Returns:</strong> <code>GNUTLS_E_SUCCESS</code>  on success, or an error code.
-</p></dd></dl>
-
-<a name="gnutls_005fopenpgp_005fprivkey_005fsec_005fparam-1"></a>
-<h4 class="subheading">gnutls_openpgp_privkey_sec_param</h4>
-<a name="gnutls_005fopenpgp_005fprivkey_005fsec_005fparam"></a><dl>
-<dt><a name="index-gnutls_005fopenpgp_005fprivkey_005fsec_005fparam"></a>Function: <em>gnutls_sec_param_t</em> <strong>gnutls_openpgp_privkey_sec_param</strong> <em>(gnutls_openpgp_privkey_t <var>key</var>)</em></dt>
-<dd><p><var>key</var>: a key structure
-</p>
-<p>This function will return the security parameter appropriate with
-this private key.
-</p>
-<p><strong>Returns:</strong> On success, a valid security parameter is returned otherwise
-<code>GNUTLS_SEC_PARAM_UNKNOWN</code>  is returned.
-</p>
-<p><strong>Since:</strong> 2.12.0
-</p></dd></dl>
-
-<a name="gnutls_005fopenpgp_005fprivkey_005fset_005fpreferred_005fkey_005fid-1"></a>
-<h4 class="subheading">gnutls_openpgp_privkey_set_preferred_key_id</h4>
-<a name="gnutls_005fopenpgp_005fprivkey_005fset_005fpreferred_005fkey_005fid"></a><dl>
-<dt><a name="index-gnutls_005fopenpgp_005fprivkey_005fset_005fpreferred_005fkey_005fid"></a>Function: <em>int</em> <strong>gnutls_openpgp_privkey_set_preferred_key_id</strong> <em>(gnutls_openpgp_privkey_t <var>key</var>, const gnutls_openpgp_keyid_t          <var>keyid</var>)</em></dt>
-<dd><p><var>key</var>: the structure that contains the OpenPGP public key.
-</p>
-<p><var>keyid</var>: the selected keyid
-</p>
-<p>This allows setting a preferred key id for the given certificate.
-This key will be used by functions that involve key handling.
-</p>
-<p>If the provided  <code>keyid</code> is <code>NULL</code>  then the master key is
-set as preferred.
-</p>
-<p><strong>Returns:</strong> On success, <code>GNUTLS_E_SUCCESS</code>  (0) is returned,
-otherwise a negative error code is returned.
-</p></dd></dl>
-
-<a name="gnutls_005fopenpgp_005fset_005frecv_005fkey_005ffunction-1"></a>
-<h4 class="subheading">gnutls_openpgp_set_recv_key_function</h4>
-<a name="gnutls_005fopenpgp_005fset_005frecv_005fkey_005ffunction"></a><dl>
-<dt><a name="index-gnutls_005fopenpgp_005fset_005frecv_005fkey_005ffunction"></a>Function: <em>void</em> <strong>gnutls_openpgp_set_recv_key_function</strong> <em>(gnutls_session_t <var>session</var>, gnutls_openpgp_recv_key_func <var>func</var>)</em></dt>
-<dd><p><var>session</var>: a TLS session
-</p>
-<p><var>func</var>: the callback
-</p>
-<p>This function will set a key retrieval function for OpenPGP keys. This
-callback is only useful in server side, and will be used if the peer
-sent a key fingerprint instead of a full key.
-</p>
-<p>The retrieved key must be allocated using <code>gnutls_malloc()</code> .
-</p></dd></dl>
-
-
-<hr>
 <a name="PKCS-12-API"></a>
 <div class="header">
 <p>
-Next: <a href="#PKCS-11-API" accesskey="n" rel="next">PKCS 11 API</a>, Previous: <a href="#OpenPGP-API" accesskey="p" rel="prev">OpenPGP API</a>, Up: <a href="#API-reference" accesskey="u" rel="up">API reference</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Function-and-Data-Index" title="Index" rel="index">Index</a>]</p>
+Next: <a href="#PKCS-11-API" accesskey="n" rel="next">PKCS 11 API</a>, Previous: <a href="#OCSP-API" accesskey="p" rel="prev">OCSP API</a>, Up: <a href="#API-reference" accesskey="u" rel="up">API reference</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Function-and-Data-Index" title="Index" rel="index">Index</a>]</p>
 </div>
 <a name="PKCS-12-API-1"></a>
-<h3 class="section">E.7 PKCS 12 API</h3>
+<h3 class="section">E.6 PKCS 12 API</h3>
 
 <p>The following functions are to be used for PKCS 12 handling.
 Their prototypes lie in <samp>gnutls/pkcs12.h</samp>.
@@ -36616,7 +35130,7 @@ negative error value.
 Next: <a href="#TPM-API" accesskey="n" rel="next">TPM API</a>, Previous: <a href="#PKCS-12-API" accesskey="p" rel="prev">PKCS 12 API</a>, Up: <a href="#API-reference" accesskey="u" rel="up">API reference</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Function-and-Data-Index" title="Index" rel="index">Index</a>]</p>
 </div>
 <a name="Hardware-token-via-PKCS-11-API"></a>
-<h3 class="section">E.8 Hardware token via PKCS 11 API</h3>
+<h3 class="section">E.7 Hardware token via PKCS 11 API</h3>
 
 <p>The following functions are to be used for PKCS 11 handling.
 Their prototypes lie in <samp>gnutls/pkcs11.h</samp>.
@@ -37838,7 +36352,7 @@ negative error value.
 Next: <a href="#Abstract-key-API" accesskey="n" rel="next">Abstract key API</a>, Previous: <a href="#PKCS-11-API" accesskey="p" rel="prev">PKCS 11 API</a>, Up: <a href="#API-reference" accesskey="u" rel="up">API reference</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Function-and-Data-Index" title="Index" rel="index">Index</a>]</p>
 </div>
 <a name="TPM-API-1"></a>
-<h3 class="section">E.9 TPM API</h3>
+<h3 class="section">E.8 TPM API</h3>
 
 <p>The following functions are to be used for TPM handling.
 Their prototypes lie in <samp>gnutls/tpm.h</samp>.
@@ -37958,7 +36472,7 @@ negative error value.
 Next: <a href="#Socket-specific-API" accesskey="n" rel="next">Socket specific API</a>, Previous: <a href="#TPM-API" accesskey="p" rel="prev">TPM API</a>, Up: <a href="#API-reference" accesskey="u" rel="up">API reference</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Function-and-Data-Index" title="Index" rel="index">Index</a>]</p>
 </div>
 <a name="Abstract-key-API-1"></a>
-<h3 class="section">E.10 Abstract key API</h3>
+<h3 class="section">E.9 Abstract key API</h3>
 
 <p>The following functions are to be used for abstract key handling.
 Their prototypes lie in <samp>gnutls/abstract.h</samp>.
@@ -40082,7 +38596,7 @@ negative error value.
 Next: <a href="#DANE-API" accesskey="n" rel="next">DANE API</a>, Previous: <a href="#Abstract-key-API" accesskey="p" rel="prev">Abstract key API</a>, Up: <a href="#API-reference" accesskey="u" rel="up">API reference</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Function-and-Data-Index" title="Index" rel="index">Index</a>]</p>
 </div>
 <a name="Socket-specific-API-1"></a>
-<h3 class="section">E.11 Socket specific API</h3>
+<h3 class="section">E.10 Socket specific API</h3>
 
 <p>The prototypes for the following functions lie in
 <samp>gnutls/socket.h</samp>.
@@ -40134,7 +38648,7 @@ in /proc/sys/net/ipv4/tcp_fastopen, bit 0 has to be set.
 Next: <a href="#Cryptographic-API" accesskey="n" rel="next">Cryptographic API</a>, Previous: <a href="#Socket-specific-API" accesskey="p" rel="prev">Socket specific API</a>, Up: <a href="#API-reference" accesskey="u" rel="up">API reference</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Function-and-Data-Index" title="Index" rel="index">Index</a>]</p>
 </div>
 <a name="DANE-API-1"></a>
-<h3 class="section">E.12 DANE API</h3>
+<h3 class="section">E.11 DANE API</h3>
 
 <p>The following functions are to be used for DANE certificate verification.
 Their prototypes lie in <samp>gnutls/dane.h</samp>. Note that you need to link
@@ -40507,7 +39021,7 @@ will be returned.
 Next: <a href="#Compatibility-API" accesskey="n" rel="next">Compatibility API</a>, Previous: <a href="#DANE-API" accesskey="p" rel="prev">DANE API</a>, Up: <a href="#API-reference" accesskey="u" rel="up">API reference</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Function-and-Data-Index" title="Index" rel="index">Index</a>]</p>
 </div>
 <a name="Cryptographic-API-1"></a>
-<h3 class="section">E.13 Cryptographic API</h3>
+<h3 class="section">E.12 Cryptographic API</h3>
 
 <p>The following functions are to be used for low-level cryptographic operations.
 Their prototypes lie in <samp>gnutls/crypto.h</samp>.
@@ -41280,7 +39794,7 @@ other values are input into its state.
 Previous: <a href="#Cryptographic-API" accesskey="p" rel="prev">Cryptographic API</a>, Up: <a href="#API-reference" accesskey="u" rel="up">API reference</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Function-and-Data-Index" title="Index" rel="index">Index</a>]</p>
 </div>
 <a name="Compatibility-API-1"></a>
-<h3 class="section">E.14 Compatibility API</h3>
+<h3 class="section">E.13 Compatibility API</h3>
 
 <p>The following functions are carried over from old GnuTLS released. They might be removed at a later version.
 Their prototypes lie in <samp>gnutls/compat.h</samp>.
@@ -42302,8 +40816,6 @@ Next: <a href="#Concept-Index" accesskey="n" rel="next">Concept Index</a>, Previ
 <tr><td></td><td valign="top"><a href="#index-gnutls_005fcertificate_005ffree_005fkeys"><code>gnutls_certificate_free_keys</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Core-TLS-API">Core TLS API</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-gnutls_005fcertificate_005fget_005fcrt_005fraw"><code>gnutls_certificate_get_crt_raw</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Core-TLS-API">Core TLS API</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-gnutls_005fcertificate_005fget_005fissuer"><code>gnutls_certificate_get_issuer</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Core-TLS-API">Core TLS API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fcertificate_005fget_005fopenpgp_005fcrt"><code>gnutls_certificate_get_openpgp_crt</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fcertificate_005fget_005fopenpgp_005fkey"><code>gnutls_certificate_get_openpgp_key</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-gnutls_005fcertificate_005fget_005fours"><code>gnutls_certificate_get_ours</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Core-TLS-API">Core TLS API</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-gnutls_005fcertificate_005fget_005fpeers"><code>gnutls_certificate_get_peers</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Core-TLS-API">Core TLS API</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-gnutls_005fcertificate_005fget_005fpeers_005fsubkey_005fid"><code>gnutls_certificate_get_peers_subkey_id</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Core-TLS-API">Core TLS API</a></td></tr>
@@ -42323,14 +40835,6 @@ Next: <a href="#Concept-Index" accesskey="n" rel="next">Concept Index</a>, Previ
 <tr><td></td><td valign="top"><a href="#index-gnutls_005fcertificate_005fset_005focsp_005fstatus_005frequest_005ffile"><code>gnutls_certificate_set_ocsp_status_request_file</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Core-TLS-API">Core TLS API</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-gnutls_005fcertificate_005fset_005focsp_005fstatus_005frequest_005ffunction"><code>gnutls_certificate_set_ocsp_status_request_function</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Core-TLS-API">Core TLS API</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-gnutls_005fcertificate_005fset_005focsp_005fstatus_005frequest_005ffunction2"><code>gnutls_certificate_set_ocsp_status_request_function2</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Core-TLS-API">Core TLS API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fcertificate_005fset_005fopenpgp_005fkey"><code>gnutls_certificate_set_openpgp_key</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fcertificate_005fset_005fopenpgp_005fkeyring_005ffile"><code>gnutls_certificate_set_openpgp_keyring_file</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-certificates">OpenPGP certificates</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fcertificate_005fset_005fopenpgp_005fkeyring_005ffile-1"><code>gnutls_certificate_set_openpgp_keyring_file</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fcertificate_005fset_005fopenpgp_005fkeyring_005fmem"><code>gnutls_certificate_set_openpgp_keyring_mem</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fcertificate_005fset_005fopenpgp_005fkey_005ffile"><code>gnutls_certificate_set_openpgp_key_file</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fcertificate_005fset_005fopenpgp_005fkey_005ffile2"><code>gnutls_certificate_set_openpgp_key_file2</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fcertificate_005fset_005fopenpgp_005fkey_005fmem"><code>gnutls_certificate_set_openpgp_key_mem</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fcertificate_005fset_005fopenpgp_005fkey_005fmem2"><code>gnutls_certificate_set_openpgp_key_mem2</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-gnutls_005fcertificate_005fset_005fparams_005ffunction"><code>gnutls_certificate_set_params_function</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Core-TLS-API">Core TLS API</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-gnutls_005fcertificate_005fset_005fpin_005ffunction"><code>gnutls_certificate_set_pin_function</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Certificate-credentials">Certificate credentials</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-gnutls_005fcertificate_005fset_005fpin_005ffunction-1"><code>gnutls_certificate_set_pin_function</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Core-TLS-API">Core TLS API</a></td></tr>
@@ -42510,6 +41014,8 @@ Next: <a href="#Concept-Index" accesskey="n" rel="next">Concept Index</a>, Previ
 <tr><td></td><td valign="top"><a href="#index-gnutls_005fhmac_005finit"><code>gnutls_hmac_init</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Cryptographic-API">Cryptographic API</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-gnutls_005fhmac_005foutput"><code>gnutls_hmac_output</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Cryptographic-API">Cryptographic API</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-gnutls_005fhmac_005fset_005fnonce"><code>gnutls_hmac_set_nonce</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Cryptographic-API">Cryptographic API</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-gnutls_005fidna_005fmap"><code>gnutls_idna_map</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Core-TLS-API">Core TLS API</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-gnutls_005fidna_005freverse_005fmap"><code>gnutls_idna_reverse_map</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Core-TLS-API">Core TLS API</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-gnutls_005finit"><code>gnutls_init</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Session-initialization">Session initialization</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-gnutls_005finit-1"><code>gnutls_init</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Core-TLS-API">Core TLS API</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-gnutls_005fkey_005fgenerate"><code>gnutls_key_generate</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Core-TLS-API">Core TLS API</a></td></tr>
@@ -42570,77 +41076,8 @@ Next: <a href="#Concept-Index" accesskey="n" rel="next">Concept Index</a>, Previ
 <tr><td></td><td valign="top"><a href="#index-gnutls_005foid_005fto_005fmac"><code>gnutls_oid_to_mac</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Core-TLS-API">Core TLS API</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-gnutls_005foid_005fto_005fpk"><code>gnutls_oid_to_pk</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Core-TLS-API">Core TLS API</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-gnutls_005foid_005fto_005fsign"><code>gnutls_oid_to_sign</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Core-TLS-API">Core TLS API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fopenpgp_005fcrt_005fcheck_005femail"><code>gnutls_openpgp_crt_check_email</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fopenpgp_005fcrt_005fcheck_005fhostname"><code>gnutls_openpgp_crt_check_hostname</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fopenpgp_005fcrt_005fcheck_005fhostname2"><code>gnutls_openpgp_crt_check_hostname2</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fopenpgp_005fcrt_005fdeinit"><code>gnutls_openpgp_crt_deinit</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fopenpgp_005fcrt_005fexport"><code>gnutls_openpgp_crt_export</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fopenpgp_005fcrt_005fexport2"><code>gnutls_openpgp_crt_export2</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fopenpgp_005fcrt_005fget_005fauth_005fsubkey"><code>gnutls_openpgp_crt_get_auth_subkey</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fopenpgp_005fcrt_005fget_005fcreation_005ftime"><code>gnutls_openpgp_crt_get_creation_time</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fopenpgp_005fcrt_005fget_005fexpiration_005ftime"><code>gnutls_openpgp_crt_get_expiration_time</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fopenpgp_005fcrt_005fget_005ffingerprint"><code>gnutls_openpgp_crt_get_fingerprint</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fopenpgp_005fcrt_005fget_005fkey_005fid"><code>gnutls_openpgp_crt_get_key_id</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fopenpgp_005fcrt_005fget_005fkey_005fusage"><code>gnutls_openpgp_crt_get_key_usage</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fopenpgp_005fcrt_005fget_005fname"><code>gnutls_openpgp_crt_get_name</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fopenpgp_005fcrt_005fget_005fpk_005falgorithm"><code>gnutls_openpgp_crt_get_pk_algorithm</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fopenpgp_005fcrt_005fget_005fpk_005fdsa_005fraw"><code>gnutls_openpgp_crt_get_pk_dsa_raw</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fopenpgp_005fcrt_005fget_005fpk_005frsa_005fraw"><code>gnutls_openpgp_crt_get_pk_rsa_raw</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fopenpgp_005fcrt_005fget_005fpreferred_005fkey_005fid"><code>gnutls_openpgp_crt_get_preferred_key_id</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fopenpgp_005fcrt_005fget_005frevoked_005fstatus"><code>gnutls_openpgp_crt_get_revoked_status</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fopenpgp_005fcrt_005fget_005fsubkey_005fcount"><code>gnutls_openpgp_crt_get_subkey_count</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fopenpgp_005fcrt_005fget_005fsubkey_005fcreation_005ftime"><code>gnutls_openpgp_crt_get_subkey_creation_time</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fopenpgp_005fcrt_005fget_005fsubkey_005fexpiration_005ftime"><code>gnutls_openpgp_crt_get_subkey_expiration_time</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fopenpgp_005fcrt_005fget_005fsubkey_005ffingerprint"><code>gnutls_openpgp_crt_get_subkey_fingerprint</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fopenpgp_005fcrt_005fget_005fsubkey_005fid"><code>gnutls_openpgp_crt_get_subkey_id</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fopenpgp_005fcrt_005fget_005fsubkey_005fidx"><code>gnutls_openpgp_crt_get_subkey_idx</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fopenpgp_005fcrt_005fget_005fsubkey_005fpk_005falgorithm"><code>gnutls_openpgp_crt_get_subkey_pk_algorithm</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fopenpgp_005fcrt_005fget_005fsubkey_005fpk_005fdsa_005fraw"><code>gnutls_openpgp_crt_get_subkey_pk_dsa_raw</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fopenpgp_005fcrt_005fget_005fsubkey_005fpk_005frsa_005fraw"><code>gnutls_openpgp_crt_get_subkey_pk_rsa_raw</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fopenpgp_005fcrt_005fget_005fsubkey_005frevoked_005fstatus"><code>gnutls_openpgp_crt_get_subkey_revoked_status</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fopenpgp_005fcrt_005fget_005fsubkey_005fusage"><code>gnutls_openpgp_crt_get_subkey_usage</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fopenpgp_005fcrt_005fget_005fversion"><code>gnutls_openpgp_crt_get_version</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fopenpgp_005fcrt_005fimport"><code>gnutls_openpgp_crt_import</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fopenpgp_005fcrt_005finit"><code>gnutls_openpgp_crt_init</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fopenpgp_005fcrt_005fprint"><code>gnutls_openpgp_crt_print</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fopenpgp_005fcrt_005fset_005fpreferred_005fkey_005fid"><code>gnutls_openpgp_crt_set_preferred_key_id</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fopenpgp_005fcrt_005fverify_005fring"><code>gnutls_openpgp_crt_verify_ring</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-certificates">OpenPGP certificates</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fopenpgp_005fcrt_005fverify_005fring-1"><code>gnutls_openpgp_crt_verify_ring</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fopenpgp_005fcrt_005fverify_005fself"><code>gnutls_openpgp_crt_verify_self</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-certificates">OpenPGP certificates</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fopenpgp_005fcrt_005fverify_005fself-1"><code>gnutls_openpgp_crt_verify_self</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fopenpgp_005fkeyring_005fcheck_005fid"><code>gnutls_openpgp_keyring_check_id</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fopenpgp_005fkeyring_005fdeinit"><code>gnutls_openpgp_keyring_deinit</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fopenpgp_005fkeyring_005fget_005fcrt"><code>gnutls_openpgp_keyring_get_crt</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fopenpgp_005fkeyring_005fget_005fcrt_005fcount"><code>gnutls_openpgp_keyring_get_crt_count</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fopenpgp_005fkeyring_005fimport"><code>gnutls_openpgp_keyring_import</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fopenpgp_005fkeyring_005finit"><code>gnutls_openpgp_keyring_init</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fopenpgp_005fprivkey_005fdeinit"><code>gnutls_openpgp_privkey_deinit</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fopenpgp_005fprivkey_005fexport"><code>gnutls_openpgp_privkey_export</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fopenpgp_005fprivkey_005fexport2"><code>gnutls_openpgp_privkey_export2</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fopenpgp_005fprivkey_005fexport_005fdsa_005fraw"><code>gnutls_openpgp_privkey_export_dsa_raw</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fopenpgp_005fprivkey_005fexport_005frsa_005fraw"><code>gnutls_openpgp_privkey_export_rsa_raw</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fopenpgp_005fprivkey_005fexport_005fsubkey_005fdsa_005fraw"><code>gnutls_openpgp_privkey_export_subkey_dsa_raw</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fopenpgp_005fprivkey_005fexport_005fsubkey_005frsa_005fraw"><code>gnutls_openpgp_privkey_export_subkey_rsa_raw</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fopenpgp_005fprivkey_005fget_005ffingerprint"><code>gnutls_openpgp_privkey_get_fingerprint</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fopenpgp_005fprivkey_005fget_005fkey_005fid"><code>gnutls_openpgp_privkey_get_key_id</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fopenpgp_005fprivkey_005fget_005fpk_005falgorithm"><code>gnutls_openpgp_privkey_get_pk_algorithm</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fopenpgp_005fprivkey_005fget_005fpreferred_005fkey_005fid"><code>gnutls_openpgp_privkey_get_preferred_key_id</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fopenpgp_005fprivkey_005fget_005frevoked_005fstatus"><code>gnutls_openpgp_privkey_get_revoked_status</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fopenpgp_005fprivkey_005fget_005fsubkey_005fcount"><code>gnutls_openpgp_privkey_get_subkey_count</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fopenpgp_005fprivkey_005fget_005fsubkey_005fcreation_005ftime"><code>gnutls_openpgp_privkey_get_subkey_creation_time</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fopenpgp_005fprivkey_005fget_005fsubkey_005fexpiration_005ftime"><code>gnutls_openpgp_privkey_get_subkey_expiration_time</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fopenpgp_005fprivkey_005fget_005fsubkey_005ffingerprint"><code>gnutls_openpgp_privkey_get_subkey_fingerprint</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fopenpgp_005fprivkey_005fget_005fsubkey_005fid"><code>gnutls_openpgp_privkey_get_subkey_id</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fopenpgp_005fprivkey_005fget_005fsubkey_005fidx"><code>gnutls_openpgp_privkey_get_subkey_idx</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fopenpgp_005fprivkey_005fget_005fsubkey_005fpk_005falgorithm"><code>gnutls_openpgp_privkey_get_subkey_pk_algorithm</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fopenpgp_005fprivkey_005fget_005fsubkey_005frevoked_005fstatus"><code>gnutls_openpgp_privkey_get_subkey_revoked_status</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fopenpgp_005fprivkey_005fimport"><code>gnutls_openpgp_privkey_import</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fopenpgp_005fprivkey_005finit"><code>gnutls_openpgp_privkey_init</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fopenpgp_005fprivkey_005fsec_005fparam"><code>gnutls_openpgp_privkey_sec_param</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fopenpgp_005fprivkey_005fset_005fpreferred_005fkey_005fid"><code>gnutls_openpgp_privkey_set_preferred_key_id</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-gnutls_005fopenpgp_005fprivkey_005fsign_005fhash"><code>gnutls_openpgp_privkey_sign_hash</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Compatibility-API">Compatibility API</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-gnutls_005fopenpgp_005fsend_005fcert"><code>gnutls_openpgp_send_cert</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Core-TLS-API">Core TLS API</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-gnutls_005fopenpgp_005fset_005frecv_005fkey_005ffunction"><code>gnutls_openpgp_set_recv_key_function</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-gnutls_005fpacket_005fdeinit"><code>gnutls_packet_deinit</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Core-TLS-API">Core TLS API</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-gnutls_005fpacket_005fget"><code>gnutls_packet_get</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Core-TLS-API">Core TLS API</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-gnutls_005fpcert_005fdeinit"><code>gnutls_pcert_deinit</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Abstract-key-API">Abstract key API</a></td></tr>
@@ -43622,7 +42059,6 @@ Previous: <a href="#Function-and-Data-Index" accesskey="p" rel="prev">Function a
 <tr><td></td><td valign="top"><a href="#index-ocsptool-help">ocsptool help</a>:</td><td>&nbsp;</td><td valign="top"><a href="#ocsptool-Invocation">ocsptool Invocation</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-Online-Certificate-Status-Protocol">Online Certificate Status Protocol</a>:</td><td>&nbsp;</td><td valign="top"><a href="#OCSP-certificate-status-checking">OCSP certificate status checking</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-Online-Certificate-Status-Protocol-1">Online Certificate Status Protocol</a>:</td><td>&nbsp;</td><td valign="top"><a href="#OCSP-stapling">OCSP stapling</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-OpenPGP-API">OpenPGP API</a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-API">OpenPGP API</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-OpenPGP-certificates">OpenPGP certificates</a>:</td><td>&nbsp;</td><td valign="top"><a href="#OpenPGP-certificates">OpenPGP certificates</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-OpenSSL">OpenSSL</a>:</td><td>&nbsp;</td><td valign="top"><a href="#Compatibility-with-the-OpenSSL-library">Compatibility with the OpenSSL library</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-OpenSSL-encrypted-keys">OpenSSL encrypted keys</a>:</td><td>&nbsp;</td><td valign="top"><a href="#Managing-encrypted-keys">Managing encrypted keys</a></td></tr>
@@ -43782,52 +42218,50 @@ It is open to any interested individual.</p>
 <h3><a name="FOOT8" href="#DOCF8">(8)</a></h3>
 <p>see <a href="http://p11-glue.freedesktop.org/trust-module.html">http://p11-glue.freedesktop.org/trust-module.html</a>.</p>
 <h3><a name="FOOT9" href="#DOCF9">(9)</a></h3>
-<p><a href="http://www.gnupg.org/related_software/gpgme/">http://www.gnupg.org/related_software/gpgme/</a></p>
-<h3><a name="FOOT10" href="#DOCF10">(10)</a></h3>
 <p>For example, OpenSC-supported cards.</p>
-<h3><a name="FOOT11" href="#DOCF11">(11)</a></h3>
+<h3><a name="FOOT10" href="#DOCF10">(10)</a></h3>
 <p><a href="http://p11-glue.freedesktop.org/">http://p11-glue.freedesktop.org/</a></p>
-<h3><a name="FOOT12" href="#DOCF12">(12)</a></h3>
+<h3><a name="FOOT11" href="#DOCF11">(11)</a></h3>
 <p>For
 example when an open session is to be reinitialized, but the PIN is not available
 to GnuTLS (e.g., it was entered at a pinpad).</p>
-<h3><a name="FOOT13" href="#DOCF13">(13)</a></h3>
+<h3><a name="FOOT12" href="#DOCF12">(12)</a></h3>
 <p><a href="http://p11-glue.freedesktop.org/trust-module.html">http://p11-glue.freedesktop.org/trust-module.html</a></p>
-<h3><a name="FOOT14" href="#DOCF14">(14)</a></h3>
+<h3><a name="FOOT13" href="#DOCF13">(13)</a></h3>
 <p>See
 the &rsquo;Restricting the scope of CA certificates&rsquo; post at <a href="http://nmav.gnutls.org/2016/06/restricting-scope-of-ca-certificates.html">http://nmav.gnutls.org/2016/06/restricting-scope-of-ca-certificates.html</a></p>
-<h3><a name="FOOT15" href="#DOCF15">(15)</a></h3>
+<h3><a name="FOOT14" href="#DOCF14">(14)</a></h3>
 <p><a href="https://github.com/google/chaps-linux">https://github.com/google/chaps-linux</a></p>
-<h3><a name="FOOT16" href="#DOCF16">(16)</a></h3>
+<h3><a name="FOOT15" href="#DOCF15">(15)</a></h3>
 <p><a href="https://sourceforge.net/projects/opencryptoki/">https://sourceforge.net/projects/opencryptoki/</a></p>
-<h3><a name="FOOT17" href="#DOCF17">(17)</a></h3>
+<h3><a name="FOOT16" href="#DOCF16">(16)</a></h3>
 <p>The first message in a <acronym>TLS</acronym> handshake</p>
-<h3><a name="FOOT18" href="#DOCF18">(18)</a></h3>
+<h3><a name="FOOT17" href="#DOCF17">(17)</a></h3>
 <p>On special systems
 you could manually specify the locking system using
 the function <a href="#gnutls_005fglobal_005fset_005fmutex">gnutls_global_set_mutex</a> before calling any other
 GnuTLS function. Setting mutexes manually is not recommended.</p>
-<h3><a name="FOOT19" href="#DOCF19">(19)</a></h3>
+<h3><a name="FOOT18" href="#DOCF18">(18)</a></h3>
 <p>The original behavior of requiring explicit initialization can obtained by setting the
 GNUTLS_NO_EXPLICIT_INIT environment variable to 1, or by using the macro GNUTLS_SKIP_GLOBAL_INIT
 in a global section of your program.</p>
-<h3><a name="FOOT20" href="#DOCF20">(20)</a></h3>
+<h3><a name="FOOT19" href="#DOCF19">(19)</a></h3>
 <p>A key of 128 bits or 16 bytes should be sufficient for this purpose.</p>
-<h3><a name="FOOT21" href="#DOCF21">(21)</a></h3>
+<h3><a name="FOOT20" href="#DOCF20">(20)</a></h3>
 <p>The default is <code>/etc/gnutls/default-priorities</code>.</p>
-<h3><a name="FOOT22" href="#DOCF22">(22)</a></h3>
+<h3><a name="FOOT21" href="#DOCF21">(21)</a></h3>
 <p>It depends on the group used.  Primes with
 lesser bits are always faster, but also easier to break.  See <a href="#Selecting-cryptographic-key-sizes">Selecting cryptographic key sizes</a>
 for the acceptable security levels.</p>
-<h3><a name="FOOT23" href="#DOCF23">(23)</a></h3>
+<h3><a name="FOOT22" href="#DOCF22">(22)</a></h3>
 <p>See <a href="http://www.lysator.liu.se/~nisse/nettle/">http://www.lysator.liu.se/~nisse/nettle/</a>.</p>
-<h3><a name="FOOT24" href="#DOCF24">(24)</a></h3>
+<h3><a name="FOOT23" href="#DOCF23">(23)</a></h3>
 <p>such as the
 <code>gnutls_certificate_credentials_t</code> structures</p>
-<h3><a name="FOOT25" href="#DOCF25">(25)</a></h3>
+<h3><a name="FOOT24" href="#DOCF24">(24)</a></h3>
 <p>See
 <a href="http://lists.gnu.org/archive/html/gnutls-devel/2011-02/msg00079.html">http://lists.gnu.org/archive/html/gnutls-devel/2011-02/msg00079.html</a>.</p>
-<h3><a name="FOOT26" href="#DOCF26">(26)</a></h3>
+<h3><a name="FOOT25" href="#DOCF25">(25)</a></h3>
 <p>Check <a href="http://home.gna.org/cryptodev-linux/">http://home.gna.org/cryptodev-linux/</a> 
 for the Linux kernel implementation of <code>/dev/crypto</code>.</p>
 </div>

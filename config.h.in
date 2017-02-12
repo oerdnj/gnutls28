@@ -731,6 +731,9 @@
 /* Build IDNA support */
 #undef HAVE_LIBIDN
 
+/* Define if IDNA 2008 support is enabled. */
+#undef HAVE_LIBIDN2
+
 /* Define to 1 if you have the `intl' library (-lintl). */
 #undef HAVE_LIBINTL
 

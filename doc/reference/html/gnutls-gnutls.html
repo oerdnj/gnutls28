@@ -6051,14 +6051,19 @@ otherwise a negative error code is returned.</p>
 gnutls_dh_params_generate2 (<em class="parameter"><code><a class="link" href="gnutls-gnutls.html#gnutls-dh-params-t" title="gnutls_dh_params_t"><span class="type">gnutls_dh_params_t</span></a> params</code></em>,
                             <em class="parameter"><code>unsigned <span class="type">int</span> bits</code></em>);</pre>
 <p>This function will generate a new pair of prime and generator for use in
-the Diffie-Hellman key exchange. The new parameters will be allocated using
-<code class="function">gnutls_malloc()</code> and will be stored in the appropriate datum.
-This function is normally slow.</p>
-<p>Do not set the number of bits directly, use <a class="link" href="gnutls-gnutls.html#gnutls-sec-param-to-pk-bits" title="gnutls_sec_param_to_pk_bits ()"><code class="function">gnutls_sec_param_to_pk_bits()</code></a> to
-get bits for <a class="link" href="gnutls-gnutls.html#GNUTLS-PK-DSA:CAPS"><code class="literal">GNUTLS_PK_DSA</code></a>.
-Also note that the DH parameters are only useful to servers.
+the Diffie-Hellman key exchange. This may take long time.</p>
+<p>It is recommended not to set the number of bits directly, but 
+use <a class="link" href="gnutls-gnutls.html#gnutls-sec-param-to-pk-bits" title="gnutls_sec_param_to_pk_bits ()"><code class="function">gnutls_sec_param_to_pk_bits()</code></a> instead.</p>
+<p>Also note that the DH parameters are only useful to servers.
 Since clients use the parameters sent by the server, it's of
 no use to call this in client side.</p>
+<p>The parameters generated are of the DSA form. It also is possible
+to generate provable parameters (following the Shawe-Taylor
+algorithm), using <code class="function">gnutls_x509_privkey_generate2()</code> with DSA option
+and the <code class="literal">GNUTLS_PRIVKEY_FLAG_PROVABLE</code> flag set. These can the
+be imported with <code class="function">gnutls_dh_params_import_dsa()</code>.</p>
+<p>It is no longer recommended for applications to generate parameters.
+See the "Parameter generation" section in the manual.</p>
 <div class="refsect3">
 <a name="gnutls-dh-params-generate2.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">
@@ -6937,6 +6942,9 @@ to <a class="link" href="gnutls-gnutls.html#GNUTLS-HEARTBEAT-WAIT:CAPS" title="G
 <p>Note that it is highly recommended to use this function with the
 flag <a class="link" href="gnutls-gnutls.html#GNUTLS-HEARTBEAT-WAIT:CAPS" title="GNUTLS_HEARTBEAT_WAIT"><code class="literal">GNUTLS_HEARTBEAT_WAIT</code></a>, or you need to handle retransmissions
 and timeouts manually.</p>
+<p>The total TLS data transmitted as part of the ping message are given by
+the following formula: MAX(16, <em class="parameter"><code>data_size</code></em>
+)+<code class="function">gnutls_record_overhead_size()</code>+3.</p>
 <div class="refsect3">
 <a name="gnutls-heartbeat-ping.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">
@@ -13447,7 +13455,7 @@ or a negative error value on other errors.</p>
 <hr>
 <div class="refsect2">
 <a name="GNUTLS-VERSION:CAPS"></a><h3>GNUTLS_VERSION</h3>
-<pre class="programlisting">#define GNUTLS_VERSION "3.5.8"
+<pre class="programlisting">#define GNUTLS_VERSION "3.5.9"
 </pre>
 <p>
 </p>
@@ -13471,7 +13479,7 @@ or a negative error value on other errors.</p>
 <hr>
 <div class="refsect2">
 <a name="GNUTLS-VERSION-NUMBER:CAPS"></a><h3>GNUTLS_VERSION_NUMBER</h3>
-<pre class="programlisting">#define GNUTLS_VERSION_NUMBER 0x030508
+<pre class="programlisting">#define GNUTLS_VERSION_NUMBER 0x030509
 </pre>
 <p>
 </p>
@@ -13479,7 +13487,7 @@ or a negative error value on other errors.</p>
 <hr>
 <div class="refsect2">
 <a name="GNUTLS-VERSION-PATCH:CAPS"></a><h3>GNUTLS_VERSION_PATCH</h3>
-<pre class="programlisting">#define GNUTLS_VERSION_PATCH 8
+<pre class="programlisting">#define GNUTLS_VERSION_PATCH 9
 </pre>
 <p>
 </p>

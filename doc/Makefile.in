@@ -1483,10 +1483,9 @@ gnutls_TEXINFOS = gnutls.texi fdl-1.3.texi cha-bib.texi \
 	gnutls-internals.dia gnutls-internals.eps gnutls-internals.png \
 	gnutls-layers.dia gnutls-layers.eps gnutls-layers.png \
 	gnutls-crypto-layers.dia gnutls-crypto-layers.eps \
-	gnutls-crypto-layers.png gnutls-pgp.dia gnutls-pgp.eps \
-	gnutls-pgp.png gnutls-x509.dia gnutls-x509.eps gnutls-x509.png \
-	gnutls-logo.eps gnutls-logo.png pkcs11-vision.dia \
-	pkcs11-vision.eps pkcs11-vision.png \
+	gnutls-crypto-layers.png gnutls-x509.dia gnutls-x509.eps \
+	gnutls-x509.png gnutls-logo.eps gnutls-logo.png \
+	pkcs11-vision.dia pkcs11-vision.eps pkcs11-vision.png \
 	gnutls-client-server-use-case.dia \
 	gnutls-client-server-use-case.eps \
 	gnutls-client-server-use-case.png \
@@ -1504,7 +1503,7 @@ AUTOGENED_DOC = invoke-gnutls-cli.texi invoke-gnutls-cli-debug.texi \
 imagesdir = $(infodir)
 images_DATA = \
 	gnutls-handshake-state.png	\
-	gnutls-layers.png gnutls-modauth.png gnutls-pgp.png	\
+	gnutls-layers.png gnutls-modauth.png \
 	gnutls-client-server-use-case.png			\
 	gnutls-handshake-sequence.png gnutls-internals.png	\
 	gnutls-logo.png gnutls-x509.png	\
@@ -1575,7 +1574,6 @@ ENUMS = enums/dane_cert_type_t enums/dane_cert_usage_t \
 	enums/gnutls_ocsp_print_formats_t \
 	enums/gnutls_ocsp_resp_status_t \
 	enums/gnutls_ocsp_verify_reason_t \
-	enums/gnutls_openpgp_crt_fmt_t \
 	enums/gnutls_openpgp_crt_status_t enums/gnutls_params_type_t \
 	enums/gnutls_pin_flag_t enums/gnutls_pk_algorithm_t \
 	enums/gnutls_pkcs11_obj_flags enums/gnutls_pkcs11_obj_info_t \
@@ -1686,10 +1684,6 @@ FUNCS = functions/dane_cert_type_name \
 	functions/gnutls_certificate_get_crt_raw.short \
 	functions/gnutls_certificate_get_issuer \
 	functions/gnutls_certificate_get_issuer.short \
-	functions/gnutls_certificate_get_openpgp_crt \
-	functions/gnutls_certificate_get_openpgp_crt.short \
-	functions/gnutls_certificate_get_openpgp_key \
-	functions/gnutls_certificate_get_openpgp_key.short \
 	functions/gnutls_certificate_get_ours \
 	functions/gnutls_certificate_get_ours.short \
 	functions/gnutls_certificate_get_peers \
@@ -1722,20 +1716,6 @@ FUNCS = functions/dane_cert_type_name \
 	functions/gnutls_certificate_set_ocsp_status_request_function.short \
 	functions/gnutls_certificate_set_ocsp_status_request_function2 \
 	functions/gnutls_certificate_set_ocsp_status_request_function2.short \
-	functions/gnutls_certificate_set_openpgp_key \
-	functions/gnutls_certificate_set_openpgp_key.short \
-	functions/gnutls_certificate_set_openpgp_key_file \
-	functions/gnutls_certificate_set_openpgp_key_file.short \
-	functions/gnutls_certificate_set_openpgp_key_file2 \
-	functions/gnutls_certificate_set_openpgp_key_file2.short \
-	functions/gnutls_certificate_set_openpgp_key_mem \
-	functions/gnutls_certificate_set_openpgp_key_mem.short \
-	functions/gnutls_certificate_set_openpgp_key_mem2 \
-	functions/gnutls_certificate_set_openpgp_key_mem2.short \
-	functions/gnutls_certificate_set_openpgp_keyring_file \
-	functions/gnutls_certificate_set_openpgp_keyring_file.short \
-	functions/gnutls_certificate_set_openpgp_keyring_mem \
-	functions/gnutls_certificate_set_openpgp_keyring_mem.short \
 	functions/gnutls_certificate_set_params_function \
 	functions/gnutls_certificate_set_params_function.short \
 	functions/gnutls_certificate_set_pin_function \
@@ -2040,7 +2020,10 @@ FUNCS = functions/dane_cert_type_name \
 	functions/gnutls_hmac_init.short functions/gnutls_hmac_output \
 	functions/gnutls_hmac_output.short \
 	functions/gnutls_hmac_set_nonce \
-	functions/gnutls_hmac_set_nonce.short functions/gnutls_init \
+	functions/gnutls_hmac_set_nonce.short \
+	functions/gnutls_idna_map functions/gnutls_idna_map.short \
+	functions/gnutls_idna_reverse_map \
+	functions/gnutls_idna_reverse_map.short functions/gnutls_init \
 	functions/gnutls_init.short functions/gnutls_key_generate \
 	functions/gnutls_key_generate.short functions/gnutls_kx_get \
 	functions/gnutls_kx_get.short functions/gnutls_kx_get_id \
@@ -2143,144 +2126,10 @@ FUNCS = functions/dane_cert_type_name \
 	functions/gnutls_oid_to_pk functions/gnutls_oid_to_pk.short \
 	functions/gnutls_oid_to_sign \
 	functions/gnutls_oid_to_sign.short \
-	functions/gnutls_openpgp_crt_check_email \
-	functions/gnutls_openpgp_crt_check_email.short \
-	functions/gnutls_openpgp_crt_check_hostname \
-	functions/gnutls_openpgp_crt_check_hostname.short \
-	functions/gnutls_openpgp_crt_check_hostname2 \
-	functions/gnutls_openpgp_crt_check_hostname2.short \
-	functions/gnutls_openpgp_crt_deinit \
-	functions/gnutls_openpgp_crt_deinit.short \
-	functions/gnutls_openpgp_crt_export \
-	functions/gnutls_openpgp_crt_export.short \
-	functions/gnutls_openpgp_crt_export2 \
-	functions/gnutls_openpgp_crt_export2.short \
-	functions/gnutls_openpgp_crt_get_auth_subkey \
-	functions/gnutls_openpgp_crt_get_auth_subkey.short \
-	functions/gnutls_openpgp_crt_get_creation_time \
-	functions/gnutls_openpgp_crt_get_creation_time.short \
-	functions/gnutls_openpgp_crt_get_expiration_time \
-	functions/gnutls_openpgp_crt_get_expiration_time.short \
-	functions/gnutls_openpgp_crt_get_fingerprint \
-	functions/gnutls_openpgp_crt_get_fingerprint.short \
-	functions/gnutls_openpgp_crt_get_key_id \
-	functions/gnutls_openpgp_crt_get_key_id.short \
-	functions/gnutls_openpgp_crt_get_key_usage \
-	functions/gnutls_openpgp_crt_get_key_usage.short \
-	functions/gnutls_openpgp_crt_get_name \
-	functions/gnutls_openpgp_crt_get_name.short \
-	functions/gnutls_openpgp_crt_get_pk_algorithm \
-	functions/gnutls_openpgp_crt_get_pk_algorithm.short \
-	functions/gnutls_openpgp_crt_get_pk_dsa_raw \
-	functions/gnutls_openpgp_crt_get_pk_dsa_raw.short \
-	functions/gnutls_openpgp_crt_get_pk_rsa_raw \
-	functions/gnutls_openpgp_crt_get_pk_rsa_raw.short \
-	functions/gnutls_openpgp_crt_get_preferred_key_id \
-	functions/gnutls_openpgp_crt_get_preferred_key_id.short \
-	functions/gnutls_openpgp_crt_get_revoked_status \
-	functions/gnutls_openpgp_crt_get_revoked_status.short \
-	functions/gnutls_openpgp_crt_get_subkey_count \
-	functions/gnutls_openpgp_crt_get_subkey_count.short \
-	functions/gnutls_openpgp_crt_get_subkey_creation_time \
-	functions/gnutls_openpgp_crt_get_subkey_creation_time.short \
-	functions/gnutls_openpgp_crt_get_subkey_expiration_time \
-	functions/gnutls_openpgp_crt_get_subkey_expiration_time.short \
-	functions/gnutls_openpgp_crt_get_subkey_fingerprint \
-	functions/gnutls_openpgp_crt_get_subkey_fingerprint.short \
-	functions/gnutls_openpgp_crt_get_subkey_id \
-	functions/gnutls_openpgp_crt_get_subkey_id.short \
-	functions/gnutls_openpgp_crt_get_subkey_idx \
-	functions/gnutls_openpgp_crt_get_subkey_idx.short \
-	functions/gnutls_openpgp_crt_get_subkey_pk_algorithm \
-	functions/gnutls_openpgp_crt_get_subkey_pk_algorithm.short \
-	functions/gnutls_openpgp_crt_get_subkey_pk_dsa_raw \
-	functions/gnutls_openpgp_crt_get_subkey_pk_dsa_raw.short \
-	functions/gnutls_openpgp_crt_get_subkey_pk_rsa_raw \
-	functions/gnutls_openpgp_crt_get_subkey_pk_rsa_raw.short \
-	functions/gnutls_openpgp_crt_get_subkey_revoked_status \
-	functions/gnutls_openpgp_crt_get_subkey_revoked_status.short \
-	functions/gnutls_openpgp_crt_get_subkey_usage \
-	functions/gnutls_openpgp_crt_get_subkey_usage.short \
-	functions/gnutls_openpgp_crt_get_version \
-	functions/gnutls_openpgp_crt_get_version.short \
-	functions/gnutls_openpgp_crt_import \
-	functions/gnutls_openpgp_crt_import.short \
-	functions/gnutls_openpgp_crt_init \
-	functions/gnutls_openpgp_crt_init.short \
-	functions/gnutls_openpgp_crt_print \
-	functions/gnutls_openpgp_crt_print.short \
-	functions/gnutls_openpgp_crt_set_preferred_key_id \
-	functions/gnutls_openpgp_crt_set_preferred_key_id.short \
-	functions/gnutls_openpgp_crt_verify_ring \
-	functions/gnutls_openpgp_crt_verify_ring.short \
-	functions/gnutls_openpgp_crt_verify_self \
-	functions/gnutls_openpgp_crt_verify_self.short \
-	functions/gnutls_openpgp_keyring_check_id \
-	functions/gnutls_openpgp_keyring_check_id.short \
-	functions/gnutls_openpgp_keyring_deinit \
-	functions/gnutls_openpgp_keyring_deinit.short \
-	functions/gnutls_openpgp_keyring_get_crt \
-	functions/gnutls_openpgp_keyring_get_crt.short \
-	functions/gnutls_openpgp_keyring_get_crt_count \
-	functions/gnutls_openpgp_keyring_get_crt_count.short \
-	functions/gnutls_openpgp_keyring_import \
-	functions/gnutls_openpgp_keyring_import.short \
-	functions/gnutls_openpgp_keyring_init \
-	functions/gnutls_openpgp_keyring_init.short \
-	functions/gnutls_openpgp_privkey_deinit \
-	functions/gnutls_openpgp_privkey_deinit.short \
-	functions/gnutls_openpgp_privkey_export \
-	functions/gnutls_openpgp_privkey_export.short \
-	functions/gnutls_openpgp_privkey_export2 \
-	functions/gnutls_openpgp_privkey_export2.short \
-	functions/gnutls_openpgp_privkey_export_dsa_raw \
-	functions/gnutls_openpgp_privkey_export_dsa_raw.short \
-	functions/gnutls_openpgp_privkey_export_rsa_raw \
-	functions/gnutls_openpgp_privkey_export_rsa_raw.short \
-	functions/gnutls_openpgp_privkey_export_subkey_dsa_raw \
-	functions/gnutls_openpgp_privkey_export_subkey_dsa_raw.short \
-	functions/gnutls_openpgp_privkey_export_subkey_rsa_raw \
-	functions/gnutls_openpgp_privkey_export_subkey_rsa_raw.short \
-	functions/gnutls_openpgp_privkey_get_fingerprint \
-	functions/gnutls_openpgp_privkey_get_fingerprint.short \
-	functions/gnutls_openpgp_privkey_get_key_id \
-	functions/gnutls_openpgp_privkey_get_key_id.short \
-	functions/gnutls_openpgp_privkey_get_pk_algorithm \
-	functions/gnutls_openpgp_privkey_get_pk_algorithm.short \
-	functions/gnutls_openpgp_privkey_get_preferred_key_id \
-	functions/gnutls_openpgp_privkey_get_preferred_key_id.short \
-	functions/gnutls_openpgp_privkey_get_revoked_status \
-	functions/gnutls_openpgp_privkey_get_revoked_status.short \
-	functions/gnutls_openpgp_privkey_get_subkey_count \
-	functions/gnutls_openpgp_privkey_get_subkey_count.short \
-	functions/gnutls_openpgp_privkey_get_subkey_creation_time \
-	functions/gnutls_openpgp_privkey_get_subkey_creation_time.short \
-	functions/gnutls_openpgp_privkey_get_subkey_expiration_time \
-	functions/gnutls_openpgp_privkey_get_subkey_expiration_time.short \
-	functions/gnutls_openpgp_privkey_get_subkey_fingerprint \
-	functions/gnutls_openpgp_privkey_get_subkey_fingerprint.short \
-	functions/gnutls_openpgp_privkey_get_subkey_id \
-	functions/gnutls_openpgp_privkey_get_subkey_id.short \
-	functions/gnutls_openpgp_privkey_get_subkey_idx \
-	functions/gnutls_openpgp_privkey_get_subkey_idx.short \
-	functions/gnutls_openpgp_privkey_get_subkey_pk_algorithm \
-	functions/gnutls_openpgp_privkey_get_subkey_pk_algorithm.short \
-	functions/gnutls_openpgp_privkey_get_subkey_revoked_status \
-	functions/gnutls_openpgp_privkey_get_subkey_revoked_status.short \
-	functions/gnutls_openpgp_privkey_import \
-	functions/gnutls_openpgp_privkey_import.short \
-	functions/gnutls_openpgp_privkey_init \
-	functions/gnutls_openpgp_privkey_init.short \
-	functions/gnutls_openpgp_privkey_sec_param \
-	functions/gnutls_openpgp_privkey_sec_param.short \
-	functions/gnutls_openpgp_privkey_set_preferred_key_id \
-	functions/gnutls_openpgp_privkey_set_preferred_key_id.short \
 	functions/gnutls_openpgp_privkey_sign_hash \
 	functions/gnutls_openpgp_privkey_sign_hash.short \
 	functions/gnutls_openpgp_send_cert \
 	functions/gnutls_openpgp_send_cert.short \
-	functions/gnutls_openpgp_set_recv_key_function \
-	functions/gnutls_openpgp_set_recv_key_function.short \
 	functions/gnutls_packet_deinit \
 	functions/gnutls_packet_deinit.short \
 	functions/gnutls_packet_get functions/gnutls_packet_get.short \
@@ -4542,6 +4391,17 @@ gnutls-api.texi: $(top_srcdir)/lib/includes/gnutls/gnutls.h.in
 	done
 	mv -f $@-tmp $@
 
+pgp-api.texi: $(top_srcdir)/lib/includes/gnutls/openpgp.h
+	echo "" > $@-tmp
+	for i in `$(top_srcdir)/doc/scripts/getfuncs.pl < $< |sort|uniq`; do \
+		echo $(ECHO_N) "Creating documentation for $$i... " && \
+		$(srcdir)/scripts/gdoc -texinfo \
+			-function $$i \
+			$(C_SOURCE_FILES) >> $@-tmp 2>/dev/null && \
+		echo "ok"; \
+	done
+	mv -f $@-tmp $@
+
 socket-api.texi: $(top_srcdir)/lib/includes/gnutls/socket.h
 	echo "" > $@-tmp
 	for i in `$(top_srcdir)/doc/scripts/getfuncs.pl < $< |sort|uniq`; do \
@@ -4575,17 +4435,6 @@ x509-api.texi: $(top_srcdir)/lib/includes/gnutls/x509.h $(top_srcdir)/lib/includ
 		echo "ok"; \
 	done
 	rm -f $@-tmp2
-	mv -f $@-tmp $@
-
-pgp-api.texi: $(top_srcdir)/lib/includes/gnutls/openpgp.h
-	echo "" > $@-tmp
-	for i in `$(top_srcdir)/doc/scripts/getfuncs.pl < $< |sort|uniq`; do \
-		echo $(ECHO_N) "Creating documentation for $$i... " && \
-		$(srcdir)/scripts/gdoc -texinfo \
-			-function $$i \
-			$(C_SOURCE_FILES) >> $@-tmp 2>/dev/null && \
-		echo "ok"; \
-	done
 	mv -f $@-tmp $@
 
 pkcs12-api.texi: $(top_srcdir)/lib/includes/gnutls/pkcs12.h

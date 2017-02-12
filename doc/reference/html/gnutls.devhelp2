@@ -878,79 +878,79 @@
     <keyword type="typedef" name="gnutls_x509_dn_t" link="gnutls-x509.html#gnutls-x509-dn-t"/>
     <keyword type="enum" name="enum gnutls_x509_qualifier_t" link="gnutls-x509.html#gnutls-x509-qualifier-t"/>
     <keyword type="typedef" name="gnutls_x509_trust_list_t" link="gnutls-x509.html#gnutls-x509-trust-list-t"/>
-    <keyword type="function" name="gnutls_certificate_set_openpgp_key ()" link="gnutls-openpgp.html#gnutls-certificate-set-openpgp-key"/>
-    <keyword type="function" name="gnutls_certificate_set_openpgp_key_file ()" link="gnutls-openpgp.html#gnutls-certificate-set-openpgp-key-file"/>
-    <keyword type="function" name="gnutls_certificate_set_openpgp_key_file2 ()" link="gnutls-openpgp.html#gnutls-certificate-set-openpgp-key-file2" since="2.4.0"/>
-    <keyword type="function" name="gnutls_certificate_set_openpgp_key_mem ()" link="gnutls-openpgp.html#gnutls-certificate-set-openpgp-key-mem"/>
-    <keyword type="function" name="gnutls_certificate_set_openpgp_key_mem2 ()" link="gnutls-openpgp.html#gnutls-certificate-set-openpgp-key-mem2" since="2.4.0"/>
-    <keyword type="function" name="gnutls_certificate_set_openpgp_keyring_file ()" link="gnutls-openpgp.html#gnutls-certificate-set-openpgp-keyring-file"/>
-    <keyword type="function" name="gnutls_certificate_set_openpgp_keyring_mem ()" link="gnutls-openpgp.html#gnutls-certificate-set-openpgp-keyring-mem"/>
-    <keyword type="function" name="gnutls_openpgp_crt_check_hostname ()" link="gnutls-openpgp.html#gnutls-openpgp-crt-check-hostname"/>
-    <keyword type="function" name="gnutls_openpgp_crt_deinit ()" link="gnutls-openpgp.html#gnutls-openpgp-crt-deinit"/>
-    <keyword type="function" name="gnutls_openpgp_crt_export ()" link="gnutls-openpgp.html#gnutls-openpgp-crt-export"/>
-    <keyword type="function" name="gnutls_openpgp_crt_export2 ()" link="gnutls-openpgp.html#gnutls-openpgp-crt-export2" since="3.1.3"/>
-    <keyword type="function" name="gnutls_openpgp_crt_get_auth_subkey ()" link="gnutls-openpgp.html#gnutls-openpgp-crt-get-auth-subkey"/>
-    <keyword type="function" name="gnutls_openpgp_crt_get_creation_time ()" link="gnutls-openpgp.html#gnutls-openpgp-crt-get-creation-time"/>
-    <keyword type="function" name="gnutls_openpgp_crt_get_expiration_time ()" link="gnutls-openpgp.html#gnutls-openpgp-crt-get-expiration-time"/>
-    <keyword type="function" name="gnutls_openpgp_crt_get_fingerprint ()" link="gnutls-openpgp.html#gnutls-openpgp-crt-get-fingerprint"/>
-    <keyword type="function" name="gnutls_openpgp_crt_get_key_id ()" link="gnutls-openpgp.html#gnutls-openpgp-crt-get-key-id" since="2.4.0"/>
-    <keyword type="function" name="gnutls_openpgp_crt_get_key_usage ()" link="gnutls-openpgp.html#gnutls-openpgp-crt-get-key-usage"/>
-    <keyword type="function" name="gnutls_openpgp_crt_get_name ()" link="gnutls-openpgp.html#gnutls-openpgp-crt-get-name"/>
-    <keyword type="function" name="gnutls_openpgp_crt_get_pk_algorithm ()" link="gnutls-openpgp.html#gnutls-openpgp-crt-get-pk-algorithm"/>
-    <keyword type="function" name="gnutls_openpgp_crt_get_pk_dsa_raw ()" link="gnutls-openpgp.html#gnutls-openpgp-crt-get-pk-dsa-raw" since="2.4.0"/>
-    <keyword type="function" name="gnutls_openpgp_crt_get_pk_rsa_raw ()" link="gnutls-openpgp.html#gnutls-openpgp-crt-get-pk-rsa-raw" since="2.4.0"/>
-    <keyword type="function" name="gnutls_openpgp_crt_get_preferred_key_id ()" link="gnutls-openpgp.html#gnutls-openpgp-crt-get-preferred-key-id"/>
-    <keyword type="function" name="gnutls_openpgp_crt_get_revoked_status ()" link="gnutls-openpgp.html#gnutls-openpgp-crt-get-revoked-status" since="2.4.0"/>
-    <keyword type="function" name="gnutls_openpgp_crt_get_subkey_count ()" link="gnutls-openpgp.html#gnutls-openpgp-crt-get-subkey-count" since="2.4.0"/>
-    <keyword type="function" name="gnutls_openpgp_crt_get_subkey_creation_time ()" link="gnutls-openpgp.html#gnutls-openpgp-crt-get-subkey-creation-time" since="2.4.0"/>
-    <keyword type="function" name="gnutls_openpgp_crt_get_subkey_expiration_time ()" link="gnutls-openpgp.html#gnutls-openpgp-crt-get-subkey-expiration-time" since="2.4.0"/>
-    <keyword type="function" name="gnutls_openpgp_crt_get_subkey_fingerprint ()" link="gnutls-openpgp.html#gnutls-openpgp-crt-get-subkey-fingerprint" since="2.4.0"/>
-    <keyword type="function" name="gnutls_openpgp_crt_get_subkey_id ()" link="gnutls-openpgp.html#gnutls-openpgp-crt-get-subkey-id"/>
-    <keyword type="function" name="gnutls_openpgp_crt_get_subkey_idx ()" link="gnutls-openpgp.html#gnutls-openpgp-crt-get-subkey-idx" since="2.4.0"/>
-    <keyword type="function" name="gnutls_openpgp_crt_get_subkey_pk_algorithm ()" link="gnutls-openpgp.html#gnutls-openpgp-crt-get-subkey-pk-algorithm" since="2.4.0"/>
-    <keyword type="function" name="gnutls_openpgp_crt_get_subkey_pk_dsa_raw ()" link="gnutls-openpgp.html#gnutls-openpgp-crt-get-subkey-pk-dsa-raw" since="2.4.0"/>
-    <keyword type="function" name="gnutls_openpgp_crt_get_subkey_pk_rsa_raw ()" link="gnutls-openpgp.html#gnutls-openpgp-crt-get-subkey-pk-rsa-raw" since="2.4.0"/>
-    <keyword type="function" name="gnutls_openpgp_crt_get_subkey_revoked_status ()" link="gnutls-openpgp.html#gnutls-openpgp-crt-get-subkey-revoked-status" since="2.4.0"/>
-    <keyword type="function" name="gnutls_openpgp_crt_get_subkey_usage ()" link="gnutls-openpgp.html#gnutls-openpgp-crt-get-subkey-usage" since="2.4.0"/>
-    <keyword type="function" name="gnutls_openpgp_crt_get_version ()" link="gnutls-openpgp.html#gnutls-openpgp-crt-get-version"/>
-    <keyword type="function" name="gnutls_openpgp_crt_import ()" link="gnutls-openpgp.html#gnutls-openpgp-crt-import"/>
-    <keyword type="function" name="gnutls_openpgp_crt_init ()" link="gnutls-openpgp.html#gnutls-openpgp-crt-init"/>
-    <keyword type="function" name="gnutls_openpgp_crt_print ()" link="gnutls-openpgp.html#gnutls-openpgp-crt-print"/>
-    <keyword type="function" name="gnutls_openpgp_crt_set_preferred_key_id ()" link="gnutls-openpgp.html#gnutls-openpgp-crt-set-preferred-key-id"/>
-    <keyword type="function" name="gnutls_openpgp_crt_verify_ring ()" link="gnutls-openpgp.html#gnutls-openpgp-crt-verify-ring"/>
-    <keyword type="function" name="gnutls_openpgp_crt_verify_self ()" link="gnutls-openpgp.html#gnutls-openpgp-crt-verify-self"/>
-    <keyword type="function" name="gnutls_openpgp_keyring_check_id ()" link="gnutls-openpgp.html#gnutls-openpgp-keyring-check-id"/>
-    <keyword type="function" name="gnutls_openpgp_keyring_deinit ()" link="gnutls-openpgp.html#gnutls-openpgp-keyring-deinit"/>
-    <keyword type="function" name="gnutls_openpgp_keyring_get_crt ()" link="gnutls-openpgp.html#gnutls-openpgp-keyring-get-crt"/>
-    <keyword type="function" name="gnutls_openpgp_keyring_get_crt_count ()" link="gnutls-openpgp.html#gnutls-openpgp-keyring-get-crt-count"/>
-    <keyword type="function" name="gnutls_openpgp_keyring_import ()" link="gnutls-openpgp.html#gnutls-openpgp-keyring-import"/>
-    <keyword type="function" name="gnutls_openpgp_keyring_init ()" link="gnutls-openpgp.html#gnutls-openpgp-keyring-init"/>
-    <keyword type="function" name="gnutls_openpgp_privkey_deinit ()" link="gnutls-openpgp.html#gnutls-openpgp-privkey-deinit"/>
-    <keyword type="function" name="gnutls_openpgp_privkey_export ()" link="gnutls-openpgp.html#gnutls-openpgp-privkey-export" since="2.4.0"/>
-    <keyword type="function" name="gnutls_openpgp_privkey_export2 ()" link="gnutls-openpgp.html#gnutls-openpgp-privkey-export2" since="3.1.3"/>
-    <keyword type="function" name="gnutls_openpgp_privkey_export_dsa_raw ()" link="gnutls-openpgp.html#gnutls-openpgp-privkey-export-dsa-raw" since="2.4.0"/>
-    <keyword type="function" name="gnutls_openpgp_privkey_export_rsa_raw ()" link="gnutls-openpgp.html#gnutls-openpgp-privkey-export-rsa-raw" since="2.4.0"/>
-    <keyword type="function" name="gnutls_openpgp_privkey_export_subkey_dsa_raw ()" link="gnutls-openpgp.html#gnutls-openpgp-privkey-export-subkey-dsa-raw" since="2.4.0"/>
-    <keyword type="function" name="gnutls_openpgp_privkey_export_subkey_rsa_raw ()" link="gnutls-openpgp.html#gnutls-openpgp-privkey-export-subkey-rsa-raw" since="2.4.0"/>
-    <keyword type="function" name="gnutls_openpgp_privkey_get_fingerprint ()" link="gnutls-openpgp.html#gnutls-openpgp-privkey-get-fingerprint" since="2.4.0"/>
-    <keyword type="function" name="gnutls_openpgp_privkey_get_key_id ()" link="gnutls-openpgp.html#gnutls-openpgp-privkey-get-key-id" since="2.4.0"/>
-    <keyword type="function" name="gnutls_openpgp_privkey_get_pk_algorithm ()" link="gnutls-openpgp.html#gnutls-openpgp-privkey-get-pk-algorithm" since="2.4.0"/>
-    <keyword type="function" name="gnutls_openpgp_privkey_get_preferred_key_id ()" link="gnutls-openpgp.html#gnutls-openpgp-privkey-get-preferred-key-id"/>
-    <keyword type="function" name="gnutls_openpgp_privkey_get_revoked_status ()" link="gnutls-openpgp.html#gnutls-openpgp-privkey-get-revoked-status" since="2.4.0"/>
-    <keyword type="function" name="gnutls_openpgp_privkey_get_subkey_count ()" link="gnutls-openpgp.html#gnutls-openpgp-privkey-get-subkey-count" since="2.4.0"/>
-    <keyword type="function" name="gnutls_openpgp_privkey_get_subkey_creation_time ()" link="gnutls-openpgp.html#gnutls-openpgp-privkey-get-subkey-creation-time" since="2.4.0"/>
-    <keyword type="function" name="gnutls_openpgp_privkey_get_subkey_expiration_time ()" link="gnutls-openpgp.html#gnutls-openpgp-privkey-get-subkey-expiration-time" since="2.4.0"/>
-    <keyword type="function" name="gnutls_openpgp_privkey_get_subkey_fingerprint ()" link="gnutls-openpgp.html#gnutls-openpgp-privkey-get-subkey-fingerprint" since="2.4.0"/>
-    <keyword type="function" name="gnutls_openpgp_privkey_get_subkey_id ()" link="gnutls-openpgp.html#gnutls-openpgp-privkey-get-subkey-id" since="2.4.0"/>
-    <keyword type="function" name="gnutls_openpgp_privkey_get_subkey_idx ()" link="gnutls-openpgp.html#gnutls-openpgp-privkey-get-subkey-idx" since="2.4.0"/>
-    <keyword type="function" name="gnutls_openpgp_privkey_get_subkey_pk_algorithm ()" link="gnutls-openpgp.html#gnutls-openpgp-privkey-get-subkey-pk-algorithm" since="2.4.0"/>
-    <keyword type="function" name="gnutls_openpgp_privkey_get_subkey_revoked_status ()" link="gnutls-openpgp.html#gnutls-openpgp-privkey-get-subkey-revoked-status" since="2.4.0"/>
-    <keyword type="function" name="gnutls_openpgp_privkey_import ()" link="gnutls-openpgp.html#gnutls-openpgp-privkey-import"/>
-    <keyword type="function" name="gnutls_openpgp_privkey_init ()" link="gnutls-openpgp.html#gnutls-openpgp-privkey-init"/>
-    <keyword type="function" name="gnutls_openpgp_privkey_sec_param ()" link="gnutls-openpgp.html#gnutls-openpgp-privkey-sec-param" since="2.12.0"/>
-    <keyword type="function" name="gnutls_openpgp_privkey_set_preferred_key_id ()" link="gnutls-openpgp.html#gnutls-openpgp-privkey-set-preferred-key-id"/>
-    <keyword type="function" name="gnutls_openpgp_recv_key_func ()" link="gnutls-openpgp.html#gnutls-openpgp-recv-key-func"/>
-    <keyword type="function" name="gnutls_openpgp_set_recv_key_function ()" link="gnutls-openpgp.html#gnutls-openpgp-set-recv-key-function"/>
+    <keyword type="function" name="gnutls_certificate_set_openpgp_key ()" link="gnutls-openpgp.html#gnutls-certificate-set-openpgp-key" deprecated=""/>
+    <keyword type="function" name="gnutls_certificate_set_openpgp_key_file ()" link="gnutls-openpgp.html#gnutls-certificate-set-openpgp-key-file" deprecated=""/>
+    <keyword type="function" name="gnutls_certificate_set_openpgp_key_file2 ()" link="gnutls-openpgp.html#gnutls-certificate-set-openpgp-key-file2" deprecated="" since="2.4.0"/>
+    <keyword type="function" name="gnutls_certificate_set_openpgp_key_mem ()" link="gnutls-openpgp.html#gnutls-certificate-set-openpgp-key-mem" deprecated=""/>
+    <keyword type="function" name="gnutls_certificate_set_openpgp_key_mem2 ()" link="gnutls-openpgp.html#gnutls-certificate-set-openpgp-key-mem2" deprecated="" since="2.4.0"/>
+    <keyword type="function" name="gnutls_certificate_set_openpgp_keyring_file ()" link="gnutls-openpgp.html#gnutls-certificate-set-openpgp-keyring-file" deprecated=""/>
+    <keyword type="function" name="gnutls_certificate_set_openpgp_keyring_mem ()" link="gnutls-openpgp.html#gnutls-certificate-set-openpgp-keyring-mem" deprecated=""/>
+    <keyword type="function" name="gnutls_openpgp_crt_check_hostname ()" link="gnutls-openpgp.html#gnutls-openpgp-crt-check-hostname" deprecated=""/>
+    <keyword type="function" name="gnutls_openpgp_crt_deinit ()" link="gnutls-openpgp.html#gnutls-openpgp-crt-deinit" deprecated=""/>
+    <keyword type="function" name="gnutls_openpgp_crt_export ()" link="gnutls-openpgp.html#gnutls-openpgp-crt-export" deprecated=""/>
+    <keyword type="function" name="gnutls_openpgp_crt_export2 ()" link="gnutls-openpgp.html#gnutls-openpgp-crt-export2" deprecated="" since="3.1.3"/>
+    <keyword type="function" name="gnutls_openpgp_crt_get_auth_subkey ()" link="gnutls-openpgp.html#gnutls-openpgp-crt-get-auth-subkey" deprecated=""/>
+    <keyword type="function" name="gnutls_openpgp_crt_get_creation_time ()" link="gnutls-openpgp.html#gnutls-openpgp-crt-get-creation-time" deprecated=""/>
+    <keyword type="function" name="gnutls_openpgp_crt_get_expiration_time ()" link="gnutls-openpgp.html#gnutls-openpgp-crt-get-expiration-time" deprecated=""/>
+    <keyword type="function" name="gnutls_openpgp_crt_get_fingerprint ()" link="gnutls-openpgp.html#gnutls-openpgp-crt-get-fingerprint" deprecated=""/>
+    <keyword type="function" name="gnutls_openpgp_crt_get_key_id ()" link="gnutls-openpgp.html#gnutls-openpgp-crt-get-key-id" deprecated="" since="2.4.0"/>
+    <keyword type="function" name="gnutls_openpgp_crt_get_key_usage ()" link="gnutls-openpgp.html#gnutls-openpgp-crt-get-key-usage" deprecated=""/>
+    <keyword type="function" name="gnutls_openpgp_crt_get_name ()" link="gnutls-openpgp.html#gnutls-openpgp-crt-get-name" deprecated=""/>
+    <keyword type="function" name="gnutls_openpgp_crt_get_pk_algorithm ()" link="gnutls-openpgp.html#gnutls-openpgp-crt-get-pk-algorithm" deprecated=""/>
+    <keyword type="function" name="gnutls_openpgp_crt_get_pk_dsa_raw ()" link="gnutls-openpgp.html#gnutls-openpgp-crt-get-pk-dsa-raw" deprecated="" since="2.4.0"/>
+    <keyword type="function" name="gnutls_openpgp_crt_get_pk_rsa_raw ()" link="gnutls-openpgp.html#gnutls-openpgp-crt-get-pk-rsa-raw" deprecated="" since="2.4.0"/>
+    <keyword type="function" name="gnutls_openpgp_crt_get_preferred_key_id ()" link="gnutls-openpgp.html#gnutls-openpgp-crt-get-preferred-key-id" deprecated=""/>
+    <keyword type="function" name="gnutls_openpgp_crt_get_revoked_status ()" link="gnutls-openpgp.html#gnutls-openpgp-crt-get-revoked-status" deprecated="" since="2.4.0"/>
+    <keyword type="function" name="gnutls_openpgp_crt_get_subkey_count ()" link="gnutls-openpgp.html#gnutls-openpgp-crt-get-subkey-count" deprecated="" since="2.4.0"/>
+    <keyword type="function" name="gnutls_openpgp_crt_get_subkey_creation_time ()" link="gnutls-openpgp.html#gnutls-openpgp-crt-get-subkey-creation-time" deprecated="" since="2.4.0"/>
+    <keyword type="function" name="gnutls_openpgp_crt_get_subkey_expiration_time ()" link="gnutls-openpgp.html#gnutls-openpgp-crt-get-subkey-expiration-time" deprecated="" since="2.4.0"/>
+    <keyword type="function" name="gnutls_openpgp_crt_get_subkey_fingerprint ()" link="gnutls-openpgp.html#gnutls-openpgp-crt-get-subkey-fingerprint" deprecated="" since="2.4.0"/>
+    <keyword type="function" name="gnutls_openpgp_crt_get_subkey_id ()" link="gnutls-openpgp.html#gnutls-openpgp-crt-get-subkey-id" deprecated=""/>
+    <keyword type="function" name="gnutls_openpgp_crt_get_subkey_idx ()" link="gnutls-openpgp.html#gnutls-openpgp-crt-get-subkey-idx" deprecated="" since="2.4.0"/>
+    <keyword type="function" name="gnutls_openpgp_crt_get_subkey_pk_algorithm ()" link="gnutls-openpgp.html#gnutls-openpgp-crt-get-subkey-pk-algorithm" deprecated="" since="2.4.0"/>
+    <keyword type="function" name="gnutls_openpgp_crt_get_subkey_pk_dsa_raw ()" link="gnutls-openpgp.html#gnutls-openpgp-crt-get-subkey-pk-dsa-raw" deprecated="" since="2.4.0"/>
+    <keyword type="function" name="gnutls_openpgp_crt_get_subkey_pk_rsa_raw ()" link="gnutls-openpgp.html#gnutls-openpgp-crt-get-subkey-pk-rsa-raw" deprecated="" since="2.4.0"/>
+    <keyword type="function" name="gnutls_openpgp_crt_get_subkey_revoked_status ()" link="gnutls-openpgp.html#gnutls-openpgp-crt-get-subkey-revoked-status" deprecated="" since="2.4.0"/>
+    <keyword type="function" name="gnutls_openpgp_crt_get_subkey_usage ()" link="gnutls-openpgp.html#gnutls-openpgp-crt-get-subkey-usage" deprecated="" since="2.4.0"/>
+    <keyword type="function" name="gnutls_openpgp_crt_get_version ()" link="gnutls-openpgp.html#gnutls-openpgp-crt-get-version" deprecated=""/>
+    <keyword type="function" name="gnutls_openpgp_crt_import ()" link="gnutls-openpgp.html#gnutls-openpgp-crt-import" deprecated=""/>
+    <keyword type="function" name="gnutls_openpgp_crt_init ()" link="gnutls-openpgp.html#gnutls-openpgp-crt-init" deprecated=""/>
+    <keyword type="function" name="gnutls_openpgp_crt_print ()" link="gnutls-openpgp.html#gnutls-openpgp-crt-print" deprecated=""/>
+    <keyword type="function" name="gnutls_openpgp_crt_set_preferred_key_id ()" link="gnutls-openpgp.html#gnutls-openpgp-crt-set-preferred-key-id" deprecated=""/>
+    <keyword type="function" name="gnutls_openpgp_crt_verify_ring ()" link="gnutls-openpgp.html#gnutls-openpgp-crt-verify-ring" deprecated=""/>
+    <keyword type="function" name="gnutls_openpgp_crt_verify_self ()" link="gnutls-openpgp.html#gnutls-openpgp-crt-verify-self" deprecated=""/>
+    <keyword type="function" name="gnutls_openpgp_keyring_check_id ()" link="gnutls-openpgp.html#gnutls-openpgp-keyring-check-id" deprecated=""/>
+    <keyword type="function" name="gnutls_openpgp_keyring_deinit ()" link="gnutls-openpgp.html#gnutls-openpgp-keyring-deinit" deprecated=""/>
+    <keyword type="function" name="gnutls_openpgp_keyring_get_crt ()" link="gnutls-openpgp.html#gnutls-openpgp-keyring-get-crt" deprecated=""/>
+    <keyword type="function" name="gnutls_openpgp_keyring_get_crt_count ()" link="gnutls-openpgp.html#gnutls-openpgp-keyring-get-crt-count" deprecated=""/>
+    <keyword type="function" name="gnutls_openpgp_keyring_import ()" link="gnutls-openpgp.html#gnutls-openpgp-keyring-import" deprecated=""/>
+    <keyword type="function" name="gnutls_openpgp_keyring_init ()" link="gnutls-openpgp.html#gnutls-openpgp-keyring-init" deprecated=""/>
+    <keyword type="function" name="gnutls_openpgp_privkey_deinit ()" link="gnutls-openpgp.html#gnutls-openpgp-privkey-deinit" deprecated=""/>
+    <keyword type="function" name="gnutls_openpgp_privkey_export ()" link="gnutls-openpgp.html#gnutls-openpgp-privkey-export" deprecated="" since="2.4.0"/>
+    <keyword type="function" name="gnutls_openpgp_privkey_export2 ()" link="gnutls-openpgp.html#gnutls-openpgp-privkey-export2" deprecated="" since="3.1.3"/>
+    <keyword type="function" name="gnutls_openpgp_privkey_export_dsa_raw ()" link="gnutls-openpgp.html#gnutls-openpgp-privkey-export-dsa-raw" deprecated="" since="2.4.0"/>
+    <keyword type="function" name="gnutls_openpgp_privkey_export_rsa_raw ()" link="gnutls-openpgp.html#gnutls-openpgp-privkey-export-rsa-raw" deprecated="" since="2.4.0"/>
+    <keyword type="function" name="gnutls_openpgp_privkey_export_subkey_dsa_raw ()" link="gnutls-openpgp.html#gnutls-openpgp-privkey-export-subkey-dsa-raw" deprecated="" since="2.4.0"/>
+    <keyword type="function" name="gnutls_openpgp_privkey_export_subkey_rsa_raw ()" link="gnutls-openpgp.html#gnutls-openpgp-privkey-export-subkey-rsa-raw" deprecated="" since="2.4.0"/>
+    <keyword type="function" name="gnutls_openpgp_privkey_get_fingerprint ()" link="gnutls-openpgp.html#gnutls-openpgp-privkey-get-fingerprint" deprecated="" since="2.4.0"/>
+    <keyword type="function" name="gnutls_openpgp_privkey_get_key_id ()" link="gnutls-openpgp.html#gnutls-openpgp-privkey-get-key-id" deprecated="" since="2.4.0"/>
+    <keyword type="function" name="gnutls_openpgp_privkey_get_pk_algorithm ()" link="gnutls-openpgp.html#gnutls-openpgp-privkey-get-pk-algorithm" deprecated="" since="2.4.0"/>
+    <keyword type="function" name="gnutls_openpgp_privkey_get_preferred_key_id ()" link="gnutls-openpgp.html#gnutls-openpgp-privkey-get-preferred-key-id" deprecated=""/>
+    <keyword type="function" name="gnutls_openpgp_privkey_get_revoked_status ()" link="gnutls-openpgp.html#gnutls-openpgp-privkey-get-revoked-status" deprecated="" since="2.4.0"/>
+    <keyword type="function" name="gnutls_openpgp_privkey_get_subkey_count ()" link="gnutls-openpgp.html#gnutls-openpgp-privkey-get-subkey-count" deprecated="" since="2.4.0"/>
+    <keyword type="function" name="gnutls_openpgp_privkey_get_subkey_creation_time ()" link="gnutls-openpgp.html#gnutls-openpgp-privkey-get-subkey-creation-time" deprecated="" since="2.4.0"/>
+    <keyword type="function" name="gnutls_openpgp_privkey_get_subkey_expiration_time ()" link="gnutls-openpgp.html#gnutls-openpgp-privkey-get-subkey-expiration-time" deprecated="" since="2.4.0"/>
+    <keyword type="function" name="gnutls_openpgp_privkey_get_subkey_fingerprint ()" link="gnutls-openpgp.html#gnutls-openpgp-privkey-get-subkey-fingerprint" deprecated="" since="2.4.0"/>
+    <keyword type="function" name="gnutls_openpgp_privkey_get_subkey_id ()" link="gnutls-openpgp.html#gnutls-openpgp-privkey-get-subkey-id" deprecated="" since="2.4.0"/>
+    <keyword type="function" name="gnutls_openpgp_privkey_get_subkey_idx ()" link="gnutls-openpgp.html#gnutls-openpgp-privkey-get-subkey-idx" deprecated="" since="2.4.0"/>
+    <keyword type="function" name="gnutls_openpgp_privkey_get_subkey_pk_algorithm ()" link="gnutls-openpgp.html#gnutls-openpgp-privkey-get-subkey-pk-algorithm" deprecated="" since="2.4.0"/>
+    <keyword type="function" name="gnutls_openpgp_privkey_get_subkey_revoked_status ()" link="gnutls-openpgp.html#gnutls-openpgp-privkey-get-subkey-revoked-status" deprecated="" since="2.4.0"/>
+    <keyword type="function" name="gnutls_openpgp_privkey_import ()" link="gnutls-openpgp.html#gnutls-openpgp-privkey-import" deprecated=""/>
+    <keyword type="function" name="gnutls_openpgp_privkey_init ()" link="gnutls-openpgp.html#gnutls-openpgp-privkey-init" deprecated=""/>
+    <keyword type="function" name="gnutls_openpgp_privkey_sec_param ()" link="gnutls-openpgp.html#gnutls-openpgp-privkey-sec-param" deprecated="" since="2.12.0"/>
+    <keyword type="function" name="gnutls_openpgp_privkey_set_preferred_key_id ()" link="gnutls-openpgp.html#gnutls-openpgp-privkey-set-preferred-key-id" deprecated=""/>
+    <keyword type="function" name="gnutls_openpgp_recv_key_func ()" link="gnutls-openpgp.html#gnutls-openpgp-recv-key-func" deprecated=""/>
+    <keyword type="function" name="gnutls_openpgp_set_recv_key_function ()" link="gnutls-openpgp.html#gnutls-openpgp-set-recv-key-function" deprecated=""/>
     <keyword type="macro" name="GNUTLS_OPENPGP_KEYID_SIZE" link="gnutls-openpgp.html#GNUTLS-OPENPGP-KEYID-SIZE:CAPS"/>
     <keyword type="macro" name="GNUTLS_OPENPGP_MASTER_KEYID_IDX" link="gnutls-openpgp.html#GNUTLS-OPENPGP-MASTER-KEYID-IDX:CAPS"/>
     <keyword type="enum" name="enum gnutls_openpgp_crt_fmt_t" link="gnutls-openpgp.html#gnutls-openpgp-crt-fmt-t"/>

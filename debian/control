@@ -9,7 +9,7 @@ Uploaders: Andreas Metzler <ametzler@debian.org>,
 Build-Depends: debhelper (>= 9.20150628), nettle-dev (>= 3.1), zlib1g-dev,
  libtasn1-6-dev (>= 4.9), autotools-dev,
  datefudge <!nocheck>, dpkg-dev (>= 1.17.14),
- libp11-kit-dev (>= 0.23.1), pkg-config, chrpath, libidn11-dev (>= 1.31),
+ libp11-kit-dev (>= 0.23.1), pkg-config, chrpath, libidn2-0-dev,
  autogen (>= 1:5.16-0), bison, dh-autoreconf, libcmocka-dev <!nocheck>,
  libgmp-dev (>= 2:6),
  libopts25-dev, automake (>= 1:1.12.2), libunbound-dev (>= 1.5.10-1),
@@ -36,7 +36,7 @@ Depends: libgnutls30 (= ${binary:Version}),
  libgnutlsxx28 (= ${binary:Version}),
  libgnutls-dane0 (= ${binary:Version}),
  nettle-dev, libc6-dev | libc-dev, zlib1g-dev,
- libtasn1-6-dev, libp11-kit-dev, libidn11-dev (>= 1.31), ${misc:Depends}
+ libtasn1-6-dev, libp11-kit-dev, libidn2-0-dev, ${misc:Depends}
 Suggests: gnutls-doc, gnutls-bin
 Conflicts: gnutls-dev
 Replaces: gnutls-dev

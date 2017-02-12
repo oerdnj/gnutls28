@@ -1,6 +1,6 @@
 This is gnutls.info, produced by makeinfo version 6.3 from gnutls.texi.
 
-This manual is last updated 8 January 2017 for version 3.5.8 of GnuTLS.
+This manual is last updated 8 January 2017 for version 3.5.9 of GnuTLS.
 
 Copyright (C) 2001-2017 Free Software Foundation, Inc.\\ Copyright (C)
 2001-2017 Nikos Mavrogiannopoulos
@@ -32,7 +32,7 @@ File: gnutls.info,  Node: Top,  Next: Preface,  Up: (dir)
 GnuTLS
 ******
 
-This manual is last updated 8 January 2017 for version 3.5.8 of GnuTLS.
+This manual is last updated 8 January 2017 for version 3.5.9 of GnuTLS.
 
 Copyright (C) 2001-2017 Free Software Foundation, Inc.\\ Copyright (C)
 2001-2017 Nikos Mavrogiannopoulos
@@ -1313,8 +1313,8 @@ File: gnutls.info,  Node: Certificate authentication,  Next: More on certificate
 
 The most known authentication method of TLS are certificates.  The PKIX
 [_PKIX_] public key infrastructure is daily used by anyone using a
-browser today.  GnuTLS supports both X.509 certificates [_PKIX_] and
-OpenPGP certificates using a common API.
+browser today.  GnuTLS provides a simple API to use the X.509
+certificates [_PKIX_].
 
 The key exchange algorithms supported by certificate authentication are
 shown in *note Table 4.1: tab:key-exchange.
@@ -2285,180 +2285,17 @@ File: gnutls.info,  Node: OpenPGP certificates,  Next: Advanced certificate veri
 4.1.2 OpenPGP certificates
 --------------------------
 
-The OpenPGP key authentication relies on a distributed trust model,
-called the "web of trust".  The "web of trust" uses a decentralized
-system of trusted introducers, which are the same as a CA. OpenPGP
-allows anyone to sign anyone else's public key.  When Alice signs Bob's
-key, she is introducing Bob's key to anyone who trusts Alice.  If
-someone trusts Alice to introduce keys, then Alice is a trusted
-introducer in the mind of that observer.  For example in *note Figure
-4.4: fig-openpgp, David trusts Alice to be an introducer and Alice
-signed Bob's key thus Dave trusts Bob's key to be the real one.
-
- [image src="gnutls-pgp.png" ]
-
-Figure 4.4: An example of the OpenPGP trust model.
-
-There are some key points that are important in that model.  In the
-example Alice has to sign Bob's key, only if she is sure that the key
-belongs to Bob.  Otherwise she may also make Dave falsely believe that
-this is Bob's key.  Dave has also the responsibility to know who to
-trust.  This model is similar to real life relations.
-
-Just see how Charlie behaves in the previous example.  Although he has
-signed Bob's key - because he knows, somehow, that it belongs to Bob -
-he does not trust Bob to be an introducer.  Charlie decided to trust
-only Kevin, for some reason.  A reason could be that Bob is lazy enough,
-and signs other people's keys without being sure that they belong to the
-actual owner.
-
-Field          Description
-               
-------------------------------------------------------------------
-version        The field that indicates the version of the
-               OpenPGP structure.
-               
-user ID        An RFC 2822 string that identifies the owner of
-               the key.  There may be multiple user identifiers
-               in a key.
-               
-public key     The main public key of the certificate.
-               
-expiration     The expiration time of the main public key.
-               
-public         An additional public key of the certificate.
-subkey         There may be multiple subkeys in a certificate.
-               
-public         The expiration time of the subkey.
-subkey         
-expiration
-
-Table 4.5: OpenPGP certificate fields.
-
-4.1.2.1 OpenPGP certificate structure
-.....................................
-
-In GnuTLS the OpenPGP certificate structures [_RFC2440_] are handled
-using the 'gnutls_openpgp_crt_t' type.  A typical certificate contains
-the user ID, which is an RFC 2822 mail and name address, a public key,
-possibly a number of additional public keys (called subkeys), and a
-number of signatures.  The various fields are shown in *note Table 4.5:
-tab:openpgp-certificate.
-
-The additional subkeys may provide key for various different purposes,
-e.g.  one key to encrypt mail, and another to sign a TLS key exchange.
-Each subkey is identified by a unique key ID. The keys that are to be
-used in a TLS key exchange that requires signatures are called
-authentication keys in the OpenPGP jargon.  The mapping of TLS key
-exchange methods to public keys is shown in *note Table 4.6:
-tab:openpgp-key-exchange.
-
-Key exchange   Public key requirements
-               
-------------------------------------------------------------------
-RSA            An RSA public key that allows encryption.
-               
-DHE_RSA        An RSA public key that is marked for
-               authentication.
-               
-ECDHE_RSA      An RSA public key that is marked for
-               authentication.
-               
-DHE_DSS        A DSA public key that is marked for
-               authentication.
-               
-
-Table 4.6: The types of (sub)keys required for the various TLS key
-exchange methods.
-
-The corresponding private keys are stored in the
-'gnutls_openpgp_privkey_t' type.  All the prototypes for the key
-handling functions can be found in 'gnutls/openpgp.h'.
-
-4.1.2.2 Verifying an OpenPGP certificate
-........................................
-
-The verification functions of OpenPGP keys, included in GnuTLS, are
-simple ones, and do not use the features of the "web of trust".  For
-that reason, if the verification needs are complex, the assistance of
-external tools like GnuPG and GPGME(1) is recommended.
-
-In GnuTLS there is a verification function for OpenPGP certificates, the
-*note gnutls_openpgp_crt_verify_ring::.  This checks an OpenPGP key
-against a given set of public keys (keyring) and returns the key status.
-The key verification status is the same as in X.509 certificates,
-although the meaning and interpretation are different.  For example an
-OpenPGP key may be valid, if the self signature is ok, even if no
-signers were found.  The meaning of verification status flags is the
-same as in the X.509 certificates (see *note Figure 4.3:
-gnutls_certificate_verify_flags.).
-
- -- Function: int gnutls_openpgp_crt_verify_ring (gnutls_openpgp_crt_t
-          KEY, gnutls_openpgp_keyring_t KEYRING, unsigned int FLAGS,
-          unsigned int * VERIFY)
-     KEY: the structure that holds the key.
-
-     KEYRING: holds the keyring to check against
-
-     FLAGS: unused (should be 0)
-
-     VERIFY: will hold the certificate verification output.
-
-     Verify all signatures in the key, using the given set of keys
-     (keyring).
-
-     The key verification output will be put in 'verify' and will be one
-     or more of the 'gnutls_certificate_status_t' enumerated elements
-     bitwise or'd.
-
-     Note that this function does not verify using any "web of trust".
-     You may use GnuPG for that purpose, or any other external PGP
-     application.
-
-     *Returns:* 'GNUTLS_E_SUCCESS' on success, or an error code.
-
- -- Function: int gnutls_openpgp_crt_verify_self (gnutls_openpgp_crt_t
-          KEY, unsigned int FLAGS, unsigned int * VERIFY)
-     KEY: the structure that holds the key.
-
-     FLAGS: unused (should be 0)
-
-     VERIFY: will hold the key verification output.
-
-     Verifies the self signature in the key.  The key verification
-     output will be put in 'verify' and will be one or more of the
-     gnutls_certificate_status_t enumerated elements bitwise or'd.
-
-     *Returns:* 'GNUTLS_E_SUCCESS' on success, or an error code.
-
-4.1.2.3 Verifying a certificate in the context of a TLS session
-...............................................................
-
-Similarly with X.509 certificates, one needs to specify the OpenPGP
-keyring file in the credentials structure.  The certificates in this
-file will be used by *note gnutls_certificate_verify_peers3:: to verify
-the signatures in the certificate sent by the peer.
-
- -- Function: int gnutls_certificate_set_openpgp_keyring_file
-          (gnutls_certificate_credentials_t C, const char * FILE,
-          gnutls_openpgp_crt_fmt_t FORMAT)
-     C: A certificate credentials structure
-
-     FILE: filename of the keyring.
-
-     FORMAT: format of keyring.
-
-     The function is used to set keyrings that will be used internally
-     by various OpenPGP functions.  For example to find a key when it is
-     needed for an operations.  The keyring will also be used at the
-     verification functions.
-
-     *Returns:* On success, 'GNUTLS_E_SUCCESS' (0) is returned,
-     otherwise a negative error value.
-
-   ---------- Footnotes ----------
-
-   (1) <http://www.gnupg.org/related_software/gpgme/>
+Previous versions of GnuTLS supported limited OpenPGP key
+authentication.  That functionality has been deprecated and although is
+still made available, it is no longer recommended to use.  The reason is
+that, supporting alternative authentication methods, when X.509 and PKIX
+were new and not well established, seemed like a good idea, in today's
+internet X.509 is unquestionably the main container for certificates.
+As such supporting more options with no clear use-cases, is a
+distraction that consumes considerable resources for improving and
+testing.  For that we have decided to mark this functionality as
+deprecated, and will be dropped in one of the next GnuTLS major
+releases.
 
 
 File: gnutls.info,  Node: Advanced certificate verification,  Next: Digital signatures,  Prev: OpenPGP certificates,  Up: Certificate authentication
@@ -2830,7 +2667,7 @@ File: gnutls.info,  Node: PKIX certificate revocation lists,  Next: OCSP certifi
 A certificate revocation list (CRL) is a structure issued by an
 authority periodically containing a list of revoked certificates serial
 numbers.  The CRL structure is signed with the issuing authorities'
-keys.  A typical CRL contains the fields as shown in *note Table 4.7:
+keys.  A typical CRL contains the fields as shown in *note Table 4.5:
 tab:crl.  Certificate revocation lists are used to complement the
 expiration date of a certificate, in order to account for other reasons
 of revocation, such as compromised keys, etc.
@@ -2859,7 +2696,7 @@ revokedCertificatesList of revoked certificates serial numbers.
 extensions     Optional CRL structure extensions.
                
 
-Table 4.7: Certificate revocation list fields.
+Table 4.5: Certificate revocation list fields.
 
 The basic CRL structure functions follow.
 
@@ -3097,7 +2934,7 @@ not be able to give a stale response for the same nonce.
 'INT *note gnutls_ocsp_req_randomize_nonce:: (gnutls_ocsp_req_t REQ)'
 
 The OCSP response structures is a complex structure.  A simplified
-overview of it is in *note Table 4.8: tab:ocsp-response.  Note that a
+overview of it is in *note Table 4.6: tab:ocsp-response.  Note that a
 response may contain information on multiple certificates.
 
 Field          Description
@@ -3126,7 +2963,7 @@ revocationTime The time the certificate was revoked.
 revocationReasonThe reason the certificate was revoked.
                
 
-Table 4.8: The most important OCSP response fields.
+Table 4.6: The most important OCSP response fields.
 
 We provide basic functions for initialization, importing, exporting and
 deallocating OCSP responses.
@@ -3212,7 +3049,7 @@ below.
 'GNUTLS_X509_CRLREASON_AACOMPROMISE'
      AA compromised.
 
-Figure 4.5: The revocation reasons
+Figure 4.4: The revocation reasons
 
 Note, that the OCSP response needs to be verified against some set of
 trust anchors before it can be relied upon.  It is also important to
@@ -3380,7 +3217,7 @@ the obsolete PBES1 scheme cannot be decrypted.
 'GNUTLS_PKCS_PBES1_DES_MD5'
      - undescribed -
 
-Figure 4.6: Encryption flags
+Figure 4.5: Encryption flags
 
 PKCS #12 structures
 ...................
@@ -5371,7 +5208,6 @@ below.  It can be imported through an existing structure like
 'SubjectPublicKeyInfo' sequence.
 
 'INT *note gnutls_pubkey_import_x509:: (gnutls_pubkey_t KEY, gnutls_x509_crt_t CRT, unsigned int FLAGS)'
-'INT *note gnutls_pubkey_import_openpgp:: (gnutls_pubkey_t KEY, gnutls_openpgp_crt_t CRT, unsigned int FLAGS)'
 'INT *note gnutls_pubkey_import_pkcs11:: (gnutls_pubkey_t KEY, gnutls_pkcs11_obj_t OBJ, unsigned int FLAGS)'
 
 'INT *note gnutls_pubkey_import_url:: (gnutls_pubkey_t KEY, const char * URL, unsigned int FLAGS)'
@@ -5405,7 +5241,6 @@ Other helper functions that allow directly importing from raw X.509 or
 OpenPGP structures are shown below.
 
 'INT *note gnutls_pubkey_import_x509_raw:: (gnutls_pubkey_t PKEY, const gnutls_datum_t * DATA, gnutls_x509_crt_fmt_t FORMAT, unsigned int FLAGS)'
-'INT *note gnutls_pubkey_import_openpgp_raw:: (gnutls_pubkey_t PKEY, const gnutls_datum_t * DATA, gnutls_openpgp_crt_fmt_t FORMAT, const gnutls_openpgp_keyid_t KEYID, unsigned int FLAGS)'
 
 An important function is *note gnutls_pubkey_import_url:: which will
 import public keys from URLs that identify objects stored in tokens (see
@@ -5460,15 +5295,11 @@ That is to allow abstraction over keys stored in hardware that makes
 available only operations.
 
 'INT *note gnutls_privkey_import_x509:: (gnutls_privkey_t PKEY, gnutls_x509_privkey_t KEY, unsigned int FLAGS)'
-'INT *note gnutls_privkey_import_openpgp:: (gnutls_privkey_t PKEY, gnutls_openpgp_privkey_t KEY, unsigned int FLAGS)'
 'INT *note gnutls_privkey_import_pkcs11:: (gnutls_privkey_t PKEY, gnutls_pkcs11_privkey_t KEY, unsigned int FLAGS)'
 
 Other helper functions that allow directly importing from raw X.509 or
 OpenPGP structures are shown below.  Again, as with public keys, private
 keys can be imported from a hardware module using URLs.
-
-'INT *note gnutls_privkey_import_x509_raw:: (gnutls_privkey_t PKEY, const gnutls_datum_t * DATA, gnutls_x509_crt_fmt_t FORMAT, const char * PASSWORD, unsigned int FLAGS)'
-'INT *note gnutls_privkey_import_openpgp_raw:: (gnutls_privkey_t PKEY, const gnutls_datum_t * DATA, gnutls_openpgp_crt_fmt_t FORMAT, const gnutls_openpgp_keyid_t KEYID, const char * PASSWORD)'
 
  -- Function: int gnutls_privkey_import_url (gnutls_privkey_t KEY, const
           char * URL, unsigned int FLAGS)
@@ -5487,6 +5318,7 @@ keys can be imported from a hardware module using URLs.
 
      *Since:* 3.1.0
 
+'INT *note gnutls_privkey_import_x509_raw:: (gnutls_privkey_t PKEY, const gnutls_datum_t * DATA, gnutls_x509_crt_fmt_t FORMAT, const char * PASSWORD, unsigned int FLAGS)'
 'INT *note gnutls_privkey_get_pk_algorithm:: (gnutls_privkey_t KEY, unsigned int * BITS)'
 'GNUTLS_PRIVKEY_TYPE_T *note gnutls_privkey_get_type:: (gnutls_privkey_t KEY)'
 'INT *note gnutls_privkey_status:: (gnutls_privkey_t KEY)'
@@ -7409,4 +7241,173 @@ about the peer involved.
      (*gnutls_audit_log_func)( gnutls_session_t, const char*);
 
      *Since:* 3.0
+
+
+File: gnutls.info,  Node: Thread safety,  Next: Running in a sandbox,  Prev: Debugging and auditing,  Up: Introduction to the library
+
+6.1.5 Thread safety
+-------------------
+
+The GnuTLS library is thread safe by design, meaning that objects of the
+library such as TLS sessions, can be safely divided across threads as
+long as a single thread accesses a single object.  This is sufficient to
+support a server which handles several sessions per thread.  If,
+however, an object needs to be shared across threads then access must be
+protected with a mutex.  Read-only access to objects, for example the
+credentials holding structures, is also thread-safe.
+
+A 'gnutls_session_t' object can be shared by two threads, one sending,
+the other receiving.  In that case rehandshakes, if required, must only
+be handled by a single thread being active.  The termination of a
+session should be handled, either by a single thread being active, or by
+the sender thread using *note gnutls_bye:: with 'GNUTLS_SHUT_WR' and the
+receiving thread waiting for a return value of zero.
+
+The random generator of the cryptographic back-end, utilizes mutex locks
+(e.g., pthreads on GNU/Linux and CriticalSection on Windows) which are
+setup by GnuTLS on library initialization.  Prior to version 3.3.0 they
+were setup by calling *note gnutls_global_init::.(1)  Note that, on
+Glibc systems the GnuTLS library does not link with the libpthread
+library by default, it utilizes the Glibc mutex stubs, which allows
+Glibc to use the non-multithreaded (and optimized) variants of its
+algorithms.  That, however, for applications using GnuTLS that may
+potentially utilize mutexes, requires them to explicitly link with
+libpthread.
+
+   ---------- Footnotes ----------
+
+   (1) On special systems you could manually specify the locking system
+using the function *note gnutls_global_set_mutex:: before calling any
+other GnuTLS function.  Setting mutexes manually is not recommended.
+
+
+File: gnutls.info,  Node: Running in a sandbox,  Next: Sessions and fork,  Prev: Thread safety,  Up: Introduction to the library
+
+6.1.6 Running in a sandbox
+--------------------------
+
+Given that TLS protocol handling as well as X.509 certificate parsing
+are complicated processes involving several thousands lines of code, it
+is often desirable (and recommended) to run the TLS session handling in
+a sandbox like seccomp.  That has to be allowed by the overall software
+design, but if available, it adds an additional layer of protection by
+preventing parsing errors from becoming vessels for further security
+issues such as code execution.
+
+GnuTLS requires the following system calls to be available for its
+proper operation.
+
+   * nanosleep
+   * time
+   * gettimeofday
+   * clock_gettime
+   * getrusage
+   * getpid
+   * send
+   * recv
+   * sendmsg
+   * read (to read from /dev/urandom)
+   * getrandom (this is Linux-kernel specific)
+   * poll
+
+As well as any calls needed for memory allocation to work.  Note
+however, that GnuTLS depends on libc for the system calls, and there is
+no guarantee that libc will call the expected system call.  For that it
+is recommended to test your program in all the targetted platforms when
+filters like seccomp are in place.
+
+An example with a seccomp filter from GnuTLS' test suite is at:
+<http://gitlab.com/gnutls/gnutls/blob/master/tests/seccomp.c>.
+
+
+File: gnutls.info,  Node: Sessions and fork,  Next: Callback functions,  Prev: Running in a sandbox,  Up: Introduction to the library
+
+6.1.7 Sessions and fork
+-----------------------
+
+A 'gnutls_session_t' object can be shared by two processes after a fork,
+one sending, the other receiving.  In that case rehandshakes, cannot and
+must not be performed.  As with threads, the termination of a session
+should be handled by the sender process using *note gnutls_bye:: with
+'GNUTLS_SHUT_WR' and the receiving process waiting for a return value of
+zero.
+
+
+File: gnutls.info,  Node: Callback functions,  Prev: Sessions and fork,  Up: Introduction to the library
+
+6.1.8 Callback functions
+------------------------
+
+There are several cases where GnuTLS may need out of band input from
+your program.  This is now implemented using some callback functions,
+which your program is expected to register.
+
+An example of this type of functions are the push and pull callbacks
+which are used to specify the functions that will retrieve and send data
+to the transport layer.
+
+'VOID *note gnutls_transport_set_push_function:: (gnutls_session_t SESSION, gnutls_push_func PUSH_FUNC)'
+'VOID *note gnutls_transport_set_pull_function:: (gnutls_session_t SESSION, gnutls_pull_func PULL_FUNC)'
+
+Other callback functions may require more complicated input and data to
+be allocated.  Such an example is *note
+gnutls_srp_set_server_credentials_function::.  All callbacks should
+allocate and free memory using 'gnutls_malloc' and 'gnutls_free'.
+
+
+File: gnutls.info,  Node: Preparation,  Next: Session initialization,  Prev: Introduction to the library,  Up: How to use GnuTLS in applications
+
+6.2 Preparation
+===============
+
+To use GnuTLS, you have to perform some changes to your sources and your
+build system.  The necessary changes are explained in the following
+subsections.
+
+* Menu:
+
+* Headers::
+* Initialization::
+* Version check::
+* Building the source::
+
+
+File: gnutls.info,  Node: Headers,  Next: Initialization,  Up: Preparation
+
+6.2.1 Headers
+-------------
+
+All the data types and functions of the GnuTLS library are defined in
+the header file 'gnutls/gnutls.h'.  This must be included in all
+programs that make use of the GnuTLS library.
+
+
+File: gnutls.info,  Node: Initialization,  Next: Version check,  Prev: Headers,  Up: Preparation
+
+6.2.2 Initialization
+--------------------
+
+The GnuTLS library is initialized on load; prior to 3.3.0 was
+initialized by calling *note gnutls_global_init::(1).  The
+initialization typically enables CPU-specific acceleration, performs any
+required precalculations needed, opens any required system devices
+(e.g., /dev/urandom on Linux) and initializes subsystems that could be
+used later.
+
+The resources allocated by the initialization process will be released
+on library deinitialization, or explicitly by calling *note
+gnutls_global_deinit::.
+
+Note that during initialization file descriptors may be kept open by
+GnuTLS (e.g.  /dev/urandom) on library load.  Applications closing all
+unknown file descriptors must immediately call *note
+gnutls_global_init::, after that, to ensure they don't disrupt GnuTLS'
+operation.
+
+   ---------- Footnotes ----------
+
+   (1) The original behavior of requiring explicit initialization can
+obtained by setting the GNUTLS_NO_EXPLICIT_INIT environment variable to
+1, or by using the macro GNUTLS_SKIP_GLOBAL_INIT in a global section of
+your program.
 

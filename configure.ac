@@ -21,7 +21,7 @@ dnl Process this file with autoconf to produce a configure script.
 # USA
 
 AC_PREREQ(2.61)
-AC_INIT([GnuTLS], [3.5.8], [bugs@gnutls.org])
+AC_INIT([GnuTLS], [3.5.9], [bugs@gnutls.org])
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_MACRO_DIR([m4])
 AC_CANONICAL_HOST
@@ -98,7 +98,6 @@ AC_SUBST(MINOR_VERSION, `echo $PACKAGE_VERSION | sed 's/.*\.\(.*\)\..*/\1/g'`)
 AC_SUBST(PATCH_VERSION, [[`echo $PACKAGE_VERSION | sed 's/.*\..*\.\([0-9]*\).*/\1/g'`]])
 AC_SUBST(NUMBER_VERSION, `printf "0x%02x%02x%02x" $MAJOR_VERSION $MINOR_VERSION $PATCH_VERSION`)
 
-touch suppressions.valgrind
 dnl C and C++ capabilities
 AC_C_INLINE
 AC_HEADER_STDC
@@ -244,9 +243,6 @@ LIBGNUTLS_EXTRA_HOOKS
 AC_ARG_ENABLE(tests,
   AS_HELP_STRING([--disable-tests], [don't compile or run any tests]),
     enable_tests=$enableval, enable_tests=$enable_tools)
-if test "$enable_tests" = "yes" && test "$enable_tools" = "no"; then
-  true #AC_MSG_ERROR([Cannot enable tests while disabling tools])
-fi
 AM_CONDITIONAL(ENABLE_TESTS, test "$enable_tests" != "no")
 
 GTK_DOC_CHECK(1.1)
@@ -362,13 +358,11 @@ AC_ARG_ENABLE(full-test-suite,
   AS_HELP_STRING([--disable-full-test-suite], [disable running very slow components of test suite]),
     full_test_suite=$enableval, full_test_suite=yes)
 
-# test if we are in git master
+# test if we are in git master or in release build. In release
+# builds we do not use valgrind.
 SUITE_FILE="${srcdir}/tests/suite/mini-eagain2.c"
 if test "$full_test_suite" = yes && test ! -f "$SUITE_FILE";then
 	full_test_suite=no
-fi
-
-if test "$full_test_suite" != "yes";then
 	VALGRIND=""
 	AC_SUBST(VALGRIND, [])
 	opt_valgrind_tests=no
@@ -470,42 +464,71 @@ fi
 PKG_CHECK_MODULES(CMOCKA, cmocka, [with_cmocka=yes], [with_cmocka=no])
 AM_CONDITIONAL(HAVE_CMOCKA, test "$with_cmocka" != "no")
 
-AC_ARG_WITH(idn, AS_HELP_STRING([--without-idn],
-                                 [disable support for libidn]),
-            try_libidn="$withval", 
-            try_libidn=yes)
-
 with_old_nettle=no
 if ! $PKG_CONFIG --atleast-version=3.3 nettle; then
 	with_old_nettle=yes
 fi
 AM_CONDITIONAL(WITH_OLD_NETTLE, test "$with_old_nettle" != "no")
 
-if test "$try_libidn" = yes;then
-PKG_CHECK_MODULES(LIBIDN, libidn >= 0.5.6, [with_libidn=yes], [with_libidn=no])
-if test "$with_libidn" != "no";then
-        if ! $PKG_CONFIG --atleast-version=1.31 libidn; then
-	    with_buggy_libidn=yes
-        fi
 
-	AC_DEFINE([HAVE_LIBIDN], 1, [Build IDNA support])
-	if test "x$GNUTLS_REQUIRES_PRIVATE" = "x"; then
-		GNUTLS_REQUIRES_PRIVATE="Requires.private: libidn"
-	else
-		GNUTLS_REQUIRES_PRIVATE="${GNUTLS_REQUIRES_PRIVATE}, libidn"
-	fi
-else
-        with_libidn=no
-        AC_MSG_WARN([[
+AC_ARG_WITH(idn, AS_HELP_STRING([--without-idn],
+                                 [disable support for libidn]),
+            try_libidn="$withval", 
+            try_libidn=yes)
+
+AC_ARG_WITH(libidn2, AS_HELP_STRING([--without-libidn2],
+                                 [force support for libidn instead of libidn2]),
+            try_libidn2="$withval", 
+            try_libidn2=yes)
+
+idna_support=no
+with_libidn2=no
+with_libidn=no
+if test "$try_libidn" = yes;then
+
+  if test "$try_libidn2" = yes;then
+  AC_SEARCH_LIBS(idn2_lookup_u8, idn2, [
+      with_libidn2=yes;
+      idna_support="IDNA 2008 (libidn2)"
+      AC_DEFINE([HAVE_LIBIDN2], 1, [Define if IDNA 2008 support is enabled.])
+      AC_SUBST([LIBIDN_LIBS], [-lidn2])
+      if test "x$GNUTLS_REQUIRES_PRIVATE" = "x"; then
+        GNUTLS_REQUIRES_PRIVATE="Requires.private: libidn2"
+      else
+        GNUTLS_REQUIRES_PRIVATE="${GNUTLS_REQUIRES_PRIVATE}, libidn2"
+      fi
+    ],[
+      with_libidn2=no;
+      AC_MSG_WARN(*** LIBIDN2 was not found. You will not be able to use IDN2008 support)
+    ])
+  else
+    with_libidn2=no
+  fi
+
+  if test "$with_libidn2" = "no"; then
+    PKG_CHECK_MODULES(LIBIDN, libidn >= 0.5.6, [with_libidn=yes], [with_libidn=no])
+    if test "$with_libidn" != "no";then
+      idna_support="IDNA 2003 (libidn)"
+      if ! $PKG_CONFIG --atleast-version=1.31 libidn; then
+	     with_buggy_libidn=yes
+      fi
+
+      AC_DEFINE([HAVE_LIBIDN], 1, [Build IDNA support])
+      if test "x$GNUTLS_REQUIRES_PRIVATE" = "x"; then
+        GNUTLS_REQUIRES_PRIVATE="Requires.private: libidn"
+      else
+        GNUTLS_REQUIRES_PRIVATE="${GNUTLS_REQUIRES_PRIVATE}, libidn"
+      fi
+    else
+      AC_MSG_WARN([[
 *** 
 *** libidn was not found. IDNA support will be disabled.
 *** ]])
+    fi
+  fi
 fi
 
-else
-	with_libidn=no
-fi
-
+AM_CONDITIONAL(HAVE_LIBIDN2, test "$with_libidn2" != "no")
 AM_CONDITIONAL(HAVE_LIBIDN, test "$with_libidn" != "no")
 AM_CONDITIONAL(HAVE_BUGGY_LIBIDN, test "$with_buggy_libidn" = "yes")
 
@@ -1040,7 +1063,7 @@ if features are disabled)
   ECDHE support:        $ac_enable_ecdhe
   Anon auth support:    $ac_enable_anon
   Heartbeat support:    $ac_enable_heartbeat
-  IDNA support:         $with_libidn
+  IDNA support:         $idna_support
   Self checks:          $enable_self_checks
   Non-SuiteB curves:    $enable_non_suiteb
   FIPS140 mode:         $enable_fips

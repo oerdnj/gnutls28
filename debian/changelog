@@ -1,8 +1,40 @@
-gnutls28 (3.5.8-0) experimental; urgency=medium
+gnutls28 (3.5.9-1) experimental; urgency=medium
 
-  * Imported Upstream version 3.5.8
+  * New upstream version.
+    + Drop debian/patches/35_0*.
+    + Update symbol file, adding gnutls_idna_map and gnutls_idna_reverse_map.
+  * Build with IDNA 2008 support, b-d on libidn2-0-dev instead of
+    libidn11-dev.
 
- -- Ondřej Surý <ondrej@debian.org>  Mon, 09 Jan 2017 09:31:22 +0100
+ -- Andreas Metzler <ametzler@debian.org>  Sun, 12 Feb 2017 19:37:32 +0100
+
+gnutls28 (3.5.8-3) unstable; urgency=high
+
+  * Another two bugfixes from upstream.
+   + 35_03_Address-test-suite-failure-due-to-timezone-differenc.patch 
+     Address test suite failure due to timezone differences.
+     Closes: #853732
+   + 35_04_gnutls_pkcs11_obj_list_import_url4-always-return-an-.patch
+     When returning success, but no elements
+     gnutls_pkcs11_obj_list_import_url4 could have returned zero number of
+     elements with a pointer that was uninitialized.
+
+ -- Andreas Metzler <ametzler@debian.org>  Sat, 04 Feb 2017 12:58:45 +0100
+
+gnutls28 (3.5.8-2) unstable; urgency=medium
+
+  * Pull two fixes from upstream GIT gnutls_3_5_x branch
+    35_01_opencdk-improved-error-code-checking-in-the-stream-r.patch
+    35_02_Disable-AVX-support-when-it-is-not-supported-by-the-.patch.
+
+ -- Andreas Metzler <ametzler@debian.org>  Sat, 28 Jan 2017 15:32:40 +0100
+
+gnutls28 (3.5.8-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Upload to unstable.
+
+ -- Andreas Metzler <ametzler@debian.org>  Mon, 09 Jan 2017 18:50:17 +0100
 
 gnutls28 (3.5.7+git668ea9-1) experimental; urgency=medium
 
@@ -11,6 +43,13 @@ gnutls28 (3.5.7+git668ea9-1) experimental; urgency=medium
     tests/key-tests/key-invalid.)
     + Drop 35_01_pkcs8-ensure-that-the-correct-error-code-is-returned.patch
       35_02_tests-added-test-for-PKCS-8-encrypted-key-decoding.patch
+    + libgnutls: Fix double free in certificate information printing. If the
+      PKIX extension proxy was set with a policy language set but no policy
+      specified, that could lead to a double free. GNUTLS-SA-2017-1
+      CVE-2017-5334
+    + libgnutls: Addressed invalid memory accesses in OpenPGP certificate
+      parsing. (issues found using oss-fuzz project) GNUTLS-SA-2017-2
+      CVE-2017-5335 / CVE-2017-5336 / CVE-2017-5337
 
  -- Andreas Metzler <ametzler@debian.org>  Sun, 08 Jan 2017 15:54:37 +0100
 
