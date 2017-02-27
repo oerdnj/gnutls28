@@ -1,3 +1,296 @@
+2017-02-12  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* NEWS: doc update
+
+2017-02-12  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* lib/includes/gnutls/gnutls.h.in: gnutls.h: corrected typo
+
+2017-01-16  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* doc/Makefile.am, doc/doc.mk, doc/manpages/Makefile.am: doc:
+	removed references to OpenPGP functions and enumerations Signed-off-by: Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+2017-01-15  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* doc/gnutls-guile.texi: doc: removed documentation related to
+	OpenPGP and guile Signed-off-by: Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+2017-01-06  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/includes/gnutls/openpgp.h: openpgp.h: all openpgp
+	functionality was marked as deprecated This is to prevent new applications using that functionality.  As
+	the OpenPGP certificate for HTTPS (or TLS in general) never got any
+	traction, GnuTLS is the only implementation supporting it, and the
+	quality of the OpenPGP supporting code is questionable, we deprecate
+	that code with the intention to drop it completely when an
+	opportunity is given.  Relates #102 Signed-off-by: Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+2017-02-05  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* doc/cha-gtls-app.texi: doc: document the intention of the priority
+	string usage [ci skip] This documents the gnutls_set_default_priority() function, and how
+	it is intended to be combined with an application that utilizes
+	priority strings.  Signed-off-by: Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+2017-02-12  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* configure.ac, m4/hooks.m4: bumped version
+
+2017-02-04  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* .travis.yml: .travis.yml: list all logs on failure Signed-off-by: Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+2017-02-04  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* tests/cert_verify_inv_utf8.c, tests/crq_apis.c, tests/crt_apis.c,
+	tests/hostname-check-utf8.c, tests/mini-server-name.c,
+	tests/set_key_utf8.c, tests/set_x509_key_utf8.c: tests: enable all
+	IDNA tests when compiled with libidn2 Keep IDNA2003-only tests on the ifdef HAVE_LIBIDN.  Signed-off-by: Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+2017-02-04  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* .travis.yml: .travis.yml: updated instructions for travis builds Removed unbound and other minor fixes.  Signed-off-by: Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+2017-02-03  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/extras/hex.h: extras/hex.h: do not use strlen as variable name That is, do not utilize a standard C function name as variable name.  Signed-off-by: Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+2017-02-03  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/pkcs11.c: gnutls_pkcs11_obj_list_import_url4: always return an
+	initialized pointer When returning success, but no elements,
+	gnutls_pkcs11_obj_list_import_url4, could have returned zero number
+	of elements with a pointer that was uninitialized.  Ensure that an
+	initialized (i.e., null in that case), pointer is always returned.
+	Reported by Jeremy Harris.  Signed-off-by: Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+2017-02-03  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* .gitlab-ci.yml: .gitlab-ci.yml: use libidn2 on windows builds Signed-off-by: Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+2017-02-02  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* tests/cert-tests/pkcs7: Address test suite failure due to timezone
+	differences.  Reported by Thorsten Glaser and Andreas Metzler.  Signed-off-by: Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+2017-01-28  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* lib/str-idna.c: _idn2_to_unicode_8z8z: do not err on mixed IDNA
+	domains That is allow domains of the form 'großes.xn--fa-hia.de'. The
+	drawback is that we may not err early on invalid formatted names. We
+	however delegate any such decisions to libidn2.  Signed-off-by: Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+2017-01-26  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* NEWS: doc update
+
+2017-01-26  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* doc/Makefile.am, doc/manpages/Makefile.am, symbols.last: Updated
+	auto-generated files Signed-off-by: Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+2017-01-26  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/str-idna.c: str-idna: improved error handling In addition to detecting input with invalid characters in
+	_idn2_to_unicode_8z8z(), we also add support for case insensitive
+	punycode header.  Signed-off-by: Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+2017-01-25  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* lib/str-idna.c: str-idna: cleanups in IDNA handling Ensure safe operation even with broken libidn2, and make sure that
+	we properly allocate memory to caller, even on complex library
+	configuration.  Signed-off-by: Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+2017-01-24  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* lib/Makefile.am, lib/str-idna.c, lib/str-unicode.c: Move IDNA
+	functionality to str-idna.c from str-unicode.c Signed-off-by: Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+2017-01-24  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* tests/str-idna.c: tests: use the exported API for IDNA testing In addition group together the tests which require libidn2 >= 0.14.
+	This allows the tests to succeed.  Signed-off-by: Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+2017-01-24  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* src/socket.c: tools: depend on gnutls_idna_map() instead of using
+	directly libidn/libidn2 Signed-off-by: Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+2017-01-24  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* lib/includes/gnutls/gnutls.h.in, lib/libgnutls.map,
+	lib/str-unicode.c, lib/str.h, lib/x509/output.c: Exported
+	gnutls_idna_map() and gnutls_idna_reverse_map() Signed-off-by: Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+2017-01-24  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* .gitlab-ci.yml: .gitlab-ci.yml: added run with IDNA2003 Signed-off-by: Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+2017-01-24  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* tests/str-idna.c: tests: simplified str-idna This separates the directions that are tested (utf-8 -> punycode and
+	vice versa).  Signed-off-by: Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+2017-01-24  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* configure.ac: configure: added flag to force IDNA2003 That allows to compile with libidn even if libidn2 is present, and
+	can be used to check IDNA2003 support.  Signed-off-by: Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+2017-01-21  Tim Rühsen <tim.ruehsen@gmx.de>
+
+	* INSTALL.md, README.md, configure.ac, lib/Makefile.am,
+	lib/str-unicode.c, lib/str.h, src/socket.c, tests/str-idna.c: Add
+	support for libidn2 (IDNA 2008 + TR46) Signed-off-by: Tim Rühsen <tim.ruehsen@gmx.de>
+
+2017-01-26  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/ext/heartbeat.c: heartbeat extension: doc update Document how to calculate the total TLS data transmitted.  Signed-off-by: Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+2017-01-20  Alon Bar-Lev <alon.barlev@gmail.com>
+
+	* .gitlab-ci.yml: .gitlab-ci.yml: add Fedora/x86_64/no-tools Signed-off-by: Alon Bar-Lev <alon.barlev@gmail.com>
+
+2017-01-20  Alon Bar-Lev <alon.barlev@gmail.com>
+
+	* .gitignore, configure.ac, gl/m4/valgrind-tests.m4,
+	gl/override/m4/valgrind-tests.m4.diff: valgrind: support separate
+	builddir for suppressions.valgrind Signed-off-by: Alon Bar-Lev <alon.barlev@gmail.com>
+
+2017-01-20  Alon Bar-Lev <alon.barlev@gmail.com>
+
+	* configure.ac: configure: remove void statement Signed-off-by: Alon Bar-Lev <alon.barlev@gmail.com>
+
+2017-01-20  Alon Bar-Lev <alon.barlev@gmail.com>
+
+	* tests/key-tests/illegal-rsa: tests: skip tests that requires tools
+	if tools are disabled building with --disable-tools should not cause test failure.  Signed-off-by: Alon Bar-Lev <alon.barlev@gmail.com>
+
+2017-01-25  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* lib/x509/pkcs7-crypt.c: pkcs7 decryption: addressed memory leak in
+	PBES1-DES-CBC-MD5 handling Signed-off-by: Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+2017-01-25  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* configure.ac: configure: do not disable valgrind tests unless
+	explicitly specified ... or unless we are in release build.  Signed-off-by: Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+2017-01-25  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* NEWS: doc update Signed-off-by: Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+2017-01-20  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* tests/suite/testpkcs11.sh: tests: verify that a written
+	certificate will inherit its ID from privkey That is, whether p11tool will do the right thing and figure the
+	proper ID to use for a certificate object, if the public key is
+	available.  Signed-off-by: Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+2017-01-20  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* src/pkcs11.c: p11tool: re-use ID from corresponding objects when
+	writing certificates That is when writing a certificate which has a corresponding public
+	key, or private key in the token, ensure that we use the same ID for
+	the objects. That eases the work of someone writing objects to
+	certificates, and does not require him to manually detect the object
+	IDs.  Resolves #160 Signed-off-by: Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+2017-01-22  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* doc/cha-gtls-app.texi, lib/dh.c: doc: improved documentation on DH
+	parameters [ci skip]
+
+2017-01-05  Alon Bar-Lev <alon.barlev@gmail.com>
+
+	* tests/cert-tests/openpgp-certs, tests/danetool.sh,
+	tests/fastopen.sh, tests/key-tests/dsa,
+	tests/ocsp-tests/ocsp-must-staple-connection,
+	tests/ocsp-tests/ocsp-tls-connection, tests/scripts/common.sh,
+	tests/starttls.sh, tests/suite/eagain.sh,
+	tests/suite/testcompat-main-openssl,
+	tests/suite/testcompat-main-polarssl, tests/suite/testdane.sh,
+	tests/suite/testpkcs11.sh, tests/suite/testrng.sh,
+	tests/suite/testsrn.sh: tests: remove bash usage Signed-off-by: Alon Bar-Lev <alon.barlev@gmail.com>
+
+2017-01-05  Alon Bar-Lev <alon.barlev@gmail.com>
+
+	* tests/suite/chain.sh: tests: suite: chain: support separate
+	builddir Signed-off-by: Alon Bar-Lev <alon.barlev@gmail.com>
+
+2017-01-05  Alon Bar-Lev <alon.barlev@gmail.com>
+
+	* tests/cert-tests/crq, tests/cert-tests/krb5-test,
+	tests/cert-tests/md5-test, tests/cert-tests/name-constraints,
+	tests/cert-tests/othername-test, tests/cert-tests/pkcs1-pad,
+	tests/cert-tests/pkcs7, tests/cert-tests/pkcs7-cat,
+	tests/cert-tests/pkcs7-constraints,
+	tests/cert-tests/pkcs7-constraints2, tests/cert-tests/sha3-test,
+	tests/cert-tests/template-exts-test,
+	tests/cert-tests/template-test, tests/cert-tests/tlsfeature-test,
+	tests/ocsp-tests/ocsp-must-staple-connection,
+	tests/ocsp-tests/ocsp-test, tests/ocsp-tests/ocsp-tls-connection,
+	tests/rsa-md5-collision/rsa-md5-collision.sh,
+	tests/suite/testcompat-main-openssl,
+	tests/suite/testcompat-main-polarssl: tests: skip tests that
+	requires tools if tools are disabled building with --disable-tools should not cause test failure.  Signed-off-by: Alon Bar-Lev <alon.barlev@gmail.com>
+
+2016-12-31  Alon Bar-Lev <alon.barlev@gmail.com>
+
+	* tests/cert-tests/aki, tests/cert-tests/certtool,
+	tests/cert-tests/certtool-long-cn,
+	tests/cert-tests/certtool-long-oids, tests/cert-tests/crl,
+	tests/cert-tests/email, tests/cert-tests/openpgp-certs,
+	tests/cert-tests/openpgp-selfsigs, tests/cert-tests/pathlen,
+	tests/cert-tests/pem-decoding, tests/cert-tests/pkcs12,
+	tests/cert-tests/pkcs12-utf8, tests/cert-tests/pkcs7-broken-sigs,
+	tests/cert-tests/privkey-import, tests/cert-tests/provable-dh,
+	tests/cert-tests/provable-dh-default,
+	tests/cert-tests/provable-privkey,
+	tests/cert-tests/provable-privkey-dsa2048,
+	tests/cert-tests/provable-privkey-gen-default,
+	tests/cert-tests/provable-privkey-rsa2048,
+	tests/cert-tests/sha2-dsa-test, tests/cert-tests/sha2-test,
+	tests/cert-tests/userid, tests/fastopen.sh, tests/key-tests/dsa,
+	tests/key-tests/ecdsa, tests/key-tests/key-id,
+	tests/key-tests/key-invalid, tests/key-tests/pkcs8,
+	tests/key-tests/pkcs8-decode, tests/key-tests/pkcs8-invalid,
+	tests/rfc2253-escape-test, tests/starttls.sh, tests/suite/chain.sh,
+	tests/suite/crl-test, tests/suite/eagain.sh,
+	tests/suite/invalid-cert.sh, tests/suite/pkcs7-cat,
+	tests/suite/testdane.sh, tests/suite/testpkcs11.sh,
+	tests/suite/testrandom.sh, tests/suite/testsrn.sh: tests: skip tests
+	that requires tools if tools are disabled building with --disable-tools should not cause test failure.  Signed-off-by: Alon Bar-Lev <alon.barlev@gmail.com>
+
+2017-01-03  Alon Bar-Lev <alon.barlev@gmail.com>
+
+	* tests/cert-tests/pkcs12, tests/cert-tests/pkcs12-utf8: tests:
+	cert-tests: pkcs12 drop builddir usage sync with other tests Signed-off-by: Alon Bar-Lev <alon.barlev@gmail.com>
+
+2017-01-18  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* NEWS: doc update
+
+2017-01-15  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* lib/accelerated/x86/x86-common.c: Disable AVX support when it is
+	not supported by the CPU This mostly affects virtual systems. Reported by Frank Chen.  Signed-off-by: Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+2017-01-06  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* doc/Makefile.am, doc/cha-cert-auth.texi, doc/cha-functions.texi,
+	doc/cha-gtls-app.texi, doc/cha-tokens.texi, doc/gnutls-pgp.eps,
+	doc/latex/Makefile.am: doc: removed documentation related to OpenPGP Also added section explaining why OpenPGP is being deprecated.  Signed-off-by: Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+2017-01-17  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/opencdk/read-packet.c: opencdk: improved error code checking
+	in the stream reading functions This ammends 49be4f7b82eba2363bb8d4090950dad976a77a3a Signed-off-by: Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+2017-01-09  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* NEWS: doc update [ci skip]
+
 2017-01-09  Nikos Mavrogiannopoulos <nmav@gnutls.org>
 
 	* tests/key-tests/Makefile.am: tests: added missing file
@@ -16174,12 +16467,7 @@
 
 2014-11-07  Nikos Mavrogiannopoulos <nmav@gnutls.org>
 
-	* lib/pkcs11.c: pkcs11: pass the correct user type to protected
-	authentication login
-
-2014-11-07  Nikos Mavrogiannopoulos <nmav@redhat.com>
-
-	* doc: corrected values for INSECURE level
+	* pkcs11: pass the correct user type to protected authentication login
 
 	-----
 

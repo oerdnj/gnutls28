@@ -79,7 +79,7 @@ COBJECTS = range.c record.c compress.c debug.c cipher.c			\
 	mem.c fingerprint.c tls-sig.c ecc.c alert.c privkey_raw.c		\
 	system/certs.c system/threads.c system/fastopen.c system/sockets.c	\
 	system/inet_ntop.c str-iconv.c system/vasprintf.c vasprintf.h system.c \
-	str.c str-unicode.c state.c x509.c file.c supplemental.c		\
+	str.c str-unicode.c str-idna.c state.c x509.c file.c supplemental.c	\
 	random.c crypto-api.c privkey.c pcert.c	pubkey.c locks.c dtls.c		\
 	system_override.c crypto-backend.c verify-tofu.c pin.c tpm.c fips.c	\
 	safe-memfuncs.c system/inet_pton.c atfork.c atfork.h randomart.c \
@@ -137,6 +137,10 @@ libgnutls_la_LIBADD = ../gl/libgnu.la x509/libgnutls_x509.la \
 	extras/libgnutls_extras.la
 thirdparty_libadd = $(LTLIBZ) $(LTLIBINTL) $(LIBSOCKET) $(LTLIBNSL) \
 	$(P11_KIT_LIBS) $(LIB_SELECT)
+
+if HAVE_LIBIDN2
+thirdparty_libadd += -lidn2
+endif
 
 if HAVE_LIBIDN
 thirdparty_libadd += $(LIBIDN_LIBS)

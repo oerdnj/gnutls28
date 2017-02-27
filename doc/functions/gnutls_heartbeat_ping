@@ -18,6 +18,9 @@ Note that it is highly recommended to use this function with the
 flag @code{GNUTLS_HEARTBEAT_WAIT} , or you need to handle retransmissions
 and timeouts manually.
 
+The total TLS data transmitted as part of the ping message are given by
+the following formula: MAX(16,  @code{data_size} )+@code{gnutls_record_overhead_size()} +3.
+
 @strong{Returns:} @code{GNUTLS_E_SUCCESS}  on success, otherwise a negative error code.
 
 @strong{Since:} 3.1.2

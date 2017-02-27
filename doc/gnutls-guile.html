@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- This manual is last updated 16 March 2016 for version
-3.5.8 of GnuTLS.
+<!-- This manual is last updated 12 February 2017 for version
+3.5.9 of GnuTLS.
 
 Copyright (C) 2001-2012, 2014, 2016 Free Software Foundation, Inc.
 
@@ -13,10 +13,10 @@ copy of the license is included in the section entitled "GNU Free
 Documentation License". -->
 <!-- Created by GNU Texinfo 6.3, http://www.gnu.org/software/texinfo/ -->
 <head>
-<title>GnuTLS-Guile 3.5.8</title>
+<title>GnuTLS-Guile 3.5.9</title>
 
-<meta name="description" content="GnuTLS-Guile 3.5.8">
-<meta name="keywords" content="GnuTLS-Guile 3.5.8">
+<meta name="description" content="GnuTLS-Guile 3.5.9">
+<meta name="keywords" content="GnuTLS-Guile 3.5.9">
 <meta name="resource-type" content="document">
 <meta name="distribution" content="global">
 <meta name="Generator" content="makeinfo">
@@ -152,7 +152,7 @@ dl {
 </head>
 
 <body lang="en">
-<h1 class="settitle" align="center">GnuTLS-Guile 3.5.8</h1>
+<h1 class="settitle" align="center">GnuTLS-Guile 3.5.9</h1>
 
 
 
@@ -179,8 +179,6 @@ dl {
   <li><a name="toc-Guile-Examples-1" href="#Guile-Examples">4 Guile Examples</a>
   <ul class="no-bullet">
     <li><a name="toc-Anonymous-Authentication-Guile-Example-1" href="#Anonymous-Authentication-Guile-Example">4.1 Anonymous Authentication Guile Example</a></li>
-    <li><a name="toc-OpenPGP-Authentication-Guile-Example-1" href="#OpenPGP-Authentication-Guile-Example">4.2 OpenPGP Authentication Guile Example</a></li>
-    <li><a name="toc-Importing-OpenPGP-Keys-Guile-Example-1" href="#Importing-OpenPGP-Keys-Guile-Example">4.3 Importing OpenPGP Keys Guile Example</a></li>
   </ul></li>
   <li><a name="toc-Guile-Reference-1" href="#Guile-Reference">5 Guile Reference</a></li>
   <li><a name="toc-Copying-Information-1" href="#Copying-Information">Appendix A Copying Information</a></li>
@@ -198,8 +196,8 @@ Next: <a href="#Preface" accesskey="n" rel="next">Preface</a>, Up: <a href="dir.
 <a name="GnuTLS_002dGuile"></a>
 <h1 class="top">GnuTLS-Guile</h1>
 
-<p>This manual is last updated 16 March 2016 for version
-3.5.8 of GnuTLS.
+<p>This manual is last updated 12 February 2017 for version
+3.5.9 of GnuTLS.
 </p>
 <p>Copyright &copy; 2001-2012, 2014, 2016 Free Software Foundation, Inc.
 </p>
@@ -342,7 +340,7 @@ print the version number of the loaded library as follows:
 <pre class="example">$ guile
 scheme@(guile-user)&gt; (use-modules (gnutls))
 scheme@(guile-user)&gt; (gnutls-version)
-&quot;3.5.8&quot;
+&quot;3.5.9&quot;
 scheme@(guile-user)&gt;
 </pre></div>
 
@@ -516,8 +514,6 @@ in the PEM format can be done as follows:
       (uniform-vector-write pem port))))
 </pre></div>
 
-<p>For an example of OpenPGP key import from a file, see <a href="#Importing-OpenPGP-Keys-Guile-Example">Importing OpenPGP Keys Guile Example</a>.
-</p>
 
 <hr>
 <a name="Input-and-Output"></a>
@@ -674,17 +670,13 @@ Next: <a href="#Guile-Reference" accesskey="n" rel="next">Guile Reference</a>, P
 <table class="menu" border="0" cellspacing="0">
 <tr><td align="left" valign="top">&bull; <a href="#Anonymous-Authentication-Guile-Example" accesskey="1">Anonymous Authentication Guile Example</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Simplest client and server.
 </td></tr>
-<tr><td align="left" valign="top">&bull; <a href="#OpenPGP-Authentication-Guile-Example" accesskey="2">OpenPGP Authentication Guile Example</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Using OpenPGP-based authentication.
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="#Importing-OpenPGP-Keys-Guile-Example" accesskey="3">Importing OpenPGP Keys Guile Example</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Importing keys from files.
-</td></tr>
 </table>
 
 <hr>
 <a name="Anonymous-Authentication-Guile-Example"></a>
 <div class="header">
 <p>
-Next: <a href="#OpenPGP-Authentication-Guile-Example" accesskey="n" rel="next">OpenPGP Authentication Guile Example</a>, Up: <a href="#Guile-Examples" accesskey="u" rel="up">Guile Examples</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Procedure-Index" title="Index" rel="index">Index</a>]</p>
+Up: <a href="#Guile-Examples" accesskey="u" rel="up">Guile Examples</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Procedure-Index" title="Index" rel="index">Index</a>]</p>
 </div>
 <a name="Anonymous-Authentication-Guile-Example-1"></a>
 <h3 class="section">4.1 Anonymous Authentication Guile Example</h3>
@@ -765,131 +757,6 @@ is bound to an open socket port):
 </pre></div>
 
 <p>This is it!
-</p>
-
-<hr>
-<a name="OpenPGP-Authentication-Guile-Example"></a>
-<div class="header">
-<p>
-Next: <a href="#Importing-OpenPGP-Keys-Guile-Example" accesskey="n" rel="next">Importing OpenPGP Keys Guile Example</a>, Previous: <a href="#Anonymous-Authentication-Guile-Example" accesskey="p" rel="prev">Anonymous Authentication Guile Example</a>, Up: <a href="#Guile-Examples" accesskey="u" rel="up">Guile Examples</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Procedure-Index" title="Index" rel="index">Index</a>]</p>
-</div>
-<a name="OpenPGP-Authentication-Guile-Example-1"></a>
-<h3 class="section">4.2 OpenPGP Authentication Guile Example</h3>
-
-<p>GnuTLS allows users to authenticate using OpenPGP certificates.
-Using OpenPGP-based authentication is not more complicated than using
-anonymous authentication.  It requires a bit of extra work, though, to
-import the OpenPGP public and private key of the client/server.  Key
-import is omitted here and is left as an exercise to the reader
-(see <a href="#Importing-OpenPGP-Keys-Guile-Example">Importing OpenPGP Keys Guile Example</a>).
-</p>
-<p>Assuming <var>some-socket</var> is bound to an open socket port and
-<var>pub</var> and <var>sec</var> are bound to the client&rsquo;s OpenPGP public and
-secret key, respectively, client-side code would look like this:
-</p>
-<a name="index-certificate_002dtype_002fopenpgp"></a>
-
-<div class="example">
-<pre class="example">;; Client-side.
-
-(define %certs (list certificate-type/openpgp))
-
-(let ((client (make-session connection-end/client))
-      (cred   (make-certificate-credentials)))
-  (set-session-default-priority! client)
-
-  ;; Choose OpenPGP certificates.
-  (set-session-certificate-type-priority! client %certs)
-
-  ;; Prepare appropriate client credentials.
-  (set-certificate-credentials-openpgp-keys! cred pub sec)
-  (set-session-credentials! client cred)
-
-  ;; Specify the underlying transport socket.
-  (set-session-transport-fd! client (fileno some-socket))
-
-  (handshake client)
-  (write &quot;hello, world!&quot; (session-record-port client))
-  (bye client close-request/rdwr))
-</pre></div>
-
-<p>Similarly, server-side code would be along these lines:
-</p>
-<div class="example">
-<pre class="example">;; Server-side.
-
-(define %certs (list certificate-type/openpgp))
-
-(let ((server (make-session connection-end/server))
-      (dh     (make-dh-parameters 1024)))
-  (set-session-default-priority! server)
-
-  ;; Choose OpenPGP certificates.
-  (set-session-certificate-type-priority! server %certs)
-
-  (let ((cred (make-certificate-credentials)))
-    ;; Prepare credentials with Diffie-Hellman parameters.
-    (set-certificate-credentials-dh-parameters! cred dh)
-    (set-certificate-credentials-openpgp-keys! cred pub sec)
-    (set-session-credentials! server cred))
-
-  (set-session-transport-fd! server (fileno some-socket))
-
-  (handshake server)
-  (let ((msg (read (session-record-port server))))
-    (format #t &quot;received: ~a~%&quot; msg)
-
-    (bye server close-request/rdwr)))
-</pre></div>
-
-
-<hr>
-<a name="Importing-OpenPGP-Keys-Guile-Example"></a>
-<div class="header">
-<p>
-Previous: <a href="#OpenPGP-Authentication-Guile-Example" accesskey="p" rel="prev">OpenPGP Authentication Guile Example</a>, Up: <a href="#Guile-Examples" accesskey="u" rel="up">Guile Examples</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Procedure-Index" title="Index" rel="index">Index</a>]</p>
-</div>
-<a name="Importing-OpenPGP-Keys-Guile-Example-1"></a>
-<h3 class="section">4.3 Importing OpenPGP Keys Guile Example</h3>
-
-<p>The following example provides a simple way of importing
-&ldquo;ASCII-armored&rdquo; OpenPGP keys from files, using the
-<code>import-openpgp-certificate</code> and <code>import-openpgp-private-key</code>
-procedures.
-</p>
-<a name="index-openpgp_002dcertificate_002dformat_002fbase64"></a>
-<a name="index-openpgp_002dcertificate_002dformat_002fraw"></a>
-
-<div class="example">
-<pre class="example">(use-modules (srfi srfi-4)
-             (gnutls))
-
-(define (import-key-from-file import-proc file)
-  ;; Import OpenPGP key from FILE using IMPORT-PROC.
-
-  ;; Prepare a u8vector large enough to hold the raw
-  ;; key contents.
-  (let* ((size (stat:size (stat path)))
-         (raw  (make-u8vector size)))
-
-    ;; Fill in the u8vector with the contents of FILE.
-    (uniform-vector-read! raw (open-input-file file))
-
-    ;; Pass the u8vector to the import procedure.
-    (import-proc raw openpgp-certificate-format/base64)))
-
-
-(define (import-public-key-from-file file)
-  (import-key-from-file import-openpgp-certificate file))
-
-(define (import-private-key-from-file file)
-  (import-key-from-file import-openpgp-private-key file))
-</pre></div>
-
-<p>The procedures <code>import-public-key-from-file</code> and
-<code>import-private-key-from-file</code> can be passed a file name.  They
-return an OpenPGP public key and private key object, respectively
-(see <a href="#Guile-Reference">OpenPGP key objects</a>).
 </p>
 
 <hr>

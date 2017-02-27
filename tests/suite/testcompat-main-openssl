@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Copyright (c) 2010-2016, Free Software Foundation, Inc.
 # Copyright (c) 2012-2016, Nikos Mavrogiannopoulos
@@ -33,6 +33,11 @@
 srcdir="${srcdir:-.}"
 CLI="${CLI:-../../src/gnutls-cli${EXEEXT}}"
 unset RETCODE
+
+if ! test -x "${CLI}"; then
+	exit 77
+fi
+
 if ! test -z "${VALGRIND}"; then
 	VALGRIND="${LIBTOOL:-libtool} --mode=execute ${VALGRIND}"
 fi
