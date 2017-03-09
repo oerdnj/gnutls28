@@ -133,7 +133,7 @@ host_triplet = @host@
 @ENABLE_PKCS11_TRUE@@WINDOWS_FALSE@	pkcs11-cert-import-url4-exts pkcs11/pkcs11-chainverify pkcs11/pkcs11-get-issuer pkcs11/pkcs11-is-known \
 @ENABLE_PKCS11_TRUE@@WINDOWS_FALSE@	pkcs11/pkcs11-combo pkcs11/pkcs11-privkey pkcs11/pkcs11-pubkey-import-rsa pkcs11/pkcs11-pubkey-import-ecdsa \
 @ENABLE_PKCS11_TRUE@@WINDOWS_FALSE@	pkcs11-import-url-privkey pkcs11-privkey-fork pkcs11/pkcs11-ec-privkey-test \
-@ENABLE_PKCS11_TRUE@@WINDOWS_FALSE@	pkcs11-privkey-always-auth pkcs11-privkey-export
+@ENABLE_PKCS11_TRUE@@WINDOWS_FALSE@	pkcs11-privkey-always-auth pkcs11-privkey-export pkcs11/pkcs11-import-with-pin
 
 @ENABLE_OCSP_TRUE@am__append_7 = ocsp
 @ENABLE_DANE_TRUE@am__append_8 = dane
@@ -144,7 +144,9 @@ host_triplet = @host@
 
 @ENABLE_OPENPGP_TRUE@@HAVE_FORK_TRUE@am__append_12 = openpgpself 
 check_PROGRAMS = $(am__EXEEXT_10)
-@WINDOWS_FALSE@am__append_13 = fastopen.sh starttls.sh
+@WINDOWS_FALSE@am__append_13 = fastopen.sh starttls.sh starttls-ftp.sh starttls-smtp.sh \
+@WINDOWS_FALSE@	starttls-lmtp.sh starttls-pop3.sh starttls-nntp.sh starttls-sieve.sh
+
 @ENABLE_DANE_TRUE@@WINDOWS_FALSE@am__append_14 = danetool.sh
 TESTS = $(am__EXEEXT_10) $(dist_check_SCRIPTS)
 subdir = tests
@@ -321,7 +323,8 @@ libutils_la_OBJECTS = $(am_libutils_la_OBJECTS)
 @ENABLE_PKCS11_TRUE@@WINDOWS_FALSE@	pkcs11-privkey-fork$(EXEEXT) \
 @ENABLE_PKCS11_TRUE@@WINDOWS_FALSE@	pkcs11/pkcs11-ec-privkey-test$(EXEEXT) \
 @ENABLE_PKCS11_TRUE@@WINDOWS_FALSE@	pkcs11-privkey-always-auth$(EXEEXT) \
-@ENABLE_PKCS11_TRUE@@WINDOWS_FALSE@	pkcs11-privkey-export$(EXEEXT)
+@ENABLE_PKCS11_TRUE@@WINDOWS_FALSE@	pkcs11-privkey-export$(EXEEXT) \
+@ENABLE_PKCS11_TRUE@@WINDOWS_FALSE@	pkcs11/pkcs11-import-with-pin$(EXEEXT)
 @ENABLE_OCSP_TRUE@am__EXEEXT_4 = ocsp$(EXEEXT)
 @ENABLE_DANE_TRUE@am__EXEEXT_5 = dane$(EXEEXT)
 @ENABLE_FIPS140_FALSE@@ENABLE_OPENSSL_TRUE@am__EXEEXT_6 =  \
@@ -1072,6 +1075,13 @@ pkcs11_pkcs11_get_issuer_OBJECTS = pkcs11/pkcs11-get-issuer.$(OBJEXT)
 pkcs11_pkcs11_get_issuer_LDADD = $(LDADD)
 pkcs11_pkcs11_get_issuer_DEPENDENCIES = $(am__DEPENDENCIES_2) \
 	libutils.la
+pkcs11_pkcs11_import_with_pin_SOURCES =  \
+	pkcs11/pkcs11-import-with-pin.c
+pkcs11_pkcs11_import_with_pin_OBJECTS =  \
+	pkcs11/pkcs11-import-with-pin.$(OBJEXT)
+pkcs11_pkcs11_import_with_pin_LDADD = $(LDADD)
+pkcs11_pkcs11_import_with_pin_DEPENDENCIES = $(am__DEPENDENCIES_2) \
+	libutils.la
 pkcs11_pkcs11_is_known_SOURCES = pkcs11/pkcs11-is-known.c
 pkcs11_pkcs11_is_known_OBJECTS = pkcs11/pkcs11-is-known.$(OBJEXT)
 pkcs11_pkcs11_is_known_LDADD = $(LDADD)
@@ -1595,6 +1605,8 @@ x509sign_verify2_LDADD = $(LDADD)
 x509sign_verify2_DEPENDENCIES = $(am__DEPENDENCIES_2) libutils.la
 am__dist_check_SCRIPTS_DIST = rfc2253-escape-test \
 	rsa-md5-collision/rsa-md5-collision.sh fastopen.sh starttls.sh \
+	starttls-ftp.sh starttls-smtp.sh starttls-lmtp.sh \
+	starttls-pop3.sh starttls-nntp.sh starttls-sieve.sh \
 	danetool.sh
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
@@ -1683,8 +1695,9 @@ SOURCES = $(libpkcs11mock1_la_SOURCES) $(libutils_la_SOURCES) \
 	$(pkcs11_privkey_export_SOURCES) \
 	$(pkcs11_privkey_fork_SOURCES) pkcs11/pkcs11-chainverify.c \
 	pkcs11/pkcs11-combo.c pkcs11/pkcs11-ec-privkey-test.c \
-	pkcs11/pkcs11-get-issuer.c pkcs11/pkcs11-is-known.c \
-	pkcs11/pkcs11-privkey.c pkcs11/pkcs11-pubkey-import-ecdsa.c \
+	pkcs11/pkcs11-get-issuer.c pkcs11/pkcs11-import-with-pin.c \
+	pkcs11/pkcs11-is-known.c pkcs11/pkcs11-privkey.c \
+	pkcs11/pkcs11-pubkey-import-ecdsa.c \
 	pkcs11/pkcs11-pubkey-import-rsa.c pkcs12_encode.c pkcs12_s2k.c \
 	pkcs12_s2k_pem.c pkcs12_simple.c pkcs7-cat-parse.c pkcs7-gen.c \
 	pkcs8-key-decode.c pkcs8-key-decode-encrypted.c prf.c \
@@ -1782,8 +1795,8 @@ DIST_SOURCES = $(am__libpkcs11mock1_la_SOURCES_DIST) \
 	$(am__pkcs11_privkey_fork_SOURCES_DIST) \
 	pkcs11/pkcs11-chainverify.c pkcs11/pkcs11-combo.c \
 	pkcs11/pkcs11-ec-privkey-test.c pkcs11/pkcs11-get-issuer.c \
-	pkcs11/pkcs11-is-known.c pkcs11/pkcs11-privkey.c \
-	pkcs11/pkcs11-pubkey-import-ecdsa.c \
+	pkcs11/pkcs11-import-with-pin.c pkcs11/pkcs11-is-known.c \
+	pkcs11/pkcs11-privkey.c pkcs11/pkcs11-pubkey-import-ecdsa.c \
 	pkcs11/pkcs11-pubkey-import-rsa.c pkcs12_encode.c pkcs12_s2k.c \
 	pkcs12_s2k_pem.c pkcs12_simple.c pkcs7-cat-parse.c pkcs7-gen.c \
 	pkcs8-key-decode.c pkcs8-key-decode-encrypted.c prf.c \
@@ -2069,8 +2082,8 @@ TEST_LOGS = $(am__test_logs2:.test.log=.log)
 TEST_LOG_DRIVER = $(SHELL) $(top_srcdir)/build-aux/test-driver
 TEST_LOG_COMPILE = $(TEST_LOG_COMPILER) $(AM_TEST_LOG_FLAGS) \
 	$(TEST_LOG_FLAGS)
-DIST_SUBDIRS = . cert-tests ocsp-tests key-tests scripts slow dtls \
-	windows suite
+DIST_SUBDIRS = . cert-tests ocsp-tests key-tests slow dtls windows \
+	suite
 am__DIST_COMMON = $(srcdir)/Makefile.in \
 	$(top_srcdir)/build-aux/depcomp \
 	$(top_srcdir)/build-aux/test-driver
@@ -2714,6 +2727,7 @@ LIBDL_PREFIX = @LIBDL_PREFIX@
 LIBGNUTLS_CFLAGS = @LIBGNUTLS_CFLAGS@
 LIBGNUTLS_LIBS = @LIBGNUTLS_LIBS@
 LIBICONV = @LIBICONV@
+LIBIDN2_LIBS = @LIBIDN2_LIBS@
 LIBIDN_CFLAGS = @LIBIDN_CFLAGS@
 LIBIDN_LIBS = @LIBIDN_LIBS@
 LIBINTL = @LIBINTL@
@@ -3115,7 +3129,7 @@ unistring_LTLIBOBJS = @unistring_LTLIBOBJS@
 unistringtests_LIBOBJS = @unistringtests_LIBOBJS@
 unistringtests_LTLIBOBJS = @unistringtests_LTLIBOBJS@
 unistringtests_WITNESS = @unistringtests_WITNESS@
-SUBDIRS = . cert-tests ocsp-tests key-tests scripts slow dtls windows \
+SUBDIRS = . cert-tests ocsp-tests key-tests slow dtls windows \
 	$(am__append_1)
 EXTRA_DIST = suppressions.valgrind eagain-common.h cert-common.h test-chains.h \
 	certs/ca-cert-ecc.pem  certs/cert-ecc256.pem  certs/cert-ecc521.pem \
@@ -3124,11 +3138,13 @@ EXTRA_DIST = suppressions.valgrind eagain-common.h cert-common.h test-chains.h \
 	certs/ecc521.pem certs/rsa-2432.pem x509cert-dir/ca.pem psk.passwd \
 	system.prio pkcs11/softhsm.h pkcs11/pkcs11-pubkey-import.c gnutls-asan.supp \
 	rsa-md5-collision/README safe-renegotiation/README starttls-smtp.txt starttls-ftp.txt \
+	starttls-lmtp.txt starttls-pop3.txt starttls-nntp.txt starttls-sieve.txt \
 	rsa-md5-collision/colliding-chain-md5-2.pem rsa-md5-collision/colliding-chain-md5-1.pem \
 	certs-interesting/README.md certs-interesting/cert1.der certs-interesting/cert1.der.err \
 	certs-interesting/cert2.der certs-interesting/cert2.der.err certs-interesting/cert3.der \
 	certs-interesting/cert3.der.err certs-interesting/cert4.der certs-interesting/cert5.der \
-	certs-interesting/cert6.der certs-interesting/cert7.der certs-interesting/cert8.der
+	certs-interesting/cert6.der certs-interesting/cert7.der certs-interesting/cert8.der \
+	scripts/common.sh scripts/starttls-common.sh certs-interesting/cert5.der.err
 
 AM_CFLAGS = $(WARN_CFLAGS) $(WERROR_CFLAGS)
 AM_CPPFLAGS = $(P11_KIT_CFLAGS) -I$(top_srcdir)/lib/includes \
@@ -4010,6 +4026,12 @@ pkcs11/pkcs11-get-issuer.$(OBJEXT): pkcs11/$(am__dirstamp) \
 pkcs11/pkcs11-get-issuer$(EXEEXT): $(pkcs11_pkcs11_get_issuer_OBJECTS) $(pkcs11_pkcs11_get_issuer_DEPENDENCIES) $(EXTRA_pkcs11_pkcs11_get_issuer_DEPENDENCIES) pkcs11/$(am__dirstamp)
 	@rm -f pkcs11/pkcs11-get-issuer$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(pkcs11_pkcs11_get_issuer_OBJECTS) $(pkcs11_pkcs11_get_issuer_LDADD) $(LIBS)
+pkcs11/pkcs11-import-with-pin.$(OBJEXT): pkcs11/$(am__dirstamp) \
+	pkcs11/$(DEPDIR)/$(am__dirstamp)
+
+pkcs11/pkcs11-import-with-pin$(EXEEXT): $(pkcs11_pkcs11_import_with_pin_OBJECTS) $(pkcs11_pkcs11_import_with_pin_DEPENDENCIES) $(EXTRA_pkcs11_pkcs11_import_with_pin_DEPENDENCIES) pkcs11/$(am__dirstamp)
+	@rm -f pkcs11/pkcs11-import-with-pin$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(pkcs11_pkcs11_import_with_pin_OBJECTS) $(pkcs11_pkcs11_import_with_pin_LDADD) $(LIBS)
 pkcs11/pkcs11-is-known.$(OBJEXT): pkcs11/$(am__dirstamp) \
 	pkcs11/$(DEPDIR)/$(am__dirstamp)
 
@@ -4747,6 +4769,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@pkcs11/$(DEPDIR)/pkcs11-get-issuer.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@pkcs11/$(DEPDIR)/pkcs11-get-raw-issuer-exts.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@pkcs11/$(DEPDIR)/pkcs11-import-url-privkey.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@pkcs11/$(DEPDIR)/pkcs11-import-with-pin.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@pkcs11/$(DEPDIR)/pkcs11-is-known.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@pkcs11/$(DEPDIR)/pkcs11-mock.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@pkcs11/$(DEPDIR)/pkcs11-privkey-always-auth.Po@am__quote@
@@ -6861,6 +6884,13 @@ pkcs11-privkey-export.log: pkcs11-privkey-export$(EXEEXT)
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
 	"$$tst" $(AM_TESTS_FD_REDIRECT)
+pkcs11/pkcs11-import-with-pin.log: pkcs11/pkcs11-import-with-pin$(EXEEXT)
+	@p='pkcs11/pkcs11-import-with-pin$(EXEEXT)'; \
+	b='pkcs11/pkcs11-import-with-pin'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
 ocsp.log: ocsp$(EXEEXT)
 	@p='ocsp$(EXEEXT)'; \
 	b='ocsp'; \
@@ -7004,6 +7034,48 @@ fastopen.sh.log: fastopen.sh
 starttls.sh.log: starttls.sh
 	@p='starttls.sh'; \
 	b='starttls.sh'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+starttls-ftp.sh.log: starttls-ftp.sh
+	@p='starttls-ftp.sh'; \
+	b='starttls-ftp.sh'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+starttls-smtp.sh.log: starttls-smtp.sh
+	@p='starttls-smtp.sh'; \
+	b='starttls-smtp.sh'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+starttls-lmtp.sh.log: starttls-lmtp.sh
+	@p='starttls-lmtp.sh'; \
+	b='starttls-lmtp.sh'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+starttls-pop3.sh.log: starttls-pop3.sh
+	@p='starttls-pop3.sh'; \
+	b='starttls-pop3.sh'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+starttls-nntp.sh.log: starttls-nntp.sh
+	@p='starttls-nntp.sh'; \
+	b='starttls-nntp.sh'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+starttls-sieve.sh.log: starttls-sieve.sh
+	@p='starttls-sieve.sh'; \
+	b='starttls-sieve.sh'; \
 	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \

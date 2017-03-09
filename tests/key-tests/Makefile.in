@@ -107,8 +107,9 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
-@WITH_OLD_NETTLE_FALSE@am__append_1 = illegal-rsa
-@WINDOWS_FALSE@am__append_2 = dsa
+@ENABLE_FIPS140_FALSE@am__append_1 = pkcs8-decode pkcs8
+@WITH_OLD_NETTLE_FALSE@am__append_2 = illegal-rsa
+@WINDOWS_FALSE@am__append_3 = dsa
 subdir = tests/key-tests
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/lib/unistring/m4/gnulib-comp.m4 \
@@ -1079,6 +1080,7 @@ LIBDL_PREFIX = @LIBDL_PREFIX@
 LIBGNUTLS_CFLAGS = @LIBGNUTLS_CFLAGS@
 LIBGNUTLS_LIBS = @LIBGNUTLS_LIBS@
 LIBICONV = @LIBICONV@
+LIBIDN2_LIBS = @LIBIDN2_LIBS@
 LIBIDN_CFLAGS = @LIBIDN_CFLAGS@
 LIBIDN_LIBS = @LIBIDN_LIBS@
 LIBINTL = @LIBINTL@
@@ -1493,8 +1495,8 @@ EXTRA_DIST = data/key-ca.pem data/key-user.pem \
 	data/pkcs8-pbes1-des-md5.pem data/pkcs8-invalid8.der data/key-invalid1.der
 
 dist_check_SCRIPTS = key-id pkcs8 pkcs8-decode dsa ecdsa illegal-rsa pkcs8-invalid key-invalid
-TESTS = key-id pkcs8 pkcs8-decode ecdsa pkcs8-invalid key-invalid \
-	$(am__append_1) $(am__append_2)
+TESTS = key-id ecdsa pkcs8-invalid key-invalid $(am__append_1) \
+	$(am__append_2) $(am__append_3)
 TESTS_ENVIRONMENT = EXEEXT=$(EXEEXT) \
 	ASAN_OPTIONS="detect_leaks=0:exitcode=6" \
 	LC_ALL="C"						\
@@ -1697,20 +1699,6 @@ key-id.log: key-id
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
 	"$$tst" $(AM_TESTS_FD_REDIRECT)
-pkcs8.log: pkcs8
-	@p='pkcs8'; \
-	b='pkcs8'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-pkcs8-decode.log: pkcs8-decode
-	@p='pkcs8-decode'; \
-	b='pkcs8-decode'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
 ecdsa.log: ecdsa
 	@p='ecdsa'; \
 	b='ecdsa'; \
@@ -1728,6 +1716,20 @@ pkcs8-invalid.log: pkcs8-invalid
 key-invalid.log: key-invalid
 	@p='key-invalid'; \
 	b='key-invalid'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+pkcs8-decode.log: pkcs8-decode
+	@p='pkcs8-decode'; \
+	b='pkcs8-decode'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+pkcs8.log: pkcs8
+	@p='pkcs8'; \
+	b='pkcs8'; \
 	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \

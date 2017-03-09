@@ -1,3 +1,343 @@
+2017-03-06  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* tests/Makefile.am: Makefile.am: Added missing file Signed-off-by: Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+2017-03-06  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* NEWS: doc update
+
+2017-03-06  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* .gitlab-ci.yml: .gitlab-ci.yml: execute initialization stage
+	unconditionally This step is required both in tags and commit runs.  Signed-off-by: Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+2017-03-06  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* NEWS, configure.ac, m4/hooks.m4: bumped version Signed-off-by: Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+2017-03-05  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* lib/datum.c: _gnutls_set_strdatum: always return an allocated
+	string on success That prevents returning NULL to functions which require a string.  Signed-off-by: Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+2017-03-05  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* NEWS: doc update Signed-off-by: Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+2017-03-05  Alex Gaynor <alex.gaynor@gmail.com>
+
+	* lib/opencdk/read-packet.c, tests/cert-tests/openpgp-cert-parser: 
+	Enforce the max packet length for OpenPGP subpackets as well This addresses:   https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=392 Signed-off-by: Alex Gaynor <alex.gaynor@gmail.com>
+
+2017-03-05  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* doc/cha-cert-auth2.texi: doc: corrected typo [ci skip] It was pointed out by morozov@eags.ru.  Signed-off-by: Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+2017-03-04  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* NEWS: NEWS: added links to GNUTLS-SA-2017-3
+
+2017-03-01  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* .gitlab-ci.yml: .gitlab-ci.yml: run tests under a FIPS140 mode
+	simulation That is, in FIPS140-2/Fedora/x86_64 build, run tests under a normal
+	run (when library is compiled with FIPS140-2 support but not enabled
+	on run time), and also run tests under a run-time that simulates
+	FIPS140-2 support.  Signed-off-by: Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+2017-03-01  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/crypto-selftests.c: crypto-self-tests: modified exported
+	functions to work under fips140-2 mode Signed-off-by: Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+2017-03-01  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* tests/dtls1-2-mtu-check.c, tests/key-tests/Makefile.am,
+	tests/set_x509_pkcs12_key.c, tests/x509sign-verify2.c: tests: skip
+	tests which cannot be run in FIPS140-2 mode This allows the test suite to be run in FIPS140-2 mode.  Signed-off-by: Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+2017-03-01  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/pk.c: _gnutls_pk_params_copy: copy the provable algorithm used This is affected utilization of generated RSA keys under FIPS140-2
+	mode which utilizes provable generation.  Signed-off-by: Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+2017-03-01  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* tests/priorities.c: tests: priorities: skip test in FIPS140-2 mode Signed-off-by: Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+2017-03-01  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/ext/session_ticket.c: gnutls_session_ticket_key_generate:
+	fixed operation under FIPS140-2 mode Signed-off-by: Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+2017-03-01  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* NEWS: doc update
+
+2017-03-01  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* tests/cert-tests/Makefile.am,
+	tests/cert-tests/openpgp-cert-parser: tests: added test cases with
+	invalid openpgp certs These certificates contain invalid secret key sub-packets.  These
+	  trigger invalid memory accesses:
+	https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=360   https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=354 Signed-off-by: Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+2017-03-01  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* lib/opencdk/kbnode.c, lib/opencdk/keydb.c, lib/opencdk/literal.c,
+	lib/opencdk/opencdk.h, lib/opencdk/read-packet.c,
+	lib/openpgp/openpgp.c, lib/openpgp/pgp.c, lib/openpgp/privkey.c: 
+	opencdk: do not parse any secret keys in packet when reading a
+	certificate This reduces the attack surface on the parsers, and prevents any
+	bugs in the secret key parser to be exploitable by inserting secret
+	key sub-packets into an openpgp certificate.  This addresses:   https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=354   https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=360 Signed-off-by: Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+2017-02-28  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/x509/output.c: x509/output: Cleanup in IDNA name printing That also removes the incorrect mapping to IDNA punycode when the
+	input is not printable.  Signed-off-by: Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+2017-02-28  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* src/certtool-cfg.c: certtool: increased buffer for reading from
+	user This allows reading longer than 128-byte fields interactively.  The
+	new limit is 512-bytes.  Relates #179 Signed-off-by: Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+2017-02-27  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* src/certtool-cfg.c: certtool: store critical extensions even if no
+	other extension are present That is, fix a bug which prevented critical extensions to be stored
+	if no other free-form extensions were specified.  Signed-off-by: Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+2017-02-24  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* NEWS: doc update
+
+2017-02-24  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/x509/ocsp.c: gnutls_ocsp_resp_verify_direct,
+	gnutls_ocsp_resp_verify: defined flags argument That was defined to be gnutls_certificate_verify_flags, and it
+	allows passing verification flags, such as flags to allow broken
+	algorithms.  Signed-off-by: Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+2017-02-24  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/x509/verify.c: is_level_acceptable: no longer checks for
+	broken algorithms This is done at is_broken_allowed(), and in fact checking them in
+	is_level_acceptable() creates a conflict when overrides like flag
+	GNUTLS_VERIFY_ALLOW_BROKEN is used.  Signed-off-by: Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+2017-02-24  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/includes/gnutls/gnutls.h.in, lib/verify-tofu.c: 
+	gnutls_store_commitment: introduced flag
+	GNUTLS_SCOMMIT_FLAG_ALLOW_BROKEN This flag allows operation of the function even with broken
+	algorithms.  Signed-off-by: Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+2017-02-24  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/x509/verify.c: verify: is_broken_allowed: account for "new"
+	flag GNUTLS_VERIFY_ALLOW_BROKEN Signed-off-by: Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+2017-02-23  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* NEWS: doc update
+
+2017-02-23  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* tests/cert-tests/Makefile.am,
+	tests/cert-tests/openpgp-cert-parser: tests: added test case with
+	invalid openpgp cert This triggers an invalid memory access:   https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=391 Signed-off-by: Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+2017-02-23  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/opencdk/read-packet.c: opencdk: read_attribute: account buffer
+	size That ensures that there is no read past the end of buffer.  Resolves the oss-fuzz found bug:
+	https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=391 Relates: #159 Signed-off-by: Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+2017-02-23  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* src/socket.c: gnutls-cli-debug: fixed protocol to port discovery That is, if --starttls-proto is provided the default port selected
+	will be converted to host byte order as expected.  Signed-off-by: Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+2017-02-23  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* NEWS: NEWS: fix typo [ci skip]
+
+2017-02-22  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* configure.ac, tests/Makefile.am, tests/scripts/Makefile.am,
+	tests/scripts/starttls-common.sh, tests/starttls-ftp.sh,
+	tests/starttls-lmtp.sh, tests/starttls-nntp.sh,
+	tests/starttls-pop3.sh, tests/starttls-sieve.sh,
+	tests/starttls-smtp.sh, tests/starttls.sh: tests: split starttls.sh
+	into multiple scripts Signed-off-by: Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+2017-02-23  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* NEWS: doc update
+
+2017-02-22  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* tests/cert-tests/data/aki-cert.pem,
+	tests/cert-tests/data/arb-extensions.csr,
+	tests/cert-tests/data/bmpstring.pem,
+	tests/cert-tests/data/ca-no-pathlen.pem,
+	tests/cert-tests/data/complex-cert.pem,
+	tests/cert-tests/data/long-oids.pem,
+	tests/cert-tests/data/multi-value-dn.pem,
+	tests/cert-tests/data/name-constraints-ip2.pem,
+	tests/cert-tests/data/no-ca-or-pathlen.pem,
+	tests/cert-tests/data/template-tlsfeature.csr,
+	tests/cert-tests/data/very-long-dn.pem,
+	tests/cert-tests/data/xmpp-othername.pem: tests: updated to include
+	the pin-sha256 in output Signed-off-by: Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+2017-02-22  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* tests/dn2.c: tests: updated to take into account the pin-sha256
+	oneline output Signed-off-by: Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+2017-02-22  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/x509/output.c: x509/output: print key PIN on oneline output That is, instead of the public key ID. The key PIN due to HPKP is
+	now more widely used than hex-based key IDs.  Signed-off-by: Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+2017-02-22  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/str.c, lib/str.h, lib/x509/output.c: x509/output: print the
+	public key PIN of a certificate That is, print the value used by the HPKP protocol as per RFC7469.  Signed-off-by: Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+2017-02-22  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* tests/pkcs11/pkcs11-import-with-pin.c: tests:
+	pkcs11-import-with-pin: removed invalid conditional macro
+
+2017-02-22  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* tests/Makefile.am, tests/pkcs11/pkcs11-import-with-pin.c: tests:
+	added PKCS#11 test for pin input This introduces a test on PIN input to retrieve an object using
+	pin-value and pin-source (file).  Signed-off-by: Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+2017-02-22  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* .gitlab-ci.yml: .gitlab-ci.yml: ubsan build: fixed artifacts path Signed-off-by: Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+2017-02-23  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* src/certtool-cfg.c: certtool: don't warn when 'uri' is specified
+	on template Reported at: https://bugzilla.redhat.com/show_bug.cgi?id=1425884 Signed-off-by: Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+2017-02-21  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/nettle/pk.c: nettle/pk: corrected memcpy of Q in DSA params Signed-off-by: Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+2017-02-21  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* .gitlab-ci.yml: .gitlab-ci.yml: backported from master branch Signed-off-by: Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+2017-02-20  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* configure.ac: configure: no longer use -Wframe-larger-than We do not require a specific stack size, and there is legacy code
+	which utilizes large stack sizes. As such remove the warnings to
+	allow for a warning free compilation.  Signed-off-by: Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+2017-02-20  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* lib/pkcs11.c: pkcs11: avoid calling memcpy will null options Signed-off-by: Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+2017-02-20  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/x509/pkcs7.c: pkcs7: corrected error checking in
+	write_signer_id Signed-off-by: Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+2017-02-20  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/x509/common.c: make_printable_string: allow operation with
+	null input Signed-off-by: Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+2017-02-21  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/gnutls_int.h: gnutls_int.h: include assert.h Signed-off-by: Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+2017-02-20  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* NEWS: doc update
+
+2017-02-20  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* tests/cert-tests/Makefile.am,
+	tests/cert-tests/data/openpgp-invalid5.pub,
+	tests/cert-tests/openpgp-cert-parser: tests: added test case with
+	invalid openpgp cert That triggers a heap buffer overflow:   https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=420 Signed-off-by: Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+2017-02-20  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/opencdk/read-packet.c: opencdk/read-packet.c: corrected typo
+	in type cast Signed-off-by: Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+2017-02-20  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/opencdk/read-packet.c: cdk_pkt_read: enforce packet limits That ensures that there are no overflows in the subsequent
+	calculations.  Resolves the oss-fuzz found bug:
+	https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=420 Relates: #159 Signed-off-by: Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+2017-02-20  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* NEWS: doc update
+
+2017-02-19  Robert Scheck <robert@fedoraproject.org>
+
+	* src/cli-args.def, src/cli-debug-args.def, src/danetool-args.def,
+	src/socket.c, tests/Makefile.am, tests/starttls-lmtp.txt,
+	tests/starttls-nntp.txt, tests/starttls-pop3.txt,
+	tests/starttls-sieve.txt, tests/starttls.sh: Add LMTP, POP3, NNTP,
+	Sieve and PostgreSQL support to gnutls-cli Add LMTP (RFC 2033), POP3 (RFC 2595), NNTP (RFC 4642), Sieve (RFC
+	5804) and PostgreSQL support to gnutls-cli ("--starttls-proto").  Signed-off-by: Robert Scheck <robert@fedoraproject.org>
+
+2017-02-17  Rical Jasan <ricaljasan@pacific.net>
+
+	* tests/scripts/common.sh: tests: Improve port-checking
+	infrastructure.  The test suite unnecessarily failed on systems without netstat
+	because it was assumed to be present.  Instead of simply checking
+	for its presence and indicating an unsupported test, however, the ss
+	utility can be used as a drop-in replacement.  When
+	netstat/net-tools is not present, the ss utility from iproute2 still
+	stands a fair chance of existing, and they also have similar enough
+	semantics that they can be used interchangeably in the test suite.  The functions in tests/scripts/common.sh that used netstat (wait_for_port, wait_for_free_port) now use new functions,
+	check_if_port_in_use and check_if_port_listening, to abstract the
+	call to netstat/ss.  The eval'd variable GETPORT also used netstat,
+	and has been updated accordingly.  The new port-checking functions use another new function,
+	have_port_finder, which takes care of the details of selecting ss (preferred) or netstat, or fails otherwise.  Signed-off-by: Rical Jasan <ricaljasan@pacific.net> Signed-off-by:
+	Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+2017-02-12  Alon Bar-Lev <alon.barlev@gmail.com>
+
+	* doc/Makefile.am: build: doc: install images also into htmldir images are required also by the html documentation.  Signed-off-by: Alon Bar-Lev <alon.barlev@gmail.com>
+
+2017-02-15  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* NEWS: doc update
+
+2017-02-15  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* configure.ac, lib/gnutls.pc.in: gnutls.pc: do not include libidn2
+	in Requires.private The libidn2 versions available do not include libidn2.pc, thus the
+	inclusion was causing problems when using pkg-config.  Instead we
+	include -lidn2 in Libs.private.  Signed-off-by: Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+2017-02-05  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* NEWS: doc update Signed-off-by: Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+2017-02-02  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* lib/x509/x509.c, lib/x509/x509_int.h,
+	tests/certs-interesting/cert5.der.err: x509: optimize subject
+	alternative name access That reads SAN and IAN early on import, significantly reducing the
+	running time of functions which iterate over the alternative names
+	of a certificate, e.g., gnutls_x509_crt_check_hostname().  Relates #165 Signed-off-by: Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
 2017-02-12  Nikos Mavrogiannopoulos <nmav@gnutls.org>
 
 	* NEWS: doc update
@@ -16467,7 +16807,21 @@
 
 2014-11-07  Nikos Mavrogiannopoulos <nmav@gnutls.org>
 
-	* pkcs11: pass the correct user type to protected authentication login
+	* lib/pkcs11.c: pkcs11: pass the correct user type to protected
+	authentication login
+
+2014-11-07  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* doc/cha-gtls-app.texi: doc: corrected values for INSECURE level
+
+2014-11-07  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/includes/gnutls/pkcs11.h, lib/pkcs11.c, lib/pkcs11_write.c: 
+	pkcs11: support the CKA_EXTRACTABLE and CKA_NEVER_EXTRACTABLE flags
+
+2014-11-07  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* pkcs11: added the flag GNUTLS_PKCS11_OBJ_FLAG_MARK_ALWAYS_AUTH
 
 	-----
 

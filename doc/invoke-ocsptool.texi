@@ -37,7 +37,54 @@ with a status code of 0.
 
 @exampleindent 0
 @example
-ocsptool is unavailable - no --help
+ocsptool - GnuTLS OCSP tool
+Usage:  ocsptool [ -<flag> [<val>] | --<name>[@{=| @}<val>] ]...
+
+   -d, --debug=num            Enable debugging
+                                - it must be in the range:
+                                  0 to 9999
+   -V, --verbose              More verbose output
+                                - may appear multiple times
+       --infile=file          Input file
+                                - file must pre-exist
+       --outfile=str          Output file
+       --ask[=arg]            Ask an OCSP/HTTP server on a certificate validity
+                                - requires these options:
+                                load-cert
+                                load-issuer
+   -e, --verify-response      Verify response
+   -i, --request-info         Print information on a OCSP request
+   -j, --response-info        Print information on a OCSP response
+   -q, --generate-request     Generate an OCSP request
+       --nonce                Use (or not) a nonce to OCSP request
+                                - disabled as '--no-nonce'
+       --load-issuer=file     Read issuer certificate from file
+                                - file must pre-exist
+       --load-cert=file       Read certificate to check from file
+                                - file must pre-exist
+       --load-trust=file      Read OCSP trust anchors from file
+                                - prohibits the option 'load-signer'
+                                - file must pre-exist
+       --load-signer=file     Read OCSP response signer from file
+                                - prohibits the option 'load-trust'
+                                - file must pre-exist
+       --inder                Use DER format for input certificates and private keys
+                                - disabled as '--no-inder'
+   -Q, --load-request=file    Read DER encoded OCSP request from file
+                                - file must pre-exist
+   -S, --load-response=file   Read DER encoded OCSP response from file
+                                - file must pre-exist
+       --ignore-errors        Ignore any verification errors
+   -v, --version[=arg]        output version information and exit
+   -h, --help                 display extended usage information and exit
+   -!, --more-help            extended usage information passed thru pager
+
+Options are specified by doubled hyphens and their name or by a single
+hyphen and the flag character.
+
+Ocsptool is a program that can parse and print information about OCSP
+requests/responses, generate requests and verify responses.
+
 @end example
 @exampleindent 4
 
