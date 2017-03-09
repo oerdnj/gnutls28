@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnutls 3.2.3\n"
 "Report-Msgid-Bugs-To: bug-gnutls@gnu.org\n"
-"POT-Creation-Date: 2017-02-12 09:37+0100\n"
+"POT-Creation-Date: 2017-03-06 07:03+0100\n"
 "PO-Revision-Date: 2015-11-10 09:47-0500\n"
 "Last-Translator: Mingye Wang (Arthur2e5) <arthur200126@gmail.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
@@ -927,9 +927,9 @@ msgid "\t\tExpiration: %s\n"
 msgstr "\t\t过期：%s\n"
 
 #: lib/openpgp/output.c:230 lib/x509/ocsp_output.c:527 lib/x509/output.c:1178
-#: lib/x509/output.c:1375 lib/x509/output.c:1519 lib/x509/output.c:1744
-#: lib/x509/output.c:1757 lib/x509/output.c:2174 lib/x509/output.c:2272
-#: lib/x509/output.c:2323
+#: lib/x509/output.c:1375 lib/x509/output.c:1519 lib/x509/output.c:1748
+#: lib/x509/output.c:1761 lib/x509/output.c:2178 lib/x509/output.c:2276
+#: lib/x509/output.c:2327
 msgid "unknown"
 msgstr "未知"
 
@@ -974,8 +974,8 @@ msgid "\t\tG:\n"
 msgstr "\t\tG：\n"
 
 #: lib/openpgp/output.c:341 lib/x509/ocsp_output.c:50
-#: lib/x509/ocsp_output.c:276 lib/x509/output.c:1398 lib/x509/output.c:1927
-#: lib/x509/output.c:2295
+#: lib/x509/ocsp_output.c:276 lib/x509/output.c:1398 lib/x509/output.c:1931
+#: lib/x509/output.c:2299
 #, c-format
 msgid "\tVersion: %d\n"
 msgstr "\t版本：%d\n"
@@ -1041,13 +1041,13 @@ msgstr "未知密钥算法（%d）"
 msgid "OpenPGP Certificate Information:\n"
 msgstr "OpenPGP 证书信息：\n"
 
-#: lib/x509/ocsp_output.c:136 lib/x509/ocsp_output.c:500 lib/x509/output.c:2095
-#: lib/x509/output.c:2457
+#: lib/x509/ocsp_output.c:136 lib/x509/ocsp_output.c:500 lib/x509/output.c:2099
+#: lib/x509/output.c:2461
 msgid "\t\t\tASCII: "
 msgstr "\t\t\tASCII： "
 
-#: lib/x509/ocsp_output.c:141 lib/x509/ocsp_output.c:505 lib/x509/output.c:2099
-#: lib/x509/output.c:2462
+#: lib/x509/ocsp_output.c:141 lib/x509/ocsp_output.c:505 lib/x509/output.c:2103
+#: lib/x509/output.c:2466
 msgid "\t\t\tHexdump: "
 msgstr "\t\t\t十六进制转储： "
 
@@ -1085,18 +1085,18 @@ msgstr "\t\t本次更新：%s\n"
 msgid "\t\tNext Update: %s\n"
 msgstr "\t\t下一次更新：%s\n"
 
-#: lib/x509/ocsp_output.c:528 lib/x509/output.c:1523 lib/x509/output.c:2178
-#: lib/x509/output.c:2327
+#: lib/x509/ocsp_output.c:528 lib/x509/output.c:1523 lib/x509/output.c:2182
+#: lib/x509/output.c:2331
 #, c-format
 msgid "\tSignature Algorithm: %s\n"
 msgstr "\t签名算法：%s\n"
 
-#: lib/x509/ocsp_output.c:532 lib/x509/output.c:1528 lib/x509/output.c:2183
+#: lib/x509/ocsp_output.c:532 lib/x509/output.c:1528 lib/x509/output.c:2187
 msgid ""
 "warning: signed using a broken signature algorithm that can be forged.\n"
 msgstr "警告：使用可伪造的签名算法进行了签名。\n"
 
-#: lib/x509/ocsp_output.c:541 lib/x509/output.c:1554 lib/x509/output.c:2209
+#: lib/x509/ocsp_output.c:541 lib/x509/output.c:1554 lib/x509/output.c:2213
 msgid "\tSignature:\n"
 msgstr "\t签名：\n"
 
@@ -1104,20 +1104,25 @@ msgstr "\t签名：\n"
 msgid "OCSP Response Information:\n"
 msgstr "OCSP 响应信息：\n"
 
-#: lib/x509/output.c:59
+#: lib/x509/output.c:55
+#, c-format
+msgid "%s%s: %.*s (contains illegal chars)\n"
+msgstr ""
+
+#: lib/x509/output.c:61
+#, c-format
+msgid "%s%s: %.*s (%s)\n"
+msgstr ""
+
+#: lib/x509/output.c:69
+#, fuzzy, c-format
+msgid "%s%s: %.*s\n"
+msgstr "%s\t\t\totherName 对象标识符（OID）：%.*s\n"
+
+#: lib/x509/output.c:85
 #, fuzzy
 msgid "warning: SAN contains an embedded NUL, replacing with '!'\n"
 msgstr "警告：altname 内含 NUL，使用“!”代替\n"
-
-#: lib/x509/output.c:76 lib/x509/output.c:84
-#, c-format
-msgid "%sDNSname: %.*s (%s)\n"
-msgstr ""
-
-#: lib/x509/output.c:92
-#, fuzzy, c-format
-msgid "%sDNSname: %.*s\n"
-msgstr "%s\t\t\totherName 对象标识符（OID）：%.*s\n"
 
 #: lib/x509/output.c:97
 #, c-format
@@ -1329,7 +1334,7 @@ msgstr "%s\t\t基本限制（%s）：\n"
 #: lib/x509/output.c:997 lib/x509/output.c:1010 lib/x509/output.c:1022
 #: lib/x509/output.c:1036 lib/x509/output.c:1050 lib/x509/output.c:1058
 #: lib/x509/output.c:1069 lib/x509/output.c:1080 lib/x509/output.c:1088
-#: lib/x509/output.c:2036 lib/x509/output.c:2061 lib/x509/output.c:2081
+#: lib/x509/output.c:2040 lib/x509/output.c:2065 lib/x509/output.c:2085
 msgid "critical"
 msgstr "关键"
 
@@ -1338,7 +1343,7 @@ msgstr "关键"
 #: lib/x509/output.c:997 lib/x509/output.c:1010 lib/x509/output.c:1022
 #: lib/x509/output.c:1036 lib/x509/output.c:1050 lib/x509/output.c:1058
 #: lib/x509/output.c:1069 lib/x509/output.c:1080 lib/x509/output.c:1088
-#: lib/x509/output.c:2037 lib/x509/output.c:2062 lib/x509/output.c:2082
+#: lib/x509/output.c:2041 lib/x509/output.c:2066 lib/x509/output.c:2086
 msgid "not critical"
 msgstr "非关键"
 
@@ -1481,7 +1486,7 @@ msgstr "\t\tQ："
 msgid "\t\tG: "
 msgstr "\t\tG："
 
-#: lib/x509/output.c:1365 lib/x509/output.c:2262
+#: lib/x509/output.c:1365 lib/x509/output.c:2266
 msgid "Subject "
 msgstr "主题 "
 
@@ -1489,12 +1494,12 @@ msgstr "主题 "
 msgid "\tSerial Number (hex): "
 msgstr "\t序列号（16进制）： "
 
-#: lib/x509/output.c:1426 lib/x509/output.c:1937
+#: lib/x509/output.c:1426 lib/x509/output.c:1941
 #, fuzzy
 msgid "\tIssuer:\n"
 msgstr "\t发行者：%s\n"
 
-#: lib/x509/output.c:1431 lib/x509/output.c:1942
+#: lib/x509/output.c:1431 lib/x509/output.c:1946
 #, c-format
 msgid "\tIssuer: %s\n"
 msgstr "\t发行者：%s\n"
@@ -1513,12 +1518,12 @@ msgstr "\t\t不早于： %s\n"
 msgid "\t\tNot After: %s\n"
 msgstr "\t\t不晚于： %s\n"
 
-#: lib/x509/output.c:1486 lib/x509/output.c:2305
+#: lib/x509/output.c:1486 lib/x509/output.c:2309
 #, fuzzy
 msgid "\tSubject:\n"
 msgstr "\t主题：%s\n"
 
-#: lib/x509/output.c:1491 lib/x509/output.c:2310
+#: lib/x509/output.c:1491 lib/x509/output.c:2314
 #, c-format
 msgid "\tSubject: %s\n"
 msgstr "\t主题：%s\n"
@@ -1545,121 +1550,130 @@ msgstr ""
 "\t公钥 Id：\n"
 "\t\t"
 
-#: lib/x509/output.c:1672
+#: lib/x509/output.c:1628
+#, fuzzy, c-format
+msgid ""
+"%sPublic Key PIN:\n"
+"%s\tpin-sha256:"
+msgstr ""
+"\t公钥 Id：\n"
+"\t\t"
+
+#: lib/x509/output.c:1676
 msgid "\tPublic key's random art:\n"
 msgstr ""
 "\t公钥对应的随机图像：\n"
 "\n"
 
-#: lib/x509/output.c:1699
+#: lib/x509/output.c:1703
 #, fuzzy
 msgid "no subject,"
 msgstr "主题 "
 
-#: lib/x509/output.c:1715
+#: lib/x509/output.c:1719
 msgid "no issuer,"
 msgstr ""
 
-#: lib/x509/output.c:1762
+#: lib/x509/output.c:1766
 #, c-format
 msgid "signed using %s (broken!), "
 msgstr "使用 %s 签名（已破损！）， "
 
-#: lib/x509/output.c:1764
+#: lib/x509/output.c:1768
 #, c-format
 msgid "signed using %s, "
 msgstr "使用 %s 签名， "
 
-#: lib/x509/output.c:1903
+#: lib/x509/output.c:1907
 msgid "X.509 Certificate Information:\n"
 msgstr "X.509 证书信息：\n"
 
-#: lib/x509/output.c:1907 lib/x509/output.c:2508
+#: lib/x509/output.c:1911 lib/x509/output.c:2512
 msgid "Other Information:\n"
 msgstr "其它信息：\n"
 
-#: lib/x509/output.c:1922
+#: lib/x509/output.c:1926
 msgid "\tVersion: 1 (default)\n"
 msgstr "\t版本：1（默认）\n"
 
-#: lib/x509/output.c:1951
+#: lib/x509/output.c:1955
 msgid "\tUpdate dates:\n"
 msgstr "\t更新日期：\n"
 
-#: lib/x509/output.c:1968
+#: lib/x509/output.c:1972
 #, c-format
 msgid "\t\tIssued: %s\n"
 msgstr "\t\t发行：%s\n"
 
-#: lib/x509/output.c:1988
+#: lib/x509/output.c:1992
 #, c-format
 msgid "\t\tNext at: %s\n"
 msgstr "\t\t下一个位于：%s\n"
 
-#: lib/x509/output.c:2019
+#: lib/x509/output.c:2023
 msgid "\tExtensions:\n"
 msgstr "\t扩展：\n"
 
-#: lib/x509/output.c:2035
+#: lib/x509/output.c:2039
 #, c-format
 msgid "\t\tCRL Number (%s): "
 msgstr "\t\tCRL 号（%s）： "
 
-#: lib/x509/output.c:2060
+#: lib/x509/output.c:2064
 #, c-format
 msgid "\t\tAuthority Key Identifier (%s):\n"
 msgstr "\t\t授权密钥识别器（%s）：\n"
 
-#: lib/x509/output.c:2079
+#: lib/x509/output.c:2083
 #, c-format
 msgid "\t\tUnknown extension %s (%s):\n"
 msgstr "\t\t未知扩展 %s（%s）：\n"
 
-#: lib/x509/output.c:2116
+#: lib/x509/output.c:2120
 #, c-format
 msgid "\tRevoked certificates (%d):\n"
 msgstr "\t撤销的证书（%d）：\n"
 
-#: lib/x509/output.c:2119
+#: lib/x509/output.c:2123
 msgid "\tNo revoked certificates.\n"
 msgstr "\t没有撤销的证书。\n"
 
-#: lib/x509/output.c:2140
+#: lib/x509/output.c:2144
 msgid "\t\tSerial Number (hex): "
 msgstr "\t\t序列号（hex）： "
 
-#: lib/x509/output.c:2158
+#: lib/x509/output.c:2162
 #, c-format
 msgid "\t\tRevoked at: %s\n"
 msgstr "\t\t撤销于：%s\n"
 
-#: lib/x509/output.c:2240
+#: lib/x509/output.c:2244
 msgid "X.509 Certificate Revocation List Information:\n"
 msgstr "X.509 证书撤销列表信息：\n"
 
-#: lib/x509/output.c:2358
+#: lib/x509/output.c:2362
 msgid "\tAttributes:\n"
 msgstr "\t属性：\n"
 
-#: lib/x509/output.c:2415
+#: lib/x509/output.c:2419
 #, c-format
 msgid "\t\tChallenge password: %s\n"
 msgstr "\t\t质询密码：%s\n"
 
-#: lib/x509/output.c:2425
+#: lib/x509/output.c:2429
 #, c-format
 msgid "\t\tUnknown attribute %s:\n"
 msgstr "\t\t未知属性 %s：\n"
 
-#: lib/x509/output.c:2504
+#: lib/x509/output.c:2508
 msgid "PKCS #10 Certificate Request Information:\n"
 msgstr "PKCS #10 证书请求信息：\n"
 
-#: lib/x509/output.c:2530
+#: lib/x509/output.c:2534
 msgid "Public Key Usage:\n"
 msgstr "公钥用法：\n"
 
-#: lib/x509/output.c:2564
+#: lib/x509/output.c:2568
 msgid "Public Key Information:\n"
 msgstr "公钥信息：\n"
 

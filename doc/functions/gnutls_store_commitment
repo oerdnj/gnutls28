@@ -17,7 +17,7 @@
 
 @var{expiration}: The expiration time (use 0 to disable expiration)
 
-@var{flags}: should be 0.
+@var{flags}: should be 0 or @code{GNUTLS_SCOMMIT_FLAG_ALLOW_BROKEN} .
 
 This function will store the provided hash commitment to 
 the list of stored public keys. The key with the given

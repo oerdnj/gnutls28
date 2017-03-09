@@ -349,7 +349,8 @@ am__can_run_installinfo = \
     n|no|NO) false;; \
     *) (install-info --version) >/dev/null 2>&1;; \
   esac
-am__installdirs = "$(DESTDIR)$(infodir)" "$(DESTDIR)$(imagesdir)"
+am__installdirs = "$(DESTDIR)$(infodir)" "$(DESTDIR)$(htmldir)" \
+	"$(DESTDIR)$(infoimagesdir)"
 am__vpath_adj_setup = srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`;
 am__vpath_adj = case $$p in \
     $(srcdir)/*) f=`echo "$$p" | sed "s|^$$srcdirstrip/||"`;; \
@@ -377,7 +378,7 @@ am__uninstall_files_from_dir = { \
     || { echo " ( cd '$$dir' && rm -f" $$files ")"; \
          $(am__cd) "$$dir" && rm -f $$files; }; \
   }
-DATA = $(images_DATA)
+DATA = $(html_DATA) $(infoimages_DATA)
 RECURSIVE_CLEAN_TARGETS = mostlyclean-recursive clean-recursive	\
   distclean-recursive maintainer-clean-recursive
 am__recursive_targets = \
@@ -1051,6 +1052,7 @@ LIBDL_PREFIX = @LIBDL_PREFIX@
 LIBGNUTLS_CFLAGS = @LIBGNUTLS_CFLAGS@
 LIBGNUTLS_LIBS = @LIBGNUTLS_LIBS@
 LIBICONV = @LIBICONV@
+LIBIDN2_LIBS = @LIBIDN2_LIBS@
 LIBIDN_CFLAGS = @LIBIDN_CFLAGS@
 LIBIDN_LIBS = @LIBIDN_LIBS@
 LIBINTL = @LIBINTL@
@@ -1457,6 +1459,14 @@ EXTRA_DIST = TODO certtool.cfg gnutls.pdf gnutls.html \
 	gnutls-guile.pdf gnutls-guile.html stamp_enums stamp_functions \
 	doc.mk COPYING COPYING.LESSER $(guile_texi) \
 	extract-guile-c-doc.scm
+IMAGES = \
+	gnutls-handshake-state.png	\
+	gnutls-layers.png gnutls-modauth.png \
+	gnutls-client-server-use-case.png			\
+	gnutls-handshake-sequence.png gnutls-internals.png	\
+	gnutls-logo.png gnutls-x509.png	\
+	pkcs11-vision.png
+
 SUBDIRS = examples cyclo scripts credentials latex $(am__append_1)
 info_TEXINFOS = gnutls.texi gnutls-guile.texi
 
@@ -1500,15 +1510,9 @@ AUTOGENED_DOC = invoke-gnutls-cli.texi invoke-gnutls-cli-debug.texi \
 	invoke-ocsptool.texi invoke-psktool.texi invoke-p11tool.texi \
 	invoke-tpmtool.texi invoke-danetool.texi
 
-imagesdir = $(infodir)
-images_DATA = \
-	gnutls-handshake-state.png	\
-	gnutls-layers.png gnutls-modauth.png \
-	gnutls-client-server-use-case.png			\
-	gnutls-handshake-sequence.png gnutls-internals.png	\
-	gnutls-logo.png gnutls-x509.png	\
-	pkcs11-vision.png
-
+infoimagesdir = $(infodir)
+infoimages_DATA = $(IMAGES)
+html_DATA = $(IMAGES)
 AM_MAKEINFOFLAGS = -I $(top_srcdir)/doc
 TEXI2DVI = texi2dvi $(AM_MAKEINFOFLAGS)
 AM_MAKEINFOHTMLFLAGS = $(AM_MAKEINFOFLAGS) \
@@ -3860,27 +3864,48 @@ maintainer-clean-aminfo:
 	  echo " rm -f $$i $$i-[0-9] $$i-[0-9][0-9] $$i_i[0-9] $$i_i[0-9][0-9]"; \
 	  rm -f $$i $$i-[0-9] $$i-[0-9][0-9] $$i_i[0-9] $$i_i[0-9][0-9]; \
 	done
-install-imagesDATA: $(images_DATA)
+install-htmlDATA: $(html_DATA)
 	@$(NORMAL_INSTALL)
-	@list='$(images_DATA)'; test -n "$(imagesdir)" || list=; \
+	@list='$(html_DATA)'; test -n "$(htmldir)" || list=; \
 	if test -n "$$list"; then \
-	  echo " $(MKDIR_P) '$(DESTDIR)$(imagesdir)'"; \
-	  $(MKDIR_P) "$(DESTDIR)$(imagesdir)" || exit 1; \
+	  echo " $(MKDIR_P) '$(DESTDIR)$(htmldir)'"; \
+	  $(MKDIR_P) "$(DESTDIR)$(htmldir)" || exit 1; \
 	fi; \
 	for p in $$list; do \
 	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
 	  echo "$$d$$p"; \
 	done | $(am__base_list) | \
 	while read files; do \
-	  echo " $(INSTALL_DATA) $$files '$(DESTDIR)$(imagesdir)'"; \
-	  $(INSTALL_DATA) $$files "$(DESTDIR)$(imagesdir)" || exit $$?; \
+	  echo " $(INSTALL_DATA) $$files '$(DESTDIR)$(htmldir)'"; \
+	  $(INSTALL_DATA) $$files "$(DESTDIR)$(htmldir)" || exit $$?; \
 	done
 
-uninstall-imagesDATA:
+uninstall-htmlDATA:
 	@$(NORMAL_UNINSTALL)
-	@list='$(images_DATA)'; test -n "$(imagesdir)" || list=; \
+	@list='$(html_DATA)'; test -n "$(htmldir)" || list=; \
 	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
-	dir='$(DESTDIR)$(imagesdir)'; $(am__uninstall_files_from_dir)
+	dir='$(DESTDIR)$(htmldir)'; $(am__uninstall_files_from_dir)
+install-infoimagesDATA: $(infoimages_DATA)
+	@$(NORMAL_INSTALL)
+	@list='$(infoimages_DATA)'; test -n "$(infoimagesdir)" || list=; \
+	if test -n "$$list"; then \
+	  echo " $(MKDIR_P) '$(DESTDIR)$(infoimagesdir)'"; \
+	  $(MKDIR_P) "$(DESTDIR)$(infoimagesdir)" || exit 1; \
+	fi; \
+	for p in $$list; do \
+	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
+	  echo "$$d$$p"; \
+	done | $(am__base_list) | \
+	while read files; do \
+	  echo " $(INSTALL_DATA) $$files '$(DESTDIR)$(infoimagesdir)'"; \
+	  $(INSTALL_DATA) $$files "$(DESTDIR)$(infoimagesdir)" || exit $$?; \
+	done
+
+uninstall-infoimagesDATA:
+	@$(NORMAL_UNINSTALL)
+	@list='$(infoimages_DATA)'; test -n "$(infoimagesdir)" || list=; \
+	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
+	dir='$(DESTDIR)$(infoimagesdir)'; $(am__uninstall_files_from_dir)
 
 # This directory's subdirectories are mostly independent; you can cd
 # into them and run 'make' without going through this Makefile.
@@ -4045,7 +4070,7 @@ check: $(BUILT_SOURCES)
 all-am: Makefile $(INFO_DEPS) $(DATA)
 installdirs: installdirs-recursive
 installdirs-am:
-	for dir in "$(DESTDIR)$(infodir)" "$(DESTDIR)$(imagesdir)"; do \
+	for dir in "$(DESTDIR)$(infodir)" "$(DESTDIR)$(htmldir)" "$(DESTDIR)$(infoimagesdir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
 	done
 install: $(BUILT_SOURCES)
@@ -4105,7 +4130,8 @@ info: info-recursive
 
 info-am: $(INFO_DEPS)
 
-install-data-am: install-imagesDATA install-info-am
+install-data-am: install-htmlDATA install-info-am \
+	install-infoimagesDATA
 
 install-dvi: install-dvi-recursive
 
@@ -4244,8 +4270,9 @@ ps: ps-recursive
 
 ps-am: $(PSS)
 
-uninstall-am: uninstall-dvi-am uninstall-html-am uninstall-imagesDATA \
-	uninstall-info-am uninstall-pdf-am uninstall-ps-am
+uninstall-am: uninstall-dvi-am uninstall-html-am uninstall-htmlDATA \
+	uninstall-info-am uninstall-infoimagesDATA uninstall-pdf-am \
+	uninstall-ps-am
 
 .MAKE: $(am__recursive_targets) all check install install-am \
 	install-strip
@@ -4257,8 +4284,8 @@ uninstall-am: uninstall-dvi-am uninstall-html-am uninstall-imagesDATA \
 	distclean-tags distdir dvi dvi-am html html-am info info-am \
 	install install-am install-data install-data-am install-dvi \
 	install-dvi-am install-exec install-exec-am install-html \
-	install-html-am install-imagesDATA install-info \
-	install-info-am install-man install-pdf install-pdf-am \
+	install-html-am install-htmlDATA install-info install-info-am \
+	install-infoimagesDATA install-man install-pdf install-pdf-am \
 	install-ps install-ps-am install-strip installcheck \
 	installcheck-am installdirs installdirs-am maintainer-clean \
 	maintainer-clean-1 maintainer-clean-aminfo \
@@ -4266,8 +4293,9 @@ uninstall-am: uninstall-dvi-am uninstall-html-am uninstall-imagesDATA \
 	mostlyclean-1 mostlyclean-aminfo mostlyclean-compile \
 	mostlyclean-generic mostlyclean-libtool mostlyclean-vti pdf \
 	pdf-am ps ps-am tags tags-am uninstall uninstall-am \
-	uninstall-dvi-am uninstall-html-am uninstall-imagesDATA \
-	uninstall-info-am uninstall-pdf-am uninstall-ps-am
+	uninstall-dvi-am uninstall-html-am uninstall-htmlDATA \
+	uninstall-info-am uninstall-infoimagesDATA uninstall-pdf-am \
+	uninstall-ps-am
 
 .PRECIOUS: Makefile
 

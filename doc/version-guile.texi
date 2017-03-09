@@ -1,4 +1,4 @@
 @set UPDATED 12 February 2017
 @set UPDATED-MONTH February 2017
-@set EDITION 3.5.9
-@set VERSION 3.5.9
+@set EDITION 3.5.10
+@set VERSION 3.5.10

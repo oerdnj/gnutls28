@@ -87,7 +87,7 @@ This is an alias for the @code{starttls-proto} option,
 @anchor{gnutls-cli-debug starttls-proto}
 @subheading starttls-proto option
 
-This is the ``the application protocol to be used to obtain the server's certificate (https, ftp, smtp, imap, ldap, xmpp)'' option.
+This is the ``the application protocol to be used to obtain the server's certificate (https, ftp, smtp, imap, ldap, xmpp, lmtp, pop3, nntp, sieve, postgres)'' option.
 This option takes a string argument.
 Specify the application layer protocol for STARTTLS. If the protocol is supported, gnutls-cli will proceed to the TLS negotiation.
 @anchor{gnutls-cli-debug exit status}
