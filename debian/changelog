@@ -1,3 +1,13 @@
+gnutls28 (3.5.10-1) experimental; urgency=medium
+
+  * New upstream version 3.5.10
+  * Remove hard dependency on --ddbg-migration to allow backports
+  * Disable tests in PPA buils
+  * Revert: "Build with IDNA 2008 support, b-d on libidn2-0-dev instead of
+    libidn11-dev."
+
+ -- Ondřej Surý <ondrej@debian.org>  Thu, 09 Mar 2017 15:02:51 +0100
+
 gnutls28 (3.5.9-1) experimental; urgency=medium
 
   * New upstream version.
