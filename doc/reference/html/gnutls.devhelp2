@@ -949,7 +949,7 @@
     <keyword type="function" name="gnutls_openpgp_privkey_init ()" link="gnutls-openpgp.html#gnutls-openpgp-privkey-init" deprecated=""/>
     <keyword type="function" name="gnutls_openpgp_privkey_sec_param ()" link="gnutls-openpgp.html#gnutls-openpgp-privkey-sec-param" deprecated="" since="2.12.0"/>
     <keyword type="function" name="gnutls_openpgp_privkey_set_preferred_key_id ()" link="gnutls-openpgp.html#gnutls-openpgp-privkey-set-preferred-key-id" deprecated=""/>
-    <keyword type="function" name="gnutls_openpgp_recv_key_func ()" link="gnutls-openpgp.html#gnutls-openpgp-recv-key-func" deprecated=""/>
+    <keyword type="function" name="gnutls_openpgp_recv_key_func ()" link="gnutls-openpgp.html#gnutls-openpgp-recv-key-func"/>
     <keyword type="function" name="gnutls_openpgp_set_recv_key_function ()" link="gnutls-openpgp.html#gnutls-openpgp-set-recv-key-function" deprecated=""/>
     <keyword type="macro" name="GNUTLS_OPENPGP_KEYID_SIZE" link="gnutls-openpgp.html#GNUTLS-OPENPGP-KEYID-SIZE:CAPS"/>
     <keyword type="macro" name="GNUTLS_OPENPGP_MASTER_KEYID_IDX" link="gnutls-openpgp.html#GNUTLS-OPENPGP-MASTER-KEYID-IDX:CAPS"/>

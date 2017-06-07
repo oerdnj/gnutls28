@@ -30,10 +30,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gnutls 3.5.10\n"
+"Project-Id-Version: gnutls 3.5.13\n"
 "Report-Msgid-Bugs-To: bug-gnutls@gnu.org\n"
-"POT-Creation-Date: 2017-03-06 07:03+0100\n"
-"PO-Revision-Date: 2017-03-06 07:03+0100\n"
+"POT-Creation-Date: 2017-06-07 07:23+0200\n"
+"PO-Revision-Date: 2017-06-07 07:23+0200\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "Language: en@boldquot\n"
@@ -412,7 +412,7 @@ msgstr "Unsupported extension in X.509 certificate."
 msgid "Key usage violation in certificate has been detected."
 msgstr "Key usage violation in certificate has been detected."
 
-#: lib/errors.c:182 lib/errors.c:423
+#: lib/errors.c:182 lib/errors.c:425
 msgid "Function was interrupted."
 msgstr "Function was interrupted."
 
@@ -838,39 +838,39 @@ msgstr "The obtained public key is invalid."
 msgid "The private key is invalid."
 msgstr "The private key is invalid."
 
-#: lib/errors.c:412 libdane/errors.c:42
-msgid "Success."
-msgstr "Success."
-
-#: lib/errors.c:413
-msgid "A TLS warning alert has been received."
-msgstr "A TLS warning alert has been received."
-
-#: lib/errors.c:415
-msgid "A heartbeat pong message was received."
-msgstr "A heartbeat pong message was received."
-
-#: lib/errors.c:417
-msgid "A heartbeat ping message was received."
-msgstr "A heartbeat ping message was received."
-
-#: lib/errors.c:419
-msgid "Resource temporarily unavailable, try again."
-msgstr "Resource temporarily unavailable, try again."
-
-#: lib/errors.c:421
-msgid "The transmitted packet is too large (EMSGSIZE)."
-msgstr "The transmitted packet is too large (EMSGSIZE)."
-
-#: lib/errors.c:424
-msgid "Rehandshake was requested by the peer."
-msgstr "Rehandshake was requested by the peer."
-
-#: lib/errors.c:426
+#: lib/errors.c:408
 msgid "One of the involved algorithms has insufficient security level."
 msgstr "One of the involved algorithms has insufficient security level."
 
-#: lib/errors.c:517 libdane/errors.c:100
+#: lib/errors.c:414 libdane/errors.c:42
+msgid "Success."
+msgstr "Success."
+
+#: lib/errors.c:415
+msgid "A TLS warning alert has been received."
+msgstr "A TLS warning alert has been received."
+
+#: lib/errors.c:417
+msgid "A heartbeat pong message was received."
+msgstr "A heartbeat pong message was received."
+
+#: lib/errors.c:419
+msgid "A heartbeat ping message was received."
+msgstr "A heartbeat ping message was received."
+
+#: lib/errors.c:421
+msgid "Resource temporarily unavailable, try again."
+msgstr "Resource temporarily unavailable, try again."
+
+#: lib/errors.c:423
+msgid "The transmitted packet is too large (EMSGSIZE)."
+msgstr "The transmitted packet is too large (EMSGSIZE)."
+
+#: lib/errors.c:426
+msgid "Rehandshake was requested by the peer."
+msgstr "Rehandshake was requested by the peer."
+
+#: lib/errors.c:518 libdane/errors.c:100
 msgid "(unknown error code)"
 msgstr "(unknown error code)"
 
@@ -1677,11 +1677,11 @@ msgstr "\t\tUnknown attribute %s:\n"
 msgid "PKCS #10 Certificate Request Information:\n"
 msgstr "PKCS #10 Certificate Request Information:\n"
 
-#: lib/x509/output.c:2534
+#: lib/x509/output.c:2535
 msgid "Public Key Usage:\n"
 msgstr "Public Key Usage:\n"
 
-#: lib/x509/output.c:2568
+#: lib/x509/output.c:2570
 msgid "Public Key Information:\n"
 msgstr "Public Key Information:\n"
 

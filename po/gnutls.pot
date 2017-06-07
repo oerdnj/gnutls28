@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: gnutls 3.5.10\n"
+"Project-Id-Version: gnutls 3.5.13\n"
 "Report-Msgid-Bugs-To: bug-gnutls@gnu.org\n"
-"POT-Creation-Date: 2017-03-06 07:03+0100\n"
+"POT-Creation-Date: 2017-06-07 07:23+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -384,7 +384,7 @@ msgstr ""
 msgid "Key usage violation in certificate has been detected."
 msgstr ""
 
-#: lib/errors.c:182 lib/errors.c:423
+#: lib/errors.c:182 lib/errors.c:425
 msgid "Function was interrupted."
 msgstr ""
 
@@ -807,39 +807,39 @@ msgstr ""
 msgid "The private key is invalid."
 msgstr ""
 
-#: lib/errors.c:412 libdane/errors.c:42
-msgid "Success."
-msgstr ""
-
-#: lib/errors.c:413
-msgid "A TLS warning alert has been received."
-msgstr ""
-
-#: lib/errors.c:415
-msgid "A heartbeat pong message was received."
-msgstr ""
-
-#: lib/errors.c:417
-msgid "A heartbeat ping message was received."
-msgstr ""
-
-#: lib/errors.c:419
-msgid "Resource temporarily unavailable, try again."
-msgstr ""
-
-#: lib/errors.c:421
-msgid "The transmitted packet is too large (EMSGSIZE)."
-msgstr ""
-
-#: lib/errors.c:424
-msgid "Rehandshake was requested by the peer."
-msgstr ""
-
-#: lib/errors.c:426
+#: lib/errors.c:408
 msgid "One of the involved algorithms has insufficient security level."
 msgstr ""
 
-#: lib/errors.c:517 libdane/errors.c:100
+#: lib/errors.c:414 libdane/errors.c:42
+msgid "Success."
+msgstr ""
+
+#: lib/errors.c:415
+msgid "A TLS warning alert has been received."
+msgstr ""
+
+#: lib/errors.c:417
+msgid "A heartbeat pong message was received."
+msgstr ""
+
+#: lib/errors.c:419
+msgid "A heartbeat ping message was received."
+msgstr ""
+
+#: lib/errors.c:421
+msgid "Resource temporarily unavailable, try again."
+msgstr ""
+
+#: lib/errors.c:423
+msgid "The transmitted packet is too large (EMSGSIZE)."
+msgstr ""
+
+#: lib/errors.c:426
+msgid "Rehandshake was requested by the peer."
+msgstr ""
+
+#: lib/errors.c:518 libdane/errors.c:100
 msgid "(unknown error code)"
 msgstr ""
 
@@ -1633,11 +1633,11 @@ msgstr ""
 msgid "PKCS #10 Certificate Request Information:\n"
 msgstr ""
 
-#: lib/x509/output.c:2534
+#: lib/x509/output.c:2535
 msgid "Public Key Usage:\n"
 msgstr ""
 
-#: lib/x509/output.c:2568
+#: lib/x509/output.c:2570
 msgid "Public Key Information:\n"
 msgstr ""
 

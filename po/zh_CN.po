@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnutls 3.2.3\n"
 "Report-Msgid-Bugs-To: bug-gnutls@gnu.org\n"
-"POT-Creation-Date: 2017-03-06 07:03+0100\n"
+"POT-Creation-Date: 2017-06-07 07:23+0200\n"
 "PO-Revision-Date: 2015-11-10 09:47-0500\n"
 "Last-Translator: Mingye Wang (Arthur2e5) <arthur200126@gmail.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
@@ -391,7 +391,7 @@ msgstr "X.509 证书中含有不支持的扩展。"
 msgid "Key usage violation in certificate has been detected."
 msgstr "在证书中检测到违规的密钥用法。"
 
-#: lib/errors.c:182 lib/errors.c:423
+#: lib/errors.c:182 lib/errors.c:425
 msgid "Function was interrupted."
 msgstr "函数被中断。"
 
@@ -823,39 +823,39 @@ msgstr "请求无效。"
 msgid "The private key is invalid."
 msgstr "请求无效。"
 
-#: lib/errors.c:412 libdane/errors.c:42
-msgid "Success."
-msgstr "成功。"
-
-#: lib/errors.c:413
-msgid "A TLS warning alert has been received."
-msgstr "收到一个 TLS 警告信息。"
-
-#: lib/errors.c:415
-msgid "A heartbeat pong message was received."
-msgstr "收到了非常大的 pong（响应）消息。"
-
-#: lib/errors.c:417
-msgid "A heartbeat ping message was received."
-msgstr "收到了非常大的 ping（请求）消息。"
-
-#: lib/errors.c:419
-msgid "Resource temporarily unavailable, try again."
-msgstr "资源临时不可用，请重试。"
-
-#: lib/errors.c:421
-msgid "The transmitted packet is too large (EMSGSIZE)."
-msgstr "传送的包太大（EMSGSIZE）。"
-
-#: lib/errors.c:424
-msgid "Rehandshake was requested by the peer."
-msgstr "按对方请求重新握手。"
-
-#: lib/errors.c:426
+#: lib/errors.c:408
 msgid "One of the involved algorithms has insufficient security level."
 msgstr ""
 
-#: lib/errors.c:517 libdane/errors.c:100
+#: lib/errors.c:414 libdane/errors.c:42
+msgid "Success."
+msgstr "成功。"
+
+#: lib/errors.c:415
+msgid "A TLS warning alert has been received."
+msgstr "收到一个 TLS 警告信息。"
+
+#: lib/errors.c:417
+msgid "A heartbeat pong message was received."
+msgstr "收到了非常大的 pong（响应）消息。"
+
+#: lib/errors.c:419
+msgid "A heartbeat ping message was received."
+msgstr "收到了非常大的 ping（请求）消息。"
+
+#: lib/errors.c:421
+msgid "Resource temporarily unavailable, try again."
+msgstr "资源临时不可用，请重试。"
+
+#: lib/errors.c:423
+msgid "The transmitted packet is too large (EMSGSIZE)."
+msgstr "传送的包太大（EMSGSIZE）。"
+
+#: lib/errors.c:426
+msgid "Rehandshake was requested by the peer."
+msgstr "按对方请求重新握手。"
+
+#: lib/errors.c:518 libdane/errors.c:100
 msgid "(unknown error code)"
 msgstr "（未知错误代码）"
 
@@ -1669,11 +1669,11 @@ msgstr "\t\t未知属性 %s：\n"
 msgid "PKCS #10 Certificate Request Information:\n"
 msgstr "PKCS #10 证书请求信息：\n"
 
-#: lib/x509/output.c:2534
+#: lib/x509/output.c:2535
 msgid "Public Key Usage:\n"
 msgstr "公钥用法：\n"
 
-#: lib/x509/output.c:2568
+#: lib/x509/output.c:2570
 msgid "Public Key Information:\n"
 msgstr "公钥信息：\n"
 

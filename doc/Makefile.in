@@ -470,6 +470,7 @@ CODE_COVERAGE_CPPFLAGS = @CODE_COVERAGE_CPPFLAGS@
 CODE_COVERAGE_CXXFLAGS = @CODE_COVERAGE_CXXFLAGS@
 CODE_COVERAGE_ENABLED = @CODE_COVERAGE_ENABLED@
 CODE_COVERAGE_LDFLAGS = @CODE_COVERAGE_LDFLAGS@
+CODE_COVERAGE_LIBS = @CODE_COVERAGE_LIBS@
 CONFIG_INCLUDE = @CONFIG_INCLUDE@
 CPP = @CPP@
 CPPFLAGS = @CPPFLAGS@
@@ -1081,6 +1082,7 @@ LIBUNISTRING_UNINORM_H = @LIBUNISTRING_UNINORM_H@
 LIBUNISTRING_UNISTR_H = @LIBUNISTRING_UNISTR_H@
 LIBUNISTRING_UNITYPES_H = @LIBUNISTRING_UNITYPES_H@
 LIBZ = @LIBZ@
+LIBZ_PC = @LIBZ_PC@
 LIBZ_PREFIX = @LIBZ_PREFIX@
 LIB_CLOCK_GETTIME = @LIB_CLOCK_GETTIME@
 LIB_SELECT = @LIB_SELECT@
@@ -1570,7 +1572,7 @@ ENUMS = enums/dane_cert_type_t enums/dane_cert_usage_t \
 	enums/gnutls_close_request_t enums/gnutls_compression_method_t \
 	enums/gnutls_credentials_type_t \
 	enums/gnutls_digest_algorithm_t enums/gnutls_ecc_curve_t \
-	enums/gnutls_ext_parse_type_t \
+	enums/gnutls_ext_flags_t enums/gnutls_ext_parse_type_t \
 	enums/gnutls_handshake_description_t enums/gnutls_init_flags_t \
 	enums/gnutls_keygen_types_t enums/gnutls_keyid_flags_t \
 	enums/gnutls_kx_algorithm_t enums/gnutls_mac_algorithm_t \
@@ -4388,7 +4390,8 @@ invoke-p11tool.texi: $(top_srcdir)/src/p11tool-args.def invoke-psktool.texi
 	fi; \
 	$(srcdir)/scripts/cleanup-autogen.pl < $@ > $@.tmp && \
 	rm -f $@ && \
-	$(SED) -e 's/@subheading/@subsection/g' \
+	$(SED) \
+	    -e 's/@subsection/@subsubheading/g' \
 	    -e 's/@section/@subsection/g' $@.tmp > $@ && \
 	rm -f $@.tmp
 
@@ -4399,7 +4402,8 @@ invoke-tpmtool.texi: $(top_srcdir)/src/tpmtool-args.def invoke-p11tool.texi
 	fi; \
 	$(srcdir)/scripts/cleanup-autogen.pl < $@ > $@.tmp && \
 	rm -f $@ && \
-	$(SED) -e 's/@subheading/@subsection/g' \
+	$(SED) \
+	    -e 's/@subsection/@subsubheading/g' \
 	    -e 's/@section/@subsection/g' $@.tmp > $@ && \
 	rm -f $@.tmp
 

@@ -1403,7 +1403,12 @@ negative error value.</p>
 <a name="gnutls-pkcs11-privkey-init"></a><h3>gnutls_pkcs11_privkey_init ()</h3>
 <pre class="programlisting"><span class="returnvalue">int</span>
 gnutls_pkcs11_privkey_init (<em class="parameter"><code><a class="link" href="gnutls-gnutls.html#gnutls-pkcs11-privkey-t" title="gnutls_pkcs11_privkey_t"><span class="type">gnutls_pkcs11_privkey_t</span></a> *key</code></em>);</pre>
-<p>This function will initialize an private key structure.</p>
+<p>This function will initialize an private key structure. This
+structure can be used for accessing an underlying PKCS<span class="type">11</span> object.</p>
+<p>In versions of GnuTLS later than 3.5.11 the object is protected
+using locks and a single <a class="link" href="gnutls-gnutls.html#gnutls-pkcs11-privkey-t" title="gnutls_pkcs11_privkey_t"><code class="literal">gnutls_pkcs11_privkey_t</code></a> can be re-used
+by many threads. However, for performance it is recommended to utilize
+one object per key per thread.</p>
 <div class="refsect3">
 <a name="gnutls-pkcs11-privkey-init.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnutls-3.2.1\n"
 "Report-Msgid-Bugs-To: bug-gnutls@gnu.org\n"
-"POT-Creation-Date: 2017-03-06 07:03+0100\n"
+"POT-Creation-Date: 2017-06-07 07:23+0200\n"
 "PO-Revision-Date: 2013-06-07 20:50+0200\n"
 "Last-Translator: Jakub Bogusz <qboosh@pld-linux.org>\n"
 "Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
@@ -390,7 +390,7 @@ msgstr "Nieobsługiwane rozszerzenie w certyfikacie X.509."
 msgid "Key usage violation in certificate has been detected."
 msgstr "Wykryto naruszenie użycia klucza w certyfikacie."
 
-#: lib/errors.c:182 lib/errors.c:423
+#: lib/errors.c:182 lib/errors.c:425
 msgid "Function was interrupted."
 msgstr "Funkcja została przerwana."
 
@@ -824,39 +824,39 @@ msgstr "Żądanie jest nieprawidłowe."
 msgid "The private key is invalid."
 msgstr "Żądanie jest nieprawidłowe."
 
-#: lib/errors.c:412 libdane/errors.c:42
-msgid "Success."
-msgstr "Sukces."
-
-#: lib/errors.c:413
-msgid "A TLS warning alert has been received."
-msgstr "Odebrano ostrzegawczy alarm TLS."
-
-#: lib/errors.c:415
-msgid "A heartbeat pong message was received."
-msgstr "Odebrano komunikat heartbeat pong."
-
-#: lib/errors.c:417
-msgid "A heartbeat ping message was received."
-msgstr "Odebrano pakiet heartbeat ping."
-
-#: lib/errors.c:419
-msgid "Resource temporarily unavailable, try again."
-msgstr "Zasoby chwilowo niedostępne, proszę spróbować ponownie."
-
-#: lib/errors.c:421
-msgid "The transmitted packet is too large (EMSGSIZE)."
-msgstr "Przesyłany pakiet jest zbyt duży (EMSGSIZE)."
-
-#: lib/errors.c:424
-msgid "Rehandshake was requested by the peer."
-msgstr "Druga strona zażądała ponownego nawiązania sesji."
-
-#: lib/errors.c:426
+#: lib/errors.c:408
 msgid "One of the involved algorithms has insufficient security level."
 msgstr ""
 
-#: lib/errors.c:517 libdane/errors.c:100
+#: lib/errors.c:414 libdane/errors.c:42
+msgid "Success."
+msgstr "Sukces."
+
+#: lib/errors.c:415
+msgid "A TLS warning alert has been received."
+msgstr "Odebrano ostrzegawczy alarm TLS."
+
+#: lib/errors.c:417
+msgid "A heartbeat pong message was received."
+msgstr "Odebrano komunikat heartbeat pong."
+
+#: lib/errors.c:419
+msgid "A heartbeat ping message was received."
+msgstr "Odebrano pakiet heartbeat ping."
+
+#: lib/errors.c:421
+msgid "Resource temporarily unavailable, try again."
+msgstr "Zasoby chwilowo niedostępne, proszę spróbować ponownie."
+
+#: lib/errors.c:423
+msgid "The transmitted packet is too large (EMSGSIZE)."
+msgstr "Przesyłany pakiet jest zbyt duży (EMSGSIZE)."
+
+#: lib/errors.c:426
+msgid "Rehandshake was requested by the peer."
+msgstr "Druga strona zażądała ponownego nawiązania sesji."
+
+#: lib/errors.c:518 libdane/errors.c:100
 msgid "(unknown error code)"
 msgstr "(nieznany kod błędu)"
 
@@ -1669,11 +1669,11 @@ msgstr "\t\tNieznane rozszerzenie %s:\n"
 msgid "PKCS #10 Certificate Request Information:\n"
 msgstr "Informacja o żądaniu certyfikatu PKCS #10:\n"
 
-#: lib/x509/output.c:2534
+#: lib/x509/output.c:2535
 msgid "Public Key Usage:\n"
 msgstr "Użycie klucza publicznego:\n"
 
-#: lib/x509/output.c:2568
+#: lib/x509/output.c:2570
 msgid "Public Key Information:\n"
 msgstr "Informacje o kluczu publicznym:\n"
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnutls 3.2.3\n"
 "Report-Msgid-Bugs-To: bug-gnutls@gnu.org\n"
-"POT-Creation-Date: 2017-03-06 07:03+0100\n"
+"POT-Creation-Date: 2017-06-07 07:23+0200\n"
 "PO-Revision-Date: 2015-06-29 20:58+0800\n"
 "Last-Translator: Sharuzzaman Ahmat Raslan <sharuzzaman@gmail.com>\n"
 "Language-Team: Malay <translation-team-ms@lists.sourceforge.net>\n"
@@ -395,7 +395,7 @@ msgstr "Sambungan kritikal tidak disokong dalam sijil X.509."
 msgid "Key usage violation in certificate has been detected."
 msgstr "Pelanggaran penggunaan kekunci dalam sijik telah dikesan."
 
-#: lib/errors.c:182 lib/errors.c:423
+#: lib/errors.c:182 lib/errors.c:425
 msgid "Function was interrupted."
 msgstr "Fungsi telah dibatalkan."
 
@@ -852,41 +852,41 @@ msgstr "Permintaan tidak sah."
 msgid "The private key is invalid."
 msgstr "Permintaan tidak sah."
 
-#: lib/errors.c:412 libdane/errors.c:42
+#: lib/errors.c:408
+msgid "One of the involved algorithms has insufficient security level."
+msgstr ""
+
+#: lib/errors.c:414 libdane/errors.c:42
 msgid "Success."
 msgstr "Berjaya."
 
-#: lib/errors.c:413
+#: lib/errors.c:415
 msgid "A TLS warning alert has been received."
 msgstr "Arahan amaran telah diterima."
 
-#: lib/errors.c:415
+#: lib/errors.c:417
 #, fuzzy
 msgid "A heartbeat pong message was received."
 msgstr "Paket rekod TLS besar telah diterima."
 
-#: lib/errors.c:417
+#: lib/errors.c:419
 #, fuzzy
 msgid "A heartbeat ping message was received."
 msgstr "Paket rekod TLS besar telah diterima."
 
-#: lib/errors.c:419
+#: lib/errors.c:421
 msgid "Resource temporarily unavailable, try again."
 msgstr ""
 
-#: lib/errors.c:421
+#: lib/errors.c:423
 msgid "The transmitted packet is too large (EMSGSIZE)."
 msgstr ""
 
-#: lib/errors.c:424
+#: lib/errors.c:426
 msgid "Rehandshake was requested by the peer."
 msgstr "Rehandshake diminta oleh peer."
 
-#: lib/errors.c:426
-msgid "One of the involved algorithms has insufficient security level."
-msgstr ""
-
-#: lib/errors.c:517 libdane/errors.c:100
+#: lib/errors.c:518 libdane/errors.c:100
 msgid "(unknown error code)"
 msgstr "(kod ralat tidak diketahui)"
 
@@ -1715,11 +1715,11 @@ msgstr "\t\tSifat %s yang tidak diketahui:\n"
 msgid "PKCS #10 Certificate Request Information:\n"
 msgstr "Maklumat Permintaan Sijil PKCS #10:\n"
 
-#: lib/x509/output.c:2534
+#: lib/x509/output.c:2535
 msgid "Public Key Usage:\n"
 msgstr "Penggunaan Kekunci Awam:\n"
 
-#: lib/x509/output.c:2568
+#: lib/x509/output.c:2570
 msgid "Public Key Information:\n"
 msgstr "Maklumat Kekunci Awam:\n"
 

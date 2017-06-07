@@ -8,7 +8,7 @@
 @var{src}: Is the source parameters
 
 This function will copy the DH parameters structure from source
-to destination.
+to destination. The destination should be already initialized.
 
 @strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (0) is returned,
 otherwise a negative error code is returned.

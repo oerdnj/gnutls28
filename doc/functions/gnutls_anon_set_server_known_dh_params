@@ -5,7 +5,7 @@
 @deftypefun {int} {gnutls_anon_set_server_known_dh_params} (gnutls_anon_server_credentials_t @var{res}, gnutls_sec_param_t @var{sec_param})
 @var{res}: is a gnutls_anon_server_credentials_t type
 
-@var{sec_param}: -- undescribed --
+@var{sec_param}: is an option of the @code{gnutls_sec_param_t}  enumeration
 
 This function will set the Diffie-Hellman parameters for an
 anonymous server to use.  These parameters will be used in

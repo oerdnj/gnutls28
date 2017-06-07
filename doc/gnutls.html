@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- This manual is last updated 8 January 2017 for version
-3.5.10 of GnuTLS.
+<!-- This manual is last updated 28 March 2017 for version
+3.5.13 of GnuTLS.
 
 Copyright (C) 2001-2017 Free Software Foundation, Inc.\\
 Copyright (C) 2001-2017 Nikos Mavrogiannopoulos
@@ -14,10 +14,10 @@ copy of the license is included in the section entitled "GNU Free
 Documentation License". -->
 <!-- Created by GNU Texinfo 6.3, http://www.gnu.org/software/texinfo/ -->
 <head>
-<title>GnuTLS 3.5.10</title>
+<title>GnuTLS 3.5.13</title>
 
-<meta name="description" content="GnuTLS 3.5.10">
-<meta name="keywords" content="GnuTLS 3.5.10">
+<meta name="description" content="GnuTLS 3.5.13">
+<meta name="keywords" content="GnuTLS 3.5.13">
 <meta name="resource-type" content="document">
 <meta name="distribution" content="global">
 <meta name="Generator" content="makeinfo">
@@ -153,7 +153,7 @@ dl {
 </head>
 
 <body lang="en">
-<h1 class="settitle" align="center">GnuTLS 3.5.10</h1>
+<h1 class="settitle" align="center">GnuTLS 3.5.13</h1>
 
 
 
@@ -283,7 +283,7 @@ dl {
       <li><a name="toc-Two-peers-and-a-trusted-third-party" href="#Two-peers-and-a-trusted-third-party">4.4.3 Two peers and a trusted third party</a></li>
     </ul></li>
   </ul></li>
-  <li><a name="toc-Abstract-keys-types-and-Hardware-security-modules" href="#Hardware-security-modules-and-abstract-key-types">5 Abstract keys types and Hardware security modules</a>
+  <li><a name="toc-Abstract-key-types-and-Hardware-security-modules" href="#Hardware-security-modules-and-abstract-key-types">5 Abstract key types and Hardware security modules</a>
   <ul class="no-bullet">
     <li><a name="toc-Abstract-key-types-1" href="#Abstract-key-types">5.1 Abstract key types</a>
     <ul class="no-bullet">
@@ -306,15 +306,6 @@ dl {
       <li><a name="toc-Using-a-PKCS-_002311-token-with-TLS" href="#Using-a-PKCS11-token-with-TLS">5.3.6 Using a <acronym>PKCS</acronym> #11 token with TLS</a></li>
       <li><a name="toc-Verifying-certificates-over-PKCS-_002311" href="#Verifying-certificates-over-PKCS11">5.3.7 Verifying certificates over <acronym>PKCS</acronym> #11</a></li>
       <li><a name="toc-Invoking-p11tool" href="#p11tool-Invocation">5.3.8 Invoking p11tool</a></li>
-      <li><a name="toc-p11tool-help_002fusage-_0028_002d_002dhelp_0029" href="#p11tool-help_002fusage-_0028_002d_002dhelp_0029">5.3.9 p11tool help/usage (<samp>--help</samp>)</a></li>
-      <li><a name="toc-token_002drelated_002doptions-options" href="#token_002drelated_002doptions-options">5.3.10 token-related-options options</a></li>
-      <li><a name="toc-object_002dlist_002drelated_002doptions-options" href="#object_002dlist_002drelated_002doptions-options">5.3.11 object-list-related-options options</a></li>
-      <li><a name="toc-keygen_002drelated_002doptions-options" href="#keygen_002drelated_002doptions-options">5.3.12 keygen-related-options options</a></li>
-      <li><a name="toc-write_002dobject_002drelated_002doptions-options" href="#write_002dobject_002drelated_002doptions-options">5.3.13 write-object-related-options options</a></li>
-      <li><a name="toc-other_002doptions-options" href="#other_002doptions-options">5.3.14 other-options options</a></li>
-      <li><a name="toc-p11tool-exit-status-1" href="#p11tool-exit-status-1">5.3.15 p11tool exit status</a></li>
-      <li><a name="toc-p11tool-See-Also-1" href="#p11tool-See-Also-1">5.3.16 p11tool See Also</a></li>
-      <li><a name="toc-p11tool-Examples-1" href="#p11tool-Examples-1">5.3.17 p11tool Examples</a></li>
     </ul></li>
     <li><a name="toc-Trusted-Platform-Module-_0028TPM_0029" href="#Trusted-Platform-Module">5.4 Trusted Platform Module (TPM)</a>
     <ul class="no-bullet">
@@ -322,18 +313,6 @@ dl {
       <li><a name="toc-Key-generation-1" href="#Key-generation">5.4.2 Key generation</a></li>
       <li><a name="toc-Using-keys-1" href="#Using-keys">5.4.3 Using keys</a></li>
       <li><a name="toc-Invoking-tpmtool" href="#tpmtool-Invocation">5.4.4 Invoking tpmtool</a></li>
-      <li><a name="toc-tpmtool-help_002fusage-_0028_002d_002dhelp_0029" href="#tpmtool-help_002fusage-_0028_002d_002dhelp_0029">5.4.5 tpmtool help/usage (<samp>--help</samp>)</a></li>
-      <li><a name="toc-debug-option-_0028_002dd_0029" href="#debug-option-_0028_002dd_0029">5.4.6 debug option (-d)</a></li>
-      <li><a name="toc-generate_002drsa-option" href="#generate_002drsa-option">5.4.7 generate-rsa option</a></li>
-      <li><a name="toc-user-option" href="#user-option">5.4.8 user option</a></li>
-      <li><a name="toc-system-option" href="#system-option">5.4.9 system option</a></li>
-      <li><a name="toc-test_002dsign-option" href="#test_002dsign-option">5.4.10 test-sign option</a></li>
-      <li><a name="toc-sec_002dparam-option" href="#sec_002dparam-option">5.4.11 sec-param option</a></li>
-      <li><a name="toc-inder-option" href="#inder-option">5.4.12 inder option</a></li>
-      <li><a name="toc-outder-option" href="#outder-option">5.4.13 outder option</a></li>
-      <li><a name="toc-tpmtool-exit-status-1" href="#tpmtool-exit-status-1">5.4.14 tpmtool exit status</a></li>
-      <li><a name="toc-tpmtool-See-Also-1" href="#tpmtool-See-Also-1">5.4.15 tpmtool See Also</a></li>
-      <li><a name="toc-tpmtool-Examples-1" href="#tpmtool-Examples-1">5.4.16 tpmtool Examples</a></li>
     </ul></li>
   </ul></li>
   <li><a name="toc-How-to-use-GnuTLS-in-applications-1" href="#How-to-use-GnuTLS-in-applications">6 How to use <acronym>GnuTLS</acronym> in applications</a>
@@ -507,8 +486,8 @@ Next: <a href="#Preface" accesskey="n" rel="next">Preface</a>, Up: <a href="dir.
 <a name="GnuTLS"></a>
 <h1 class="top">GnuTLS</h1>
 
-<p>This manual is last updated 8 January 2017 for version
-3.5.10 of GnuTLS.
+<p>This manual is last updated 28 March 2017 for version
+3.5.13 of GnuTLS.
 </p>
 <p>Copyright &copy; 2001-2017 Free Software Foundation, Inc.\\
 Copyright &copy; 2001-2017 Nikos Mavrogiannopoulos
@@ -4336,7 +4315,7 @@ variables GNUTLS_PIN and GNUTLS_SO_PIN.
 
 </pre></div>
 
-<a name="certtool-debug"></a><a name="debug-option-_0028_002dd_0029-1"></a>
+<a name="certtool-debug"></a><a name="debug-option-_0028_002dd_0029"></a>
 <h4 class="subsubheading">debug option (-d)</h4>
 
 <p>This is the &ldquo;enable debugging&rdquo; option.
@@ -4538,12 +4517,12 @@ This option generates a PKCS #7 certificate container structure. To add certific
 <h4 class="subsubheading">p7-sign option</h4>
 
 <p>This is the &ldquo;signs using a pkcs #7 structure&rdquo; option.
-This option generates a PKCS #7 structure containing a signature for the provided data from infile. The data are stored within the structure. The signer certificate has to be specified using &ndash;load-certificate and &ndash;load-privkey.
+This option generates a PKCS #7 structure containing a signature for the provided data from infile. The data are stored within the structure. The signer certificate has to be specified using &ndash;load-certificate and &ndash;load-privkey. The input to &ndash;load-certificate can be a list of certificates. In case of a list, the first certificate is used for signing and the other certificates are included in the structure.
 <a name="certtool-p7_002ddetached_002dsign"></a></p><a name="p7_002ddetached_002dsign-option"></a>
 <h4 class="subsubheading">p7-detached-sign option</h4>
 
 <p>This is the &ldquo;signs using a detached pkcs #7 structure&rdquo; option.
-This option generates a PKCS #7 structure containing a signature for the provided data from infile. The signer certificate has to be specified using &ndash;load-certificate and &ndash;load-privkey.
+This option generates a PKCS #7 structure containing a signature for the provided data from infile. The signer certificate has to be specified using &ndash;load-certificate and &ndash;load-privkey. The input to &ndash;load-certificate can be a list of certificates. In case of a list, the first certificate is used for signing and the other certificates are included in the structure.
 <a name="certtool-p7_002dinclude_002dcert"></a></p><a name="p7_002dinclude_002dcert-option"></a>
 <h4 class="subsubheading">p7-include-cert option</h4>
 
@@ -4625,7 +4604,7 @@ see <a href="#certtool-ecc">the ecc option documentation</a>.
 <p>This is the &ldquo;hash algorithm to use for signing&rdquo; option.
 This option takes a string argument.
 Available hash functions are SHA1, RMD160, SHA256, SHA384, SHA512, SHA3-224, SHA3-256, SHA3-384, SHA3-512.
-<a name="certtool-inder"></a></p><a name="inder-option-1"></a>
+<a name="certtool-inder"></a></p><a name="inder-option"></a>
 <h4 class="subsubheading">inder option</h4>
 
 <p>This is the &ldquo;use der format for input certificates, private keys, and dh parameters &rdquo; option.
@@ -4644,7 +4623,7 @@ certificates), when reading in DER format a single data structure is read.
 <p>This is an alias for the <code>inder</code> option,
 see <a href="#certtool-inder">the inder option documentation</a>.
 </p>
-<a name="certtool-outder"></a><a name="outder-option-1"></a>
+<a name="certtool-outder"></a><a name="outder-option"></a>
 <h4 class="subsubheading">outder option</h4>
 
 <p>This is the &ldquo;use der format for output certificates, private keys, and dh parameters&rdquo; option.
@@ -4667,7 +4646,7 @@ see <a href="#certtool-outder">the outder option documentation</a>.
 <p>This is the &ldquo;specify the curve used for ec key generation&rdquo; option.
 This option takes a string argument.
 Supported values are secp192r1, secp224r1, secp256r1, secp384r1 and secp521r1.
-<a name="certtool-sec_002dparam"></a></p><a name="sec_002dparam-option-1"></a>
+<a name="certtool-sec_002dparam"></a></p><a name="sec_002dparam-option"></a>
 <h4 class="subsubheading">sec-param option</h4>
 
 <p>This is the &ldquo;specify the security level [low, legacy, medium, high, ultra]&rdquo; option.
@@ -5228,7 +5207,7 @@ requests/responses, generate requests and verify responses.
 
 </pre></div>
 
-<a name="ocsptool-debug"></a><a name="debug-option-_0028_002dd_0029-2"></a>
+<a name="ocsptool-debug"></a><a name="debug-option-_0028_002dd_0029-1"></a>
 <h4 class="subsubheading">debug option (-d)</h4>
 
 <p>This is the &ldquo;enable debugging&rdquo; option.
@@ -5457,7 +5436,7 @@ Usage:  danetool [ -&lt;flag&gt; [&lt;val&gt;] | --&lt;name&gt;[{=| }&lt;val&gt;
        --port=str             The port or service to connect to, for DANE data
        --app-proto=str        an alias for the 'starttls-proto' option
        --starttls-proto=str   The application protocol to be used to obtain the server's certificate
-(https, ftp, smtp, imap, ldap, xmpp)
+(https, ftp, smtp, imap, ldap, xmpp, lmtp, pop3, nntp, sieve, postgres)
        --ca                   Whether the provided certificate or public key is a Certificate
 Authority
        --x509                 Use the hash of the X.509 certificate, rather than the public key
@@ -5486,7 +5465,7 @@ Tool to generate and check DNS resource records for the DANE protocol.
 
 </pre></div>
 
-<a name="danetool-debug"></a><a name="debug-option-_0028_002dd_0029-3"></a>
+<a name="danetool-debug"></a><a name="debug-option-_0028_002dd_0029-2"></a>
 <h4 class="subsubheading">debug option (-d)</h4>
 
 <p>This is the &ldquo;enable debugging&rdquo; option.
@@ -5613,7 +5592,7 @@ This is disabled by default due to many servers not allowing DNSSEC.
 
 <p>This is the &ldquo;do not verify any dnssec signature&rdquo; option.
 Ignores any DNSSEC signature verification results.
-<a name="danetool-inder"></a></p><a name="inder-option-2"></a>
+<a name="danetool-inder"></a></p><a name="inder-option-1"></a>
 <h4 class="subsubheading">inder option</h4>
 
 <p>This is the &ldquo;use der format for input certificates and private keys&rdquo; option.
@@ -5903,7 +5882,7 @@ configuration file to hold the group parameters (called tpasswd.conf).
 
 </pre></div>
 
-<a name="srptool-debug"></a><a name="debug-option-_0028_002dd_0029-4"></a>
+<a name="srptool-debug"></a><a name="debug-option-_0028_002dd_0029-3"></a>
 <h4 class="subsubheading">debug option (-d)</h4>
 
 <p>This is the &ldquo;enable debugging&rdquo; option.
@@ -6087,7 +6066,7 @@ stored in hexadecimal format in a key file.
 
 </pre></div>
 
-<a name="psktool-debug"></a><a name="debug-option-_0028_002dd_0029-5"></a>
+<a name="psktool-debug"></a><a name="debug-option-_0028_002dd_0029-4"></a>
 <h4 class="subsubheading">debug option (-d)</h4>
 
 <p>This is the &ldquo;enable debugging&rdquo; option.
@@ -6266,8 +6245,8 @@ the same (see <a href="#Verifying-a-certificate-using-trust-on-first-use-authent
 <p>
 Next: <a href="#How-to-use-GnuTLS-in-applications" accesskey="n" rel="next">How to use GnuTLS in applications</a>, Previous: <a href="#Authentication-methods" accesskey="p" rel="prev">Authentication methods</a>, Up: <a href="#Top" accesskey="u" rel="up">Top</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Function-and-Data-Index" title="Index" rel="index">Index</a>]</p>
 </div>
-<a name="Abstract-keys-types-and-Hardware-security-modules"></a>
-<h2 class="chapter">5 Abstract keys types and Hardware security modules</h2>
+<a name="Abstract-key-types-and-Hardware-security-modules"></a>
+<h2 class="chapter">5 Abstract key types and Hardware security modules</h2>
 
 <p>In several cases storing the long term cryptographic keys in a hard disk or
 even in memory poses a significant risk. Once the system they are stored
@@ -7489,7 +7468,7 @@ This software is released under the GNU General Public License, version 3 or lat
 </p>
 
 <a name="p11tool-usage"></a><a name="p11tool-help_002fusage-_0028_002d_002dhelp_0029"></a>
-<h4 class="subsection">5.3.9 p11tool help/usage (<samp>--help</samp>)</h4>
+<h4 class="subheading">p11tool help/usage (<samp>--help</samp>)</h4>
 <a name="index-p11tool-help"></a>
 
 <p>This is the automatically generated usage text for p11tool.
@@ -7649,7 +7628,7 @@ environment variables GNUTLS_PIN and GNUTLS_SO_PIN.
 </pre></div>
 
 <a name="p11tool-token_002drelated_002doptions"></a><a name="token_002drelated_002doptions-options"></a>
-<h4 class="subsection">5.3.10 token-related-options options</h4>
+<h4 class="subheading">token-related-options options</h4>
 <p>Tokens.
 </p><a name="list_002dtoken_002durls-option_002e"></a>
 <h4 class="subsubheading">list-token-urls option.</h4>
@@ -7669,7 +7648,7 @@ Alternatively the GNUTLS_PIN environment variable may be used.
 This option takes a string argument.
 Alternatively the GNUTLS_SO_PIN environment variable may be used.
 <a name="p11tool-object_002dlist_002drelated_002doptions"></a></p><a name="object_002dlist_002drelated_002doptions-options"></a>
-<h4 class="subsection">5.3.11 object-list-related-options options</h4>
+<h4 class="subheading">object-list-related-options options</h4>
 <p>Object listing.
 </p><a name="list_002dall_002dprivkeys-option_002e"></a>
 <h4 class="subsubheading">list-all-privkeys option.</h4>
@@ -7739,7 +7718,7 @@ see <a href="#p11tool-mark_002dtrusted">the mark-trusted option documentation</a
 see <a href="#p11tool-mark_002ddistrusted">the mark-distrusted option documentation</a>.
 </p>
 <a name="p11tool-keygen_002drelated_002doptions"></a><a name="keygen_002drelated_002doptions-options"></a>
-<h4 class="subsection">5.3.12 keygen-related-options options</h4>
+<h4 class="subheading">keygen-related-options options</h4>
 <p>Key generation.
 </p><a name="generate_002drsa-option_002e"></a>
 <h4 class="subsubheading">generate-rsa option.</h4>
@@ -7780,7 +7759,7 @@ Supported values are secp192r1, secp224r1, secp256r1, secp384r1 and secp521r1.
 This option takes a string argument <samp>Security parameter</samp>.
 This is alternative to the bits option. Available options are [low, legacy, medium, high, ultra].
 <a name="p11tool-write_002dobject_002drelated_002doptions"></a></p><a name="write_002dobject_002drelated_002doptions-options"></a>
-<h4 class="subsection">5.3.13 write-object-related-options options</h4>
+<h4 class="subheading">write-object-related-options options</h4>
 <p>Writing objects.
 </p><a name="set_002did-option_002e"></a>
 <h4 class="subsubheading">set-id option.</h4>
@@ -7921,7 +7900,7 @@ see <a href="#p11tool-mark_002dprivate">the mark-private option documentation</a
 This option takes a string argument.
 This secret key will be written to the module if &ndash;write is specified.
 <a name="p11tool-other_002doptions"></a></p><a name="other_002doptions-options"></a>
-<h4 class="subsection">5.3.14 other-options options</h4>
+<h4 class="subheading">other-options options</h4>
 <p>Other options.
 </p><a name="debug-option-_0028_002dd_0029_002e"></a>
 <h4 class="subsubheading">debug option (-d).</h4>
@@ -8005,7 +7984,7 @@ This will override the default options in /etc/gnutls/pkcs11.conf
 <p>This is the &ldquo;disable all interaction with the tool&rdquo; option.
 In batch mode there will be no prompts, all parameters need to be specified on command line.
 <a name="p11tool-exit-status"></a></p><a name="p11tool-exit-status-1"></a>
-<h4 class="subsection">5.3.15 p11tool exit status</h4>
+<h4 class="subheading">p11tool exit status</h4>
 
 <p>One of the following exit values will be returned:
 </p><dl compact="compact">
@@ -8017,10 +7996,10 @@ In batch mode there will be no prompts, all parameters need to be specified on c
 </p></dd>
 </dl>
 <a name="p11tool-See-Also"></a><a name="p11tool-See-Also-1"></a>
-<h4 class="subsection">5.3.16 p11tool See Also</h4>
+<h4 class="subheading">p11tool See Also</h4>
 <p>certtool (1)
 <a name="p11tool-Examples"></a></p><a name="p11tool-Examples-1"></a>
-<h4 class="subsection">5.3.17 p11tool Examples</h4>
+<h4 class="subheading">p11tool Examples</h4>
 <p>To view all tokens in your system use:
 </p><div class="example">
 <pre class="example">$ p11tool --list-tokens
@@ -8348,7 +8327,7 @@ This software is released under the GNU General Public License, version 3 or lat
 </p>
 
 <a name="tpmtool-usage"></a><a name="tpmtool-help_002fusage-_0028_002d_002dhelp_0029"></a>
-<h4 class="subsection">5.4.5 tpmtool help/usage (<samp>--help</samp>)</h4>
+<h4 class="subheading">tpmtool help/usage (<samp>--help</samp>)</h4>
 <a name="index-tpmtool-help"></a>
 
 <p>This is the automatically generated usage text for tpmtool.
@@ -8407,21 +8386,21 @@ Program that allows handling cryptographic data from the TPM chip.
 
 </pre></div>
 
-<a name="tpmtool-debug"></a><a name="debug-option-_0028_002dd_0029"></a>
-<h4 class="subsection">5.4.6 debug option (-d)</h4>
+<a name="tpmtool-debug"></a><a name="debug-option-_0028_002dd_0029-5"></a>
+<h4 class="subheading">debug option (-d)</h4>
 
 <p>This is the &ldquo;enable debugging&rdquo; option.
 This option takes a number argument.
 Specifies the debug level.
 <a name="tpmtool-generate_002drsa"></a></p><a name="generate_002drsa-option"></a>
-<h4 class="subsection">5.4.7 generate-rsa option</h4>
+<h4 class="subheading">generate-rsa option</h4>
 
 <p>This is the &ldquo;generate an rsa private-public key pair&rdquo; option.
 Generates an RSA private-public key pair in the TPM chip. 
 The key may be stored in file system and protected by a PIN, or stored (registered)
 in the TPM chip flash.
 <a name="tpmtool-user"></a></p><a name="user-option"></a>
-<h4 class="subsection">5.4.8 user option</h4>
+<h4 class="subheading">user option</h4>
 
 <p>This is the &ldquo;any registered key will be a user key&rdquo; option.
 </p>
@@ -8435,7 +8414,7 @@ system.
 
 <p>The generated key will be stored in a user specific persistent storage.
 <a name="tpmtool-system"></a></p><a name="system-option"></a>
-<h4 class="subsection">5.4.9 system option</h4>
+<h4 class="subheading">system option</h4>
 
 <p>This is the &ldquo;any registered key will be a system key&rdquo; option.
 </p>
@@ -8449,21 +8428,21 @@ user.
 
 <p>The generated key will be stored in system persistent storage.
 <a name="tpmtool-test_002dsign"></a></p><a name="test_002dsign-option"></a>
-<h4 class="subsection">5.4.10 test-sign option</h4>
+<h4 class="subheading">test-sign option</h4>
 
 <p>This is the &ldquo;tests the signature operation of the provided object&rdquo; option.
 This option takes a string argument <samp>url</samp>.
 It can be used to test the correct operation of the signature operation.
 This operation will sign and verify the signed data.
-<a name="tpmtool-sec_002dparam"></a></p><a name="sec_002dparam-option"></a>
-<h4 class="subsection">5.4.11 sec-param option</h4>
+<a name="tpmtool-sec_002dparam"></a></p><a name="sec_002dparam-option-1"></a>
+<h4 class="subheading">sec-param option</h4>
 
 <p>This is the &ldquo;specify the security level [low, legacy, medium, high, ultra].&rdquo; option.
 This option takes a string argument <samp>Security parameter</samp>.
 This is alternative to the bits option. Note however that the
 values allowed by the TPM chip are quantized and given values may be rounded up.
-<a name="tpmtool-inder"></a></p><a name="inder-option"></a>
-<h4 class="subsection">5.4.12 inder option</h4>
+<a name="tpmtool-inder"></a></p><a name="inder-option-2"></a>
+<h4 class="subheading">inder option</h4>
 
 <p>This is the &ldquo;use the der format for keys.&rdquo; option.
 </p>
@@ -8475,8 +8454,8 @@ values allowed by the TPM chip are quantized and given values may be rounded up.
 <p>The input files will be assumed to be in the portable
 DER format of TPM. The default format is a custom format used by various
 TPM tools
-<a name="tpmtool-outder"></a></p><a name="outder-option"></a>
-<h4 class="subsection">5.4.13 outder option</h4>
+<a name="tpmtool-outder"></a></p><a name="outder-option-1"></a>
+<h4 class="subheading">outder option</h4>
 
 <p>This is the &ldquo;use der format for output keys&rdquo; option.
 </p>
@@ -8487,7 +8466,7 @@ TPM tools
 
 <p>The output will be in the TPM portable DER format.
 <a name="tpmtool-exit-status"></a></p><a name="tpmtool-exit-status-1"></a>
-<h4 class="subsection">5.4.14 tpmtool exit status</h4>
+<h4 class="subheading">tpmtool exit status</h4>
 
 <p>One of the following exit values will be returned:
 </p><dl compact="compact">
@@ -8499,10 +8478,10 @@ TPM tools
 </p></dd>
 </dl>
 <a name="tpmtool-See-Also"></a><a name="tpmtool-See-Also-1"></a>
-<h4 class="subsection">5.4.15 tpmtool See Also</h4>
+<h4 class="subheading">tpmtool See Also</h4>
 <p>p11tool (1), certtool (1)
 <a name="tpmtool-Examples"></a></p><a name="tpmtool-Examples-1"></a>
-<h4 class="subsection">5.4.16 tpmtool Examples</h4>
+<h4 class="subheading">tpmtool Examples</h4>
 <p>To generate a key that is to be stored in file system use:
 </p><div class="example">
 <pre class="example">$ tpmtool --generate-rsa --bits 2048 --outfile tpmkey.pem
@@ -8994,9 +8973,9 @@ precalculations needed, opens any required system devices (e.g., /dev/urandom on
 and initializes subsystems that could be used later.
 </p>
 <p>The resources allocated by the initialization process will be released 
-on library deinitialization, or explicitly by calling <a href="#gnutls_005fglobal_005fdeinit">gnutls_global_deinit</a>.
+on library deinitialization.
 </p>
-<p>Note that during initialization file descriptors may be kept open by
+<p>Note that on certain systems file descriptors may be kept open by
 GnuTLS (e.g. /dev/urandom) on library load. Applications closing all unknown file
 descriptors must immediately call <a href="#gnutls_005fglobal_005finit">gnutls_global_init</a>, after that, to
 ensure they don&rsquo;t disrupt GnuTLS&rsquo; operation.
@@ -9919,11 +9898,15 @@ for data.
 int (*gnutls_pull_timeout_func)(gnutls_transport_ptr_t, unsigned int ms);
 </p>
 <p>This callback is necessary when <code>gnutls_handshake_set_timeout()</code>  or 
-<code>gnutls_record_set_timeout()</code>  are set. It will not be used when 
-non-blocking sockets are in use. That is, this function will
-not operate when <code>GNUTLS_NONBLOCK</code>  is specified in <code>gnutls_init()</code> , 
-or a custom pull function is registered without updating the 
-pull timeout function.
+<code>gnutls_record_set_timeout()</code>  are set, and for calculating the DTLS mode
+timeouts.
+</p>
+<p>In short, this callback should be set when a custom pull function is
+registered. The callback will not be used when the session is in TLS mode with
+non-blocking sockets. That is, when <code>GNUTLS_NONBLOCK</code>  is specified for a TLS
+session in <code>gnutls_init()</code> . For compatibility with future GnuTLS versions
+it is recommended to always set this function when a custom pull function
+is registered.
 </p>
 <p>The helper function <code>gnutls_system_recv_timeout()</code>  is provided to
 simplify writing callbacks. 
@@ -10010,11 +9993,15 @@ for data.
 int (*gnutls_pull_timeout_func)(gnutls_transport_ptr_t, unsigned int ms);
 </p>
 <p>This callback is necessary when <code>gnutls_handshake_set_timeout()</code>  or 
-<code>gnutls_record_set_timeout()</code>  are set. It will not be used when 
-non-blocking sockets are in use. That is, this function will
-not operate when <code>GNUTLS_NONBLOCK</code>  is specified in <code>gnutls_init()</code> , 
-or a custom pull function is registered without updating the 
-pull timeout function.
+<code>gnutls_record_set_timeout()</code>  are set, and for calculating the DTLS mode
+timeouts.
+</p>
+<p>In short, this callback should be set when a custom pull function is
+registered. The callback will not be used when the session is in TLS mode with
+non-blocking sockets. That is, when <code>GNUTLS_NONBLOCK</code>  is specified for a TLS
+session in <code>gnutls_init()</code> . For compatibility with future GnuTLS versions
+it is recommended to always set this function when a custom pull function
+is registered.
 </p>
 <p>The helper function <code>gnutls_system_recv_timeout()</code>  is provided to
 simplify writing callbacks. 
@@ -16529,10 +16516,11 @@ Usage:  gnutls-cli [ -&lt;flag&gt; [&lt;val&gt;] | --&lt;name&gt;[{=| }&lt;val&g
                                 - disabled as '--no-ocsp'
    -r, --resume               Establish a session and resume
    -e, --rehandshake          Establish a session and rehandshake
+       --sni-hostname=str     Server's hostname for server name indication extension
    -s, --starttls             Connect, establish a plain session and start TLS
        --app-proto=str        an alias for the 'starttls-proto' option
        --starttls-proto=str   The application protocol to be used to obtain the server's certificate
-(https, ftp, smtp, imap, ldap, xmpp)
+(https, ftp, smtp, imap, ldap, xmpp, lmtp, pop3, nntp, sieve, postgres)
                                 - prohibits the option 'starttls'
    -u, --udp                  Use DTLS (datagram TLS) over UDP
        --mtu=num              Set MTU for datagram TLS
@@ -16692,6 +16680,12 @@ Connect, establish a session, reconnect and resume.
 
 <p>This is the &ldquo;establish a session and rehandshake&rdquo; option.
 Connect, establish a session and rehandshake immediately.
+<a name="gnutls_002dcli-sni_002dhostname"></a></p><a name="sni_002dhostname-option"></a>
+<h4 class="subheading">sni-hostname option</h4>
+
+<p>This is the &ldquo;server&rsquo;s hostname for server name indication extension&rdquo; option.
+This option takes a string argument.
+Set explicitly the server name used in the TLS server name indication extension. That is useful when testing with servers setup on different DNS name than the intended. If not specified, the provided hostname is used.
 <a name="gnutls_002dcli-starttls"></a></p><a name="starttls-option-_0028_002ds_0029"></a>
 <h4 class="subheading">starttls option (-s)</h4>
 
@@ -17003,7 +16997,7 @@ Server program that listens to incoming TLS connections.
 <p>This is the &ldquo;enable debugging&rdquo; option.
 This option takes a number argument.
 Specifies the debug level.
-<a name="gnutls_002dserv-sni_002dhostname"></a></p><a name="sni_002dhostname-option"></a>
+<a name="gnutls_002dserv-sni_002dhostname"></a></p><a name="sni_002dhostname-option-1"></a>
 <h4 class="subheading">sni-hostname option</h4>
 
 <p>This is the &ldquo;server&rsquo;s hostname for server name extension&rdquo; option.
@@ -17274,7 +17268,7 @@ Usage:  gnutls-cli-debug [ -&lt;flag&gt; [&lt;val&gt;] | --&lt;name&gt;[{=| }&lt
                                   0 to 65536
        --app-proto=str        an alias for the 'starttls-proto' option
        --starttls-proto=str   The application protocol to be used to obtain the server's certificate
-(https, ftp, smtp, imap, ldap, xmpp)
+(https, ftp, smtp, imap, ldap, xmpp, lmtp, pop3, nntp, sieve, postgres)
    -v, --version[=arg]        output version information and exit
    -h, --help                 display extended usage information and exit
    -!, --more-help            extended usage information passed thru pager
@@ -19064,7 +19058,7 @@ Anonymous Diffie-Hellman cipher suites.
 <dt><a name="index-gnutls_005fanon_005fset_005fserver_005fknown_005fdh_005fparams"></a>Function: <em>int</em> <strong>gnutls_anon_set_server_known_dh_params</strong> <em>(gnutls_anon_server_credentials_t <var>res</var>, gnutls_sec_param_t <var>sec_param</var>)</em></dt>
 <dd><p><var>res</var>: is a gnutls_anon_server_credentials_t type
 </p>
-<p><var>sec_param</var>: &ndash; undescribed &ndash;
+<p><var>sec_param</var>: is an option of the <code>gnutls_sec_param_t</code>  enumeration
 </p>
 <p>This function will set the Diffie-Hellman parameters for an
 anonymous server to use.  These parameters will be used in
@@ -19220,7 +19214,8 @@ This is the creation time for openpgp keys.
 <dt><a name="index-gnutls_005fcertificate_005fclient_005fget_005frequest_005fstatus"></a>Function: <em>int</em> <strong>gnutls_certificate_client_get_request_status</strong> <em>(gnutls_session_t <var>session</var>)</em></dt>
 <dd><p><var>session</var>: is a gnutls session
 </p>
-<p>Get whether client certificate is requested or not.
+<p>Get whether client certificate was requested on the last
+handshake or not.
 </p>
 <p><strong>Returns:</strong> 0 if the peer (server) did not request client
 authentication or 1 otherwise.
@@ -20917,7 +20912,7 @@ an error code is returned.
 <p><var>src</var>: Is the source parameters
 </p>
 <p>This function will copy the DH parameters structure from source
-to destination.
+to destination. The destination should be already initialized.
 </p>
 <p><strong>Returns:</strong> On success, <code>GNUTLS_E_SUCCESS</code>  (0) is returned,
 otherwise a negative error code is returned.
@@ -21581,6 +21576,10 @@ should be used if you have complete control of your program and libraries.
 Do not call this function from a library, or preferably from any application
 unless really needed to. GnuTLS will use the appropriate locks for the running
 system.
+</p>
+<p>Note that since the move to implicit initialization of GnuTLS on library
+load, calling this function will deinitialize the library, and re-initialize
+it after the new locking functions are set.
 </p>
 <p>This function must be called prior to any other gnutls function.
 </p>
@@ -22529,7 +22528,7 @@ an error code is returned.
 <h4 class="subheading">gnutls_pem_base64_encode</h4>
 <a name="gnutls_005fpem_005fbase64_005fencode"></a><dl>
 <dt><a name="index-gnutls_005fpem_005fbase64_005fencode"></a>Function: <em>int</em> <strong>gnutls_pem_base64_encode</strong> <em>(const char * <var>msg</var>, const gnutls_datum_t * <var>data</var>, char * <var>result</var>, size_t * <var>result_size</var>)</em></dt>
-<dd><p><var>msg</var>: is a message to be put in the header
+<dd><p><var>msg</var>: is a message to be put in the header (may be <code>NULL</code> )
 </p>
 <p><var>data</var>: contain the raw data
 </p>
@@ -22540,7 +22539,7 @@ an error code is returned.
 <p>This function will convert the given data to printable data, using
 the base64 encoding. This is the encoding used in PEM messages.
 </p>
-<p>The output string will be null terminated, although the size will
+<p>The output string will be null terminated, although the output size will
 not include the terminating null.
 </p>
 <p><strong>Returns:</strong> On success <code>GNUTLS_E_SUCCESS</code>  (0) is returned,
@@ -22552,7 +22551,7 @@ not long enough, or 0 on success.
 <h4 class="subheading">gnutls_pem_base64_encode2</h4>
 <a name="gnutls_005fpem_005fbase64_005fencode2"></a><dl>
 <dt><a name="index-gnutls_005fpem_005fbase64_005fencode2"></a>Function: <em>int</em> <strong>gnutls_pem_base64_encode2</strong> <em>(const char * <var>msg</var>, const gnutls_datum_t * <var>data</var>, gnutls_datum_t * <var>result</var>)</em></dt>
-<dd><p><var>msg</var>: is a message to be put in the encoded header
+<dd><p><var>msg</var>: is a message to be put in the encoded header (may be <code>NULL</code> )
 </p>
 <p><var>data</var>: contains the raw data
 </p>
@@ -23423,7 +23422,8 @@ should return <code>GNUTLS_E_SUCCESS</code>  (0) on success.
 <p><var>art</var>: The returned random art
 </p>
 <p>This function will convert a given fingerprint to an &quot;artistic&quot;
-image. The returned image is allocated using <code>gnutls_malloc()</code> .
+image. The returned image is allocated using <code>gnutls_malloc()</code> , is
+null-terminated but art-&gt;size will not account the terminating null.
 </p>
 <p><strong>Returns:</strong> On success, <code>GNUTLS_E_SUCCESS</code>  (0) is returned, otherwise
 an error code is returned.
@@ -24091,11 +24091,16 @@ This is in accordance to draft-ietf-tls-session-hash-01
 </p>
 <p><var>unpack_func</var>: a function which will deserialize the extension&rsquo;s private data
 </p>
-<p><var>flags</var>: must be zero
+<p><var>flags</var>: must be zero or flags from <code>gnutls_ext_flags_t</code> 
 </p>
 <p>This function will register a new extension type. The extension will be
 only usable within the registered session. If the extension type
-is already registered then <code>GNUTLS_E_ALREADY_REGISTERED</code>  will be returned.
+is already registered then <code>GNUTLS_E_ALREADY_REGISTERED</code>  will be returned,
+unless the flag <code>GNUTLS_EXT_FLAG_OVERRIDE_INTERNAL</code>  is specified. The latter
+flag when specified can be used to override certain extensions introduced
+after 3.5.12. It is expected to be used by applications which handle
+custom extensions that are not currently supported in GnuTLS, but direct
+support for them may be added in the future.
 </p>
 <p>Each registered extension can store temporary data into the gnutls_session_t
 structure using <code>gnutls_ext_set_data()</code> , and they can be retrieved using
@@ -25379,7 +25384,7 @@ will be returned.
 <dt><a name="index-gnutls_005fsupplemental_005fsend"></a>Function: <em>void</em> <strong>gnutls_supplemental_send</strong> <em>(gnutls_session_t <var>session</var>, unsigned <var>do_send_supplemental</var>)</em></dt>
 <dd><p><var>session</var>: is a <code>gnutls_session_t</code>  type.
 </p>
-<p><var>do_send_supplemental</var>: &ndash; undescribed &ndash;
+<p><var>do_send_supplemental</var>: non-zero in order to send supplemental data
 </p>
 <p>This function is to be called by an extension handler to
 instruct gnutls to send supplemental data during the handshake process.
@@ -25691,11 +25696,15 @@ for data.
 int (*gnutls_pull_timeout_func)(gnutls_transport_ptr_t, unsigned int ms);
 </p>
 <p>This callback is necessary when <code>gnutls_handshake_set_timeout()</code>  or 
-<code>gnutls_record_set_timeout()</code>  are set. It will not be used when 
-non-blocking sockets are in use. That is, this function will
-not operate when <code>GNUTLS_NONBLOCK</code>  is specified in <code>gnutls_init()</code> , 
-or a custom pull function is registered without updating the 
-pull timeout function.
+<code>gnutls_record_set_timeout()</code>  are set, and for calculating the DTLS mode
+timeouts.
+</p>
+<p>In short, this callback should be set when a custom pull function is
+registered. The callback will not be used when the session is in TLS mode with
+non-blocking sockets. That is, when <code>GNUTLS_NONBLOCK</code>  is specified for a TLS
+session in <code>gnutls_init()</code> . For compatibility with future GnuTLS versions
+it is recommended to always set this function when a custom pull function
+is registered.
 </p>
 <p>The helper function <code>gnutls_system_recv_timeout()</code>  is provided to
 simplify writing callbacks. 
@@ -42686,7 +42695,8 @@ GnuTLS function. Setting mutexes manually is not recommended.</p>
 <h3><a name="FOOT18" href="#DOCF18">(18)</a></h3>
 <p>The original behavior of requiring explicit initialization can obtained by setting the
 GNUTLS_NO_EXPLICIT_INIT environment variable to 1, or by using the macro GNUTLS_SKIP_GLOBAL_INIT
-in a global section of your program.</p>
+in a global section of your program &ndash;the latter works in systems with
+support for weak symbols only.</p>
 <h3><a name="FOOT19" href="#DOCF19">(19)</a></h3>
 <p>A key of 128 bits or 16 bytes should be sufficient for this purpose.</p>
 <h3><a name="FOOT20" href="#DOCF20">(20)</a></h3>

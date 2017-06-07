@@ -88,7 +88,7 @@ typedef int ssize_t;
  */
 typedef struct {
 	unsigned char i[8];
-} uint64;
+} gnutls_uint64;
 
 #include <gnutls/gnutls.h>
 #include <gnutls/dtls.h>
@@ -346,7 +346,7 @@ typedef struct mbuffer_st {
 	content_type_t type;
 
 	/* record layer sequence */
-	uint64 record_sequence;
+	gnutls_uint64 record_sequence;
 
 	/* Filled in by handshake layer on send:
 	 * type, epoch, htype, handshake_sequence
@@ -420,15 +420,6 @@ struct gnutls_key_st {
 
 	auth_cred_st *cred;	/* used to specify keys/certificates etc */
 
-	int crt_requested;
-	/* some ciphersuites use this
-	 * to provide client authentication.
-	 * 1 if client auth was requested
-	 * by the peer, 0 otherwise
-	 *** In case of a server this
-	 * holds 1 if we should wait
-	 * for a client certificate verify
-	 */
 };
 typedef struct gnutls_key_st gnutls_key_st;
 
@@ -454,7 +445,8 @@ typedef struct cipher_entry_st {
 	uint16_t explicit_iv;	/* the size of explicit IV - the IV stored in record */
 	uint16_t cipher_iv;	/* the size of IV needed by the cipher */
 	uint16_t tagsize;
-	bool	xor_nonce;	/* In this TLS AEAD cipher xor the implicit_iv with the nonce */
+	bool xor_nonce;	/* In this TLS AEAD cipher xor the implicit_iv with the nonce */
+	bool only_aead; /* When set, this cipher is only available through the new AEAD API */
 } cipher_entry_st;
 
 typedef struct gnutls_cipher_suite_entry_st {
@@ -605,7 +597,7 @@ struct record_state_st {
 	gnutls_datum_t key;
 	auth_cipher_hd_st cipher_state;
 	comp_hd_st compression_state;
-	uint64 sequence_number;
+	gnutls_uint64 sequence_number;
 };
 
 
@@ -1001,6 +993,11 @@ typedef struct {
 	time_t handshake_endtime;	/* end time in seconds */
 	unsigned int handshake_timeout_ms;	/* timeout in milliseconds */
 	unsigned int record_timeout_ms;	/* timeout in milliseconds */
+
+	unsigned crt_requested; /* 1 if client auth was requested (i.e., client cert).
+	 * In case of a server this holds 1 if we should wait
+	 * for a client certificate verify
+	 */
 
 	gnutls_buffer_st hb_local_data;
 	gnutls_buffer_st hb_remote_data;

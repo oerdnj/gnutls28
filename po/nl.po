@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnutls-3.2.1\n"
 "Report-Msgid-Bugs-To: bug-gnutls@gnu.org\n"
-"POT-Creation-Date: 2017-03-06 07:03+0100\n"
+"POT-Creation-Date: 2017-06-07 07:23+0200\n"
 "PO-Revision-Date: 2013-06-13 19:56+0200\n"
 "Last-Translator: Benno Schulenberg <benno@vertaalt.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -397,7 +397,7 @@ msgstr ""
 "Er is een overtreding van het sleutelgebruik in het certificaat "
 "geconstateerd."
 
-#: lib/errors.c:182 lib/errors.c:423
+#: lib/errors.c:182 lib/errors.c:425
 msgid "Function was interrupted."
 msgstr "Functie werd onderbroken."
 
@@ -833,39 +833,39 @@ msgstr "Het verzoek is ongeldig."
 msgid "The private key is invalid."
 msgstr "Het verzoek is ongeldig."
 
-#: lib/errors.c:412 libdane/errors.c:42
-msgid "Success."
-msgstr "Gelukt."
-
-#: lib/errors.c:413
-msgid "A TLS warning alert has been received."
-msgstr "Er is een TLS-waarschuwing ontvangen."
-
-#: lib/errors.c:415
-msgid "A heartbeat pong message was received."
-msgstr "Er werd een hartslag-pong-bericht ontvangen."
-
-#: lib/errors.c:417
-msgid "A heartbeat ping message was received."
-msgstr "Er werd een hartslag-ping-bericht ontvangen."
-
-#: lib/errors.c:419
-msgid "Resource temporarily unavailable, try again."
-msgstr "Bron is tijdelijk niet beschikbaar; probeer het later nogmaals."
-
-#: lib/errors.c:421
-msgid "The transmitted packet is too large (EMSGSIZE)."
-msgstr "Het verzonden pakket is te groot (EMSGSIZE)."
-
-#: lib/errors.c:424
-msgid "Rehandshake was requested by the peer."
-msgstr "De andere computer heeft om een hernieuwde handshake gevraagd."
-
-#: lib/errors.c:426
+#: lib/errors.c:408
 msgid "One of the involved algorithms has insufficient security level."
 msgstr ""
 
-#: lib/errors.c:517 libdane/errors.c:100
+#: lib/errors.c:414 libdane/errors.c:42
+msgid "Success."
+msgstr "Gelukt."
+
+#: lib/errors.c:415
+msgid "A TLS warning alert has been received."
+msgstr "Er is een TLS-waarschuwing ontvangen."
+
+#: lib/errors.c:417
+msgid "A heartbeat pong message was received."
+msgstr "Er werd een hartslag-pong-bericht ontvangen."
+
+#: lib/errors.c:419
+msgid "A heartbeat ping message was received."
+msgstr "Er werd een hartslag-ping-bericht ontvangen."
+
+#: lib/errors.c:421
+msgid "Resource temporarily unavailable, try again."
+msgstr "Bron is tijdelijk niet beschikbaar; probeer het later nogmaals."
+
+#: lib/errors.c:423
+msgid "The transmitted packet is too large (EMSGSIZE)."
+msgstr "Het verzonden pakket is te groot (EMSGSIZE)."
+
+#: lib/errors.c:426
+msgid "Rehandshake was requested by the peer."
+msgstr "De andere computer heeft om een hernieuwde handshake gevraagd."
+
+#: lib/errors.c:518 libdane/errors.c:100
 msgid "(unknown error code)"
 msgstr "(onbekende foutcode)"
 
@@ -1679,11 +1679,11 @@ msgstr "\t\tOnbekende eigenschap %s:\n"
 msgid "PKCS #10 Certificate Request Information:\n"
 msgstr "Informatie over PKCS #10-certificaatverzoek:\n"
 
-#: lib/x509/output.c:2534
+#: lib/x509/output.c:2535
 msgid "Public Key Usage:\n"
 msgstr "Gebruik van publieke sleutel:\n"
 
-#: lib/x509/output.c:2568
+#: lib/x509/output.c:2570
 msgid "Public Key Information:\n"
 msgstr "Informatie over publieke sleutel:\n"
 

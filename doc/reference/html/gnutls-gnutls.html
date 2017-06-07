@@ -3568,7 +3568,8 @@ gnutls_certificate_allocate_credentials
 <pre class="programlisting"><span class="returnvalue">int</span>
 gnutls_certificate_client_get_request_status
                                (<em class="parameter"><code><a class="link" href="gnutls-gnutls.html#gnutls-session-t" title="gnutls_session_t"><span class="type">gnutls_session_t</span></a> session</code></em>);</pre>
-<p>Get whether client certificate is requested or not.</p>
+<p>Get whether client certificate was requested on the last
+handshake or not.</p>
 <div class="refsect3">
 <a name="gnutls-certificate-client-get-request-status.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">
@@ -5844,7 +5845,7 @@ an error code is returned.</p>
 gnutls_dh_params_cpy (<em class="parameter"><code><a class="link" href="gnutls-gnutls.html#gnutls-dh-params-t" title="gnutls_dh_params_t"><span class="type">gnutls_dh_params_t</span></a> dst</code></em>,
                       <em class="parameter"><code><a class="link" href="gnutls-gnutls.html#gnutls-dh-params-t" title="gnutls_dh_params_t"><span class="type">gnutls_dh_params_t</span></a> src</code></em>);</pre>
 <p>This function will copy the DH parameters structure from source
-to destination.</p>
+to destination. The destination should be already initialized.</p>
 <div class="refsect3">
 <a name="gnutls-dh-params-cpy.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">
@@ -6526,6 +6527,9 @@ should be used if you have complete control of your program and libraries.
 Do not call this function from a library, or preferably from any application
 unless really needed to. GnuTLS will use the appropriate locks for the running
 system.</p>
+<p>Note that since the move to implicit initialization of GnuTLS on library
+load, calling this function will deinitialize the library, and re-initialize
+it after the new locking functions are set.</p>
 <p>This function must be called prior to any other gnutls function.</p>
 <div class="refsect3">
 <a name="gnutls-global-set-mutex.parameters"></a><h4>Parameters</h4>
@@ -7400,11 +7404,17 @@ gnutls_ocsp_status_request_enable_client
                                 <em class="parameter"><code><span class="type">gnutls_datum_t</span> *request_extensions</code></em>);</pre>
 <p>This function is to be used by clients to request OCSP response
 from the server, using the "status_request" TLS extension.  Only
-OCSP status type is supported. A typical server has a single
-OCSP response cached, so <em class="parameter"><code>responder_id</code></em>
+OCSP status type is supported.</p>
+<p>The <em class="parameter"><code>responder_id</code></em>
+ array, its containing elements as well as
+the data of <em class="parameter"><code>extensions</code></em>
+, must be allocated using <code class="function">gnutls_malloc()</code>. They
+will be deinitialized on session cleanup.</p>
+<p>Due to the difficult semantics of the <em class="parameter"><code>responder_id</code></em>
  and <em class="parameter"><code>extensions</code></em>
 
-should be null.</p>
+parameters, it is recommended to only call this function with these
+parameters set to <code class="literal">NULL</code>.</p>
 <div class="refsect3">
 <a name="gnutls-ocsp-status-request-enable-client.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">
@@ -7619,7 +7629,7 @@ gnutls_pem_base64_encode (<em class="parameter"><code>const <span class="type">c
                           <em class="parameter"><code><span class="type">size_t</span> *result_size</code></em>);</pre>
 <p>This function will convert the given data to printable data, using
 the base64 encoding. This is the encoding used in PEM messages.</p>
-<p>The output string will be null terminated, although the size will
+<p>The output string will be null terminated, although the output size will
 not include the terminating null.</p>
 <div class="refsect3">
 <a name="gnutls-pem-base64-encode.parameters"></a><h4>Parameters</h4>
@@ -7632,7 +7642,7 @@ not include the terminating null.</p>
 <tbody>
 <tr>
 <td class="parameter_name"><p>msg</p></td>
-<td class="parameter_description"><p>is a message to be put in the header</p></td>
+<td class="parameter_description"><p>is a message to be put in the header (may be <code class="literal">NULL</code>)</p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 <tr>
@@ -8931,7 +8941,8 @@ gnutls_random_art (<em class="parameter"><code><a class="link" href="gnutls-gnut
                    <em class="parameter"><code><span class="type">size_t</span> fpr_size</code></em>,
                    <em class="parameter"><code><span class="type">gnutls_datum_t</span> *art</code></em>);</pre>
 <p>This function will convert a given fingerprint to an "artistic"
-image. The returned image is allocated using <code class="function">gnutls_malloc()</code>.</p>
+image. The returned image is allocated using <code class="function">gnutls_malloc()</code>, is
+null-terminated but art-&gt;size will not account the terminating null.</p>
 <div class="refsect3">
 <a name="gnutls-random-art.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">
@@ -11152,7 +11163,7 @@ default file backend will be used.</p>
 </tr>
 <tr>
 <td class="parameter_name"><p>flags</p></td>
-<td class="parameter_description"><p>should be 0.</p></td>
+<td class="parameter_description"><p>should be 0 or <code class="literal">GNUTLS_SCOMMIT_FLAG_ALLOW_BROKEN</code>.</p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 </tbody>
@@ -11675,11 +11686,14 @@ for data.</p>
  is of the form,
 int (*gnutls_pull_timeout_func)(gnutls_transport_ptr_t, unsigned int ms);</p>
 <p>This callback is necessary when <a class="link" href="gnutls-gnutls.html#gnutls-handshake-set-timeout" title="gnutls_handshake_set_timeout ()"><code class="function">gnutls_handshake_set_timeout()</code></a> or 
-<code class="function">gnutls_record_set_timeout()</code> are set. It will not be used when 
-non-blocking sockets are in use. That is, this function will
-not operate when <a class="link" href="gnutls-gnutls.html#GNUTLS-NONBLOCK:CAPS" title="GNUTLS_NONBLOCK"><code class="literal">GNUTLS_NONBLOCK</code></a> is specified in <a class="link" href="gnutls-gnutls.html#gnutls-init" title="gnutls_init ()"><code class="function">gnutls_init()</code></a>, 
-or a custom pull function is registered without updating the 
-pull timeout function.</p>
+<code class="function">gnutls_record_set_timeout()</code> are set, and for calculating the DTLS mode
+timeouts.</p>
+<p>In short, this callback should be set when a custom pull function is
+registered. The callback will not be used when the session is in TLS mode with
+non-blocking sockets. That is, when <a class="link" href="gnutls-gnutls.html#GNUTLS-NONBLOCK:CAPS" title="GNUTLS_NONBLOCK"><code class="literal">GNUTLS_NONBLOCK</code></a> is specified for a TLS
+session in <a class="link" href="gnutls-gnutls.html#gnutls-init" title="gnutls_init ()"><code class="function">gnutls_init()</code></a>. For compatibility with future GnuTLS versions
+it is recommended to always set this function when a custom pull function
+is registered.</p>
 <p>The helper function <code class="function">gnutls_system_recv_timeout()</code> is provided to
 simplify writing callbacks.</p>
 <div class="refsect3">
@@ -13455,7 +13469,7 @@ or a negative error value on other errors.</p>
 <hr>
 <div class="refsect2">
 <a name="GNUTLS-VERSION:CAPS"></a><h3>GNUTLS_VERSION</h3>
-<pre class="programlisting">#define GNUTLS_VERSION "3.5.9"
+<pre class="programlisting">#define GNUTLS_VERSION "3.5.13"
 </pre>
 <p>
 </p>
@@ -13479,7 +13493,7 @@ or a negative error value on other errors.</p>
 <hr>
 <div class="refsect2">
 <a name="GNUTLS-VERSION-NUMBER:CAPS"></a><h3>GNUTLS_VERSION_NUMBER</h3>
-<pre class="programlisting">#define GNUTLS_VERSION_NUMBER 0x030509
+<pre class="programlisting">#define GNUTLS_VERSION_NUMBER 0x03050d
 </pre>
 <p>
 </p>
@@ -13487,7 +13501,7 @@ or a negative error value on other errors.</p>
 <hr>
 <div class="refsect2">
 <a name="GNUTLS-VERSION-PATCH:CAPS"></a><h3>GNUTLS_VERSION_PATCH</h3>
-<pre class="programlisting">#define GNUTLS_VERSION_PATCH 9
+<pre class="programlisting">#define GNUTLS_VERSION_PATCH 13
 </pre>
 <p>
 </p>
@@ -16172,6 +16186,10 @@ algorithms.</p>
 	gnutls_datum_t raw_spki;
 
 	gnutls_datum_t der;
+
+	/* this cached value allows fast access to alt names */
+	gnutls_subject_alt_names_t san;
+	gnutls_subject_alt_names_t ian;
 
 	/* backwards compatibility for gnutls_x509_crt_get_subject()
 	 * and gnutls_x509_crt_get_issuer() */
