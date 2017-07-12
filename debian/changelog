@@ -1,20 +1,3 @@
-gnutls28 (3.5.14-2) unstable; urgency=medium
-
-  * Upload to unstable.
-
- -- Andreas Metzler <ametzler@debian.org>  Sat, 08 Jul 2017 18:34:43 +0200
-
-gnutls28 (3.5.14-1) experimental; urgency=low
-
-  [ Dan Nicholson ]
-  * Build with --disable-rpath. Closes: #865674
-
-  [ Andreas Metzler ]
-  * New upstream version.
-  * Build against external libunistring.
-
- -- Andreas Metzler <ametzler@debian.org>  Wed, 05 Jul 2017 19:31:06 +0200
-
 gnutls28 (3.5.13-2) unstable; urgency=medium
 
   * Upload to unstable, merge changelogs.
