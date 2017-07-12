@@ -43,6 +43,8 @@
 # include <signal.h>
 #endif
 
+#include <assert.h>
+
 /* Gnulib portability files. */
 #include <read-file.h>
 
@@ -559,6 +561,18 @@ generate_certificate(gnutls_privkey_t * ret_key,
 			result =
 			    gnutls_x509_crt_set_key_purpose_oid
 			    (crt, GNUTLS_KP_TIME_STAMPING, 0);
+			if (result < 0) {
+				fprintf(stderr, "key_kp: %s\n",
+					gnutls_strerror(result));
+				exit(1);
+			}
+		}
+
+		result = get_email_protection_status();
+		if (result) {
+			result =
+			    gnutls_x509_crt_set_key_purpose_oid
+			    (crt, GNUTLS_KP_EMAIL_PROTECTION, 0);
 			if (result < 0) {
 				fprintf(stderr, "key_kp: %s\n",
 					gnutls_strerror(result));
@@ -1479,7 +1493,7 @@ void pgp_privkey_info(void)
 	gnutls_openpgp_privkey_t key;
 	unsigned char keyid[GNUTLS_OPENPGP_KEYID_SIZE];
 	size_t size;
-	int ret, i, subkeys, bits = 0;
+	int ret, i, subkeys;
 	gnutls_datum_t pem;
 	const char *cprint;
 
@@ -1553,8 +1567,6 @@ void pgp_privkey_info(void)
 				print_rsa_pkey(outfile, &m, &e, &d, &p, &q,
 					       &u, NULL, NULL,
 					       HAVE_OPT(CPRINT));
-
-			bits = m.size * 8;
 		} else if (ret == GNUTLS_PK_DSA) {
 			gnutls_datum_t p, q, g, y, x;
 
@@ -1573,8 +1585,6 @@ void pgp_privkey_info(void)
 			else
 				print_dsa_pkey(outfile, &x, &y, &p, &q, &g,
 					       HAVE_OPT(CPRINT));
-
-			bits = y.size * 8;
 		}
 
 		fprintf(outfile, "\n");
@@ -1613,21 +1623,8 @@ void pgp_privkey_info(void)
 				"Error in fingerprint calculation: %s\n",
 				gnutls_strerror(ret));
 		} else {
-			gnutls_datum_t art;
-
 			fprintf(outfile, "Fingerprint: %s\n",
 				raw_to_string(lbuffer, size));
-
-			ret =
-			    gnutls_random_art(GNUTLS_RANDOM_ART_OPENSSH,
-					      cprint, bits, lbuffer, size,
-					      &art);
-			if (ret >= 0) {
-				fprintf(outfile,
-					"Fingerprint's random art:\n%s\n\n",
-					art.data);
-				gnutls_free(art.data);
-			}
 		}
 	}
 
@@ -2070,6 +2067,18 @@ void generate_request(common_info_st * cinfo)
 		if (ret) {
 			ret = gnutls_x509_crq_set_key_purpose_oid
 			    (crq, GNUTLS_KP_TIME_STAMPING, 0);
+			if (ret < 0) {
+				fprintf(stderr, "key_kp: %s\n",
+					gnutls_strerror(ret));
+				exit(1);
+			}
+		}
+
+		ret = get_email_protection_status();
+		if (ret) {
+			ret =
+			    gnutls_x509_crq_set_key_purpose_oid
+			    (crq, GNUTLS_KP_EMAIL_PROTECTION, 0);
 			if (ret < 0) {
 				fprintf(stderr, "key_kp: %s\n",
 					gnutls_strerror(ret));
@@ -2916,8 +2925,10 @@ void verify_pkcs7(common_info_st * cinfo, const char *purpose, unsigned display_
 					ret = GNUTLS_E_CONSTRAINT_ERROR;
 			}
 
-		} else
+		} else {
+			assert(tl != NULL);
 			ret = gnutls_pkcs7_verify(pkcs7, tl, vdata, vdata_size, i, detached.data!=NULL?&detached:NULL, flags);
+		}
 		if (ret < 0) {
 			fprintf(stderr, "\tSignature status: verification failed: %s\n", gnutls_strerror(ret));
 			ecode = 1;
@@ -2945,7 +2956,9 @@ void pkcs7_sign(common_info_st * cinfo, unsigned embed)
 	size_t size;
 	gnutls_datum_t data;
 	unsigned flags = 0;
-	gnutls_x509_crt_t signer;
+	gnutls_x509_crt_t *crts;
+	size_t crt_size;
+	size_t i;
 
 	if (ENABLED_OPT(P7_TIME))
 		flags |= GNUTLS_PKCS7_INCLUDE_TIME;
@@ -2967,17 +2980,26 @@ void pkcs7_sign(common_info_st * cinfo, unsigned embed)
 		exit(1);
 	}
 
-	signer = load_cert(1, cinfo);
+	crts = load_cert_list(1, &crt_size, cinfo);
 	key = load_private_key(1, cinfo);
 
 	if (embed)
 		flags |= GNUTLS_PKCS7_EMBED_DATA;
 
-	ret = gnutls_pkcs7_sign(pkcs7, signer, key, &data, NULL, NULL, get_dig(signer), flags);
+	ret = gnutls_pkcs7_sign(pkcs7, *crts, key, &data, NULL, NULL, get_dig(*crts), flags);
 	if (ret < 0) {
 		fprintf(stderr, "Error signing: %s\n", gnutls_strerror(ret));
 		exit(1);
 	}
+
+	for (i=1;i<crt_size;i++) {
+		ret = gnutls_pkcs7_set_crt(pkcs7, crts[i]);
+		if (ret < 0) {
+			fprintf(stderr, "Error adding cert: %s\n", gnutls_strerror(ret));
+			exit(1);
+		}
+	}
+
 
 	size = lbuffer_size;
 	ret =
@@ -2990,7 +3012,10 @@ void pkcs7_sign(common_info_st * cinfo, unsigned embed)
 	fwrite(lbuffer, 1, size, outfile);
 
 	gnutls_privkey_deinit(key);
-	gnutls_x509_crt_deinit(signer);
+	for (i=0;i<crt_size;i++) {
+		gnutls_x509_crt_deinit(crts[i]);
+	}
+	gnutls_free(crts);
 	gnutls_pkcs7_deinit(pkcs7);
 	exit(0);
 }
@@ -3757,15 +3782,17 @@ void pkcs7_info(common_info_st *cinfo, unsigned display_data)
 			exit(1);
 		}
 	} else {
-		ret = gnutls_pkcs7_print(pkcs7, GNUTLS_CRT_PRINT_FULL, &str);
-		if (ret < 0) {
-			fprintf(stderr, "printing error: %s\n",
-				gnutls_strerror(ret));
-			exit(1);
-		}
+		if (outcert_format == GNUTLS_X509_FMT_PEM) {
+			ret = gnutls_pkcs7_print(pkcs7, GNUTLS_CRT_PRINT_FULL, &str);
+			if (ret < 0) {
+				fprintf(stderr, "printing error: %s\n",
+					gnutls_strerror(ret));
+				exit(1);
+			}
 
-		fprintf(outfile, "%s", str.data);
-		gnutls_free(str.data);
+			fprintf(outfile, "%s", str.data);
+			gnutls_free(str.data);
+		}
 
 		size = lbuffer_size;
 		ret =
@@ -3801,6 +3828,7 @@ void smime_to_pkcs7(void)
 	}
 	while (strcmp(lineptr, "\r\n") != 0 && strcmp(lineptr, "\n") != 0);
 
+	/* skip newlines */
 	do {
 		len = getline(&lineptr, &linesize, infile);
 		if (len == -1) {
@@ -3809,7 +3837,7 @@ void smime_to_pkcs7(void)
 			exit(1);
 		}
 	}
-	while (strcmp(lineptr, "\r\n") == 0 && strcmp(lineptr, "\n") == 0);
+	while (strcmp(lineptr, "\r\n") == 0 || strcmp(lineptr, "\n") == 0);
 
 	fprintf(outfile, "%s", "-----BEGIN PKCS7-----\n");
 

@@ -60,7 +60,7 @@ Usage:  danetool [ -<flag> [<val>] | --<name>[@{=| @}<val>] ]...
        --port=str             The port or service to connect to, for DANE data
        --app-proto=str        an alias for the 'starttls-proto' option
        --starttls-proto=str   The application protocol to be used to obtain the server's certificate
-(https, ftp, smtp, imap, ldap, xmpp)
+(https, ftp, smtp, imap, ldap, xmpp, lmtp, pop3, nntp, sieve, postgres)
        --ca                   Whether the provided certificate or public key is a Certificate
 Authority
        --x509                 Use the hash of the X.509 certificate, rather than the public key

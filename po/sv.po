@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnutls 3.0.12\n"
 "Report-Msgid-Bugs-To: bug-gnutls@gnu.org\n"
-"POT-Creation-Date: 2017-03-06 07:03+0100\n"
+"POT-Creation-Date: 2017-07-04 07:41+0200\n"
 "PO-Revision-Date: 2012-01-22 10:09+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
@@ -393,7 +393,7 @@ msgstr "Icke stödd kritisk utökning i X.509-certifikat."
 msgid "Key usage violation in certificate has been detected."
 msgstr "Överträdelse av nyckelanvändning i certifikat har upptäckts."
 
-#: lib/errors.c:182 lib/errors.c:423
+#: lib/errors.c:182 lib/errors.c:425
 msgid "Function was interrupted."
 msgstr "Funktionen avbröts."
 
@@ -832,41 +832,41 @@ msgstr "Begäran är ogiltig."
 msgid "The private key is invalid."
 msgstr "Begäran är ogiltig."
 
-#: lib/errors.c:412 libdane/errors.c:42
+#: lib/errors.c:408
+msgid "One of the involved algorithms has insufficient security level."
+msgstr ""
+
+#: lib/errors.c:414 libdane/errors.c:42
 msgid "Success."
 msgstr "Lyckades."
 
-#: lib/errors.c:413
+#: lib/errors.c:415
 msgid "A TLS warning alert has been received."
 msgstr "En TLS-varning har tagits emot."
 
-#: lib/errors.c:415
+#: lib/errors.c:417
 #, fuzzy
 msgid "A heartbeat pong message was received."
 msgstr "Ett stort TLS-journalpaket togs emot."
 
-#: lib/errors.c:417
+#: lib/errors.c:419
 #, fuzzy
 msgid "A heartbeat ping message was received."
 msgstr "Ett stort TLS-journalpaket togs emot."
 
-#: lib/errors.c:419
+#: lib/errors.c:421
 msgid "Resource temporarily unavailable, try again."
 msgstr "Resursen är temporärt otillgänglig, försök igen."
 
-#: lib/errors.c:421
+#: lib/errors.c:423
 msgid "The transmitted packet is too large (EMSGSIZE)."
 msgstr ""
 
-#: lib/errors.c:424
+#: lib/errors.c:426
 msgid "Rehandshake was requested by the peer."
 msgstr "Upprepad handskakning begärdes av motparten."
 
-#: lib/errors.c:426
-msgid "One of the involved algorithms has insufficient security level."
-msgstr ""
-
-#: lib/errors.c:517 libdane/errors.c:100
+#: lib/errors.c:518 libdane/errors.c:100
 msgid "(unknown error code)"
 msgstr "(okänd felkod)"
 
@@ -937,7 +937,7 @@ msgstr "\t\tUtgångsdatum: Aldrig\n"
 msgid "\t\tExpiration: %s\n"
 msgstr "\t\tUtgångsdatum: %s\n"
 
-#: lib/openpgp/output.c:230 lib/x509/ocsp_output.c:527 lib/x509/output.c:1178
+#: lib/openpgp/output.c:230 lib/x509/ocsp_output.c:524 lib/x509/output.c:1178
 #: lib/x509/output.c:1375 lib/x509/output.c:1519 lib/x509/output.c:1748
 #: lib/x509/output.c:1761 lib/x509/output.c:2178 lib/x509/output.c:2276
 #: lib/x509/output.c:2327
@@ -1096,22 +1096,22 @@ msgstr "\t\tDenna uppdatering: %s\n"
 msgid "\t\tNext Update: %s\n"
 msgstr "\t\tNästa uppdatering: %s\n"
 
-#: lib/x509/ocsp_output.c:528 lib/x509/output.c:1523 lib/x509/output.c:2182
+#: lib/x509/ocsp_output.c:525 lib/x509/output.c:1523 lib/x509/output.c:2182
 #: lib/x509/output.c:2331
 #, c-format
 msgid "\tSignature Algorithm: %s\n"
 msgstr "\tSignaturalgoritm: %s\n"
 
-#: lib/x509/ocsp_output.c:532 lib/x509/output.c:1528 lib/x509/output.c:2187
+#: lib/x509/ocsp_output.c:529 lib/x509/output.c:1528 lib/x509/output.c:2187
 msgid ""
 "warning: signed using a broken signature algorithm that can be forged.\n"
 msgstr "varning: signerad med en trasig signaturalgoritm som kan förfalskas.\n"
 
-#: lib/x509/ocsp_output.c:541 lib/x509/output.c:1554 lib/x509/output.c:2213
+#: lib/x509/ocsp_output.c:543 lib/x509/output.c:1554 lib/x509/output.c:2213
 msgid "\tSignature:\n"
 msgstr "\tSignatur:\n"
 
-#: lib/x509/ocsp_output.c:649
+#: lib/x509/ocsp_output.c:651
 msgid "OCSP Response Information:\n"
 msgstr "Information om OCSP-svar:\n"
 
@@ -1686,14 +1686,14 @@ msgstr "\t\tOkänt attribut %s:\n"
 msgid "PKCS #10 Certificate Request Information:\n"
 msgstr "Information om begäran av PKCS #10-certifikat:\n"
 
-#: lib/x509/output.c:2534
+#: lib/x509/output.c:2535
 #, fuzzy
 msgid "Public Key Usage:\n"
 msgstr ""
 "\tPublik nyckel-identitet:\n"
 "\t\t"
 
-#: lib/x509/output.c:2568
+#: lib/x509/output.c:2570
 #, fuzzy
 msgid "Public Key Information:\n"
 msgstr "Övrig information:\n"

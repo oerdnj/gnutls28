@@ -110,7 +110,7 @@ check_PROGRAMS = $(am__EXEEXT_1) cipher-test$(EXEEXT) \
 	cipher-override$(EXEEXT) mac-override$(EXEEXT) \
 	cipher-override2$(EXEEXT) hash-large$(EXEEXT) $(am__EXEEXT_2)
 TESTS = $(am__EXEEXT_1) test-ciphers.sh override-ciphers \
-	test-hash-large $(am__append_4)
+	test-hash-large.sh $(am__append_4)
 @HAVE_LIBCRYPTO_TRUE@am__append_2 = test-ciphers-openssl.sh
 @HAVE_LIBCRYPTO_TRUE@am__append_3 = cipher-openssl-compat
 @HAVE_LIBCRYPTO_TRUE@am__append_4 = test-ciphers-openssl.sh
@@ -299,7 +299,8 @@ mac_override_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
 	$(mac_override_LDFLAGS) $(LDFLAGS) -o $@
 am__dist_check_SCRIPTS_DIST = test-ciphers.sh override-ciphers \
-	test-hash-large test-ciphers-common.sh test-ciphers-openssl.sh
+	test-hash-large.sh test-ciphers-common.sh \
+	test-ciphers-openssl.sh
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -603,6 +604,7 @@ CODE_COVERAGE_CPPFLAGS = @CODE_COVERAGE_CPPFLAGS@
 CODE_COVERAGE_CXXFLAGS = @CODE_COVERAGE_CXXFLAGS@
 CODE_COVERAGE_ENABLED = @CODE_COVERAGE_ENABLED@
 CODE_COVERAGE_LDFLAGS = @CODE_COVERAGE_LDFLAGS@
+CODE_COVERAGE_LIBS = @CODE_COVERAGE_LIBS@
 CONFIG_INCLUDE = @CONFIG_INCLUDE@
 CPP = @CPP@
 CPPFLAGS = @CPPFLAGS@
@@ -1214,6 +1216,7 @@ LIBUNISTRING_UNINORM_H = @LIBUNISTRING_UNINORM_H@
 LIBUNISTRING_UNISTR_H = @LIBUNISTRING_UNISTR_H@
 LIBUNISTRING_UNITYPES_H = @LIBUNISTRING_UNITYPES_H@
 LIBZ = @LIBZ@
+LIBZ_PC = @LIBZ_PC@
 LIBZ_PREFIX = @LIBZ_PREFIX@
 LIB_CLOCK_GETTIME = @LIB_CLOCK_GETTIME@
 LIB_SELECT = @LIB_SELECT@
@@ -1606,8 +1609,8 @@ ctests = gendh
 @ENABLE_NETTLE_TRUE@mac_override_CPPFLAGS = $(AM_CPPFLAGS) $(NETTLE_CFLAGS) $(HOGWEED_CFLAGS)
 @ENABLE_NETTLE_TRUE@cipher_override_LDFLAGS = $(NETTLE_LIBS) $(HOGWEED_LIBS) $(GMP_LIBS) $(LDADD)
 @ENABLE_NETTLE_TRUE@mac_override_LDFLAGS = $(NETTLE_LIBS) $(HOGWEED_LIBS) $(GMP_LIBS) $(LDADD)
-dist_check_SCRIPTS = test-ciphers.sh override-ciphers test-hash-large \
-	test-ciphers-common.sh $(am__append_2)
+dist_check_SCRIPTS = test-ciphers.sh override-ciphers \
+	test-hash-large.sh test-ciphers-common.sh $(am__append_2)
 @HAVE_LIBCRYPTO_TRUE@cipher_openssl_compat_LDFLAGS = $(LDADD) $(LIBCRYPTO)
 EXTRA_DIST = README gnutls-asan.supp
 TESTS_ENVIRONMENT = EXEEXT=$(EXEEXT) LC_ALL="C" \
@@ -1999,9 +2002,9 @@ override-ciphers.log: override-ciphers
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
 	"$$tst" $(AM_TESTS_FD_REDIRECT)
-test-hash-large.log: test-hash-large
-	@p='test-hash-large'; \
-	b='test-hash-large'; \
+test-hash-large.sh.log: test-hash-large.sh
+	@p='test-hash-large.sh'; \
+	b='test-hash-large.sh'; \
 	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \

@@ -142,7 +142,8 @@ host_triplet = @host@
 @HAVE_LD_OUTPUT_DEF_TRUE@am__append_29 = -Wl,--output-def,libgnutls-$(DLL_VERSION).def
 @HAVE_LD_OUTPUT_DEF_TRUE@am__append_30 = $(defexec_DATA)
 @WINDOWS_TRUE@am__append_31 = -lcrypt32
-@ENABLE_CXX_TRUE@am__append_32 = libgnutlsxx.la
+@MACOSX_TRUE@am__append_32 = -framework Security -framework CoreFoundation
+@ENABLE_CXX_TRUE@am__append_33 = libgnutlsxx.la
 subdir = lib
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/lib/unistring/m4/gnulib-comp.m4 \
@@ -350,10 +351,11 @@ am__libgnutls_la_SOURCES_DIST = abstract_int.h debug.h compress.h \
 	tpm.c fips.c safe-memfuncs.c system/inet_pton.c atfork.c \
 	atfork.h randomart.c system-keys.h urls.c urls.h prf.c \
 	auto-verify.c dh-session.c cert-session.c handshake-checks.c \
-	dtls-sw.c dh-primes.c system/keys-win.c system/keys-dummy.c \
-	crypto-selftests.c crypto-selftests-pk.c pkcs11.c pkcs11x.c \
-	pkcs11_privkey.c pkcs11_write.c pkcs11_secret.c pkcs11_int.c \
-	srp.c psk.c gnutls.asn pkix.asn libgnutls.map
+	dtls-sw.c dh-primes.c openpgp_compat.c system/keys-win.c \
+	system/keys-dummy.c crypto-selftests.c crypto-selftests-pk.c \
+	pkcs11.c pkcs11x.c pkcs11_privkey.c pkcs11_write.c \
+	pkcs11_secret.c pkcs11_int.c srp.c psk.c gnutls.asn pkix.asn \
+	libgnutls.map
 am__objects_1 =
 am__objects_2 = $(am__objects_1)
 am__dirstamp = $(am__leading_dot)dirstamp
@@ -380,8 +382,8 @@ am__objects_7 = range.lo record.lo compress.lo debug.lo cipher.lo \
 	tpm.lo fips.lo safe-memfuncs.lo system/inet_pton.lo atfork.lo \
 	randomart.lo urls.lo prf.lo auto-verify.lo dh-session.lo \
 	cert-session.lo handshake-checks.lo dtls-sw.lo dh-primes.lo \
-	$(am__objects_3) $(am__objects_4) $(am__objects_5) \
-	$(am__objects_6)
+	openpgp_compat.lo $(am__objects_3) $(am__objects_4) \
+	$(am__objects_5) $(am__objects_6)
 am__objects_8 = srp.lo
 am__objects_9 = psk.lo
 am_libgnutls_la_OBJECTS = $(am__objects_2) $(am__objects_7) \
@@ -563,6 +565,7 @@ CODE_COVERAGE_CPPFLAGS = @CODE_COVERAGE_CPPFLAGS@
 CODE_COVERAGE_CXXFLAGS = @CODE_COVERAGE_CXXFLAGS@
 CODE_COVERAGE_ENABLED = @CODE_COVERAGE_ENABLED@
 CODE_COVERAGE_LDFLAGS = @CODE_COVERAGE_LDFLAGS@
+CODE_COVERAGE_LIBS = @CODE_COVERAGE_LIBS@
 CONFIG_INCLUDE = @CONFIG_INCLUDE@
 CPP = @CPP@
 CPPFLAGS = @CPPFLAGS@
@@ -1174,6 +1177,7 @@ LIBUNISTRING_UNINORM_H = @LIBUNISTRING_UNINORM_H@
 LIBUNISTRING_UNISTR_H = @LIBUNISTRING_UNISTR_H@
 LIBUNISTRING_UNITYPES_H = @LIBUNISTRING_UNITYPES_H@
 LIBZ = @LIBZ@
+LIBZ_PC = @LIBZ_PC@
 LIBZ_PREFIX = @LIBZ_PREFIX@
 LIB_CLOCK_GETTIME = @LIB_CLOCK_GETTIME@
 LIB_SELECT = @LIB_SELECT@
@@ -1567,7 +1571,7 @@ AM_CPPFLAGS = -DLOCALEDIR=\"$(localedir)\" -I$(srcdir)/../gl \
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = gnutls.pc
 DISTCLEANFILES = $(pkgconfig_DATA) $(am__append_30)
-lib_LTLIBRARIES = libgnutls.la $(am__append_32)
+lib_LTLIBRARIES = libgnutls.la $(am__append_33)
 SRP_COBJECTS = srp.c
 PSK_COBJECTS = psk.c
 COBJECTS = range.c record.c compress.c debug.c cipher.c mbuffers.c \
@@ -1585,8 +1589,8 @@ COBJECTS = range.c record.c compress.c debug.c cipher.c mbuffers.c \
 	tpm.c fips.c safe-memfuncs.c system/inet_pton.c atfork.c \
 	atfork.h randomart.c system-keys.h urls.c urls.h prf.c \
 	auto-verify.c dh-session.c cert-session.c handshake-checks.c \
-	dtls-sw.c dh-primes.c $(am__append_7) $(am__append_8) \
-	$(am__append_9) $(am__append_10)
+	dtls-sw.c dh-primes.c openpgp_compat.c $(am__append_7) \
+	$(am__append_8) $(am__append_9) $(am__append_10)
 HFILES = abstract_int.h debug.h compress.h cipher.h buffers.h errors.h \
 	gnutls_int.h dtls.h handshake.h num.h algorithms.h dh.h kx.h \
 	hash_int.h cipher_int.h db.h auth.h extensions.h x509_b64.h \
@@ -1602,7 +1606,8 @@ libgnutls_la_SOURCES = $(HFILES) $(COBJECTS) $(SRP_COBJECTS)	\
 
 libgnutls_la_LDFLAGS = -no-undefined -version-info \
 	$(LT_CURRENT):$(LT_REVISION):$(LT_AGE) $(COMMON_LINK_FLAGS) \
-	$(am__append_23) $(am__append_24) $(am__append_29)
+	$(am__append_23) $(am__append_24) $(am__append_29) \
+	$(am__append_32)
 libgnutls_la_LIBADD = ../gl/libgnu.la x509/libgnutls_x509.la \
 	ext/libgnutls_ext.la auth/libgnutls_auth.la \
 	algorithms/libgnutls_alg.la extras/libgnutls_extras.la \
@@ -1780,6 +1785,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/mem.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/mpi.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/num.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/openpgp_compat.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pcert.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pin.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pk.Plo@am__quote@

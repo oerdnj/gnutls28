@@ -328,13 +328,13 @@ int gnutls_ocsp_req_export(gnutls_ocsp_req_t req, gnutls_datum_t * data)
 	}
 
 	/* XXX remove when we support these fields */
-	asn1_write_value(req->req, "tbsRequest.requestorName", NULL, 0);
-	asn1_write_value(req->req, "optionalSignature", NULL, 0);
+	(void)asn1_write_value(req->req, "tbsRequest.requestorName", NULL, 0);
+	(void)asn1_write_value(req->req, "optionalSignature", NULL, 0);
 
 	/* prune extension field if we don't have any extension */
 	ret = gnutls_ocsp_req_get_extension(req, 0, NULL, NULL, NULL);
 	if (ret == GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE)
-		asn1_write_value(req->req, "tbsRequest.requestExtensions",
+		(void)asn1_write_value(req->req, "tbsRequest.requestExtensions",
 				 NULL, 0);
 
 	return _gnutls_x509_get_raw_field(req->req, "", data);
@@ -430,7 +430,7 @@ gnutls_ocsp_req_get_cert_id(gnutls_ocsp_req_t req,
 			    gnutls_datum_t * serial_number)
 {
 	gnutls_datum_t sa;
-	char name[ASN1_MAX_NAME_SIZE];
+	char name[MAX_NAME_SIZE];
 	int ret;
 
 	if (req == NULL) {
@@ -737,7 +737,7 @@ gnutls_ocsp_req_get_extension(gnutls_ocsp_req_t req,
 {
 	int ret;
 	char str_critical[10];
-	char name[ASN1_MAX_NAME_SIZE];
+	char name[MAX_NAME_SIZE];
 	int len;
 
 	if (!req) {
@@ -981,6 +981,9 @@ int gnutls_ocsp_resp_get_status(gnutls_ocsp_resp_t resp)
 		return _gnutls_asn2err(ret);
 	}
 
+	if (len != 1)
+		return gnutls_assert_val(GNUTLS_E_UNEXPECTED_PACKET);
+
 	switch (str[0]) {
 	case GNUTLS_OCSP_RESP_SUCCESSFUL:
 	case GNUTLS_OCSP_RESP_MALFORMEDREQUEST:
@@ -990,7 +993,7 @@ int gnutls_ocsp_resp_get_status(gnutls_ocsp_resp_t resp)
 	case GNUTLS_OCSP_RESP_UNAUTHORIZED:
 		break;
 	default:
-		return GNUTLS_E_UNEXPECTED_PACKET;
+		return gnutls_assert_val(GNUTLS_E_UNEXPECTED_PACKET);
 	}
 
 	return (int) str[0];
@@ -1414,7 +1417,7 @@ gnutls_ocsp_resp_get_single(gnutls_ocsp_resp_t resp,
 			    time_t * revocation_time,
 			    unsigned int *revocation_reason)
 {
-	char name[ASN1_MAX_NAME_SIZE];
+	char name[MAX_NAME_SIZE];
 	int ret, result;
 	char oidtmp[MAX_OID_SIZE];
 	int len;
@@ -1625,7 +1628,7 @@ gnutls_ocsp_resp_get_extension(gnutls_ocsp_resp_t resp,
 {
 	int ret;
 	char str_critical[10];
-	char name[ASN1_MAX_NAME_SIZE];
+	char name[MAX_NAME_SIZE];
 	int len;
 
 	if (!resp) {
@@ -1827,7 +1830,7 @@ gnutls_ocsp_resp_get_certs(gnutls_ocsp_resp_t resp,
 	}
 
 	for (;;) {
-		char name[ASN1_MAX_NAME_SIZE];
+		char name[MAX_NAME_SIZE];
 
 		snprintf(name, sizeof(name), "certs.?%u",
 			 (unsigned int) (ctr + 1));
@@ -1920,27 +1923,60 @@ static gnutls_x509_crt_t find_signercert(gnutls_ocsp_resp_t resp)
 
 	for (i = 0; i < ncerts; i++) {
 		if (keyid.data != NULL) {
-			uint8_t digest[20];
+			uint8_t digest[64]; /* to support longer key IDs */
 			gnutls_datum_t spki;
+			size_t digest_size = sizeof(digest);
+			int len;
 
+			_gnutls_debug_log("checking key ID against SPK identifier\n");
+
+			/* check subject key identifier as well, some certificates
+			 * match that, but not the hash */
+			rc = gnutls_x509_crt_get_subject_key_id(certs[i], digest, &digest_size, NULL);
+			if (rc >= 0 && digest_size == keyid.size &&
+			    memcmp(keyid.data, digest, digest_size) == 0) {
+				signercert = certs[i];
+				goto quit;
+			}
+
+			_gnutls_debug_log("checking key ID against SPKI hash\n");
+
+			/* continue with checking the hash */
 			rc = _gnutls_x509_get_raw_field2(certs[i]->cert, &certs[i]->der,
 					  "tbsCertificate.subjectPublicKeyInfo.subjectPublicKey",
 					  &spki);
 			if (rc < 0 || spki.size < 6) {
 				signercert = NULL;
-				goto quit;
+				continue;
 			}
 
 			/* For some reason the protocol requires we skip the
 			 * tag, length and number of unused bits.
 			 */
-			spki.data += 5;
-			spki.size -= 5;
-			rc = gnutls_hash_fast(GNUTLS_DIG_SHA1, spki.data, spki.size, digest);
+			if (spki.data[0] != 0x03) { /* bit string */
+				gnutls_assert();
+				signercert = NULL;
+				continue;
+			}
+
+			rc = asn1_get_length_der(spki.data+1, spki.size-1, &len);
+			if (rc <= 0) {
+				gnutls_assert();
+				signercert = NULL;
+				continue;
+			}
+			len += 1+1; /* skip unused bits as well */
+			if (len >= (int)spki.size) {
+				gnutls_assert();
+				signercert = NULL;
+				continue;
+			}
+
+			rc = gnutls_hash_fast(GNUTLS_DIG_SHA1, spki.data+len, spki.size-len, digest);
 			if (rc < 0) {
 				gnutls_assert();
 				signercert = NULL;
-				goto quit;
+				continue;
 			}
 
 			if ((20 == keyid.size) &&

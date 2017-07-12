@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnutls 3.2.1\n"
 "Report-Msgid-Bugs-To: bug-gnutls@gnu.org\n"
-"POT-Creation-Date: 2017-03-06 07:03+0100\n"
+"POT-Creation-Date: 2017-07-04 07:41+0200\n"
 "PO-Revision-Date: 2013-06-13 19:14+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <translation-team-uk@lists.sourceforge.net>\n"
@@ -396,7 +396,7 @@ msgstr "Непідтримуване розширення у сертифіка�
 msgid "Key usage violation in certificate has been detected."
 msgstr "Виявлено порушення правил використання ключів сертифіката."
 
-#: lib/errors.c:182 lib/errors.c:423
+#: lib/errors.c:182 lib/errors.c:425
 msgid "Function was interrupted."
 msgstr "Роботу функції було перервано."
 
@@ -832,40 +832,40 @@ msgstr "Некоректний запит."
 msgid "The private key is invalid."
 msgstr "Некоректний запит."
 
-#: lib/errors.c:412 libdane/errors.c:42
+#: lib/errors.c:408
+msgid "One of the involved algorithms has insufficient security level."
+msgstr ""
+
+#: lib/errors.c:414 libdane/errors.c:42
 msgid "Success."
 msgstr "Успіх."
 
-#: lib/errors.c:413
+#: lib/errors.c:415
 msgid "A TLS warning alert has been received."
 msgstr "Отримано попередження TLS."
 
-#: lib/errors.c:415
+#: lib/errors.c:417
 msgid "A heartbeat pong message was received."
 msgstr "Отримано повідомлення-відповідь підтримування зв’язку."
 
-#: lib/errors.c:417
+#: lib/errors.c:419
 msgid "A heartbeat ping message was received."
 msgstr "Отримано вхідне повідомлення підтримування зв’язку."
 
-#: lib/errors.c:419
+#: lib/errors.c:421
 msgid "Resource temporarily unavailable, try again."
 msgstr "Ресурс тимчасово недоступний, повторіть спробу."
 
-#: lib/errors.c:421
+#: lib/errors.c:423
 msgid "The transmitted packet is too large (EMSGSIZE)."
 msgstr "Переданий пакет є надто великим (EMSGSIZE)."
 
-#: lib/errors.c:424
+#: lib/errors.c:426
 msgid "Rehandshake was requested by the peer."
 msgstr ""
 "Вузол надіслав запит на повторне надсилання даних підтвердження з’єднання."
 
-#: lib/errors.c:426
-msgid "One of the involved algorithms has insufficient security level."
-msgstr ""
-
-#: lib/errors.c:517 libdane/errors.c:100
+#: lib/errors.c:518 libdane/errors.c:100
 msgid "(unknown error code)"
 msgstr "(невідомий код помилки)"
 
@@ -936,7 +936,7 @@ msgstr "\t\tСтрок дії: не обмежено\n"
 msgid "\t\tExpiration: %s\n"
 msgstr "\t\tСтрок дії: до %s\n"
 
-#: lib/openpgp/output.c:230 lib/x509/ocsp_output.c:527 lib/x509/output.c:1178
+#: lib/openpgp/output.c:230 lib/x509/ocsp_output.c:524 lib/x509/output.c:1178
 #: lib/x509/output.c:1375 lib/x509/output.c:1519 lib/x509/output.c:1748
 #: lib/x509/output.c:1761 lib/x509/output.c:2178 lib/x509/output.c:2276
 #: lib/x509/output.c:2327
@@ -1095,24 +1095,24 @@ msgstr "\t\tЦе оновлення: %s\n"
 msgid "\t\tNext Update: %s\n"
 msgstr "\t\tНаступне оновлення: %s\n"
 
-#: lib/x509/ocsp_output.c:528 lib/x509/output.c:1523 lib/x509/output.c:2182
+#: lib/x509/ocsp_output.c:525 lib/x509/output.c:1523 lib/x509/output.c:2182
 #: lib/x509/output.c:2331
 #, c-format
 msgid "\tSignature Algorithm: %s\n"
 msgstr "\tАлгоритм підписування: %s\n"
 
-#: lib/x509/ocsp_output.c:532 lib/x509/output.c:1528 lib/x509/output.c:2187
+#: lib/x509/ocsp_output.c:529 lib/x509/output.c:1528 lib/x509/output.c:2187
 msgid ""
 "warning: signed using a broken signature algorithm that can be forged.\n"
 msgstr ""
 "попередження: signed використовує слабкий алгоритм підписування, який можна "
 "зламати.\n"
 
-#: lib/x509/ocsp_output.c:541 lib/x509/output.c:1554 lib/x509/output.c:2213
+#: lib/x509/ocsp_output.c:543 lib/x509/output.c:1554 lib/x509/output.c:2213
 msgid "\tSignature:\n"
 msgstr "\tПідпис:\n"
 
-#: lib/x509/ocsp_output.c:649
+#: lib/x509/ocsp_output.c:651
 msgid "OCSP Response Information:\n"
 msgstr "Дані відповіді OCSP:\n"
 
@@ -1680,11 +1680,11 @@ msgstr "\t\tНевідомий атрибут %s:\n"
 msgid "PKCS #10 Certificate Request Information:\n"
 msgstr "Дані щодо запиту сертифіката PKCS #10:\n"
 
-#: lib/x509/output.c:2534
+#: lib/x509/output.c:2535
 msgid "Public Key Usage:\n"
 msgstr "Використання відкритого ключа:\n"
 
-#: lib/x509/output.c:2568
+#: lib/x509/output.c:2570
 msgid "Public Key Information:\n"
 msgstr "Дані відкритого ключа:\n"
 

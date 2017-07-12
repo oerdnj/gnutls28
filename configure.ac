@@ -21,7 +21,7 @@ dnl Process this file with autoconf to produce a configure script.
 # USA
 
 AC_PREREQ(2.61)
-AC_INIT([GnuTLS], [3.5.10], [bugs@gnutls.org])
+AC_INIT([GnuTLS], [3.5.14], [bugs@gnutls.org])
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_MACRO_DIR([m4])
 AC_CANONICAL_HOST
@@ -363,9 +363,6 @@ AC_ARG_ENABLE(full-test-suite,
 SUITE_FILE="${srcdir}/tests/suite/mini-eagain2.c"
 if test "$full_test_suite" = yes && test ! -f "$SUITE_FILE";then
 	full_test_suite=no
-	VALGRIND=""
-	AC_SUBST(VALGRIND, [])
-	opt_valgrind_tests=no
 fi
 
 AM_CONDITIONAL(WANT_TEST_SUITE, test "$full_test_suite" = "yes")
@@ -757,10 +754,13 @@ if test x$ac_zlib != xno; then
     else
       GNUTLS_REQUIRES_PRIVATE="$GNUTLS_REQUIRES_PRIVATE, zlib"
     fi
+    LIBZ_PC=""
+  else
+    LIBZ_PC=$LIBZ
   fi
 fi
+AC_SUBST(LIBZ_PC)
 AC_SUBST(GNUTLS_REQUIRES_PRIVATE)
-
 
 
 AC_ARG_WITH([default-trust-store-pkcs11],
@@ -788,7 +788,7 @@ dnl auto detect http://lists.gnu.org/archive/html/help-gnutls/2012-05/msg00004.h
 AC_ARG_WITH([default-trust-store-file],
   [AS_HELP_STRING([--with-default-trust-store-file=FILE],
     [use the given file default trust store])], with_default_trust_store_file="$withval",
-  [if test "$build" = "$host" && test x$with_default_trust_store_pkcs11 = x && test x$with_default_trust_store_dir = x;then
+  [if test "$build" = "$host" && test x$with_default_trust_store_pkcs11 = x && test x$with_default_trust_store_dir = x && test x$have_macosx = x;then
   for i in \
     /etc/ssl/ca-bundle.pem \
     /etc/ssl/certs/ca-certificates.crt \
@@ -951,6 +951,7 @@ AC_SUBST([YEAR], $YEAR)
 for i in ${srcdir}/src/*-args.c.bak ${srcdir}/src/*-args.h.bak; do
 	nam=$(basename $i|sed 's/.bak//g')
 	if test "$create_libopts_links" = "yes";then
+		rm -f "src/$nam.stamp"
 		rm -f "src/$nam"
 		AC_CONFIG_LINKS([src/$nam:$i])
 	fi
@@ -1096,4 +1097,13 @@ AC_MSG_WARN([[
 *** Use the command: unbound-anchor -a "$unbound_root_key_file"
 *** to generate or update it.
 *** ]])
+fi
+
+if test "${enable_static}" != no;then
+AC_MSG_WARN([[
+*** GnuTLS will be build as a static library. That means that library
+*** constructors for gnutls_global_init will not be made available to
+*** linking applications. If you are building that library for arbitrary
+*** applications to link, do not enable static linking.
+]])
 fi

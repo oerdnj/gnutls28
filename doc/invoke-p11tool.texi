@@ -30,7 +30,7 @@ This software is released under the GNU General Public License, version 3 or lat
 
 
 @anchor{p11tool usage}
-@subsection p11tool help/usage (@option{--help})
+@subheading p11tool help/usage (@option{--help})
 @cindex p11tool help
 
 This is the automatically generated usage text for p11tool.
@@ -192,7 +192,7 @@ environment variables GNUTLS_PIN and GNUTLS_SO_PIN.
 @exampleindent 4
 
 @anchor{p11tool token-related-options}
-@subsection token-related-options options
+@subheading token-related-options options
 Tokens.
 @subsubheading list-token-urls option.
 @anchor{p11tool list-token-urls}
@@ -212,7 +212,7 @@ This is the ``specify the security officer's pin to use on token initialization'
 This option takes a string argument.
 Alternatively the GNUTLS_SO_PIN environment variable may be used.
 @anchor{p11tool object-list-related-options}
-@subsection object-list-related-options options
+@subheading object-list-related-options options
 Object listing.
 @subsubheading list-all-privkeys option.
 @anchor{p11tool list-all-privkeys}
@@ -288,7 +288,7 @@ This is an alias for the @code{mark-distrusted} option,
 @pxref{p11tool mark-distrusted, the mark-distrusted option documentation}.
 
 @anchor{p11tool keygen-related-options}
-@subsection keygen-related-options options
+@subheading keygen-related-options options
 Key generation.
 @subsubheading generate-rsa option.
 @anchor{p11tool generate-rsa}
@@ -329,7 +329,7 @@ This is the ``specify the security level'' option.
 This option takes a string argument @file{Security parameter}.
 This is alternative to the bits option. Available options are [low, legacy, medium, high, ultra].
 @anchor{p11tool write-object-related-options}
-@subsection write-object-related-options options
+@subheading write-object-related-options options
 Writing objects.
 @subsubheading set-id option.
 @anchor{p11tool set-id}
@@ -489,7 +489,7 @@ This is the ``provide a hex encoded secret key'' option.
 This option takes a string argument.
 This secret key will be written to the module if --write is specified.
 @anchor{p11tool other-options}
-@subsection other-options options
+@subheading other-options options
 Other options.
 @subsubheading debug option (-d).
 @anchor{p11tool debug}
@@ -579,7 +579,7 @@ This will override the default options in /etc/gnutls/pkcs11.conf
 This is the ``disable all interaction with the tool'' option.
 In batch mode there will be no prompts, all parameters need to be specified on command line.
 @anchor{p11tool exit status}
-@subsection p11tool exit status
+@subheading p11tool exit status
 
 One of the following exit values will be returned:
 @table @samp
@@ -589,10 +589,10 @@ Successful program execution.
 The operation failed or the command syntax was not valid.
 @end table
 @anchor{p11tool See Also}
-@subsection p11tool See Also
+@subheading p11tool See Also
     certtool (1)
 @anchor{p11tool Examples}
-@subsection p11tool Examples
+@subheading p11tool Examples
 To view all tokens in your system use:
 @example
 $ p11tool --list-tokens

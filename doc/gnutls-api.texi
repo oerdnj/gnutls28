@@ -188,7 +188,7 @@ Anonymous Diffie-Hellman cipher suites.
 @deftypefun {int} {gnutls_anon_set_server_known_dh_params} (gnutls_anon_server_credentials_t @var{res}, gnutls_sec_param_t @var{sec_param})
 @var{res}: is a gnutls_anon_server_credentials_t type
 
-@var{sec_param}: -- undescribed --
+@var{sec_param}: is an option of the @code{gnutls_sec_param_t}  enumeration
 
 This function will set the Diffie-Hellman parameters for an
 anonymous server to use.  These parameters will be used in
@@ -335,7 +335,8 @@ Allocate a gnutls_certificate_credentials_t structure.
 @deftypefun {int} {gnutls_certificate_client_get_request_status} (gnutls_session_t @var{session})
 @var{session}: is a gnutls session
 
-Get whether client certificate is requested or not.
+Get whether client certificate was requested on the last
+handshake or not.
 
 @strong{Returns:} 0 if the peer (server) did not request client
 authentication or 1 otherwise.
@@ -1949,7 +1950,7 @@ an error code is returned.
 @var{src}: Is the source parameters
 
 This function will copy the DH parameters structure from source
-to destination.
+to destination. The destination should be already initialized.
 
 @strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (0) is returned,
 otherwise a negative error code is returned.
@@ -2576,6 +2577,10 @@ should be used if you have complete control of your program and libraries.
 Do not call this function from a library, or preferably from any application
 unless really needed to. GnuTLS will use the appropriate locks for the running
 system.
+
+Note that since the move to implicit initialization of GnuTLS on library
+load, calling this function will deinitialize the library, and re-initialize
+it after the new locking functions are set.
 
 This function must be called prior to any other gnutls function.
 
@@ -3472,7 +3477,7 @@ an error code is returned.
 @subheading gnutls_pem_base64_encode
 @anchor{gnutls_pem_base64_encode}
 @deftypefun {int} {gnutls_pem_base64_encode} (const char * @var{msg}, const gnutls_datum_t * @var{data}, char * @var{result}, size_t * @var{result_size})
-@var{msg}: is a message to be put in the header
+@var{msg}: is a message to be put in the header (may be @code{NULL} )
 
 @var{data}: contain the raw data
 
@@ -3483,7 +3488,7 @@ an error code is returned.
 This function will convert the given data to printable data, using
 the base64 encoding. This is the encoding used in PEM messages.
 
-The output string will be null terminated, although the size will
+The output string will be null terminated, although the output size will
 not include the terminating null.
 
 @strong{Returns:} On success @code{GNUTLS_E_SUCCESS}  (0) is returned,
@@ -3494,7 +3499,7 @@ not long enough, or 0 on success.
 @subheading gnutls_pem_base64_encode2
 @anchor{gnutls_pem_base64_encode2}
 @deftypefun {int} {gnutls_pem_base64_encode2} (const char * @var{msg}, const gnutls_datum_t * @var{data}, gnutls_datum_t * @var{result})
-@var{msg}: is a message to be put in the encoded header
+@var{msg}: is a message to be put in the encoded header (may be @code{NULL} )
 
 @var{data}: contains the raw data
 
@@ -4320,7 +4325,8 @@ should return @code{GNUTLS_E_SUCCESS}  (0) on success.
 @var{art}: The returned random art
 
 This function will convert a given fingerprint to an "artistic"
-image. The returned image is allocated using @code{gnutls_malloc()} .
+image. The returned image is allocated using @code{gnutls_malloc()} , is
+null-terminated but art->size will not account the terminating null.
 
 @strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (0) is returned, otherwise
 an error code is returned.
@@ -4956,11 +4962,16 @@ This is in accordance to draft-ietf-tls-session-hash-01
 
 @var{unpack_func}: a function which will deserialize the extension's private data
 
-@var{flags}: must be zero
+@var{flags}: must be zero or flags from @code{gnutls_ext_flags_t} 
 
 This function will register a new extension type. The extension will be
 only usable within the registered session. If the extension type
-is already registered then @code{GNUTLS_E_ALREADY_REGISTERED}  will be returned.
+is already registered then @code{GNUTLS_E_ALREADY_REGISTERED}  will be returned,
+unless the flag @code{GNUTLS_EXT_FLAG_OVERRIDE_INTERNAL}  is specified. The latter
+flag when specified can be used to override certain extensions introduced
+after 3.5.12. It is expected to be used by applications which handle
+custom extensions that are not currently supported in GnuTLS, but direct
+support for them may be added in the future.
 
 Each registered extension can store temporary data into the gnutls_session_t
 structure using @code{gnutls_ext_set_data()} , and they can be retrieved using
@@ -6177,7 +6188,7 @@ This function is not thread safe.
 @deftypefun {void} {gnutls_supplemental_send} (gnutls_session_t @var{session}, unsigned @var{do_send_supplemental})
 @var{session}: is a @code{gnutls_session_t}  type.
 
-@var{do_send_supplemental}: -- undescribed --
+@var{do_send_supplemental}: non-zero in order to send supplemental data
 
 This function is to be called by an extension handler to
 instruct gnutls to send supplemental data during the handshake process.
@@ -6471,11 +6482,15 @@ for data.
 int (*gnutls_pull_timeout_func)(gnutls_transport_ptr_t, unsigned int ms);
 
 This callback is necessary when @code{gnutls_handshake_set_timeout()}  or 
-@code{gnutls_record_set_timeout()}  are set. It will not be used when 
-non-blocking sockets are in use. That is, this function will
-not operate when @code{GNUTLS_NONBLOCK}  is specified in @code{gnutls_init()} , 
-or a custom pull function is registered without updating the 
-pull timeout function.
+@code{gnutls_record_set_timeout()}  are set, and for calculating the DTLS mode
+timeouts.
+
+In short, this callback should be set when a custom pull function is
+registered. The callback will not be used when the session is in TLS mode with
+non-blocking sockets. That is, when @code{GNUTLS_NONBLOCK}  is specified for a TLS
+session in @code{gnutls_init()} . For compatibility with future GnuTLS versions
+it is recommended to always set this function when a custom pull function
+is registered.
 
 The helper function @code{gnutls_system_recv_timeout()}  is provided to
 simplify writing callbacks. 

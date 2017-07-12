@@ -431,6 +431,7 @@ static int cert_verify_callback(gnutls_session_t session)
 	int dane = ENABLED_OPT(DANE);
 	int ca_verify = ENABLED_OPT(CA_VERIFICATION);
 	const char *txt_service;
+	gnutls_datum_t oresp;
 
 	/* On an session with TOFU the PKI/DANE verification
 	 * become advisory.
@@ -440,8 +441,24 @@ static int cert_verify_callback(gnutls_session_t session)
 		ssh = strictssh;
 	}
 
+	/* Save certificate and OCSP response */
 	if (HAVE_OPT(SAVE_CERT)) {
 		try_save_cert(session);
+	}
+
+	rc = gnutls_ocsp_status_request_get(session, &oresp);
+	if (rc < 0) {
+		oresp.data = NULL;
+		oresp.size = 0;
+	}
+
+	if (HAVE_OPT(SAVE_OCSP) && oresp.data) {
+		FILE *fp = fopen(OPT_ARG(SAVE_OCSP), "w");
+
+		if (fp != NULL) {
+			fwrite(oresp.data, 1, oresp.size, fp);
+			fclose(fp);
+		}
 	}
 
 	print_cert_info(session, verbose, print_cert);
@@ -695,7 +712,10 @@ gnutls_session_t init_tls_session(const char *host)
 	/* allow the use of private ciphersuites.
 	 */
 	if (disable_extensions == 0 && disable_sni == 0) {
-		if (host != NULL && is_ip(host) == 0)
+		if (HAVE_OPT(SNI_HOSTNAME)) {
+			gnutls_server_name_set(session, GNUTLS_NAME_DNS,
+					       OPT_ARG(SNI_HOSTNAME), strlen(OPT_ARG(SNI_HOSTNAME)));
+		} else if (host != NULL && is_ip(host) == 0)
 			gnutls_server_name_set(session, GNUTLS_NAME_DNS,
 					       host, strlen(host));
 	}
@@ -1150,14 +1170,6 @@ print_other_info(gnutls_session_t session)
 		fputs((char*)p.data, stdout);
 	}
 
-	if (HAVE_OPT(SAVE_OCSP) && oresp.data) {
-		FILE *fp = fopen(OPT_ARG(SAVE_OCSP), "w");
-
-		if (fp != NULL) {
-			fwrite(oresp.data, 1, oresp.size, fp);
-			fclose(fp);
-		}
-	}
 }
 
 static void flush_socket(socket_st *hd, unsigned ms)
@@ -1962,7 +1974,8 @@ static int cert_verify_ocsp(gnutls_session_t session)
 				goto cleanup;
 			}
 		} else if (ret < 0) {
-			fprintf(stderr, "Cannot find issuer\n");
+			if (it == 0)
+				fprintf(stderr, "Cannot find issuer: %s\n", gnutls_strerror(ret));
 			goto cleanup;
 		}
 

@@ -21,11 +21,16 @@
 
 @var{unpack_func}: a function which will deserialize the extension's private data
 
-@var{flags}: must be zero
+@var{flags}: must be zero or flags from @code{gnutls_ext_flags_t} 
 
 This function will register a new extension type. The extension will be
 only usable within the registered session. If the extension type
-is already registered then @code{GNUTLS_E_ALREADY_REGISTERED}  will be returned.
+is already registered then @code{GNUTLS_E_ALREADY_REGISTERED}  will be returned,
+unless the flag @code{GNUTLS_EXT_FLAG_OVERRIDE_INTERNAL}  is specified. The latter
+flag when specified can be used to override certain extensions introduced
+after 3.5.12. It is expected to be used by applications which handle
+custom extensions that are not currently supported in GnuTLS, but direct
+support for them may be added in the future.
 
 Each registered extension can store temporary data into the gnutls_session_t
 structure using @code{gnutls_ext_set_data()} , and they can be retrieved using

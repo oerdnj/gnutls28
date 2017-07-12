@@ -480,7 +480,6 @@ gnutls_int
 @auth_info_size: 
 @crypt_algo: 
 @cred: 
-@crt_requested: 
 
 <!-- ##### ENUM handshake_state_t ##### -->
 <para>

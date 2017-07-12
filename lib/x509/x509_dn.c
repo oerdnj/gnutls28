@@ -288,7 +288,7 @@ fail:
  * DN parsing error %GNUTLS_E_PARSING_ERROR is returned.
  *
  * Note that DNs are not expected to hold DNS information, and thus
- * no automatic IDNA convertions are attempted when using this function.
+ * no automatic IDNA conversions are attempted when using this function.
  * If that is required (e.g., store a domain in CN), process the corresponding
  * input with gnutls_idna_map().
  *
@@ -563,7 +563,7 @@ gnutls_x509_dn_get_rdn_ava(gnutls_x509_dn_t dn,
 	ASN1_DATA_NODE vnode;
 	long len;
 	int lenlen, remlen, ret;
-	char rbuf[ASN1_MAX_NAME_SIZE];
+	char rbuf[MAX_NAME_SIZE];
 	unsigned char cls;
 	const unsigned char *ptr;
 

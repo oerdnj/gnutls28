@@ -59,10 +59,11 @@ Usage:  gnutls-cli [ -<flag> [<val>] | --<name>[@{=| @}<val>] ]... [hostname]
                                 - disabled as '--no-ocsp'
    -r, --resume               Establish a session and resume
    -e, --rehandshake          Establish a session and rehandshake
+       --sni-hostname=str     Server's hostname for server name indication extension
    -s, --starttls             Connect, establish a plain session and start TLS
        --app-proto=str        an alias for the 'starttls-proto' option
        --starttls-proto=str   The application protocol to be used to obtain the server's certificate
-(https, ftp, smtp, imap, ldap, xmpp)
+(https, ftp, smtp, imap, ldap, xmpp, lmtp, pop3, nntp, sieve, postgres)
                                 - prohibits the option 'starttls'
    -u, --udp                  Use DTLS (datagram TLS) over UDP
        --mtu=num              Set MTU for datagram TLS
@@ -236,6 +237,12 @@ Connect, establish a session, reconnect and resume.
 
 This is the ``establish a session and rehandshake'' option.
 Connect, establish a session and rehandshake immediately.
+@anchor{gnutls-cli sni-hostname}
+@subheading sni-hostname option
+
+This is the ``server's hostname for server name indication extension'' option.
+This option takes a string argument.
+Set explicitly the server name used in the TLS server name indication extension. That is useful when testing with servers setup on different DNS name than the intended. If not specified, the provided hostname is used.
 @anchor{gnutls-cli starttls}
 @subheading starttls option (-s)
 

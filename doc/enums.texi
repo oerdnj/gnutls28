@@ -796,6 +796,12 @@ Extension parsed even if resuming (or extensions are disabled).
 Never parsed
 @end table
 
+@c gnutls_ext_flags_t
+@table @code
+@item GNUTLS_@-EXT_@-FLAG_@-OVERRIDE_@-INTERNAL
+If specified the extension registered will override the internal; this does not work with extensions existing prior to 3.5.12.
+@end table
+
 @c gnutls_certificate_import_flags
 @table @code
 @item GNUTLS_@-X509_@-CRT_@-LIST_@-IMPORT_@-FAIL_@-IF_@-EXCEED

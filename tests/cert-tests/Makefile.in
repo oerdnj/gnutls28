@@ -116,13 +116,12 @@ host_triplet = @host@
 @ENABLE_OPENPGP_TRUE@	openpgp-cert-parser
 @ENABLE_OPENPGP_TRUE@@WINDOWS_FALSE@am__append_4 = openpgp-certs
 @HAVE_BUGGY_LIBIDN_FALSE@am__append_5 = certtool-utf8
-@ENABLE_NON_SUITEB_CURVES_TRUE@am__append_6 = crq
-@WINDOWS_FALSE@am__append_7 = template-test pem-decoding othername-test krb5-test sha3-test md5-test \
+@WINDOWS_FALSE@am__append_6 = template-test pem-decoding othername-test krb5-test sha3-test md5-test \
 @WINDOWS_FALSE@	tlsfeature-test template-exts-test pkcs1-pad pkcs12-utf8
 
-@ENABLE_DANE_TRUE@am__append_8 = dane
-@ENABLE_FIPS140_TRUE@am__append_9 = FIPS140=1
-@WINDOWS_TRUE@am__append_10 = WINDOWS=1
+@ENABLE_DANE_TRUE@am__append_7 = dane
+@ENABLE_FIPS140_TRUE@am__append_8 = FIPS140=1
+@WINDOWS_TRUE@am__append_9 = WINDOWS=1
 subdir = tests/cert-tests
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/lib/unistring/m4/gnulib-comp.m4 \
@@ -253,16 +252,16 @@ CONFIG_HEADER = $(top_builddir)/config.h
 CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__dist_check_SCRIPTS_DIST = pathlen aki certtool invalid-sig email \
-	pkcs7 pkcs7-broken-sigs privkey-import name-constraints \
+	crq pkcs7 pkcs7-broken-sigs privkey-import name-constraints \
 	certtool-long-cn crl provable-privkey provable-dh userid \
 	sha2-test sha2-dsa-test provable-privkey-dsa2048 \
 	provable-privkey-rsa2048 provable-privkey-gen-default \
 	pkcs7-constraints pkcs7-constraints2 certtool-long-oids \
-	pkcs7-cat provable-dh-default pkcs12 openpgp-selfsigs \
-	openpgp-cert-parser openpgp-certs certtool-utf8 crq \
-	template-test pem-decoding othername-test krb5-test sha3-test \
-	md5-test tlsfeature-test template-exts-test pkcs1-pad \
-	pkcs12-utf8 dane
+	pkcs7-cat pkcs12-corner-cases pkcs7-list-sign \
+	provable-dh-default pkcs12 openpgp-selfsigs \
+	openpgp-cert-parser openpgp-certs certtool-utf8 template-test \
+	pem-decoding othername-test krb5-test sha3-test md5-test \
+	tlsfeature-test template-exts-test pkcs1-pad pkcs12-utf8 dane
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -522,6 +521,7 @@ CODE_COVERAGE_CPPFLAGS = @CODE_COVERAGE_CPPFLAGS@
 CODE_COVERAGE_CXXFLAGS = @CODE_COVERAGE_CXXFLAGS@
 CODE_COVERAGE_ENABLED = @CODE_COVERAGE_ENABLED@
 CODE_COVERAGE_LDFLAGS = @CODE_COVERAGE_LDFLAGS@
+CODE_COVERAGE_LIBS = @CODE_COVERAGE_LIBS@
 CONFIG_INCLUDE = @CONFIG_INCLUDE@
 CPP = @CPP@
 CPPFLAGS = @CPPFLAGS@
@@ -1133,6 +1133,7 @@ LIBUNISTRING_UNINORM_H = @LIBUNISTRING_UNINORM_H@
 LIBUNISTRING_UNISTR_H = @LIBUNISTRING_UNISTR_H@
 LIBUNISTRING_UNITYPES_H = @LIBUNISTRING_UNITYPES_H@
 LIBZ = @LIBZ@
+LIBZ_PC = @LIBZ_PC@
 LIBZ_PREFIX = @LIBZ_PREFIX@
 LIB_CLOCK_GETTIME = @LIB_CLOCK_GETTIME@
 LIB_SELECT = @LIB_SELECT@
@@ -1552,17 +1553,20 @@ EXTRA_DIST = data/ca-no-pathlen.pem data/no-ca-or-pathlen.pem data/aki-cert.pem 
 	data/openpgp-invalid1.pub data/openpgp-invalid2.pub data/openpgp-invalid3.pub \
 	data/openpgp-invalid4.pub data/openpgp-invalid5.pub \
 	data/openpgp-invalid5.pub data/openpgp-invalid6.pub \
-	data/openpgp-invalid7.pub data/openpgp-invalid8.pub
+	data/openpgp-invalid7.pub data/openpgp-invalid8.pub \
+	data/key-corpus-rc2-1.p12 data/key-corpus-rc2-2.p12 data/key-corpus-rc2-3.p12 \
+	data/pkcs7-chain.pem data/pkcs7-chain-root.pem \
+	data/pkcs7-chain-endcert-key.pem data/openssl-invalid-time-format.pem
 
-dist_check_SCRIPTS = pathlen aki certtool invalid-sig email pkcs7 \
+dist_check_SCRIPTS = pathlen aki certtool invalid-sig email crq pkcs7 \
 	pkcs7-broken-sigs privkey-import name-constraints \
 	certtool-long-cn crl provable-privkey provable-dh userid \
 	sha2-test sha2-dsa-test provable-privkey-dsa2048 \
 	provable-privkey-rsa2048 provable-privkey-gen-default \
 	pkcs7-constraints pkcs7-constraints2 certtool-long-oids \
-	pkcs7-cat $(am__append_1) $(am__append_2) $(am__append_3) \
-	$(am__append_4) $(am__append_5) $(am__append_6) \
-	$(am__append_7) $(am__append_8)
+	pkcs7-cat pkcs12-corner-cases pkcs7-list-sign $(am__append_1) \
+	$(am__append_2) $(am__append_3) $(am__append_4) \
+	$(am__append_5) $(am__append_6) $(am__append_7)
 TESTS = $(dist_check_SCRIPTS)
 
 # Set detect_leaks=0 to ASAN. It seems it is detecting many leaks in tools
@@ -1570,7 +1574,7 @@ TESTS = $(dist_check_SCRIPTS)
 TESTS_ENVIRONMENT = EXEEXT=$(EXEEXT) LC_ALL="C" VALGRIND="$(VALGRIND)" \
 	LIBTOOL="$(LIBTOOL)" top_builddir="$(top_builddir)" \
 	ASAN_OPTIONS="detect_leaks=0:exitcode=6" srcdir="$(srcdir)" \
-	$(am__append_9) $(am__append_10)
+	$(am__append_8) $(am__append_9)
 all: all-am
 
 .SUFFIXES:
@@ -1793,6 +1797,13 @@ email.log: email
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
 	"$$tst" $(AM_TESTS_FD_REDIRECT)
+crq.log: crq
+	@p='crq'; \
+	b='crq'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
 pkcs7.log: pkcs7
 	@p='pkcs7'; \
 	b='pkcs7'; \
@@ -1919,6 +1930,20 @@ pkcs7-cat.log: pkcs7-cat
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
 	"$$tst" $(AM_TESTS_FD_REDIRECT)
+pkcs12-corner-cases.log: pkcs12-corner-cases
+	@p='pkcs12-corner-cases'; \
+	b='pkcs12-corner-cases'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+pkcs7-list-sign.log: pkcs7-list-sign
+	@p='pkcs7-list-sign'; \
+	b='pkcs7-list-sign'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
 provable-dh-default.log: provable-dh-default
 	@p='provable-dh-default'; \
 	b='provable-dh-default'; \
@@ -1957,13 +1982,6 @@ openpgp-certs.log: openpgp-certs
 certtool-utf8.log: certtool-utf8
 	@p='certtool-utf8'; \
 	b='certtool-utf8'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-crq.log: crq
-	@p='crq'; \
-	b='crq'; \
 	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \

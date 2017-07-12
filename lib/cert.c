@@ -918,7 +918,7 @@ int _gnutls_check_key_cert_match(gnutls_certificate_credentials_t res)
 
 	ret = gnutls_pubkey_verify_data2(res->certs[res->ncerts - 1].cert_list[0].pubkey,
 		gnutls_pk_to_sign(pk, GNUTLS_DIG_SHA256),
-		0, &test, &sig);
+		GNUTLS_VERIFY_ALLOW_BROKEN, &test, &sig);
 
 	gnutls_free(sig.data);
 
@@ -979,12 +979,12 @@ gnutls_certificate_verification_status_print(unsigned int status,
 		if (status & GNUTLS_CERT_REVOCATION_DATA_SUPERSEDED)
 			_gnutls_buffer_append_str(&str,
 						  _
-						  ("The revocation data are old and have been superseded. "));
+						  ("The revocation or OCSP data are old and have been superseded. "));
 
 		if (status & GNUTLS_CERT_REVOCATION_DATA_ISSUED_IN_FUTURE)
 			_gnutls_buffer_append_str(&str,
 						  _
-						  ("The revocation data are issued with a future date. "));
+						  ("The revocation or OCSP data are issued with a future date. "));
 
 		if (status & GNUTLS_CERT_SIGNER_NOT_FOUND)
 			_gnutls_buffer_append_str(&str,

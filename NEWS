@@ -2,8 +2,128 @@ GnuTLS NEWS -- History of user-visible changes.                -*- outline -*-
 Bug numbers referenced in this log correspond to bug numbers at our issue tracker,
 available at https://gitlab.com/gnutls/gnutls/issues
 Copyright (C) 2000-2016 Free Software Foundation, Inc.
-Copyright (C) 2013-2016 Nikos Mavrogiannopoulos
+Copyright (C) 2013-2017 Nikos Mavrogiannopoulos
 See the end for copying conditions.
+
+* Version 3.5.14 (released 2017-07-04)
+
+** libgnutls: Handle specially HSMs which request explicit authentication.
+   There are HSMs which return CKR_USER_NOT_LOGGED_IN on the first private key
+   operation. Detect that state and try to login.
+
+** libgnutls: the GNUTLS_PKCS11_OBJ_FLAG_LOGIN will force a login on HSMs.
+   That is, even in tokens which do not have a CKF_LOGIN_REQUIRED flag
+   a login will be forced. This improves operation on certain Safenet HSMs.
+
+** libgnutls: do not set leading zeros when copying integers on HSMs.
+   PKCS#11 defines integers as unsigned having most significant byte
+   first, e.g., 32768 = 0x80 0x00. This is interpreted literraly by
+   some HSMs which do not accept an integer with a leading zero. This
+   improves operation with certain Atos HSMs.
+
+** libgnutls: Fixed issue discovering certain OCSP signers, and improved the
+   discovery of OCSP signer in the case where the Subject Public Key
+   identifier field matches. Resolves gitlab issue #223.
+
+** gnutls-cli: ensure OCSP responses are saved with --save-ocsp even if
+   certificate verification fails.
+
+** API and ABI modifications:
+No changes since last version.
+
+
+* Version 3.5.13 (released 2017-06-07)
+
+** libgnutls: fixed issue with AES-GCM in-place encryption and decryption in
+   aarch64. Resolves gitlab issue #204.
+
+** libgnutls: no longer parse the ResponseID field of the status response
+   TLS extension. The field is not used by GnuTLS nor is made available to
+   calling applications. That addresses a null pointer dereference on server
+   side caused by packets containing the ResponseID field. Reported
+   by Hubert Kario. [GNUTLS-SA-2017-4]
+
+** libgnutls: tolerate certificates which do not have strict DER time encoding.
+   It is possible using 3rd party tools to generate certificates with time fields
+   that do not conform to DER requirements. Since 3.4.x these certificates were rejected
+   and cannot be used with GnuTLS, however that caused problems with existing private
+   certificate infrastructures, which were relying on such certificates (see gitlab
+   issue #196). Tolerate reading and using these certificates.
+
+** minitasn1: updated to libtasn1 4.11.
+
+** certtool: allow multiple certificates to be used in --p7-sign with
+   the --load-certificate option. Patch by Karl Tarbe.
+
+** API and ABI modifications:
+No changes since last version.
+
+
+* Version 3.5.12 (released 2017-05-11)
+
+** libgnutls: enabled TCP Fast open for MacOSX. Patch by Tim Ruehsen.
+
+** libgnutls: gnutls_x509_crt_check_hostname2() no longer matches IP addresses
+   against DNS fields of certificate (CN or DNSname). The previous behavior
+   was to tolerate some misconfigured servers, but that was non-standard
+   and skipped any IP constraints present in higher level certificates.
+
+** libgnutls: when converting to IDNA2008, fallback to IDNA2003 (i.e., transitional
+   encoding) if the domain cannot be converted. That provides maximum compatibility
+   with browsers like firefox that perform the same conversion.
+
+** libgnutls: fix issue in RSA-PSK client callback which resulted in no username
+   being sent to the peer. Patch by Nicolas Dufresne.
+
+** libgnutls: fix regression causing stapled extensions in trust modules not
+   to be considered.
+
+** certtool: introduced the email_protection_key option.  This option was introduced
+   in documentation for certtool without an implementation of it. It is a shortcut
+   for option 'key_purpose_oid = 1.3.6.1.5.5.7.3.4'.
+
+** certtool: made printing of key ID and key PIN consistent between certificates,
+   public keys, and private keys. That is the private key printing now uses the
+   same format as the rest.
+
+** gnutls-cli: introduced the --sni-hostname option. This allows overriding the
+   hostname advertised to the peer.
+
+** API and ABI modifications:
+No changes since last version.
+
+
+* Version 3.5.11 (released 2017-04-07)
+
+** gnutls.pc: do not include libtool options into Libs.private.
+
+** libgnutls: Fixed issue when rehandshaking without a client certificate in
+   a session which initially used one. Reported by Frantisek Sumsal.
+
+** libgnutls: Addressed read of 4 bytes past the end of buffer in OpenPGP
+   certificate parsing. Issues found using oss-fuzz project and were fixed
+   by Alex Gaynor:
+   https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=737
+   https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=824
+
+** libgnutls: Introduced locks in gnutls_pkcs11_privkey_t structure access.
+   That allows PKCS#11 operations such as signing to be performed with the
+   same object from multiple threads.
+
+** libgnutls: Added support for MacOSX key chain for obtaining trust store's
+   root CA certificates. That is, gnutls_x509_trust_list_add_system_trust() and
+   gnutls_certificate_set_x509_system_trust() will load the certificates from
+   the key chain. That also means that we no longer check for a default trust
+   store file in configure when building on MacOSX (unless explicitly asked to).
+   Patch by David Caldwell.
+
+** libgnutls: when disabling OpenPGP authentication, the resulting library
+   is ABI compatible (with openpgp related functions being stubs that fail
+   on invocation).
+
+** API and ABI modifications:
+No changes since last version.
+
 
 * Version 3.5.10 (released 2017-03-06)
 

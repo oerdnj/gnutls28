@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnutls 3.2.3\n"
 "Report-Msgid-Bugs-To: bug-gnutls@gnu.org\n"
-"POT-Creation-Date: 2017-03-06 07:03+0100\n"
+"POT-Creation-Date: 2017-07-04 07:41+0200\n"
 "PO-Revision-Date: 2015-04-25 19:49+0200\n"
 "Last-Translator: Stéphane Aulery <lkppo@free.fr>\n"
 "Language-Team: French <traduc@traduc.org>\n"
@@ -403,7 +403,7 @@ msgstr "Une extension du certificat X.509 n’est pas prise en charge."
 msgid "Key usage violation in certificate has been detected."
 msgstr "Violation d’utilisation de la clef d’un certificat détectée."
 
-#: lib/errors.c:182 lib/errors.c:423
+#: lib/errors.c:182 lib/errors.c:425
 msgid "Function was interrupted."
 msgstr "Fonction interrompue."
 
@@ -840,39 +840,39 @@ msgstr "Requête invalide."
 msgid "The private key is invalid."
 msgstr "Requête invalide."
 
-#: lib/errors.c:412 libdane/errors.c:42
-msgid "Success."
-msgstr "Succès."
-
-#: lib/errors.c:413
-msgid "A TLS warning alert has been received."
-msgstr "Un avertissement TLS a été reçu."
-
-#: lib/errors.c:415
-msgid "A heartbeat pong message was received."
-msgstr "Un message de pong heartbeat a été reçu."
-
-#: lib/errors.c:417
-msgid "A heartbeat ping message was received."
-msgstr "Un message de ping heartbeat a été reçu."
-
-#: lib/errors.c:419
-msgid "Resource temporarily unavailable, try again."
-msgstr "Ressource temporairement indisponible. Réessayer."
-
-#: lib/errors.c:421
-msgid "The transmitted packet is too large (EMSGSIZE)."
-msgstr "Le paquet transmis est trop grand (EMSGSIZE)."
-
-#: lib/errors.c:424
-msgid "Rehandshake was requested by the peer."
-msgstr "Une renégociation a été demandée par la machine distante."
-
-#: lib/errors.c:426
+#: lib/errors.c:408
 msgid "One of the involved algorithms has insufficient security level."
 msgstr ""
 
-#: lib/errors.c:517 libdane/errors.c:100
+#: lib/errors.c:414 libdane/errors.c:42
+msgid "Success."
+msgstr "Succès."
+
+#: lib/errors.c:415
+msgid "A TLS warning alert has been received."
+msgstr "Un avertissement TLS a été reçu."
+
+#: lib/errors.c:417
+msgid "A heartbeat pong message was received."
+msgstr "Un message de pong heartbeat a été reçu."
+
+#: lib/errors.c:419
+msgid "A heartbeat ping message was received."
+msgstr "Un message de ping heartbeat a été reçu."
+
+#: lib/errors.c:421
+msgid "Resource temporarily unavailable, try again."
+msgstr "Ressource temporairement indisponible. Réessayer."
+
+#: lib/errors.c:423
+msgid "The transmitted packet is too large (EMSGSIZE)."
+msgstr "Le paquet transmis est trop grand (EMSGSIZE)."
+
+#: lib/errors.c:426
+msgid "Rehandshake was requested by the peer."
+msgstr "Une renégociation a été demandée par la machine distante."
+
+#: lib/errors.c:518 libdane/errors.c:100
 msgid "(unknown error code)"
 msgstr "(code d’erreur inconnu)"
 
@@ -943,7 +943,7 @@ msgstr "\t\tExpiration : jamais\n"
 msgid "\t\tExpiration: %s\n"
 msgstr "\t\tExpiration : %s\n"
 
-#: lib/openpgp/output.c:230 lib/x509/ocsp_output.c:527 lib/x509/output.c:1178
+#: lib/openpgp/output.c:230 lib/x509/ocsp_output.c:524 lib/x509/output.c:1178
 #: lib/x509/output.c:1375 lib/x509/output.c:1519 lib/x509/output.c:1748
 #: lib/x509/output.c:1761 lib/x509/output.c:2178 lib/x509/output.c:2276
 #: lib/x509/output.c:2327
@@ -1102,24 +1102,24 @@ msgstr "\t\tCette mise à jour : %s\n"
 msgid "\t\tNext Update: %s\n"
 msgstr "\t\tProchaine mise à jour : %s\n"
 
-#: lib/x509/ocsp_output.c:528 lib/x509/output.c:1523 lib/x509/output.c:2182
+#: lib/x509/ocsp_output.c:525 lib/x509/output.c:1523 lib/x509/output.c:2182
 #: lib/x509/output.c:2331
 #, c-format
 msgid "\tSignature Algorithm: %s\n"
 msgstr "\tAlgorithme de signature : %s\n"
 
-#: lib/x509/ocsp_output.c:532 lib/x509/output.c:1528 lib/x509/output.c:2187
+#: lib/x509/ocsp_output.c:529 lib/x509/output.c:1528 lib/x509/output.c:2187
 msgid ""
 "warning: signed using a broken signature algorithm that can be forged.\n"
 msgstr ""
 "attention : signé par un algorithme de signature compromis et "
 "potentiellement non fiable.\n"
 
-#: lib/x509/ocsp_output.c:541 lib/x509/output.c:1554 lib/x509/output.c:2213
+#: lib/x509/ocsp_output.c:543 lib/x509/output.c:1554 lib/x509/output.c:2213
 msgid "\tSignature:\n"
 msgstr "\tSignature :\n"
 
-#: lib/x509/ocsp_output.c:649
+#: lib/x509/ocsp_output.c:651
 msgid "OCSP Response Information:\n"
 msgstr "Informations de la requête OCSP :\n"
 
@@ -1688,11 +1688,11 @@ msgstr "\t\tAttribut inconnu %s :\n"
 msgid "PKCS #10 Certificate Request Information:\n"
 msgstr "Informations de requête de certificat PKCS #10 :\n"
 
-#: lib/x509/output.c:2534
+#: lib/x509/output.c:2535
 msgid "Public Key Usage:\n"
 msgstr "Utilisation de la clef publique :\n"
 
-#: lib/x509/output.c:2568
+#: lib/x509/output.c:2570
 msgid "Public Key Information:\n"
 msgstr "Informations de clef publique :\n"
 

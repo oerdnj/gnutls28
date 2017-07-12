@@ -3,7 +3,7 @@
  * Copyright (C) 2010-2014 Free Software Foundation, Inc.
  * Copyright (C) 2008 Joe Orton <joe@manyfish.co.uk>
  * Copyright (C) 2013 Nikos Mavrogiannopoulos
- * Copyright (C) 2014 Red Hat
+ * Copyright (C) 2014-2017 Red Hat
  * 
  * Authors: Nikos Mavrogiannopoulos, Stef Walter
  *
@@ -108,6 +108,8 @@ static struct gnutls_pkcs11_provider_st providers[MAX_PROVIDERS];
 static unsigned int active_providers = 0;
 static unsigned int providers_initialized = 0;
 static unsigned int pkcs11_forkid = 0;
+
+static int _gnutls_pkcs11_reinit(void);
 
 gnutls_pkcs11_token_callback_t _gnutls_token_func;
 void *_gnutls_token_data;
@@ -251,9 +253,12 @@ pkcs11_add_module(const char* name, struct ck_function_list *module, const char 
 /* Returns:
  *  - negative error code on error,
  *  - 0 on success
- *  - 1 on success (and a fork was detected)
- */
-int _gnutls_pkcs11_check_init(void)
+ *  - 1 on success (and a fork was detected - cb was run)
+ *
+ * The output value of the callback will be returned if it is
+ * a negative one (indicating failure).
+*/
+int _gnutls_pkcs11_check_init(void *priv, pkcs11_reinit_function cb)
 {
 	int ret;
 
@@ -266,9 +271,16 @@ int _gnutls_pkcs11_check_init(void)
 
 		if (_gnutls_detect_fork(pkcs11_forkid)) {
 			/* if we are initialized but a fork is detected */
-			ret = gnutls_pkcs11_reinit();
-			if (ret == 0)
+			ret = _gnutls_pkcs11_reinit();
+			if (ret == 0) {
 				ret = 1;
+				if (cb) {
+					int ret2 = cb(priv);
+					if (ret2 < 0)
+						ret = ret2;
+				}
+				pkcs11_forkid = _gnutls_get_forkid();
+			}
 		}
 
 		gnutls_mutex_unlock(&_gnutls_pkcs11_mutex);
@@ -794,29 +806,10 @@ gnutls_pkcs11_init(unsigned int flags, const char *deprecated_config_file)
 	return 0;
 }
 
-/**
- * gnutls_pkcs11_reinit:
- *
- * This function will reinitialize the PKCS 11 subsystem in gnutls. 
- * This is required by PKCS 11 when an application uses fork(). The
- * reinitialization function must be called on the child.
- *
- * Note that since GnuTLS 3.3.0, the reinitialization of the PKCS #11
- * subsystem occurs automatically after fork.
- *
- * Returns: On success, %GNUTLS_E_SUCCESS (0) is returned, otherwise a
- *   negative error value.
- *
- * Since: 3.0
- **/
-int gnutls_pkcs11_reinit(void)
+static int _gnutls_pkcs11_reinit(void)
 {
 	unsigned i;
 	ck_rv_t rv;
-
-	/* make sure that we don't call more than once after a fork */
-	if (_gnutls_detect_fork(pkcs11_forkid) == 0)
-		return 0;
 
 	for (i = 0; i < active_providers; i++) {
 		if (providers[i].module != NULL) {
@@ -834,9 +827,37 @@ int gnutls_pkcs11_reinit(void)
 		}
 	}
 
+	return 0;
+}
+
+/**
+ * gnutls_pkcs11_reinit:
+ *
+ * This function will reinitialize the PKCS 11 subsystem in gnutls. 
+ * This is required by PKCS 11 when an application uses fork(). The
+ * reinitialization function must be called on the child.
+ *
+ * Note that since GnuTLS 3.3.0, the reinitialization of the PKCS #11
+ * subsystem occurs automatically after fork.
+ *
+ * Returns: On success, %GNUTLS_E_SUCCESS (0) is returned, otherwise a
+ *   negative error value.
+ *
+ * Since: 3.0
+ **/
+int gnutls_pkcs11_reinit(void)
+{
+	int ret;
+
+	/* make sure that we don't call more than once after a fork */
+	if (_gnutls_detect_fork(pkcs11_forkid) == 0)
+		return 0;
+
+	ret = _gnutls_pkcs11_reinit();
+
 	pkcs11_forkid = _gnutls_get_forkid();
 
-	return 0;
+	return ret;
 }
 
 /**
@@ -1291,15 +1312,13 @@ pkcs11_open_session(struct pkcs11_session_info *sinfo,
 	sinfo->init = 1;
 	memcpy(&sinfo->tinfo, &tinfo, sizeof(sinfo->tinfo));
 
-	if (flags & SESSION_LOGIN) {
-		ret =
-		    pkcs11_login(sinfo, pin_info, info,
-				 (flags & SESSION_SO) ? 1 : 0, 0);
-		if (ret < 0) {
-			gnutls_assert();
-			pkcs11_close_session(sinfo);
-			return ret;
-		}
+	ret =
+	    pkcs11_login(sinfo, pin_info, info,
+			 flags);
+	if (ret < 0) {
+		gnutls_assert();
+		pkcs11_close_session(sinfo);
+		return ret;
 	}
 
 	return 0;
@@ -1374,15 +1393,12 @@ _pkcs11_traverse_tokens(find_func_t find_func, void *input,
 			memcpy(&sinfo.tinfo, &l_tinfo, sizeof(sinfo.tinfo));
 			memcpy(&sinfo.slot_info, &l_sinfo, sizeof(sinfo.slot_info));
 
-			if (flags & SESSION_LOGIN) {
-				ret =
-				    pkcs11_login(&sinfo, pin_info,
-						 info, (flags & SESSION_SO) ? 1 : 0,
-						 0);
-				if (ret < 0) {
-					gnutls_assert();
-					return ret;
-				}
+			ret =
+			    pkcs11_login(&sinfo, pin_info,
+					 info, flags);
+			if (ret < 0) {
+				gnutls_assert();
+				return ret;
 			}
 
 			ret =
@@ -2013,9 +2029,11 @@ unsigned int pkcs11_obj_flags_to_int(unsigned int flags)
 	unsigned int ret_flags = 0;
 
 	if (flags & GNUTLS_PKCS11_OBJ_FLAG_LOGIN)
-		ret_flags |= SESSION_LOGIN;
+		ret_flags |= SESSION_LOGIN | SESSION_FORCE_LOGIN;
+
 	if (flags & GNUTLS_PKCS11_OBJ_FLAG_LOGIN_SO)
-		ret_flags |= SESSION_LOGIN | SESSION_SO;
+		ret_flags |= SESSION_LOGIN | SESSION_SO | SESSION_FORCE_LOGIN;
+
 	if (flags & GNUTLS_PKCS11_OBJ_FLAG_PRESENT_IN_TRUSTED_MODULE)
 		ret_flags |= SESSION_TRUSTED;
 
@@ -2507,25 +2525,30 @@ int
 pkcs11_login(struct pkcs11_session_info *sinfo,
 	     struct pin_info_st *pin_info,
 	     struct p11_kit_uri *info,
-	     unsigned so,
-	     unsigned reauth)
+	     unsigned flags)
 {
 	struct ck_session_info session_info;
 	int attempt = 0, ret;
 	ck_user_type_t user_type;
 	ck_rv_t rv;
 
-	if (so == 0) {
-		if (reauth == 0)
-			user_type = CKU_USER;
-		else
-			user_type = CKU_CONTEXT_SPECIFIC;
-	} else
-		user_type = CKU_SO;
+	if (!(flags & SESSION_LOGIN)) {
+		_gnutls_debug_log("p11: No login requested.\n");
+		return 0;
+	}
 
-	if (so == 0 && (sinfo->tinfo.flags & CKF_LOGIN_REQUIRED) == 0) {
+	if (flags & SESSION_SO) {
+		user_type = CKU_SO;
+	} else if (flags & SESSION_CONTEXT_SPECIFIC) {
+		user_type = CKU_CONTEXT_SPECIFIC;
+	} else {
+		user_type = CKU_USER;
+	}
+
+	if (!(flags & (SESSION_FORCE_LOGIN|SESSION_SO)) &&
+	    !(sinfo->tinfo.flags & CKF_LOGIN_REQUIRED)) {
 		gnutls_assert();
-		_gnutls_debug_log("p11: No login required.\n");
+		_gnutls_debug_log("p11: No login required in token.\n");
 		return 0;
 	}
 
@@ -2554,15 +2577,17 @@ pkcs11_login(struct pkcs11_session_info *sinfo,
 		memcpy(&tinfo, &sinfo->tinfo, sizeof(tinfo));
 
 		/* Check whether the session is already logged in, and if so, just skip */
-		rv = (sinfo->module)->C_GetSessionInfo(sinfo->pks,
-						       &session_info);
-		if (rv == CKR_OK && reauth == 0 &&
-		    (session_info.state == CKS_RO_USER_FUNCTIONS
-			|| session_info.state == CKS_RW_USER_FUNCTIONS)) {
-			ret = 0;
-			_gnutls_debug_log
-			    ("p11: Already logged in\n");
-			goto cleanup;
+		if (!(flags & SESSION_CONTEXT_SPECIFIC)) {
+			rv = (sinfo->module)->C_GetSessionInfo(sinfo->pks,
+							       &session_info);
+			if (rv == CKR_OK &&
+				(session_info.state == CKS_RO_USER_FUNCTIONS
+				|| session_info.state == CKS_RW_USER_FUNCTIONS)) {
+				ret = 0;
+				_gnutls_debug_log
+				    ("p11: Already logged in\n");
+				goto cleanup;
+			}
 		}
 
 		/* If login has been attempted once already, check the token
@@ -2599,12 +2624,11 @@ pkcs11_login(struct pkcs11_session_info *sinfo,
 
 	_gnutls_debug_log("p11: Login result = %s (%lu)\n", (rv==0)?"ok":p11_kit_strerror(rv), rv);
 
-
 	ret = (rv == CKR_OK
 	       || rv ==
 	       CKR_USER_ALREADY_LOGGED_IN) ? 0 : pkcs11_rv_to_err(rv);
 
-      cleanup:
+ cleanup:
 	return ret;
 }
 

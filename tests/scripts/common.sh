@@ -26,14 +26,14 @@ export TZ="UTC"
 # command in the caller's PFCMD, or exit, indicating an unsupported
 # test.  Prefer ss from iproute2 over the older netstat.
 have_port_finder() {
-	for file in $(which ss) /*bin/ss /usr/*bin/ss /usr/local/*bin/ss;do
+	for file in $(which ss 2> /dev/null) /*bin/ss /usr/*bin/ss /usr/local/*bin/ss;do
 		if test -x "$file";then
 			PFCMD="$file";return 0
 		fi
 	done
 
 	if test -z "$PFCMD";then
-	for file in $(which netstat) /bin/netstat /usr/bin/netstat /usr/local/bin/netstat;do
+	for file in $(which netstat 2> /dev/null) /bin/netstat /usr/bin/netstat /usr/local/bin/netstat;do
 		if test -x "$file";then
 			PFCMD="$file";return 0
 		fi
@@ -81,6 +81,18 @@ fail() {
    echo "Failure: $1" >&2
    [ -n "${PID}" ] && kill ${PID}
    exit 1
+}
+
+exit_if_non_x86()
+{
+which lscpu >/dev/null 2>&1
+if test $? = 0;then
+        $(which lscpu)|grep Architecture|grep x86
+        if test $? != 0;then
+                echo "non-x86 CPU detected"
+                exit 0
+        fi
+fi
 }
 
 wait_for_port()

@@ -1,6 +1,7 @@
 /*
  * GnuTLS PKCS#11 support
  * Copyright (C) 2010-2012 Free Software Foundation, Inc.
+ * Copyright (C) 2017 Red Hat, Inc.
  * 
  * Authors: Nikos Mavrogiannopoulos, Stef Walter
  *
@@ -29,18 +30,15 @@
 #include <pk.h>
 #include <fips.h>
 #include "urls.h"
+#include "locks.h"
 #include <p11-kit/uri.h>
 
 /* In case of a fork, it will invalidate the open session
  * in the privkey and start another */
 #define PKCS11_CHECK_INIT_PRIVKEY(k) \
-	ret = _gnutls_pkcs11_check_init(); \
+	ret = _gnutls_pkcs11_check_init(k, reopen_privkey_session); \
 	if (ret < 0) \
-		return gnutls_assert_val(ret); \
-	if (ret == 1) { \
-		memset(&k->sinfo, 0, sizeof(k->sinfo)); \
-		FIND_OBJECT(k); \
-	}
+		return gnutls_assert_val(ret)
 
 #define FIND_OBJECT(key) \
 	do { \
@@ -71,6 +69,8 @@ struct gnutls_pkcs11_privkey_st {
 	ck_object_handle_t ref;	/* the key in the session */
 	unsigned reauth; /* whether we need to login on each operation */
 
+	void *mutex; /* lock for operations requiring co-ordination */
+
 	struct pin_info_st pin;
 };
 
@@ -78,13 +78,20 @@ struct gnutls_pkcs11_privkey_st {
  * gnutls_pkcs11_privkey_init:
  * @key: A pointer to the type to be initialized
  *
- * This function will initialize an private key structure.
+ * This function will initialize an private key structure. This
+ * structure can be used for accessing an underlying PKCS#11 object.
+ *
+ * In versions of GnuTLS later than 3.5.11 the object is protected
+ * using locks and a single %gnutls_pkcs11_privkey_t can be re-used
+ * by many threads. However, for performance it is recommended to utilize
+ * one object per key per thread.
  *
  * Returns: On success, %GNUTLS_E_SUCCESS (0) is returned, otherwise a
  *   negative error value.
  **/
 int gnutls_pkcs11_privkey_init(gnutls_pkcs11_privkey_t * key)
 {
+	int ret;
 	FAIL_IF_LIB_ERROR;
 
 	*key = gnutls_calloc(1, sizeof(struct gnutls_pkcs11_privkey_st));
@@ -98,6 +105,14 @@ int gnutls_pkcs11_privkey_init(gnutls_pkcs11_privkey_t * key)
 		free(*key);
 		gnutls_assert();
 		return GNUTLS_E_MEMORY_ERROR;
+	}
+
+	ret = gnutls_mutex_init(&(*key)->mutex);
+	if (ret < 0) {
+		gnutls_assert();
+		p11_kit_uri_free((*key)->uinfo);
+		free(*key);
+		return GNUTLS_E_LOCKING_ERROR;
 	}
 
 	return 0;
@@ -135,6 +150,7 @@ void gnutls_pkcs11_privkey_deinit(gnutls_pkcs11_privkey_t key)
 	gnutls_free(key->url);
 	if (key->sinfo.init != 0)
 		pkcs11_close_session(&key->sinfo);
+	gnutls_mutex_deinit(&key->mutex);
 	gnutls_free(key);
 }
 
@@ -226,7 +242,29 @@ find_object(struct pkcs11_session_info *sinfo,
 	return ret;
 }
 
+/* callback function to be passed in _gnutls_pkcs11_check_init().
+ * It is run, only when a fork has been detected, and data have
+ * been re-initialized. In that case we reset the session and re-open
+ * the object. */
+static int reopen_privkey_session(void * _privkey)
+{
+	int ret;
+	gnutls_pkcs11_privkey_t privkey = _privkey;
 
+	memset(&privkey->sinfo, 0, sizeof(privkey->sinfo));
+	privkey->ref = 0;
+	FIND_OBJECT(privkey);
+
+	return 0;
+}
+
+#define REPEAT_ON_INVALID_HANDLE(expr) \
+	if ((expr) == CKR_SESSION_HANDLE_INVALID) { \
+		ret = reopen_privkey_session(key); \
+		if (ret < 0) \
+			return gnutls_assert_val(ret); \
+		expr; \
+	}
 
 /*-
  * _gnutls_pkcs11_privkey_sign_hash:
@@ -252,6 +290,8 @@ _gnutls_pkcs11_privkey_sign_hash(gnutls_pkcs11_privkey_t key,
 	gnutls_datum_t tmp = { NULL, 0 };
 	unsigned long siglen;
 	struct pkcs11_session_info *sinfo;
+	unsigned req_login = 0;
+	unsigned login_flags = SESSION_LOGIN|SESSION_CONTEXT_SPECIFIC;
 
 	PKCS11_CHECK_INIT_PRIVKEY(key);
 
@@ -261,19 +301,27 @@ _gnutls_pkcs11_privkey_sign_hash(gnutls_pkcs11_privkey_t key,
 	mech.parameter = NULL;
 	mech.parameter_len = 0;
 
+	ret = gnutls_mutex_lock(&key->mutex);
+	if (ret != 0)
+		return gnutls_assert_val(GNUTLS_E_LOCKING_ERROR);
+
 	/* Initialize signing operation; using the private key discovered
 	 * earlier. */
-	rv = pkcs11_sign_init(sinfo->module, sinfo->pks, &mech, key->ref);
+	REPEAT_ON_INVALID_HANDLE(rv = pkcs11_sign_init(sinfo->module, sinfo->pks, &mech, key->ref));
 	if (rv != CKR_OK) {
 		gnutls_assert();
 		ret = pkcs11_rv_to_err(rv);
 		goto cleanup;
 	}
 
-	if (key->reauth) {
+ retry_login:
+	if (key->reauth || req_login) {
+		if (req_login)
+			login_flags = SESSION_LOGIN|SESSION_FORCE_LOGIN;
+
 		ret =
 		    pkcs11_login(&key->sinfo, &key->pin,
-				 key->uinfo, 0, 1);
+				 key->uinfo, login_flags);
 		if (ret < 0) {
 			gnutls_assert();
 			_gnutls_debug_log("PKCS #11 login failed, trying operation anyway\n");
@@ -284,6 +332,11 @@ _gnutls_pkcs11_privkey_sign_hash(gnutls_pkcs11_privkey_t key,
 	/* Work out how long the signature must be: */
 	rv = pkcs11_sign(sinfo->module, sinfo->pks, hash->data, hash->size,
 			 NULL, &siglen);
+	if (unlikely(rv == CKR_USER_NOT_LOGGED_IN && req_login == 0)) {
+		req_login = 1;
+		goto retry_login;
+	}
+
 	if (rv != CKR_OK) {
 		gnutls_assert();
 		ret = pkcs11_rv_to_err(rv);
@@ -335,6 +388,7 @@ _gnutls_pkcs11_privkey_sign_hash(gnutls_pkcs11_privkey_t key,
 	ret = 0;
 
       cleanup:
+	gnutls_mutex_unlock(&key->mutex);
 	if (sinfo != &key->sinfo)
 		pkcs11_close_session(sinfo);
 	if (ret < 0)
@@ -349,7 +403,7 @@ _gnutls_pkcs11_privkey_sign_hash(gnutls_pkcs11_privkey_t key,
  *
  * Checks the status of the private key token.
  *
- * Returns: this function will return non-zero if the token 
+ * Returns: this function will return non-zero if the token
  * holding the private key is still available (inserted), and zero otherwise.
  * 
  * Since: 3.1.9
@@ -363,7 +417,7 @@ unsigned gnutls_pkcs11_privkey_status(gnutls_pkcs11_privkey_t key)
 	
 	PKCS11_CHECK_INIT_PRIVKEY(key);
 
-	rv = (key->sinfo.module)->C_GetSessionInfo(key->sinfo.pks, &session_info);
+	REPEAT_ON_INVALID_HANDLE(rv = (key->sinfo.module)->C_GetSessionInfo(key->sinfo.pks, &session_info));
 	if (rv != CKR_OK) {
 		ret = 0;
 		goto cleanup;
@@ -509,6 +563,8 @@ _gnutls_pkcs11_privkey_decrypt_data(gnutls_pkcs11_privkey_t key,
 	int ret;
 	struct ck_mechanism mech;
 	unsigned long siglen;
+	unsigned req_login = 0;
+	unsigned login_flags = SESSION_LOGIN|SESSION_CONTEXT_SPECIFIC;
 
 	PKCS11_CHECK_INIT_PRIVKEY(key);
 
@@ -519,19 +575,27 @@ _gnutls_pkcs11_privkey_decrypt_data(gnutls_pkcs11_privkey_t key,
 	mech.parameter = NULL;
 	mech.parameter_len = 0;
 
+	ret = gnutls_mutex_lock(&key->mutex);
+	if (ret != 0)
+		return gnutls_assert_val(GNUTLS_E_LOCKING_ERROR);
+
 	/* Initialize signing operation; using the private key discovered
 	 * earlier. */
-	rv = pkcs11_decrypt_init(key->sinfo.module, key->sinfo.pks, &mech, key->ref);
+	REPEAT_ON_INVALID_HANDLE(rv = pkcs11_decrypt_init(key->sinfo.module, key->sinfo.pks, &mech, key->ref));
 	if (rv != CKR_OK) {
 		gnutls_assert();
 		ret = pkcs11_rv_to_err(rv);
 		goto cleanup;
 	}
 
-	if (key->reauth) {
+ retry_login:
+	if (key->reauth || req_login) {
+		if (req_login)
+			login_flags = SESSION_LOGIN|SESSION_FORCE_LOGIN;
+
 		ret =
 		    pkcs11_login(&key->sinfo, &key->pin,
-				 key->uinfo, 0, 1);
+				 key->uinfo, login_flags);
 		if (ret < 0) {
 			gnutls_assert();
 			_gnutls_debug_log("PKCS #11 login failed, trying operation anyway\n");
@@ -542,6 +606,11 @@ _gnutls_pkcs11_privkey_decrypt_data(gnutls_pkcs11_privkey_t key,
 	/* Work out how long the plaintext must be: */
 	rv = pkcs11_decrypt(key->sinfo.module, key->sinfo.pks, ciphertext->data,
 			    ciphertext->size, NULL, &siglen);
+	if (unlikely(rv == CKR_USER_NOT_LOGGED_IN && req_login == 0)) {
+		req_login = 1;
+		goto retry_login;
+	}
+
 	if (rv != CKR_OK) {
 		gnutls_assert();
 		ret = pkcs11_rv_to_err(rv);
@@ -565,6 +634,7 @@ _gnutls_pkcs11_privkey_decrypt_data(gnutls_pkcs11_privkey_t key,
 	ret = 0;
 
       cleanup:
+	gnutls_mutex_unlock(&key->mutex);
 	return ret;
 }
 

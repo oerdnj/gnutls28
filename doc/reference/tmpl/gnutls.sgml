@@ -4484,6 +4484,8 @@ gnutls
 @raw_issuer_dn: 
 @raw_spki: 
 @der: 
+@san: 
+@ian: 
 @dn: 
 @idn: 
 

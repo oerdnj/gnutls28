@@ -20,7 +20,7 @@ This software is released under the GNU General Public License, version 3 or lat
 
 
 @anchor{tpmtool usage}
-@subsection tpmtool help/usage (@option{--help})
+@subheading tpmtool help/usage (@option{--help})
 @cindex tpmtool help
 
 This is the automatically generated usage text for tpmtool.
@@ -82,20 +82,20 @@ Program that allows handling cryptographic data from the TPM chip.
 @exampleindent 4
 
 @anchor{tpmtool debug}
-@subsection debug option (-d)
+@subheading debug option (-d)
 
 This is the ``enable debugging'' option.
 This option takes a number argument.
 Specifies the debug level.
 @anchor{tpmtool generate-rsa}
-@subsection generate-rsa option
+@subheading generate-rsa option
 
 This is the ``generate an rsa private-public key pair'' option.
 Generates an RSA private-public key pair in the TPM chip. 
 The key may be stored in file system and protected by a PIN, or stored (registered)
 in the TPM chip flash.
 @anchor{tpmtool user}
-@subsection user option
+@subheading user option
 
 This is the ``any registered key will be a user key'' option.
 
@@ -112,7 +112,7 @@ system.
 
 The generated key will be stored in a user specific persistent storage.
 @anchor{tpmtool system}
-@subsection system option
+@subheading system option
 
 This is the ``any registered key will be a system key'' option.
 
@@ -129,21 +129,21 @@ user.
 
 The generated key will be stored in system persistent storage.
 @anchor{tpmtool test-sign}
-@subsection test-sign option
+@subheading test-sign option
 
 This is the ``tests the signature operation of the provided object'' option.
 This option takes a string argument @file{url}.
 It can be used to test the correct operation of the signature operation.
 This operation will sign and verify the signed data.
 @anchor{tpmtool sec-param}
-@subsection sec-param option
+@subheading sec-param option
 
 This is the ``specify the security level [low, legacy, medium, high, ultra].'' option.
 This option takes a string argument @file{Security parameter}.
 This is alternative to the bits option. Note however that the
 values allowed by the TPM chip are quantized and given values may be rounded up.
 @anchor{tpmtool inder}
-@subsection inder option
+@subheading inder option
 
 This is the ``use the der format for keys.'' option.
 
@@ -158,7 +158,7 @@ The input files will be assumed to be in the portable
 DER format of TPM. The default format is a custom format used by various
 TPM tools
 @anchor{tpmtool outder}
-@subsection outder option
+@subheading outder option
 
 This is the ``use der format for output keys'' option.
 
@@ -171,7 +171,7 @@ can be disabled with --no-outder.
 
 The output will be in the TPM portable DER format.
 @anchor{tpmtool exit status}
-@subsection tpmtool exit status
+@subheading tpmtool exit status
 
 One of the following exit values will be returned:
 @table @samp
@@ -181,10 +181,10 @@ Successful program execution.
 The operation failed or the command syntax was not valid.
 @end table
 @anchor{tpmtool See Also}
-@subsection tpmtool See Also
+@subheading tpmtool See Also
     p11tool (1), certtool (1)
 @anchor{tpmtool Examples}
-@subsection tpmtool Examples
+@subheading tpmtool Examples
 To generate a key that is to be stored in file system use:
 @example
 $ tpmtool --generate-rsa --bits 2048 --outfile tpmkey.pem

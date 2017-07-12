@@ -3700,7 +3700,6 @@ otherwise a negative error code is returned.</p>
                                  <em class="parameter"><code>const unsigned <span class="type">char</span> *keyfpr</code></em>,
                                  <em class="parameter"><code>unsigned <span class="type">int</span> keyfpr_length</code></em>,
                                  <em class="parameter"><code><span class="type">gnutls_datum_t</span> *key</code></em>);</pre>
-<div class="warning"><p><code class="literal">gnutls_openpgp_recv_key_func</code> is deprecated and should not be used in newly-written code.</p></div>
 <p>A callback of this type is used to retrieve OpenPGP keys.  Only
 useful on the server, and will only be used if the peer send a key
 fingerprint instead of a full key.  See also

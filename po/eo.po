@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnutls 3.2.1\n"
 "Report-Msgid-Bugs-To: bug-gnutls@gnu.org\n"
-"POT-Creation-Date: 2017-03-06 07:03+0100\n"
+"POT-Creation-Date: 2017-07-04 07:41+0200\n"
 "PO-Revision-Date: 2013-06-28 14:49-0300\n"
 "Last-Translator: Felipe Castro <fefcas@gmail.com>\n"
 "Language-Team: Esperanto <translation-team-eo@lists.sourceforge.net>\n"
@@ -389,7 +389,7 @@ msgstr "Nesubtenata etendo en atestilo X.509."
 msgid "Key usage violation in certificate has been detected."
 msgstr "Malrespekto en ŝlosil-uzmaniero estas detektita."
 
-#: lib/errors.c:182 lib/errors.c:423
+#: lib/errors.c:182 lib/errors.c:425
 msgid "Function was interrupted."
 msgstr "Funkcio estis haltigata."
 
@@ -824,39 +824,39 @@ msgstr "La peto malvalidas."
 msgid "The private key is invalid."
 msgstr "La peto malvalidas."
 
-#: lib/errors.c:412 libdane/errors.c:42
-msgid "Success."
-msgstr "Sukceso."
-
-#: lib/errors.c:413
-msgid "A TLS warning alert has been received."
-msgstr "Averta atentigo TLS estas ricevita."
-
-#: lib/errors.c:415
-msgid "A heartbeat pong message was received."
-msgstr "Korbata mesaĝo 'pong' estis ricevata."
-
-#: lib/errors.c:417
-msgid "A heartbeat ping message was received."
-msgstr "Korbata mesaĝo 'ping' estis ricevata."
-
-#: lib/errors.c:419
-msgid "Resource temporarily unavailable, try again."
-msgstr "La rimedo estas provizore nedisponebla, provu refoje."
-
-#: lib/errors.c:421
-msgid "The transmitted packet is too large (EMSGSIZE)."
-msgstr "La transigita pako tro larĝas (EMSGSIZE)."
-
-#: lib/errors.c:424
-msgid "Rehandshake was requested by the peer."
-msgstr "Rekvitanco estis petata de la samtavolano."
-
-#: lib/errors.c:426
+#: lib/errors.c:408
 msgid "One of the involved algorithms has insufficient security level."
 msgstr ""
 
-#: lib/errors.c:517 libdane/errors.c:100
+#: lib/errors.c:414 libdane/errors.c:42
+msgid "Success."
+msgstr "Sukceso."
+
+#: lib/errors.c:415
+msgid "A TLS warning alert has been received."
+msgstr "Averta atentigo TLS estas ricevita."
+
+#: lib/errors.c:417
+msgid "A heartbeat pong message was received."
+msgstr "Korbata mesaĝo 'pong' estis ricevata."
+
+#: lib/errors.c:419
+msgid "A heartbeat ping message was received."
+msgstr "Korbata mesaĝo 'ping' estis ricevata."
+
+#: lib/errors.c:421
+msgid "Resource temporarily unavailable, try again."
+msgstr "La rimedo estas provizore nedisponebla, provu refoje."
+
+#: lib/errors.c:423
+msgid "The transmitted packet is too large (EMSGSIZE)."
+msgstr "La transigita pako tro larĝas (EMSGSIZE)."
+
+#: lib/errors.c:426
+msgid "Rehandshake was requested by the peer."
+msgstr "Rekvitanco estis petata de la samtavolano."
+
+#: lib/errors.c:518 libdane/errors.c:100
 msgid "(unknown error code)"
 msgstr "(nekonata erar-kodo)"
 
@@ -927,7 +927,7 @@ msgstr "\t\tLimdato: Neniam\n"
 msgid "\t\tExpiration: %s\n"
 msgstr "\t\tLimdato: %s\n"
 
-#: lib/openpgp/output.c:230 lib/x509/ocsp_output.c:527 lib/x509/output.c:1178
+#: lib/openpgp/output.c:230 lib/x509/ocsp_output.c:524 lib/x509/output.c:1178
 #: lib/x509/output.c:1375 lib/x509/output.c:1519 lib/x509/output.c:1748
 #: lib/x509/output.c:1761 lib/x509/output.c:2178 lib/x509/output.c:2276
 #: lib/x509/output.c:2327
@@ -1086,24 +1086,24 @@ msgstr "\t\tTiu ĉi ĝisdatigo: %s\n"
 msgid "\t\tNext Update: %s\n"
 msgstr "\t\tVenonta ĝisdatigo: %s\n"
 
-#: lib/x509/ocsp_output.c:528 lib/x509/output.c:1523 lib/x509/output.c:2182
+#: lib/x509/ocsp_output.c:525 lib/x509/output.c:1523 lib/x509/output.c:2182
 #: lib/x509/output.c:2331
 #, c-format
 msgid "\tSignature Algorithm: %s\n"
 msgstr "\tSubskriba algoritmo: %s\n"
 
-#: lib/x509/ocsp_output.c:532 lib/x509/output.c:1528 lib/x509/output.c:2187
+#: lib/x509/ocsp_output.c:529 lib/x509/output.c:1528 lib/x509/output.c:2187
 msgid ""
 "warning: signed using a broken signature algorithm that can be forged.\n"
 msgstr ""
 "averto: subskribita uzante rompitan subskrib-algoritmon kiu povas esti "
 "imitata.\n"
 
-#: lib/x509/ocsp_output.c:541 lib/x509/output.c:1554 lib/x509/output.c:2213
+#: lib/x509/ocsp_output.c:543 lib/x509/output.c:1554 lib/x509/output.c:2213
 msgid "\tSignature:\n"
 msgstr "\tSubskribo:\n"
 
-#: lib/x509/ocsp_output.c:649
+#: lib/x509/ocsp_output.c:651
 msgid "OCSP Response Information:\n"
 msgstr "Respond-informo de OCSP:\n"
 
@@ -1670,11 +1670,11 @@ msgstr "\t\tNekonata atributo %s:\n"
 msgid "PKCS #10 Certificate Request Information:\n"
 msgstr "Atestil-peta informo de PKCS #10:\n"
 
-#: lib/x509/output.c:2534
+#: lib/x509/output.c:2535
 msgid "Public Key Usage:\n"
 msgstr "Uzado de publik-ŝlosilo:\n"
 
-#: lib/x509/output.c:2568
+#: lib/x509/output.c:2570
 msgid "Public Key Information:\n"
 msgstr "Publik-ŝlosila informo:\n"
 
