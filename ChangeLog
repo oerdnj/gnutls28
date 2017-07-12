@@ -1,3 +1,143 @@
+2017-07-04  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* NEWS, configure.ac, m4/hooks.m4: released 3.5.14 Signed-off-by: Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+2017-06-30  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* NEWS: doc update Signed-off-by: Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+2017-07-01  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* lib/x509/ocsp.c: OCSP: find_signercert: improved DER length
+	calculation Previously we were assuming a fixed amount of length bytes which is
+	not correct for all possible lengths. Use libtasn1 to decode the
+	length field.  Resolves: #223 Signed-off-by: Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+2017-06-30  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/x509/ocsp.c: OCSP: check the subject public key identifier
+	field to figure issuer Normally when attempting to match the 'Responder Key ID' in an OCSP
+	response against the issuer certificate we check (according to
+	RFC6960) against the hash of the SPKI field. However, in few
+	certificates (see commit: "added ECDSA OCSP response verification"),
+	that may not be the case. In that certificate, that value matches
+	the Subject Public Key identifier field but not the hash.  To account for these certificates, we enhance the matching to also
+	consider the Subject Public Key identifier field.  Relates: #223 Signed-off-by: Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+2017-06-30  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* tests/ocsp-tests/Makefile.am,
+	tests/ocsp-tests/certs/cert-akamai.com.pem,
+	tests/ocsp-tests/ocsp-ecdsa-test: tests: added ECDSA OCSP response
+	verification Signed-off-by: Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+2017-06-30  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* .travis.yml: .travis.yml: do not fail on brew install failures brew install seems to fail on several occasions when a newer package
+	is available than the installed. Ignore those errors rather than
+	failing build.  Signed-off-by: Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+2017-06-29  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* NEWS: doc update Signed-off-by: Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+2017-06-29  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* tests/Makefile.am, tests/gnutls-cli-save-data.sh: tests: added
+	check on saving certs and OCSP responses Signed-off-by: Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+2017-06-29  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* src/cli.c: gnutls-cli: save OCSP response at the time certificate
+	is saved That ensures that we always save the OCSP response, even when
+	certificate verification fails.  Signed-off-by: Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+2017-06-20  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* src/certtool.c: certtool: removed unused variables Signed-off-by: Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+2017-06-20  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/x509/ocsp_output.c: ocsp: print response's signature algorithm
+	in compact listing Signed-off-by: Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+2017-06-20  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* src/cli.c: gnutls-cli: be less verbose in OCSP error messages Previously we were reporting "No issuer found" if any certificate in
+	a chain could not be verified. That was confusing information and
+	not strictly necessary. No longer print that.  Signed-off-by: Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+2017-06-20  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* src/ocsptool-common.c: gnutls-cli: improved error message of OCSP
+	failure Signed-off-by: Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+2017-06-19  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* tests/pkcs11/pkcs11-mock.c: tests: pkcs11-mock: backported module
+	from master Signed-off-by: Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+2017-06-19  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* lib/cert.c: gnutls_certificate_verification_status_print: mention
+	OCSP in error messages [ci skip] Signed-off-by: Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+2017-05-28  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* tests/Makefile.am, tests/pkcs11/pkcs11-mock-ext.h,
+	tests/pkcs11/pkcs11-mock.c,
+	tests/pkcs11/pkcs11-privkey-safenet-always-auth.c: tests: added unit
+	test for safenet protectserver HSM's PKCS#11 support That is, detect whether the absence of C_Login on a token, will
+	result to C_Sign or C_Decrypt to a login using CKU_USER.  Signed-off-by: Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+2017-06-16  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* NEWS: NEWS: doc update Signed-off-by: Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+2017-05-29  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/pkcs11.c, lib/pkcs11_int.h, lib/pkcs11_privkey.c: pkcs11:
+	simplified pkcs11_login() By cleanups, as well as including the reauth flag in the flags
+	option.  Signed-off-by: Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+2017-05-29  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/pkcs11.c, lib/pkcs11_int.h, lib/pkcs11_privkey.c: pkcs11: the
+	GNUTLS_PKCS11_OBJ_FLAG_LOGIN will force a login That is, even in tokens which do not have a CKF_LOGIN_REQUIRED flag
+	a login will be forced. This allows operation on the safenet HSMs
+	which do not set that flag.  Signed-off-by: Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+2017-05-27  Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+	* lib/pkcs11.c, lib/pkcs11_privkey.c: Handle specially safenet HSMs
+	which request explicit authentication These HSMs return CKR_USER_NOT_LOGGED_IN on the first private key
+	operation, instead of using CKA_ALWAYS_AUTHENTICATE or similar.
+	Detect that state and retry login with CKU_USER.  See discussion in https://github.com/OpenSC/libp11/issues/160 Signed-off-by: Nikos Mavrogiannopoulos <nmav@gnutls.org>
+
+2017-06-15  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/x509/ocsp.c: ocsp: added sanity check in returned length This addresses:   https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=1492 Signed-off-by: Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+2017-06-15  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* doc/cha-intro-tls.texi: doc: added/modernized text on AEAD ciphers
+	[ci skip] Signed-off-by: Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+2017-06-14  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* .gitlab-ci.yml: .gitlab-ci.yml: FreeBSD system is no longer
+	available; disabling for CI [ci skip] Signed-off-by: Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+2017-06-09  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* lib/pkcs11_write.c: pkcs11: do not set leading zeros when writing
+	integers Signed-off-by: Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+2017-06-08  Nikos Mavrogiannopoulos <nmav@redhat.com>
+
+	* src/certtool-common.c: certtool: improved error message when
+	public key cannot be figured [ci skip] Signed-off-by: Nikos Mavrogiannopoulos <nmav@redhat.com>
+
 2017-06-07  Nikos Mavrogiannopoulos <nmav@gnutls.org>
 
 	* tests/cert-tests/Makefile.am: tests: corrected typo in makefile Signed-off-by: Nikos Mavrogiannopoulos <nmav@gnutls.org>

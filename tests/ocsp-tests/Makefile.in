@@ -107,7 +107,9 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
-@WINDOWS_FALSE@am__append_1 = ocsp-tls-connection ocsp-must-staple-connection ocsp-test
+@WINDOWS_FALSE@am__append_1 = ocsp-tls-connection ocsp-must-staple-connection ocsp-test \
+@WINDOWS_FALSE@	ocsp-ecdsa-test
+
 @WINDOWS_TRUE@am__append_2 = WINDOWS=1
 subdir = tests/ocsp-tests
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -239,7 +241,7 @@ CONFIG_HEADER = $(top_builddir)/config.h
 CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__dist_check_SCRIPTS_DIST = ocsp-tls-connection \
-	ocsp-must-staple-connection ocsp-test
+	ocsp-must-staple-connection ocsp-test ocsp-ecdsa-test
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -1488,7 +1490,8 @@ unistringtests_WITNESS = @unistringtests_WITNESS@
 EXTRA_DIST = certs/ca.key certs/ca.pem certs/ocsp-server.key certs/ocsp-server.pem response1.der \
 	response2.der certs/ocsp_index.txt certs/ocsp_index.txt.attr \
 	certs/server_good.key certs/server_bad.key certs/server_good.template \
-	certs/server_bad.template certs/ocsp-staple-unrelated.der suppressions.valgrind
+	certs/server_bad.template certs/ocsp-staple-unrelated.der suppressions.valgrind \
+	certs/ocsp-akamai.com.der certs/cert-akamai.com.pem
 
 dist_check_SCRIPTS = $(am__append_1)
 TESTS = $(dist_check_SCRIPTS)
@@ -1699,6 +1702,13 @@ ocsp-must-staple-connection.log: ocsp-must-staple-connection
 ocsp-test.log: ocsp-test
 	@p='ocsp-test'; \
 	b='ocsp-test'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+ocsp-ecdsa-test.log: ocsp-ecdsa-test
+	@p='ocsp-ecdsa-test'; \
+	b='ocsp-ecdsa-test'; \
 	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \

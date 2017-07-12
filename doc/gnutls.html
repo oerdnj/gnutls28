@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <!-- This manual is last updated 28 March 2017 for version
-3.5.13 of GnuTLS.
+3.5.14 of GnuTLS.
 
 Copyright (C) 2001-2017 Free Software Foundation, Inc.\\
 Copyright (C) 2001-2017 Nikos Mavrogiannopoulos
@@ -14,10 +14,10 @@ copy of the license is included in the section entitled "GNU Free
 Documentation License". -->
 <!-- Created by GNU Texinfo 6.3, http://www.gnu.org/software/texinfo/ -->
 <head>
-<title>GnuTLS 3.5.13</title>
+<title>GnuTLS 3.5.14</title>
 
-<meta name="description" content="GnuTLS 3.5.13">
-<meta name="keywords" content="GnuTLS 3.5.13">
+<meta name="description" content="GnuTLS 3.5.14">
+<meta name="keywords" content="GnuTLS 3.5.14">
 <meta name="resource-type" content="document">
 <meta name="distribution" content="global">
 <meta name="Generator" content="makeinfo">
@@ -153,7 +153,7 @@ dl {
 </head>
 
 <body lang="en">
-<h1 class="settitle" align="center">GnuTLS 3.5.13</h1>
+<h1 class="settitle" align="center">GnuTLS 3.5.14</h1>
 
 
 
@@ -487,7 +487,7 @@ Next: <a href="#Preface" accesskey="n" rel="next">Preface</a>, Up: <a href="dir.
 <h1 class="top">GnuTLS</h1>
 
 <p>This manual is last updated 28 March 2017 for version
-3.5.13 of GnuTLS.
+3.5.14 of GnuTLS.
 </p>
 <p>Copyright &copy; 2001-2017 Free Software Foundation, Inc.\\
 Copyright &copy; 2001-2017 Nikos Mavrogiannopoulos
@@ -894,43 +894,45 @@ Next: <a href="#Compression-algorithms-used-in-the-record-layer" accesskey="n" r
 <a name="index-symmetric-encryption-algorithms"></a>
 
 <p>Confidentiality in the record layer is achieved by using symmetric
-block encryption algorithms like <code>3DES</code>, <code>AES</code>
-or stream algorithms like <code>ARCFOUR_128</code>.
- Ciphers are encryption algorithms that use a single, secret,
-key to encrypt and decrypt data. Block algorithms in CBC mode also provide
-protection against statistical analysis of the data.  Thus, if you&rsquo;re
-using the <acronym>TLS</acronym> protocol, a random number of blocks will be
-appended to data, to prevent eavesdroppers from guessing the actual
-data size.
+ciphers like <code>AES</code> or <code>CHACHA20</code>.  Ciphers are encryption algorithms 
+that use a single, secret, key to encrypt and decrypt data. Early
+versions of TLS separated between block and stream ciphers and had
+message authentication plugged in to them by the protocol, though later 
+versions switched to using authenticated-encryption (AEAD) ciphers. The AEAD
+ciphers are defined to combine encryption and authentication, and as such
+they are not only more efficient, as the primitives used are designed to
+interoperate nicely, but they are also known to interoperate in a secure
+way.
 </p>
 <p>The supported in <acronym>GnuTLS</acronym> ciphers and MAC algorithms are shown in <a href="#tab_003aciphers">Table 3.1</a> and
 <a href="#tab_003amacs">Table 3.2</a>.
 </p>
 <div class="float"><a name="tab_003aciphers"></a>
 <table>
-<thead><tr><th width="30%">Algorithm</th><th width="60%">Description</th></tr></thead>
-<tr><td width="30%">AES-128-CBC, AES-256-CBC</td><td width="60%">AES or RIJNDAEL is the block cipher algorithm that replaces the old
-DES algorithm.  It has 128 bits block size and is used in CBC mode.</td></tr>
-<tr><td width="30%">AES-128-GCM, AES-256-GCM</td><td width="60%">This is the AES algorithm in the authenticated encryption GCM mode.
+<thead><tr><th width="20%">Algorithm</th><th width="20%">Type</th><th width="60%">Description</th></tr></thead>
+<tr><td width="20%">AES-128-GCM, AES-256-GCM</td><td width="20%">AEAD</td><td width="60%">This is the AES algorithm in the authenticated encryption GCM mode.
 This mode combines message authentication and encryption and can
 be extremely fast on CPUs that support hardware acceleration.</td></tr>
-<tr><td width="30%">AES-128-CCM, AES-256-CCM</td><td width="60%">This is the AES algorithm in the authenticated encryption CCM mode.
+<tr><td width="20%">AES-128-CCM, AES-256-CCM</td><td width="20%">AEAD</td><td width="60%">This is the AES algorithm in the authenticated encryption CCM mode.
 This mode combines message authentication and encryption and is
 often used by systems without AES or GCM acceleration support.</td></tr>
-<tr><td width="30%">AES-128-CCM-8, AES-256-CCM-8</td><td width="60%">This is the AES algorithm in the authenticated encryption CCM mode
+<tr><td width="20%">AES-128-CCM-8, AES-256-CCM-8</td><td width="20%">AEAD</td><td width="60%">This is the AES algorithm in the authenticated encryption CCM mode
 with a truncated to 64-bit authentication tag. This mode is for
 communication with restricted systems.</td></tr>
-<tr><td width="30%">CAMELLIA-128-CBC, CAMELLIA-256-CBC</td><td width="60%">This is an 128-bit block cipher developed by Mitsubishi and NTT. It
-is one of the approved ciphers of the European NESSIE and Japanese
-CRYPTREC projects.</td></tr>
-<tr><td width="30%">CHACHA20-POLY1305</td><td width="60%">CHACHA20-POLY1305 is an authenticated encryption algorithm based on CHACHA20 cipher and
+<tr><td width="20%">CAMELLIA-128-GCM, CAMELLIA-256-GCM</td><td width="20%">AEAD</td><td width="60%">This is the CAMELLIA algorithm in the authenticated encryption GCM mode.</td></tr>
+<tr><td width="20%">CHACHA20-POLY1305</td><td width="20%">AEAD</td><td width="60%">CHACHA20-POLY1305 is an authenticated encryption algorithm based on CHACHA20 cipher and
 POLY1305 MAC. CHACHA20 is a refinement of SALSA20 algorithm, an approved cipher by
 the European ESTREAM project. POLY1305 is Wegman-Carter, one-time authenticator. The
 combination provides a fast stream cipher suitable for systems where a hardware AES
 accelerator is not available.</td></tr>
-<tr><td width="30%">3DES-CBC</td><td width="60%">This is the DES block cipher algorithm used with triple
+<tr><td width="20%">AES-128-CBC, AES-256-CBC</td><td width="20%">Legacy (block)</td><td width="60%">AES or RIJNDAEL is the block cipher algorithm that replaces the old
+DES algorithm.  It has 128 bits block size and is used in CBC mode.</td></tr>
+<tr><td width="20%">CAMELLIA-128-CBC, CAMELLIA-256-CBC</td><td width="20%">Legacy (block)</td><td width="60%">This is an 128-bit block cipher developed by Mitsubishi and NTT. It
+is one of the approved ciphers of the European NESSIE and Japanese
+CRYPTREC projects.</td></tr>
+<tr><td width="20%">3DES-CBC</td><td width="20%">Legacy (block)</td><td width="60%">This is the DES block cipher algorithm used with triple
 encryption (EDE). Has 64 bits block size and is used in CBC mode.</td></tr>
-<tr><td width="30%">ARCFOUR-128</td><td width="60%">ARCFOUR-128 is a compatible algorithm with RSA&rsquo;s RC4 algorithm, which is considered to be a trade
+<tr><td width="20%">ARCFOUR-128</td><td width="20%">Legacy (stream)</td><td width="60%">ARCFOUR-128 is a compatible algorithm with RSA&rsquo;s RC4 algorithm, which is considered to be a trade
 secret. It is a considered to be broken, and is only used for compatibility
 purposed. For this reason it is not enabled by default.</td></tr>
 </table>

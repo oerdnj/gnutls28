@@ -141,7 +141,7 @@ host_triplet = @host@
 @ENABLE_PKCS11_TRUE@@WINDOWS_FALSE@	pkcs11/pkcs11-combo pkcs11/pkcs11-privkey pkcs11/pkcs11-pubkey-import-rsa pkcs11/pkcs11-pubkey-import-ecdsa \
 @ENABLE_PKCS11_TRUE@@WINDOWS_FALSE@	pkcs11-import-url-privkey pkcs11-privkey-fork pkcs11/pkcs11-ec-privkey-test \
 @ENABLE_PKCS11_TRUE@@WINDOWS_FALSE@	pkcs11-privkey-always-auth pkcs11-privkey-export pkcs11/pkcs11-import-with-pin \
-@ENABLE_PKCS11_TRUE@@WINDOWS_FALSE@	pkcs11/pkcs11-privkey-pthread
+@ENABLE_PKCS11_TRUE@@WINDOWS_FALSE@	pkcs11/pkcs11-privkey-pthread pkcs11-privkey-safenet-always-auth
 
 @ENABLE_OCSP_TRUE@am__append_7 = ocsp
 @ENABLE_DANE_TRUE@am__append_8 = dane
@@ -153,7 +153,8 @@ host_triplet = @host@
 @ENABLE_OPENPGP_TRUE@@HAVE_FORK_TRUE@am__append_12 = openpgpself 
 check_PROGRAMS = $(am__EXEEXT_10)
 @WINDOWS_FALSE@am__append_13 = fastopen.sh pkgconfig.sh starttls.sh starttls-ftp.sh starttls-smtp.sh \
-@WINDOWS_FALSE@	starttls-lmtp.sh starttls-pop3.sh starttls-nntp.sh starttls-sieve.sh sni-hostname.sh
+@WINDOWS_FALSE@	starttls-lmtp.sh starttls-pop3.sh starttls-nntp.sh starttls-sieve.sh sni-hostname.sh \
+@WINDOWS_FALSE@	gnutls-cli-save-data.sh
 
 @ENABLE_DANE_TRUE@@WINDOWS_FALSE@am__append_14 = danetool.sh
 TESTS = $(am__EXEEXT_10) $(dist_check_SCRIPTS)
@@ -333,7 +334,8 @@ libutils_la_OBJECTS = $(am_libutils_la_OBJECTS)
 @ENABLE_PKCS11_TRUE@@WINDOWS_FALSE@	pkcs11-privkey-always-auth$(EXEEXT) \
 @ENABLE_PKCS11_TRUE@@WINDOWS_FALSE@	pkcs11-privkey-export$(EXEEXT) \
 @ENABLE_PKCS11_TRUE@@WINDOWS_FALSE@	pkcs11/pkcs11-import-with-pin$(EXEEXT) \
-@ENABLE_PKCS11_TRUE@@WINDOWS_FALSE@	pkcs11/pkcs11-privkey-pthread$(EXEEXT)
+@ENABLE_PKCS11_TRUE@@WINDOWS_FALSE@	pkcs11/pkcs11-privkey-pthread$(EXEEXT) \
+@ENABLE_PKCS11_TRUE@@WINDOWS_FALSE@	pkcs11-privkey-safenet-always-auth$(EXEEXT)
 @ENABLE_OCSP_TRUE@am__EXEEXT_4 = ocsp$(EXEEXT)
 @ENABLE_DANE_TRUE@am__EXEEXT_5 = dane$(EXEEXT)
 @ENABLE_FIPS140_FALSE@@ENABLE_OPENSSL_TRUE@am__EXEEXT_6 =  \
@@ -1170,6 +1172,11 @@ pkcs11_privkey_export_OBJECTS = $(am_pkcs11_privkey_export_OBJECTS)
 am__pkcs11_privkey_fork_SOURCES_DIST = pkcs11/pkcs11-privkey-fork.c
 @ENABLE_PKCS11_TRUE@@WINDOWS_FALSE@am_pkcs11_privkey_fork_OBJECTS = pkcs11/pkcs11-privkey-fork.$(OBJEXT)
 pkcs11_privkey_fork_OBJECTS = $(am_pkcs11_privkey_fork_OBJECTS)
+am__pkcs11_privkey_safenet_always_auth_SOURCES_DIST =  \
+	pkcs11/pkcs11-privkey-safenet-always-auth.c
+@ENABLE_PKCS11_TRUE@@WINDOWS_FALSE@am_pkcs11_privkey_safenet_always_auth_OBJECTS = pkcs11/pkcs11-privkey-safenet-always-auth.$(OBJEXT)
+pkcs11_privkey_safenet_always_auth_OBJECTS =  \
+	$(am_pkcs11_privkey_safenet_always_auth_OBJECTS)
 pkcs11_pkcs11_chainverify_SOURCES = pkcs11/pkcs11-chainverify.c
 pkcs11_pkcs11_chainverify_OBJECTS =  \
 	pkcs11/pkcs11-chainverify.$(OBJEXT)
@@ -1822,7 +1829,8 @@ am__dist_check_SCRIPTS_DIST = rfc2253-escape-test \
 	rsa-md5-collision/rsa-md5-collision.sh fastopen.sh \
 	pkgconfig.sh starttls.sh starttls-ftp.sh starttls-smtp.sh \
 	starttls-lmtp.sh starttls-pop3.sh starttls-nntp.sh \
-	starttls-sieve.sh sni-hostname.sh danetool.sh
+	starttls-sieve.sh sni-hostname.sh gnutls-cli-save-data.sh \
+	danetool.sh
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -1908,11 +1916,12 @@ SOURCES = $(libpkcs11mock1_la_SOURCES) $(libutils_la_SOURCES) \
 	$(pkcs11_import_url_privkey_SOURCES) \
 	$(pkcs11_privkey_always_auth_SOURCES) \
 	$(pkcs11_privkey_export_SOURCES) \
-	$(pkcs11_privkey_fork_SOURCES) pkcs11/pkcs11-chainverify.c \
-	pkcs11/pkcs11-combo.c pkcs11/pkcs11-ec-privkey-test.c \
-	pkcs11/pkcs11-get-issuer.c pkcs11/pkcs11-import-with-pin.c \
-	pkcs11/pkcs11-is-known.c pkcs11/pkcs11-privkey.c \
-	pkcs11/pkcs11-privkey-pthread.c \
+	$(pkcs11_privkey_fork_SOURCES) \
+	$(pkcs11_privkey_safenet_always_auth_SOURCES) \
+	pkcs11/pkcs11-chainverify.c pkcs11/pkcs11-combo.c \
+	pkcs11/pkcs11-ec-privkey-test.c pkcs11/pkcs11-get-issuer.c \
+	pkcs11/pkcs11-import-with-pin.c pkcs11/pkcs11-is-known.c \
+	pkcs11/pkcs11-privkey.c pkcs11/pkcs11-privkey-pthread.c \
 	pkcs11/pkcs11-pubkey-import-ecdsa.c \
 	pkcs11/pkcs11-pubkey-import-rsa.c pkcs12_encode.c pkcs12_s2k.c \
 	pkcs12_s2k_pem.c pkcs12_simple.c pkcs7-cat-parse.c pkcs7-gen.c \
@@ -2012,6 +2021,7 @@ DIST_SOURCES = $(am__libpkcs11mock1_la_SOURCES_DIST) \
 	$(am__pkcs11_privkey_always_auth_SOURCES_DIST) \
 	$(am__pkcs11_privkey_export_SOURCES_DIST) \
 	$(am__pkcs11_privkey_fork_SOURCES_DIST) \
+	$(am__pkcs11_privkey_safenet_always_auth_SOURCES_DIST) \
 	pkcs11/pkcs11-chainverify.c pkcs11/pkcs11-combo.c \
 	pkcs11/pkcs11-ec-privkey-test.c pkcs11/pkcs11-get-issuer.c \
 	pkcs11/pkcs11-import-with-pin.c pkcs11/pkcs11-is-known.c \
@@ -3509,6 +3519,9 @@ ssl3_0_cert_key_exchange_SOURCES = common-cert-key-exchange.c ssl3.0-cert-key-ex
 @ENABLE_PKCS11_TRUE@@WINDOWS_FALSE@pkcs11_privkey_always_auth_SOURCES = pkcs11/pkcs11-privkey-always-auth.c
 @ENABLE_PKCS11_TRUE@@WINDOWS_FALSE@pkcs11_privkey_always_auth_DEPENDENCIES = libpkcs11mock1.la libutils.la
 @ENABLE_PKCS11_TRUE@@WINDOWS_FALSE@pkcs11_privkey_always_auth_LDADD = $(LDADD) $(LIBDL)
+@ENABLE_PKCS11_TRUE@@WINDOWS_FALSE@pkcs11_privkey_safenet_always_auth_SOURCES = pkcs11/pkcs11-privkey-safenet-always-auth.c
+@ENABLE_PKCS11_TRUE@@WINDOWS_FALSE@pkcs11_privkey_safenet_always_auth_DEPENDENCIES = libpkcs11mock1.la libutils.la
+@ENABLE_PKCS11_TRUE@@WINDOWS_FALSE@pkcs11_privkey_safenet_always_auth_LDADD = $(LDADD) $(LIBDL)
 @ENABLE_PKCS11_TRUE@@WINDOWS_FALSE@pkcs11_pkcs11_privkey_pthread_LDADD = $(LDADD) -lpthread
 rsa_illegal_import_CPPFLAGS = $(AM_CPPFLAGS) $(NETTLE_CFLAGS)
 mini_alignment_CPPFLAGS = $(AM_CPPFLAGS) $(NETTLE_CFLAGS)
@@ -4227,6 +4240,12 @@ pkcs11/pkcs11-privkey-fork.$(OBJEXT): pkcs11/$(am__dirstamp) \
 pkcs11-privkey-fork$(EXEEXT): $(pkcs11_privkey_fork_OBJECTS) $(pkcs11_privkey_fork_DEPENDENCIES) $(EXTRA_pkcs11_privkey_fork_DEPENDENCIES) 
 	@rm -f pkcs11-privkey-fork$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(pkcs11_privkey_fork_OBJECTS) $(pkcs11_privkey_fork_LDADD) $(LIBS)
+pkcs11/pkcs11-privkey-safenet-always-auth.$(OBJEXT):  \
+	pkcs11/$(am__dirstamp) pkcs11/$(DEPDIR)/$(am__dirstamp)
+
+pkcs11-privkey-safenet-always-auth$(EXEEXT): $(pkcs11_privkey_safenet_always_auth_OBJECTS) $(pkcs11_privkey_safenet_always_auth_DEPENDENCIES) $(EXTRA_pkcs11_privkey_safenet_always_auth_DEPENDENCIES) 
+	@rm -f pkcs11-privkey-safenet-always-auth$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(pkcs11_privkey_safenet_always_auth_OBJECTS) $(pkcs11_privkey_safenet_always_auth_LDADD) $(LIBS)
 pkcs11/pkcs11-chainverify.$(OBJEXT): pkcs11/$(am__dirstamp) \
 	pkcs11/$(DEPDIR)/$(am__dirstamp)
 
@@ -5026,6 +5045,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@pkcs11/$(DEPDIR)/pkcs11-privkey-export.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@pkcs11/$(DEPDIR)/pkcs11-privkey-fork.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@pkcs11/$(DEPDIR)/pkcs11-privkey-pthread.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@pkcs11/$(DEPDIR)/pkcs11-privkey-safenet-always-auth.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@pkcs11/$(DEPDIR)/pkcs11-privkey.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@pkcs11/$(DEPDIR)/pkcs11-pubkey-import-ecdsa.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@pkcs11/$(DEPDIR)/pkcs11-pubkey-import-rsa.Po@am__quote@
@@ -7170,6 +7190,13 @@ pkcs11/pkcs11-privkey-pthread.log: pkcs11/pkcs11-privkey-pthread$(EXEEXT)
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
 	"$$tst" $(AM_TESTS_FD_REDIRECT)
+pkcs11-privkey-safenet-always-auth.log: pkcs11-privkey-safenet-always-auth$(EXEEXT)
+	@p='pkcs11-privkey-safenet-always-auth$(EXEEXT)'; \
+	b='pkcs11-privkey-safenet-always-auth'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
 ocsp.log: ocsp$(EXEEXT)
 	@p='ocsp$(EXEEXT)'; \
 	b='ocsp'; \
@@ -7369,6 +7396,13 @@ starttls-sieve.sh.log: starttls-sieve.sh
 sni-hostname.sh.log: sni-hostname.sh
 	@p='sni-hostname.sh'; \
 	b='sni-hostname.sh'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+gnutls-cli-save-data.sh.log: gnutls-cli-save-data.sh
+	@p='gnutls-cli-save-data.sh'; \
+	b='gnutls-cli-save-data.sh'; \
 	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \

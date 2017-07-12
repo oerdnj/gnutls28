@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnutls 3.2.1\n"
 "Report-Msgid-Bugs-To: bug-gnutls@gnu.org\n"
-"POT-Creation-Date: 2017-06-07 07:23+0200\n"
+"POT-Creation-Date: 2017-07-04 07:41+0200\n"
 "PO-Revision-Date: 2013-06-16 21:52+0200\n"
 "Last-Translator: Petr Pisar <petr.pisar@atlas.cz>\n"
 "Language-Team: Czech <translation-team-cs@lists.sourceforge.net>\n"
@@ -933,7 +933,7 @@ msgstr "\t\tVypršení: Nikdy\n"
 msgid "\t\tExpiration: %s\n"
 msgstr "\t\tVypršení: %s\n"
 
-#: lib/openpgp/output.c:230 lib/x509/ocsp_output.c:527 lib/x509/output.c:1178
+#: lib/openpgp/output.c:230 lib/x509/ocsp_output.c:524 lib/x509/output.c:1178
 #: lib/x509/output.c:1375 lib/x509/output.c:1519 lib/x509/output.c:1748
 #: lib/x509/output.c:1761 lib/x509/output.c:2178 lib/x509/output.c:2276
 #: lib/x509/output.c:2327
@@ -1094,23 +1094,23 @@ msgstr "\t\tTato aktualizace: %s\n"
 msgid "\t\tNext Update: %s\n"
 msgstr "\t\tDalší aktualizace: %s\n"
 
-#: lib/x509/ocsp_output.c:528 lib/x509/output.c:1523 lib/x509/output.c:2182
+#: lib/x509/ocsp_output.c:525 lib/x509/output.c:1523 lib/x509/output.c:2182
 #: lib/x509/output.c:2331
 #, c-format
 msgid "\tSignature Algorithm: %s\n"
 msgstr "\tAlgoritmus podpisu: %s\n"
 
-#: lib/x509/ocsp_output.c:532 lib/x509/output.c:1528 lib/x509/output.c:2187
+#: lib/x509/ocsp_output.c:529 lib/x509/output.c:1528 lib/x509/output.c:2187
 msgid ""
 "warning: signed using a broken signature algorithm that can be forged.\n"
 msgstr ""
 "varování: podepsáno vadným podpisovým algoritmem, kterým lze falšovat.\n"
 
-#: lib/x509/ocsp_output.c:541 lib/x509/output.c:1554 lib/x509/output.c:2213
+#: lib/x509/ocsp_output.c:543 lib/x509/output.c:1554 lib/x509/output.c:2213
 msgid "\tSignature:\n"
 msgstr "\tPodpis:\n"
 
-#: lib/x509/ocsp_output.c:649
+#: lib/x509/ocsp_output.c:651
 msgid "OCSP Response Information:\n"
 msgstr "Údaje odpovědi OCSP:\n"
 
