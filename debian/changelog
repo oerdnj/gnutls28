@@ -1,12 +1,72 @@
+gnutls28 (3.5.14-2) unstable; urgency=medium
+
+  * Upload to unstable.
+
+ -- Andreas Metzler <ametzler@debian.org>  Sat, 08 Jul 2017 18:34:43 +0200
+
+gnutls28 (3.5.14-1) experimental; urgency=low
+
+  [ Dan Nicholson ]
+  * Build with --disable-rpath. Closes: #865674
+
+  [ Andreas Metzler ]
+  * New upstream version.
+  * Build against external libunistring.
+
+ -- Andreas Metzler <ametzler@debian.org>  Wed, 05 Jul 2017 19:31:06 +0200
+
+gnutls28 (3.5.13-2) unstable; urgency=medium
+
+  * Upload to unstable, merge changelogs.
+
+ -- Andreas Metzler <ametzler@debian.org>  Thu, 22 Jun 2017 18:18:19 +0200
+
+gnutls28 (3.5.13-1) experimental; urgency=low
+
+  * New upstream version.
+    + Drop 35_test-corrected-typo-preventing-the-run-of-openpgp-te.patch.
+    + Fixes GNUTLS-SA-2017-4/CVE-2017-7507 - Crash due to a null pointer
+      dereference. #864560
+
+ -- Andreas Metzler <ametzler@debian.org>  Fri, 09 Jun 2017 18:53:39 +0200
+
+gnutls28 (3.5.12-2) experimental; urgency=medium
+
+  * 35_test-corrected-typo-preventing-the-run-of-openpgp-te.patch: Correct
+    typo preventing the run of openpgp test.
+  * Stop disabling heartbeat support. Closes: #861193
+
+ -- Andreas Metzler <ametzler@debian.org>  Sun, 14 May 2017 11:34:32 +0200
+
+gnutls28 (3.5.12-1) experimental; urgency=medium
+
+  * New upstream version.
+  * Bump dep info on gnutls_session_ext_register.
+
+ -- Andreas Metzler <ametzler@debian.org>  Thu, 11 May 2017 19:14:52 +0200
+
+gnutls28 (3.5.11-1) experimental; urgency=medium
+
+  * New upstream version.
+  * gnutls.pc: do not include libtool options into Libs.private.
+    Closes: #857943
+  * gnutls.pc does not refer to e.g. zlib in *both* Requires.private and
+    Libs.private. (LP: #1660915)
+  * OpenSSL wrapper: SSLv23_*_method translates to NORMAL GnuTLS priority,
+    which includes TLS1.2 support. Closes: #857436
+  * Add b-d on ca-certificates, needed for trust-store check.
+
+ -- Andreas Metzler <ametzler@debian.org>  Sat, 08 Apr 2017 14:51:31 +0200
+
 gnutls28 (3.5.10-1) experimental; urgency=medium
 
-  * New upstream version 3.5.10
-  * Remove hard dependency on --ddbg-migration to allow backports
-  * Disable tests in PPA buils
-  * Revert: "Build with IDNA 2008 support, b-d on libidn2-0-dev instead of
-    libidn11-dev."
+  * New upstream version.
+    + gnutls.pc: do not include libidn2 in Requires.private. Closes: #855888
+    + Includes fixes for GNUTLS-SA-2017-3[ABC].
+    + Bump info for gnutls_store_commitment, gnutls_ocsp_resp_verify_direct
+      and gnutls_ocsp_resp_verify which now accept (more) flags.
 
- -- Ondřej Surý <ondrej@debian.org>  Thu, 09 Mar 2017 15:02:51 +0100
+ -- Andreas Metzler <ametzler@debian.org>  Thu, 09 Mar 2017 18:37:48 +0100
 
 gnutls28 (3.5.9-1) experimental; urgency=medium
 
@@ -17,6 +77,49 @@ gnutls28 (3.5.9-1) experimental; urgency=medium
     libidn11-dev.
 
  -- Andreas Metzler <ametzler@debian.org>  Sun, 12 Feb 2017 19:37:32 +0100
+
+gnutls28 (3.5.8-6) unstable; urgency=high
+
+  * 36_CVE-2017-7507_*.patch: Pulled from 3.5.13, fix crash upon receiving
+    well-formed status_request extension. GNUTLS-SA-2017-4/CVE-2017-7507
+    Closes: #864560
+
+ -- Andreas Metzler <ametzler@debian.org>  Sun, 11 Jun 2017 10:44:33 +0200
+
+gnutls28 (3.5.8-5) unstable; urgency=medium
+
+  * 35_01_z_opencdk-read-packet.c-corrected-typo-in-type-cast.patch: Fix typo
+    in 35_01_opencdk-improved-error-code-checking-in-the-stream-r.patch.
+  * 35_07_Enforce-the-max-packet-length-for-OpenPGP-subpackets.patch:
+    Addressed large allocation in OpenPGP certificate parsing, that could lead
+    in out-of-memory condition. Issue found using oss-fuzz project, and was
+    fixed by Alex Gaynor.
+    https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=392
+    [GNUTLS-SA-2017-3C]
+
+ -- Andreas Metzler <ametzler@debian.org>  Tue, 07 Mar 2017 19:07:31 +0100
+
+gnutls28 (3.5.8-4) unstable; urgency=medium
+
+  * More upstream fixes from gnutls_3_5_x branch:
+    + 35_05_cdk_pkt_read-enforce-packet-limits.patch: Addressed integer
+      overflow resulting to invalid memory write in OpenPGP certificate
+      parsing.  Issue found using oss-fuzz project:
+      https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=420
+      [GNUTLS-SA-2017-3A]
+    + 35_05_opencdk-read_attribute-account-buffer-size.patch Addressed read of
+      1 byte past the end of buffer in OpenPGP certificate parsing. Issue
+      found using oss-fuzz project:
+      https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=391
+    + 35_06_opencdk-do-not-parse-any-secret-keys-in-packet-when-.patch
+      Addressed crashes in OpenPGP certificate parsing, related to private key
+      parser. No longer allow OpenPGP certificates (public keys) to contain
+      private key sub-packets. Issue found using oss-fuzz project:
+      https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=354
+      https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=360
+      [GNUTLS-SA-2017-3B]
+
+ -- Andreas Metzler <ametzler@debian.org>  Sat, 04 Mar 2017 16:23:15 +0100
 
 gnutls28 (3.5.8-3) unstable; urgency=high
 

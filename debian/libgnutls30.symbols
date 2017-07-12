@@ -2,15 +2,15 @@ libgnutls.so.30 libgnutls30 #MINVER#
 * Build-Depends-Package: libgnutls28-dev
  GNUTLS_3_4@GNUTLS_3_4 3.5.0
  GNUTLS_FIPS140_3_4@GNUTLS_FIPS140_3_4 3.5.0
- (regex|optional)"@GNUTLS_PRIVATE_3_4$" 3.5.9-0+private+1
- _dsa_generate_dss_g@GNUTLS_FIPS140_3_4 3.5.9-0+private+1
- _dsa_generate_dss_pq@GNUTLS_FIPS140_3_4 3.5.9-0+private+1
- _dsa_validate_dss_g@GNUTLS_FIPS140_3_4 3.5.9-0+private+1
- _dsa_validate_dss_pq@GNUTLS_FIPS140_3_4 3.5.9-0+private+1
- _gnutls_decode_ber_rs_raw@GNUTLS_FIPS140_3_4 3.5.9-0+private+1
- _gnutls_encode_ber_rs_raw@GNUTLS_FIPS140_3_4 3.5.9-0+private+1
+ (regex|optional)"@GNUTLS_PRIVATE_3_4$" 3.5.10-0+private+1
+ _dsa_generate_dss_g@GNUTLS_FIPS140_3_4 3.5.10-0+private+1
+ _dsa_generate_dss_pq@GNUTLS_FIPS140_3_4 3.5.10-0+private+1
+ _dsa_validate_dss_g@GNUTLS_FIPS140_3_4 3.5.10-0+private+1
+ _dsa_validate_dss_pq@GNUTLS_FIPS140_3_4 3.5.10-0+private+1
+ _gnutls_decode_ber_rs_raw@GNUTLS_FIPS140_3_4 3.5.10-0+private+1
+ _gnutls_encode_ber_rs_raw@GNUTLS_FIPS140_3_4 3.5.10-0+private+1
  _gnutls_global_init_skip@GNUTLS_3_4 3.5.0
- _rsa_generate_fips186_4_keypair@GNUTLS_FIPS140_3_4 3.5.9-0+private+1
+ _rsa_generate_fips186_4_keypair@GNUTLS_FIPS140_3_4 3.5.10-0+private+1
  dsa_generate_dss_keypair@GNUTLS_FIPS140_3_4 3.5.0
  gnutls_aead_cipher_decrypt@GNUTLS_3_4 3.5.0
  gnutls_aead_cipher_deinit@GNUTLS_3_4 3.5.0
@@ -300,8 +300,8 @@ libgnutls.so.30 libgnutls30 #MINVER#
  gnutls_ocsp_resp_import@GNUTLS_3_4 3.5.0
  gnutls_ocsp_resp_init@GNUTLS_3_4 3.5.0
  gnutls_ocsp_resp_print@GNUTLS_3_4 3.5.0
- gnutls_ocsp_resp_verify@GNUTLS_3_4 3.5.0
- gnutls_ocsp_resp_verify_direct@GNUTLS_3_4 3.5.0
+ gnutls_ocsp_resp_verify@GNUTLS_3_4 3.5.10
+ gnutls_ocsp_resp_verify_direct@GNUTLS_3_4 3.5.10
  gnutls_ocsp_status_request_enable_client@GNUTLS_3_4 3.5.0
  gnutls_ocsp_status_request_get@GNUTLS_3_4 3.5.0
  gnutls_ocsp_status_request_is_checked@GNUTLS_3_4 3.5.0
@@ -658,7 +658,7 @@ libgnutls.so.30 libgnutls30 #MINVER#
  gnutls_session_enable_compatibility_mode@GNUTLS_3_4 3.5.0
  gnutls_session_etm_status@GNUTLS_3_4 3.5.0
  gnutls_session_ext_master_secret_status@GNUTLS_3_4 3.5.0
- gnutls_session_ext_register@GNUTLS_3_4 3.5.5
+ gnutls_session_ext_register@GNUTLS_3_4 3.5.12
  gnutls_session_force_valid@GNUTLS_3_4 3.5.0
  gnutls_session_get_data2@GNUTLS_3_4 3.5.3
  gnutls_session_get_data@GNUTLS_3_4 3.5.0
@@ -728,7 +728,7 @@ libgnutls.so.30 libgnutls30 #MINVER#
  gnutls_srtp_set_mki@GNUTLS_3_4 3.5.0
  gnutls_srtp_set_profile@GNUTLS_3_4 3.5.0
  gnutls_srtp_set_profile_direct@GNUTLS_3_4 3.5.0
- gnutls_store_commitment@GNUTLS_3_4 3.5.0
+ gnutls_store_commitment@GNUTLS_3_4 3.5.10
  gnutls_store_pubkey@GNUTLS_3_4 3.5.0
  gnutls_strdup@GNUTLS_3_4 3.5.0
  gnutls_strerror@GNUTLS_3_4 3.5.0

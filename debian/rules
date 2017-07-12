@@ -22,11 +22,10 @@ override_dh_auto_configure:
 	dh_auto_configure --verbose -- \
 	--enable-ld-version-script --enable-cxx \
 	--enable-static \
+	--disable-rpath \
 	--without-lzo \
 	--enable-libdane --without-tpm --disable-guile \
-	--disable-heartbeat-support \
 	--enable-openssl-compatibility \
-	--with-included-unistring \
 	--disable-silent-rules \
 	--with-unbound-root-key-file=/usr/share/dns/root.key \
 	--with-default-trust-store-file=/etc/ssl/certs/ca-certificates.crt \
@@ -90,7 +89,7 @@ override_dh_compress:
 	dh_compress -X.pdf
 
 override_dh_strip:
-	dh_strip -O--ddeb-migration='libgnutls30-dbg (<< 3.4.7-2~)'
+	dh_strip --ddeb-migration='libgnutls30-dbg (<< 3.4.7-2~)'
 
 override_dh_auto_test:
 	dh_auto_test -O--parallel --verbose -- VERBOSE=1

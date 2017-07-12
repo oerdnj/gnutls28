@@ -425,6 +425,7 @@ License
 lib/unistring/*
 Author: Bruno Haible <bruno@clisp.org>
 Copyright (C) 2009-2016 Free Software Foundation, Inc.
+Comment: Debian package is built against libunistring-dev package.
 License
  This program is free software: you can redistribute it and/or modify it
  under the terms of either:
